@@ -4,9 +4,7 @@ about:
 title: [FE/BE]
 labels: ''
 assignees: ''
-
 ---
-
 ### 📙 작업 내역
 
 - [ ] 작업 1
