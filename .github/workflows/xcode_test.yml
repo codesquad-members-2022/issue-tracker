@@ -1,6 +1,6 @@
 on: [push, pull_request]
 jobs:
-  builAndTest: 
+  buildAndTest: 
     runs-on: macos-latest
     steps: 
      - uses: actions/checkout@v2
