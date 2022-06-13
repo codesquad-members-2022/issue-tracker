@@ -1,20 +1,19 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
+name: Feature
+about: 
+title: [FE/BE]
 labels: ''
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### 📙 작업 내역
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+- [ ] 작업 1
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+### 📘 작업 유형
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+- 설계
+- 기능 추가
+- 기능 수정
+- 버그 수정
