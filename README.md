@@ -1,2 +1,3 @@
-# issue-tracker
-그룹 프로젝트#5
+# PR-tracker
+
+Team repo: Eddy, Selina
