@@ -1,4 +1,4 @@
-package com.example.issu_tracker
+package com.example.issu_tracker.data
 
 data class Issue(
     val index: Int,

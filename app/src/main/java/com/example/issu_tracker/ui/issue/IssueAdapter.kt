@@ -1,12 +1,13 @@
-package com.example.issu_tracker
+package com.example.issu_tracker.ui.issue
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.issu_tracker.R
+import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.databinding.ItemIssueBinding
 
 class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) {

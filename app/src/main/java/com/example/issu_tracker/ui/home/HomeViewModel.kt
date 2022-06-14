@@ -1,6 +1,7 @@
-package com.example.issu_tracker
+package com.example.issu_tracker.ui.home
 
 import androidx.lifecycle.ViewModel
+import com.example.issu_tracker.data.Issue
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
