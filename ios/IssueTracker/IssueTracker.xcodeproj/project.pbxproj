@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0881070F63CD4F2E7BD12F01 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32333319155069DAD8E6E4 /* Pods_IssueTracker.framework */; };
+		E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */; };
+		E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */; };
 		E4D87382285884AE00AFCE4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D87381285884AE00AFCE4D /* AppDelegate.swift */; };
 		E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D87383285884AE00AFCE4D /* SceneDelegate.swift */; };
-		E4D87386285884AE00AFCE4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D87385285884AE00AFCE4D /* ViewController.swift */; };
+		E4D87386285884AE00AFCE4D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D87385285884AE00AFCE4D /* LoginViewController.swift */; };
 		E4D8738B285884AF00AFCE4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4D8738A285884AF00AFCE4D /* Assets.xcassets */; };
 		E4D8738E285884AF00AFCE4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D8738C285884AF00AFCE4D /* LaunchScreen.storyboard */; };
 		E4D873992858854D00AFCE4D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E4D873982858854C00AFCE4D /* .swiftlint.yml */; };
@@ -21,10 +23,12 @@
 		83F78B1622BC6D4343FB3F6B /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		8C32333319155069DAD8E6E4 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A21CC3CDE9942DA700D65C06 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
+		E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowCoordinator.swift; sourceTree = "<group>"; };
 		E4D8737E285884AE00AFCE4D /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D87381285884AE00AFCE4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4D87383285884AE00AFCE4D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E4D87385285884AE00AFCE4D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E4D87385285884AE00AFCE4D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E4D8738A285884AF00AFCE4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4D8738D285884AF00AFCE4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4D8738F285884AF00AFCE4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,7 +54,6 @@
 				83F78B1622BC6D4343FB3F6B /* Pods-IssueTracker.debug.xcconfig */,
 				A21CC3CDE9942DA700D65C06 /* Pods-IssueTracker.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -60,6 +63,31 @@
 				8C32333319155069DAD8E6E4 /* Pods_IssueTracker.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4C5DADE285891A00093CFF1 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				E4C5DADF285891A60093CFF1 /* Flow */,
+				E4C5DAE0285891AE0093CFF1 /* Login */,
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		E4C5DADF285891A60093CFF1 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		E4C5DAE0285891AE0093CFF1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E4D87385285884AE00AFCE4D /* LoginViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		E4D87375285884AE00AFCE4D = {
@@ -97,6 +125,7 @@
 			children = (
 				E4D87381285884AE00AFCE4D /* AppDelegate.swift */,
 				E4D87383285884AE00AFCE4D /* SceneDelegate.swift */,
+				E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -114,7 +143,7 @@
 		E4D87397285884BF00AFCE4D /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				E4D87385285884AE00AFCE4D /* ViewController.swift */,
+				E4C5DADE285891A00093CFF1 /* LoginScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -273,9 +302,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4D87386285884AE00AFCE4D /* ViewController.swift in Sources */,
+				E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */,
+				E4D87386285884AE00AFCE4D /* LoginViewController.swift in Sources */,
 				E4D87382285884AE00AFCE4D /* AppDelegate.swift in Sources */,
 				E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */,
+				E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
