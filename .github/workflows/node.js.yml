@@ -10,6 +10,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     branches: [ "fe-deploy" ]
   pull_request:
     branches: [ "fe-deploy" ]
@@ -43,8 +44,11 @@ jobs:
   build:
 =======
     branches: [ "team-24" ]
+=======
+    branches: [ "fe-deploy" ]
+>>>>>>> eb6f5ec (fix: node.js.yml 브랜치 수정)
   pull_request:
-    branches: [ "team-24" ]
+    branches: [ "fe-deploy" ]
 
 jobs:
   build:
