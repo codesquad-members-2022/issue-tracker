@@ -2,6 +2,7 @@ package kr.codesquad.issuetracker.auth;
 
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -10,8 +11,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequiredArgsConstructor
 public class LoginService {
 
-    private static final String GITHUB_AUTHORIZATION_SERVER_URL = "https://github.com/login/oauth/access_token";
     private final GitHubOAuthProperties gitHubOAuthProperties;
+
+    private static final String GITHUB_AUTHORIZATION_SERVER_URL = "https://github.com/login/oauth/access_token";
+    private static final String GITHUB_RESOURCE_SERVER_API_URL = "https://api.github.com/user";
 
     public AccessToken getAccessToken(String code) {
         WebClient webClient = WebClient.create();
@@ -28,4 +31,15 @@ public class LoginService {
             .orElseThrow(NoSuchElementException::new);
     }
 
+    public GitHubUserInfo getGitHubUserInfo(AccessToken accessToken) {
+        WebClient webClient = WebClient.create();
+        return webClient.get()
+            .uri(GITHUB_RESOURCE_SERVER_API_URL)
+            .accept(MediaType.APPLICATION_JSON)
+            .header(HttpHeaders.AUTHORIZATION, "token " + accessToken.getAccessToken())
+            .retrieve()
+            .bodyToMono(GitHubUserInfo.class)
+            .blockOptional()
+            .orElseThrow(NoSuchElementException::new);
+    }
 }

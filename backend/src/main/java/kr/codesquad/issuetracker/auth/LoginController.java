@@ -14,6 +14,7 @@ public class LoginController {
     @GetMapping("/oauth/callback")
     public void callBack(@RequestParam String code) {
         AccessToken accessToken = loginService.getAccessToken(code);
+        GitHubUserInfo gitHubUserInfo = loginService.getGitHubUserInfo(accessToken);
     }
 
 }
