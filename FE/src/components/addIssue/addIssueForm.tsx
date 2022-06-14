@@ -1,23 +1,16 @@
 import React from 'react';
+import styles from './addIssueForm.module.scss';
+import { TextForm } from './textForm';
 
-const AddIssueForm = (): JSX.Element => {
+export const AddIssueForm = (): JSX.Element => {
   return (
     <form>
-      <div>
-        <div></div>
-        <div>
-          <div>
-            <input type="text" placeholder="제목" />
-          </div>
-          <div>
-            <input type="text" placeholder="코멘트를 입력하세요" />
-          </div>
-          <div>
-            <label>
-              파일 첨부하기
-              <input type="file" />
-            </label>
-          </div>
+      <div className={styles.Box}>
+        <div className={styles.userImg}>
+          <img src={'assets/img/UserImage.png'} />
+        </div>
+        <div className={styles.inputBox}>
+          <TextForm />
         </div>
         <div></div>
       </div>
