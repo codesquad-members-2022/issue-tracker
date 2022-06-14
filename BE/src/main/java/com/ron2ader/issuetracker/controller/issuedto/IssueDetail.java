@@ -3,8 +3,10 @@ package com.ron2ader.issuetracker.controller.issuedto;
 import com.ron2ader.issuetracker.domain.issue.Issue;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class IssueDetail {
 
     private String title;

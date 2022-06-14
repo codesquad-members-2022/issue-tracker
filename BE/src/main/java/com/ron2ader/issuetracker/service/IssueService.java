@@ -43,7 +43,6 @@ public class IssueService {
 
     public Page<IssueSimpleResponse> findAllByOpenStatus(Pageable pageable, Boolean openStatus) {
         Page<Issue> issues = issueRepository.findAllByOpenStatus(pageable, openStatus);
-
         return issues.map(IssueSimpleResponse::from);
     }
 }
