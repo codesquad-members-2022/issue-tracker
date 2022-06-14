@@ -10,7 +10,7 @@ import androidx.browser.customtabs.CustomTabsIntent
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.config.GITHUB_OAUTH_URL
 import com.example.it.issuetracker.databinding.ActivityLoginBinding
-import com.example.it.issuetracker.presentation.issue.MainActivity
+import com.example.it.issuetracker.presentation.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -27,7 +27,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var gsc: GoogleSignInClient
     private lateinit var gso: GoogleSignInOptions
     private lateinit var auth: FirebaseAuth
-    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 runCatching {
@@ -45,7 +46,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
-        if(auth.currentUser != null) { navigateIssueActivity() }
+        if (auth.currentUser != null) {
+            navigateIssueActivity()
+        }
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -88,6 +91,7 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateIssueActivity() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun firebaseAuthWIthGoogle(account: GoogleSignInAccount) {

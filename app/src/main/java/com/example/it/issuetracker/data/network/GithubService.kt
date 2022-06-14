@@ -1,7 +1,9 @@
 package com.example.it.issuetracker.data.network
 
 import com.example.it.issuetracker.data.dto.GithubTokenDto
-import retrofit2.http.*
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface GithubService {
 

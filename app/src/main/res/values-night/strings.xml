@@ -2,4 +2,8 @@
 <resources>
     <string name="label_github">깃헙 계정으로 로그인</string>
     <string name="label_google">구글 계정으로 로그인</string>
+    <string name="bottom_navigation_issue">이슈</string>
+    <string name="bottom_navigation_label">레이블</string>
+    <string name="bottom_navigation_milestone">마일스톤</string>
+    <string name="bottom_navigation_my_page">내 계정</string>
 </resources>

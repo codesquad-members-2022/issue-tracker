@@ -3,7 +3,6 @@ package com.example.it.issuetracker.presentation.login
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.it.issuetracker.BuildConfig
 import com.example.it.issuetracker.config.GITHUB_CLIENT_ID
 import com.example.it.issuetracker.config.GITHUB_SECRET_ID
 import com.example.it.issuetracker.data.network.GithubNetwork

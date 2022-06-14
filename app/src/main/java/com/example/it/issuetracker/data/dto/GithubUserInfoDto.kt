@@ -10,5 +10,5 @@ data class GithubUserInfoDto(
     val login: String,
 
     @Json(name = "avatar_url")
-    val avatarUrl: String
+    val avatarUrl: String,
 )
