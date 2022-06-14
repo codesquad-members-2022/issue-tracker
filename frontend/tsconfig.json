@@ -14,7 +14,7 @@
     "declaration": false,
     "removeComments": true,
     "pretty": true,
-    "noEmit": true,
+    // "noEmit": true,
     "noUnusedLocals": true,
     "downlevelIteration": true,
     "strict": true,
