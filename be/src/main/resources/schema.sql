@@ -19,15 +19,15 @@ CREATE TABLE member
 
 CREATE TABLE issue
 (
-    issue_id     INT NOT NULL AUTO_INCREMENT,
-    member_id    INT NOT NULL,
-    issue_number INT,
-    subject      VARCHAR(255),
-    description  VARCHAR(255),
-    writer       VARCHAR(255),
-    image_url    VARCHAR(255),
-    status       VARCHAR(32),
-    end_time     TIMESTAMP,
+    issue_id         INT NOT NULL AUTO_INCREMENT,
+    member_id        INT NOT NULL,
+    issue_number     INT,
+    subject          VARCHAR(255),
+    description      VARCHAR(255),
+    writer           VARCHAR(255),
+    image_url        VARCHAR(255),
+    status           VARCHAR(32),
+    created_datetime TIMESTAMP,
     PRIMARY KEY (issue_id),
     FOREIGN KEY (member_id) REFERENCES member (member_id)
 );
