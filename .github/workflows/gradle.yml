@@ -13,6 +13,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     branches: [ "be-deploy" ]
   pull_request:
     branches: [ "be-deploy" ]
@@ -36,6 +37,11 @@ on:
   pull_request:
     branches: [ "team-24" ]
 >>>>>>> 471f0ef (chore: (BE)github actions.yml init)
+=======
+    branches: [ "be-deploy" ]
+  pull_request:
+    branches: [ "be-deploy" ]
+>>>>>>> e37d9a8 (fix: gradle.yml 브랜치 수정)
 
 permissions:
   contents: read
