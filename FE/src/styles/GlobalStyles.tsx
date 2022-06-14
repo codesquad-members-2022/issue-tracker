@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import { COLOR, FONT } from '@/styles/common';
 
-const GlobalStyles = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   ${reset}
   
   html,
@@ -113,15 +114,16 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    font: 400 62.5%/1.4 'Noto Sans KR', sans-serif;
+    font: ${FONT.WEIGHT.REGULAR} 62.5%/1.5 ${FONT.FAMILY.BASE};
   }
 
   body {
     width: 100%;
-    color: #14142B;
+    color: ${COLOR.title};
     font: inherit;
     letter-spacing: -0.4px;
-    font-size:1.6rem
+    font-size: 1.6rem;
+    background: ${COLOR.background};
   }
 
   ol,
@@ -208,4 +210,4 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export default GlobalStyles;
+export default GlobalStyle;
