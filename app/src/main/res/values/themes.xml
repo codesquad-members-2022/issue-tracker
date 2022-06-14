@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Issutracker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Issutracker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/issue_tracker_blue</item>
-        <item name="colorPrimaryVariant">@color/issue_tracker_light_blue</item>
+        <item name="colorPrimaryVariant">@color/issue_tracker_blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/issue_tracker_indigo</item>

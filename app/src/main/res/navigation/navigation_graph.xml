@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/issueFragment2">
+
+    <fragment
+        android:id="@+id/issueFragment2"
+        android:name="com.example.issu_tracker.IssueFragment"
+        android:label="fragment_issue"
+        tools:layout="@layout/fragment_issue" />
+    <fragment
+        android:id="@+id/labelFragment2"
+        android:name="com.example.issu_tracker.LabelFragment"
+        android:label="fragment_label"
+        tools:layout="@layout/fragment_label" />
+    <fragment
+        android:id="@+id/mileStoneFragment2"
+        android:name="com.example.issu_tracker.MileStoneFragment"
+        android:label="fragment_mile_stone"
+        tools:layout="@layout/fragment_mile_stone" />
+    <fragment
+        android:id="@+id/myAccountFragment2"
+        android:name="com.example.issu_tracker.MyAccountFragment"
+        android:label="fragment_my_account"
+        tools:layout="@layout/fragment_my_account" />
+</navigation>
