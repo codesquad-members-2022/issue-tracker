@@ -6,6 +6,7 @@ name: Node.js CI
 on:
   push:
 <<<<<<< HEAD
+<<<<<<< HEAD
     branches: [ "fe-deploy" ]
   pull_request:
     branches: [ "fe-deploy" ]
@@ -14,6 +15,11 @@ on:
   pull_request:
     branches: [ "team-24" ]
 >>>>>>> f6632c2 (chore: (FE) github actions.yml init)
+=======
+    branches: [ "fe-deploy" ]
+  pull_request:
+    branches: [ "fe-deploy" ]
+>>>>>>> 717084f (fix: node.js.yml 브랜치 수정)
 
 jobs:
   build:
