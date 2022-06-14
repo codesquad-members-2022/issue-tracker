@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "868023325340",
+    "project_id": "issue-tracker-88904",
+    "storage_bucket": "issue-tracker-88904.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868023325340:android:f8f3aa0f4fef9914155359",
+        "android_client_info": {
+          "package_name": "com.example.it.issuetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868023325340-ol7r0jgkvc6ob57ppqjq5qufg6llrve9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0hKGjupZrFn4U6Ro8CQAoK5aNxsh5y2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868023325340-ol7r0jgkvc6ob57ppqjq5qufg6llrve9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
