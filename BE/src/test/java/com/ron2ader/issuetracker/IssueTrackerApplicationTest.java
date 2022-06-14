@@ -1,4 +1,4 @@
-package com.ron2ader.issueTracker;
+package com.ron2ader.issuetracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

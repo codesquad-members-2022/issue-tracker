@@ -1,0 +1,36 @@
+package com.ron2ader.issuetracker.service;
+
+import com.ron2ader.issuetracker.controller.issuedto.IssueCreateRequest;
+import com.ron2ader.issuetracker.controller.issuedto.IssueDetail;
+import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
+import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
+import com.ron2ader.issuetracker.domain.issue.Issue;
+import com.ron2ader.issuetracker.domain.issue.IssueRepository;
+import java.util.NoSuchElementException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class IssueService {
+
+    private final IssueRepository issueRepository;
+
+    public IssueDetailResponse registerIssue(IssueCreateRequest issueCreateRequest, MemberDto issuer) {
+        //TODO
+        // s3에 파일을 보내고 url을 받는다
+
+        Issue savedIssue = issueRepository.save(
+            Issue.of(issuer, issueCreateRequest.getTitle(), issueCreateRequest.getContents(), null));
+
+        return new IssueDetailResponse(issuer, IssueDetail.from(savedIssue));
+    }
+
+    // 상세 정보
+    public IssueDetailResponse findByIssueNumber(Long issueNumber) {
+        Issue targetIssue = issueRepository.findByIssueNumber(issueNumber)
+            .orElseThrow(() -> new NoSuchElementException("해당하는 이슈가 없습니다."));
+
+        return new IssueDetailResponse(MemberDto.from(targetIssue.getIssuer()), IssueDetail.from(targetIssue));
+    }
+}

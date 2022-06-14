@@ -1,0 +1,34 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/testdb
+    username: root
+    password: test
+
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    hibernate:
+<<<<<<< HEAD
+      ddl-auto: create
+=======
+      ddl-auto: update
+>>>>>>> b1beead218f028a50a79369670ae1ad76c048507
+
+
+
+
