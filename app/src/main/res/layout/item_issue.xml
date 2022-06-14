@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="issue"
+            type="com.example.issu_tracker.Issue" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="15dp">
+
+        <ImageView
+
+            android:id="@+id/iv_mile_stone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_baseline_fork_right_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_issue_mile_stone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_issue_mile_stone" />
+
+        <TextView
+            android:id="@+id/tv_issue_mile_stone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@{issue.mileStone}"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/iv_mile_stone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_issue_item_title"
+            style="@style/HeadLine6.20.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{issue.title}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_issue_mile_stone"
+            tools:text="@string/milestone" />
+
+        <TextView
+            android:id="@+id/tv_issue_item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{issue.description}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_title"
+            tools:text="@string/temp_string_long" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_rectangle_background"
+            android:text="@{issue.label}"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_description"
+            app:layout_constraintBottom_toTopOf="@id/view_issue_item"
+            tools:text="document" />
+
+        <View
+            android:id="@+id/view_issue_item"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginVertical="5dp"
+            android:background="@color/background2"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
