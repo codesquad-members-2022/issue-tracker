@@ -5,9 +5,15 @@ name: Node.js CI
 
 on:
   push:
+<<<<<<< HEAD
     branches: [ "fe-deploy" ]
   pull_request:
     branches: [ "fe-deploy" ]
+=======
+    branches: [ "team-24" ]
+  pull_request:
+    branches: [ "team-24" ]
+>>>>>>> f6632c2 (chore: (FE) github actions.yml init)
 
 jobs:
   build:
