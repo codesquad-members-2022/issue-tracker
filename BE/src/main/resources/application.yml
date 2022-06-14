@@ -1,0 +1,39 @@
+# active profile
+spring:
+  profiles:
+    active: dev-mysql
+---
+# profile group
+spring:
+  profiles:
+    group:
+      dev-mysql: "dev-mysql, local-log"
+---
+# dev-mysql
+spring:
+  config:
+    activate:
+      on-profile: dev-mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/issue_tracker
+    username:
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        connection:
+          charSet: UTF-8
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        open-in-view: false
+---
+# log-group
+spring:
+  profiles:
+    group:
+      local-log: "console-log, low-level-log"
+      deploy-log: "file-log, high-level-log"
