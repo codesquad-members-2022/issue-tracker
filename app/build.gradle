@@ -4,10 +4,6 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
-def apikeyPropertiesFile = rootProject.file("githubkey.properties")
-def apikeyProperties = new Properties()
-apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
-
 android {
     compileSdk 32
 
@@ -19,9 +15,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "CLIENT_ID", apikeyProperties['CLIENT_ID'])
-        buildConfigField("String", "CLIENT_SECRET_ID", apikeyProperties['CLIENT_SECRET_ID'])
     }
 
     buildTypes {
