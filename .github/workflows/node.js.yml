@@ -7,6 +7,7 @@ on:
   push:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     branches: [ "fe-deploy" ]
   pull_request:
     branches: [ "fe-deploy" ]
@@ -20,10 +21,14 @@ on:
   pull_request:
     branches: [ "fe-deploy" ]
 >>>>>>> 717084f (fix: node.js.yml 브랜치 수정)
+=======
+    branches: ["team-24"]
+  pull_request:
+    branches: ["team-24"]
+>>>>>>> 294c1b6 (chore: (FE) github actions.yml init)
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -32,12 +37,12 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
