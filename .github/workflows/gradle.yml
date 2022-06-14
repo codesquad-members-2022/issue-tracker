@@ -10,6 +10,7 @@ name: Java CI with Gradle
 on:
   push:
 <<<<<<< HEAD
+<<<<<<< HEAD
     branches: [ "be-deploy" ]
   pull_request:
     branches: [ "be-deploy" ]
@@ -18,6 +19,11 @@ on:
   pull_request:
     branches: [ "team-24" ]
 >>>>>>> 250e9cf (chore: (BE)github actions.yml init)
+=======
+    branches: [ "be-deploy" ]
+  pull_request:
+    branches: [ "be-deploy" ]
+>>>>>>> 12fb95e (fix: gradle.yml 브랜치 수정)
 
 permissions:
   contents: read
