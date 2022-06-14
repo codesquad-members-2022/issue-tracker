@@ -20,7 +20,8 @@
     "paths": {
       "@UI/*": ["src/UI/*"],
       "@components/*": ["src/components/*"]
-    }
+    },
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["src"]
 }
