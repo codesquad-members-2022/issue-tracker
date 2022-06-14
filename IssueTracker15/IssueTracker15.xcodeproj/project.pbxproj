@@ -111,9 +111,9 @@
 		1B17481F285885180028E037 /* IssueTracker15 */ = {
 			isa = PBXGroup;
 			children = (
+				1B174824285885180028E037 /* ViewController.swift */,
 				1B1748542858857B0028E037 /* SupportingFiles */,
 				1B174834285885640028E037 /* RegularExpressionChecker */,
-				1B174824285885180028E037 /* ViewController.swift */,
 				1B174839285885710028E037 /* Test */,
 				1B17482E285885190028E037 /* Info.plist */,
 				1BA1960B2858888900A4D7B1 /* .swiftlint.yml */,
