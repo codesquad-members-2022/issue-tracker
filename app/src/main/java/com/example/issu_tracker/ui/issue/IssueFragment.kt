@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
 import com.example.issu_tracker.databinding.FragmentIssueBinding
 import com.example.issu_tracker.ui.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class IssueFragment : Fragment() {
     private lateinit var binding: FragmentIssueBinding
     private val issueAdapter = IssueAdapter()
