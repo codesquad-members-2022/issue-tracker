@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">issu-tracker</string>
+    <string name="google_sign_in">구글 계정으로 로그인</string>
+    <string name="github_sign_in">깃헙 계정으로 로그인</string>
 </resources>
