@@ -23,7 +23,11 @@ spring:
 
   jpa:
     hibernate:
+<<<<<<< HEAD
       ddl-auto: create
+=======
+      ddl-auto: update
+>>>>>>> b1beead218f028a50a79369670ae1ad76c048507
 
 
 
