@@ -1,0 +1,4 @@
+excluded:
+  - Pods
+  - SignUp/AppDelegate.swift
+  - SignUp/SceneDelegate.swift
