@@ -8,6 +8,7 @@ on:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     branches: [ "fe-deploy" ]
   pull_request:
     branches: [ "fe-deploy" ]
@@ -26,6 +27,16 @@ on:
   pull_request:
     branches: ["team-24"]
 >>>>>>> 294c1b6 (chore: (FE) github actions.yml init)
+=======
+    branches: ["team-24"]
+  pull_request:
+    branches: ["team-24"]
+=======
+    branches: [ "fe-deploy" ]
+  pull_request:
+    branches: [ "fe-deploy" ]
+>>>>>>> eb6f5ec (fix: node.js.yml 브랜치 수정)
+>>>>>>> af6a69f (fix: node.js.yml 브랜치 수정)
 
 jobs:
   build:
