@@ -25,7 +25,7 @@ public class Issue extends BaseEntity {
     private Member issuer;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer issueNumber;
+    private Long issueNumber;
 
     private String title;
 
@@ -33,9 +33,9 @@ public class Issue extends BaseEntity {
 
     private String attachmentUrl;
 
-    private Boolean isOpen;
+    private Boolean openStatus;
 
-    public static Issue of(MemberDto member, String title, String contents, String attachmentUrl) {
+    public static Issue of(Member member, String title, String contents, String attachmentUrl) {
         return new Issue(null, member, null,
                 title, contents, attachmentUrl, true);
     }
