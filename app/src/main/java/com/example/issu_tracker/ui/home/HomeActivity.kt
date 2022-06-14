@@ -1,13 +1,13 @@
-package com.example.issu_tracker
+package com.example.issu_tracker.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.example.issu_tracker.R
 import com.example.issu_tracker.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
