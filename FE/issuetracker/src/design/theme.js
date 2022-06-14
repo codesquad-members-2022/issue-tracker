@@ -1,4 +1,4 @@
-const background = {
+const backgroundColors = {
   gray1: '#FEFEFE',
   gray2: '#F7F7FC',
   gray3: '#EFF0F6',
@@ -10,11 +10,12 @@ const background = {
   purple1: '#0025E7',
   purple2: '#CCD4FF',
 };
-const fontColor = {
-  gray1: '#6E7191',
-  gray2: '#4E4B66',
-  gray3: '#A0A3BD',
-  gray4: '14142B',
+const fontColors = {
+  gray1: '#FEFEFE',
+  gray2: '#6E7191',
+  gray3: '#4E4B66',
+  gray4: '#A0A3BD',
+  gray5: '14142B',
   purple: '#0025E7',
   red: '#FF3B30',
 };
@@ -26,6 +27,13 @@ const fontStyles = {
     fontSize: '32px',
     lineHeight: '46.34px',
     letter: '-4%',
+  },
+  logoLarge: {
+    fontFamily: 'Montserrat',
+    fontStyle: 'italic',
+    fontWeight: 400,
+    fontSize: '56px',
+    lineHeight: '72px',
   },
   display: {
     fontWeight: 400,
@@ -64,7 +72,7 @@ const fontStyles = {
   },
 };
 export const theme = {
-  background,
-  fontColor,
+  backgroundColors,
+  fontColors,
   fontStyles,
 };

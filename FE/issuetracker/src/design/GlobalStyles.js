@@ -2,11 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 export const mixin = {
-  flexbox: ({ dir = 'row', jc = '', ai = '' }) => `
+  flexbox: ({ dir = 'row', horizontal = '', vertical = '' }) => `
     display: flex;
     flex-direction: ${dir};
-    justify-content: ${jc};
-    align-items: ${ai};
+    justify-content: ${horizontal};
+    align-items: ${vertical};
     `,
 
   // 사용법
