@@ -16,6 +16,6 @@
 
 #### 도메인 및 테이블 설계(안)
 + 개념적 설계
-> ![image](https://user-images.githubusercontent.com/82401504/173668158-dcabfb3b-bef4-43fa-8b05-3fd59d5e545b.png)
+> ![image](https://user-images.githubusercontent.com/82401504/173673131-ad29f4e1-af37-40f1-99ca-59e528e1b424.png)
 + ERD
-> ![image](https://user-images.githubusercontent.com/82401504/173500076-7ad061a4-6cbf-485c-a81e-ffc598e89662.png)
+> ![image](https://user-images.githubusercontent.com/82401504/173673708-8eee4da8-e9e8-4d61-bb83-255ec5a2b6e5.png)

@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS member;
 CREATE TABLE member
 (
     member_id   INT NOT NULL AUTO_INCREMENT,
+    type        VARCHAR(32),
     email       VARCHAR(255),
     password    VARCHAR(255),
     name        VARCHAR(32),
