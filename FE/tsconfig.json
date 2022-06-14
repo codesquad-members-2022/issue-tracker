@@ -19,7 +19,8 @@
     "baseUrl": "./",
     "paths": {
       "@UI/*": ["src/UI/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@styles/*": ["src/styles/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },

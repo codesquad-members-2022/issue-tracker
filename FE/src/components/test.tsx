@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './test.module.scss';
 
 const Test = () => {
-  return <div className={styles.test}>test</div>;
+  return <button className={styles.test}>test</button>;
 };
 
 export default Test;
