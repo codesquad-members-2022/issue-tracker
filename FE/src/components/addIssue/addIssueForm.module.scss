@@ -1,5 +1,7 @@
 .Box {
   display: flex;
+  width: 128rem;
+  border-bottom: 0.1rem solid #d9dbe9;
 }
 
 .userImg {
@@ -8,4 +10,10 @@
 
 .inputBox {
   margin-right: 3.2rem;
+}
+
+.buttonBox {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3.2rem;
 }

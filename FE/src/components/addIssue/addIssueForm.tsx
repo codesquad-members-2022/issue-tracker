@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './addIssueForm.module.scss';
-import { TextForm } from './textForm';
+import { AddIssueInputs } from './addIssueInputs';
 
 export const AddIssueForm = (): JSX.Element => {
   return (
@@ -10,13 +10,16 @@ export const AddIssueForm = (): JSX.Element => {
           <img src={'assets/img/UserImage.png'} />
         </div>
         <div className={styles.inputBox}>
-          <TextForm />
+          <AddIssueInputs />
         </div>
         <div></div>
       </div>
-      <div>
-        <button>작성 취소</button>
-        <button>완료</button>
+      <div className={styles.buttonBox}>
+        <button>
+          <img src={'assets/img/Ximage.png'} />
+          작성 취소
+        </button>
+        <button type="submit">완료</button>
       </div>
     </form>
   );
