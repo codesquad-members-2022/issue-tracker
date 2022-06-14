@@ -13,10 +13,10 @@ class MockIssueTest: XCTestCase {
     var manager: DecodeManager!
 
     func testLocalMockIssues() throws {
-        manager = DecodeManagerImpl()
+        manager = DecodeManagerImplement()
         let issues = manager.getIssuesOnFailure()
 
-        XCTAssertEqual(issues?.count, 3)
+        XCTAssertNotNil(issues, "Issue is NIL")
     }
 
 }
