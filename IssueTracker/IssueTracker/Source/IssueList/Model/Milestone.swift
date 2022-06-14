@@ -7,16 +7,8 @@
 
 import Foundation
 
-final class Milestone: Inform {
-
-    let completeDay: Date?
-
-    init(title: String, completeDay: Date? = nil) {
-        self.completeDay = completeDay
-        super.init(title: title)
-    }
-
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
-    }
+struct Milestone: Codable {
+    let title: String
+    let description: String?
+    let completeDay: String?
 }

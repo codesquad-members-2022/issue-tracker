@@ -53,6 +53,7 @@ class DecodeManagerImpl: DecodeManager {
             let issueList = try JSONDecoder().decode(IssueResponse.self, from: jsonData)
             return issueList.body
         } catch {
+            print(error.localizedDescription)
             return nil
         }
     }

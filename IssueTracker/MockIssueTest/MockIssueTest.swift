@@ -12,11 +12,11 @@ import XCTest
 class MockIssueTest: XCTestCase {
     var manager: DecodeManager!
 
-    func TestLocalMockIssues() {
+    func testLocalMockIssues() throws {
         manager = DecodeManagerImpl()
         let issues = manager.getIssuesOnFailure()
 
-        XCTAssert(issues?.count == 3, "failure at load local json file")
+        XCTAssertEqual(issues?.count, 3)
     }
 
 }

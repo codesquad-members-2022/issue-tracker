@@ -7,16 +7,8 @@
 
 import Foundation
 
-final class Tag: Inform {
-
-    let backgroundColor: UInt64
-    init(title: String, backgroundColor: UInt64) {
-        self.backgroundColor = backgroundColor
-        super.init(title: title)
-    }
-
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
-    }
-
+struct Tag: Codable {
+    let title: String
+    let description: String?
+    let backgroundColor: String
 }

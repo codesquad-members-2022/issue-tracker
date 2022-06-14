@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum State: Codable {
+enum State: String, Codable {
     case open
     case written
     case assign
