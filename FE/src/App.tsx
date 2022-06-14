@@ -1,9 +1,9 @@
 import React from 'react';
-import Test from '@components/test';
+import AuthForm from '@components/Auth/AuthForm';
 import '@styles/reset.css';
 
 const App = () => {
-  return <Test />;
+  return <AuthForm />;
 };
 
 export default App;
