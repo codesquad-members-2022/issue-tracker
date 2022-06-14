@@ -9,9 +9,15 @@ name: Java CI with Gradle
 
 on:
   push:
+<<<<<<< HEAD
     branches: [ "be-deploy" ]
   pull_request:
     branches: [ "be-deploy" ]
+=======
+    branches: [ "team-24" ]
+  pull_request:
+    branches: [ "team-24" ]
+>>>>>>> 250e9cf (chore: (BE)github actions.yml init)
 
 permissions:
   contents: read
