@@ -2,16 +2,16 @@ package com.ron2ader.issuetracker.controller;
 
 import com.ron2ader.issuetracker.controller.issuedto.IssueCreateRequest;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.service.IssueService;
 import com.ron2ader.issuetracker.service.MemberService;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,10 +29,18 @@ public class IssueController {
         return ResponseEntity.ok(issueDetailResponse);
     }
 
-    @PostMapping("/{issueNumber}")
+    @GetMapping("/{issueNumber}")
     public ResponseEntity<IssueDetailResponse> showIssue(@PathVariable Long issueNumber) {
         IssueDetailResponse issueDetailResponse = issueService.findByIssueNumber(issueNumber);
 
         return ResponseEntity.ok(issueDetailResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<IssueSimpleResponse>> showIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
+
+        Page<IssueSimpleResponse> issues = issueService.findAllByOpenStatus(pageable, openStatus);
+
+        return ResponseEntity.ok(issues);
     }
 }

@@ -9,10 +9,10 @@ public class IssueDetail {
 
     private String title;
     private String contents;
-    private Boolean isOpen;
+    private Boolean openStatus;
     private LocalDateTime createdAt;
 
     public static IssueDetail from(Issue issue) {
-        return new IssueDetail(issue.getTitle(), issue.getContents(), issue.getIsOpen(), issue.getCreatedAt());
+        return new IssueDetail(issue.getTitle(), issue.getContents(), issue.getOpenStatus(), issue.getCreatedAt());
     }
 }
