@@ -1,0 +1,92 @@
+.label {
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 1.2rem;
+  margin: 1.6rem 2.4rem 0;
+}
+
+.commentBox {
+  display: flex;
+  width: 88rem;
+  height: 29.1rem;
+  border-top-left-radius: 1.6rem;
+  border-top-right-radius: 1.6rem;
+  background-color: #eff0f6;
+
+  textarea {
+    font-size: 1.6rem;
+    font-family: inherit;
+    font-weight: 500;
+    border: none;
+    padding: 0;
+    background-color: #eff0f6;
+    width: 83.2rem;
+    height: 21.9rem;
+    margin: 1.6rem 2.4rem 0;
+    resize: none;
+  }
+
+  textarea::placeholder {
+    color: #a0a3bd;
+  }
+
+  textarea:focus {
+    outline: none;
+  }
+}
+
+.onFocus {
+  width: 87.8rem;
+  height: 28.9rem;
+  background-color: #ffffff;
+  border-style: solid solid dashed;
+  border-width: 0.1rem;
+  border-color: #000000;
+
+  textarea {
+    background-color: #ffffff;
+    margin: 0.8rem 2.4rem 0;
+  }
+}
+
+.fileBox {
+  display: flex;
+  width: 83.2rem;
+  height: 2rem;
+  background-color: #eff0f6;
+  padding: 1.6rem 2.4rem;
+  margin-bottom: 1.6rem;
+  border-bottom-left-radius: 1.6rem;
+  border-bottom-right-radius: 1.6rem;
+
+  input {
+    display: none;
+  }
+}
+
+.fileBoxFocus {
+  width: 83rem;
+  height: 1.9rem;
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 0 0.1rem 0.1rem 0.1rem;
+  border-color: #000000;
+}
+
+.fileBoxLabel {
+  display: flex;
+  font-size: 1.2rem;
+  line-height: 2rem;
+
+  img {
+    margin-top: 0.1rem;
+    margin-right: 0.5rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  h3,
+  img {
+    cursor: pointer;
+  }
+}
