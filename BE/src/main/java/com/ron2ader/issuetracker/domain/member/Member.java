@@ -1,5 +1,6 @@
-package com.ron2ader.issueTracker.domain.member;
+package com.ron2ader.issuetracker.domain.member;
 
+import com.ron2ader.issuetracker.domain.common.BaseEntity;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

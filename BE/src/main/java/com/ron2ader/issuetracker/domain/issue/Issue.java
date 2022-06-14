@@ -1,6 +1,8 @@
-package com.ron2ader.issueTracker.domain.issue;
+package com.ron2ader.issuetracker.domain.issue;
 
-import com.ron2ader.issueTracker.domain.member.Member;
+import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
+import com.ron2ader.issuetracker.domain.common.BaseEntity;
+import com.ron2ader.issuetracker.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class Issue {
+public class Issue extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +35,7 @@ public class Issue {
 
     private Boolean isOpen;
 
-    public static Issue of(Member member, String title, String contents, String attachmentUrl) {
+    public static Issue of(MemberDto member, String title, String contents, String attachmentUrl) {
         return new Issue(null, member, null,
                 title, contents, attachmentUrl, true);
     }
