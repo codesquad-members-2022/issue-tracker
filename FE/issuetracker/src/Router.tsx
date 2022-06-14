@@ -1,14 +1,16 @@
+import IssueList from 'components/IssueList/index';
+import Login from 'components/Login/Index';
 import { Route, Routes } from 'react-router-dom';
 
 function Router() {
   return (
     <Routes>
-      <Route path="/login"></Route>
-      <Route path="/issueList"></Route>
-      <Route path="/newIssue"></Route>
-      <Route path="/issue"></Route>
-      <Route path="/label"></Route>
-      <Route path="/milestone"></Route>
+      <Route path="/" element={<Login />} />
+      <Route path="/issueList" element={<IssueList />} />
+      <Route path="/newIssue" />
+      <Route path="/issue" />
+      <Route path="/label" />
+      <Route path="/milestone" />
     </Routes>
   );
 }
