@@ -1,5 +1,6 @@
 package codesquad.issuetracker.domain;
 
+import codesquad.issuetracker.domain.enumtype.MemberType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;

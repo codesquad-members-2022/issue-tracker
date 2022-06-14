@@ -1,5 +1,6 @@
 package codesquad.issuetracker.domain;
 
+import codesquad.issuetracker.domain.enumtype.IssueStatus;
 import com.sun.istack.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
