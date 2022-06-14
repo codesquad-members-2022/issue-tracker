@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/issueFragment2"
+        android:icon="@drawable/ic_outline_info_24"
+        android:title="이슈" />
+
+    <item
+        android:id="@+id/labelFragment2"
+        android:icon="@drawable/ic_outline_loyalty_24"
+        android:title="레이블" />
+
+    <item
+        android:id="@+id/mileStoneFragment2"
+        android:icon="@drawable/ic_baseline_fork_right_24"
+        android:title="마일스톤" />
+
+    <item
+        android:id="@+id/myAccountFragment2"
+        android:icon="@drawable/ic_outline_account_circle_24"
+        android:title="내 계정" />
+</menu>

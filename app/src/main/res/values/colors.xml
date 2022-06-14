@@ -2,7 +2,7 @@
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="issue_tracker_blue">#007AFF</color>
-    <color name="issue_tracker_light_blue">##C7EBFF</color>
+    <color name="issue_tracker_light_blue">#C7EBFF</color>
     <color name="issue_tracker_indigo">#0025E7</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
