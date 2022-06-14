@@ -1,5 +1,5 @@
 //
-//  State.swift
+//  IssueState.swift
 //  IssueTracker
 //
 //  Created by 최예주 on 2022/06/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum State: String, Codable {
+enum IssueState: String, Codable {
     case open
     case written
     case assign

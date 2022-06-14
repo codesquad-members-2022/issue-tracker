@@ -12,5 +12,5 @@ struct Issue: Codable {
     let description: String
     let milestone: Milestone?
     let tag: Tag?
-    let state: State?
+    let state: IssueState?
 }
