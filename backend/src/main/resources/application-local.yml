@@ -6,14 +6,19 @@ spring:
     password:
   sql:
     init:
-      data-locations: classpath:data.sql
-      mode: always
+#      data-locations: classpath:data.sql
+#      mode: always
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     hibernate:
       ddl-auto: create
       format_sql: true
+
+oauth2:
+  github:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
 
 logging:
   level.kr.codesquad.issuetracker: debug
