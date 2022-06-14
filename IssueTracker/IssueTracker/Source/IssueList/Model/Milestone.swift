@@ -15,4 +15,8 @@ final class Milestone: Inform {
         self.completeDay = completeDay
         super.init(title: title)
     }
+
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Inform {
+class Inform: Codable {
     let title: String
     let description: String?
 
