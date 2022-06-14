@@ -25,14 +25,12 @@
 
     <style name="Body2" parent="TextAppearance.MaterialComponents.Body2" />
 
-    <style name="Body2.14.black" parent="TextAppearance.MaterialComponents.Body2">
+    <style name="Body2.black" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="Body2.14" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14sp</item>
+    <style name="Body2.white" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/white</item>
     </style>
 
 
