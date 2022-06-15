@@ -9,9 +9,15 @@ function Login(): JSX.Element {
         <S.Logo>
           <S.LogoImg />
         </S.Logo>
-        {/* <GitHubBtn to="/" color="primary">
+        <S.GitHubBtn to="/" size="sm">
+          GitHub
+        </S.GitHubBtn>
+        <S.GitHubBtn to="/" size="md">
+          GitHub 계정으로
+        </S.GitHubBtn>
+        <S.GitHubBtn to="/" size="lg">
           GitHub 계정으로 로그인
-        </GitHubBtn> */}
+        </S.GitHubBtn>
       </S.Wrapper>
     </S.Container>
   );

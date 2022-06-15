@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { CustomBtn } from '../../common/button.styled';
 
 export const Container = styled.div`
   width: 100vw;
@@ -19,13 +19,4 @@ export const LogoImg = styled.img.attrs({
   src: './LogotypeLarge.svg',
 })``;
 
-export const GitHubBtn = styled(NavLink)`
-  display: block;
-  width: 340px;
-  height: 64px;
-  border-radius: 20px;
-  color: ${({ theme: { colors } }) => colors.offWhite};
-  background-color: ${({ theme: { colors } }) => colors.titleActive};
-  text-align: center;
-  line-height: 64px;
-`;
+export const GitHubBtn = styled(CustomBtn)``;

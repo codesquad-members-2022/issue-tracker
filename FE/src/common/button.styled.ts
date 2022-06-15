@@ -1,27 +1,51 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import theme from './theme';
+import { BtnBase } from './util.styled';
 
-const handleBackgroundColorType = (color?: string): string => {
-  switch (color) {
-    case 'primary':
-      return '340px';
-    case 'primaryLight':
-      return theme.colors.primaryLight;
-    case 'primaryDark':
-      return theme.colors.primaryDark;
+const handleWidthType = (size: string): string => {
+  switch (size) {
+    case 'sm':
+      return '120px';
+    case 'md':
+      return '240px';
+    case 'lg':
+      return '360px';
     default:
-      return '#000';
+      return '';
   }
 };
 
-export const BaseBtn = styled(NavLink)<{ color?: string }>`
-  display: block;
-  width: 340px;
-  height: 64px;
-  border-radius: 20px;
+const handleHeightType = (size: string): string => {
+  switch (size) {
+    case 'sm':
+      return '40px';
+    case 'md':
+      return '56px';
+    case 'lg':
+      return '64px';
+    default:
+      return '';
+  }
+};
+
+const handleBorderRadiusType = (size: string): string => {
+  switch (size) {
+    case 'sm':
+      return '11px';
+    case 'md':
+      return '20px';
+    case 'lg':
+      return '20px';
+    default:
+      return '';
+  }
+};
+
+export const CustomBtn = styled(NavLink)<{ size: string }>`
+  ${BtnBase};
+  width: ${({ size }) => handleWidthType(size)};
+  height: ${({ size }) => handleHeightType(size)};
+  border-radius: ${({ size }) => handleBorderRadiusType(size)};
   color: ${({ theme: { colors } }) => colors.offWhite};
-  background-color: ${({ color }) => handleBackgroundColorType(color)};
-  text-align: center;
-  line-height: 64px;
+  background-color: ${({ theme: { colors } }) => colors.primary};
 `;
