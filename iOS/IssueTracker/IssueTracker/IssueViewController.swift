@@ -54,17 +54,3 @@ class IssueViewController: UIViewController {
     
 }
 
-extension IssueViewController {
-    @objc private func buttonPressed(_ sender: Any) {
-        if let button = sender as? UIBarButtonItem {
-            switch button.tag {
-            case 1:
-                self.view.backgroundColor = .systemBlue
-            case 2:
-                self.view.backgroundColor = .systemRed
-            default:
-                print("error button")
-            }
-        }
-    }
-}
