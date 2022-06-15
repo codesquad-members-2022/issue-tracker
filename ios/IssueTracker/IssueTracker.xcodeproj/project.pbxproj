@@ -30,6 +30,8 @@
 		E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43D17892859C8590091DDF1 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E44DF6AB2859A71700FAC8FB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		E47CCCDD2859EE1B00D37ED8 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		E47CCCDE2859EE2100D37ED8 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowCoordinator.swift; sourceTree = "<group>"; };
 		E4D8737E285884AE00AFCE4D /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,8 @@
 			children = (
 				E4D873982858854C00AFCE4D /* .swiftlint.yml */,
 				E4D8739E2858861000AFCE4D /* .swiftformat */,
+				E47CCCDD2859EE1B00D37ED8 /* debug.xcconfig */,
+				E47CCCDE2859EE2100D37ED8 /* release.xcconfig */,
 				E4D87380285884AE00AFCE4D /* IssueTracker */,
 				E4D8737F285884AE00AFCE4D /* Products */,
 				9440FD2DC72618AE4A2F7FCA /* Pods */,
@@ -480,7 +484,7 @@
 		};
 		E4D87393285884AF00AFCE4D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF7E055DCBFAC002F724EBA1 /* Pods-IssueTracker.debug.xcconfig */;
+			baseConfigurationReference = E47CCCDD2859EE1B00D37ED8 /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -508,7 +512,7 @@
 		};
 		E4D87394285884AF00AFCE4D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1D71F4808639204766E3B8B /* Pods-IssueTracker.release.xcconfig */;
+			baseConfigurationReference = E47CCCDE2859EE2100D37ED8 /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

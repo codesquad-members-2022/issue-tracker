@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>GITHUB_API_URL</key>
-	<string>$(GITHUB_URL)</string>
+	<string>$(GITHUB_API_URL)</string>
 	<key>SERVER_API_URL</key>
 	<string>$(SERVER_API_URL)</string>
 	<key>UIApplicationSceneManifest</key>
