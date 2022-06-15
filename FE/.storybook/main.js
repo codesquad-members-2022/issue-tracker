@@ -12,6 +12,13 @@ module.exports = {
     builder: '@storybook/builder-webpack5'
   },
   webpackFinal: async config => {
+    // remove svg from existing rule
+    const fileLoaderRule = config.module.rules.find(rule => rule.test && rule.test.test('.svg'));
+    fileLoaderRule.exclude = /\.svg$/;
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack', 'url-loader']
+    });
     config.resolve.modules = [path.resolve(__dirname, '..'), 'node_modules', 'styles'];
     config.resolve.alias = {
       ...config.resolve.alias,
