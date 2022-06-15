@@ -1,3 +1,4 @@
+import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../src/styles/GlobalStyle';
 import * as CommonStyle from '../src/styles/common';
 
