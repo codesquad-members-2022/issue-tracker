@@ -21,7 +21,4 @@ class LoginViewModel(
         Log.d("test", "getAccessToken: $accessToken")
     }
 
-    companion object {
-        const val TAG = "test"
-    }
 }

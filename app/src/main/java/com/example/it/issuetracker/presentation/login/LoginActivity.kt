@@ -46,5 +46,6 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateMain() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }
