@@ -26,4 +26,9 @@ struct KeyChainManager {
             print("Error: \(status)")
         }
     }
+    
+    func save(_ string: String, service: String, account: String) {
+        let data = Data(string.utf8)
+        save(data, service: service, account: account)
+    }
 }
