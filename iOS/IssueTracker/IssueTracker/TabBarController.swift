@@ -35,7 +35,7 @@ private extension TabBarController {
     }
     
     func setTabBarBackgroundColor() {
-        if #available(iOS 15.0, *) {
+        if #available(iOS 13.0, *) {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = .systemGray6

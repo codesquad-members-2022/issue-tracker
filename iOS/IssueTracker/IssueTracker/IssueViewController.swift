@@ -8,13 +8,63 @@
 import UIKit
 
 class IssueViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        createNavigationBarButton()
+    }
+    
+    private func createNavigationBarButton() {
+        
+        let leftButton: UIButton = {
+            var config = UIButton.Configuration.plain()
+            config.image = UIImage(named: "filter")
+            config.imagePadding = 10
+            var titleAttr = AttributedString.init("필터")
+            titleAttr.font = .systemFont(ofSize: 17.0, weight: .light)
+            config.attributedTitle = titleAttr
+            
+            let leftButton = UIButton(configuration: config)
+            return leftButton
+        }()
+        let leftBarButton = UIBarButtonItem(customView: leftButton)
+        
+        let rightButton: UIButton = {
+            var config = UIButton.Configuration.plain()
+            
+            var titleAttr = AttributedString.init("선택")
+            titleAttr.font = .systemFont(ofSize: 17.0, weight: .light)
+            config.attributedTitle = titleAttr
+            
+            config.image = UIImage(systemName: "checkmark.circle")
+            config.imagePlacement = NSDirectionalRectEdge.trailing
+            config.imagePadding = 10
+            
+            let rightButton = UIButton(configuration: config)
+            return rightButton
+        }()
+        let rightBarButton = UIBarButtonItem(customView: rightButton)
+        
+        self.navigationItem.leftBarButtonItem = leftBarButton
+        self.navigationItem.rightBarButtonItem = rightBarButton
         
     }
-
-
+    
+    
 }
 
+extension IssueViewController {
+    @objc private func buttonPressed(_ sender: Any) {
+        if let button = sender as? UIBarButtonItem {
+            switch button.tag {
+            case 1:
+                self.view.backgroundColor = .systemBlue
+            case 2:
+                self.view.backgroundColor = .systemRed
+            default:
+                print("error button")
+            }
+        }
+    }
+}
