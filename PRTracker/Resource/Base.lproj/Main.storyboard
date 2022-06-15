@@ -145,6 +145,9 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Github 계정으로 로그인"/>
+                                        <connections>
+                                            <action selector="githubLoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FCe-tT-ivi"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6nd-Or-d8H">
                                         <rect key="frame" x="0.0" y="45" width="382" height="31"/>
@@ -152,6 +155,9 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Apple 계정으로 로그인"/>
+                                        <connections>
+                                            <action selector="appleLoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NXa-Kl-MG2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -175,6 +181,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QS7-eZ-Wtx" secondAttribute="trailing" constant="16" id="uGp-Ih-Ru4"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="idTextField" destination="es5-Mx-Io3" id="96S-hO-yhG"/>
+                        <outlet property="passwordTextField" destination="WBh-7r-O2F" id="FzW-9e-N3E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
