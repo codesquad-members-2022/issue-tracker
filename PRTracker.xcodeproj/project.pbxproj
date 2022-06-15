@@ -33,6 +33,11 @@
 		D04099DC2859C6930008B517 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DB2859C6930008B517 /* Observable.swift */; };
 		D04099DE2859C9320008B517 /* PRTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DD2859C9320008B517 /* PRTableCellViewModel.swift */; };
 		D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DF2859C9400008B517 /* LabelViewModel.swift */; };
+		D04099E12859D91C0008B517 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DB2859C6930008B517 /* Observable.swift */; };
+		D04099E22859D9BD0008B517 /* PRTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DD2859C9320008B517 /* PRTableCellViewModel.swift */; };
+		D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */; };
+		D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DF2859C9400008B517 /* LabelViewModel.swift */; };
+		D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D12859C08B0008B517 /* ListingViewController.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -459,10 +464,15 @@
 				BCF57C0D285705220059E61D /* LoginView.swift in Sources */,
 				BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */,
+				D04099E12859D91C0008B517 /* Observable.swift in Sources */,
+				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
+				D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
+				D04099E22859D9BD0008B517 /* PRTableCellViewModel.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
 				BCF57BFE285704F40059E61D /* ListingViewModel.swift in Sources */,
+				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
