@@ -1,5 +1,8 @@
 package kr.codesquad.issuetracker.auth;
 
+import kr.codesquad.issuetracker.auth.jwt.JWT;
+import kr.codesquad.issuetracker.auth.jwt.JWTUtil;
+import kr.codesquad.issuetracker.common.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,11 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     private final LoginService loginService;
+    private final JWTUtil jwtUtil;
 
     @GetMapping("/oauth/callback")
-    public void oauthLogin(@RequestParam String code) {
+    public LoginResponse oauthLogin(@RequestParam String code) {
         AccessToken accessToken = loginService.getAccessToken(code);
         GitHubUserInfo gitHubUserInfo = loginService.getGitHubUserInfo(accessToken);
+        JWT jwt = jwtUtil.createToken(gitHubUserInfo);
+
+        return LoginResponse.builder()
+            .jwt(jwt.getJwt())
+            .message(ResponseMessage.LONGIN_SUCCESS)
+            .build();
     }
 
 }
