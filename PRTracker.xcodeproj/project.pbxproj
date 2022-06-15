@@ -16,8 +16,6 @@
 		BC9709432859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
 		BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709442859CACC00E54F93 /* TokenResponse.swift */; };
 		BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709442859CACC00E54F93 /* TokenResponse.swift */; };
-		BC9709482859CD8600E54F93 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709472859CD8600E54F93 /* Secret.swift */; };
-		BC9709492859CD8600E54F93 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709472859CD8600E54F93 /* Secret.swift */; };
 		BC97094C2859D59000E54F93 /* secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC97094B2859D59000E54F93 /* secret.plist */; };
 		BC97094D2859D59000E54F93 /* secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC97094B2859D59000E54F93 /* secret.plist */; };
 		BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC1285701FB0059E61D /* AppDelegate.swift */; };
@@ -64,7 +62,6 @@
 		BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManger.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
-		BC9709472859CD8600E54F93 /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		BC97094B2859D59000E54F93 /* secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secret.plist; sourceTree = "<group>"; };
 		BCF57BBE285701FB0059E61D /* PRTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PRTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF57BC1285701FB0059E61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -196,7 +193,6 @@
 				BCF57BCF285701FC0059E61D /* Info.plist */,
 				BCF57BC1285701FB0059E61D /* AppDelegate.swift */,
 				BCF57BC3285701FB0059E61D /* SceneDelegate.swift */,
-				BC9709472859CD8600E54F93 /* Secret.swift */,
 				BC97094B2859D59000E54F93 /* secret.plist */,
 			);
 			path = Supporting;
@@ -446,7 +442,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
-				BC9709482859CD8600E54F93 /* Secret.swift in Sources */,
 				BCF57C06285705130059E61D /* OAuthManger.swift in Sources */,
 				BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
 				BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */,
@@ -475,7 +470,6 @@
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
 				BC97093F2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
-				BC9709492859CD8600E54F93 /* Secret.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BFE285704F40059E61D /* ListingViewModel.swift in Sources */,
