@@ -3,27 +3,22 @@ package com.example.it.issuetracker.presentation.login
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.it.issuetracker.BuildConfig
-import com.example.it.issuetracker.config.GITHUB_CLIENT_ID
-import com.example.it.issuetracker.config.GITHUB_SECRET_ID
-import com.example.it.issuetracker.data.network.GithubNetwork
+import com.example.it.issuetracker.domain.repository.LoginRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+    private val loginRepository: LoginRepository
+) : ViewModel() {
 
-    private val githubNetwork = GithubNetwork.createGithubService()
-    private val githubApiNetwork = GithubNetwork.createGithubApiService()
+    private val _token = MutableStateFlow<String>("")
+    val token = _token.asStateFlow()
 
-    fun getAccessToken(code: String) {
-        viewModelScope.launch {
-            val token = githubNetwork.getAccessToken("application/json",
-                GITHUB_CLIENT_ID,
-                GITHUB_SECRET_ID,
-                code)
-
-            val info = githubApiNetwork.getUserInfo("token ${token.accessToken}")
-            Log.d(TAG, "getAccessToken: ${info.toString()}")
-        }
+    fun getAccessToken(code: String) = viewModelScope.launch {
+        val accessToken = loginRepository.getAccessToken(code)
+        _token.value = accessToken
+        Log.d("test", "getAccessToken: $accessToken")
     }
 
     companion object {
