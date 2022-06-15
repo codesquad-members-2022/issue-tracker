@@ -38,6 +38,26 @@
                ReferencedContainer = "container:IssueTracker15.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D66A2DF28596415001B514C"
+               BuildableName = "UseCaseDictionaryUnitTest.xctest"
+               BlueprintName = "UseCaseDictionaryUnitTest"
+               ReferencedContainer = "container:IssueTracker15.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8DFDB6E82859BC2F008E7E59"
+               BuildableName = "DIConatinerUnitTest.xctest"
+               BlueprintName = "DIConatinerUnitTest"
+               ReferencedContainer = "container:IssueTracker15.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

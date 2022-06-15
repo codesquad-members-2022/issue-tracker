@@ -6,7 +6,11 @@ import Foundation
 import Alamofire
 
 class RequestModel {
+    
     static func request(_ responsible: UseCaseResponsible) -> DataResponsePublisher<TestDecodableType> {
-        AF.request("https://www.naver.com").publishDecodable(type: TestDecodableType.self)
+        AF
+            .request("https://www.naver.com")
+            .validate()
+            .publishDecodable(type: TestDecodableType.self)
     }
 }

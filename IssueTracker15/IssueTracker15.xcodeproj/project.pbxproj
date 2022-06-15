@@ -29,6 +29,9 @@
 		1BD75055285886C40025DDC8 /* IDChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174835285885640028E037 /* IDChecker.swift */; };
 		1BD75056285886C70025DDC8 /* PasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174836285885640028E037 /* PasswordChecker.swift */; };
 		40B2C70D0084E13935624E19 /* Pods_IssueTracker15.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8581CFC489C61282E0355D9F /* Pods_IssueTracker15.framework */; };
+		8D66A2C1285959CF001B514C /* Resolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D66A2C0285959CF001B514C /* Resolvable.swift */; };
+		8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D66A2ED28598CA1001B514C /* UseCaseContainer.swift */; };
+		8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionCheckerUnitTest.swift; sourceTree = "<group>"; };
 		6E5A22FB498819D6DAD72D75 /* Pods-IssueTracker15.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.release.xcconfig"; sourceTree = "<group>"; };
 		8581CFC489C61282E0355D9F /* Pods_IssueTracker15.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker15.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D66A2C0285959CF001B514C /* Resolvable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolvable.swift; sourceTree = "<group>"; };
+		8D66A2ED28598CA1001B514C /* UseCaseContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseContainer.swift; sourceTree = "<group>"; };
+		8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerWrapper.swift; sourceTree = "<group>"; };
 		978ACBA6F4626FB73B12E9D4 /* Pods-IssueTracker15.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,9 +118,9 @@
 			isa = PBXGroup;
 			children = (
 				1B174824285885180028E037 /* ViewController.swift */,
-				1B1748542858857B0028E037 /* SupportingFiles */,
 				1B174834285885640028E037 /* RegularExpressionChecker */,
 				1B174839285885710028E037 /* Test */,
+				1B1748542858857B0028E037 /* SupportingFiles */,
 				1B17482E285885190028E037 /* Info.plist */,
 				1BA1960B2858888900A4D7B1 /* .swiftlint.yml */,
 			);
@@ -133,6 +139,7 @@
 		1B174839285885710028E037 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				8D66A2C628595EB2001B514C /* Container */,
 				1B17483A285885710028E037 /* ViewModel */,
 				1B17483C285885710028E037 /* ViewTypes */,
 				1B174841285885710028E037 /* Views */,
@@ -196,6 +203,16 @@
 				1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */,
 			);
 			path = RegularExpressionCheckerUnitTest;
+			sourceTree = "<group>";
+		};
+		8D66A2C628595EB2001B514C /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				8D66A2C0285959CF001B514C /* Resolvable.swift */,
+				8D66A2ED28598CA1001B514C /* UseCaseContainer.swift */,
+				8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */,
+			);
+			path = Container;
 			sourceTree = "<group>";
 		};
 		AE925EF14FEC98BC13A2354E /* Frameworks */ = {
@@ -380,6 +397,7 @@
 				1B174849285885710028E037 /* TestViewModel.swift in Sources */,
 				1B174850285885710028E037 /* UseCaseResponsible.swift in Sources */,
 				1B17484A285885710028E037 /* LargeStringAdaptable.swift in Sources */,
+				8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */,
 				1B17484D285885710028E037 /* BoldStringAdaptable.swift in Sources */,
 				1B17484B285885710028E037 /* ViewTextBindable.swift in Sources */,
 				1B17484E285885710028E037 /* TestLabel.swift in Sources */,
@@ -390,6 +408,8 @@
 				1B174821285885180028E037 /* AppDelegate.swift in Sources */,
 				1B17484C285885710028E037 /* ViewBindable.swift in Sources */,
 				1B174838285885640028E037 /* PasswordChecker.swift in Sources */,
+				8D66A2C1285959CF001B514C /* Resolvable.swift in Sources */,
+				8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */,
 				1B174852285885710028E037 /* TestDecodableType.swift in Sources */,
 				1B174823285885180028E037 /* SceneDelegate.swift in Sources */,
 				1B17484F285885710028E037 /* TestButton.swift in Sources */,
