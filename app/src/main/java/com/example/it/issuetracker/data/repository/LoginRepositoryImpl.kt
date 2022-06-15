@@ -1,6 +1,5 @@
 package com.example.it.issuetracker.data.repository
 
-import android.util.Log
 import com.example.it.issuetracker.domain.repository.LoginRepository
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
@@ -23,9 +22,9 @@ class LoginRepositoryImpl(
 
     override suspend fun checkUserRegistered(userUid: String): Result<Boolean> {
         return runCatching {
-            val documentReference = db.collection("user").document(userUid)
+            val documentReference = db.collection("users").document(userUid)
             val snapshot = documentReference.get().await()
-            snapshot != null
+            snapshot.exists()
         }
     }
 
@@ -39,7 +38,8 @@ class LoginRepositoryImpl(
 
     override suspend fun registerUser(userList: List<String>): Result<Boolean> {
         return runCatching {
-            val currentUid = firebaseAuth.currentUser?.uid ?: throw NullPointerException("Null Pointer Error")
+            val currentUid =
+                firebaseAuth.currentUser?.uid ?: throw NullPointerException("Null Pointer Error")
             if (userList.contains(currentUid)) {
                 throw Exception("Duplicated uid Error")
             }

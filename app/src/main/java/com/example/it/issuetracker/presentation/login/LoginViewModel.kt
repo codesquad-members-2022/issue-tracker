@@ -7,13 +7,13 @@ import com.example.it.issuetracker.data.repository.LoginRepositoryImpl
 import com.example.it.issuetracker.domain.repository.LoginRepository
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseNetworkException
-import com.google.firebase.auth.*
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import java.lang.Exception
-import java.lang.NullPointerException
 
 class LoginViewModel(
     private val loginRepository: LoginRepository = LoginRepositoryImpl(),
@@ -23,15 +23,16 @@ class LoginViewModel(
     private val _isUserRegistered = MutableStateFlow<Boolean>(false)
     val isUserRegistered: MutableStateFlow<Boolean> = _isUserRegistered
 
-    fun firebaseAuthWithGithub(task: () -> Task<AuthResult>) = viewModelScope.launch(Dispatchers.IO) {
-        val result = task().await()
+    fun firebaseAuthWithGithub(task: () -> Task<AuthResult>) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = task().await()
             try {
                 val credential = result.credential
                 if (credential != null) {
                     val uid = loginRepository.signInWithCredential(auth, credential).getOrThrow()
                     val isRegistered = loginRepository.checkUserRegistered(uid).getOrThrow()
                     if (!isRegistered) registerUser()
-                    _isUserRegistered.value = isRegistered
+                    _isUserRegistered.value = true
                 }
             } catch (e: FirebaseNetworkException) {
             } catch (e: NullPointerException) {
@@ -46,7 +47,7 @@ class LoginViewModel(
                 val uid = loginRepository.signInWithCredential(auth, credential).getOrThrow()
                 val isRegistered = loginRepository.checkUserRegistered(uid).getOrThrow()
                 if (!isRegistered) registerUser()
-                _isUserRegistered.value = isRegistered
+                _isUserRegistered.value = true
             }
         } catch (e: FirebaseNetworkException) {
         } catch (e: NullPointerException) {

@@ -2,20 +2,14 @@ package com.example.it.issuetracker.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.ActivityLoginBinding
 import com.example.it.issuetracker.presentation.issue.MainActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.GithubAuthProvider
 import com.google.firebase.auth.OAuthProvider
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 class LoginActivity : AppCompatActivity() {
 

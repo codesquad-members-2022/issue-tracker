@@ -4,12 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
-import com.example.it.issuetracker.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 
-class SignInIntentContract: ActivityResultContract<String, String>() {
+class SignInIntentContract : ActivityResultContract<String, String>() {
     override fun createIntent(context: Context, cliendId: String): Intent {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(cliendId)
@@ -20,7 +19,7 @@ class SignInIntentContract: ActivityResultContract<String, String>() {
     }
 
     override fun parseResult(resultCode: Int, intent: Intent?): String? {
-        return when(resultCode) {
+        return when (resultCode) {
             Activity.RESULT_OK -> getTokenId(intent)
             else -> null
         }
