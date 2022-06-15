@@ -187,6 +187,7 @@
                     <connections>
                         <outlet property="idTextField" destination="es5-Mx-Io3" id="96S-hO-yhG"/>
                         <outlet property="passwordTextField" destination="WBh-7r-O2F" id="FzW-9e-N3E"/>
+                        <segue destination="sVA-oP-Vgq" kind="custom" identifier="loginSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="toQ-Cc-Ot1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
