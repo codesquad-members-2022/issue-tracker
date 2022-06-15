@@ -8,6 +8,8 @@
 import UIKit
 
 extension UIColor {
+    static let line = UIColor(named: "line")
+    static let graybg = UIColor(named: "graybg")
     static let labelGray = UIColor(named: "labelGray")
     static let lightBlue = UIColor(named: "lightBlue")
     static let primary = UIColor(named: "primary")
