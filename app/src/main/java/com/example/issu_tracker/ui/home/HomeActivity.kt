@@ -9,7 +9,9 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.issu_tracker.R
 import com.example.issu_tracker.databinding.ActivityHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     val homeViewModel: HomeViewModel by viewModels<HomeViewModel>()
 

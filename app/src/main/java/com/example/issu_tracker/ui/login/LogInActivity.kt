@@ -18,8 +18,9 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
-
+@AndroidEntryPoint
 class LogInActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
