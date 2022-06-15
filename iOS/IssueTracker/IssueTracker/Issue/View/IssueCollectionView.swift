@@ -12,6 +12,7 @@ final class IssueCollectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        addSubview(collectionView)
     }
     
     @available(*, unavailable)
@@ -30,7 +31,6 @@ final class IssueCollectionView: UIView {
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true
-        
         collectionView.register(IssueCollectionViewCell.self, forCellWithReuseIdentifier: IssueCollectionViewCell.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -42,7 +42,7 @@ final class IssueCollectionView: UIView {
     
     override func layoutSubviews() {
         collectionView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalTo(self.collectionView)
+            make.top.leading.trailing.bottom.equalTo(self)
         }
     }
 }

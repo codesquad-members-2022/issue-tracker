@@ -13,7 +13,7 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        appendSubView()
+        addSubviews(title, issueDescription, milestoneImage, milestoneName, labelName)
     }
     
     @available(*, unavailable)
@@ -28,7 +28,7 @@ final class IssueCollectionViewCell: UICollectionViewCell {
         let length = titleAttributedString.length
         titleAttributedString.addAttributes([
             .foregroundColor: UIColor.black,
-            .font: UIFont.systemFont(ofSize: 22, weight: .bold)
+            .font: UIFont(name: "SFProDisplay-Bold", size: 22) ?? UIFont()
         ], range: NSRange(location: 0, length: length))
         title.attributedText = titleAttributedString
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +37,7 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     private var issueDescription: UILabel = {
         let issueDescription = UILabel()
-        let issueDescriptionFont = UIFont(name: "Helvetica", size: 17)
+        let issueDescriptionFont = UIFont(name: "SFProDisplay-Regular", size: 17)
         let issueDescriptionAttributedString = NSMutableAttributedString(string: "마일스톤 이름")
         issueDescription.attributedText = issueDescriptionAttributedString
         issueDescription.font = issueDescriptionFont
@@ -53,7 +53,7 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     private var milestoneName: UILabel = {
         let milestoneName = UILabel()
-        let milestoneNameFont = UIFont(name: "Helvetica", size: 17)
+        let milestoneNameFont = UIFont(name: "SFProDisplay-Regular", size: 17)
         let milestoneNameAttributedString = NSMutableAttributedString(string: "마일스톤 이름")
         milestoneName.attributedText = milestoneNameAttributedString
         milestoneName.font = milestoneNameFont
@@ -76,14 +76,6 @@ final class IssueCollectionViewCell: UICollectionViewCell {
         self.title.text = title
         self.issueDescription.text = issueDescription
         self.milestoneName.text = milestoneName
-    }
-    
-    private func appendSubView() {
-        contentView.addSubview(title)
-        contentView.addSubview(issueDescription)
-        contentView.addSubview(milestoneImage)
-        contentView.addSubview(milestoneName)
-        contentView.addSubview(labelName)
     }
     
     override func layoutSubviews() {

@@ -9,7 +9,7 @@ import UIKit
 
 class IssueViewController: UIViewController {
     
-    private var issueCollectionView = IssueCollectionView()
+    private lazy var issueCollectionView = IssueCollectionView(frame: view.frame)
     
     override func viewDidLoad() {
         super.viewDidLoad()
