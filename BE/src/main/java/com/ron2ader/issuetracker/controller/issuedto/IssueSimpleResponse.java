@@ -17,9 +17,7 @@ public class IssueSimpleResponse {
     private LocalDateTime createdAt;
 
     public static IssueSimpleResponse from(Issue issue) {
-        return new IssueSimpleResponse(MemberDto.from(issue.getIssuer()), issue.getIssueNumber(),
+        return new IssueSimpleResponse(MemberDto.from(issue.getIssuer()), issue.getId(),
                 issue.getTitle(), issue.getCreatedAt());
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.ron2ader.issuetracker.domain.member;
 
 import com.ron2ader.issuetracker.domain.common.BaseEntity;
+import javax.persistence.Table;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@Table(name = "member")
 public class Member extends BaseEntity {
 
     @Id
@@ -25,6 +27,4 @@ public class Member extends BaseEntity {
     public static Member of(String userId, String avatarUrl) {
         return new Member(null, userId, avatarUrl);
     }
-
-
 }

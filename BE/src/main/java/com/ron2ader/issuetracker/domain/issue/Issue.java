@@ -1,6 +1,5 @@
 package com.ron2ader.issuetracker.domain.issue;
 
-import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.domain.common.BaseEntity;
 import com.ron2ader.issuetracker.domain.member.Member;
 import lombok.AccessLevel;
@@ -20,12 +19,9 @@ public class Issue extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "member_id")
     private Member issuer;
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long issueNumber;
 
     private String title;
 
@@ -36,8 +32,7 @@ public class Issue extends BaseEntity {
     private Boolean openStatus;
 
     public static Issue of(Member member, String title, String contents, String attachmentUrl) {
-        return new Issue(null, member, null,
+        return new Issue(null, member,
                 title, contents, attachmentUrl, true);
     }
-
 }
