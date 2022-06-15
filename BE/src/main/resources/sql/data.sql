@@ -1,1 +1,2 @@
-INSERT INTO member(user_id, avatar_url) VALUES ('ron2', 'asdfasdf.com');
+INSERT INTO member(created_at, updated_at, member_id, avatar_url) VALUES (now(), now(), 'ron2', 'asdfasdf.com');
+
