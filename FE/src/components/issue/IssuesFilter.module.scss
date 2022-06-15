@@ -1,0 +1,32 @@
+.filterNav {
+  width: 1280px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background-color: red;
+}
+
+.filterWrapper {
+  width: 50%;
+  height: 100%;
+  background-color: blue;
+}
+
+.filterButtonsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40%;
+  height: 100%;
+  background-color: yellow;
+}
+
+.addIssueButton {
+  width: 120px;
+  height: 40px;
+  border-radius: 11px;
+  font-size: 1.2rem;
+  background-color: blue;
+}

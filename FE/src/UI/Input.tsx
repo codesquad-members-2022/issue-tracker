@@ -5,7 +5,7 @@ type InputPropType = {
   info: Record<string, string>;
 };
 
-const Input = React.forwardRef<HTMLInputElement, InputPropType>(
+export const InputWithRef = React.forwardRef<HTMLInputElement, InputPropType>(
   (props, ref) => {
     return (
       <>
@@ -16,4 +16,11 @@ const Input = React.forwardRef<HTMLInputElement, InputPropType>(
   },
 );
 
-export default Input;
+export const Input = (props: InputPropType) => {
+  return (
+    <>
+      <label htmlFor={props.label} />
+      <input {...props.info} />
+    </>
+  );
+};

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styles from './AuthForm.module.scss';
-import Input from '@UI/Input';
+import { InputWithRef } from '@UI/Input';
 
 const AuthForm = () => {
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -13,7 +13,7 @@ const AuthForm = () => {
         <button className={styles.github_button}>GitHub 계정으로 로그인</button>
         <div className={styles.divider}>or</div>
         <form className={styles.form}>
-          <Input
+          <InputWithRef
             ref={emailInputRef}
             label="email"
             info={{
@@ -22,7 +22,7 @@ const AuthForm = () => {
               placeHolder: '아이디',
             }}
           />
-          <Input
+          <InputWithRef
             ref={passwordInputRef}
             label="password"
             info={{
