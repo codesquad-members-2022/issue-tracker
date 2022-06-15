@@ -3,7 +3,6 @@ package codesquad.issuetracker.domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,10 +25,10 @@ public class MileStone {
     @Column(name = "milestone_id")
     private Long id;
 
-    @OneToMany(mappedBy = "milestone", cascade = CascadeType.ALL)
-    private List<IssueMilestone> issueMilestones = new ArrayList<>();
+    @OneToMany(mappedBy = "mileStone")
+    private List<Issue> issues = new ArrayList<>();
 
     private String subject;
     private String description;
-    private LocalDate endTime;
+    private LocalDate endDate;
 }

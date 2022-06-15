@@ -1,6 +1,6 @@
 package codesquad.issuetracker.domain;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

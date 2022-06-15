@@ -1,6 +1,6 @@
 package codesquad.issuetracker.domain;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,9 +32,9 @@ public class Reply {
     private Issue issue;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "writer_id")
     @NotNull
-    private Member member;
+    private Writer writer;
 
     private String content;
     private LocalDateTime createdDateTime;

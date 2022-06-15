@@ -1,6 +1,5 @@
 package codesquad.issuetracker.domain;
 
-import com.sun.istack.NotNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,19 +9,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "issue_milestone")
+@Table(name = "image")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class IssueMilestone {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "issue_milestone_id")
+    @Column(name = "image_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,8 +30,5 @@ public class IssueMilestone {
     @NotNull
     private Issue issue;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "milestone_id")
-    @NotNull
-    private MileStone milestone;
+    private String imageUrl;
 }

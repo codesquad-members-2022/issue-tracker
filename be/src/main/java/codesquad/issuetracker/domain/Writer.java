@@ -1,6 +1,5 @@
 package codesquad.issuetracker.domain;
 
-import codesquad.issuetracker.domain.enumtype.MemberType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -19,31 +18,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "member")
+@Table(name = "writer")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Writer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "writer_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private MemberType type;
 
-    private String email;
+    private String identity;
     private String password;
-    private String name;
+    private String email;
+    private String nickname;
     private String profileUrl;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "writer")
     private List<Issue> issues = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "writer")
     private List<Reply> replies = new ArrayList<>();
 
-    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
-    private IssueAssignee issueAssignee;
+    @OneToOne(mappedBy = "writer", fetch = FetchType.LAZY)
+    private Assignee assignee;
 
 }

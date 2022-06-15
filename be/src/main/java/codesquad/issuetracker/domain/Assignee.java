@@ -1,6 +1,6 @@
 package codesquad.issuetracker.domain;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,11 +19,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "issue_assignee")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class IssueAssignee {
+public class Assignee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "issue_assignee_id")
+    @Column(name = "assignee_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,7 +32,7 @@ public class IssueAssignee {
     private Issue issue;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "writer_id")
     @NotNull
-    private Member member;
+    private Writer writer;
 }
