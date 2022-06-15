@@ -31,6 +31,8 @@
 		D04099D22859C08B0008B517 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D12859C08B0008B517 /* ListingViewController.swift */; };
 		D04099DA2859C34A0008B517 /* ReplaceRootSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */; };
 		D04099DC2859C6930008B517 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DB2859C6930008B517 /* Observable.swift */; };
+		D04099DE2859C9320008B517 /* PRTableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DD2859C9320008B517 /* PRTableCellViewModel.swift */; };
+		D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DF2859C9400008B517 /* LabelViewModel.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,8 @@
 		D04099D12859C08B0008B517 /* ListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
 		D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceRootSegue.swift; sourceTree = "<group>"; };
 		D04099DB2859C6930008B517 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		D04099DD2859C9320008B517 /* PRTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTableCellViewModel.swift; sourceTree = "<group>"; };
+		D04099DF2859C9400008B517 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +241,8 @@
 			isa = PBXGroup;
 			children = (
 				BCF57BFC285704F40059E61D /* ListingViewModel.swift */,
+				D04099DD2859C9320008B517 /* PRTableCellViewModel.swift */,
+				D04099DF2859C9400008B517 /* LabelViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -253,8 +259,8 @@
 		D04099D62859C3380008B517 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
 				D04099DB2859C6930008B517 /* Observable.swift */,
+				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -439,7 +445,9 @@
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */,
 				BCF57BFD285704F40059E61D /* ListingViewModel.swift in Sources */,
+				D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */,
 				D04099D22859C08B0008B517 /* ListingViewController.swift in Sources */,
+				D04099DE2859C9320008B517 /* PRTableCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
