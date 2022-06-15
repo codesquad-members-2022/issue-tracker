@@ -1,9 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Button } from '@/components/Button';
-import { COLOR } from '@/styles/common';
 
 export default {
-  title: 'Button/Button222',
+  title: 'Button/Button',
   component: Button
 } as ComponentMeta<typeof Button>;
 
