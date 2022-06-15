@@ -83,14 +83,34 @@ const mediumText = css`
   }
   ${textEventStyle}
 `;
+
+const EmptyCss = css``;
+
+type ButtonStyle = Record<ButtonStyleType, FlattenInterpolation<ThemeProps<any>>>;
+
+const buttonStyle: ButtonStyle = {
+  Large: large,
+  'Small-Standard': smallStandard,
+  'Medium-Standard': EmptyCss,
+  'Small-Secondary': EmptyCss,
+  'Medium-Text': mediumText,
+  'Small-Text': EmptyCss
+};
+
 interface Styled_button {
-  width: string;
+  styleType: ButtonStyleType;
 }
 
 const Styled_button = styled.button<Styled_button>`
-  min-width: ${({ width }) => width};
-  height: 100px;
-  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${({ styleType }) => styleType && buttonStyle[styleType]}
 `;
 
-export { Styled_button };
+const Styled_TextWrapper = styled.span`
+  padding-left: 4px;
+`;
+
+export type { ButtonStyleType };
+export { Styled_button, Styled_TextWrapper };
