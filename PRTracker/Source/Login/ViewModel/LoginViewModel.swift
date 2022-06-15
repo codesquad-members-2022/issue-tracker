@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+final class LoginViewModel {
+    func requestGithubLogin() {
+        // TODO: OAuthManager로 github 로그인 요청
+    }
+}
