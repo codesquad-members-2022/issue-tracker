@@ -44,7 +44,7 @@ module.exports = {
       'error',
       { functions: false, classes: true, variables: false },
     ],
-    'import/no-unresolved': 'false',
+    'import/no-unresolved': false,
   },
   settings: {
     'import/resolver': {
