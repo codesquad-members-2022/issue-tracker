@@ -138,5 +138,6 @@ html {
   /* default size */
   font-size: 10px;
   width: 144rem;
+  margin: 0 auto;
   background-color: #f7f7fc;
 }

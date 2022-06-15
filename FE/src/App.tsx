@@ -6,11 +6,11 @@ import { AddIssue } from './pages/addIssue';
 
 const App = () => {
   return (
-    <AuthForm />
-    // <>
-    //   <Header />
-    //   <AddIssue />
-    // </>
+    // <AuthForm />
+    <>
+      <Header />
+      <AddIssue />
+    </>
   );
 };
 
