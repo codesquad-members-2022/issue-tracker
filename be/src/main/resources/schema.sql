@@ -5,18 +5,18 @@ DROP TABLE IF EXISTS image;
 DROP TABLE IF EXISTS assignee;
 DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS milestone;
-DROP TABLE IF EXISTS writer;
+DROP TABLE IF EXISTS member;
 
-CREATE TABLE writer
+CREATE TABLE member
 (
-    writer_id   BIGINT NOT NULL AUTO_INCREMENT,
+    member_id   BIGINT NOT NULL AUTO_INCREMENT,
     type        VARCHAR(32),
     identity    VARCHAR(255),
     password    VARCHAR(255),
     email       VARCHAR(255),
     nickname    VARCHAR(32),
     profile_url VARCHAR(255),
-    PRIMARY KEY (writer_id)
+    PRIMARY KEY (member_id)
 );
 
 CREATE TABLE milestone
@@ -31,7 +31,7 @@ CREATE TABLE milestone
 CREATE TABLE issue
 (
     issue_id         BIGINT NOT NULL AUTO_INCREMENT,
-    writer_id        BIGINT NOT NULL,
+    member_id        BIGINT NOT NULL,
     milestone_id     BIGINT,
     subject          VARCHAR(255),
     description      VARCHAR(255),
@@ -39,7 +39,7 @@ CREATE TABLE issue
     created_datetime TIMESTAMP,
     updated_datetime TIMESTAMP,
     PRIMARY KEY (issue_id),
-    FOREIGN KEY (writer_id) REFERENCES writer (writer_id),
+    FOREIGN KEY (member_id) REFERENCES member (member_id),
     FOREIGN KEY (milestone_id) REFERENCES milestone (milestone_id)
 );
 
@@ -55,22 +55,22 @@ CREATE TABLE assignee
 (
     assignee_id       BIGINT NOT NULL AUTO_INCREMENT,
     issue_id          BIGINT NOT NULL,
-    writer_id         BIGINT NOT NULL,
+    member_id         BIGINT NOT NULL,
     PRIMARY KEY (assignee_id),
     FOREIGN KEY (issue_id) REFERENCES issue (issue_id),
-    FOREIGN KEY (writer_id) REFERENCES writer (writer_id)
+    FOREIGN KEY (member_id) REFERENCES member (member_id)
 );
 
 CREATE TABLE reply
 (
     reply_id         BIGINT NOT NULL AUTO_INCREMENT,
     issue_id         BIGINT NOT NULL,
-    writer_id        BIGINT NOT NULL,
+    member_id        BIGINT NOT NULL,
     content          VARCHAR(255),
     created_datetime TIMESTAMP,
     PRIMARY KEY (reply_id),
     FOREIGN KEY (issue_id) REFERENCES issue (issue_id),
-    FOREIGN KEY (writer_id) REFERENCES writer (writer_id)
+    FOREIGN KEY (member_id) REFERENCES member (member_id)
 );
 
 CREATE TABLE label

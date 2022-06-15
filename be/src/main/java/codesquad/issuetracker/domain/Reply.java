@@ -32,9 +32,9 @@ public class Reply {
     private Issue issue;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "writer_id")
+    @JoinColumn(name = "member_id")
     @NotNull
-    private Writer writer;
+    private Member member;
 
     private String content;
     private LocalDateTime createdDateTime;

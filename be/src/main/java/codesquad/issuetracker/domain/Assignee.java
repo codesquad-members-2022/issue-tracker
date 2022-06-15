@@ -32,7 +32,7 @@ public class Assignee {
     private Issue issue;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "writer_id")
+    @JoinColumn(name = "member_id")
     @NotNull
-    private Writer writer;
+    private Member member;
 }

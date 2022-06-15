@@ -34,16 +34,13 @@ public class Issue {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "writer_id")
+    @JoinColumn(name = "member_id")
     @NotNull
-    private Writer writer;
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
     private MileStone mileStone;
-
-    @OneToMany(mappedBy = "issue")
-    private List<Assignee> assignees = new ArrayList<>();
 
     @OneToMany(mappedBy = "issue")
     private List<Image> images = new ArrayList<>();
