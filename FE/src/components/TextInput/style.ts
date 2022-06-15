@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { StyleType, IStyleProps, StyleTypes, IStyled_textInput } from '@/components/TextInput/type';
 
 const standardEventStyle = css`
-  :active {
+  :focus {
     background: ${({ theme }) => theme.PALETTE.WHITE};
     border: 1px solid ${({ theme }) => theme.COLOR.title};
   }
