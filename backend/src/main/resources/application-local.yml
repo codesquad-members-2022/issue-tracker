@@ -20,5 +20,9 @@ oauth2:
     client-id: ${CLIENT_ID}
     client-secret: ${CLIENT_SECRET}
 
+jwt:
+  issuer: ${JWT_ISSUER}
+  secret: ${JWT_SECRET}
+
 logging:
   level.kr.codesquad.issuetracker: debug
