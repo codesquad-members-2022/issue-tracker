@@ -31,7 +31,7 @@ public class IssueController {
 
     @GetMapping("/{issueNumber}")
     public ResponseEntity<IssueDetailResponse> showIssue(@PathVariable Long issueNumber) {
-        IssueDetailResponse issueDetailResponse = issueService.findByIssueNumber(issueNumber);
+        IssueDetailResponse issueDetailResponse = issueService.findById(issueNumber);
 
         return ResponseEntity.ok(issueDetailResponse);
     }

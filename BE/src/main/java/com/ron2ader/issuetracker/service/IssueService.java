@@ -34,8 +34,8 @@ public class IssueService {
     }
 
     // 상세 정보
-    public IssueDetailResponse findByIssueNumber(Long issueNumber) {
-        Issue targetIssue = issueRepository.findByIssueNumber(issueNumber)
+    public IssueDetailResponse findById(Long issueNumber) {
+        Issue targetIssue = issueRepository.findById(issueNumber)
                 .orElseThrow(() -> new NoSuchElementException("해당하는 이슈가 없습니다."));
 
         return new IssueDetailResponse(MemberDto.from(targetIssue.getIssuer()), IssueDetail.from(targetIssue));
