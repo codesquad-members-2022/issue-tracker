@@ -7,17 +7,12 @@ import { AddIssue } from './pages/addIssue';
 
 const App = () => {
   return (
-<<<<<<< Updated upstream
     // <AuthForm />
-    <>
-      <Header />
-      <AddIssue />
-    </>
-=======
-    <div>
-      <Issues />
-    </div>
->>>>>>> Stashed changes
+    // <>
+    //   <Header />
+    //   <AddIssue />
+    // </>
+    <Issues />
   );
 };
 

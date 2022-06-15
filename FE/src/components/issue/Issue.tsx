@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './IssuesNav.module.scss';
+import styles from './Issue.module.scss';
 import { Input } from '@UI/Input';
 
 const Issue = () => {
@@ -8,27 +8,31 @@ const Issue = () => {
       <div className={styles.leftWrapper}>
         <div className={styles.checkBoxWrapper}>
           <Input
-            label="issueAllSelect"
+            label="issueSelect"
             info={{
-              id: 'issueAllSelect',
+              id: 'issueSelect',
               type: 'checkbox',
-              value: 'allSelect',
+              value: 'issueSelect',
             }}
           />
         </div>
         <div className={styles.issue__contentWrapper}>
           <div>
-            <span>열린 이슈</span>
-            <span>닫힌 이슈</span>
+            <span>이슈 제목</span>
+            <span>badge</span>
           </div>
           <div>
-            <span>열린 이슈</span>
-            <span>닫힌 이슈</span>
+            <span>#이슈번호</span>
+            <span>작성자 및 타임스탬프 정보</span>
+            <span>마일스톤</span>
           </div>
         </div>
       </div>
 
       <div className={styles.rightWrapper}>
+        <div>무언가</div>
+        <div>무언가</div>
+        <div>무언가</div>
         <div>무언가</div>
       </div>
     </div>

@@ -7,7 +7,10 @@ import Issue from './Issue';
 const Issues = () => {
   return (
     <>
-      <button>이슈 등록하기</button>
+      <div>필터 옵션</div>
+      <button style={{ width: '300px', height: '100px', background: 'red' }}>
+        이슈 등록하기
+      </button>
       <div className={styles.wrapper}>
         <IssuesNav />
         <Issue />
