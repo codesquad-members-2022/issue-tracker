@@ -11,22 +11,26 @@ module.exports = {
       {
         test: /\.(ts|tsx|js|jsx)$/,
         use: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
-    ],
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader']
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: `${path.resolve(__dirname, '../src/public')}/index.html`,
+      template: `${path.resolve(__dirname, '../src/public')}/index.html`
     }),
     new webpack.ProvidePlugin({
-      React: 'react',
-    }),
+      React: 'react'
+    })
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, '..src/'),
+      '@': path.resolve(__dirname, '../src')
     },
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
-  },
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css']
+  }
 };
