@@ -61,10 +61,27 @@ struct OAuthManger {
         guard var components = URLComponents(string: OAuthManger.accessTokenURL) else { return nil }
         components.queryItems = [
             URLQueryItem(name: "client_id", value: OAuthManger.clientId),
-            URLQueryItem(name: "client_secret", value: Secret.clientSecret),
+            URLQueryItem(name: "client_secret", value: getClientSecret()),
             URLQueryItem(name: "code", value: code)
         ]
         return components.url
+    }
+    
+    func getClientSecret() -> String {
+        guard let filePath = Bundle.main.path(forResource: "secret", ofType: "plist") else {
+            Log.error("Failed to find secret.plist")
+            return ""
+        }
+        
+        let plistKey = "github_client_secret"
+        let plist = NSDictionary(contentsOfFile: filePath)
+        
+        guard let clientScret = plist?.object(forKey: plistKey) as? String else {
+            Log.error("Failed to find value for \(plistKey)")
+            return ""
+        }
+        
+        return clientScret
     }
 }
 
