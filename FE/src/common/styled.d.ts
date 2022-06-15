@@ -1,6 +1,6 @@
 import 'styled-components';
 
-declare module 'styled-component' {
+declare module 'styled-components' {
   export interface DefaultTheme {
     fontSizes: {
       xs: '0.75rem';
@@ -28,10 +28,10 @@ declare module 'styled-component' {
       line: '#D9DBE9';
       inputBackground: '#EFF0F6';
       background: '#F7F7FC';
-      offWhilte: '#FEFEFE';
+      offWhite: '#FEFEFE';
       primary: '#007AFF';
       primaryLight: '#C7EBFF';
-      parimaryDark: '#004DE3';
+      primaryDark: '#004DE3';
       secondary: '#0025E7';
       secondaryLight: '#CCD4FF';
       secondaryDark: '#020070';
@@ -41,6 +41,7 @@ declare module 'styled-component' {
       success: '#34C759';
       successLight: '#DDFFE6';
       successDark: '#00A028';
+      grey1: '#D9D9D9';
     };
   }
 }
