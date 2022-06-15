@@ -15,7 +15,14 @@ final class SignInViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         signInView.setGitHubSignInButtonAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
-            self.signInManager.requestCode()
+            self.signInManager.requestCode { result in
+                switch result {
+                case let .success(url):
+                    UIApplication.shared.open(url)
+                case let .failure(error):
+                    print(error)
+                }
+            }
         }))
     }
 

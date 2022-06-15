@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct SignInManager {
     static let shared = SignInManager()
@@ -14,66 +13,23 @@ struct SignInManager {
     private let clientID = Bundle.main.clientID
     private let clientSecret = Bundle.main.clientSecret
 
-    func requestCode() {
-        let baseURL = "https://github.com/login/oauth/authorize"
-        var components = URLComponents(string: baseURL) ?? URLComponents()
-        components.queryItems = [
-            URLQueryItem(name: "client_id", value: clientID)
-        ]
+    func requestCode(completion: @escaping (Result<URL, Error>) -> Void) {
+        let networkTarget = SignInNetworkTarget.requestCode(clientID: clientID)
+        var components = URLComponents(string: networkTarget.url) ?? URLComponents()
+        components.queryItems = networkTarget.queryItem
 
         guard let url = components.url else {
-            return print("url Error")
+            return completion(.failure(NetworkError.invalidURL))
         }
-        UIApplication.shared.open(url)
+        completion(.success(url))
     }
 
-    func requestAccessToken(with code: String) {
-        let url = "https://github.com/login/oauth/access_token"
-        var components = URLComponents(string: url) ?? URLComponents()
+    func requestAccessToken(code: String, completion: @escaping (Result<[String: String], NetworkError>) -> Void) {
 
-        components.queryItems = [
-            URLQueryItem(name: "client_id", value: clientID),
-            URLQueryItem(name: "client_secret", value: clientSecret),
-            URLQueryItem(name: "code", value: code)
-        ]
-
-        if let request = makePostRequest(with: components.url) {
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                guard error == nil else {
-                    return print(error?.localizedDescription as Any)
-                }
-                guard let data = data else {
-                    return print("no data")
-                }
-                guard let response = response as? HTTPURLResponse else {
-                    return print("no response")
-                }
-
-                let statusCode = response.statusCode
-                guard 200..<300 ~= statusCode else {
-                    return print("invalid response status Code")
-                }
-
-                guard let decodedData = try? JSONDecoder().decode([String: String].self, from: data) else {
-                    return print("Decoding Error")
-                }
-
-                print(decodedData["access_token"] ?? "no Accesstoken")
-            }.resume()
-        }
-    }
-}
-
-private extension SignInManager {
-    func makePostRequest(with url: URL?) -> URLRequest? {
-        guard let url = url else {
-            return nil
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-
-        return request
+        NetworkManager<[String: String]>.fetchData(
+            target: .requestAccessToken(clientID: clientID,
+                                        clientSecret: clientSecret,
+                                        code: code),
+            completion: completion)
     }
 }

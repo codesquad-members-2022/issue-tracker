@@ -25,7 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let codeURL = URLContexts.first?.url {
             if codeURL.absoluteString.starts(with: "issuetrackerapp://") {
                 if let code = codeURL.absoluteString.split(separator: "=").last.map({String($0)}) {
-                    signInManager.requestAccessToken(with: code)
+                    signInManager.requestAccessToken(code: code) { result in
+                        switch result {
+                        case let .success(data):
+                            // 서버로부터 JWT토큰 요청하는 로직 필요
+                            return
+                        case let .failure(error):
+                            // 다시 로그인을 요청하도록 하는 Noti 로직 필요
+                            return
+                        }
+                    }
                 }
             }
         }
