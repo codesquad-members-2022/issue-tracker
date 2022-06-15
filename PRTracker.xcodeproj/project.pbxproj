@@ -38,6 +38,8 @@
 		D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */; };
 		D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DF2859C9400008B517 /* LabelViewModel.swift */; };
 		D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D12859C08B0008B517 /* ListingViewController.swift */; };
+		D04099E72859DA630008B517 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC1285701FB0059E61D /* AppDelegate.swift */; };
+		D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC3285701FB0059E61D /* SceneDelegate.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -464,6 +466,8 @@
 				BCF57C0D285705220059E61D /* LoginView.swift in Sources */,
 				BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */,
+				D04099E72859DA630008B517 /* AppDelegate.swift in Sources */,
+				D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */,
 				D04099E12859D91C0008B517 /* Observable.swift in Sources */,
 				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
 				D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */,
