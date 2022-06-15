@@ -2,21 +2,20 @@ package com.example.issu_tracker.ui.home
 
 import androidx.lifecycle.ViewModel
 import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
+
 @HiltViewModel
-class HomeViewModel : ViewModel() {
+class HomeViewModel @Inject constructor(repository: HomeRepository) : ViewModel() {
 
     private val _issueList = MutableStateFlow<List<Issue>>(listOf())
     val issueList: StateFlow<List<Issue>> = _issueList
 
     init {
-        val issueDummyData =
-            listOf(
-                Issue(0, "마일스톤", "Document", "그라운드 룰", "Issue_tracker 의 그라운드 룰을 정의합니다."),
-                Issue(1, "마일스톤", "Feature", "리사이클러뷰 구현", "리사이클러뷰를 구현했습니다."),
-            )
+        val issueDummyData = repository.loadIssues()
         _issueList.value = issueDummyData
     }
 
