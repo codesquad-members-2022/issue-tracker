@@ -5,6 +5,8 @@ import kr.codesquad.issuetracker.auth.jwt.JWTUtil;
 import kr.codesquad.issuetracker.common.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +23,7 @@ public class LoginController {
         GitHubUserInfo gitHubUserInfo = loginService.getGitHubUserInfo(accessToken);
         JWT jwt = jwtUtil.createToken(gitHubUserInfo);
 
-        return LoginResponse.builder()
-            .jwt(jwt.getJwt())
-            .message(ResponseMessage.LONGIN_SUCCESS)
-            .build();
+        return new LoginResponse(jwt.getJwt(), ResponseMessage.LONGIN_SUCCESS);
     }
 
 }

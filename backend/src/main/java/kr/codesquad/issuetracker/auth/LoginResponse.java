@@ -9,7 +9,6 @@ public class LoginResponse {
     private final String jwt;
     private final String message;
 
-    @Builder
     public LoginResponse(String jwt, String message) {
         this.jwt = jwt;
         this.message = message;
