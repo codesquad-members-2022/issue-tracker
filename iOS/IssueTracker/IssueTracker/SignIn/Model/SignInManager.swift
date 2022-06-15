@@ -26,12 +26,14 @@ struct SignInManager {
         completion(.success(url))
     }
 
-    func requestAccessToken(code: String, completion: @escaping (Result<[String: String], NetworkError>) -> Void) {
-
-        NetworkManager<[String: String]>.fetchData(
-            target: .requestAccessToken(clientID: clientID,
-                                        clientSecret: clientSecret,
-                                        code: code),
-            completion: completion)
+    func requestAccessToken(codeURL: URL, completion: @escaping (Result<[String: String], NetworkError>) -> Void) {
+        if codeURL.absoluteString.starts(with: "issuetrackerapp://"),
+           let code = codeURL.absoluteString.split(separator: "=").last.map({String($0)}) {
+            NetworkManager<[String: String]>.fetchData(
+                target: .requestAccessToken(clientID: clientID,
+                                            clientSecret: clientSecret,
+                                            code: code),
+                completion: completion)
+        }
     }
 }

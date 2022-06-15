@@ -22,18 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let codeURL = URLContexts.first?.url {
-            if codeURL.absoluteString.starts(with: "issuetrackerapp://") {
-                if let code = codeURL.absoluteString.split(separator: "=").last.map({String($0)}) {
-                    SignInManager.shared.requestAccessToken(code: code) { result in
-                        switch result {
-                        case let .success(data):
-                            // 서버로부터 JWT토큰 요청하는 로직 필요
-                            return
-                        case let .failure(error):
-                            // 다시 로그인을 요청하도록 하는 Noti 로직 필요
-                            return
-                        }
-                    }
+            SignInManager.shared.requestAccessToken(codeURL: codeURL) { result in
+                switch result {
+                case let .success(data):
+                    // 서버로부터 JWT토큰 요청하는 로직 필요
+                    return
+                case let .failure(error):
+                    // 다시 로그인을 요청하도록 하는 Noti 로직 필요
+                    return
                 }
             }
         }
