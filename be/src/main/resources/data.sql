@@ -1,1 +1,1 @@
-INSERT INTO member (email, password, name, profile_url) VALUES('auddlr100@naver.com', '1234', 'ikjo', null);
+INSERT INTO writer (identity, password, email, nickname, profile_url) VALUES('ikjo', '1234', 'auddlr100@naver.com', '익조', null);
