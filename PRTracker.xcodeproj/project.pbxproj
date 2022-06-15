@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1DE61695C83CB1A5484B159C /* Pods_PRTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F85B983D296BEA49342F0 /* Pods_PRTrackerTests.framework */; };
+		BC97093B2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
+		BC97093C2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
+		BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */; };
+		BC97093F2859C1EB00E54F93 /* KeyChainManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */; };
+		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
+		BC9709432859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
+		BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709442859CACC00E54F93 /* TokenResponse.swift */; };
+		BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709442859CACC00E54F93 /* TokenResponse.swift */; };
 		BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC1285701FB0059E61D /* AppDelegate.swift */; };
 		BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC3285701FB0059E61D /* SceneDelegate.swift */; };
 		BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC5285701FB0059E61D /* ViewController.swift */; };
@@ -21,8 +29,8 @@
 		BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BFF285704FE0059E61D /* ListingManager.swift */; };
 		BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C022857050A0059E61D /* ListingTableView.swift */; };
 		BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C022857050A0059E61D /* ListingTableView.swift */; };
-		BCF57C06285705130059E61D /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* LoginModel.swift */; };
-		BCF57C07285705130059E61D /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* LoginModel.swift */; };
+		BCF57C06285705130059E61D /* OAuthManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* OAuthManger.swift */; };
+		BCF57C07285705130059E61D /* OAuthManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* OAuthManger.swift */; };
 		BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C082857051C0059E61D /* LoginViewModel.swift */; };
 		BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C082857051C0059E61D /* LoginViewModel.swift */; };
 		BCF57C0C285705220059E61D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C0B285705220059E61D /* LoginView.swift */; };
@@ -48,6 +56,10 @@
 		79EDD15A918B4109D48FA1B6 /* Pods-PRTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTracker.debug.xcconfig"; path = "Target Support Files/Pods-PRTracker/Pods-PRTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		A6AE00453ECCCA10D6CD0525 /* Pods-PRTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B82F1307FAF9E5A90C63CAFE /* Pods-PRTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		BC97093A2859B23D00E54F93 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
+		BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManger.swift; sourceTree = "<group>"; };
+		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		BCF57BBE285701FB0059E61D /* PRTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PRTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF57BC1285701FB0059E61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCF57BC3285701FB0059E61D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +73,7 @@
 		BCF57BFC285704F40059E61D /* ListingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewModel.swift; sourceTree = "<group>"; };
 		BCF57BFF285704FE0059E61D /* ListingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingManager.swift; sourceTree = "<group>"; };
 		BCF57C022857050A0059E61D /* ListingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableView.swift; sourceTree = "<group>"; };
-		BCF57C05285705130059E61D /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		BCF57C05285705130059E61D /* OAuthManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManger.swift; sourceTree = "<group>"; };
 		BCF57C082857051C0059E61D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BCF57C0B285705220059E61D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +118,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BC9709402859C87800E54F93 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BC9709412859C88100E54F93 /* Logger.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		BCF57BB5285701FB0059E61D = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +167,7 @@
 		BCF57BF1285703B60059E61D /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BC9709402859C87800E54F93 /* Common */,
 				BCF57BF5285704020059E61D /* PR_Listing */,
 				BCF57BF4285703F60059E61D /* Login */,
 			);
@@ -205,7 +226,9 @@
 		BCF57BF72857049A0059E61D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BCF57C05285705130059E61D /* LoginModel.swift */,
+				BCF57C05285705130059E61D /* OAuthManger.swift */,
+				BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */,
+				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				BCF57BFF285704FE0059E61D /* ListingManager.swift */,
+				BC97093A2859B23D00E54F93 /* Pull.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -412,11 +436,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
-				BCF57C06285705130059E61D /* LoginModel.swift in Sources */,
+				BCF57C06285705130059E61D /* OAuthManger.swift in Sources */,
+				BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
+				BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */,
 				BCF57C0C285705220059E61D /* LoginView.swift in Sources */,
 				BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */,
 				BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */,
+				BC9709422859C88100E54F93 /* Logger.swift in Sources */,
+				BC97093B2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */,
 				BCF57BFD285704F40059E61D /* ListingViewModel.swift in Sources */,
@@ -427,13 +455,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCF57C07285705130059E61D /* LoginModel.swift in Sources */,
+				BCF57C07285705130059E61D /* OAuthManger.swift in Sources */,
+				BC9709432859C88100E54F93 /* Logger.swift in Sources */,
 				BCF57C0D285705220059E61D /* LoginView.swift in Sources */,
 				BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */,
+				BC97093C2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
+				BC97093F2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
+				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BFE285704F40059E61D /* ListingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,6 +632,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PRTracker/Supporting/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PRTracker;
+				INFOPLIST_KEY_NSMainStoryboardFile = Resource/Main.storyboard;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -631,6 +664,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PRTracker/Supporting/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PRTracker;
+				INFOPLIST_KEY_NSMainStoryboardFile = Resource/Main.storyboard;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
