@@ -1,18 +1,6 @@
-import {
-  ButtonStyleType,
-  Styled_button,
-  Styled_TextWrapper
-} from '@/components/Button/Button.style';
-import { Icon, IconTypes } from '@/components/Icon';
-
-interface ButtonProps {
-  styleType: ButtonStyleType;
-  iconType?: IconTypes;
-  iconColor?: string;
-  text?: string;
-  children?: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
+import { Styled_button, Styled_TextWrapper } from '@/components/Button/button.style';
+import { ButtonProps } from '@/components/Button/type';
+import { Icon } from '@/components/Icon';
 
 function Button({
   styleType,
@@ -20,13 +8,13 @@ function Button({
   iconColor,
   text,
   children,
-  onClick = () => {}
+  onClick = () => {},
+  ...props
 }: ButtonProps) {
   return (
-    <Styled_button styleType={styleType} onClick={onClick}>
+    <Styled_button styleType={styleType} onClick={onClick} {...props}>
       {iconType && <Icon IconType={iconType} color={iconColor} />}
-      <Styled_TextWrapper></Styled_TextWrapper>
-      {text || children}
+      <Styled_TextWrapper>{text || children}</Styled_TextWrapper>
     </Styled_button>
   );
 }

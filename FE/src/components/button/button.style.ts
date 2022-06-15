@@ -1,12 +1,10 @@
-import styled, { css, FlattenInterpolation, ThemeProps } from 'styled-components';
-
-type ButtonStyleType =
-  | 'Large'
-  | 'Small-Standard'
-  | 'Medium-Standard'
-  | 'Small-Secondary'
-  | 'Medium-Text'
-  | 'Small-Text';
+import {
+  ButtonStyleProps,
+  ButtonStyle,
+  ButtonStyleType,
+  Styled_buttonType
+} from '@/components/Button/type';
+import styled, { css } from 'styled-components';
 
 const standardEventStyle = css`
   :hover {
@@ -86,8 +84,6 @@ const mediumText = css`
 
 const EmptyCss = css``;
 
-type ButtonStyle = Record<ButtonStyleType, FlattenInterpolation<ThemeProps<any>>>;
-
 const buttonStyle: ButtonStyle = {
   Large: large,
   'Small-Standard': smallStandard,
@@ -120,5 +116,4 @@ const Styled_TextWrapper = styled.span`
   padding-left: 4px;
 `;
 
-export type { ButtonStyleType };
 export { Styled_button, Styled_TextWrapper };
