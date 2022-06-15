@@ -4,20 +4,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 dotenv.config();
 
-const isProd = process.env.NODE_ENV === 'production'; // ❓
+const isProd = process.env.NODE_ENV === 'production';
 const PORT = process.env.PORT || 3000;
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
-  devtool: isProd ? 'hidden-source-map' : 'source-map', // development 환경에서만 source-map을 만든다.
+  devtool: isProd ? 'hidden-source-map' : 'source-map',
   entry: './src/index.tsx',
   output: {
-    filename: '[name].js', // [name]은 청크의 이름을 사용한다. ❓
-    path: path.join(__dirname, '/dist'), // ❓
+    filename: '[name].js',
+    path: path.join(__dirname, '/dist'),
   },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js', '.jsx', '.ts', '.tsx'], // ❓
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -25,7 +25,7 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         loader: 'ts-loader',
         options: {
-          transpileOnly: isProd ? false : true, // ❓
+          transpileOnly: isProd ? false : true,
         },
       },
       {
@@ -39,13 +39,17 @@ module.exports = {
           name: '[name].[ext]?[hash]',
         },
       },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
       hash: true,
-    }), // ❓
+    }),
   ],
   stats: 'errors-only',
   devServer: {
