@@ -1,0 +1,71 @@
+@import '../../styles/_utils.scss';
+@import './layout';
+
+.navWrapper {
+  @include flex($align: center, $justify: space-between);
+  @include wrapper(64px);
+}
+
+.leftWrapper {
+  width: 70%;
+  height: 100%;
+  // 250px
+  @include flex($align: center);
+  border: 1px solid black;
+}
+
+.checkBoxWrapper {
+  @include flex($align: center, $justify: center);
+  width: 6%;
+  transform: translateY(-0.2rem);
+  // 60px
+}
+
+.contentWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.nav__contentWrapper {
+  @extend .contentWrapper;
+  @include flex($align: center);
+
+  span {
+    font-size: 16px;
+  }
+}
+
+.issue__contentWrapper {
+  @extend .contentWrapper;
+  @include flex($direction: column, $justify: space-around);
+  span {
+    font-size: 16px;
+  }
+}
+
+.rightWrapper {
+  @include flex($align: center);
+  width: 30%;
+  height: 100%;
+}
+
+details {
+  position: relative;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  summary {
+    list-style: none;
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  .test {
+    position: absolute;
+    top: 30px;
+    cursor: pointer;
+    // 모달 들어가야 하는 부분
+  }
+}

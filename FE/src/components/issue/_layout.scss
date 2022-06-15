@@ -1,0 +1,32 @@
+@import '../../styles/_utils.scss';
+
+@mixin wrapper($height) {
+  @include flex($align: center, $justify: space-between);
+  height: $height;
+  width: 100%;
+}
+
+@mixin leftWrapper {
+  width: 70%;
+  height: 100%;
+  // 250px
+  @include flex($align: center);
+  border: 1px solid black;
+}
+
+@mixin checkboxWrapper {
+  @include flex($align: center, $justify: center);
+  width: 6%;
+  transform: translateY(-0.2rem);
+}
+
+@mixin contextWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin rightWrapper {
+  @include flex($align: center);
+  width: 30%;
+  height: 100%;
+}
