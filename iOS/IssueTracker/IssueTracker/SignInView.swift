@@ -45,6 +45,10 @@ final class SignInView: UIView {
         fatalError()
     }
 
+    func setGitHubSignInButtonAction(_ action: UIAction) {
+        signInWithGitHubButton.addAction(action, for: .touchUpInside)
+    }
+
     override func layoutSubviews() {
         let screenSize = UIScreen.main.bounds
 

@@ -9,6 +9,20 @@ import UIKit
 
 final class SignInViewController: UIViewController {
     private lazy var signInView = SignInView(frame: view.frame)
+    private let signInManager = SignInManager()
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        signInView.setGitHubSignInButtonAction(UIAction(handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.signInManager.requestCode()
+        }))
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
