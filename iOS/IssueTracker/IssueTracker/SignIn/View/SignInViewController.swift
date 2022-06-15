@@ -9,13 +9,11 @@ import UIKit
 
 final class SignInViewController: UIViewController {
     private lazy var signInView = SignInView(frame: view.frame)
-    private let signInManager = SignInManager()
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        signInView.setGitHubSignInButtonAction(UIAction(handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.signInManager.requestCode { result in
+        signInView.setGitHubSignInButtonAction(UIAction(handler: { _ in
+            SignInManager.shared.requestCode { result in
                 switch result {
                 case let .success(url):
                     UIApplication.shared.open(url)

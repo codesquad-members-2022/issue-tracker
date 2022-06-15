@@ -13,6 +13,8 @@ struct SignInManager {
     private let clientID = Bundle.main.clientID
     private let clientSecret = Bundle.main.clientSecret
 
+    private init() {}
+
     func requestCode(completion: @escaping (Result<URL, Error>) -> Void) {
         let networkTarget = SignInNetworkTarget.requestCode(clientID: clientID)
         var components = URLComponents(string: networkTarget.url) ?? URLComponents()

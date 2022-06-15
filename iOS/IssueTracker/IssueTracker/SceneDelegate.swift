@@ -10,7 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private let signInManager = SignInManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -25,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let codeURL = URLContexts.first?.url {
             if codeURL.absoluteString.starts(with: "issuetrackerapp://") {
                 if let code = codeURL.absoluteString.split(separator: "=").last.map({String($0)}) {
-                    signInManager.requestAccessToken(code: code) { result in
+                    SignInManager.shared.requestAccessToken(code: code) { result in
                         switch result {
                         case let .success(data):
                             // 서버로부터 JWT토큰 요청하는 로직 필요
