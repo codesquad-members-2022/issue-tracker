@@ -97,15 +97,23 @@ const buttonStyle: ButtonStyle = {
   'Small-Text': EmptyCss
 };
 
-interface Styled_button {
-  styleType: ButtonStyleType;
-}
+const createCustomStyle = (styleType: ButtonStyleType, props: ButtonStyleProps) => css`
+  ${styleType && buttonStyle[styleType]}
+  ${props.width && { width: props.width }}
+  ${props.height && { height: props.height }}
+  ${props.color && { color: props.color }}
+  ${props.background && { background: props.background }}
+  ${props.border && { border: props.border }}
+  ${props.borderRadius && { 'border-radius': props.borderRadius }}
+  ${props.fontSize && { 'font-size': props.fontSize }}
+  ${props.fontWeight && { 'font-weight': props.fontWeight }}
+`;
 
-const Styled_button = styled.button<Styled_button>`
+const Styled_button = styled.button<Styled_buttonType>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ styleType }) => styleType && buttonStyle[styleType]}
+  ${({ styleType, ...props }) => createCustomStyle(styleType, props)}
 `;
 
 const Styled_TextWrapper = styled.span`
