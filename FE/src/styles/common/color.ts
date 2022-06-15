@@ -37,25 +37,25 @@ const COLOR = {
   label: PALETTE.GREY[200],
   placeholder: PALETTE.GREY[300],
   line: PALETTE.GREY[400],
-  inputBackgound: PALETTE.GREY[500],
+  inputBackground: PALETTE.GREY[500],
   background: PALETTE.GREY[600],
   primary: {
-    initail: PALETTE.BLUE[200],
+    initial: PALETTE.BLUE[200],
     focus: PALETTE.BLUE[100],
     hover: PALETTE.BLUE[300]
   },
   secondary: {
-    initail: PALETTE.BLUE.DARK[200],
+    initial: PALETTE.BLUE.DARK[200],
     focus: PALETTE.BLUE.DARK[100],
     hover: PALETTE.BLUE.DARK[300]
   },
   error: {
-    initail: PALETTE.RED[200],
+    initial: PALETTE.RED[200],
     focus: PALETTE.RED[100],
     hover: PALETTE.RED[300]
   },
   success: {
-    initail: PALETTE.GREEN[200],
+    initial: PALETTE.GREEN[200],
     focus: PALETTE.GREEN[100],
     hover: PALETTE.GREEN[300]
   }
