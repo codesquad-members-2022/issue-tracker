@@ -1,5 +1,5 @@
 //
-//  LoignView.swift
+//  LoginView.swift
 //  IssueTracker
 //
 //  Created by Jihee hwang on 2022/06/15.
@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-final class LoignView: UIView {
+final class LoginView: UIView {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical

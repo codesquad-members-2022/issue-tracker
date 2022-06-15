@@ -4,6 +4,8 @@
 
 ## Custom
 .DS_Store
+*/debug.xcconfig
+*/release.xcconfig
 
 ## User settings
 xcuserdata/
