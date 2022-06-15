@@ -1,8 +1,8 @@
 import {
-  ButtonStyleProps,
+  IButtonStyleProps,
   ButtonStyle,
   ButtonStyleType,
-  Styled_buttonType
+  IStyled_buttonType
 } from '@/components/Button/type';
 import styled, { css } from 'styled-components';
 
@@ -85,15 +85,15 @@ const mediumText = css`
 const EmptyCss = css``;
 
 const buttonStyle: ButtonStyle = {
-  Large: large,
-  'Small-Standard': smallStandard,
-  'Medium-Standard': EmptyCss,
-  'Small-Secondary': EmptyCss,
-  'Medium-Text': mediumText,
-  'Small-Text': EmptyCss
+  large: large,
+  smallStandard: smallStandard,
+  mediumStandard: EmptyCss,
+  smallSecondary: EmptyCss,
+  mediumText: mediumText,
+  smallText: EmptyCss
 };
 
-const createCustomStyle = (styleType: ButtonStyleType, props: ButtonStyleProps) => css`
+const createCustomStyle = (styleType: ButtonStyleType, props: IButtonStyleProps) => css`
   ${styleType && buttonStyle[styleType]}
   ${props.width && { width: props.width }}
   ${props.height && { height: props.height }}
@@ -105,11 +105,11 @@ const createCustomStyle = (styleType: ButtonStyleType, props: ButtonStyleProps) 
   ${props.fontWeight && { 'font-weight': props.fontWeight }}
 `;
 
-const Styled_button = styled.button<Styled_buttonType>`
+const Styled_button = styled.button<IStyled_buttonType>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ styleType, ...props }) => createCustomStyle(styleType, props)}
+  ${({ styleType = 'large', ...props }) => createCustomStyle(styleType, props)}
 `;
 
 const Styled_TextWrapper = styled.span`

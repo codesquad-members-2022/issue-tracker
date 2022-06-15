@@ -12,14 +12,14 @@ export const Large = Template.bind({});
 Large.args = {
   text: 'Button',
   children: 'test',
-  styleType: 'Large'
+  styleType: 'large'
 };
 Large.storyName = 'Button(Large)';
 
 export const SmallStandard = Template.bind({});
 SmallStandard.args = {
   text: 'Button',
-  styleType: 'Small-Standard',
+  styleType: 'smallStandard',
   iconType: 'plus'
 };
 SmallStandard.storyName = 'Button(Small-Standard)';
@@ -27,7 +27,7 @@ SmallStandard.storyName = 'Button(Small-Standard)';
 export const MediumText = Template.bind({});
 MediumText.args = {
   text: 'Button',
-  styleType: 'Medium-Text',
+  styleType: 'mediumText',
   iconType: 'plus'
 };
 MediumText.storyName = 'Button(Medium-Text)';

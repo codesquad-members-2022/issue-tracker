@@ -2,16 +2,16 @@ import { FlattenInterpolation, ThemeProps } from 'styled-components';
 import { IconTypes } from '@/components/Icon';
 
 type ButtonStyleType =
-  | 'Large'
-  | 'Small-Standard'
-  | 'Medium-Standard'
-  | 'Small-Secondary'
-  | 'Medium-Text'
-  | 'Small-Text';
+  | 'large'
+  | 'smallStandard'
+  | 'mediumStandard'
+  | 'smallSecondary'
+  | 'mediumText'
+  | 'smallText';
 
 type ButtonStyle = Record<ButtonStyleType, FlattenInterpolation<ThemeProps<any>>>;
 
-interface ButtonStyleProps {
+interface IButtonStyleProps {
   width?: string;
   height?: string;
   color?: string;
@@ -22,8 +22,8 @@ interface ButtonStyleProps {
   fontWeight?: string;
 }
 
-interface ButtonProps extends ButtonStyleProps {
-  styleType: ButtonStyleType;
+interface IButtonProps extends IButtonStyleProps {
+  styleType?: ButtonStyleType;
   iconType?: IconTypes;
   iconColor?: string;
   text?: string;
@@ -31,8 +31,9 @@ interface ButtonProps extends ButtonStyleProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-interface Styled_buttonType extends ButtonStyleProps {
-  styleType: ButtonStyleType;
+interface IStyled_buttonType extends IButtonStyleProps {
+  styleType?: ButtonStyleType;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export type { ButtonProps, ButtonStyleType, ButtonStyleProps, ButtonStyle, Styled_buttonType };
+export type { IButtonProps, ButtonStyleType, IButtonStyleProps, ButtonStyle, IStyled_buttonType };
