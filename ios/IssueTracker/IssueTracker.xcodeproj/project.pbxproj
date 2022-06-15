@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0881070F63CD4F2E7BD12F01 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32333319155069DAD8E6E4 /* Pods_IssueTracker.framework */; };
+		73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC52859697600191F99 /* Extension+UIColor.swift */; };
 		E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */; };
 		E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */; };
 		E4D87382285884AE00AFCE4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D87381285884AE00AFCE4D /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73A7EDC52859697600191F99 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		83F78B1622BC6D4343FB3F6B /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		8C32333319155069DAD8E6E4 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A21CC3CDE9942DA700D65C06 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -48,6 +50,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73A7EDC32859694B00191F99 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				73A7EDC42859696000191F99 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		73A7EDC42859696000191F99 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				73A7EDC52859697600191F99 /* Extension+UIColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		9C4F6CF5B1FBB1E3569D0AFB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +161,7 @@
 		E4D87397285884BF00AFCE4D /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				73A7EDC32859694B00191F99 /* Utils */,
 				E4C5DADE285891A00093CFF1 /* LoginScene */,
 			);
 			path = Presentation;
@@ -307,6 +326,7 @@
 				E4D87382285884AE00AFCE4D /* AppDelegate.swift in Sources */,
 				E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */,
 				E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */,
+				73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
