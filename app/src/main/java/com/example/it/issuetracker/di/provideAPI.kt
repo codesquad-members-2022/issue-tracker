@@ -17,7 +17,7 @@ fun provideInterceptor(): HttpLoggingInterceptor {
 }
 
 fun provideOkHttpClient(
-    interceptor: HttpLoggingInterceptor
+    interceptor: HttpLoggingInterceptor,
 ): OkHttpClient {
     return OkHttpClient.Builder().apply {
         addInterceptor(interceptor)

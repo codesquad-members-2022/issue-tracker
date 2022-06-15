@@ -3,12 +3,11 @@ package com.example.it.issuetracker.presentation.login
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import com.example.it.issuetracker.config.GITHUB_OAUTH_URL
 import com.example.it.issuetracker.databinding.ActivityLoginBinding
-import com.example.it.issuetracker.presentation.issue.MainActivity
+import com.example.it.issuetracker.presentation.main.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
