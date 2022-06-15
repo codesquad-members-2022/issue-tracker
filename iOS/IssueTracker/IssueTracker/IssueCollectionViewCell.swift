@@ -9,6 +9,8 @@ import SnapKit
 
 final class IssueCollectionViewCell: UICollectionViewCell {
     
+    static let identifier = "IssueCollectionViewCell"
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         appendSubView()

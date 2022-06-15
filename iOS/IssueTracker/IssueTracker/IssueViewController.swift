@@ -9,10 +9,13 @@ import UIKit
 
 class IssueViewController: UIViewController {
     
+    private var issueCollectionView = IssueCollectionView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         createNavigationBarButton()
+        self.view = issueCollectionView
+        
     }
     
     private func createNavigationBarButton() {
@@ -51,6 +54,6 @@ class IssueViewController: UIViewController {
         
     }
     
-    
+
 }
 
