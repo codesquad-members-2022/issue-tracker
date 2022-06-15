@@ -1,4 +1,4 @@
-import { Styled_button, Styled_TextWrapper } from '@/components/Button/button.style';
+import { Styled_button, Styled_TextWrapper } from '@/components/Button/style';
 import { ButtonProps } from '@/components/Button/type';
 import { Icon } from '@/components/Icon';
 
