@@ -26,9 +26,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let authorizedCode = response.absoluteString.components(separatedBy: "code=").last else { return }
         let targetUrl: IssueTrackerTarget = .requestAccessToken(code: authorizedCode)
         print(targetUrl)
+
+        let validURL = IssueTrackerTarget.requestAccessToken(code: authorizedCode)
+//        guard let requestURL = createRequest(validURL) else { return }
+
+//        URLSession.shared.dataTask(with: requestURL) { data, _, _ in
+//
+//            if let data = data {
+//                print(data)
+//            }
+//
+//        }.resume()
     }
 
-    private static func createRequest(_ target: BaseTarget) -> URLRequest? {
+    private func createRequest(_ target: BaseTarget) -> URLRequest? {
         guard let baseUrl = target.baseURL else {
             return nil
         }
@@ -40,25 +51,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         var request = URLRequest(url: url)
         request.httpMethod = target.method.value
-//        target.parameter?.forEach(<#T##body: ((key: String, value: String)) throws -> Void##((key: String, value: String)) throws -> Void#>)
-//        target.header?.forEach { key, value in
-//            request.addValue(value, forHTTPHeaderField: key)
-//        }
-//
-//        if target.content == .urlencode {
-//            if let param = target.parameter {
-//                let formDataString = param.reduce(into: "") {
-//                    $0 = $0 + "\($1.key)=\($1.value)&"
-//                }.dropLast()
-//
-//                request.httpBody = formDataString.data(using: .utf8, allowLossyConversion: true)
-//            }
-//        } else {
-//            if let param = target.parameter,
-//               let body = try? JSONSerialization.data(withJSONObject: param, options: .init()) {
-//                request.httpBody = body
-//            }
-//        }
+
+        if let param = target.parameter,
+           let body = try? JSONSerialization.data(withJSONObject: param, options: .init()) {
+                request.httpBody = body
+            }
+
         return request
     }
+
 }

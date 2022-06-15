@@ -8,15 +8,13 @@
 import Foundation
 
 enum HTTPContentType: String {
-    case json, urlencode
+    case json
 
     // TODO: - 컨텐트 타입이 어떤식으로 사용될지 고민
     var value: String {
         switch self {
         case .json:
-            return "let's think"
-        case .urlencode:
-            return "let's think twice"
+            return "application/json; charset=utf-8"
         }
     }
 }

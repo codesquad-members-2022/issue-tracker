@@ -46,9 +46,12 @@ extension IssueTrackerTarget: BaseTarget {
         }
     }
 
-//    var content: HTTPContentType {
-//        //
-//    }
+    var content: HTTPContentType {
+        switch self {
+        case .requestAccessToken:
+            return .json
+        }
+    }
 
 //    func addAuthorizationCode(_ code: String) {
 //

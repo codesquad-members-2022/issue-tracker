@@ -13,11 +13,11 @@ protocol BaseTarget {
     var path: String? { get }
     var parameter: [String: String]? { get }
     var method: HTTPMethod { get }
-//    var content: HTTPContentType { get }
+    var content: HTTPContentType { get }
 }
 
  extension BaseTarget {
-//    var header: [String: String]? {
-//        ["Content-Type": content.value]
-//    }
+    var header: [String: String]? {
+        ["Content-Type": content.value]
+    }
  }
