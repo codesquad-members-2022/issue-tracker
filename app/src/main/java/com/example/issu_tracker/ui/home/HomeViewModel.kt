@@ -9,12 +9,16 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(repository: HomeRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
 
     private val _issueList = MutableStateFlow<List<Issue>>(listOf())
     val issueList: StateFlow<List<Issue>> = _issueList
 
     init {
+        getIssueList()
+    }
+
+    fun getIssueList() {
         val issueDummyData = repository.loadIssues()
         _issueList.value = issueDummyData
     }
