@@ -5,6 +5,7 @@ import com.ron2ader.issuetracker.domain.member.MemberRepository;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -12,9 +13,11 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public MemberDto findMember(String userId) {
+    @Transactional(readOnly = true)
+    public MemberDto findMember(String memberId) {
         return MemberDto.from(
-            memberRepository.findByUserId(userId).orElseThrow(() -> new NoSuchElementException("해당하는 회원이 없습니다.")));
+            memberRepository.findByMemberId(memberId)
+                    .orElseThrow(() -> new NoSuchElementException("해당하는 회원이 없습니다.")));
     }
 
 }

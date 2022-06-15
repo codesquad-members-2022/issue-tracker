@@ -1,13 +1,10 @@
 package com.ron2ader.issuetracker.domain.member;
 
 import com.ron2ader.issuetracker.domain.common.BaseEntity;
-import javax.persistence.Table;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,11 +17,11 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userId;
+    private String memberId;
 
     private String avatarUrl;
 
-    public static Member of(String userId, String avatarUrl) {
-        return new Member(null, userId, avatarUrl);
+    public static Member of(String memberId, String avatarUrl) {
+        return new Member(null, memberId, avatarUrl);
     }
 }
