@@ -13,5 +13,4 @@ class MyAccountViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGreen
     }
-    
 }

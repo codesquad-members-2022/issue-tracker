@@ -53,7 +53,4 @@ class IssueViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
         
     }
-    
-
 }
-

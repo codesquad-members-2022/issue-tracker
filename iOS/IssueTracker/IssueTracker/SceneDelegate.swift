@@ -12,16 +12,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private let signInManager = SignInManager()
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-<<<<<<< HEAD
-        let rootVC = SignInViewController()
-=======
         let rootVC = TabBarController()
->>>>>>> iOS-#1
         self.window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
@@ -35,6 +30,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
     }
-
 }
-

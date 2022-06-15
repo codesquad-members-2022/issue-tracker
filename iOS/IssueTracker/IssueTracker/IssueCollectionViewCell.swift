@@ -26,9 +26,10 @@ final class IssueCollectionViewCell: UICollectionViewCell {
         let title = UILabel()
         let titleAttributedString = NSMutableAttributedString(string: "제목")
         let length = titleAttributedString.length
-        titleAttributedString.addAttributes([.foregroundColor:UIColor.black,
-                                        .font:UIFont.systemFont(ofSize: 22, weight: .bold)],
-                                       range: NSRange(location: 0, length: length))
+        titleAttributedString.addAttributes([
+            .foregroundColor: UIColor.black,
+            .font: UIFont.systemFont(ofSize: 22, weight: .bold)
+        ], range: NSRange(location: 0, length: length))
         title.attributedText = titleAttributedString
         title.translatesAutoresizingMaskIntoConstraints = false
         return title

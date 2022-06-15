@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class IssueCollectionView: UIView  {
+final class IssueCollectionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +26,7 @@ final class IssueCollectionView: UIView  {
         flowLayout.minimumLineSpacing = 5
         flowLayout.estimatedItemSize = CGSize(width: 350, height: 240)
         
-        let collectionView = UICollectionView(frame:.zero, collectionViewLayout: flowLayout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true

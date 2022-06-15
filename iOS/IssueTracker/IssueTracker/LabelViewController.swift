@@ -12,7 +12,5 @@ class LabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemYellow
-        
     }
-    
 }

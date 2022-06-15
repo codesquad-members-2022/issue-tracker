@@ -23,6 +23,7 @@
 		024F43B82859AC88008C4235 /* SignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F43B72859AC88008C4235 /* SignInManager.swift */; };
 		024F43BB2859B7F6008C4235 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 024F43BA2859B7F6008C4235 /* ClientKey.plist */; };
 		024F43BD2859B857008C4235 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F43BC2859B857008C4235 /* Bundle+Extension.swift */; };
+		024F43BF2859C63C008C4235 /* .swiftLint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 024F43BE2859C63C008C4235 /* .swiftLint.yml */; };
 		5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C028573E400088EC11 /* AppDelegate.swift */; };
 		5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C228573E400088EC11 /* SceneDelegate.swift */; };
 		5B29A0C528573E400088EC11 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C428573E400088EC11 /* IssueViewController.swift */; };
@@ -31,7 +32,6 @@
 		5B29A0D828573E410088EC11 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0D728573E410088EC11 /* IssueTrackerTests.swift */; };
 		5B29A0E228573E410088EC11 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0E128573E410088EC11 /* IssueTrackerUITests.swift */; };
 		5B29A0E428573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0E328573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift */; };
-		5BE928CA2858468E00D237AB /* .swiftlint in Resources */ = {isa = PBXBuildFile; fileRef = 5BE928C92858468E00D237AB /* .swiftlint */; };
 		5BE928CD28584BCF00D237AB /* SnapKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5BE928CC28584BCF00D237AB /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5BE928CF285852C100D237AB /* IssueCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928CE285852C100D237AB /* IssueCollectionView.swift */; };
 		5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */; };
@@ -92,6 +92,7 @@
 		024F43B72859AC88008C4235 /* SignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
 		024F43BA2859B7F6008C4235 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
 		024F43BC2859B857008C4235 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		024F43BE2859C63C008C4235 /* .swiftLint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftLint.yml; sourceTree = "<group>"; };
 		27B2358B9B31125F065826EB /* Pods-IssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		48C305B87C203B547BF1F8B1 /* Pods_IssueTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B29A0BD28573E400088EC11 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,7 +107,6 @@
 		5B29A0DD28573E410088EC11 /* IssueTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B29A0E128573E410088EC11 /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
 		5B29A0E328573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		5BE928C92858468E00D237AB /* .swiftlint */ = {isa = PBXFileReference; explicitFileType = text.yaml; path = .swiftlint; sourceTree = "<group>"; };
 		5BE928CC28584BCF00D237AB /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SnapKit.framework; sourceTree = "<group>"; };
 		5BE928CE285852C100D237AB /* IssueCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionView.swift; sourceTree = "<group>"; };
 		5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -172,8 +172,8 @@
 		5B29A0B428573E400088EC11 = {
 			isa = PBXGroup;
 			children = (
+				024F43BE2859C63C008C4235 /* .swiftLint.yml */,
 				5BE928CC28584BCF00D237AB /* SnapKit.framework */,
-				5BE928C92858468E00D237AB /* .swiftlint */,
 				5B29A0BF28573E400088EC11 /* IssueTracker */,
 				5B29A0D628573E410088EC11 /* IssueTrackerTests */,
 				5B29A0E028573E410088EC11 /* IssueTrackerUITests */,
@@ -199,14 +199,11 @@
 				5B29A0F028573E500088EC11 /* Resource */,
 				5B29A0C028573E400088EC11 /* AppDelegate.swift */,
 				5B29A0C228573E400088EC11 /* SceneDelegate.swift */,
-<<<<<<< HEAD
-				5B29A0C428573E400088EC11 /* ViewController.swift */,
 				024F438A28596ED3008C4235 /* SignInView.swift */,
 				024F4390285976C8008C4235 /* SignInViewController.swift */,
 				024F438E285972DB008C4235 /* UIView+Extension.swift */,
 				024F43B72859AC88008C4235 /* SignInManager.swift */,
 				024F43BC2859B857008C4235 /* Bundle+Extension.swift */,
-=======
 				5BE928D22858553800D237AB /* TabBarController.swift */,
 				5B29A0C428573E400088EC11 /* IssueViewController.swift */,
 				5BE928CE285852C100D237AB /* IssueCollectionView.swift */,
@@ -215,7 +212,6 @@
 				5BE928D42858567900D237AB /* LabelViewController.swift */,
 				5BE928D62858568B00D237AB /* MilestoneViewController.swift */,
 				5BE928D82858569C00D237AB /* MyAccountViewController.swift */,
->>>>>>> iOS-#1
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -383,18 +379,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				024F43AC2859A1D5008C4235 /* SF-Pro-Display-Medium.otf in Resources */,
 				024F43A82859A1D5008C4235 /* SF-Pro-Display-Thin.otf in Resources */,
 				024F43AF2859A1D5008C4235 /* SF-Pro-Display-Black.otf in Resources */,
 				024F43BB2859B7F6008C4235 /* ClientKey.plist in Resources */,
 				024F43B32859A1D5008C4235 /* SF-Pro-Display-Heavy.otf in Resources */,
 				024F43B22859A1D5008C4235 /* SF-Pro-Display-Semibold.otf in Resources */,
+				024F43BF2859C63C008C4235 /* .swiftLint.yml in Resources */,
 				024F43B52859A1D5008C4235 /* SF-Pro-Display-Bold.otf in Resources */,
 				024F43A92859A1D5008C4235 /* SF-Pro-Display-Light.otf in Resources */,
-=======
-				5BE928CA2858468E00D237AB /* .swiftlint in Resources */,
->>>>>>> iOS-#1
 				5B29A0CD28573E410088EC11 /* LaunchScreen.storyboard in Resources */,
 				024F438D2859704E008C4235 /* MontserratItalic.ttf in Resources */,
 				024F43AB2859A1D5008C4235 /* SF-Pro-Display-Ultralight.otf in Resources */,
@@ -522,7 +515,7 @@
 		};
 		5BE928C62858451400D237AB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -533,9 +526,9 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint/autocorrect\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

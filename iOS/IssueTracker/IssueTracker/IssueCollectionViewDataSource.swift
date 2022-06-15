@@ -19,9 +19,7 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCollectionViewCell.identifier, for: indexPath) as? IssueCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let item = indexPath.item
         
-        cell.configure(title: item.title, issueDescription: item.issueDescription, milestoneName: item.milestoneName)
         return cell
     }
     
@@ -30,5 +28,4 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         let issueDescription: String
         let milestoneName: String
     }
-    
 }
