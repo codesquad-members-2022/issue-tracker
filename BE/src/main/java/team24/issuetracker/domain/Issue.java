@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,23 +30,29 @@ public class Issue {
     private String title;
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private User writer;
 
     @OneToMany(mappedBy = "issue")
+    @JsonManagedReference
     private List<Assignee> assignees;
 
     @OneToMany(mappedBy = "issue")
+    @JsonManagedReference
     private List<IssueLabel> issueLabels;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private Milestone milestone;
     private boolean isClosed;
 
     @OneToMany(mappedBy = "issue")
+    @JsonManagedReference
     private List<Image> images;
-    private LocalDateTime dateTime;
+    private LocalDateTime writtenTime;
 
     @OneToMany(mappedBy = "issue")
+    @JsonManagedReference
     private List<Comment> comments;
 }
