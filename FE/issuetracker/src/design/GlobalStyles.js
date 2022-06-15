@@ -8,14 +8,6 @@ export const mixin = {
     justify-content: ${horizontal};
     align-items: ${vertical};
     `,
-
-  // 사용법
-  // export const MultiRangeSlider = styled.div`
-  // ${mixin.flexbox({ jc: 'center', ai: 'center' })};
-  // position: relative;
-  // width: 100%;
-  // z-index: 1;
-  // `;
 };
 
 const GlobalStyles = createGlobalStyle`
@@ -27,6 +19,10 @@ const GlobalStyles = createGlobalStyle`
         margin:0;
         padding:0;
         font-family: 'Noto Sans KR';
+    body{
+      padding: 0 80px;
+      background : #F7F7FC;
+    }
 }
 `;
 export default GlobalStyles;
