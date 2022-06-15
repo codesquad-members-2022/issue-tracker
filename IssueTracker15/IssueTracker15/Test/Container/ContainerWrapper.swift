@@ -5,10 +5,9 @@
 //  Created by 박진섭 on 2022/06/15.
 //
 
-
 struct ContainerWrapper<T: Resolvable> {
     
-    var container: T?
+    private var container: T?
     
     init(container: T) {
         self.container = container

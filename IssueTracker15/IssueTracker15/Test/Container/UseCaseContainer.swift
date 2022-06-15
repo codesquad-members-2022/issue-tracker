@@ -7,9 +7,7 @@
 
 import Foundation
 
-
-
-class UseCaseContainer: Resolvable {
+final class UseCaseContainer: Resolvable {
     typealias Value = UseCaseResponsible
     
     static let shard: UseCaseContainer = UseCaseContainer()
@@ -18,7 +16,7 @@ class UseCaseContainer: Resolvable {
     
     func regist<T>(instance: T) {
         let identifier = ObjectIdentifier(T.self)
-        guard let useCase = instance as? UseCaseResponsible else { return }
+        guard let useCase = instance as? Value else { return }
         self.useCases[identifier] = useCase
     }
     
