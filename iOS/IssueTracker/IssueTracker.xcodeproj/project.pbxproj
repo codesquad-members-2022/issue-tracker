@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		024F438B28596ED3008C4235 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F438A28596ED3008C4235 /* SignInView.swift */; };
 		024F438D2859704E008C4235 /* MontserratItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 024F438C2859704E008C4235 /* MontserratItalic.ttf */; };
 		024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F438E285972DB008C4235 /* UIView+Extension.swift */; };
+		024F4391285976C8008C4235 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F4390285976C8008C4235 /* SignInViewController.swift */; };
 		024F43A82859A1D5008C4235 /* SF-Pro-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 024F43962859A1D4008C4235 /* SF-Pro-Display-Thin.otf */; };
 		024F43A92859A1D5008C4235 /* SF-Pro-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 024F43972859A1D4008C4235 /* SF-Pro-Display-Light.otf */; };
 		024F43AB2859A1D5008C4235 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 024F43992859A1D4008C4235 /* SF-Pro-Display-Ultralight.otf */; };
@@ -49,8 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		024F438A28596ED3008C4235 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		024F438C2859704E008C4235 /* MontserratItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MontserratItalic.ttf; sourceTree = "<group>"; };
 		024F438E285972DB008C4235 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		024F4390285976C8008C4235 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		024F43962859A1D4008C4235 /* SF-Pro-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Thin.otf"; sourceTree = "<group>"; };
 		024F43972859A1D4008C4235 /* SF-Pro-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Light.otf"; sourceTree = "<group>"; };
 		024F43992859A1D4008C4235 /* SF-Pro-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Ultralight.otf"; sourceTree = "<group>"; };
@@ -157,6 +161,8 @@
 				5B29A0C028573E400088EC11 /* AppDelegate.swift */,
 				5B29A0C228573E400088EC11 /* SceneDelegate.swift */,
 				5B29A0C428573E400088EC11 /* ViewController.swift */,
+				024F438A28596ED3008C4235 /* SignInView.swift */,
+				024F4390285976C8008C4235 /* SignInViewController.swift */,
 				024F438E285972DB008C4235 /* UIView+Extension.swift */,
 			);
 			path = IssueTracker;
@@ -463,6 +469,8 @@
 			files = (
 				5B29A0C528573E400088EC11 /* ViewController.swift in Sources */,
 				5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */,
+				024F4391285976C8008C4235 /* SignInViewController.swift in Sources */,
+				024F438B28596ED3008C4235 /* SignInView.swift in Sources */,
 				024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */,
 				5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */,
 			);
