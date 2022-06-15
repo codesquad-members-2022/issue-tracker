@@ -1,5 +1,7 @@
 @import '../../styles/_utils.scss';
 
+// width : 1280px;
+
 @mixin wrapper($height) {
   @include flex($align: center, $justify: space-between);
   height: $height;
