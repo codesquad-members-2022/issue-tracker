@@ -21,6 +21,7 @@
 		024F43B32859A1D5008C4235 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 024F43A12859A1D5008C4235 /* SF-Pro-Display-Heavy.otf */; };
 		024F43B52859A1D5008C4235 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 024F43A32859A1D5008C4235 /* SF-Pro-Display-Bold.otf */; };
 		024F43BB2859B7F6008C4235 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 024F43BA2859B7F6008C4235 /* ClientKey.plist */; };
+		024F43BD2859B857008C4235 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F43BC2859B857008C4235 /* Bundle+Extension.swift */; };
 		5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C028573E400088EC11 /* AppDelegate.swift */; };
 		5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C228573E400088EC11 /* SceneDelegate.swift */; };
 		5B29A0C528573E400088EC11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C428573E400088EC11 /* ViewController.swift */; };
@@ -66,6 +67,7 @@
 		024F43A12859A1D5008C4235 /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		024F43A32859A1D5008C4235 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		024F43BA2859B7F6008C4235 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
+		024F43BC2859B857008C4235 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		27B2358B9B31125F065826EB /* Pods-IssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		48C305B87C203B547BF1F8B1 /* Pods_IssueTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B29A0BD28573E400088EC11 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,7 @@
 				024F438A28596ED3008C4235 /* SignInView.swift */,
 				024F4390285976C8008C4235 /* SignInViewController.swift */,
 				024F438E285972DB008C4235 /* UIView+Extension.swift */,
+				024F43BC2859B857008C4235 /* Bundle+Extension.swift */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				5B29A0C528573E400088EC11 /* ViewController.swift in Sources */,
 				5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */,
 				024F4391285976C8008C4235 /* SignInViewController.swift in Sources */,
+				024F43BD2859B857008C4235 /* Bundle+Extension.swift in Sources */,
 				024F438B28596ED3008C4235 /* SignInView.swift in Sources */,
 				024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */,
 				5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */,
