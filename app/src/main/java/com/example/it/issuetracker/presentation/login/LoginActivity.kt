@@ -1,14 +1,11 @@
 package com.example.it.issuetracker.presentation.login
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.customtabs.CustomTabsIntent
 import com.example.it.issuetracker.R
-import com.example.it.issuetracker.config.GITHUB_OAUTH_URL
 import com.example.it.issuetracker.databinding.ActivityLoginBinding
 import com.example.it.issuetracker.presentation.issue.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -20,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.OAuthProvider
 
 class LoginActivity : AppCompatActivity() {
 
@@ -61,28 +59,21 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        val code = intent?.data?.getQueryParameter("code")
-        code?.let {
-            val viewModel = LoginViewModel()
-            viewModel.getAccessToken(it)
-            navigateIssueActivity()
-        }
-    }
-
     private fun sigInGoogle() {
         val signIn = gsc.signInIntent
         resultLauncher.launch(signIn)
     }
 
     private fun signInGithub() {
-        val builder = CustomTabsIntent.Builder()
-        builder.setShowTitle(true)
-        builder.setShareState(CustomTabsIntent.SHARE_STATE_ON)
-        builder.setUrlBarHidingEnabled(true)
-        val customTabsIntent = builder.build()
-        customTabsIntent.launchUrl(this@LoginActivity, Uri.parse(GITHUB_OAUTH_URL))
+        val provider = OAuthProvider.newBuilder("github.com")
+        auth.startActivityForSignInWithProvider(this, provider.build())
+            .addOnSuccessListener {
+                navigateIssueActivity()
+                Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun navigateIssueActivity() {
