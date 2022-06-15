@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Button from '@/components/button';
+import { Button } from '@/components/Button';
+import { COLOR } from '@/styles/common';
 
 export default {
   title: 'Button/Button222',
@@ -8,18 +9,26 @@ export default {
 
 const Template: ComponentStory<typeof Button> = args => <Button {...args}></Button>;
 
-export const shortButton = Template.bind({});
-shortButton.args = {
-  width: '100px'
+export const Large = Template.bind({});
+Large.args = {
+  text: 'Button',
+  children: 'test',
+  styleType: 'Large'
 };
-shortButton.storyName = 'Button(short)';
+Large.storyName = 'Button(Large)';
 
-export const longButton = Template.bind({});
-longButton.args = {
-  width: '200px'
+export const SmallStandard = Template.bind({});
+SmallStandard.args = {
+  text: 'Button',
+  styleType: 'Small-Standard',
+  iconType: 'plus'
 };
-longButton.storyName = 'Button(long)';
+SmallStandard.storyName = 'Button(Small-Standard)';
 
-export const Default: ComponentStory<typeof Button> = args => {
-  return <Button {...args}></Button>;
+export const MediumText = Template.bind({});
+MediumText.args = {
+  text: 'Button',
+  styleType: 'Medium-Text',
+  iconType: 'plus'
 };
+MediumText.storyName = 'Button(Medium-Text)';
