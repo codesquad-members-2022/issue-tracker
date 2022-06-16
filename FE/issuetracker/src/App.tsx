@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Router from 'Router';
 import GlobalStyles from 'design/GlobalStyles';
 import 'assets/style.css';
-import Header from 'components/header/index';
+import Header from 'components/header';
 
 function App() {
   return (
