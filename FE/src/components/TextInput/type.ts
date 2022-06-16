@@ -11,7 +11,6 @@ interface IStyleProps {
   background?: string;
   border?: string;
   borderRadius?: string;
-  visibleLabel: boolean;
 }
 
 interface IStyled_label {
@@ -22,13 +21,16 @@ interface IStyled_label {
 
 interface IStyled_textInput extends IStyleProps {
   styleType?: StyleType;
+  visibleLabel: boolean;
 }
 
-interface TextInputProps extends IStyled_textInput {
+interface ITextInputProps extends IStyleProps {
+  styleType?: StyleType;
   placeholder?: string;
   label?: string;
   maxLength?: number;
-  as?: StyledComponent<'input', any, IStyled_textInput, never>;
+  type?: string;
+  as?: StyledComponent<'div', any, IStyled_textInput, never>;
 }
 
-export type { StyleType, IStyleProps, IStyled_label, IStyled_textInput, TextInputProps };
+export type { StyleType, IStyleProps, IStyled_label, IStyled_textInput, ITextInputProps };

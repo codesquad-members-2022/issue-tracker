@@ -1,11 +1,11 @@
-import { Styled_textInput } from '@/components/TextInput/style';
+import { Styled_textInputWrap } from '@/components/TextInput/style';
 import styled from 'styled-components';
 
 const Styled_logoWrapper = styled.div`
   margin-bottom: 60px;
 `;
 
-const Styled_loginInput = styled(Styled_textInput)`
+const Styled_loginInput = styled(Styled_textInputWrap)`
   & + & {
     margin-top: 16px;
   }
