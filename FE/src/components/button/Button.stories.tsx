@@ -11,10 +11,16 @@ const Template: ComponentStory<typeof Button> = args => <Button {...args}></Butt
 export const Large = Template.bind({});
 Large.args = {
   text: 'Button',
-  children: 'test',
   styleType: 'large'
 };
 Large.storyName = 'Button(Large)';
+
+export const MediumStandard = Template.bind({});
+MediumStandard.args = {
+  text: 'Button',
+  styleType: 'mediumStandard'
+};
+MediumStandard.storyName = 'Button(Medium-Standard)';
 
 export const SmallStandard = Template.bind({});
 SmallStandard.args = {
@@ -24,6 +30,14 @@ SmallStandard.args = {
 };
 SmallStandard.storyName = 'Button(Small-Standard)';
 
+export const SmallSecondary = Template.bind({});
+SmallSecondary.args = {
+  text: 'Button',
+  styleType: 'smallSecondary',
+  iconType: 'plus'
+};
+SmallSecondary.storyName = 'Button(Small-Secondary)';
+
 export const MediumText = Template.bind({});
 MediumText.args = {
   text: 'Button',
@@ -31,3 +45,11 @@ MediumText.args = {
   iconType: 'plus'
 };
 MediumText.storyName = 'Button(Medium-Text)';
+
+export const SmallText = Template.bind({});
+SmallText.args = {
+  text: 'Button',
+  styleType: 'smallText',
+  iconType: 'plus'
+};
+SmallText.storyName = 'Button(Small-Text)';

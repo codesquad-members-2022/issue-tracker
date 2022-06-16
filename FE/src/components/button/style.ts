@@ -20,6 +20,30 @@ const standardEventStyle = css`
   }
 `;
 
+const secondaryEventStyle = css`
+  :hover {
+    color: ${({ theme }) => theme.COLOR.primary.hover};
+    border-color: ${({ theme }) => theme.COLOR.primary.hover};
+    svg {
+      path {
+        stroke: ${({ theme }) => theme.COLOR.primary.hover};
+      }
+    }
+  }
+  :active {
+    color: ${({ theme }) => theme.COLOR.primary.initial};
+    border: 4px solid ${({ theme }) => theme.COLOR.primary.focus};
+    svg {
+      path {
+        stroke: ${({ theme }) => theme.COLOR.primary.initial};
+      }
+    }
+  }
+  :disabled {
+    opacity: 50%;
+  }
+`;
+
 const textEventStyle = css`
   :hover {
     color: ${({ theme }) => theme.COLOR.body};
@@ -54,6 +78,12 @@ const large = css`
   ${standardEventStyle}
 `;
 
+const mediumStandard = css`
+  ${large}
+  width: 240px;
+  height: 56px;
+`;
+
 const smallStandard = css`
   width: 120px;
   height: 40px;
@@ -61,13 +91,28 @@ const smallStandard = css`
   background: ${({ theme }) => theme.COLOR.primary.initial};
   font-size: ${({ theme }) => `${theme.FONT.SIZE.X_SMALL}`};
   font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
-  border-radius: 10px;
+  border-radius: 11px;
   svg {
     path {
       stroke: ${({ theme }) => theme.PALETTE.WHITE};
     }
   }
   ${standardEventStyle}
+`;
+
+const smallSecondary = css`
+  width: 120px;
+  height: 40px;
+  color: ${({ theme }) => theme.COLOR.primary.initial};
+  background: ${({ theme }) => theme.PALETTE.WHITE};
+  border: 2px solid ${({ theme }) => theme.COLOR.primary.initial};
+  border-radius: 11px;
+  svg {
+    path {
+      stroke: ${({ theme }) => theme.COLOR.primary.initial};
+    }
+  }
+  ${secondaryEventStyle}
 `;
 
 const mediumText = css`
@@ -82,15 +127,25 @@ const mediumText = css`
   ${textEventStyle}
 `;
 
-const EmptyCss = css``;
+const smallText = css`
+  width: 70px;
+  height: 32px;
+  color: ${({ theme }) => theme.COLOR.label};
+  svg {
+    path {
+      stroke: ${({ theme }) => theme.COLOR.label};
+    }
+  }
+  ${textEventStyle}
+`;
 
 const buttonStyle: ButtonStyle = {
   large: large,
   smallStandard: smallStandard,
-  mediumStandard: EmptyCss,
-  smallSecondary: EmptyCss,
+  mediumStandard: mediumStandard,
+  smallSecondary: smallSecondary,
   mediumText: mediumText,
-  smallText: EmptyCss
+  smallText: smallText
 };
 
 const createCustomStyle = (styleType: ButtonStyleType, props: IButtonStyleProps) => css`
