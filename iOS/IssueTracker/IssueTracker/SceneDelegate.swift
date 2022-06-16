@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private let signInManager = SignInManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -22,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let codeURL = URLContexts.first?.url {
-            SignInManager.shared.requestAccessToken(codeURL: codeURL) { result in
+            signInManager.requestAccessToken(codeURL: codeURL) { result in
                 switch result {
                 case let .success(data):
                     self.requestJWTToken(with: data["access_token"] ?? "")

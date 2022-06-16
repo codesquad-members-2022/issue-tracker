@@ -8,12 +8,8 @@
 import Foundation
 
 struct SignInManager {
-    static let shared = SignInManager()
-
     private let clientID = Bundle.main.clientID
     private let clientSecret = Bundle.main.clientSecret
-
-    private init() {}
 
     func requestCode(completion: @escaping (Result<URL, Error>) -> Void) {
         let networkTarget = SignInNetworkTarget.requestCode(clientID: clientID)

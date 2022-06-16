@@ -9,6 +9,7 @@ import UIKit
 
 final class SignInViewController: UIViewController {
     private lazy var signInView = SignInView(frame: view.frame)
+    private let signInManager = SignInManager()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -49,8 +50,8 @@ private extension SignInViewController {
     }
 
     func setGitHubSignInButtonAction() {
-        let gitHubSignInButtonAction = UIAction { _ in
-            SignInManager.shared.requestCode { result in
+        let gitHubSignInButtonAction = UIAction { [weak self] _ in
+            self?.signInManager.requestCode { result in
                 switch result {
                 case let .success(url):
                     DispatchQueue.main.async {
