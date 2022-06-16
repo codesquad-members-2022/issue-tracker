@@ -14,6 +14,7 @@ protocol BaseTarget {
     var parameter: [String: String]? { get }
     var method: HTTPMethod { get }
     var content: HTTPContentType { get }
+    var accept: HTTPAcceptType? { get }
 }
 
  extension BaseTarget {

@@ -24,7 +24,7 @@ extension IssueTrackerTarget: BaseTarget {
     var path: String? {
         switch self {
         case .requestAccessToken:
-            return "/login/oauth/authorize"
+            return "/login/oauth/access_token"
         }
     }
 
@@ -50,10 +50,15 @@ extension IssueTrackerTarget: BaseTarget {
         switch self {
         case .requestAccessToken:
             return .json
+
         }
     }
 
-//    func addAuthorizationCode(_ code: String) {
-//
-//    }
+    var accept: HTTPAcceptType? {
+        switch self {
+        case .requestAccessToken:
+            return .json
+        }
+    }
+
 }
