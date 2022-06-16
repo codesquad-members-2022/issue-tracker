@@ -2,6 +2,7 @@ package com.example.issu_tracker.di
 
 import com.example.issu_tracker.data.repository.HomeRepository
 import com.example.issu_tracker.data.repository.HomeRepositoryImpl
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +13,12 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 object RepositoryModule {
 
     @Provides
-    fun provideHomeRepository(): HomeRepository {
-        return HomeRepositoryImpl()
+    fun provideHomeRepository(fireStore: FirebaseFirestore): HomeRepository {
+        return HomeRepositoryImpl(fireStore)
+    }
+
+    @Provides
+    fun provideFireStoreDB(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
 }
