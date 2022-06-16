@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/issueFragment2"
-        android:name="com.example.issu_tracker.IssueFragment"
+        android:name="com.example.issu_tracker.ui.issue.IssueFragment"
         android:label="fragment_issue"
         tools:layout="@layout/fragment_issue" />
     <fragment

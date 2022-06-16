@@ -1,4 +1,4 @@
-package com.example.issu_tracker
+package com.example.issu_tracker.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.example.issu_tracker.R
+import com.example.issu_tracker.ui.home.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -16,9 +18,10 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
-
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class LogInActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -27,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
         firebaseAuth = Firebase.auth
 
         initGoogleSignInButton()
@@ -128,6 +131,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             Log.e("Google account", "로그인 됨")
             // 여기서 토큰을 저장하는 프로세스 넣으면 됨
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         }
 
     }
