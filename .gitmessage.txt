@@ -1,0 +1,12 @@
+################
+# Feat: (BumgeunSong/PR-tracker#)
+# Fix: (BumgeunSong/PR-tracker#)
+# Docs: (BumgeunSong/PR-tracker#)
+# Refactor: (BumgeunSong/PR-tracker#)
+# Style: (BumgeunSong/PR-tracker#)
+# Test: (BumgeunSong/PR-tracker#)
+# Chore: (BumgeunSong/PR-tracker#)
+# Design: (BumgeunSong/PR-tracker#)
+################
+
+# 커밋 타입 : 커밋 제목 (BumgeunSong/PR-tracker#이슈번호) 형식으로 작성하며 제목은 최대 50글자 정도로만 입력
