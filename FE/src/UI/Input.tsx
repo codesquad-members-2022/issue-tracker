@@ -2,7 +2,7 @@ import React from 'react';
 
 type InputPropType = {
   label: string;
-  info: Record<string, string>;
+  info: Record<string, string | (() => void)>;
 };
 
 export const InputWithRef = React.forwardRef<HTMLInputElement, InputPropType>(
