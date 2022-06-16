@@ -128,6 +128,17 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		983E66CA285B2AD300C9B975 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00BCB405285B01AA005E87BC /* Issue.swift */,
+				00BCB407285B0262005E87BC /* Label.swift */,
+				00BCB409285B027B005E87BC /* Milestone.swift */,
+				00BCB40B285B076B005E87BC /* State.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		988510C928572B8700CC2DA9 = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +162,7 @@
 		988510D428572B8700CC2DA9 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				983E66CA285B2AD300C9B975 /* Model */,
 				983E66C4285B204600C9B975 /* Storage */,
 				981BD438285B123A00DDDE64 /* Issue */,
 				988510D528572B8700CC2DA9 /* AppDelegate.swift */,
@@ -159,11 +171,6 @@
 				988510E028572B8900CC2DA9 /* LaunchScreen.storyboard */,
 				988510E328572B8900CC2DA9 /* Info.plist */,
 				0053D7542859B162006614EC /* Config.plist */,
-				00BCB405285B01AA005E87BC /* Issue.swift */,
-				00BCB407285B0262005E87BC /* Label.swift */,
-				00BCB409285B027B005E87BC /* Milestone.swift */,
-				00BCB40B285B076B005E87BC /* State.swift */,
-				00BCB40D285B08BE005E87BC /* IssueListViewController.swift */,
 				983E66C7285B212A00C9B975 /* NetworkManager.swift */,
 			);
 			path = IssueTracker;
