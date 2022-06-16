@@ -26,7 +26,7 @@ struct SignInManager {
         if codeURL.absoluteString.starts(with: "issuetrackerapp://"),
            let code = codeURL.absoluteString.split(separator: "=").last.map({String($0)}) {
             NetworkManager<[String: String]>.fetchData(
-                target: .requestAccessToken(clientID: clientID,
+                target: SignInNetworkTarget.requestAccessToken(clientID: clientID,
                                             clientSecret: clientSecret,
                                             code: code),
                 completion: completion)

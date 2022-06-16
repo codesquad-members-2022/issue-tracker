@@ -8,7 +8,7 @@
 import Foundation
 
 struct NetworkManager<T: Decodable> {
-    static func fetchData(target: SignInNetworkTarget, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    static func fetchData(target: NetworkTargetable, completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard let request = makeRequest(target: target) else {
             return completion(.failure(NetworkError.invalidURL))
         }
@@ -39,16 +39,18 @@ struct NetworkManager<T: Decodable> {
 }
 
 private extension NetworkManager {
-    static func makeRequest(target: SignInNetworkTarget) -> URLRequest? {
+    static func makeRequest(target: NetworkTargetable) -> URLRequest? {
         var components = URLComponents(string: target.url) ?? URLComponents()
         components.queryItems = target.queryItem
 
         if let url = components.url {
             var request = URLRequest(url: url)
             request.httpMethod = target.method
-            if target.isAcceptJSON {
+            if let target = target as? SignInNetworkTarget,
+               target.isAcceptJSON {
                 request.addValue("application/json", forHTTPHeaderField: "Accept")
             }
+
             return request
         }
         return nil

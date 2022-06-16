@@ -53,7 +53,7 @@ private extension SceneDelegate {
 
         let dummy = DummyData(data: data, response: response, error: nil)
 
-        let stubURLSession = SingInStubURLSession(dummy: dummy)
+        let stubURLSession = StubURLSession(dummy: dummy)
 
         stubURLSession.dataTask(with: url) { (data, _, _) in
             if let data = data,
