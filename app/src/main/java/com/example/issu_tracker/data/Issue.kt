@@ -1,8 +1,5 @@
 package com.example.issu_tracker.data
 
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
-
 //data class Issue(
 //    val index: Int,
 //    val mileStone: String,
