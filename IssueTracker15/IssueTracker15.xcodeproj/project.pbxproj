@@ -24,6 +24,11 @@
 		1B174851285885710028E037 /* TestUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174846285885710028E037 /* TestUseCase.swift */; };
 		1B174852285885710028E037 /* TestDecodableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174847285885710028E037 /* TestDecodableType.swift */; };
 		1B174853285885710028E037 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174848285885710028E037 /* RequestModel.swift */; };
+		1B87F704285B6C7A002B47B7 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */; };
+		1B87F705285B6C7A002B47B7 /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */; };
+		1B87F706285B6C7A002B47B7 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F700285B6C7A002B47B7 /* ServiceLayer.swift */; };
+		1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F702285B6C7A002B47B7 /* NetworkService.swift */; };
+		1B87F708285B6C7A002B47B7 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F703285B6C7A002B47B7 /* Repository.swift */; };
 		1BA1960C2858888900A4D7B1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1BA1960B2858888900A4D7B1 /* .swiftlint.yml */; };
 		1BD7504F2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */; };
 		1BD75055285886C40025DDC8 /* IDChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174835285885640028E037 /* IDChecker.swift */; };
@@ -64,6 +69,11 @@
 		1B174846285885710028E037 /* TestUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUseCase.swift; sourceTree = "<group>"; };
 		1B174847285885710028E037 /* TestDecodableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDecodableType.swift; sourceTree = "<group>"; };
 		1B174848285885710028E037 /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
+		1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
+		1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
+		1B87F700285B6C7A002B47B7 /* ServiceLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
+		1B87F702285B6C7A002B47B7 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1B87F703285B6C7A002B47B7 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1BA1960B2858888900A4D7B1 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		1BD7504C2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RegularExpressionCheckerUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionCheckerUnitTest.swift; sourceTree = "<group>"; };
@@ -118,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				1B174824285885180028E037 /* ViewController.swift */,
+				1B87F6FC285B6C7A002B47B7 /* Repository */,
 				1B174834285885640028E037 /* RegularExpressionChecker */,
 				1B174839285885710028E037 /* Test */,
 				1B1748542858857B0028E037 /* SupportingFiles */,
@@ -195,6 +206,34 @@
 				1B174829285885190028E037 /* Assets.xcassets */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		1B87F6FC285B6C7A002B47B7 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */,
+				1B87F6FE285B6C7A002B47B7 /* Persistent */,
+				1B87F700285B6C7A002B47B7 /* ServiceLayer.swift */,
+				1B87F701285B6C7A002B47B7 /* Network */,
+				1B87F703285B6C7A002B47B7 /* Repository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		1B87F6FE285B6C7A002B47B7 /* Persistent */ = {
+			isa = PBXGroup;
+			children = (
+				1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */,
+			);
+			path = Persistent;
+			sourceTree = "<group>";
+		};
+		1B87F701285B6C7A002B47B7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1B87F702285B6C7A002B47B7 /* NetworkService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		1BD7504D2858867E0025DDC8 /* RegularExpressionCheckerUnitTest */ = {
@@ -396,6 +435,7 @@
 			files = (
 				1B174849285885710028E037 /* TestViewModel.swift in Sources */,
 				1B174850285885710028E037 /* UseCaseResponsible.swift in Sources */,
+				1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */,
 				1B17484A285885710028E037 /* LargeStringAdaptable.swift in Sources */,
 				8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */,
 				1B17484D285885710028E037 /* BoldStringAdaptable.swift in Sources */,
@@ -403,14 +443,18 @@
 				1B17484E285885710028E037 /* TestLabel.swift in Sources */,
 				1B174837285885640028E037 /* IDChecker.swift in Sources */,
 				1B174853285885710028E037 /* RequestModel.swift in Sources */,
+				1B87F704285B6C7A002B47B7 /* ServiceContainer.swift in Sources */,
+				1B87F708285B6C7A002B47B7 /* Repository.swift in Sources */,
 				1B174851285885710028E037 /* TestUseCase.swift in Sources */,
 				1B174825285885180028E037 /* ViewController.swift in Sources */,
 				1B174821285885180028E037 /* AppDelegate.swift in Sources */,
 				1B17484C285885710028E037 /* ViewBindable.swift in Sources */,
 				1B174838285885640028E037 /* PasswordChecker.swift in Sources */,
+				1B87F705285B6C7A002B47B7 /* PersistentService.swift in Sources */,
 				8D66A2C1285959CF001B514C /* Resolvable.swift in Sources */,
 				8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */,
 				1B174852285885710028E037 /* TestDecodableType.swift in Sources */,
+				1B87F706285B6C7A002B47B7 /* ServiceLayer.swift in Sources */,
 				1B174823285885180028E037 /* SceneDelegate.swift in Sources */,
 				1B17484F285885710028E037 /* TestButton.swift in Sources */,
 			);
