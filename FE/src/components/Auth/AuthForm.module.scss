@@ -2,8 +2,7 @@
 @import '../../styles/_utils.scss';
 
 .section {
-  position: absolute;
-  @include place-at-center();
+  position: relative;
   width: 342px;
   height: 549px;
 
@@ -19,11 +18,6 @@
   width: 100%;
   height: 372px;
   margin-top: 61px;
-}
-
-.github_button {
-  @include bigButton();
-  background-color: black;
 }
 
 .divider {

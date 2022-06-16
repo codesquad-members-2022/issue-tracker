@@ -1,29 +1,25 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export type authStateType = {
   isLogin: boolean;
   hasError: boolean;
-  secureToken: string | null;
 };
 
 const initialAuthState: authStateType = {
-  isLogin: false,
+  isLogin: localStorage.getItem('token') ? true : false,
   hasError: false,
-  secureToken: null,
 };
 
 const authSlice = createSlice({
   name: 'login',
   initialState: initialAuthState,
   reducers: {
-    login: (state, action: PayloadAction<string>) => {
+    login: (state) => {
       state.isLogin = true;
       state.hasError = false;
-      state.secureToken = action.payload;
     },
     logout: (state) => {
       state.isLogin = false;
-      state.secureToken = null;
     },
     error: (state) => {
       state.hasError = true;
