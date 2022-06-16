@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.RequiredArgsConstructor;
-import team24.issuetracker.web.dto.IssueListResponsse;
+import team24.issuetracker.web.dto.IssueListResponse;
 import team24.issuetracker.web.repository.IssueRepository;
 
 @Service
@@ -15,9 +16,21 @@ public class IssueService {
 
 	private final IssueRepository issueRepository;
 
-	public List<IssueListResponsse> findIssues() {
+	public List<IssueListResponse> findIssues() {
 		return issueRepository.findAll().stream()
-			.map(IssueListResponsse::new)
+			.map(IssueListResponse::new)
+			.collect(Collectors.toList());
+	}
+
+	public List<IssueListResponse> findIssuesCreatedByMe(@PathVariable Long id) {
+		return issueRepository.findByWriter(id).stream()
+			.map(IssueListResponse::new)
+			.collect(Collectors.toList());
+	}
+
+	public List<IssueListResponse> findIssuesAssignedToMe(@PathVariable Long id) {
+		return issueRepository.findByAssignee(id).stream()
+			.map(IssueListResponse::new)
 			.collect(Collectors.toList());
 	}
 }

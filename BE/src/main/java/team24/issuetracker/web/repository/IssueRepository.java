@@ -1,10 +1,20 @@
 package team24.issuetracker.web.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import team24.issuetracker.domain.Issue;
 
 @Repository
 public interface IssueRepository extends JpaRepository<Issue, Long> {
+
+	@Query("select i from Issue i where  i.writer.id = :id")
+	List<Issue> findByWriter(@Param("id") Long id);
+
+	@Query("select i from Issue i join i.assignees as a where a.user.id = :id")
+	List<Issue> findByAssignee(@Param("id") Long id);
 }
