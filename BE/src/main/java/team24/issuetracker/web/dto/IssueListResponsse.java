@@ -15,14 +15,14 @@ import team24.issuetracker.domain.User;
 @Getter
 public class IssueListResponsse {
 
-	private Long id;
-	private String title;
-	private User writer;
-	private LocalDateTime writtenTime;
-	private Milestone milestone;
-	private List<Label> labels;
-	private boolean isClosed;
-	private List<Assignee> assignees;
+	private final Long id;
+	private final String title;
+	private final User writer;
+	private final LocalDateTime writtenTime;
+	private final Milestone milestone;
+	private final List<Label> labels;
+	private final boolean isClosed;
+	private final List<Assignee> assignees;
 
 	public IssueListResponsse(Issue issue) {
 		this.id = issue.getId();
