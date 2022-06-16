@@ -24,19 +24,15 @@ const secondaryEventStyle = css`
   :hover {
     color: ${({ theme }) => theme.COLOR.primary.hover};
     border-color: ${({ theme }) => theme.COLOR.primary.hover};
-    svg {
-      path {
-        stroke: ${({ theme }) => theme.COLOR.primary.hover};
-      }
+    svg > path {
+      stroke: ${({ theme }) => theme.COLOR.primary.hover};
     }
   }
   :active {
     color: ${({ theme }) => theme.COLOR.primary.initial};
     border: 4px solid ${({ theme }) => theme.COLOR.primary.focus};
-    svg {
-      path {
-        stroke: ${({ theme }) => theme.COLOR.primary.initial};
-      }
+    svg > path {
+      stroke: ${({ theme }) => theme.COLOR.primary.initial};
     }
   }
   :disabled {
@@ -47,18 +43,14 @@ const secondaryEventStyle = css`
 const textEventStyle = css`
   :hover {
     color: ${({ theme }) => theme.COLOR.body};
-    svg {
-      path {
-        stroke: ${({ theme }) => theme.COLOR.body};
-      }
+    svg > path {
+      stroke: ${({ theme }) => theme.COLOR.body};
     }
   }
   :active {
     color: ${({ theme }) => theme.COLOR.title};
-    svg {
-      path {
-        stroke: ${({ theme }) => theme.COLOR.title};
-      }
+    svg > path {
+      stroke: ${({ theme }) => theme.COLOR.title};
     }
   }
   :disabled {
@@ -92,10 +84,8 @@ const smallStandard = css`
   font-size: ${({ theme }) => `${theme.FONT.SIZE.X_SMALL}`};
   font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
   border-radius: 11px;
-  svg {
-    path {
-      stroke: ${({ theme }) => theme.PALETTE.WHITE};
-    }
+  svg > path {
+    stroke: ${({ theme }) => theme.PALETTE.WHITE};
   }
   ${standardEventStyle}
 `;
@@ -107,10 +97,8 @@ const smallSecondary = css`
   background: ${({ theme }) => theme.PALETTE.WHITE};
   border: 2px solid ${({ theme }) => theme.COLOR.primary.initial};
   border-radius: 11px;
-  svg {
-    path {
-      stroke: ${({ theme }) => theme.COLOR.primary.initial};
-    }
+  svg > path {
+    stroke: ${({ theme }) => theme.COLOR.primary.initial};
   }
   ${secondaryEventStyle}
 `;
@@ -119,10 +107,8 @@ const mediumText = css`
   width: 87px;
   height: 32px;
   color: ${({ theme }) => theme.COLOR.label};
-  svg {
-    path {
-      stroke: ${({ theme }) => theme.COLOR.label};
-    }
+  svg > path {
+    stroke: ${({ theme }) => theme.COLOR.label};
   }
   ${textEventStyle}
 `;
@@ -131,10 +117,8 @@ const smallText = css`
   width: 70px;
   height: 32px;
   color: ${({ theme }) => theme.COLOR.label};
-  svg {
-    path {
-      stroke: ${({ theme }) => theme.COLOR.label};
-    }
+  svg > path {
+    stroke: ${({ theme }) => theme.COLOR.label};
   }
   ${textEventStyle}
 `;
