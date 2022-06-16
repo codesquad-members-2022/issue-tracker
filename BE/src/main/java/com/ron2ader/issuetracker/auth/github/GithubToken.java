@@ -1,4 +1,4 @@
-package com.ron2ader.issuetracker.oauth;
+package com.ron2ader.issuetracker.auth.github;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

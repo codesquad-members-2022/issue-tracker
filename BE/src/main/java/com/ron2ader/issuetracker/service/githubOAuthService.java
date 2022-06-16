@@ -1,9 +1,8 @@
 package com.ron2ader.issuetracker.service;
 
-import com.ron2ader.issuetracker.config.WebClientConfig;
-import com.ron2ader.issuetracker.oauth.GithubToken;
-import com.ron2ader.issuetracker.oauth.GithubTokenRequest;
-import com.ron2ader.issuetracker.oauth.GithubUserInfo;
+import com.ron2ader.issuetracker.auth.github.GithubToken;
+import com.ron2ader.issuetracker.auth.github.GithubTokenRequest;
+import com.ron2ader.issuetracker.auth.github.GithubUserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
