@@ -5,6 +5,8 @@ export const IssuesWrap = styled.div`
   width: 1280px;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
+  padding-bottom: 11px;
+  background: ${({ theme }) => theme.backgroundColors.gray1};
 `;
 export const IssuesTab = styled.div`
   ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
@@ -27,6 +29,7 @@ export const OpenedIssue = styled.div`
   ${({ theme }) => theme.fontStyles.linkSmall};
   color: ${({ theme }) => theme.fontColors.gray5};
   margin-right: 24px;
+  gap: 5px;
 `;
 export const ClosedIssue = styled(OpenedIssue)``;
 export const IssuesTabRight = styled(IssuesTabLeft)`
@@ -35,7 +38,7 @@ export const IssuesTabRight = styled(IssuesTabLeft)`
 `;
 export const DropboxContent = styled.div`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
-  gap: 4px;
+  gap: 8px;
   ${({ theme }) => theme.fontStyles.linkSmall};
   color: ${({ theme }) => theme.fontColors.gray2};
 `;

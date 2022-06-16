@@ -25,6 +25,7 @@ export const Filter = styled.button`
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   ${({ theme }) => theme.fontStyles.linkSmall}
   color: ${({ theme }) => theme.fontColors.gray2};
+  gap: 42px;
 `;
 export const SearchBar = styled.input`
   ${mixin.flexbox({ vertical: 'center' })};
@@ -53,10 +54,16 @@ export const LabelBtn = styled.button`
   border-radius: 11px 0px 0px 11px;
   ${({ theme }) => theme.fontStyles.linkSmall};
   color: ${({ theme }) => theme.fontColors.gray2};
+  gap: 8px;
 `;
 export const MileStoneBtn = styled(LabelBtn)`
   border-radius: 0px 11px 11px 0px;
 `;
+export const BtnText = styled.div`
+  ${({ theme }) => theme.fontStyles.linkSmall};
+  color: ${({ theme }) => theme.fontColors.gray2};
+`;
+export const BtnContentCount = styled(BtnText)``;
 export const IssueOption = styled.div`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
   background: ${({ theme }) => theme.backgroundColors.blue2};
