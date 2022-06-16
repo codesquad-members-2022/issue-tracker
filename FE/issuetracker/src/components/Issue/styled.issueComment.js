@@ -4,7 +4,7 @@ import { mixin } from 'design/GlobalStyles';
 export const commentArticle = styled.article`
   ${mixin.flexbox({})};
   height: 124px;
-  margin-bottom: 24px;
+  margin-top: 16px;
 `;
 
 export const commentUserImage = styled.figure`
