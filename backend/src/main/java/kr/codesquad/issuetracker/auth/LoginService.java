@@ -1,8 +1,8 @@
 package kr.codesquad.issuetracker.auth;
 
 import java.util.NoSuchElementException;
-import kr.codesquad.issuetracker.user.User;
-import kr.codesquad.issuetracker.user.UserRepository;
+import kr.codesquad.issuetracker.core.user.User;
+import kr.codesquad.issuetracker.core.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

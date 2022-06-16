@@ -1,7 +1,7 @@
 package kr.codesquad.issuetracker.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import kr.codesquad.issuetracker.user.User;
+import kr.codesquad.issuetracker.core.user.User;
 import lombok.Getter;
 
 @Getter
