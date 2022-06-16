@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://airbnb-db.cabi5bwgwykn.ap-northeast-2.rds.amazonaws.com:3306/airbnb
+    url: jdbc:mysql://airbnb-db.cabi5bwgwykn.ap-northeast-2.rds.amazonaws.com:3306/issueTracker
     username: team11
     password: Password1!
     driver-class-name: com.mysql.cj.jdbc.Driver
