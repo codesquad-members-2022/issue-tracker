@@ -1,17 +1,34 @@
-import { GREYSCALE, COLORS } from '@/constants';
+import { GREYSCALE } from '@/constants';
 import React from 'react';
 import styled from 'styled-components';
 
-function TextInput({ type, placeholder, isSuccess }) {
-  const Caption = isSuccess ? SuccessCaption : ErrorCaption;
-  const captionText = isSuccess
-    ? '사용 가능한 아이디 입니다!'
-    : '이미 사용하고 있는 아이디 입니다!';
+type TextInputProps = {
+  type: 'text' | 'password';
+  placeholder: string;
+  value: string;
+  minLength: number;
+  maxLength: number;
+  inputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
+function TextInput({
+  type,
+  placeholder,
+  value,
+  minLength,
+  maxLength,
+  inputHandler,
+}: TextInputProps) {
   return (
     <TextInputBox>
-      <InputBox type={type} placeholder={placeholder}></InputBox>
-      {/* <Caption>{captionText}</Caption> */}
+      <InputBox
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        minLength={minLength}
+        maxLength={maxLength}
+        onChange={inputHandler}
+      ></InputBox>
     </TextInputBox>
   );
 }
@@ -38,18 +55,6 @@ const InputBox = styled.input`
     background-color: ${GREYSCALE.OFF_WHITE};
     border: 1px solid ${GREYSCALE.TITLE_ACTION};
   }
-`;
-
-const CaptionTag = styled.div`
-  ${({ theme }) => theme.TYPOGRAPHY.TEXT_X_SMALL}
-`;
-
-const SuccessCaption = styled(CaptionTag)`
-  color: ${COLORS.DARK_GREEN};
-`;
-
-const ErrorCaption = styled(CaptionTag)`
-  color: ${COLORS.DARK_RED};
 `;
 
 export default TextInput;
