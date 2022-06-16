@@ -49,3 +49,13 @@ export const userUnit = styled.div`
 export const userName = styled.span`
   ${({ theme }) => theme.fontStyles.textSmall};
 `;
+
+export const label = styled.label`
+  ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
+  width: 121px;
+  height: 28px;
+  margin: 16px 0;
+  border-radius: 30px;
+  background: ${({ theme }) => theme.backgroundColors.purple1};
+  color: ${({ theme }) => theme.fontColors.gray1};
+`;
