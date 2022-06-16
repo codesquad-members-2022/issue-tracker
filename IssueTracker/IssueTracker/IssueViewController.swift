@@ -18,7 +18,8 @@ final class IssueViewController: UIViewController {
     private let dummy: [Dummy] = [
         .init(title: "iOS 이슈 트래커 개발", description: "개발일정: 8월 3일부터 9월 2일까지", milestone: "마스터즈 코스", label: "Documentation"),
         .init(title: "다마고치 게임 개발", description: "iOS, Watch 를 지원하는 게임을 개발한다", milestone: "개인 프로젝트", label: "Feature"),
-        .init(title: "타이머 앱의 시간 오류", description: "타이머 앱에서 잘못된 시간을 화면에 보여주고 있습니다", milestone: "개인 프로젝트", label: "bug")
+        .init(title: "타이머 앱의 시간 오류", description: "타이머 앱에서 잘못된 시간을 화면에 보여주고 있습니다", milestone: "개인 프로젝트", label: "bug"),
+        .init(title: "PR 보내기", description: "iOS 이슈 트래커의 코드리뷰를 받기위해 PR 보내기", milestone: "마스터즈 코스", label: "Documentation")
     ]
     
     override func viewDidLoad() {
@@ -56,7 +57,7 @@ final class IssueViewController: UIViewController {
         collectionView.backgroundColor = .blue
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 0, left: Margins.side, bottom: 0, right: Margins.side))
+            make.edges.equalTo(self.view)
         }
     }
     
@@ -103,7 +104,7 @@ extension IssueViewController: UICollectionViewDataSource {
 
 extension IssueViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 300)
+        return CGSize(width: collectionView.frame.width, height: 200)
     }
 }
 
@@ -121,12 +122,21 @@ class IssueListCell: UICollectionViewCell {
     
     func updateViews(title: String, description: String, milestone: String, label: String) {
         self.titleLabel.text = title
+        self.descriptionLabel.text = description
+        self.milestoneLabel.text = milestone
+        self.labelNameButton.titleLabel?.text = label
     }
     
     private func setupViews() {
-        self.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel, milestoneLabel, labelNameButton])
+        stackView.alignment = .leading
+        stackView.spacing = 16
+        stackView.distribution = .equalSpacing
+        stackView.axis = .vertical
+        
+        self.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.edges.equalTo(self).inset(UIEdgeInsets(top: 24, left: Margins.side, bottom: 24, right: Margins.side))
         }
     }
     
@@ -135,5 +145,28 @@ class IssueListCell: UICollectionViewCell {
         label.text = "제목"
         label.font = .systemFont(ofSize: 22)
         return label
+    }()
+    
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "description"
+        label.textColor = .systemGray
+        return label
+    }()
+    
+    private let milestoneLabel: UILabel = {
+        let label = UILabel()
+        label.text = "milestone"
+        label.textColor = .systemGray
+        return label
+    }()
+    
+    private let labelNameButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.buttonSize = .medium
+        configuration.cornerStyle = .capsule
+        configuration.title = "label name"
+        let button = UIButton(configuration: configuration, primaryAction: nil)
+        return button
     }()
 }
