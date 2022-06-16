@@ -1,4 +1,4 @@
-package codesquad.issuetracker.dto;
+package codesquad.issuetracker.dto.member;
 
 import java.util.List;
 import lombok.Getter;

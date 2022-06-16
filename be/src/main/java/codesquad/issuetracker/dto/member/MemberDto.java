@@ -1,4 +1,4 @@
-package codesquad.issuetracker.dto;
+package codesquad.issuetracker.dto.member;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;

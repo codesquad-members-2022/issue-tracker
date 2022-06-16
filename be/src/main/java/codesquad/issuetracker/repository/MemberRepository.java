@@ -2,8 +2,8 @@ package codesquad.issuetracker.repository;
 
 import static codesquad.issuetracker.domain.QMember.*;
 
-import codesquad.issuetracker.dto.MemberDto;
-import codesquad.issuetracker.dto.QMemberDto;
+import codesquad.issuetracker.dto.member.MemberDto;
+import codesquad.issuetracker.dto.member.QMemberDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
