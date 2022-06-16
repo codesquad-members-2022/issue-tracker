@@ -27,57 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(url)
         if url.absoluteString.starts(with: "issuetracker://login") { // 콜백URL
             if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
-                requestAccessToken(with: code)
-                requestIssues()
+                NetworkManager.shared.requestAccessToken(with: code)
+                window?.rootViewController = IssueViewController()
             }
         }
-       
         return true
     }
     
-    private func requestAccessToken(with code: String) {
-        let url = "https://github.com/login/oauth/access_token"
-        
-        let parameters = ["client_id": "\(PrivateStorage.clientId)",
-                          "client_secret": "\(PrivateStorage.clientSecret)",
-                          "code": code]
-        let headers: HTTPHeaders = ["Accept": "application/json"]
-        
-        AF.request(url, method: .post, parameters: parameters, headers: headers).responseDecodable(of: [String: String].self) { (response) in
-            switch response.result {
-            case let .success(json):
-                if let dic = json as? [String: String],
-                   let accessToken = dic["access_token"] {
-                    GithubUserDefaults.setToken(uid: accessToken)
-                }
-            case let .failure(error):
-                print(error)
-            }
-        }
-    }
-    
-    private func requestIssues() {
-        let urlString = "https://api.github.com/issues"
-
-        guard let accessToken = GithubUserDefaults.getToken() else {
-            return
-        }
-        print("accessToken : \(accessToken)")
-        let headers: HTTPHeaders = [
-            "Accept": "application/vnd.github.v3+json",
-            "Authorization": "token \(accessToken)"
-        ]
-        AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [Issue].self) { (response) in
-                print("response: \(response)")
-            switch response.result {
-            case let .success(json):
-                print(json)
-            case let .failure(error):
-                print(error)
-            }
-        }
-        
-    }
 }
 
