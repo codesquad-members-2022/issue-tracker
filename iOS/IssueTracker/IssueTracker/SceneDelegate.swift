@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let rootVC = TabBarController()
+        let rootVC = SignInViewController()
         self.window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
@@ -25,8 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             SignInManager.shared.requestAccessToken(codeURL: codeURL) { result in
                 switch result {
                 case let .success(data):
-                    // 서버로부터 JWT토큰 요청하는 로직 필요
-                    return
+                    self.requestJWTToken(with: data["access_token"] ?? "")
                 case let .failure(error):
                     NotificationCenter.default.post(name: NotificationNames.didGetSignInError, object: error)
                     return print(error)
@@ -40,5 +39,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     enum NotificationNames {
         static let didGetSignInError = Notification.Name("SceneDelegateDidGetSignInError")
+    }
+}
+
+// MARK: - Private Method
+private extension SceneDelegate {
+    // API 구현전이라, 임시적으로 만든 JWT 토큰 요청 로직
+    func requestJWTToken(with accessToken: String) {
+        let url = URL(string: "http://example.com")!
+        let data = "a1b2c3d4".data(using: .utf8)
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+
+        let dummy = DummyData(data: data, response: response, error: nil)
+
+        let stubURLSession = SingInStubURLSession(dummy: dummy)
+
+        stubURLSession.dataTask(with: url) { (data, _, _) in
+            if let data = data,
+               let JSONString = String(data: data, encoding: String.Encoding.utf8) {
+                print(JSONString)
+            }
+        }.resume()
     }
 }
