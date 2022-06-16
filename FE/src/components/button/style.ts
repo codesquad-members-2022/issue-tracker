@@ -111,6 +111,8 @@ const mediumStandard = css`
   width: 240px;
   height: 56px;
   border-radius: 20px;
+  ${standardColorStyle}
+  ${standardEventStyle}
   ${largeFontStyle}
 `;
 
