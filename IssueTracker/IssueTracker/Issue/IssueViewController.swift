@@ -21,6 +21,19 @@ final class IssueViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
+        
+        guard let token = GithubUserDefaults.getToken() else {
+            return
+        }
+        
+        NetworkManager.shared.requestIssues(accessToken: token) { result in
+            switch result {
+            case .success(let issues):
+                print(issues)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @objc func touchedSelectButton() {
