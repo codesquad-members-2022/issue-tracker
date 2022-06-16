@@ -1,6 +1,4 @@
-package kr.codesquad.issuetracker.domain;
-
-import static javax.persistence.FetchType.*;
+package kr.codesquad.issuetracker.domain.image;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,17 +7,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import kr.codesquad.issuetracker.domain.comment.Comment;
 
 @Entity
-public class IssueLabels {
+@Table(name = "comment_image")
+public class CommentImage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "issues_labels_id")
+	@Column(name = "comment_image_id")
 	private Long id;
 
-	@ManyToOne(fetch = LAZY)
-	private Issue issue;
+	private String imageUrl;
 
-	@ManyToOne(fetch = LAZY)
-	private Label label;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Comment comment;
 }
