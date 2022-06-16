@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
+import { Link } from 'react-router-dom';
 
 export const HeaderWrap = styled.div<{ checkPage: boolean }>`
   ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
@@ -9,7 +10,7 @@ export const HeaderWrap = styled.div<{ checkPage: boolean }>`
   height: 94px;
   margin-bottom: 20px;
 `;
-export const Title = styled.div`
+export const Title = styled(Link)`
   ${({ theme }) => theme.fontStyles.logoMedium};
 `;
 export const AccountImg = styled.img`
