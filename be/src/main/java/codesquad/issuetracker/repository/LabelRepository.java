@@ -20,6 +20,7 @@ public class LabelRepository {
             .select(new QLabelDto(
                 label.id,
                 label.name,
+                label.description,
                 label.color
             ))
             .from(label)
