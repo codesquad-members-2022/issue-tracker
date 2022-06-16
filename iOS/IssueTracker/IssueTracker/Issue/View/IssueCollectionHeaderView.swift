@@ -13,7 +13,7 @@ final class IssueCollectionHeaderView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        addSubview(headerTitle)
     }
     
     @available(*, unavailable)
@@ -26,18 +26,20 @@ final class IssueCollectionHeaderView: UICollectionReusableView {
         let headerTitleAttributedString = NSMutableAttributedString(string: "이슈")
         headerTitle.font = UIFont(name: "SFProDisplay-Bold", size: 34)
         headerTitle.attributedText = headerTitleAttributedString
-        headerTitle.translatesAutoresizingMaskIntoConstraints = false
         headerTitle.textAlignment = .left
+        headerTitle.translatesAutoresizingMaskIntoConstraints = false
         return headerTitle
     }()
     
+    func setHeaderTitle(text: String?) {
+        headerTitle.text = text
+    }
+    
     override func layoutSubviews() {
-        self.addSubview(headerTitle)
         headerTitle.snp.makeConstraints { make in
             make.top.equalTo(self)
             make.leading.equalTo(self).offset(16)
             make.bottom.equalTo(self).offset(-8)
         }
     }
-    
 }

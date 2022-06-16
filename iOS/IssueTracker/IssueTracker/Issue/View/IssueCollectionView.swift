@@ -28,10 +28,12 @@ final class IssueCollectionView: UIView {
         flowLayout.estimatedItemSize = CGSize(width: 350, height: 240)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        flowLayout.headerReferenceSize = .init(width: UIScreen.main.bounds.width, height: 41)
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true
         collectionView.register(IssueCollectionViewCell.self, forCellWithReuseIdentifier: IssueCollectionViewCell.identifier)
+        collectionView.register(IssueCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: IssueCollectionHeaderView.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
