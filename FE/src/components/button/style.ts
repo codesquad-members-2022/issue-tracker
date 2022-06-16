@@ -5,6 +5,7 @@ import {
   IStyled_buttonType
 } from '@/components/Button/type';
 import styled, { css } from 'styled-components';
+import { darken, lighten } from 'polished';
 
 const standardColorStyle = css`
   color: ${({ theme }) => theme.PALETTE.WHITE};
@@ -45,55 +46,59 @@ const smallFontStyle = css`
   font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
 `;
 
-const standardEventStyle = css`
-  :hover {
-    background: ${({ theme }) => theme.COLOR.primary.hover};
+const standardEventStyle = css<IStyled_buttonType>`
+  :enabled:hover {
+    background: ${({ theme, background }) =>
+      !background ? theme.COLOR.primary.hover : darken(0.1, background)};
   }
-  :active {
-    background: ${({ theme }) => theme.COLOR.primary.initial};
-    border: 4px solid ${({ theme }) => theme.COLOR.primary.focus};
-  }
-  :disabled {
-    background: ${({ theme }) => theme.COLOR.primary.initial};
-    opacity: 50%;
-  }
-`;
-
-const secondaryEventStyle = css`
-  :hover {
-    color: ${({ theme }) => theme.COLOR.primary.hover};
-    border-color: ${({ theme }) => theme.COLOR.primary.hover};
-    svg > path {
-      stroke: ${({ theme }) => theme.COLOR.primary.hover};
-    }
-  }
-  :active {
-    color: ${({ theme }) => theme.COLOR.primary.initial};
-    border: 4px solid ${({ theme }) => theme.COLOR.primary.focus};
-    svg > path {
-      stroke: ${({ theme }) => theme.COLOR.primary.initial};
-    }
+  :enabled:active {
+    background: ${({ theme, background }) =>
+      !background ? theme.COLOR.primary.initial : background};
+    border: 4px solid
+      ${({ theme, background }) =>
+        !background ? theme.COLOR.primary.focus : lighten(0.3, background)};
   }
   :disabled {
     opacity: 50%;
   }
 `;
 
-const textEventStyle = css`
+const secondaryEventStyle = css<IStyled_buttonType>`
   :hover {
-    color: ${({ theme }) => theme.COLOR.body};
+    color: ${({ theme, color }) => (!color ? theme.COLOR.primary.hover : darken(0.1, color))};
+    border-color: ${({ theme, color }) =>
+      !color ? theme.COLOR.primary.hover : darken(0.1, color)};
     svg > path {
-      stroke: ${({ theme }) => theme.COLOR.body};
+      stroke: ${({ theme, color }) => (!color ? theme.COLOR.primary.hover : darken(0.1, color))};
     }
   }
-  :active {
-    color: ${({ theme }) => theme.COLOR.title};
+  :enabled:active {
+    color: ${({ theme, color }) => (!color ? theme.COLOR.primary.initial : lighten(0.1, color))};
+    border: 4px solid
+      ${({ theme, color }) => (!color ? theme.COLOR.primary.focus : lighten(0.3, color))};
     svg > path {
-      stroke: ${({ theme }) => theme.COLOR.title};
+      stroke: ${({ theme, color }) => (!color ? theme.COLOR.primary.initial : lighten(0.1, color))};
     }
   }
   :disabled {
-    color: ${({ theme }) => theme.COLOR.body};
+    opacity: 50%;
+  }
+`;
+
+const textEventStyle = css<IStyled_buttonType>`
+  :hover {
+    color: ${({ theme, color }) => (!color ? theme.COLOR.body : darken(0.1, color))};
+    svg > path {
+      stroke: ${({ theme, color }) => (!color ? theme.COLOR.body : darken(0.1, color))};
+    }
+  }
+  :enabled:active {
+    color: ${({ theme, color }) => (!color ? theme.COLOR.title : darken(0.2, color))};
+    svg > path {
+      stroke: ${({ theme, color }) => (!color ? theme.COLOR.title : darken(0.2, color))};
+    }
+  }
+  :disabled {
     opacity: 50%;
   }
 `;
@@ -147,7 +152,7 @@ const smallText = css`
   height: 32px;
   ${textColorStyle}
   ${textEventStyle}
-  ${textEventStyle}
+  ${smallFontStyle}
 `;
 
 const buttonStyle: ButtonStyle = {
@@ -163,12 +168,20 @@ const createCustomStyle = (styleType: ButtonStyleType, props: IButtonStyleProps)
   ${styleType && buttonStyle[styleType]}
   ${props.width && { width: props.width }}
   ${props.height && { height: props.height }}
-  ${props.color && { color: props.color }}
+  ${props.color && CustomColorStyle}
   ${props.background && { background: props.background }}
   ${props.border && { border: props.border }}
   ${props.borderRadius && { 'border-radius': props.borderRadius }}
   ${props.fontSize && { 'font-size': props.fontSize }}
   ${props.fontWeight && { 'font-weight': props.fontWeight }}
+`;
+
+const CustomColorStyle = css<IStyled_buttonType>`
+  color: ${({ color }) => color};
+  svg > path {
+    stroke: ${({ color }) => color};
+  }
+  border-color: ${({ color }) => color};
 `;
 
 const Styled_button = styled.button<IStyled_buttonType>`
