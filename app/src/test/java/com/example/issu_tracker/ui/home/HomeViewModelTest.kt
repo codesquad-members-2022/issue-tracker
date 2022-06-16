@@ -6,7 +6,6 @@ import com.example.issu_tracker.data.repository.HomeRepository
 import com.example.issu_tracker.data.repository.HomeRepositoryImpl
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
