@@ -8,11 +8,12 @@ const fontSize = {
 
 const fontWeight = {
   bold: 700,
+  xRegular: 500,
   regular: 400,
 };
 
 const colors = {
-  titleActive: "#D9DBE9",
+  titleActive: "#14142B",
   body: "#4E4B66",
   label: "#6E7191",
   placeHolder: "#A0A3BD",
