@@ -1,5 +1,5 @@
 import React from 'react';
-import * as icons from './svgs';
+import { icons } from '@/assets/icons/svgs';
 
 const Icon = ({ iconName, width = 16, height = 16 }) => {
   const IconSvg = icons[iconName];
