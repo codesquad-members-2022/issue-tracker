@@ -28,10 +28,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     // 서버로부터 JWT토큰 요청하는 로직 필요
                     return
                 case let .failure(error):
-                    // 다시 로그인을 요청하도록 하는 Noti 로직 필요
-                    return
+                    NotificationCenter.default.post(name: NotificationNames.didGetSignInError, object: error)
+                    return print(error)
                 }
             }
         }
+    }
+}
+
+// MARK: - enum / static properties
+extension SceneDelegate {
+    enum NotificationNames {
+        static let didGetSignInError = Notification.Name("SceneDelegateDidGetSignInError")
     }
 }
