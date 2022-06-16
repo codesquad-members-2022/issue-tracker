@@ -14,10 +14,14 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/tracker
-    username: aderron2
+    username: aderon2
     password: ron2ader
 
   sql:
     init:
       mode: always
       data-locations: classpath:sql/data.sql
+
+  jpa:
+    hibernate:
+      ddl-auto: update
