@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DE61695C83CB1A5484B159C /* Pods_PRTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F85B983D296BEA49342F0 /* Pods_PRTrackerTests.framework */; };
 		BC2F5963285AE4040012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
+		BC2F5964285AE5970012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
 		BC97093B2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093C2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */; };
@@ -542,6 +543,7 @@
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BFE285704F40059E61D /* ListingViewModel.swift in Sources */,
 				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
+				BC2F5964285AE5970012D18C /* Secrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
