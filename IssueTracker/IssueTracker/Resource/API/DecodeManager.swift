@@ -12,12 +12,6 @@ protocol DecodeManager {
     func getIssuesOnFailure() -> [Issue]?
 }
 
-enum NetworkError: Error {
-    case invalidJsonError
-    case invalidUrlError
-    case cantReachedServerError
-}
-
 class DecodeManagerImplement: DecodeManager {
     func requestIssues(url: String,
                        completion: @escaping (Result<[Issue]?, NetworkError>) -> Void) {

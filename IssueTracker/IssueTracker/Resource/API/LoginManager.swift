@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class LoginManager {
-    
+
     static func requestGithubAuthorize() {
         let clientID = "e6386d0321b6dc2820c0"
         let scope = "repo user"
