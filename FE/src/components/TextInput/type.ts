@@ -3,6 +3,7 @@ type StyleType = 'large' | 'medium' | 'small';
 type Status = 'right' | 'error';
 
 interface IStyleProps {
+  status?: Status;
   width?: string;
   height?: string;
   color?: string;
@@ -14,6 +15,7 @@ interface IStyleProps {
 
 interface IStyled_label {
   styleType?: StyleType;
+  status?: string;
   visible: boolean;
 }
 
@@ -21,4 +23,10 @@ interface IStyled_textInput extends IStyleProps {
   styleType?: StyleType;
 }
 
-export type { StyleType, Status, IStyleProps, IStyled_label, IStyled_textInput };
+interface TextInputProps extends IStyled_textInput {
+  placeholder?: string;
+  label?: string;
+  maxLength?: number;
+}
+
+export type { StyleType, IStyleProps, IStyled_label, IStyled_textInput, TextInputProps };

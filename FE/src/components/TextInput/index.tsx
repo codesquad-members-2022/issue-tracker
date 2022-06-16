@@ -1,19 +1,6 @@
 import { useState } from 'react';
 import { Styled_textInputWrap, Styled_label, Styled_textInput } from '@/components/TextInput/style';
-import { StyleType } from '@/components/TextInput/type';
-
-interface TextInputProps {
-  styleType?: StyleType;
-  width?: string;
-  height?: string;
-  color?: string;
-  background?: string;
-  border?: string;
-  borderRadius?: string;
-  placeholder?: string;
-  label?: string;
-  maxLength?: number;
-}
+import { TextInputProps } from '@/components/TextInput/type';
 
 const MIN_INPUT_VALUE_LENGTH = 1;
 

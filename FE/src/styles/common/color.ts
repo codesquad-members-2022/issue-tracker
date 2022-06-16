@@ -50,14 +50,14 @@ const COLOR = {
     hover: PALETTE.BLUE.DARK[300]
   },
   error: {
-    initial: PALETTE.RED[200],
-    focus: PALETTE.RED[100],
-    hover: PALETTE.RED[300]
+    background: PALETTE.RED[100],
+    border: PALETTE.RED[200],
+    text: PALETTE.RED[300]
   },
   success: {
-    initial: PALETTE.GREEN[200],
-    focus: PALETTE.GREEN[100],
-    hover: PALETTE.GREEN[300]
+    background: PALETTE.GREEN[100],
+    border: PALETTE.GREEN[200],
+    text: PALETTE.GREEN[300]
   }
 };
 
