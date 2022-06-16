@@ -9,7 +9,7 @@ import UIKit
 
 class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    var issueData: [IssueItem] = [.init(title: "제목", issueDescription: "이슈에 대한 설명(최대 두 줄까지 보여줄 수 있다)", milestoneName: "마일스톤 이름") ]
+    private var issueData: [IssueItem] = [.init(title: "제목", issueDescription: "이슈에 대한 설명(최대 두 줄까지 보여줄 수 있다)", milestoneName: "마일스톤 이름") ]
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         issueData.count
@@ -21,11 +21,5 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         }
         
         return cell
-    }
-    
-    struct IssueItem {
-        let title: String
-        let issueDescription: String
-        let milestoneName: String
     }
 }
