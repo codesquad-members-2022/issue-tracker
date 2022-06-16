@@ -18,7 +18,7 @@ import userImageLarge from './userImageLarge.svg';
 import userImageSmall from './userImageSmall.svg';
 import xSquare from './xSquare.svg';
 
-export {
+const icons = {
   alertCircle,
   archive,
   calendar,
@@ -39,3 +39,4 @@ export {
   userImageSmall,
   xSquare,
 };
+export { icons };
