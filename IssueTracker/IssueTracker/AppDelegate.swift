@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool { // 사파리 -> 콜백으로 들어오는 부분
         print(url)
         if url.absoluteString.starts(with: "issuetracker://login") { // 콜백URL
-            if let code = url.absoluteString.split(separator: "=").last.map { String($0) } {
+            if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
                 requestAccessToken(with: code)
                 requestIssues()
             }
