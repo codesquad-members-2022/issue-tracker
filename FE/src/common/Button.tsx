@@ -2,10 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { COLORS, GREYSCALE } from '@/constants';
 
-function Button({ isDisabled = false, label }) {
+type ButtonProps = {
+  isDisabled: boolean;
+  label: string;
+  clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+function Button({ isDisabled, label, clickHandler }: ButtonProps) {
   const Box = isDisabled ? ButtonBoxDisabled : ButtonBoxAbled;
 
-  return <Box>{label}</Box>;
+  return (
+    <Box disabled={isDisabled} onClick={clickHandler}>
+      {label}
+    </Box>
+  );
 }
 
 export const ButtonBox = styled.button`
