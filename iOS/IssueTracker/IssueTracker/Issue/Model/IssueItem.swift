@@ -12,4 +12,3 @@ struct IssueItem {
     let issueDescription: String
     let milestoneName: String
 }
-
