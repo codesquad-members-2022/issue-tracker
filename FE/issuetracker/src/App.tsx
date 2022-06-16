@@ -10,8 +10,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Header />
       <BrowserRouter>
+        <Header />
         <Router />
       </BrowserRouter>
     </ThemeProvider>
