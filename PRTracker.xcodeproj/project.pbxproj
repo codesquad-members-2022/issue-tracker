@@ -150,7 +150,9 @@
 		BC9709402859C87800E54F93 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D04099DB2859C6930008B517 /* Observable.swift */,
 				BC9709412859C88100E54F93 /* Logger.swift */,
+				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -197,7 +199,6 @@
 		BCF57BF1285703B60059E61D /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D04099D62859C3380008B517 /* Common */,
 				BC9709402859C87800E54F93 /* Common */,
 				BCF57BF5285704020059E61D /* PR_Listing */,
 				BCF57BF4285703F60059E61D /* Login */,
@@ -301,15 +302,6 @@
 				D0E98CD2285B088A0051413E /* ListingTableViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		D04099D62859C3380008B517 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				D04099DB2859C6930008B517 /* Observable.swift */,
-				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
