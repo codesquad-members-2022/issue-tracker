@@ -38,6 +38,14 @@ private extension SignInViewController {
                 self?.present(alert, animated: true)
             }
         }
+
+        NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didSignIn, object: nil, queue: nil) { [weak self] _ in
+            DispatchQueue.main.async {
+                let tabBarController = TabBarController()
+                tabBarController.modalPresentationStyle = .fullScreen
+                self?.present(tabBarController, animated: true)
+            }
+        }
     }
 
     func setGitHubSignInButtonAction() {

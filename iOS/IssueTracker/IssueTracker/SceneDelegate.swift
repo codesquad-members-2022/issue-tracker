@@ -28,7 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     self.requestJWTToken(with: data["access_token"] ?? "")
                 case let .failure(error):
                     NotificationCenter.default.post(name: NotificationNames.didGetSignInError, object: error)
-                    return print(error)
                 }
             }
         }
@@ -39,6 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     enum NotificationNames {
         static let didGetSignInError = Notification.Name("SceneDelegateDidGetSignInError")
+        static let didSignIn = Notification.Name("SceneDelegateDidSignIn")
     }
 }
 
@@ -56,8 +56,9 @@ private extension SceneDelegate {
 
         stubURLSession.dataTask(with: url) { (data, _, _) in
             if let data = data,
-               let JSONString = String(data: data, encoding: String.Encoding.utf8) {
-                print(JSONString)
+               let jwtToken = String(data: data, encoding: String.Encoding.utf8) {
+                UserDefaultManager.saveJWTToken(jwtToken)
+                NotificationCenter.default.post(name: NotificationNames.didSignIn, object: self)
             }
         }.resume()
     }
