@@ -8,9 +8,11 @@ export default function TextInput({
   placeholder = '',
   label,
   maxLength,
+  as,
   ...props
 }: TextInputProps) {
   const [visibleLabel, setVisibleLabel] = useState(false);
+  const Input = as || Styled_textInput;
 
   const showLabel = (event: React.ChangeEvent<HTMLInputElement>) => {
     const hasValue = event.target.value.length >= MIN_INPUT_VALUE_LENGTH;
@@ -24,14 +26,14 @@ export default function TextInput({
           {label}
         </Styled_label>
       )}
-      <Styled_textInput
+      <Input
         {...props}
         type="text"
         placeholder={placeholder}
         maxLength={maxLength}
         visibleLabel={visibleLabel}
-        onChange={event => label && showLabel(event)}
-      ></Styled_textInput>
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => label && showLabel(event)}
+      ></Input>
     </Styled_textInputWrap>
   );
 }
