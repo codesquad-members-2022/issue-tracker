@@ -34,6 +34,8 @@
 		5B29A0D828573E410088EC11 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0D728573E410088EC11 /* IssueTrackerTests.swift */; };
 		5B29A0E228573E410088EC11 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0E128573E410088EC11 /* IssueTrackerUITests.swift */; };
 		5B29A0E428573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0E328573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift */; };
+		5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A115285ABF2F0088EC11 /* IssueItem.swift */; };
+		5B29A118285ACACE0088EC11 /* CustomBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A117285ACACE0088EC11 /* CustomBarButton.swift */; };
 		5BE928CF285852C100D237AB /* IssueCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928CE285852C100D237AB /* IssueCollectionView.swift */; };
 		5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */; };
 		5BE928D32858553800D237AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D22858553800D237AB /* TabBarController.swift */; };
@@ -109,6 +111,8 @@
 		5B29A0DD28573E410088EC11 /* IssueTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B29A0E128573E410088EC11 /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
 		5B29A0E328573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5B29A115285ABF2F0088EC11 /* IssueItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueItem.swift; sourceTree = "<group>"; };
+		5B29A117285ACACE0088EC11 /* CustomBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButton.swift; sourceTree = "<group>"; };
 		5BE928CE285852C100D237AB /* IssueCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionView.swift; sourceTree = "<group>"; };
 		5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewCell.swift; sourceTree = "<group>"; };
 		5BE928D22858553800D237AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -218,8 +222,9 @@
 		024F43C52859C976008C4235 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				024F43C62859C986008C4235 /* View */,
 				5BE928DA2859B94A00D237AB /* IssueCollectionViewDataSource.swift */,
+				024F43C62859C986008C4235 /* View */,
+				5B29A114285ABF070088EC11 /* Model */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 				5B29A0C428573E400088EC11 /* IssueViewController.swift */,
 				5BE928CE285852C100D237AB /* IssueCollectionView.swift */,
 				5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */,
+				5B29A117285ACACE0088EC11 /* CustomBarButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +307,14 @@
 				024F43BA2859B7F6008C4235 /* ClientKey.plist */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		5B29A114285ABF070088EC11 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B29A115285ABF2F0088EC11 /* IssueItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		83679A2BB4C553F474D664CC /* Frameworks */ = {
@@ -561,7 +575,11 @@
 			files = (
 				5BE928CF285852C100D237AB /* IssueCollectionView.swift in Sources */,
 				5B29A0C528573E400088EC11 /* IssueViewController.swift in Sources */,
+<<<<<<< HEAD
 				027C7E86285A42B900A5175B /* SignInNetworkTarget.swift in Sources */,
+=======
+				5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */,
+>>>>>>> iOS-#4
 				5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */,
 				5BE928D32858553800D237AB /* TabBarController.swift in Sources */,
 				027C7E84285A3AF300A5175B /* NetworkManager.swift in Sources */,
@@ -569,6 +587,7 @@
 				5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */,
 				024F4391285976C8008C4235 /* SignInViewController.swift in Sources */,
 				024F43BD2859B857008C4235 /* Bundle+Extension.swift in Sources */,
+				5B29A118285ACACE0088EC11 /* CustomBarButton.swift in Sources */,
 				024F43B82859AC88008C4235 /* SignInManager.swift in Sources */,
 				024F438B28596ED3008C4235 /* SignInView.swift in Sources */,
 				024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */,

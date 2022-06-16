@@ -25,11 +25,7 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     private var title: UILabel = {
         let title = UILabel()
         let titleAttributedString = NSMutableAttributedString(string: "제목")
-        let length = titleAttributedString.length
-        titleAttributedString.addAttributes([
-            .foregroundColor: UIColor.black,
-            .font: UIFont(name: "SFProDisplay-Bold", size: 22) ?? UIFont()
-        ], range: NSRange(location: 0, length: length))
+        title.font = UIFont(name: "SFProDisplay-Bold", size: 22)
         title.attributedText = titleAttributedString
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
@@ -37,10 +33,9 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     private var issueDescription: UILabel = {
         let issueDescription = UILabel()
-        let issueDescriptionFont = UIFont(name: "SFProDisplay-Regular", size: 17)
         let issueDescriptionAttributedString = NSMutableAttributedString(string: "마일스톤 이름")
+        issueDescription.font = UIFont(name: "SFProDisplay-Regular", size: 17)
         issueDescription.attributedText = issueDescriptionAttributedString
-        issueDescription.font = issueDescriptionFont
         issueDescription.translatesAutoresizingMaskIntoConstraints = false
         return issueDescription
     }()
@@ -53,20 +48,19 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     private var milestoneName: UILabel = {
         let milestoneName = UILabel()
-        let milestoneNameFont = UIFont(name: "SFProDisplay-Regular", size: 17)
         let milestoneNameAttributedString = NSMutableAttributedString(string: "마일스톤 이름")
         milestoneName.attributedText = milestoneNameAttributedString
-        milestoneName.font = milestoneNameFont
+        milestoneName.font = UIFont(name: "SFProDisplay-Regular", size: 17)
         milestoneName.translatesAutoresizingMaskIntoConstraints = false
         return milestoneName
     }()
     
-    private let labelName: UIButton = {
-        let labelName = UIButton()
-        labelName.setTitle("  레이블이름  ", for: .normal)
-        labelName.setTitleColor(UIColor.white, for: .normal)
-        labelName.backgroundColor = .lightGray
-        labelName.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+    private let labelName: UILabel = {
+        let labelName = UILabel()
+        let labelNameAttributedString = NSMutableAttributedString(string: "레이블이름")
+        labelName.attributedText = labelNameAttributedString
+        labelName.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        labelName.clipsToBounds = true
         labelName.layer.cornerRadius = 10
         labelName.translatesAutoresizingMaskIntoConstraints = false
         return labelName
