@@ -30,9 +30,9 @@ public class IssueListResponsse {
 		this.writer = issue.getWriter();
 		this.writtenTime = issue.getWrittenTime();
 		this.milestone = issue.getMilestone();
-		this.labels = issue.getIssueLabels().stream()
+		this.labels = List.copyOf(issue.getIssueLabels().stream()
 			.map(IssueLabel::getLabel)
-			.collect(Collectors.toList());
+			.collect(Collectors.toList()));
 		this.isClosed = issue.isClosed();
 		this.assignees = List.copyOf(issue.getAssignees());
 	}
