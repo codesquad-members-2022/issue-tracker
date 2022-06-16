@@ -11,6 +11,8 @@ import Alamofire
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    static var accessToken: String? = nil
+    
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -23,14 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool { // 사파리 -> 콜백으로 들어오는 부분
         print(url)
-        if url.absoluteString.starts(with: "issuetracker://login") {
+        if url.absoluteString.starts(with: "issuetracker://login") { // 콜백URL
             if let code = url.absoluteString.split(separator: "=").last.map { String($0) } {
-                print(code)
                 requestAccessToken(with: code)
+                requestIssues()
             }
         }
+       
         return true
     }
     
@@ -46,14 +49,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch response.result {
             case let .success(json):
                 if let dic = json as? [String: String] {
-                    print(dic["access_token"])
-                    print(dic["scope"])
-                    print(dic["token_type"])
+                    AppDelegate.accessToken = dic["access_token"]
                 }
             case let .failure(error):
                 print(error)
             }
         }
+    }
+    
+    private func requestIssues() {
+        let urlString = "https://api.github.com/issues"
+//        guard let urlComponents = URLComponents(string: urlString) else {
+//            return
+//        }
+//        urlComponents.queryItems = [ ] // 쿼리 파라미터
+        guard let accessToken = AppDelegate.accessToken else {
+            return
+        }
+        print("accessToken : \(accessToken)")
+        let headers: HTTPHeaders = [
+            "Accept": "application/vnd.github.v3+json",
+            "Authorization": "token \(accessToken)"
+        ]
+        AF.request(urlString, method: .get, headers: headers)
+            .responseDecodable(of: [Issue].self) { (response) in
+                print("response: \(response)")
+            switch response.result {
+            case let .success(json):
+                print(json)
+            case let .failure(error):
+                print(error)
+            }
+        }
+        
     }
 }
 

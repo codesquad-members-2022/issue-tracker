@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class ViewController: UIViewController {
     
@@ -42,11 +43,19 @@ class ViewController: UIViewController {
     }()
     
     private func requestLogin() {
-        if let url = URL(string: "https://github.com/login/oauth/authorize?client_id=\(PrivateStorage.clientId)") {
-            
+        let scope = "repo,user"
+        let urlString = "https://github.com/login/oauth/authorize"
+        guard var urlComponents = URLComponents(string: urlString) else {
+           return
+        }
+        urlComponents.queryItems = [
+            URLQueryItem(name: "client_id", value: PrivateStorage.clientId),
+            URLQueryItem(name: "scope", value: scope),
+        ]
+        
+        if let url = urlComponents.url {
             UIApplication.shared.open(url) // 새 사파리 창을 열기
         }
     }
-    
 }
 

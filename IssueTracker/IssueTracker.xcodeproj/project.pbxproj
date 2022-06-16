@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		0053D7552859B162006614EC /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0053D7542859B162006614EC /* Config.plist */; };
 		0053D7572859B4CA006614EC /* PrivateStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053D7562859B4CA006614EC /* PrivateStorage.swift */; };
+		00BCB406285B01AA005E87BC /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB405285B01AA005E87BC /* Issue.swift */; };
+		00BCB408285B0262005E87BC /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB407285B0262005E87BC /* Label.swift */; };
+		00BCB40A285B027B005E87BC /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB409285B027B005E87BC /* Milestone.swift */; };
+		00BCB40C285B076B005E87BC /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB40B285B076B005E87BC /* State.swift */; };
+		00BCB40E285B08BE005E87BC /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCB40D285B08BE005E87BC /* IssueListViewController.swift */; };
 		988510D628572B8700CC2DA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988510D528572B8700CC2DA9 /* AppDelegate.swift */; };
 		988510DA28572B8700CC2DA9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988510D928572B8700CC2DA9 /* ViewController.swift */; };
 		988510DF28572B8900CC2DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 988510DE28572B8900CC2DA9 /* Assets.xcassets */; };
@@ -40,6 +45,11 @@
 /* Begin PBXFileReference section */
 		0053D7542859B162006614EC /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		0053D7562859B4CA006614EC /* PrivateStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateStorage.swift; sourceTree = "<group>"; };
+		00BCB405285B01AA005E87BC /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		00BCB407285B0262005E87BC /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		00BCB409285B027B005E87BC /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
+		00BCB40B285B076B005E87BC /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		00BCB40D285B08BE005E87BC /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		988510D228572B8700CC2DA9 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		988510D528572B8700CC2DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		988510D928572B8700CC2DA9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +120,11 @@
 				988510E028572B8900CC2DA9 /* LaunchScreen.storyboard */,
 				988510E328572B8900CC2DA9 /* Info.plist */,
 				0053D7542859B162006614EC /* Config.plist */,
+				00BCB405285B01AA005E87BC /* Issue.swift */,
+				00BCB407285B0262005E87BC /* Label.swift */,
+				00BCB409285B027B005E87BC /* Milestone.swift */,
+				00BCB40B285B076B005E87BC /* State.swift */,
+				00BCB40D285B08BE005E87BC /* IssueListViewController.swift */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -270,9 +285,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00BCB40A285B027B005E87BC /* Milestone.swift in Sources */,
 				988510DA28572B8700CC2DA9 /* ViewController.swift in Sources */,
 				988510D628572B8700CC2DA9 /* AppDelegate.swift in Sources */,
 				0053D7572859B4CA006614EC /* PrivateStorage.swift in Sources */,
+				00BCB40E285B08BE005E87BC /* IssueListViewController.swift in Sources */,
+				00BCB408285B0262005E87BC /* Label.swift in Sources */,
+				00BCB40C285B076B005E87BC /* State.swift in Sources */,
+				00BCB406285B01AA005E87BC /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
