@@ -37,6 +37,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
+    "polished": "^4.2.2",
     "react-query": "^3.39.1",
     "sass": "^1.52.3",
     "sass-loader": "^13.0.0",
