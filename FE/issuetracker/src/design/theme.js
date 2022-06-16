@@ -15,7 +15,7 @@ const fontColors = {
   gray2: '#6E7191',
   gray3: '#4E4B66',
   gray4: '#A0A3BD',
-  gray5: '14142B',
+  gray5: '#14142B',
   blue: ' #007AFF',
   purple: '#0025E7',
   red: '#FF3B30',
