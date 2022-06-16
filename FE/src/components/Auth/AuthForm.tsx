@@ -19,7 +19,7 @@ const AuthForm = () => {
             info={{
               id: 'email',
               type: 'text',
-              placeHolder: '아이디',
+              placeholder: '아이디',
             }}
           />
           <InputWithRef
@@ -28,7 +28,7 @@ const AuthForm = () => {
             info={{
               id: 'password',
               type: 'text',
-              placeHolder: '비밀번호',
+              placeholder: '비밀번호',
             }}
           />
           <button className={styles.login_button}>아이디로 로그인</button>
