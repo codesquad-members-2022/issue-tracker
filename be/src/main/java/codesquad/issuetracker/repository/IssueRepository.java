@@ -44,7 +44,7 @@ public class IssueRepository {
             .leftJoin(issue.mileStone, mileStone)
             .leftJoin(issue.assignees, assignee)
             .leftJoin(issue.replies, reply)
-            .join(issue.issueLabels, issueLabel)
+            .leftJoin(issue.issueLabels, issueLabel)
             .where(statusEq(condition.getStatus()),
                 writerIdEq(condition.getWriterId()),
                 mileStoneIdEq(condition.getMilestoneId()),
