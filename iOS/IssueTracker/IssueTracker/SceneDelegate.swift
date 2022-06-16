@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let rootVC = SignInViewController()
+        let rootVC = selectRootViewController()
         self.window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
@@ -61,5 +61,10 @@ private extension SceneDelegate {
                 NotificationCenter.default.post(name: NotificationNames.didSignIn, object: self)
             }
         }.resume()
+    }
+
+    func selectRootViewController() -> UIViewController {
+        return UserDefaultManager.isSavedJWTToken() ?
+        TabBarController() : SignInViewController()
     }
 }
