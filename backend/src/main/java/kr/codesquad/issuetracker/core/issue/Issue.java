@@ -9,12 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import kr.codesquad.issuetracker.common.BaseTimeEntity;
 import kr.codesquad.issuetracker.core.label.Label;
 import kr.codesquad.issuetracker.core.milestone.Milestone;
 import kr.codesquad.issuetracker.core.user.User;
 
 @Entity
-public class Issue {
+public class Issue extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +25,6 @@ public class Issue {
     private User user;
     @Column(name = "open_yn")
     private boolean isOpen;
-    @Column(name = "createdAt")
-    private LocalDateTime createdAt;
     @ManyToOne
     private Milestone milestone;
     @OneToMany(mappedBy = "issue")
