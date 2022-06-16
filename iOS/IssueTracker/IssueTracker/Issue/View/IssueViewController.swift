@@ -10,12 +10,13 @@ import UIKit
 class IssueViewController: UIViewController {
     
     private lazy var issueCollectionView = IssueCollectionView(frame: view.frame)
+    private var dataSource = IssueCollectionViewDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createNavigationBarButton()
         self.view = issueCollectionView
-        
+        issueCollectionView.setDataSource(dataSource)
     }
     
     private func createNavigationBarButton() {
