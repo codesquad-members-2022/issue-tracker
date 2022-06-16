@@ -1,5 +1,6 @@
 package codesquad.issuetracker.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
@@ -48,12 +49,11 @@ public class Issue {
     @OneToMany(mappedBy = "issue")
     private List<Reply> replies = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "issue_label",
-        joinColumns = @JoinColumn(name="issue_id"),
-        inverseJoinColumns = @JoinColumn(name="label_id")
-    )
-    private List<Label> labels = new ArrayList<>();
+    @OneToMany(mappedBy = "issue")
+    private List<Assignee> assignees = new ArrayList<>();
+
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
+    private List<IssueLabel> issueLabels = new ArrayList<>();
 
     private String subject;
     private String description;

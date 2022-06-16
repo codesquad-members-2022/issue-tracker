@@ -9,9 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -44,11 +41,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Reply> replies = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "assignee",
-        joinColumns = @JoinColumn(name="member_id"),
-        inverseJoinColumns = @JoinColumn(name="issue_id")
-    )
-    private List<Issue> labels = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<Assignee> assignees = new ArrayList<>();
 
 }
