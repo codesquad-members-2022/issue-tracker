@@ -1,5 +1,13 @@
+import React from "react";
+
+import Input from "components/common/Input";
+
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <Input />
+    </div>
+  );
 }
 
 export default App;

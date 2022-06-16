@@ -1,74 +1,27 @@
 module.exports = {
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    node: true,
-  },
-  settings: {
-    "import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-      },
-      typescript: {
-        alwaysTryTypes: true,
-      },
-    },
-    react: {
-      version: "detect",
-    },
-  },
   parser: "@typescript-eslint/parser",
-  parserOptions: {
-    sourceType: "module",
-    project: "./tsconfig.json",
-    tsconfigRootDir: __dirname,
-  },
-  plugins: ["react-hooks", "react", "@typescript-eslint", "import", "prettier"],
+  plugins: ["@typescript-eslint", "prettier"],
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:import/typescript",
-    "plugin:import/recommended",
+    "airbnb",
+    "plugin:import/errors",
+    "plugin:import/warnings",
     "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
   ],
   rules: {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/no-var-requires": 0,
-    "import/no-unresolved": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        endOfLine: "auto",
-      },
-    ],
-    // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md 참조
-    "import/order": [
-      "error",
-      {
-        groups: ["builtin", "external", "internal", ["parent", "sibling"], "index", "object", "type"],
-        pathGroups: [
-          {
-            pattern: "react",
-            group: "builtin",
-            position: "before",
-          },
-          {
-            pattern: "@*/**",
-            group: "internal",
-            position: "after",
-          },
-        ],
-        "newlines-between": "always",
-        alphabetize: { order: "asc", caseInsensitive: true },
-        warnOnUnassignedImports: true,
-        pathGroupsExcludedImportTypes: [],
-      },
-    ],
+    "linebreak-style": 0,
+    "import/prefer-default-export": 0,
+    "prettier/prettier": 0,
+    "import/extensions": 0,
+    "no-use-before-define": 0,
+    "import/no-unresolved": 0,
+    "import/no-extraneous-dependencies": 0,
+    // 테스트 또는 개발환경을 구성하는 파일에서는 devDependency 사용을 허용
+    "no-shadow": 0,
+    "react/prop-types": 0,
+    "react/jsx-filename-extension": [2, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "react/function-component-definition": 0,
+    "react/jsx-props-no-spreading": 0,
   },
 };
