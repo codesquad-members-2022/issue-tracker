@@ -33,6 +33,7 @@
 		5B29A0E228573E410088EC11 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0E128573E410088EC11 /* IssueTrackerUITests.swift */; };
 		5B29A0E428573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0E328573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift */; };
 		5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A115285ABF2F0088EC11 /* IssueItem.swift */; };
+		5B29A118285ACACE0088EC11 /* CustomBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A117285ACACE0088EC11 /* CustomBarButton.swift */; };
 		5BE928CF285852C100D237AB /* IssueCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928CE285852C100D237AB /* IssueCollectionView.swift */; };
 		5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */; };
 		5BE928D32858553800D237AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D22858553800D237AB /* TabBarController.swift */; };
@@ -107,6 +108,7 @@
 		5B29A0E128573E410088EC11 /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
 		5B29A0E328573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5B29A115285ABF2F0088EC11 /* IssueItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueItem.swift; sourceTree = "<group>"; };
+		5B29A117285ACACE0088EC11 /* CustomBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButton.swift; sourceTree = "<group>"; };
 		5BE928CE285852C100D237AB /* IssueCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionView.swift; sourceTree = "<group>"; };
 		5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewCell.swift; sourceTree = "<group>"; };
 		5BE928D22858553800D237AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				5B29A0C428573E400088EC11 /* IssueViewController.swift */,
 				5BE928CE285852C100D237AB /* IssueCollectionView.swift */,
 				5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */,
+				5B29A117285ACACE0088EC11 /* CustomBarButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */,
 				024F4391285976C8008C4235 /* SignInViewController.swift in Sources */,
 				024F43BD2859B857008C4235 /* Bundle+Extension.swift in Sources */,
+				5B29A118285ACACE0088EC11 /* CustomBarButton.swift in Sources */,
 				024F43B82859AC88008C4235 /* SignInManager.swift in Sources */,
 				024F438B28596ED3008C4235 /* SignInView.swift in Sources */,
 				024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */,

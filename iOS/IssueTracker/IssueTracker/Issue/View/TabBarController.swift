@@ -9,11 +9,6 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
-    let issueViewController = IssueViewController()
-    let labelViewController = LabelViewController()
-    let milestoneViewController = MilestoneViewController()
-    let myAccountViewController = MyAccountViewController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBarItems()
@@ -24,6 +19,10 @@ class TabBarController: UITabBarController {
 private extension TabBarController {
     
     func setTabBarItems() {
+        let issueViewController = IssueViewController()
+        let labelViewController = LabelViewController()
+        let milestoneViewController = MilestoneViewController()
+        let myAccountViewController = MyAccountViewController()
         let navigationViewController = UINavigationController(rootViewController: issueViewController)
         
         navigationViewController.tabBarItem = UITabBarItem(title: "이슈", image: UIImage(named: "alertcircle"), tag: 0)
