@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">issue-tracker</string>
+    <string name="hello_sing_up_fragment">Hello sing up fragment</string>
+    <string name="main_text">회원가입</string>
+    <string name="id">아이디</string>
+    <string name="id_hint">이메일을 입력해주세요.</string>
+    <string name="password">비밀번호</string>
+    <string name="password_recheck">비밀번호 재확인</string>
+    <string name="name">이름</string>
+    <string name="next">다음</string>
+    <string name="user_email_id">아이디</string>
+    <string name="email_password">비밀번호</string>
+    <string name="sign_in">로그인</string>
+    <string name="sign_up">회원가입</string>
+    <string name="issue_tracker">issue_tracker</string>
+    <string name="title_activity_issue">IssueActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_title_issue">이슈</string>
+    <string name="menu_title_label">레이블</string>
+    <string name="menu_title_milestone">마일스톤</string>
+    <string name="menu_title_my_account">내 계정</string>
+    <string name="label_btn_issue_filter">btn_issue_filter</string>
+    <string name="label_issue">이슈</string>
+    <string name="label_issue_search">issue_search</string>
+    <string name="labellist_title">레이블</string>
+    <string name="add_new_label_title">새로운 레이블</string>
+</resources>

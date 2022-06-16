@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_btn_issue_filter">btn_issue_filter</string>
+    <string name="label_issue">이슈</string>
+    <string name="label_issue_search">issue_search</string>
+</resources>
