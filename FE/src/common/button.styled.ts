@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import { BtnBase } from './util.styled';
 
 const handleWidthType = (size: string): string => {
@@ -28,24 +28,40 @@ const handleHeightType = (size: string): string => {
   }
 };
 
-const handleBorderRadiusType = (size: string): string => {
+const handleBorderRadiusType = css<{ size: string }>`
+  ${({ size }) =>
+    size === 'sm' &&
+    css`
+      width: 340px;
+      height: 40px;
+    `}
+  ${({ size }) =>
+    size === 'md' &&
+    css`
+      width: 600px;
+      height: 40px;
+      border-radius: 24px;
+    `}
+`;
+
+/* const handleBorderRadiusTypes = (size: string): string  => {
   switch (size) {
     case 'sm':
       return '11px';
     case 'md':
       return '20px';
     case 'lg':
-      return '20px';
+      return '24px';
     default:
-      return '';
+      return ;
   }
-};
+}; */
 
-export const CustomBtn = styled(NavLink)<{ size: string }>`
+export const CustomBtn = styled(Link)<{ size: string }>`
   ${BtnBase};
   width: ${({ size }) => handleWidthType(size)};
   height: ${({ size }) => handleHeightType(size)};
-  border-radius: ${({ size }) => handleBorderRadiusType(size)};
   color: ${({ theme: { colors } }) => colors.offWhite};
   background-color: ${({ theme: { colors } }) => colors.primary};
+  ${handleBorderRadiusType}
 `;
