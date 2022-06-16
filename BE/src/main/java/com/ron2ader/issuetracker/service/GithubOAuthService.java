@@ -1,5 +1,6 @@
 package com.ron2ader.issuetracker.service;
 
+import com.ron2ader.issuetracker.auth.github.GithubProperties;
 import com.ron2ader.issuetracker.auth.github.GithubToken;
 import com.ron2ader.issuetracker.auth.github.GithubTokenRequest;
 import com.ron2ader.issuetracker.auth.github.GithubUserInfo;
@@ -11,21 +12,19 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 @RequiredArgsConstructor
-public class githubOAuthService {
+public class GithubOAuthService {
 
     public static final String ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     private final WebClient webClient;
-    private String clientId;
-    private String clientSecret;
-
+    private final GithubProperties githubProperties;
 
     public GithubToken requestAccessToken(String code) {
         return webClient.post()
             .uri(ACCESS_TOKEN_URL)
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .bodyValue(
-                GithubTokenRequest.of(clientId, clientSecret, code)
+                GithubTokenRequest.of(githubProperties.getClientId(), githubProperties.getClientSecret(), code)
             )
+            .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .bodyToMono(GithubToken.class)
             .block();
@@ -35,6 +34,7 @@ public class githubOAuthService {
         return webClient.get()
             .uri("/user")
             .header(HttpHeaders.AUTHORIZATION, githubToken.toHeader())
+            .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .bodyToMono(GithubUserInfo.class)
             .block();

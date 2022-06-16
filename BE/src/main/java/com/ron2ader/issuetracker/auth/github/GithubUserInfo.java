@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class GithubUserInfo {
 
-    @JsonProperty("user_id")
+    @JsonProperty("login")
     private String userId;
     @JsonProperty("avatar_url")
     private String avatarUrl;

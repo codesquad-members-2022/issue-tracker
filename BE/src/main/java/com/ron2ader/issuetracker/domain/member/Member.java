@@ -24,4 +24,13 @@ public class Member extends BaseEntity {
     public static Member of(String memberId, String avatarUrl) {
         return new Member(null, memberId, avatarUrl);
     }
+
+    public Member update(Member member) {
+        if (member.getMemberId() != null && member.getAvatarUrl() != null) {
+            this.memberId = member.getMemberId();
+            this.avatarUrl = member.getAvatarUrl();
+        }
+
+        return this;
+    }
 }
