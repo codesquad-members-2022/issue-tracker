@@ -7,7 +7,10 @@ function IssueList() {
     <S.IssueListWrap>
       <S.IssueListTop>
         <S.FilterBar>
-          <S.Filter>필터</S.Filter>
+          <S.Filter>
+            필터
+            <I.dropdownArrow />
+          </S.Filter>
           <S.SearchBar placeholder="is:issue is:open" />
         </S.FilterBar>
         <S.IssueListTopRight>

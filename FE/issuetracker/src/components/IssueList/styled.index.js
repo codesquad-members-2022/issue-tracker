@@ -25,6 +25,7 @@ export const Filter = styled.button`
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   ${({ theme }) => theme.fontStyles.linkSmall}
   color: ${({ theme }) => theme.fontColors.gray2};
+  gap: 42px;
 `;
 export const SearchBar = styled.input`
   ${mixin.flexbox({ vertical: 'center' })};
