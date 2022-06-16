@@ -14,8 +14,8 @@ class CustomToolbar(
     attrs: AttributeSet?,
 ) : Toolbar(context, attrs) {
 
-    private lateinit var firstActionItem: MenuItem
-    private lateinit var secondActionItem: MenuItem
+    lateinit var firstActionItem: MenuItem
+    lateinit var secondActionItem: MenuItem
 
     private var toolbarTitle: Int
     private var toolbarNavigationIcon: Drawable? = null

@@ -11,4 +11,9 @@
     <string name="toolbar_title_filter">필터</string>
     <string name="toolbar_action_reset">초기화</string>
     <string name="toolbar_action_apply">적용</string>
+    <string name="condition_value_default">선택</string>
+    <string name="condition_title_state">상태</string>
+    <string name="condition_title_writer">작성자</string>
+    <string name="condition_title_label">레이블</string>
+    <string name="condition_title_mile_stone">마일스톤</string>
 </resources>

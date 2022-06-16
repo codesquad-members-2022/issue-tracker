@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
+import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.databinding.FragmentIssueBinding
 import com.example.issu_tracker.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +29,9 @@ class IssueFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
+
+        val conditions = arguments?.getParcelable<FilterCondition>("filterCondition")
+        println(conditions)
 
         settingRecyclerview()
         updateRecyclerview()

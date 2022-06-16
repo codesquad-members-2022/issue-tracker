@@ -33,5 +33,9 @@
         android:id="@+id/filterFragment"
         android:name="com.example.issu_tracker.filter.FilterFragment"
         android:label="fragment_filter"
-        tools:layout="@layout/fragment_filter" />
+        tools:layout="@layout/fragment_filter" >
+        <action
+            android:id="@+id/action_filterFragment_to_issueFragment2"
+            app:destination="@id/issueFragment2" />
+    </fragment>
 </navigation>
