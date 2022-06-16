@@ -54,7 +54,6 @@ final class IssueViewController: UIViewController {
     private func setupViews() {
         self.view.backgroundColor = .white
         
-        collectionView.backgroundColor = .blue
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(self.view)
@@ -95,9 +94,8 @@ extension IssueViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueListCell", for: indexPath) as? IssueListCell else {
             return UICollectionViewCell()
         }
-        cell.backgroundColor = .orange
         let data = dummy[indexPath.row]
-        cell.updateViews(title: data.title, description: data.description, milestone: data.milestone, label: data.label)
+        cell.updateViews(title: data.title, description: data.description, milestone: data.milestone, labelName: data.label)
         return cell
     }
 }
@@ -109,7 +107,7 @@ extension IssueViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-class IssueListCell: UICollectionViewCell {
+final class IssueListCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -120,15 +118,15 @@ class IssueListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateViews(title: String, description: String, milestone: String, label: String) {
+    func updateViews(title: String, description: String, milestone: String, labelName: String) {
         self.titleLabel.text = title
         self.descriptionLabel.text = description
         self.milestoneLabel.text = milestone
-        self.labelNameButton.titleLabel?.text = label
+        self.labelNameView.updateView(title: labelName)
     }
     
     private func setupViews() {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel, milestoneLabel, labelNameButton])
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel, milestoneLabel, labelNameView])
         stackView.alignment = .leading
         stackView.spacing = 16
         stackView.distribution = .equalSpacing
@@ -137,6 +135,16 @@ class IssueListCell: UICollectionViewCell {
         self.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.edges.equalTo(self).inset(UIEdgeInsets(top: 24, left: Margins.side, bottom: 24, right: Margins.side))
+        }
+        
+        let bottomLine = UIView()
+        bottomLine.backgroundColor = .systemGray5
+        self.addSubview(bottomLine)
+        bottomLine.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.left.equalTo(self)
+            make.right.equalTo(self)
+            make.bottom.equalTo(self)
         }
     }
     
@@ -161,12 +169,43 @@ class IssueListCell: UICollectionViewCell {
         return label
     }()
     
-    private let labelNameButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.buttonSize = .medium
-        configuration.cornerStyle = .capsule
-        configuration.title = "label name"
-        let button = UIButton(configuration: configuration, primaryAction: nil)
-        return button
+    private let labelNameView: CapsuleTextView = {
+        let view = CapsuleTextView(title: "label")
+        return view
+    }()
+}
+
+
+final class CapsuleTextView: UIView {
+    
+    convenience init(title: String) {
+        self.init(frame: .zero)
+        self.backgroundColor = .systemYellow
+        titleLabel.text = title
+        setupViews()
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        layer.cornerRadius = rect.height * 0.5
+        clipsToBounds = true
+    }
+    
+    func updateView(title: String) {
+        self.titleLabel.text = title
+    }
+    
+    private func setupViews() {
+        addSubview(titleLabel)
+        self.snp.makeConstraints { make in
+            make.edges.equalTo(titleLabel).inset(UIEdgeInsets(top: -4, left: -6, bottom: -4, right: -6))
+        }
+    }
+    
+    private let titleLabel: UILabel = {
+       let label = UILabel()
+        label.text = "label"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 }
