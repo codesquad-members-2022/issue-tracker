@@ -26,9 +26,9 @@ final class IssueCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 5
         flowLayout.estimatedItemSize = CGSize(width: 350, height: 240)
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         flowLayout.headerReferenceSize = .init(width: UIScreen.main.bounds.width, height: 41)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true
