@@ -25,6 +25,7 @@ function IssueSidebar() {
           <S.barHeaderText>레이블</S.barHeaderText>
           <I.plus />
         </S.barHeader>
+        <S.label>documentation</S.label>
       </S.labelBar>
       <S.milestoneBar>
         <S.barHeader>
