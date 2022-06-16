@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         android:padding="15dp">
 
         <ImageView
@@ -36,6 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:layout_marginTop="7dp"
             android:id="@+id/tv_issue_item_title"
             style="@style/HeadLine6.20.bold"
             android:layout_width="wrap_content"
@@ -46,6 +47,7 @@
             tools:text="@string/milestone" />
 
         <TextView
+            android:layout_marginTop="7dp"
             android:id="@+id/tv_issue_item_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,16 +56,14 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_title"
             tools:text="@string/temp_string_long" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            labelList="@{issue.labels}"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_rectangle_background"
-            android:text="@{issue.label.get(0)}"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_description"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/view_issue_item"
-            tools:text="document" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_description" />
 
         <View
             android:id="@+id/view_issue_item"

@@ -2,6 +2,7 @@ package com.example.issu_tracker.data.repository
 
 import com.example.issu_tracker.data.Comment
 import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.Label
 import com.example.issu_tracker.data.User
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -35,9 +36,18 @@ fun DocumentSnapshot.documentDataToIssue(): Issue? {
             commentList.add(Comment(user, it["content"] as String, it["time"] as String))
         }
 
+        val labelList = mutableListOf<Label>()
+        val labels = this["label"] as List<Map<String, String>>
+        labels.forEach { map ->
+            if (map["color"] != null && map["content"] != null) {
+                labelList.add(Label(map["color"]!!, map["content"]!!))
+            }
+        }
+
+
         return Issue(
             this["mileStone"] as String,
-            this["label"] as List<String>,
+            labelList,
             this["title"] as String,
             this["description"] as String,
             user,

@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
 
@@ -21,13 +20,10 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         viewModelScope.launch {
             getIssueList()
         }
-
     }
 
     suspend fun getIssueList() {
         val issueDummyData = repository.loadIssues()
         _issueList.value = issueDummyData
     }
-
-
 }
