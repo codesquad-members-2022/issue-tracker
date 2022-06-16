@@ -12,7 +12,7 @@ class ListingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureSearchController()
+        configureObserver()
         configureNavigationBar()
     }
     
@@ -21,7 +21,6 @@ class ListingViewController: UIViewController {
         searchController.searchBar.placeholder = "Search"
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
-        
         searchController.searchBar.showsCancelButton = false
         searchController.hidesNavigationBarDuringPresentation = false
         
@@ -35,6 +34,16 @@ class ListingViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         self.navigationItem.title = "PR"
+    }
+    
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(forName: .TableViewDidReload,
+                                                           object: nil,
+                                                           queue: .main) { _ in
+            DispatchQueue.main.async {
+                self.configureSearchController()
+            }
+        }
     }
 }
 

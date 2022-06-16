@@ -8,9 +8,18 @@
 import UIKit
 
 class ListingTableViewController: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func didPullToRefresh() {
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+            NotificationCenter.default.post(name: .TableViewDidReload, object: nil)
+        }
     }
 
     // MARK: - Table view data source

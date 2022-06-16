@@ -58,6 +58,8 @@
 		D0E98CD4285B088A0051413E /* ListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CD2285B088A0051413E /* ListingTableViewController.swift */; };
 		D0E98CDB285BAEE90051413E /* CustomBarButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDA285BAEE80051413E /* CustomBarButton .swift */; };
 		D0E98CDC285BAEE90051413E /* CustomBarButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDA285BAEE80051413E /* CustomBarButton .swift */; };
+		D0E98CDE285BC5A70051413E /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */; };
+		D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +110,7 @@
 		D0E98CCF285B05000051413E /* LabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelView.xib; sourceTree = "<group>"; };
 		D0E98CD2285B088A0051413E /* ListingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableViewController.swift; sourceTree = "<group>"; };
 		D0E98CDA285BAEE80051413E /* CustomBarButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomBarButton .swift"; sourceTree = "<group>"; };
+		D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,7 @@
 				D04099DB2859C6930008B517 /* Observable.swift */,
 				BC9709412859C88100E54F93 /* Logger.swift */,
 				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
+				D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -507,6 +511,7 @@
 				BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
 				BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */,
+				D0E98CDE285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57C0C285705220059E61D /* LoginView.swift in Sources */,
 				D04099DC2859C6930008B517 /* Observable.swift in Sources */,
 				D0E98CD3285B088A0051413E /* ListingTableViewController.swift in Sources */,
@@ -549,6 +554,7 @@
 				BC97093F2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
+				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57BFE285704F40059E61D /* ListingViewModel.swift in Sources */,
 				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
 				D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */,
