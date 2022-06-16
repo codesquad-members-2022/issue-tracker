@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1DE61695C83CB1A5484B159C /* Pods_PRTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F85B983D296BEA49342F0 /* Pods_PRTrackerTests.framework */; };
-		BC2F5963285AE4040012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
-		BC2F5964285AE5970012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
 		BC97093B2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093C2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */; };
@@ -50,6 +48,14 @@
 		D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D12859C08B0008B517 /* ListingViewController.swift */; };
 		D04099E72859DA630008B517 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC1285701FB0059E61D /* AppDelegate.swift */; };
 		D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC3285701FB0059E61D /* SceneDelegate.swift */; };
+		D0E98CC3285AF7AD0051413E /* cutsom-env-variable.sh in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */; };
+		D0E98CC4285AF7AD0051413E /* cutsom-env-variable.sh in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */; };
+		D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
+		D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
+		D0E98CD0285B05000051413E /* LabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CCF285B05000051413E /* LabelView.xib */; };
+		D0E98CD1285B05000051413E /* LabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CCF285B05000051413E /* LabelView.xib */; };
+		D0E98CD3285B088A0051413E /* ListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CD2285B088A0051413E /* ListingTableViewController.swift */; };
+		D0E98CD4285B088A0051413E /* ListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CD2285B088A0051413E /* ListingTableViewController.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +76,6 @@
 		79EDD15A918B4109D48FA1B6 /* Pods-PRTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTracker.debug.xcconfig"; path = "Target Support Files/Pods-PRTracker/Pods-PRTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		A6AE00453ECCCA10D6CD0525 /* Pods-PRTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B82F1307FAF9E5A90C63CAFE /* Pods-PRTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
-		BC2F5962285AE4040012D18C /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
 		BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManger.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -96,6 +101,10 @@
 		D04099DB2859C6930008B517 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D04099DD2859C9320008B517 /* PRTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTableCellViewModel.swift; sourceTree = "<group>"; };
 		D04099DF2859C9400008B517 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
+		D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "cutsom-env-variable.sh"; path = "../../../Downloads/cutsom-env-variable.sh"; sourceTree = "<group>"; };
+		D0E98CC5285AF81C0051413E /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		D0E98CCF285B05000051413E /* LabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelView.xib; sourceTree = "<group>"; };
+		D0E98CD2285B088A0051413E /* ListingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +158,7 @@
 		BCF57BB5285701FB0059E61D = {
 			isa = PBXGroup;
 			children = (
+				D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */,
 				BCF57BC0285701FB0059E61D /* PRTracker */,
 				BCF57BD7285701FD0059E61D /* PRTrackerTests */,
 				BCF57BBF285701FB0059E61D /* Products */,
@@ -208,10 +218,10 @@
 		BCF57BF3285703C90059E61D /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				BC2F5962285AE4040012D18C /* Secrets.swift */,
 				BCF57BCF285701FC0059E61D /* Info.plist */,
 				BCF57BC1285701FB0059E61D /* AppDelegate.swift */,
 				BCF57BC3285701FB0059E61D /* SceneDelegate.swift */,
+				D0E98CC5285AF81C0051413E /* Secrets.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -285,8 +295,10 @@
 		BCF57BFB285704D30059E61D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D0E98CCF285B05000051413E /* LabelView.xib */,
 				BCF57C022857050A0059E61D /* ListingTableView.swift */,
 				D04099D12859C08B0008B517 /* ListingViewController.swift */,
+				D0E98CD2285B088A0051413E /* ListingTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -386,8 +398,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCF57BCE285701FC0059E61D /* LaunchScreen.storyboard in Resources */,
+				D0E98CD0285B05000051413E /* LabelView.xib in Resources */,
 				BCF57BCB285701FC0059E61D /* Assets.xcassets in Resources */,
 				BCF57BC9285701FB0059E61D /* Main.storyboard in Resources */,
+				D0E98CC3285AF7AD0051413E /* cutsom-env-variable.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +409,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E98CC4285AF7AD0051413E /* cutsom-env-variable.sh in Resources */,
+				D0E98CD1285B05000051413E /* LabelView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC2F5963285AE4040012D18C /* Secrets.swift in Sources */,
+				D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */,
 				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
 				BCF57C06285705130059E61D /* OAuthManger.swift in Sources */,
 				BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
@@ -496,6 +512,7 @@
 				BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */,
 				BCF57C0C285705220059E61D /* LoginView.swift in Sources */,
 				D04099DC2859C6930008B517 /* Observable.swift in Sources */,
+				D0E98CD3285B088A0051413E /* ListingTableViewController.swift in Sources */,
 				BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */,
 				BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */,
 				D04099DA2859C34A0008B517 /* ReplaceRootSegue.swift in Sources */,
@@ -527,6 +544,7 @@
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PRTableCellViewModel.swift in Sources */,
+				D0E98CD4285B088A0051413E /* ListingTableViewController.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
@@ -535,7 +553,7 @@
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BFE285704F40059E61D /* ListingViewModel.swift in Sources */,
 				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
-				BC2F5964285AE5970012D18C /* Secrets.swift in Sources */,
+				D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
