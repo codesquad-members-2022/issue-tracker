@@ -95,6 +95,8 @@ const smallSecondary = css`
   height: 40px;
   color: ${({ theme }) => theme.COLOR.primary.initial};
   background: ${({ theme }) => theme.PALETTE.WHITE};
+  font-size: ${({ theme }) => `${theme.FONT.SIZE.X_SMALL}`};
+  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
   border: 2px solid ${({ theme }) => theme.COLOR.primary.initial};
   border-radius: 11px;
   svg > path {
@@ -107,6 +109,8 @@ const mediumText = css`
   width: 87px;
   height: 32px;
   color: ${({ theme }) => theme.COLOR.label};
+  font-size: ${({ theme }) => `${theme.FONT.SIZE.BASE}`};
+  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
   svg > path {
     stroke: ${({ theme }) => theme.COLOR.label};
   }
@@ -117,6 +121,8 @@ const smallText = css`
   width: 70px;
   height: 32px;
   color: ${({ theme }) => theme.COLOR.label};
+  font-size: ${({ theme }) => `${theme.FONT.SIZE.X_SMALL}`};
+  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
   svg > path {
     stroke: ${({ theme }) => theme.COLOR.label};
   }
