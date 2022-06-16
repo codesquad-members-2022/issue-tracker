@@ -8,10 +8,22 @@
 import UIKit
 import Alamofire
 
+struct GithubUserDefaults {
+
+    private static let key = "github_access_token"
+
+    static func setToken(uid: String) {
+        UserDefaults.standard.set(uid, forKey: key)
+    }
+
+    static func getToken() -> String? {
+        return UserDefaults.standard.string(forKey: self.key) ?? nil
+    }
+}
+
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    static var accessToken: String? = nil
     
     var window: UIWindow?
     
@@ -48,8 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AF.request(url, method: .post, parameters: parameters, headers: headers).responseDecodable(of: [String: String].self) { (response) in
             switch response.result {
             case let .success(json):
-                if let dic = json as? [String: String] {
-                    AppDelegate.accessToken = dic["access_token"]
+                if let dic = json as? [String: String],
+                   let accessToken = dic["access_token"] {
+                    GithubUserDefaults.setToken(uid: accessToken)
                 }
             case let .failure(error):
                 print(error)
@@ -59,11 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func requestIssues() {
         let urlString = "https://api.github.com/issues"
-//        guard let urlComponents = URLComponents(string: urlString) else {
-//            return
-//        }
-//        urlComponents.queryItems = [ ] // 쿼리 파라미터
-        guard let accessToken = AppDelegate.accessToken else {
+
+        guard let accessToken = GithubUserDefaults.getToken() else {
             return
         }
         print("accessToken : \(accessToken)")
