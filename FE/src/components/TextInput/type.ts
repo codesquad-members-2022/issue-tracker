@@ -1,6 +1,6 @@
-type StyleType = 'large' | 'medium' | 'small';
+import { Status } from '@/constants/message';
 
-type Status = 'right' | 'error';
+type StyleType = 'large' | 'medium' | 'small';
 
 interface IStyleProps {
   status?: Status;
