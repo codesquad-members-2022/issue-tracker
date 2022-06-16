@@ -13,7 +13,7 @@ import team24.issuetracker.domain.Milestone;
 import team24.issuetracker.domain.User;
 
 @Getter
-public class IssueListResponsse {
+public class IssueListResponse {
 
 	private final Long id;
 	private final String title;
@@ -24,7 +24,7 @@ public class IssueListResponsse {
 	private final boolean isClosed;
 	private final List<Assignee> assignees;
 
-	public IssueListResponsse(Issue issue) {
+	public IssueListResponse(Issue issue) {
 		this.id = issue.getId();
 		this.title = issue.getTitle();
 		this.writer = issue.getWriter();
