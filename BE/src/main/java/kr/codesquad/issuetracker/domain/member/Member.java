@@ -9,19 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import kr.codesquad.issuetracker.auth.dto.AccessTokenResponseDto;
-import kr.codesquad.issuetracker.auth.dto.UserProfile;
 import kr.codesquad.issuetracker.domain.comment.Comment;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "members")
 public class Member {
@@ -34,20 +23,10 @@ public class Member {
 
 	private String email;
 
-	private String imageUrl;
+	private String githubId;
 
-	private String token;
+	private String imageUrl;
 
 	@OneToMany(mappedBy = "member")
 	private List<Comment> comments = new ArrayList<>();
-
-	public static Member createMember(UserProfile userInfo, String token) {
-		return Member.builder()
-			.name(userInfo.getLogin())
-			.email(userInfo.getEmail())
-			.imageUrl(userInfo.getAvatarUrl())
-			.token(token)
-			.build();
-	}
-
 }
