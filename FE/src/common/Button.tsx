@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { COLORS, GREYSCALE } from '@/constants';
 
-function Button({ isDisabled = false }) {
+function Button({ isDisabled = false, label }) {
   const Box = isDisabled ? ButtonBoxDisabled : ButtonBoxAbled;
 
-  return <Box>dd</Box>;
+  return <Box>{label}</Box>;
 }
 
-const ButtonBox = styled.button`
+export const ButtonBox = styled.button`
   width: 340px;
   height: 64px;
   background-color: ${COLORS.BLUE};
