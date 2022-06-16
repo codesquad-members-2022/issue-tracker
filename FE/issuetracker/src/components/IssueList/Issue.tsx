@@ -1,6 +1,7 @@
 import * as S from 'components/IssueList/styled.issue';
 import * as I from 'design/icons';
-import Label from 'components/common/Labels';
+import Label, { AccountImg } from 'components/common/Common';
+import AccountSrc from 'assets/images/UserImageLarge.svg';
 import { CheckBox } from './styled.issues';
 
 function Issue() {
@@ -26,7 +27,7 @@ function Issue() {
           </S.IssueBottomContent>
         </S.IssueBottom>
       </S.IssueLeft>
-      계정아이콘
+      <AccountImg src={AccountSrc} />
     </S.IssueWrap>
   );
 }

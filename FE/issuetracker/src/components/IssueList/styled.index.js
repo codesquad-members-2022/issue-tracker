@@ -7,7 +7,7 @@ export const IssueListWrap = styled.div`
 
 export const IssueListTop = styled.div`
   ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
-  width: 1280px;
+  width: 100%;
   height: 40px;
   margin-bottom: 32px;
 `;
