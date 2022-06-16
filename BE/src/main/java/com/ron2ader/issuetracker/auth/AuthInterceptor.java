@@ -4,12 +4,15 @@ import com.ron2ader.issuetracker.auth.jwt.JwtProvider;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
+@Component
 public class AuthInterceptor implements HandlerInterceptor {
 
     private static final String BEARER = "Bearer ";
@@ -18,6 +21,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        if(request.getMethod().matches(HttpMethod.OPTIONS.toString())) {
+            return true;
+        }
+
         String tokenHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (tokenHeader == null) {
