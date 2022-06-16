@@ -1,7 +1,8 @@
 
 ## Hidden information
-PRTracker/Supporting/Secret.swift
+PRTracker/Supporting/Secrets.swift
 PRTracker/Supporting/secret.plist
+cutsom-env-variable.sh
 
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
