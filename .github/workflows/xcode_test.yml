@@ -14,5 +14,8 @@ jobs:
        run: 
         pod install
      - name: Running test 🧪
+       env:
+         CLIENT_ID_GITHUB: ${{ secrets.CLIENT_ID_GITHUB }}
+         CLIENT_SECRET_GITHUB: ${{ secrets.CLIENT_SECRET_GITHUB }}
        run:
         xcodebuild test -destination 'platform=iOS Simulator,OS=15.2,name=iPhone 12' -workspace PRTracker.xcworkspace -scheme PRTracker
