@@ -60,8 +60,8 @@ struct OAuthManger {
     func makeURL(with code: String) -> URL? {
         guard var components = URLComponents(string: OAuthManger.accessTokenURL) else { return nil }
         components.queryItems = [
-            URLQueryItem(name: "client_id", value: OAuthManger.clientId),
-            URLQueryItem(name: "client_secret", value: getClientSecret()),
+            URLQueryItem(name: "client_id", value: Secrets.clientId),
+            URLQueryItem(name: "client_secret", value: Secrets.clientSecret),
             URLQueryItem(name: "code", value: code)
         ]
         return components.url

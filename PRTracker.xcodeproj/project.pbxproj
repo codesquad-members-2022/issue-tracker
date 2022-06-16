@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DE61695C83CB1A5484B159C /* Pods_PRTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F85B983D296BEA49342F0 /* Pods_PRTrackerTests.framework */; };
+		BC2F5963285AE4040012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
 		BC97093B2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093C2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */; };
@@ -70,6 +71,7 @@
 		79EDD15A918B4109D48FA1B6 /* Pods-PRTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTracker.debug.xcconfig"; path = "Target Support Files/Pods-PRTracker/Pods-PRTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		A6AE00453ECCCA10D6CD0525 /* Pods-PRTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B82F1307FAF9E5A90C63CAFE /* Pods-PRTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		BC2F5962285AE4040012D18C /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
 		BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManger.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		BCF57BF3285703C90059E61D /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				BC2F5962285AE4040012D18C /* Secrets.swift */,
 				BCF57BCF285701FC0059E61D /* Info.plist */,
 				BCF57BC1285701FB0059E61D /* AppDelegate.swift */,
 				BCF57BC3285701FB0059E61D /* SceneDelegate.swift */,
@@ -308,6 +311,7 @@
 			buildConfigurationList = BCF57BE8285701FD0059E61D /* Build configuration list for PBXNativeTarget "PRTracker" */;
 			buildPhases = (
 				B899F7D72F584B6DAAD7DE31 /* [CP] Check Pods Manifest.lock */,
+				BC2F595F285AD08A0012D18C /* Generate Secret file */,
 				BC874810285709F800875E81 /* SwiftLint Script */,
 				BCF57BBA285701FB0059E61D /* Sources */,
 				BCF57BBB285701FB0059E61D /* Frameworks */,
@@ -446,6 +450,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BC2F595F285AD08A0012D18C /* Generate Secret file */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/create_secrets.rb",
+			);
+			name = "Generate Secret file";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/PRTracker/Supporting/Secrets.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -f ./cutsom-env-variable.sh ]\nthen\nsource ./cutsom-env-variable.sh\nfi\n\nruby ${SRCROOT}/create_secrets.rb\n";
+		};
 		BC874810285709F800875E81 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -471,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2F5963285AE4040012D18C /* Secrets.swift in Sources */,
 				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
 				BCF57C06285705130059E61D /* OAuthManger.swift in Sources */,
 				BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
