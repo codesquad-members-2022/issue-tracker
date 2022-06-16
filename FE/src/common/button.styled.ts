@@ -2,66 +2,39 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { BtnBase } from './util.styled';
 
-const handleWidthType = (size: string): string => {
-  switch (size) {
-    case 'sm':
-      return '120px';
-    case 'md':
-      return '240px';
-    case 'lg':
-      return '360px';
-    default:
-      return '';
-  }
-};
-
-const handleHeightType = (size: string): string => {
-  switch (size) {
-    case 'sm':
-      return '40px';
-    case 'md':
-      return '56px';
-    case 'lg':
-      return '64px';
-    default:
-      return '';
-  }
-};
-
-const handleBorderRadiusType = css<{ size: string }>`
+export const BtnStyles = css<{ size: string }>`
   ${({ size }) =>
     size === 'sm' &&
     css`
-      width: 340px;
+      width: 120px;
       height: 40px;
+      border-radius: 11px;
     `}
   ${({ size }) =>
     size === 'md' &&
     css`
-      width: 600px;
-      height: 40px;
+      width: 240px;
+      height: 56px;
+      border-radius: 20px;
+    `}
+    ${({ size, theme: { fontWeights, fontSizes, lineHeights, colors } }) =>
+    size === 'lg' &&
+    css`
+      width: 360px;
+      height: 64px;
       border-radius: 24px;
+      font-weight: ${fontWeights.bold};
+      font-size: ${fontSizes.md};
+      line-height: ${lineHeights.base};
+      color: ${colors.offWhite};
     `}
 `;
 
-/* const handleBorderRadiusTypes = (size: string): string  => {
-  switch (size) {
-    case 'sm':
-      return '11px';
-    case 'md':
-      return '20px';
-    case 'lg':
-      return '24px';
-    default:
-      return ;
-  }
-}; */
-
 export const CustomBtn = styled(Link)<{ size: string }>`
   ${BtnBase};
-  width: ${({ size }) => handleWidthType(size)};
-  height: ${({ size }) => handleHeightType(size)};
-  color: ${({ theme: { colors } }) => colors.offWhite};
-  background-color: ${({ theme: { colors } }) => colors.primary};
-  ${handleBorderRadiusType}
+  ${BtnStyles}
+  ${({ theme: { colors } }) => css`
+    color: ${colors.offWhite};
+    background-color: ${colors.primary};
+  `}
 `;

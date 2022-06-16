@@ -3,22 +3,22 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     fontSizes: {
-      xs: '0.75rem';
-      sm: '1rem';
-      md: '1.125rem';
-      lg: '1.5rem';
-      xl: '2rem';
+      xs: '1.2rem';
+      sm: '1.6rem';
+      md: '1.8rem';
+      lg: '2.4rem';
+      xl: '3.2rem';
     };
     fontWeights: {
       normal: '400';
       bold: '700';
     };
     lineHeights: {
-      shorter: '1.25rem';
-      short: '1.75rem';
-      base: '2rem';
-      tall: '2.5rem';
-      taller: '3rem';
+      shorter: '2rem';
+      short: '2.8rem';
+      base: '3.2rem';
+      tall: '4rem';
+      taller: '4.8rem';
     };
     colors: {
       titleActive: '#14142B';

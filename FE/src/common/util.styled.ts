@@ -21,3 +21,12 @@ export const BtnBase = css`
     opacity: 0.5;
   }
 `;
+
+export const InputBase = css`
+  padding: 18px 24px;
+  display: block;
+  width: 360px;
+  height: 64px;
+  border-radius: 16px;
+  background-color: ${({ theme: { colors } }) => colors.inputBackground};
+`;

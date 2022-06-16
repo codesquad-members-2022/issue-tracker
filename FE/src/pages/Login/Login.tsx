@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
 function Login(): JSX.Element {
@@ -7,17 +8,33 @@ function Login(): JSX.Element {
     <S.Container>
       <S.Wrapper>
         <S.Logo>
-          <S.LogoImg />
+          <S.LogoImg alt="logo" src="./LogotypeLarge.svg" />
         </S.Logo>
-        <S.GitHubBtn to="/" size="sm">
-          GitHub
-        </S.GitHubBtn>
-        <S.GitHubBtn to="/" size="md">
-          GitHub 계정으로
-        </S.GitHubBtn>
-        <S.GitHubBtn to="/" size="lg">
+        <GitHubBtn to="/" size="lg">
           GitHub 계정으로 로그인
-        </S.GitHubBtn>
+        </GitHubBtn>
+        <S.OR
+          fontWeight="bold"
+          fontSize="sm"
+          lineheight="short"
+          color="placeholder"
+        >
+          OR
+        </S.OR>
+        <S.IdInput placeholder="아이디" type="text" />
+        <S.PasswordInput placeholder="비밀번호" type="password" />
+        <S.IdBtn to="/" size="lg">
+          아이디로 로그인
+        </S.IdBtn>
+        <S.MemberBtn
+          to="/"
+          fontWeight="bold"
+          fontSize="xs"
+          lineheight="shorter"
+          color="body"
+        >
+          회원가입
+        </S.MemberBtn>
       </S.Wrapper>
     </S.Container>
   );

@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
 
   html {
     font-family: Noto Sans KR;
+    font-size: 10px;
   }
 
   a {
