@@ -1,20 +1,17 @@
 package com.example.it.issuetracker.data.repository
 
-import com.example.it.issuetracker.config.GITHUB_CLIENT_ID
-import com.example.it.issuetracker.config.GITHUB_SECRET_ID
-import com.example.it.issuetracker.data.network.GithubService
+import com.example.it.issuetracker.data.dto.toLoginInformation
+import com.example.it.issuetracker.data.network.IssueTrackerService
+import com.example.it.issuetracker.domain.model.LoginInformation
 import com.example.it.issuetracker.domain.repository.LoginRepository
 
 class LoginRepositoryImpl(
-    private val githubApi: GithubService,
+    private val issuerTrackerApi: IssueTrackerService,
 ) : LoginRepository {
-    override suspend fun getAccessToken(code: String): String {
-        val token = githubApi.getAccessToken(
-            "application/json",
-            GITHUB_CLIENT_ID,
-            GITHUB_SECRET_ID,
-            code
-        )
-        return token.accessToken
+
+    override suspend fun loginOAuthGithub(code: String): LoginInformation {
+        val loginDto = issuerTrackerApi.loginOAuthGithub(code)
+
+        return loginDto.toLoginInformation()
     }
 }

@@ -3,6 +3,7 @@ package com.example.it.issuetracker.presentation
 import android.app.Application
 import com.example.it.issuetracker.di.networkModule
 import com.example.it.issuetracker.di.repositoryModule
+import com.example.it.issuetracker.di.sharedPrefModule
 import com.example.it.issuetracker.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -19,7 +20,8 @@ class IssueTrackerApplication : Application() {
             modules(
                 networkModule,
                 viewModelModule,
-                repositoryModule
+                repositoryModule,
+                sharedPrefModule
             )
         }
     }

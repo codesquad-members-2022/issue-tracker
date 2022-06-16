@@ -1,14 +1,13 @@
 package com.example.it.issuetracker.di
 
-import com.example.it.issuetracker.data.network.GithubService
+import com.example.it.issuetracker.config.ISSUE_TRACKER_BASEURL
+import com.example.it.issuetracker.data.network.IssueTrackerService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-
-private const val GITHUB_BASE_URL = "https://github.com/login/oauth/"
 
 fun provideInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor().apply {
@@ -33,17 +32,17 @@ fun provideMoshi(): Moshi {
 fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory =
     MoshiConverterFactory.create(moshi)
 
-fun provideGithubRetrofit(
+fun provideIssueTrackerRetrofit(
     okHttpClient: OkHttpClient,
     moshiConverterFactory: MoshiConverterFactory,
 ): Retrofit {
     return Retrofit.Builder()
-        .baseUrl(GITHUB_BASE_URL)
+        .baseUrl(ISSUE_TRACKER_BASEURL)
         .addConverterFactory(moshiConverterFactory)
         .client(okHttpClient)
         .build()
 }
 
-fun provideGithubService(retrofit: Retrofit): GithubService {
-    return retrofit.create(GithubService::class.java)
+fun provideIssueTrackerService(retrofit: Retrofit): IssueTrackerService {
+    return retrofit.create(IssueTrackerService::class.java)
 }
