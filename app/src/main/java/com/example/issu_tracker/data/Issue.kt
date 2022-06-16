@@ -1,19 +1,16 @@
 package com.example.issu_tracker.data
 
-//data class Issue(
-//    val index: Int,
-//    val mileStone: String,
-//    val label: String,
-//    val title: String,
-//    val description: String,
-//)
-data class Issue(
-    val mileStone: String,
-    val labels: List<Label>,
-    val title: String,
-    val description: String,
-    val user: User,
-    val comments: List<Comment>
-)
+import com.google.gson.annotations.SerializedName
 
-data class Label(val color: String, val content: String)
+data class Label(val color: String = "", val content: String = "")
+
+data class Issue(
+    @SerializedName("commets")
+    val comments: List<Comment> = listOf(),
+    val description: String = "",
+    val label: List<Label> = listOf(),
+    val mileStone: String = "",
+    val state: Boolean = true,
+    val title: String = "",
+    val user: User? = null
+)
