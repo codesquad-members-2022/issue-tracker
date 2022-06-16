@@ -13,7 +13,7 @@ enum SignInNetworkTarget {
 }
 
 extension SignInNetworkTarget: NetworkTargetable {
-    var queryItem: [URLQueryItem] {
+    var queryItem: [URLQueryItem]? {
         switch self {
         case .requestCode(let clientID):
             return [URLQueryItem(name: "client_id", value: clientID)]
