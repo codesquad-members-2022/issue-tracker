@@ -9,11 +9,10 @@ import Foundation
 import UIKit
 
 
-struct OAuthManger {
+struct OAuthManager {
     
-    static let shared = OAuthManger()
+    static let shared = OAuthManager()
     
-    static let clientId = "3d45d9cbd8c6e918841f"
     static let requiredScope = "repo,user"
     static let authorizeBaseURL = "https://github.com/login/oauth/authorize"
     static let accessTokenURL = "https://github.com/login/oauth/access_token"
@@ -21,21 +20,19 @@ struct OAuthManger {
     let keyChainManager = KeyChainManager()
     
     func requestAuthorization() {
-        guard var components = URLComponents(string: OAuthManger.authorizeBaseURL) else { return }
+        guard var components = URLComponents(string: OAuthManager.authorizeBaseURL) else { return }
         components.queryItems = [
-            URLQueryItem(name: "client_id", value: OAuthManger.clientId),
-            URLQueryItem(name: "scope", value: OAuthManger.requiredScope)
+            URLQueryItem(name: "client_id", value: Secrets.clientId),
+            URLQueryItem(name: "scope", value: OAuthManager.requiredScope)
         ]
         guard let url = components.url else { return }
         UIApplication.shared.open(url)
     }
     
     func requestToken(with code: String) {
-        guard let url = makeURL(with: code) else { return }
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        
+        guard let url = makeTokenAccessURL(with: code) else { return }
+        let request = makeTokenAccessRequest(with: url)
+
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 Log.error(error.localizedDescription)
@@ -57,8 +54,8 @@ struct OAuthManger {
         }.resume()
     }
     
-    func makeURL(with code: String) -> URL? {
-        guard var components = URLComponents(string: OAuthManger.accessTokenURL) else { return nil }
+    func makeTokenAccessURL(with code: String) -> URL? {
+        guard var components = URLComponents(string: OAuthManager.accessTokenURL) else { return nil }
         components.queryItems = [
             URLQueryItem(name: "client_id", value: Secrets.clientId),
             URLQueryItem(name: "client_secret", value: Secrets.clientSecret),
@@ -67,21 +64,10 @@ struct OAuthManger {
         return components.url
     }
     
-    func getClientSecret() -> String {
-        guard let filePath = Bundle.main.path(forResource: "secret", ofType: "plist") else {
-            Log.error("Failed to find secret.plist")
-            return ""
-        }
-        
-        let plistKey = "github_client_secret"
-        let plist = NSDictionary(contentsOfFile: filePath)
-        
-        guard let clientScret = plist?.object(forKey: plistKey) as? String else {
-            Log.error("Failed to find value for \(plistKey)")
-            return ""
-        }
-        
-        return clientScret
+    func makeTokenAccessRequest(with url: URL) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        return request
     }
 }
 

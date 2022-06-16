@@ -31,8 +31,8 @@
 		BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BFF285704FE0059E61D /* ListingManager.swift */; };
 		BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C022857050A0059E61D /* ListingTableView.swift */; };
 		BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C022857050A0059E61D /* ListingTableView.swift */; };
-		BCF57C06285705130059E61D /* OAuthManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* OAuthManger.swift */; };
-		BCF57C07285705130059E61D /* OAuthManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* OAuthManger.swift */; };
+		BCF57C06285705130059E61D /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* OAuthManager.swift */; };
+		BCF57C07285705130059E61D /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* OAuthManager.swift */; };
 		BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C082857051C0059E61D /* LoginViewModel.swift */; };
 		BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C082857051C0059E61D /* LoginViewModel.swift */; };
 		BCF57C0C285705220059E61D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C0B285705220059E61D /* LoginView.swift */; };
@@ -88,7 +88,7 @@
 		BCF57BFC285704F40059E61D /* ListingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewModel.swift; sourceTree = "<group>"; };
 		BCF57BFF285704FE0059E61D /* ListingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingManager.swift; sourceTree = "<group>"; };
 		BCF57C022857050A0059E61D /* ListingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableView.swift; sourceTree = "<group>"; };
-		BCF57C05285705130059E61D /* OAuthManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManger.swift; sourceTree = "<group>"; };
+		BCF57C05285705130059E61D /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		BCF57C082857051C0059E61D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BCF57C0B285705220059E61D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D04099D12859C08B0008B517 /* ListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 		BCF57BF72857049A0059E61D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BCF57C05285705130059E61D /* OAuthManger.swift */,
+				BCF57C05285705130059E61D /* OAuthManager.swift */,
 				BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */,
 				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
 			);
@@ -490,7 +490,7 @@
 			files = (
 				BC2F5963285AE4040012D18C /* Secrets.swift in Sources */,
 				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
-				BCF57C06285705130059E61D /* OAuthManger.swift in Sources */,
+				BCF57C06285705130059E61D /* OAuthManager.swift in Sources */,
 				BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
 				BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */,
@@ -514,7 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCF57C07285705130059E61D /* OAuthManger.swift in Sources */,
+				BCF57C07285705130059E61D /* OAuthManager.swift in Sources */,
 				BC9709432859C88100E54F93 /* Logger.swift in Sources */,
 				BCF57C0D285705220059E61D /* LoginView.swift in Sources */,
 				BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */,
