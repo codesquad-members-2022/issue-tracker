@@ -21,8 +21,6 @@ public class Issue extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @ManyToOne
-    private User user;
     @Column(name = "open_yn")
     private boolean isOpen;
     @ManyToOne
