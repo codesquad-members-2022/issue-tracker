@@ -4,6 +4,7 @@ import { mixin } from 'design/GlobalStyles';
 export const issueTitleWrapper = styled.div`
   ${mixin.flexbox({ vertical: 'center' })};
   position: relative;
+  margin-top: 12px;
 `;
 
 export const issueTitle = styled.div`
