@@ -1,5 +1,6 @@
 package com.example.issu_tracker.ui.common
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.View
@@ -11,12 +12,12 @@ import androidx.databinding.BindingAdapter
 import com.example.issu_tracker.R
 import com.example.issu_tracker.data.Label
 
+@SuppressLint("Range")
 @BindingAdapter("labelList")
 fun setLabels(view: LinearLayout, list: List<Label>) {
     list.forEach {
         val textView =
             TextView(view.context)
-
         val background = ContextCompat.getDrawable(
             view.context,
             R.drawable.round_rectangle_background
