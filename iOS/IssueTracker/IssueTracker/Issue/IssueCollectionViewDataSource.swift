@@ -11,6 +11,10 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     private var issueData: [IssueItem] = [.init(title: "제목", issueDescription: "이슈에 대한 설명(최대 두 줄까지 보여줄 수 있다)", milestoneName: "마일스톤 이름") ]
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return issueData.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         issueData.count
     }
@@ -21,5 +25,17 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: IssueCollectionHeaderView.identifier, for: indexPath) as? IssueCollectionHeaderView else {
+                return UICollectionReusableView()
+            }
+            header.setHeaderTitle(text: "이슈")
+            return header
+        } else {
+            return UICollectionReusableView()
+        }
     }
 }

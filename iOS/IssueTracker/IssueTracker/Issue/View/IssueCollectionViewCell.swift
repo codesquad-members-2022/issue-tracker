@@ -57,11 +57,12 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     private let labelName: UILabel = {
         let labelName = UILabel()
-        let labelNameAttributedString = NSMutableAttributedString(string: "레이블이름")
+        let labelNameAttributedString = NSMutableAttributedString(string: "  레이블이름  ")
         labelName.attributedText = labelNameAttributedString
         labelName.font = UIFont(name: "SFProDisplay-Regular", size: 17)
         labelName.clipsToBounds = true
         labelName.layer.cornerRadius = 10
+        labelName.backgroundColor = .systemGray
         labelName.translatesAutoresizingMaskIntoConstraints = false
         return labelName
     }()
@@ -77,27 +78,30 @@ final class IssueCollectionViewCell: UICollectionViewCell {
         title.snp.makeConstraints { make in
             make.top.equalTo(self.contentView).offset(24)
             make.leading.equalTo(self.contentView).offset(16)
+            make.trailing.lessThanOrEqualTo(-16)
         }
         
         issueDescription.snp.makeConstraints { make in
-            make.top.equalTo(title).offset(16)
-            make.leading.equalTo(title)
-            make.trailing.equalTo(self.contentView).offset(16)
+            make.top.equalTo(title.snp.bottom).offset(16)
+            make.leading.equalTo(title.snp.leading)
+            make.trailing.equalTo(self.contentView).offset(-16)
         }
         
         milestoneImage.snp.makeConstraints { make in
-            make.top.equalTo(issueDescription).offset(18)
-            make.leading.equalTo(title)
+            make.top.equalTo(issueDescription.snp.bottom).offset(18)
+            make.leading.equalTo(title.snp.leading)
         }
         
         milestoneName.snp.makeConstraints { make in
-            make.top.equalTo(issueDescription).offset(18)
-            make.leading.equalTo(milestoneImage).offset(4)
+            make.top.equalTo(issueDescription.snp.bottom).offset(18)
+            make.leading.equalTo(milestoneImage.snp.trailing).offset(4)
+            make.trailing.lessThanOrEqualTo(-16)
         }
         
         labelName.snp.makeConstraints { make in
-            make.top.equalTo(milestoneImage).offset(16)
+            make.top.equalTo(milestoneImage.snp.bottom).offset(16)
             make.leading.equalTo(title)
+            make.bottom.lessThanOrEqualTo(-24)
         }
     }
     
