@@ -1,6 +1,6 @@
-import { FlattenInterpolation, ThemeProps } from 'styled-components';
-
 type StyleType = 'large' | 'medium' | 'small';
+
+type Status = 'right' | 'error';
 
 interface IStyleProps {
   width?: string;
@@ -9,14 +9,16 @@ interface IStyleProps {
   background?: string;
   border?: string;
   borderRadius?: string;
-  fontSize?: string;
-  fontWeight?: string;
+  visibleLabel: boolean;
 }
 
-type StyleTypes = Record<StyleType, FlattenInterpolation<ThemeProps<any>>>;
+interface IStyled_label {
+  styleType?: StyleType;
+  visible: boolean;
+}
 
 interface IStyled_textInput extends IStyleProps {
   styleType?: StyleType;
 }
 
-export type { StyleType, IStyleProps, StyleTypes, IStyled_textInput };
+export type { StyleType, Status, IStyleProps, IStyled_label, IStyled_textInput };
