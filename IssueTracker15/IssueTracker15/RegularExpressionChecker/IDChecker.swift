@@ -10,7 +10,7 @@ import Foundation
 struct IDChecker {
     static func check(input: String) -> Bool {
         let pattern: String = "^[a-zA-Z0-9]{6,16}@" // @ 이전 ID입력값이 6 ~ 16개
-        if let _ = input.range(of: pattern, options: .regularExpression) {
+        if input.range(of: pattern, options: .regularExpression) != nil {
             return true
         } else {
             return false

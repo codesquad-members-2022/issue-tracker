@@ -46,4 +46,3 @@ class ViewController: UIViewController, ViewBinding {
         vm?.request(target, param: param)
     }
 }
-

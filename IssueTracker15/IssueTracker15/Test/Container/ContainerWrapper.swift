@@ -17,7 +17,7 @@ struct ContainerWrapper<T: Resolvable> {
         container?.regist(instance: instance)
     }
     
-    func resolve<P>(type:P.Type) -> T.Value? {
+    func resolve<P>(type: P.Type) -> T.Value? {
         return container?.resolve(type: type)
     }
 }

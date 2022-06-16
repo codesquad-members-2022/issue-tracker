@@ -23,7 +23,7 @@ class ContainerUnitTest: XCTestCase {
         sut.regist(instance: mockValue)
         
         guard let registedValue = mockContainer.map[mockValueType] as? MockValue else {
-            XCTFail()
+            XCTFail("registed Mock Vlaue is nil")
             return
         }
         
@@ -39,7 +39,7 @@ class ContainerUnitTest: XCTestCase {
         sut.regist(instance: mockValue)
         
         guard let resolvedValue = sut.resolve(type: MockValue.self) as? MockValue else {
-            XCTFail()
+            XCTFail("registed Mock Vlaue is nil")
             return
         }
         
