@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
 import com.example.issu_tracker.databinding.FragmentIssueBinding
@@ -30,7 +31,7 @@ class IssueFragment : Fragment() {
 
         settingRecyclerview()
         updateRecyclerview()
-
+        navigateFilterScreen()
         return binding.root
     }
 
@@ -48,5 +49,12 @@ class IssueFragment : Fragment() {
         binding.rvIssue.adapter = issueAdapter
         binding.rvIssue.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun navigateFilterScreen() {
+        binding.ivIssueMenu.setOnClickListener {
+            val navController = Navigation.findNavController(binding.root)
+            navController.navigate(R.id.action_issueFragment2_to_filterFragment)
+        }
     }
 }
