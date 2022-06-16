@@ -26,8 +26,8 @@ const medium = css`
 `;
 
 const small = css`
-  width: 87px;
-  height: 32px;
+  width: 300px;
+  height: 40px;
   border-radius: 11px;
   ${standardEventStyle}
 `;
