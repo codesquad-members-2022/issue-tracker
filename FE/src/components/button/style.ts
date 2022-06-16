@@ -6,6 +6,45 @@ import {
 } from '@/components/Button/type';
 import styled, { css } from 'styled-components';
 
+const standardColorStyle = css`
+  color: ${({ theme }) => theme.PALETTE.WHITE};
+  background: ${({ theme }) => theme.COLOR.primary.initial};
+  svg > path {
+    stroke: ${({ theme }) => theme.PALETTE.WHITE};
+  }
+`;
+
+const secondaryColorStyle = css`
+  color: ${({ theme }) => theme.COLOR.primary.initial};
+  background: ${({ theme }) => theme.PALETTE.WHITE};
+  border-color: ${({ theme }) => theme.COLOR.primary.initial};
+  svg > path {
+    stroke: ${({ theme }) => theme.COLOR.primary.initial};
+  }
+`;
+
+const textColorStyle = css`
+  color: ${({ theme }) => theme.COLOR.label};
+  svg > path {
+    stroke: ${({ theme }) => theme.COLOR.label};
+  }
+`;
+
+const largeFontStyle = css`
+  font-size: ${({ theme }) => `${theme.FONT.SIZE.MEDIUM}`};
+  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
+`;
+
+const mediumFontStyle = css`
+  font-size: ${({ theme }) => `${theme.FONT.SIZE.BASE}`};
+  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
+`;
+
+const smallFontStyle = css`
+  font-size: ${({ theme }) => `${theme.FONT.SIZE.X_SMALL}`};
+  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
+`;
+
 const standardEventStyle = css`
   :hover {
     background: ${({ theme }) => theme.COLOR.primary.hover};
@@ -62,70 +101,50 @@ const textEventStyle = css`
 const large = css`
   width: 340px;
   height: 64px;
-  color: ${({ theme }) => theme.PALETTE.WHITE};
-  background: ${({ theme }) => theme.COLOR.primary.initial};
-  font-size: ${({ theme }) => `${theme.FONT.SIZE.MEDIUM}`};
-  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
   border-radius: 20px;
+  ${standardColorStyle}
   ${standardEventStyle}
+  ${largeFontStyle}
 `;
 
 const mediumStandard = css`
-  ${large}
   width: 240px;
   height: 56px;
+  border-radius: 20px;
+  ${largeFontStyle}
 `;
 
 const smallStandard = css`
   width: 120px;
   height: 40px;
-  color: ${({ theme }) => theme.PALETTE.WHITE};
-  background: ${({ theme }) => theme.COLOR.primary.initial};
-  font-size: ${({ theme }) => `${theme.FONT.SIZE.X_SMALL}`};
-  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
   border-radius: 11px;
-  svg > path {
-    stroke: ${({ theme }) => theme.PALETTE.WHITE};
-  }
+  ${standardColorStyle}
   ${standardEventStyle}
+  ${smallFontStyle}
 `;
 
 const smallSecondary = css`
   width: 120px;
   height: 40px;
-  color: ${({ theme }) => theme.COLOR.primary.initial};
-  background: ${({ theme }) => theme.PALETTE.WHITE};
-  font-size: ${({ theme }) => `${theme.FONT.SIZE.X_SMALL}`};
-  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
-  border: 2px solid ${({ theme }) => theme.COLOR.primary.initial};
+  border: 2px solid;
   border-radius: 11px;
-  svg > path {
-    stroke: ${({ theme }) => theme.COLOR.primary.initial};
-  }
+  ${secondaryColorStyle}
   ${secondaryEventStyle}
 `;
 
 const mediumText = css`
   width: 87px;
   height: 32px;
-  color: ${({ theme }) => theme.COLOR.label};
-  font-size: ${({ theme }) => `${theme.FONT.SIZE.BASE}`};
-  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
-  svg > path {
-    stroke: ${({ theme }) => theme.COLOR.label};
-  }
+  ${textColorStyle}
   ${textEventStyle}
+  ${mediumFontStyle}
 `;
 
 const smallText = css`
   width: 70px;
   height: 32px;
-  color: ${({ theme }) => theme.COLOR.label};
-  font-size: ${({ theme }) => `${theme.FONT.SIZE.X_SMALL}`};
-  font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
-  svg > path {
-    stroke: ${({ theme }) => theme.COLOR.label};
-  }
+  ${textColorStyle}
+  ${textEventStyle}
   ${textEventStyle}
 `;
 
