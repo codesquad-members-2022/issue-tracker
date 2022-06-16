@@ -13,8 +13,8 @@ class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFire
         val list = mutableListOf<Issue>()
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_PATH).get().await()
         collectionData.documents.forEach {
-            val issueObj = it.toObject(Issue::class.java)
-            issueObj?.let { it1 -> list.add(it1) }
+            val issueObj = it.toObject(IssueDto::class.java)
+            issueObj?.let { it1 -> it1.toIssue()?.let { it2 -> list.add(it2) } }
         }
         return list
     }
