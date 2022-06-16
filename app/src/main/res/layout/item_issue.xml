@@ -57,7 +57,7 @@
             tools:text="@string/temp_string_long" />
 
         <LinearLayout
-            labelList="@{issue.labels}"
+            labelList="@{issue.label}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
