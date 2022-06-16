@@ -31,7 +31,7 @@ public class Issue {
     @OneToMany(mappedBy = "issue")
     private List<Label> labels;
     @OneToMany(mappedBy = "issue")
-    private List<Responsibility> responsibilities;
+    private List<Assignee> assignees;
     @OneToMany(mappedBy = "issue")
     private List<Comment> comments;
 }
