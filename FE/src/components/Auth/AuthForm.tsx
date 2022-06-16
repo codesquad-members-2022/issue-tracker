@@ -1,41 +1,52 @@
-import React, { useRef } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './AuthForm.module.scss';
-import { InputWithRef } from '@UI/Input';
+import { Input } from '@UI/Input';
+import { authActions } from '../../store/authStore';
+import GithubLoginBtn from './GithubLoginBtn';
+import { useLocation } from 'react-router-dom';
 
 const AuthForm = () => {
-  const emailInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const { search } = useLocation();
+  const dispatch = useDispatch();
+  const idSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // 아이디로 로그인
+    dispatch(authActions.login());
+  };
 
   return (
-    <section className={styles.section}>
-      <h1 className={styles.title}>Issue Tracker</h1>
-      <div className={styles.wrapper}>
-        <button className={styles.github_button}>GitHub 계정으로 로그인</button>
-        <div className={styles.divider}>or</div>
-        <form className={styles.form}>
-          <InputWithRef
-            ref={emailInputRef}
-            label="email"
-            info={{
-              id: 'email',
-              type: 'text',
-              placeholder: '아이디',
-            }}
-          />
-          <InputWithRef
-            ref={passwordInputRef}
-            label="password"
-            info={{
-              id: 'password',
-              type: 'text',
-              placeholder: '비밀번호',
-            }}
-          />
-          <button className={styles.login_button}>아이디로 로그인</button>
-        </form>
-      </div>
-      <button className={styles.signUp_button}>회원 가입</button>
-    </section>
+    <>
+      <section className={styles.section}>
+        <h1 className={styles.title}>Issue Tracker</h1>
+        <div className={styles.wrapper}>
+          <GithubLoginBtn />
+          <div className={styles.divider}>or</div>
+          <form className={styles.form} onSubmit={idSubmitHandler}>
+            <Input
+              label="email"
+              info={{
+                id: 'email',
+                type: 'email',
+                placeholder: '아이디',
+              }}
+            />
+            <Input
+              label="password"
+              info={{
+                id: 'password',
+                type: 'password',
+                placeholder: '비밀번호',
+              }}
+            />
+            <button type="submit" className={styles.login_button}>
+              아이디로 로그인
+            </button>
+          </form>
+        </div>
+        <button className={styles.signUp_button}>회원 가입</button>
+      </section>
+    </>
   );
 };
 
