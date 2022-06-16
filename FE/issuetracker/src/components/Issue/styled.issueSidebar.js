@@ -52,8 +52,10 @@ export const userName = styled.span`
 
 export const label = styled.label`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
+  ${({ theme }) => theme.fontStyles.textXSmall};
   width: 121px;
   height: 28px;
+  padding: 0 16px;
   margin: 16px 0;
   border-radius: 30px;
   background: ${({ theme }) => theme.backgroundColors.purple1};
