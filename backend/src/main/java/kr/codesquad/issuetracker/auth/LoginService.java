@@ -1,6 +1,8 @@
 package kr.codesquad.issuetracker.auth;
 
 import java.util.NoSuchElementException;
+import kr.codesquad.issuetracker.user.User;
+import kr.codesquad.issuetracker.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class LoginService {
 
     private final GitHubOAuthProperties gitHubOAuthProperties;
+    private final UserRepository userRepository;
 
     private static final String GITHUB_AUTHORIZATION_SERVER_URL = "https://github.com/login/oauth/access_token";
     private static final String GITHUB_RESOURCE_SERVER_API_URL = "https://api.github.com/user";
@@ -42,4 +45,13 @@ public class LoginService {
             .blockOptional()
             .orElseThrow(NoSuchElementException::new);
     }
+
+    public void saveUser(GitHubUserInfo gitHubUserInfo) {
+        String userId = gitHubUserInfo.getUserId();
+        if (!userRepository.existsByUserId(userId)) {
+            User user = gitHubUserInfo.createUser();
+            userRepository.save(user);
+        }
+    }
+
 }

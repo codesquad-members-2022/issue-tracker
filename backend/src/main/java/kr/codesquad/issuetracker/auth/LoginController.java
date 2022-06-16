@@ -21,6 +21,7 @@ public class LoginController {
     public LoginResponse oauthLogin(@RequestParam String code) {
         AccessToken accessToken = loginService.getAccessToken(code);
         GitHubUserInfo gitHubUserInfo = loginService.getGitHubUserInfo(accessToken);
+        loginService.saveUser(gitHubUserInfo);
         JWT jwt = jwtUtil.createToken(gitHubUserInfo);
 
         return new LoginResponse(jwt.getJwt(), ResponseMessage.LONGIN_SUCCESS);
