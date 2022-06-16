@@ -21,7 +21,7 @@ jobs:
          CLIENT_ID_GITHUB: ${{ secrets.CLIENT_ID_GITHUB }}
          CLIENT_SECRET_GITHUB: ${{ secrets.CLIENT_SECRET_GITHUB }}
        run:
-         ruby ${SRCROOT}/create_secrets.rb
+         ruby create_secrets.rb
      - name: Running test 🧪
        env:
          CLIENT_ID_GITHUB: ${{ secrets.CLIENT_ID_GITHUB }}
