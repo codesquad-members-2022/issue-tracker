@@ -56,19 +56,8 @@ final class SignInViewController: UIViewController {
 // MARK: - Private Method
 private extension SignInViewController {
     func setGitHubSignInButtonAction() {
-        let gitHubSignInButtonAction = UIAction { [weak self] _ in
-            self?.signInManager.requestCode { result in
-                switch result {
-                case let .success(url):
-                    DispatchQueue.main.async {
-                        UIApplication.shared.open(url)
-                    }
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
-
-        signInView.setGitHubSignInButtonAction(gitHubSignInButtonAction)
+        signInView.setGitHubSignInButtonAction(UIAction { [weak self] _ in
+            self?.viewModel?.requestOAuthCode()
+        })
     }
 }
