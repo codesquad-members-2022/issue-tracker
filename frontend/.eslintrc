@@ -1,0 +1,28 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "html"],
+  "extends": ["naver", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", ["parent", "sibling"], "index"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ],
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "indent": ["error", 2],
+    "@typescript-eslint/no-var-requires": 0
+  }
+}
