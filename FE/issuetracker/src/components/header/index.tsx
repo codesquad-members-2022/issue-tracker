@@ -2,7 +2,7 @@ import * as S from 'components/header/styled.index';
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 
 function Header() {
-  const isLoginPage: boolean = window.location.href === `http://localhost:3000/`;
+  const isLoginPage = window.location.href === `http://localhost:3000/` ? true : false;
   return (
     <S.HeaderWrap checkPage={isLoginPage}>
       <S.Title to="/">Issue Tracker</S.Title>
