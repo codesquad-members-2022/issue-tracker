@@ -459,17 +459,15 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/create_secrets.rb",
 			);
 			name = "Generate Secret file";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/PRTracker/Supporting/Secrets.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f ./cutsom-env-variable.sh ]\nthen\nsource ./cutsom-env-variable.sh\nfi\n\nruby ${SRCROOT}/create_secrets.rb\n";
+			shellScript = "if [ -f ${SRCROOT}/cutsom-env-variable.sh ]\nthen\nsource ${SRCROOT}/cutsom-env-variable.sh\nfi\n\nruby ${SRCROOT}/create_secrets.rb\n";
 		};
 		BC874810285709F800875E81 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
