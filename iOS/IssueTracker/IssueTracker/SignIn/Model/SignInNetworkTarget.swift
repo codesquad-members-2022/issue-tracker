@@ -12,20 +12,7 @@ enum SignInNetworkTarget {
     case requestAccessToken(clientID: String, clientSecret: String, code: String)
 }
 
-extension SignInNetworkTarget {
-    private var baseURL: String {
-        return "https://github.com/login/oauth"
-    }
-
-    private var path: String {
-        switch self {
-        case .requestCode:
-            return "/authorize"
-        case .requestAccessToken:
-            return "/access_token"
-        }
-    }
-
+extension SignInNetworkTarget: NetworkTargetable {
     var queryItem: [URLQueryItem] {
         switch self {
         case .requestCode(let clientID):
@@ -58,6 +45,22 @@ extension SignInNetworkTarget {
             return false
         case .requestAccessToken:
             return true
+        }
+    }
+}
+
+// MARK: - private computed properties
+private extension SignInNetworkTarget {
+    private var baseURL: String {
+        return "https://github.com/login/oauth"
+    }
+
+    private var path: String {
+        switch self {
+        case .requestCode:
+            return "/authorize"
+        case .requestAccessToken:
+            return "/access_token"
         }
     }
 }
