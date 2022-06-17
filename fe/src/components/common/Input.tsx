@@ -1,33 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
+import { SizeType } from "../../constants/textInputStyle";
 import { sizeStyle, STYLE, specificStyle, commonStyle } from "../../constants/textInputStyle";
 
 interface InputProps {
-  size?: string;
-  type?: string;
-}
-
-function Input({ size = "small", type = "typing" }) {
-  const style = { ...sizeStyle[STYLE[type]][size], ...commonStyle[STYLE[type]], ...specificStyle[type] };
-  console.log(style);
-  return (
-    <InputWrapper customStyle={style} size={size}>
-      <Title customStyle={style}>아이디</Title>
-      <TextInput customStyle={style} />
-    </InputWrapper>
-  );
+  size: string;
+  type: string;
 }
 
 interface StylesProps {
   size?: string;
   customStyle: {
-    wrapperSize: { width: number; height: number };
-    titleSize: { width: number; height: number };
+    wrapperSize: SizeType;
+    titleSize: SizeType;
     backgroundColor: string;
     border: string;
     opacity?: number;
-    textInputSize?: { width: number; height: number };
+    textInputSize?: SizeType;
     textInputDisplay: string;
     titleFont: {
       size: string;
@@ -42,6 +32,17 @@ interface StylesProps {
       color: string;
     };
   };
+}
+
+function Input({ size, type }: InputProps) {
+  const style = { ...sizeStyle[STYLE[type]][size], ...commonStyle[STYLE[type]], ...specificStyle[type] };
+
+  return (
+    <InputWrapper customStyle={style} size={size}>
+      <Title customStyle={style}>아이디</Title>
+      <TextInput customStyle={style} />
+    </InputWrapper>
+  );
 }
 
 const InputWrapper = styled.div<StylesProps>`

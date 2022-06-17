@@ -1,13 +1,13 @@
 import React from "react";
 
 import Input from "components/common/Input";
-import InputInitial from "components/common/LargeLabel";
+import TextArea from "components/common/TextArea";
 
 function App() {
   return (
     <div>
-      <Input />
-      <InputInitial />
+      <Input size="small" type="success" />
+      <TextArea />
     </div>
   );
 }

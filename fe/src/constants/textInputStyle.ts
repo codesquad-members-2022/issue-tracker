@@ -189,3 +189,4 @@ const STYLE: {
 };
 
 export { sizeStyle, STYLE, specificStyle, commonStyle };
+export type { SizeType };

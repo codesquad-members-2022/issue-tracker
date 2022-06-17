@@ -1,32 +1,58 @@
+import React from "react";
 import styled from "styled-components";
+
+import GripIcon from "../Icons/Grip";
 
 interface InputProps {
   size: string;
 }
 
-function Input({ size }) {
+function TextArea() {
   return (
-    <InputWrapper>
-      <Title>아이디</Title>
-      <TextInput placeholder={size === "large" ? "아이디" : "제목"} />;
-    </InputWrapper>
+    <TextAreaWrapper>
+      <InputWrapper>
+        <PlaceHoler>코멘트를 입력하세요</PlaceHoler>
+        <TextInput />
+      </InputWrapper>
+      <IconWrapper>
+        <GripIcon />
+      </IconWrapper>
+      <Line />
+    </TextAreaWrapper>
   );
 }
 
-const InputWrapper = styled.div`
+const Line = styled.div`
   width: 340px;
-  height: 64px;
-  background: #fefefe;
-  border: 1px solid #14142b;
+  border: 1px dashed #d9dbe9;
+  position: absolute;
+`;
+
+const TextAreaWrapper = styled.div`
+  width: 340px;
+  height: 200px;
+  background: #eff0f6;
   border-radius: 16px;
+  padding: 16px 24px;
+  position: relative;
+`;
+
+const IconWrapper = styled.div`
+  margin-top: 78px;
+  margin-left: 280px;
+`;
+
+const InputWrapper = styled.div`
+  width: 292px;
+  height: 28px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 0px 24px;
+  gap: 8px;
 `;
 
-const Title = styled.div`
+const PlaceHoler = styled.div`
   width: 292px;
   height: 28px;
 `;
@@ -34,6 +60,7 @@ const Title = styled.div`
 const TextInput = styled.input`
   width: 290px;
   height: 28px;
+  display: none;
 `;
 
-export default Input;
+export default TextArea;
