@@ -3,6 +3,7 @@ import Login from 'components/Login/Index';
 import { Route, Routes } from 'react-router-dom';
 import Issue from 'components/Issue/index';
 import NewIssue from 'components/newIssue';
+import LabelPage from 'components/LabelPage';
 
 function Router() {
   return (
@@ -11,7 +12,7 @@ function Router() {
       <Route path="/issueList" element={<IssueList />} />
       <Route path="/newIssue" element={<NewIssue />} />
       <Route path="/issue" element={<Issue />} />
-      <Route path="/label" />
+      <Route path="/label" element={<LabelPage />} />
       <Route path="/milestone" />
     </Routes>
   );
