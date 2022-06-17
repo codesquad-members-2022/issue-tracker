@@ -15,17 +15,18 @@ public class AuthToken {
 
     public static AuthToken from(String tokenHeader) {
         String[] split = tokenHeader.split(" ");
-        if (split.length != 2) {
+        if (split.length != 2 || validateToken(tokenHeader)) {
             throw new IllegalArgumentException();
         }
-        validateToken(tokenHeader);
+
         return new AuthToken(split[0], split[1]);
     }
 
-    private static void validateToken(String tokenType) {
+    private static boolean validateToken(String tokenType) {
         if (tokenType.equalsIgnoreCase(BEARER_TYPE)) {
-            throw new IllegalArgumentException();
+            return true;
         }
+        return false;
     }
 
 }

@@ -1,15 +1,17 @@
 package com.ron2ader.issuetracker.auth.github;
 
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
 
 @Getter
-@Setter
+@RequiredArgsConstructor
+@ConstructorBinding
 @ConfigurationProperties(prefix = "github")
 public class GithubProperties {
 
-    private String clientId;
-    private String clientSecret;
-    private String accessTokenUrl;
+    private final String clientId;
+    private final String clientSecret;
+    private final String accessTokenUrl;
 }
