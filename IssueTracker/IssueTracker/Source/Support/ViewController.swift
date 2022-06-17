@@ -10,11 +10,14 @@ import SnapKit
 
 class ViewController: UIViewController {
 
-    private let githubLoginButton: UIButton = {
+    // TODO: 후에 LoginViewModel 에서 요청하도록 변경
+    let loginRepository = LoginRepository()
+
+    private lazy var githubLoginButton: UIButton = {
         let button = UIButton()
         button.setTitle("gitbutton", for: .normal)
         button.addAction(UIAction(handler: { _ in
-            LoginManager.requestGithubAuthorize()
+            self.loginRepository.requestGithubAuthorize()
         }), for: .touchUpInside)
         return button
     }()
