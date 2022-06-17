@@ -28,7 +28,6 @@
 		B3773F352858648E008C4AAF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F342858648E008C4AAF /* TabBarViewController.swift */; };
 		B3773F37285864E2008C4AAF /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F36285864E2008C4AAF /* IssueListViewController.swift */; };
 		B3773F3928586D97008C4AAF /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F3828586D97008C4AAF /* IssueCell.swift */; };
-		B3773F732859C607008C4AAF /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F722859C607008C4AAF /* LoginManager.swift */; };
 		B3773F75285B1990008C4AAF /* HTTPAcceptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F74285B198F008C4AAF /* HTTPAcceptType.swift */; };
 		B3BFBD3628572E5400D69A34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBD3528572E5400D69A34 /* AppDelegate.swift */; };
 		B3BFBD3828572E5400D69A34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBD3728572E5400D69A34 /* SceneDelegate.swift */; };
@@ -63,10 +62,10 @@
 		367146F3B09437CB1929CCDA /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		723F045752A9006DEAC1B352 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		907546187A5C5236FB655944 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
+		9574981D2F6F3B6B5A4359A7 /* Pods-IssueTracker.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.alpha.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.alpha.xcconfig"; sourceTree = "<group>"; };
 		B3419D32285C1EC800F1273C /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		B3419D34285C205600F1273C /* RequestRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRepository.swift; sourceTree = "<group>"; };
 		B3419D36285C30EB00F1273C /* IssueTrackingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackingRepository.swift; sourceTree = "<group>"; };
-		9574981D2F6F3B6B5A4359A7 /* Pods-IssueTracker.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.alpha.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.alpha.xcconfig"; sourceTree = "<group>"; };
 		B3773F272858518A008C4AAF /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		B3773F2928585216008C4AAF /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
 		B3773F2D28585237008C4AAF /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -74,7 +73,6 @@
 		B3773F342858648E008C4AAF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B3773F36285864E2008C4AAF /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		B3773F3828586D97008C4AAF /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
-		B3773F722859C607008C4AAF /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		B3773F74285B198F008C4AAF /* HTTPAcceptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAcceptType.swift; sourceTree = "<group>"; };
 		B3BFBD3228572E5400D69A34 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3BFBD3528572E5400D69A34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				000651BD285A09DE00A6426A /* IssueTrackerTarget.swift */,
 				000651BF285A09FA00A6426A /* Base */,
 				00B2A26328585CD700D201D3 /* DecodeManager.swift */,
-				B3773F722859C607008C4AAF /* LoginManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -442,7 +439,6 @@
 				B3BFBD3628572E5400D69A34 /* AppDelegate.swift in Sources */,
 				B3773F2E28585237008C4AAF /* Tag.swift in Sources */,
 				B3419D33285C1EC800F1273C /* LoginRepository.swift in Sources */,
-				B3773F732859C607008C4AAF /* LoginManager.swift in Sources */,
 				00B2A267285867A400D201D3 /* IssueResponse.swift in Sources */,
 				000651BE285A09DE00A6426A /* IssueTrackerTarget.swift in Sources */,
 				B3BFBD3828572E5400D69A34 /* SceneDelegate.swift in Sources */,
