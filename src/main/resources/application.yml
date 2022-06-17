@@ -7,3 +7,9 @@ spring:
 
   jpa:
     database: mysql
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
