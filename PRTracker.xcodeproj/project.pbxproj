@@ -71,6 +71,9 @@
 		D0E98CEC285C107E0051413E /* PullListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CEA285C107E0051413E /* PullListTableViewCell.swift */; };
 		D0E98D05285CE97D0051413E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98D03285CE97D0051413E /* NetworkService.swift */; };
 		D0E98D06285CE97D0051413E /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98D04285CE97D0051413E /* KeyChainService.swift */; };
+		D0E98D07285CEABA0051413E /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98D04285CE97D0051413E /* KeyChainService.swift */; };
+		D0E98D08285CEAC00051413E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98D03285CE97D0051413E /* NetworkService.swift */; };
+		D0E98D09285CEAD50051413E /* PullManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5969285C1AC10012D18C /* PullManager.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -570,6 +573,7 @@
 				BC2F5979285C2ADC0012D18C /* RepoManager.swift in Sources */,
 				BC9709432859C88100E54F93 /* Logger.swift in Sources */,
 				BCF57C0D285705220059E61D /* LoginView.swift in Sources */,
+				D0E98D09285CEAD50051413E /* PullManager.swift in Sources */,
 				BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */,
 				D0E98CDC285BAEE90051413E /* CustomBarButton .swift in Sources */,
@@ -593,6 +597,8 @@
 				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57BFE285704F40059E61D /* PullListViewModel.swift in Sources */,
 				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
+				D0E98D07285CEABA0051413E /* KeyChainService.swift in Sources */,
+				D0E98D08285CEAC00051413E /* NetworkService.swift in Sources */,
 				D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */,
 				BC2F5976285C2A660012D18C /* Repo.swift in Sources */,
 			);
