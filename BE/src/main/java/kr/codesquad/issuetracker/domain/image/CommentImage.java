@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import kr.codesquad.issuetracker.domain.comment.Comment;
@@ -21,5 +22,6 @@ public class CommentImage {
 	private String imageUrl;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "comment_id")
 	private Comment comment;
 }

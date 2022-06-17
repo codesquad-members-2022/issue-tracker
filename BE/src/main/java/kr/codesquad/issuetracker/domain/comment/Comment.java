@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,17 +23,19 @@ public class Comment extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "comments_id")
+	@Column(name = "comment_id")
 	private Long id;
 
 	private String content;
 
-	@OneToMany(mappedBy = "comment_image_id")
+	@OneToMany(mappedBy = "comment")
 	private List<CommentImage> commentImages = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
 	private Member member;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "issue_id")
 	private Issue issue;
 }

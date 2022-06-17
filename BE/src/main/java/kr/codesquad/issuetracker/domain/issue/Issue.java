@@ -39,12 +39,14 @@ public class Issue extends BaseTimeEntity {
 	private String content;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
 	private Member member;
 
 	@OneToMany(mappedBy = "issue")
 	private List<Comment> comments = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "milestone_id")
 	private Milestone milestone;
 
 	@ManyToMany
