@@ -10,11 +10,13 @@ import XCTest
 @testable import IssueTracker
 
 class MockIssueTest: XCTestCase {
-    var manager: DecodeManager!
+
+    var issueRepository: IssueTrackingRepository!
 
     func testLocalMockIssues() throws {
-        manager = DecodeManagerImplement()
-        let issues = manager.getIssuesOnFailure()
+//        manager = DecodeManagerImplement()
+        issueRepository = IssueTrackingRepository()
+        let issues = issueRepository.getIssuesOnFailure()
 
         XCTAssertNotNil(issues, "Issue is NIL")
     }
