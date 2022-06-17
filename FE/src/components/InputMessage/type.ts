@@ -1,12 +1,8 @@
-import { MessageType, Status } from '@/constants/message';
+import { Status } from '@/constants/message';
 
 interface IInputMessageProps {
-  messageType: MessageType;
+  children: React.ReactNode | string;
   status: Status;
 }
 
-interface IStyled_message {
-  status: Status;
-}
-
-export type { IInputMessageProps, IStyled_message };
+export type { IInputMessageProps };
