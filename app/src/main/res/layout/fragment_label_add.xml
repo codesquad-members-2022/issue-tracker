@@ -48,7 +48,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="22dp"
             android:text="@string/label_subject_string"
-            android:textColor="@color/text_color"
+            android:textColor="@color/dark_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/label_appbarLayout" />
 
@@ -75,7 +75,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="33dp"
             android:text="@string/description_string"
-            android:textColor="@color/text_color"
+            android:textColor="@color/dark_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_subject" />
 
@@ -102,7 +102,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="33dp"
             android:text="@string/background_string"
-            android:textColor="@color/text_color"
+            android:textColor="@color/dark_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
@@ -115,7 +115,7 @@
             android:layout_marginEnd="4dp"
             android:background="@android:color/transparent"
             android:text="@{viewModel.backgroundColor}"
-            android:textColor="@color/text_color"
+            android:textColor="@color/dark_gray"
             app:layout_constraintBottom_toBottomOf="@id/tv_background"
             app:layout_constraintEnd_toStartOf="@id/btn_generate_color"
             app:layout_constraintStart_toEndOf="@id/tv_background"

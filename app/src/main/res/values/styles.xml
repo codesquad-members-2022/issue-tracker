@@ -52,6 +52,7 @@
 
     <style name="Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:includeFontPadding">false</item>
     </style>

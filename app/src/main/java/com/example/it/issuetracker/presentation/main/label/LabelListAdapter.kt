@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.it.issuetracker.data.dto.LabelInfo
+import com.example.it.issuetracker.data.dto.LabelDto
 import com.example.it.issuetracker.databinding.LabelItemBinding
 
-class LabelListAdapter : ListAdapter<LabelInfo, LabelListAdapter.LabelViewHolder>(diffUtil) {
+class LabelListAdapter : ListAdapter<LabelDto, LabelListAdapter.LabelViewHolder>(diffUtil) {
 
     class LabelViewHolder(private val binding: LabelItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(labelInfo: LabelInfo) {
-            binding.labelInfo = labelInfo
+        fun bind(labelDto: LabelDto) {
+            binding.labelInfo = labelDto
         }
     }
 
@@ -33,12 +33,12 @@ class LabelListAdapter : ListAdapter<LabelInfo, LabelListAdapter.LabelViewHolder
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<LabelInfo>() {
-            override fun areItemsTheSame(oldItem: LabelInfo, newItem: LabelInfo): Boolean {
+        val diffUtil = object : DiffUtil.ItemCallback<LabelDto>() {
+            override fun areItemsTheSame(oldItem: LabelDto, newItem: LabelDto): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: LabelInfo, newItem: LabelInfo): Boolean {
+            override fun areContentsTheSame(oldItem: LabelDto, newItem: LabelDto): Boolean {
                 return oldItem.id == newItem.id
             }
         }

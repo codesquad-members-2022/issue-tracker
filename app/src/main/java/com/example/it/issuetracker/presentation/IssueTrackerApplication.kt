@@ -19,7 +19,7 @@ class IssueTrackerApplication : Application() {
                 viewModelModule,
                 repositoryModule,
                 sharedPrefModule,
-                datasourceModule
+                dataSourceModule
             )
         }
     }

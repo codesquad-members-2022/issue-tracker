@@ -9,7 +9,7 @@
 
         <variable
             name="labelInfo"
-            type="com.example.it.issuetracker.data.dto.LabelInfo" />
+            type="com.example.it.issuetracker.data.dto.LabelDto" />
 
     </data>
 
