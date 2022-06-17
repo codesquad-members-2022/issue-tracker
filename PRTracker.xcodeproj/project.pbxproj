@@ -40,8 +40,6 @@
 		BCF57BFE285704F40059E61D /* PullListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BFC285704F40059E61D /* PullListViewModel.swift */; };
 		BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BFF285704FE0059E61D /* ListingManager.swift */; };
 		BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BFF285704FE0059E61D /* ListingManager.swift */; };
-		BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C022857050A0059E61D /* ListingTableView.swift */; };
-		BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C022857050A0059E61D /* ListingTableView.swift */; };
 		BCF57C06285705130059E61D /* GitHubLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* GitHubLoginManager.swift */; };
 		BCF57C07285705130059E61D /* GitHubLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C05285705130059E61D /* GitHubLoginManager.swift */; };
 		BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C082857051C0059E61D /* LoginViewModel.swift */; };
@@ -121,7 +119,6 @@
 		BCF57BD8285701FD0059E61D /* PRTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTrackerTests.swift; sourceTree = "<group>"; };
 		BCF57BFC285704F40059E61D /* PullListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullListViewModel.swift; sourceTree = "<group>"; };
 		BCF57BFF285704FE0059E61D /* ListingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingManager.swift; sourceTree = "<group>"; };
-		BCF57C022857050A0059E61D /* ListingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableView.swift; sourceTree = "<group>"; };
 		BCF57C05285705130059E61D /* GitHubLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginManager.swift; sourceTree = "<group>"; };
 		BCF57C082857051C0059E61D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BCF57C0B285705220059E61D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -183,8 +180,8 @@
 		BC9709402859C87800E54F93 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D0E98CE1285C01530051413E /* MockDataService.swift */,
 				BC9709412859C88100E54F93 /* Logger.swift */,
-				D0E98CE0285C014B0051413E /* Mock */,
 				D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */,
 				D04099DB2859C6930008B517 /* Observable.swift */,
 				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
@@ -338,7 +335,6 @@
 			children = (
 				D0E98CDA285BAEE80051413E /* CustomBarButton .swift */,
 				D0E98CCF285B05000051413E /* LabelView.xib */,
-				BCF57C022857050A0059E61D /* ListingTableView.swift */,
 				D0E98CEA285C107E0051413E /* PullListTableViewCell.swift */,
 				D0E98CD2285B088A0051413E /* PullListTableViewController.swift */,
 				D04099D12859C08B0008B517 /* PullListViewController.swift */,
@@ -603,14 +599,12 @@
 				BC2F596D285C26AB0012D18C /* NetworkService.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CE9285C02800051413E /* PullListModel.swift in Sources */,
-				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PullTableCellViewModel.swift in Sources */,
 				D0E98CD4285B088A0051413E /* PullListTableViewController.swift in Sources */,
 				BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CEC285C107E0051413E /* PullListTableViewCell.swift in Sources */,
-				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
 				D0E98CE3285C01530051413E /* MockDataService.swift in Sources */,
 				BC97093F2859C1EB00E54F93 /* KeyChainService.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
