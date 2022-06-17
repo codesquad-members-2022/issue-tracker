@@ -1,0 +1,12 @@
+@import '../../styles/_buttons.scss';
+@import '../../styles/_utils.scss';
+
+.github_button {
+  @include bigButton();
+  @include flex($align: center, $justify: center);
+  background-color: black;
+}
+
+.link {
+  text-decoration: none;
+}

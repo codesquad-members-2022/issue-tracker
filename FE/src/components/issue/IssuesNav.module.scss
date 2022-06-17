@@ -1,0 +1,56 @@
+@import '../../styles/_utils.scss';
+@import './layout';
+
+.navWrapper {
+  @include flex($align: center, $justify: space-between);
+  @include wrapper(64px);
+}
+
+.leftWrapper {
+  @include leftWrapper();
+  @include flex($align: center);
+}
+
+.checkBoxWrapper {
+  @include checkboxWrapper();
+  @include flex($align: center, $justify: center);
+  width: 6%;
+  transform: translateY(-0.2rem);
+  // 60px
+}
+
+.nav__contentWrapper {
+  @include contextWrapper();
+  @include flex($align: center);
+
+  span {
+    font-size: 1.6rem;
+    margin-right: 2rem;
+  }
+}
+
+.rightWrapper {
+  @include rightWrapper();
+  @include flex($align: center, $justify: space-around);
+
+  details {
+    position: relative;
+    font-weight: 700;
+    cursor: pointer;
+
+    summary {
+      font-size: 16px;
+      list-style: none;
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    .test {
+      position: absolute;
+      top: 30px;
+      cursor: pointer;
+      // 모달 들어가야 하는 부분
+    }
+  }
+}

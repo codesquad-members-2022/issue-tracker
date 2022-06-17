@@ -1,0 +1,55 @@
+@import './variables';
+
+@mixin button(
+  $width,
+  $height,
+  $padding-width: 0,
+  $padding-height: 0,
+  $radius: 0,
+  $font-size,
+  $color: #fff
+) {
+  width: calc($width);
+  height: calc($height);
+  border-radius: $radius;
+  padding: $padding-height $padding-width;
+  font-size: $font-size;
+  color: $color;
+
+  &:disabled {
+    opacity: 50%;
+  }
+}
+
+@mixin bigButton() {
+  @include button(
+    $width: 340px,
+    $height: 64px,
+    $radius: 20px,
+    $font-size: 1.8rem
+  );
+
+  background-color: $deep-blue;
+}
+
+@mixin mediumButton() {
+  @include button(
+    $width: 240px,
+    $height: 56px,
+    $radius: 20px,
+    $font-size: 1.8rem
+  );
+
+  background-color: $deep-blue;
+}
+
+@mixin smallButton() {
+  @include button(
+    $width: 120px,
+    $height: 40px,
+    $radius: 11px,
+    $font-size: 1.2rem
+  );
+
+  background-color: $deep-blue;
+}

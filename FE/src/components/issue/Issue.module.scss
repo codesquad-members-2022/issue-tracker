@@ -1,0 +1,40 @@
+@import '../../styles/_utils.scss';
+@import './layout';
+
+.wrapper {
+  width: 1280px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  border-radius: 2rem;
+}
+
+.issueWrapper {
+  @include wrapper(100px);
+  border-top: 1px solid black;
+  box-sizing: border-box;
+}
+
+.leftWrapper {
+  @include leftWrapper();
+  @include flex($align: center);
+}
+
+.checkBoxWrapper {
+  @include checkboxWrapper();
+}
+
+.issue__contentWrapper {
+  @include contextWrapper();
+  @include flex($direction: column, $justify: space-around);
+
+  span {
+    font-size: 1.6rem;
+    margin-right: 2rem;
+  }
+}
+
+.rightWrapper {
+  @include rightWrapper();
+  @include flex($align: center, $justify: space-around);
+}
+

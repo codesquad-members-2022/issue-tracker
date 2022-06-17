@@ -1,0 +1,24 @@
+@import '../../styles/_buttons.scss';
+@import '../../styles/_utils.scss';
+
+.filterNav {
+  @include flex($align: center, $justify: space-between);
+  width: 1280px;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.filterWrapper {
+  width: 50%;
+  height: 100%;
+}
+
+.filterButtonsWrapper {
+  @include flex($align: center, $justify: flex-end);
+  width: 40%;
+  height: 100%;
+}
+
+.addIssueButton {
+  @include smallButton();
+}
