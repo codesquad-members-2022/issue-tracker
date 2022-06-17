@@ -10,7 +10,8 @@ import UIKit
 class PullListViewController: UIViewController {
 
     private let viewModel = PullListViewModel()
-    private var modelData: [PullListModel]?
+    private var pullListDatas: [Pull]?
+    private var cellViewModel = [PullTableCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,13 +23,13 @@ class PullListViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.mockData.bind { modelLists in
-            self.modelData = modelLists
+        viewModel.pullViewModelList.bind { tableCellViewModels in
+            self.cellViewModel = tableCellViewModels ?? []
         }
     }
     
     private func requestData() {
-        viewModel.requestData()
+        viewModel.requestPullListData()
     }
     
     private func configureSearchController() {
