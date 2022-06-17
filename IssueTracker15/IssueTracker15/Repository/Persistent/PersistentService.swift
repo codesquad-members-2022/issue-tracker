@@ -9,9 +9,7 @@ import Foundation
 import Combine
 
 class PersistentService: ServiceLayer {
-    typealias DataResult = Data
-    
-    func requestFromUseCase(type: ServiceType) -> AnyPublisher<DataResult, Error>? {
+    func requestFromUseCase(type: ServiceType) -> AnyPublisher<Transferable, Error>? {
         return nil
     }
 }
