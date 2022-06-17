@@ -10,6 +10,9 @@
 		1DE61695C83CB1A5484B159C /* Pods_PRTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F85B983D296BEA49342F0 /* Pods_PRTrackerTests.framework */; };
 		BC2F5963285AE4040012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
 		BC2F5964285AE5970012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
+		BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
+		BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
+		BC2F596A285C1AC10012D18C /* PullManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5969285C1AC10012D18C /* PullManager.swift */; };
 		BC97093B2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093C2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */; };
@@ -71,6 +74,9 @@
 		A6AE00453ECCCA10D6CD0525 /* Pods-PRTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B82F1307FAF9E5A90C63CAFE /* Pods-PRTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		BC2F5962285AE4040012D18C /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		BC2F5965285B6FBB0012D18C /* PRTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PRTracker.entitlements; sourceTree = "<group>"; };
+		BC2F5966285B70100012D18C /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
+		BC2F5969285C1AC10012D18C /* PullManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullManager.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
 		BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManger.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 		BCF57BC0285701FB0059E61D /* PRTracker */ = {
 			isa = PBXGroup;
 			children = (
+				BC2F5965285B6FBB0012D18C /* PRTracker.entitlements */,
 				BCF57BF3285703C90059E61D /* Supporting */,
 				BCF57BF2285703C50059E61D /* Resource */,
 				BCF57BF1285703B60059E61D /* Source */,
@@ -249,6 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				BCF57C05285705130059E61D /* OAuthManager.swift */,
+				BC2F5969285C1AC10012D18C /* PullManager.swift */,
+				BC2F5966285B70100012D18C /* AppleLoginManager.swift */,
 				BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */,
 				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
 			);
@@ -504,8 +513,10 @@
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */,
 				BCF57BFD285704F40059E61D /* ListingViewModel.swift in Sources */,
+				BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */,
 				D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */,
 				D04099D22859C08B0008B517 /* ListingViewController.swift in Sources */,
+				BC2F596A285C1AC10012D18C /* PullManager.swift in Sources */,
 				D04099DE2859C9320008B517 /* PRTableCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,6 +537,7 @@
 				D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
+				BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PRTableCellViewModel.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
@@ -695,6 +707,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PRTracker/PRTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
@@ -727,6 +740,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PRTracker/PRTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
