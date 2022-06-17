@@ -70,7 +70,6 @@ class PullListViewController: UIViewController {
 
 extension PullListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        dump(searchController.searchBar.text)
     }
 }
 
