@@ -47,7 +47,7 @@ export const Buttons = styled.div`
   border-radius: 11px;
 `;
 
-export const LabelBtn = styled.button`
+export const LabelBtn = styled(Link)`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   width: 160px;
@@ -56,6 +56,7 @@ export const LabelBtn = styled.button`
   ${({ theme }) => theme.fontStyles.linkSmall};
   color: ${({ theme }) => theme.fontColors.gray2};
   gap: 8px;
+  text-decoration: none;
 `;
 export const MileStoneBtn = styled(LabelBtn)`
   border-radius: 0px 11px 11px 0px;
