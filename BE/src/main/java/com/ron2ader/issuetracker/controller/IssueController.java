@@ -22,7 +22,7 @@ public class IssueController {
     @PostMapping("/issues")
     public ResponseEntity<IssueDetailResponse> register(IssueCreateRequest issueCreateRequest) {
 
-        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest, "ron2"); // 임시 아이디
+        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest.getTitle(), issueCreateRequest.getContents(), "ron2"); // 임시 아이디
 
         return ResponseEntity.ok(issueDetailResponse);
     }
