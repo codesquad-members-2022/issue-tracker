@@ -12,11 +12,12 @@ final class IssueListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateViews(title: String, description: String, milestone: String, labelName: String) {
+    func updateViews(title: String, description: String, milestone: String?, labels: [Label]) {
         self.titleLabel.text = title
         self.descriptionLabel.text = description
         self.milestoneLabel.text = milestone
-        self.labelNameView.updateView(title: labelName)
+        // TODO: - label갯수만큼 for 돌려서 붙이기
+//        self.labelNameView.updateView(title: labelName)
     }
     
     private func setupViews() {

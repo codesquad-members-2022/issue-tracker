@@ -3,33 +3,25 @@ import UIKit
 
 final class IssueViewController: UIViewController {
 
-    struct Dummy {
-        let title: String
-        let description: String
-        let milestone: String
-        let label: String
-    }
-    
-    private let dummy: [Dummy] = [
-        .init(title: "iOS 이슈 트래커 개발", description: "개발일정: 8월 3일부터 9월 2일까지", milestone: "마스터즈 코스", label: "Documentation"),
-        .init(title: "다마고치 게임 개발", description: "iOS, Watch 를 지원하는 게임을 개발한다", milestone: "개인 프로젝트", label: "Feature"),
-        .init(title: "타이머 앱의 시간 오류", description: "타이머 앱에서 잘못된 시간을 화면에 보여주고 있습니다", milestone: "개인 프로젝트", label: "bug"),
-        .init(title: "PR 보내기", description: "iOS 이슈 트래커의 코드리뷰를 받기위해 PR 보내기", milestone: "마스터즈 코스", label: "Documentation")
-    ]
+    private var issues: [Issue] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
-        
+        requestIssue()
+    }
+    
+    private func requestIssue() {
         guard let token = GithubUserDefaults.getToken() else {
             return
         }
-        
         NetworkManager.shared.requestIssues(accessToken: token) { result in
             switch result {
             case .success(let issues):
                 print(issues)
+                self.issues = issues
+                self.collectionView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -95,15 +87,15 @@ final class IssueViewController: UIViewController {
 
 extension IssueViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummy.count
+        return self.issues.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueListCell", for: indexPath) as? IssueListCell else {
             return UICollectionViewCell()
         }
-        let data = dummy[indexPath.row]
-        cell.updateViews(title: data.title, description: data.description, milestone: data.milestone, labelName: data.label)
+        let data = issues[indexPath.row]
+        cell.updateViews(title: data.title, description: data.body ?? "", milestone: data.milestone?.title, labels: data.labels)
         return cell
     }
 }
