@@ -5,7 +5,6 @@ final class CapsuleTextView: UIView {
     
     convenience init(title: String, hexColor: String) {
         self.init(frame: .zero)
-        print("hexcolor=", hexColor)
         self.backgroundColor = UIColor(hexString: "#\(hexColor)")
         titleLabel.text = title
         setupViews()

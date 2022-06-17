@@ -39,13 +39,10 @@ final class NetworkManager {
         ]
         AF.request(urlString, method: .get, headers: headers)
             .responseDecodable(of: [Issue].self) { (response) in
-                print("response: \(response)")
             switch response.result {
             case let .success(decodeData):
-                print(decodeData)
                 completion(.success(decodeData))
             case let .failure(error):
-                print(error)
                 completion(.failure(.issueNotFound))
             }
         }

@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // TODO: - 토큰 유효기간 판단
+        // 토큰저장할때: 토큰 & 토큰이 저장된 시간 & 유효시간(1일)
+        // 토큰이 유효한지 판단
+        // UserDefaults.토큰이저장된시간 > 1일
+        // { 다시 로그인을 해야된다고 판단 => UerDefaults.token 삭제 }
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let rootViewController =
         GithubUserDefaults.getToken() != nil
@@ -27,8 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool { // 사파리 -> 콜백으로 들어오는 부분
-        print(url)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if url.absoluteString.starts(with: "issuetracker://login") { // 콜백URL
             if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
                 NetworkManager.shared.requestAccessToken(with: code) { result in

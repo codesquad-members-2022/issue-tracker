@@ -19,7 +19,6 @@ final class IssueViewController: UIViewController {
         NetworkManager.shared.requestIssues(accessToken: token) { result in
             switch result {
             case .success(let issues):
-                print(issues)
                 self.issues = issues
                 self.collectionView.reloadData()
             case .failure(let error):
