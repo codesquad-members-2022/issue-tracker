@@ -11,8 +11,8 @@ import UIKit
 class LoginRepository {
 
     func requestGithubAuthorize() {
-        let clientID = "e6386d0321b6dc2820c0"
-        let scope = "repo user"
+        let clientID = Environment.clientId
+        let scope = Environment.scope
         let urlString = "https://github.com/login/oauth/authorize"
         guard var components = URLComponents(string: urlString) else { return }
         components.queryItems = [

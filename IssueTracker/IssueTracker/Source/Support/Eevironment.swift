@@ -25,12 +25,12 @@ public enum Environment {
 
     static let clientId: String = {
         guard let idString = Environment.infoDictionary[Keys.Plist.clientId] as? String else { fatalError("Client id not set in plist for this environment") }
-        return idString
+        return "\(idString)"
     }()
 
     static let clientSecret: String = {
         guard let secretString = Environment.infoDictionary[Keys.Plist.clientSecret] as? String else { fatalError("Client secret not set in plist for this environment") }
-        return secretString
+        return "\(secretString)"
     }()
 
     static let scope: String  = {
