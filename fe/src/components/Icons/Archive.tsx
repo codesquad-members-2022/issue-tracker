@@ -7,23 +7,23 @@ function ArchiveIcon({ size = { width: "16", height: "16" } }: DefaultIconProps)
         <path
           d="M14 5.33334V14H2V5.33334"
           stroke="#14142B"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M15.3334 2H0.666748V5.33333H15.3334V2Z"
           stroke="#14142B"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M6.66675 8H9.33341"
           stroke="#14142B"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>

@@ -6,9 +6,9 @@ function XsquareIcon({ size = { width: "16", height: "16" } }: DefaultIconProps)
       <path
         d="M11.2999 4.70023L4.70025 11.2999M4.7002 4.70016L11.2999 11.2998"
         stroke="#111111"
-        stroke-width="1.6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
