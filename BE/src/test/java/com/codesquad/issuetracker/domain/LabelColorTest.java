@@ -87,4 +87,72 @@ class LabelColorTest {
             }
         }
     }
+
+    @Nested
+    @DisplayName("getColorCode 메서드는")
+    class GetColorCode_메서드는 {
+        @Nested
+        @DisplayName("만약 LabelColor 생성시 색상코드 문자열이 '0'이라면")
+        class 만약_LabelColor_생성시_색상코드_문자열이_0이라면 {
+
+            private String colorCode = "0";
+
+            @Test
+            @DisplayName("문자열 '000000'을 반환해야 한다")
+            void 문자열_000000을_반환해야_한다() {
+                LabelColor labelColor = LabelColor.create(colorCode);
+                String colorCode = labelColor.getColorCode();
+
+                assertThat(colorCode).isEqualTo("000000");
+            }
+        }
+
+        @Nested
+        @DisplayName("만약 LabelColor 생성시 색상코드 문자열이 'fFfFfF'라면")
+        class 만약_LabelColor_생성시_색상코드_문자열이_fFfFfF라면 {
+
+            private String colorCode = "fFfFfF";
+
+            @Test
+            @DisplayName("문자열 'ffffff'을 반환해야 한다")
+            void 문자열_ffffff을_반환해야_한다() {
+                LabelColor labelColor = LabelColor.create(colorCode);
+                String colorCode = labelColor.getColorCode();
+
+                assertThat(colorCode).isEqualTo("ffffff");
+            }
+        }
+
+        @Nested
+        @DisplayName("만약 LabelColor 생성시 색상코드 문자열이 'aaa'라면")
+        class 만약_LabelColor_생성시_색상코드_문자열이_aaa라면 {
+
+            private String colorCode = "aaa";
+
+            @Test
+            @DisplayName("문자열 '000aaa'을 반환해야 한다")
+            void 문자열_000aaa을_반환해야_한다() {
+                LabelColor labelColor = LabelColor.create(colorCode);
+                String colorCode = labelColor.getColorCode();
+
+                assertThat(colorCode).isEqualTo("000aaa");
+            }
+        }
+
+        @Nested
+        @DisplayName("만약 LabelColor 생성시 색상코드 문자열이 'bBb'라면")
+        class 만약_LabelColor_생성시_색상코드_문자열이_bBb라면 {
+
+            private String colorCode = "bBb";
+
+            @Test
+            @DisplayName("문자열 '000bbb'을 반환해야 한다")
+            void 문자열_000bbb을_반환해야_한다() {
+                LabelColor labelColor = LabelColor.create(colorCode);
+                String colorCode = labelColor.getColorCode();
+
+                assertThat(colorCode).isEqualTo("000bbb");
+            }
+        }
+    }
 }
