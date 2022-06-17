@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  IssueTracker
 //
 //  Created by 최예주 on 2022/06/13.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     // TODO: 후에 LoginViewModel 에서 요청하도록 변경
     let loginRepository = LoginRepository()

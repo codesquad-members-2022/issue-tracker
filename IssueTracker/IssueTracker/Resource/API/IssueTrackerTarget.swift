@@ -8,22 +8,19 @@
 import Foundation
 
 enum IssueTrackerTarget {
-    case requestGitHubAuthorize
     case requestAccessToken(code: String)
 }
 
 extension IssueTrackerTarget: BaseTarget {
     var baseURL: URL? {
         switch self {
-        case .requestAccessToken, .requestGitHubAuthorize:
+        case .requestAccessToken:
             return URL(string: "https://github.com/login/oauth")
         }
     }
     // MARK: - End Point
     var path: String? {
         switch self {
-        case .requestGitHubAuthorize:
-            return "/authorize"
         case .requestAccessToken:
             return "/login/oauth/access_token"
         }
@@ -32,11 +29,6 @@ extension IssueTrackerTarget: BaseTarget {
     // TODO: KeyChain 사용해서 client_id, client_secret 등은 안보이게 하는 것이 좋겠다.
     var parameter: [String: String]? {
         switch self {
-        case .requestGitHubAuthorize:
-            return [
-                "client_id": Environment.clientId,
-                "scope": Environment.scope
-            ]
         case .requestAccessToken(let code):
             return [
                 "client_id": Environment.clientId,
@@ -50,8 +42,6 @@ extension IssueTrackerTarget: BaseTarget {
         switch self {
         case .requestAccessToken:
             return .post
-        case .requestGitHubAuthorize:
-            return .get
         }
     }
 
