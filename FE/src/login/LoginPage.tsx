@@ -15,6 +15,10 @@ function LoginPage() {
     return false;
   };
 
+  const resetErrorMessage = () => {
+    setErrorMessage('');
+  };
+
   const handleUserInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { type, value } = event.target;
     switch (type) {
@@ -25,7 +29,6 @@ function LoginPage() {
         setPassword(value);
         break;
     }
-    setErrorMessage('');
   };
 
   const handleLoginButtonClick = (
@@ -55,6 +58,7 @@ function LoginPage() {
             minLength={6}
             maxLength={16}
             inputHandler={handleUserInput}
+            focusHandler={resetErrorMessage}
           />
           <TextInput
             type="password"
@@ -63,6 +67,7 @@ function LoginPage() {
             minLength={6}
             maxLength={12}
             inputHandler={handleUserInput}
+            focusHandler={resetErrorMessage}
           />
         </Inputs>
         <Button
