@@ -26,7 +26,6 @@
 		1B174853285885710028E037 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174848285885710028E037 /* RequestModel.swift */; };
 		1B87F704285B6C7A002B47B7 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */; };
 		1B87F705285B6C7A002B47B7 /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */; };
-		1B87F706285B6C7A002B47B7 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F700285B6C7A002B47B7 /* ServiceLayer.swift */; };
 		1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F702285B6C7A002B47B7 /* NetworkService.swift */; };
 		1B87F708285B6C7A002B47B7 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F703285B6C7A002B47B7 /* Repository.swift */; };
 		1B87F70F285C221D002B47B7 /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F70E285C221D002B47B7 /* Transferable.swift */; };
@@ -73,7 +72,6 @@
 		1B174848285885710028E037 /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
 		1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
-		1B87F700285B6C7A002B47B7 /* ServiceLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
 		1B87F702285B6C7A002B47B7 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1B87F703285B6C7A002B47B7 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1B87F70E285C221D002B47B7 /* Transferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 				1B87F70E285C221D002B47B7 /* Transferable.swift */,
 				1B87F703285B6C7A002B47B7 /* Repository.swift */,
 				1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */,
-				1B87F700285B6C7A002B47B7 /* ServiceLayer.swift */,
 				1B87F6FE285B6C7A002B47B7 /* Persistent */,
 				1B87F701285B6C7A002B47B7 /* Network */,
 			);
@@ -462,7 +459,6 @@
 				8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */,
 				1B87F70F285C221D002B47B7 /* Transferable.swift in Sources */,
 				1B174852285885710028E037 /* TestDecodableType.swift in Sources */,
-				1B87F706285B6C7A002B47B7 /* ServiceLayer.swift in Sources */,
 				1B174823285885180028E037 /* SceneDelegate.swift in Sources */,
 				1B17484F285885710028E037 /* TestButton.swift in Sources */,
 			);

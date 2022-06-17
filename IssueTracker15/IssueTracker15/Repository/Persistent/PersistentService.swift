@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-class PersistentService: ServiceLayer {
-    func requestFromUseCase(type: ServiceType) -> AnyPublisher<Transferable, Error>? {
+class PersistentService<T: NSData> {
+    func requestFromUseCase(type: ServiceType) -> AnyPublisher<T, Error>? {
         return nil
     }
 }
