@@ -14,13 +14,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequiredArgsConstructor
 public class GithubOAuthService {
 
-    public static final String ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     private final WebClient webClient;
     private final GithubProperties githubProperties;
 
     public GithubToken requestAccessToken(String code) {
         return webClient.post()
-            .uri(ACCESS_TOKEN_URL)
+            .uri(githubProperties.getAccessTokenUrl())
             .bodyValue(
                 GithubTokenRequest.of(githubProperties.getClientId(), githubProperties.getClientSecret(), code)
             )
