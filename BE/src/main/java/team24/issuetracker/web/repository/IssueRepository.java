@@ -17,4 +17,10 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
 
 	@Query("select i from Issue i join i.assignees as a where a.user.id = :id")
 	List<Issue> findByAssignee(@Param("id") Long id);
+
+	@Query("select i from Issue i join i.comments as c where c.writer.id = :id")
+	List<Issue> findByComment(@Param("id") Long id);
+
+	@Query("select i from Issue i where i.isClosed = :isClosed ")
+	List<Issue> findByClosed(@Param("isClosed") Boolean isClosed);
 }

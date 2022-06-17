@@ -33,4 +33,16 @@ public class IssueService {
 			.map(IssueListResponse::new)
 			.collect(Collectors.toList());
 	}
+
+	public List<IssueListResponse> findIssuesCommentedByMe(@PathVariable Long id) {
+		return issueRepository.findByComment(id).stream()
+			.map(IssueListResponse::new)
+			.collect(Collectors.toList());
+	}
+
+	public List<IssueListResponse> findByIsClosed(Boolean isClosed) {
+		return issueRepository.findByClosed(isClosed).stream()
+			.map(IssueListResponse::new)
+			.collect(Collectors.toList());
+	}
 }
