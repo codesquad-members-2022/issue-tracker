@@ -49,3 +49,21 @@ export const buttonStyle = {
     opacity: 0.5,
   },
 };
+
+export const textButtonStyle = {
+  medium: {
+    width: 87,
+    height: 32,
+    fontSize: "small",
+  },
+  small: {
+    width: 70,
+    height: 32,
+    fontSize: "xSmall",
+  },
+  fontColor: {
+    initial: "label",
+    active: "titleActive",
+    hover: "body",
+  },
+};
