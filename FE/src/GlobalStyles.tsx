@@ -1,7 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
+// NOTE: 코드스쿼드 멤버 dony의 코드를 사용
+// https://github.com/jindonyy/airbnb/blob/team-36/src/GlobalStyles.tsx
+
 const GlobalStyles = createGlobalStyle`
-  
   html,
   body,
   div,

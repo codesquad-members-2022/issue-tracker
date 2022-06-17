@@ -1,3 +1,4 @@
+// NOTE: 참고 링크 https://velog.io/@jjunyjjuny/React-TS-boilerplate-%EC%A0%9C%EC%9E%91%EA%B8%B0-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%84%B1
 const dotenv = require('dotenv');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
-  devtool: isProd ? 'hidden-source-map' : 'source-map',
+  devtool: isProd ? 'source-map' : 'eval-source-map',
   entry: './src/index.tsx',
   output: {
     filename: '[name].js',
