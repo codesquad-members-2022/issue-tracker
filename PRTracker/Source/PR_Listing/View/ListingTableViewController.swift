@@ -40,7 +40,6 @@ class ListingTableViewController: UITableViewController {
         cell.title.text = cellData?.title
         cell.content.text = cellData?.content
         cell.projectName.text = cellData?.projectName
-        print("cellData~~~", cellData)
         return cell
     }
     
