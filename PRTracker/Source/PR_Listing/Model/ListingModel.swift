@@ -12,4 +12,5 @@ struct ListingModel {
     let content: String
     let projectName: String
     let labelName: String?
+    let commentCount: Int?
 }
