@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Issue from 'components/Issue/index';
 import NewIssue from 'components/newIssue';
 import LabelPage from 'components/LabelPage';
+import MileStone from 'components/milestone/Index';
 
 function Router() {
   return (
@@ -13,7 +14,7 @@ function Router() {
       <Route path="/newIssue" element={<NewIssue />} />
       <Route path="/issue" element={<Issue />} />
       <Route path="/label" element={<LabelPage />} />
-      <Route path="/milestone" />
+      <Route path="/milestone" element={<MileStone />} />
     </Routes>
   );
 }
