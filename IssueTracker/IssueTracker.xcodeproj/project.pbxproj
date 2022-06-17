@@ -19,6 +19,8 @@
 		981BD43F285B12F300DDDE64 /* Margins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981BD43E285B12F200DDDE64 /* Margins.swift */; };
 		983E66C6285B208800C9B975 /* GithubUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E66C5285B208800C9B975 /* GithubUserDefaults.swift */; };
 		983E66C8285B212A00C9B975 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E66C7285B212A00C9B975 /* NetworkManager.swift */; };
+		985CAB47285C1A26005E709D /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB46285C1A26005E709D /* UIStackView+Extension.swift */; };
+		985CAB49285C1A61005E709D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB48285C1A61005E709D /* UIColor+Extension.swift */; };
 		988510D628572B8700CC2DA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988510D528572B8700CC2DA9 /* AppDelegate.swift */; };
 		988510DA28572B8700CC2DA9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988510D928572B8700CC2DA9 /* ViewController.swift */; };
 		988510DF28572B8900CC2DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 988510DE28572B8900CC2DA9 /* Assets.xcassets */; };
@@ -60,6 +62,8 @@
 		981BD43E285B12F200DDDE64 /* Margins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Margins.swift; sourceTree = "<group>"; };
 		983E66C5285B208800C9B975 /* GithubUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserDefaults.swift; sourceTree = "<group>"; };
 		983E66C7285B212A00C9B975 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		985CAB46285C1A26005E709D /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		985CAB48285C1A61005E709D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		988510D228572B8700CC2DA9 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		988510D528572B8700CC2DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		988510D928572B8700CC2DA9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +143,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		985CAB45285C19D0005E709D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				985CAB46285C1A26005E709D /* UIStackView+Extension.swift */,
+				985CAB48285C1A61005E709D /* UIColor+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		988510C928572B8700CC2DA9 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +175,7 @@
 		988510D428572B8700CC2DA9 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				985CAB45285C19D0005E709D /* Extension */,
 				983E66CA285B2AD300C9B975 /* Model */,
 				983E66C4285B204600C9B975 /* Storage */,
 				981BD438285B123A00DDDE64 /* Issue */,
@@ -333,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00BCB40A285B027B005E87BC /* Milestone.swift in Sources */,
+				985CAB47285C1A26005E709D /* UIStackView+Extension.swift in Sources */,
 				981BD43F285B12F300DDDE64 /* Margins.swift in Sources */,
 				981BD43B285B128F00DDDE64 /* CapsuleTextView.swift in Sources */,
 				983E66C8285B212A00C9B975 /* NetworkManager.swift in Sources */,
@@ -340,6 +355,7 @@
 				988510DA28572B8700CC2DA9 /* ViewController.swift in Sources */,
 				981BD43D285B12AC00DDDE64 /* IssueListCell.swift in Sources */,
 				988510D628572B8700CC2DA9 /* AppDelegate.swift in Sources */,
+				985CAB49285C1A61005E709D /* UIColor+Extension.swift in Sources */,
 				0053D7572859B4CA006614EC /* PrivateStorage.swift in Sources */,
 				00BCB408285B0262005E87BC /* Label.swift in Sources */,
 				983E66C6285B208800C9B975 /* GithubUserDefaults.swift in Sources */,
