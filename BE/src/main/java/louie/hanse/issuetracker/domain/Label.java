@@ -1,5 +1,7 @@
 package louie.hanse.issuetracker.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
@@ -11,9 +13,8 @@ public class Label {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn
-    private Issue issue;
+    @OneToMany(mappedBy = "issue")
+    private List<IssueLabel> issueLabels = new ArrayList<>();
 
     @Column(name = "label_name")
     private String name;

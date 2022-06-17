@@ -19,7 +19,7 @@ public class Issue {
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "issue")
-    private List<Label> labels = new ArrayList<>();
+    private List<IssueLabel> issueLabels = new ArrayList<>();
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn
