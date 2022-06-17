@@ -21,6 +21,9 @@ class RequestModel {
         var request = URLRequest(url: url)
         request.method = .get
         
-        return NetworkService<TestDecodableType>().request(request, urgency: urgency ?? .urgent)
+        return Repository
+            .shared
+            .networkService
+            .request(request, urgency: urgency ?? .urgent)
     }
 }

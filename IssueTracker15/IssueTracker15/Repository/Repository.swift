@@ -12,7 +12,7 @@ import Alamofire
 class Repository {
     static let shared = Repository()
     
-    // TODO: - ServiceContainer 구현.
+    var networkService = NetworkService<TestDecodableType>()
 }
 
 enum ServiceType {

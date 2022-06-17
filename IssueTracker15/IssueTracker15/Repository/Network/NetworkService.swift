@@ -5,7 +5,7 @@
 import Foundation
 import Alamofire
 
-class NetworkService<T: Decodable> {
+class NetworkService<T: Codable> {
     
     private var urgentSession = Session(requestQueue: DispatchQueue.global(qos: .userInteractive))
     private var effectiveSession = Session(requestQueue: DispatchQueue.global(qos: .background))
@@ -42,7 +42,8 @@ class NetworkService<T: Decodable> {
         }
         
         return getSession(urgency)
-            .request(request).publishDecodable(type: T.self)
+            .request(request)
+            .publishDecodable(type: T.self)
     }
     
     private func getSession(_ urgency: RequestUrgency) -> Session {

@@ -58,6 +58,16 @@
                ReferencedContainer = "container:IssueTracker15.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1B87F719285C38FD002B47B7"
+               BuildableName = "ViewModelUnitTest.xctest"
+               BlueprintName = "ViewModelUnitTest"
+               ReferencedContainer = "container:IssueTracker15.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
