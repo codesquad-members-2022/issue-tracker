@@ -1,5 +1,5 @@
 //
-//  ListingTableViewController.swift
+//  PullListTableViewController.swift
 //  PRTracker
 //
 //  Created by 안상희 on 2022/06/16.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ListingTableViewController: UITableViewController {
+class PullListTableViewController: UITableViewController {
     
-    private let viewModel = PRTableCellViewModel()
-    private var cellData: ListingModel?
+    private let viewModel = PullTableCellViewModel()
+    private var cellData: PullListModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class ListingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListingTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PullListTableViewCell else { return UITableViewCell() }
         cell.title.text = cellData?.title
         cell.content.text = cellData?.content
         cell.projectName.text = cellData?.projectName

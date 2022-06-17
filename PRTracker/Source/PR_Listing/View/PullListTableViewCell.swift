@@ -1,5 +1,5 @@
 //
-//  ListingTableViewCell.swift
+//  PullListTableViewCell.swift
 //  PRTracker
 //
 //  Created by 안상희 on 2022/06/17.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListingTableViewCell: UITableViewCell {
+class PullListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var content: UILabel!

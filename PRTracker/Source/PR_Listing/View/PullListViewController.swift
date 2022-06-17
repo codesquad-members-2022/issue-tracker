@@ -1,5 +1,5 @@
 //
-//  ListingViewController.swift
+//  PullListViewController.swift
 //  PRTracker
 //
 //  Created by 안상희 on 2022/06/15.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ListingViewController: UIViewController {
+class PullListViewController: UIViewController {
 
-    private let viewModel = ListingViewModel()
-    private var modelData: [ListingModel]?
+    private let viewModel = PullListViewModel()
+    private var modelData: [PullListModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,13 +63,13 @@ class ListingViewController: UIViewController {
 }
 
 
-extension ListingViewController: UISearchResultsUpdating {
+extension PullListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         dump(searchController.searchBar.text)
     }
 }
 
-extension ListingViewController: UISearchBarDelegate {
+extension PullListViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         return true
     }

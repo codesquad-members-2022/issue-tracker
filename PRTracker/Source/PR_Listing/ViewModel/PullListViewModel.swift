@@ -1,5 +1,5 @@
 //
-//  ListingViewModel.swift
+//  PullListViewModel.swift
 //  PRTracker
 //
 //  Created by Bumgeun Song on 2022/06/13.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class ListingViewModel {
+final class PullListViewModel {
     private var mockDataService = MockDataService()
-    var mockData: Observable<[ListingModel]?> = Observable(nil)
+    var mockData: Observable<[PullListModel]?> = Observable(nil)
     
-    private var tableCellViewModelLists = [PRTableCellViewModel]()
-    private let tableCellViewModel = PRTableCellViewModel()
+    private var tableCellViewModelLists = [PullTableCellViewModel]()
+    private let tableCellViewModel = PullTableCellViewModel()
     
     func searchBarTextDidChange(with text: String) {
         // TODO: SearchBarText가 바뀌면 호출되는 부분 구현
@@ -33,7 +33,7 @@ final class ListingViewModel {
         }
     }
     
-    private func configureTableCellViewData(with modelList: [ListingModel]) {
+    private func configureTableCellViewData(with modelList: [PullListModel]) {
         for model in modelList {
             tableCellViewModel.configureCellData(with: model)
             tableCellViewModelLists.append(tableCellViewModel)
