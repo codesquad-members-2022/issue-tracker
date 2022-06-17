@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let url = URLContexts.first?.url, url.absoluteString.starts(with: "pr-tracker://") {
             guard let queryString = url.query else { return }
             guard let code = queryString.components(separatedBy: "=").last else { return }
-            OAuthManager.shared.getAccessToken(with: code)
+            GitHubLoginManager.shared.getAccessToken(with: code)
         }
     }
 
