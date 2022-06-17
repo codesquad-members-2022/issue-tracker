@@ -11,10 +11,9 @@
     <string name="bottom_navigation_milestone">마일스톤</string>
     <string name="bottom_navigation_my_page">내 계정</string>
 
-    <string name="label_add_string">새로운 레이블</string>
+    <!--label-->
     <string name="label_add_menu_string">label add</string>
     <string name="save_string">저장</string>
-    <string name="label_string">레이블</string>
     <string name="label_subject_string">제목</string>
     <string name="must_input_string">필수 입력</string>
     <string name="description_string">설명</string>
@@ -22,4 +21,16 @@
     <string name="background_string">배경색</string>
     <string name="refresh_string">refresh</string>
     <string name="change_color_string">색상 변경</string>
+
+    <!--issue-->
+    <string name="description_add_issue">add_issue</string>
+
+    <!--image description-->
+    <string name="toolbar_search">toolbar_search</string>
+
+    <!--toolbar title-->
+    <string name="issue">이슈</string>
+    <string name="label_add_string">새로운 레이블</string>
+    <string name="label_string">레이블</string>
+
 </resources>
