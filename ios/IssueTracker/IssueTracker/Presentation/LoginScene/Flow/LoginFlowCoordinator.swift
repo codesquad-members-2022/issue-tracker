@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol LoginFlowCoordinatorDependencies {
+    func makeLoginViewController(action: LoginViewModelAction) -> UIViewController
+}
+
 final class LoginFlowCoordinator: Coordinator {
     private let navigationController: UINavigationController
+    private let dependency: LoginFlowCoordinatorDependencies
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, dependency: LoginFlowCoordinatorDependencies) {
         self.navigationController = navigationController
+        self.dependency = dependency
     }
 
     deinit {
@@ -19,7 +25,12 @@ final class LoginFlowCoordinator: Coordinator {
     }
 
     func start() {
-        let viewController = LoginViewController()
+        let action = LoginViewModelAction(goToMainScene: showMainTabBar)
+        let viewController = dependency.makeLoginViewController(action: action)
         navigationController.viewControllers = [viewController]
+    }
+
+    private func showMainTabBar() {
+        // new flow start or push view controller
     }
 }
