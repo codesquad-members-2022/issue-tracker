@@ -7,9 +7,9 @@ function CheckBoxActiveIcon({ size = { width: "16", height: "16" } }: DefaultIco
       <path
         d="M10.6667 6L7 9.67333L5 7.67333"
         stroke="#FEFEFE"
-        stroke-width="1.6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
