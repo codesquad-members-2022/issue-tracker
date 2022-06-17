@@ -8,13 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1DE61695C83CB1A5484B159C /* Pods_PRTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F85B983D296BEA49342F0 /* Pods_PRTrackerTests.framework */; };
-		BC2F5963285AE4040012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
-		BC2F5964285AE5970012D18C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5962285AE4040012D18C /* Secrets.swift */; };
 		BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
 		BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
 		BC2F596A285C1AC10012D18C /* PullManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5969285C1AC10012D18C /* PullManager.swift */; };
-		BC2F596C285C26AB0012D18C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596B285C26AB0012D18C /* NetworkService.swift */; };
-		BC2F596D285C26AB0012D18C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596B285C26AB0012D18C /* NetworkService.swift */; };
 		BC2F596F285C26D60012D18C /* UserManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManger.swift */; };
 		BC2F5970285C26D60012D18C /* UserManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManger.swift */; };
 		BC2F5975285C2A660012D18C /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5974285C2A660012D18C /* Repo.swift */; };
@@ -23,8 +19,6 @@
 		BC2F5979285C2ADC0012D18C /* RepoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5977285C2ADC0012D18C /* RepoManager.swift */; };
 		BC97093B2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093C2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
-		BC97093E2859C1EB00E54F93 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainService.swift */; };
-		BC97093F2859C1EB00E54F93 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainService.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
 		BC9709432859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
 		BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709442859CACC00E54F93 /* TokenResponse.swift */; };
@@ -75,6 +69,8 @@
 		D0E98CE9285C02800051413E /* PullListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE7285C02800051413E /* PullListModel.swift */; };
 		D0E98CEB285C107E0051413E /* PullListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CEA285C107E0051413E /* PullListTableViewCell.swift */; };
 		D0E98CEC285C107E0051413E /* PullListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CEA285C107E0051413E /* PullListTableViewCell.swift */; };
+		D0E98D05285CE97D0051413E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98D03285CE97D0051413E /* NetworkService.swift */; };
+		D0E98D06285CE97D0051413E /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98D04285CE97D0051413E /* KeyChainService.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,16 +91,13 @@
 		79EDD15A918B4109D48FA1B6 /* Pods-PRTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTracker.debug.xcconfig"; path = "Target Support Files/Pods-PRTracker/Pods-PRTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		A6AE00453ECCCA10D6CD0525 /* Pods-PRTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B82F1307FAF9E5A90C63CAFE /* Pods-PRTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
-		BC2F5962285AE4040012D18C /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		BC2F5965285B6FBB0012D18C /* PRTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PRTracker.entitlements; sourceTree = "<group>"; };
 		BC2F5966285B70100012D18C /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		BC2F5969285C1AC10012D18C /* PullManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullManager.swift; sourceTree = "<group>"; };
-		BC2F596B285C26AB0012D18C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BC2F596E285C26D60012D18C /* UserManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManger.swift; sourceTree = "<group>"; };
 		BC2F5974285C2A660012D18C /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		BC2F5977285C2ADC0012D18C /* RepoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoManager.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
-		BC97093D2859C1EB00E54F93 /* KeyChainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		BCF57BBE285701FB0059E61D /* PRTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PRTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +128,8 @@
 		D0E98CE1285C01530051413E /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
 		D0E98CE7285C02800051413E /* PullListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullListModel.swift; sourceTree = "<group>"; };
 		D0E98CEA285C107E0051413E /* PullListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullListTableViewCell.swift; sourceTree = "<group>"; };
+		D0E98D03285CE97D0051413E /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		D0E98D04285CE97D0051413E /* KeyChainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,8 +175,10 @@
 		BC9709402859C87800E54F93 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D0E98CE1285C01530051413E /* MockDataService.swift */,
+				D0E98D04285CE97D0051413E /* KeyChainService.swift */,
 				BC9709412859C88100E54F93 /* Logger.swift */,
+				D0E98CE1285C01530051413E /* MockDataService.swift */,
+				D0E98D03285CE97D0051413E /* NetworkService.swift */,
 				D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */,
 				D04099DB2859C6930008B517 /* Observable.swift */,
 				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
@@ -340,18 +337,6 @@
 				D04099D12859C08B0008B517 /* PullListViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		D0E98CE0285C014B0051413E /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-				D0E98CE1285C01530051413E /* MockDataService.swift */,
-				D04099DB2859C6930008B517 /* Observable.swift */,
-				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
-				BC2F596B285C26AB0012D18C /* NetworkService.swift */,
-				BC97093D2859C1EB00E54F93 /* KeyChainService.swift */,
-			);
-			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -549,11 +534,7 @@
 				D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */,
 				D0E98CDB285BAEE90051413E /* CustomBarButton .swift in Sources */,
 				D0E98CDE285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
-				BC2F596C285C26AB0012D18C /* NetworkService.swift in Sources */,
-				BC2F5963285AE4040012D18C /* Secrets.swift in Sources */,
-				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
 				BCF57C06285705130059E61D /* GitHubLoginManager.swift in Sources */,
-				BC97093E2859C1EB00E54F93 /* KeyChainService.swift in Sources */,
 				BC2F5978285C2ADC0012D18C /* RepoManager.swift in Sources */,
 				BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */,
@@ -574,6 +555,8 @@
 				D04099D22859C08B0008B517 /* PullListViewController.swift in Sources */,
 				D04099DE2859C9320008B517 /* PullTableCellViewModel.swift in Sources */,
 				BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */,
+				D0E98D05285CE97D0051413E /* NetworkService.swift in Sources */,
+				D0E98D06285CE97D0051413E /* KeyChainService.swift in Sources */,
 				D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */,
 				BC2F596A285C1AC10012D18C /* PullManager.swift in Sources */,
 			);
@@ -596,7 +579,6 @@
 				D04099E12859D91C0008B517 /* Observable.swift in Sources */,
 				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
 				D04099E52859D9D00008B517 /* PullListViewController.swift in Sources */,
-				BC2F596D285C26AB0012D18C /* NetworkService.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CE9285C02800051413E /* PullListModel.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PullTableCellViewModel.swift in Sources */,
@@ -606,14 +588,12 @@
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CEC285C107E0051413E /* PullListTableViewCell.swift in Sources */,
 				D0E98CE3285C01530051413E /* MockDataService.swift in Sources */,
-				BC97093F2859C1EB00E54F93 /* KeyChainService.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57BFE285704F40059E61D /* PullListViewModel.swift in Sources */,
 				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
 				D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */,
-				BC2F5964285AE5970012D18C /* Secrets.swift in Sources */,
 				BC2F5976285C2A660012D18C /* Repo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
