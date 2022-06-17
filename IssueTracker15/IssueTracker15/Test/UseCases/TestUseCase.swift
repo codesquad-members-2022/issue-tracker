@@ -10,6 +10,8 @@ class TestUseCase: UseCaseResponsible {
     static let shared = TestUseCase()
     private var storeCancellable: Set<AnyCancellable> = []
     
+    private var cancellable = Set<AnyCancellable>()
+    
     func requestFromUseCase(_ completionBlock: @escaping (Any?)->Void) {
         RequestModel.request(self).result().sink { result in
             switch result {
@@ -19,5 +21,16 @@ class TestUseCase: UseCaseResponsible {
                 print("Failure")
             }
         }.store(in: &storeCancellable)
+    }
+    
+    func testRequest(_ completionBlock: @escaping (Any?)->Void) {
+        RequestModel.networkRequest(urgency: .urgent)?.sink(receiveValue: { response in
+            if let error = response.error {
+                completionBlock(error)
+            }
+            
+            completionBlock(response.data)
+        })
+        .store(in: &cancellable)
     }
 }
