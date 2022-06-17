@@ -4,14 +4,16 @@ import Alamofire
 final class NetworkManager {
     enum NetworkError: Error {
         case issueNotFound
+        case tokenNotFound
     }
     
     public static let shared = NetworkManager()
     private init() {}
     
-    func requestAccessToken(with code: String) {
+    typealias UserToken = String
+    
+    func requestAccessToken(with code: String, completion: @escaping (Result<UserToken, NetworkError>) -> Void) {
         let url = "https://github.com/login/oauth/access_token"
-        
         let parameters = ["client_id": "\(PrivateStorage.clientId)",
                           "client_secret": "\(PrivateStorage.clientSecret)",
                           "code": code]
@@ -19,13 +21,12 @@ final class NetworkManager {
         
         AF.request(url, method: .post, parameters: parameters, headers: headers).responseDecodable(of: [String: String].self) { (response) in
             switch response.result {
-            case let .success(json):
-                if let dic = json as? [String: String],
-                   let accessToken = dic["access_token"] {
-                    GithubUserDefaults.setToken(uid: accessToken)
+            case .success(let json):
+                if let accessToken = json["access_token"] {
+                    completion(.success(accessToken))
                 }
-            case let .failure(error):
-                print(error)
+            case .failure:
+                completion(.failure(.tokenNotFound))
             }
         }
     }

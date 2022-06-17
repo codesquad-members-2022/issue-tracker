@@ -17,7 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = ViewController()
+        let rootViewController =
+        GithubUserDefaults.getToken() != nil
+            ? IssueViewController()
+            : ViewController()
+        window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         
         return true
@@ -27,8 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(url)
         if url.absoluteString.starts(with: "issuetracker://login") { // 콜백URL
             if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
-                NetworkManager.shared.requestAccessToken(with: code)
-                window?.rootViewController = IssueViewController()
+                NetworkManager.shared.requestAccessToken(with: code) { result in
+                    switch result {
+                    case .success(let accessToken):
+                        GithubUserDefaults.setToken(uid: accessToken)
+                        self.window?.rootViewController = IssueViewController()
+                    case .failure(let error):
+                        // TODO: 로그인 실패 얼럿띄우기
+                        print(error)
+                    }
+                }
             }
         }
         return true
