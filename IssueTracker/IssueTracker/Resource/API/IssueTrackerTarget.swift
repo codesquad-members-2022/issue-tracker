@@ -8,9 +8,7 @@
 import Foundation
 
 enum IssueTrackerTarget {
-//    case requestGitHubAuthorize
     case requestAccessToken(code: String)
-//    case requestLocalJson
 }
 
 extension IssueTrackerTarget: BaseTarget {
@@ -20,7 +18,7 @@ extension IssueTrackerTarget: BaseTarget {
             return URL(string: "https://github.com")
         }
     }
-
+    // MARK: - End Point
     var path: String? {
         switch self {
         case .requestAccessToken:
@@ -28,12 +26,13 @@ extension IssueTrackerTarget: BaseTarget {
         }
     }
 
+    // TODO: KeyChain 사용해서 client_id, client_secret 등은 안보이게 하는 것이 좋겠다.
     var parameter: [String: String]? {
         switch self {
         case .requestAccessToken(let code):
             return [
-                "client_id": "e6386d0321b6dc2820c0",
-                "client_secret": "5f71ec5552ff96d0cac78118449404aec504fb64",
+                "client_id": Environment.clientId,
+                "client_secret": Environment.clientSecret,
                 "code": code
             ]
         }

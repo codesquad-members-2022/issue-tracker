@@ -17,9 +17,9 @@ class IssueCell: UICollectionViewCell {
         addsubviews()
         setLayouts()
     }
-
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("\(#function) has not been implemented")
     }
 
     private var titleLabel: UILabel = {
