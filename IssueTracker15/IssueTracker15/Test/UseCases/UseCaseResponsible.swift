@@ -4,6 +4,6 @@
 
 import Foundation
 
-protocol UseCaseResponsible: AnyObject {
-    func requestFromUseCase(_ completionBlock: @escaping (Any?)->Void)
+protocol UseCaseResponsible {
+    func requestFromUseCase(_ completionBlock: @escaping (Any?) -> Void)
 }

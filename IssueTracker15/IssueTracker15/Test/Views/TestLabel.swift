@@ -31,4 +31,3 @@ class TestLabel: UILabel,
         self.vc = binding
     }
 }
-
