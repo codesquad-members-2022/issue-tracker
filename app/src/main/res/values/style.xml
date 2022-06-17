@@ -21,21 +21,50 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="HeadLine6.white" >
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1" />
 
-    <style name="Subtitle1.black" parent="TextAppearance.MaterialComponents.Subtitle1">
+    <style name="Subtitle1.black" >
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Subtitle1.white" >
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Subtitle1.white.bold" >
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Subtitle1.grey" >
+        <item name="android:textColor">@color/background2</item>
     </style>
 
 
     <style name="Body2" parent="TextAppearance.MaterialComponents.Body2" />
 
-    <style name="Body2.black" parent="TextAppearance.MaterialComponents.Body2">
+    <style name="Body2.black" >
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="Body2.white" parent="TextAppearance.MaterialComponents.Body2">
+    <style name="Body2.white" >
         <item name="android:textColor">@color/white</item>
+    </style>
+    
+    <style name="ToolbarTheme" parent="Theme.MaterialComponents.NoActionBar" >
+        <item name="android:tint">@color/white</item>
+    </style>
+
+    <style name="SpinnerDivideStyle" parent="android:style/Widget.ListView.DropDown" >
+        <item name="android:divider">@color/grey05</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="SpinnerTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:dropDownListViewStyle">@style/SpinnerDivideStyle</item>
     </style>
 
 

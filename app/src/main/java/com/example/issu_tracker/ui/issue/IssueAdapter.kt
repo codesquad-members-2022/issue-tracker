@@ -35,7 +35,7 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Issue>() {
             override fun areItemsTheSame(oldItem: Issue, newItem: Issue): Boolean {
-                return oldItem.index == newItem.index
+                return oldItem.title == newItem.title
             }
 
             override fun areContentsTheSame(oldItem: Issue, newItem: Issue): Boolean {
