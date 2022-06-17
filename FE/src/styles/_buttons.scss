@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin button(
   $width,
   $height,
@@ -26,6 +28,8 @@
     $radius: 20px,
     $font-size: 1.8rem
   );
+
+  background-color: $deep-blue;
 }
 
 @mixin mediumButton() {
@@ -35,6 +39,8 @@
     $radius: 20px,
     $font-size: 1.8rem
   );
+
+  background-color: $deep-blue;
 }
 
 @mixin smallButton() {
@@ -44,4 +50,6 @@
     $radius: 11px,
     $font-size: 1.2rem
   );
+
+  background-color: $deep-blue;
 }

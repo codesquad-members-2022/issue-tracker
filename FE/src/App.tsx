@@ -1,12 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
-import AuthForm from '@components/Auth/AuthForm';
-import { Header } from '@components/header';
 import { AddIssue } from './pages/addIssue';
 import IssueList from '@pages/issueList/IssueList';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AuthPage from '@pages/auth/AuthPage';
 import store from './store/store';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +22,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/">
-              <Route index element={<AuthForm />} />
+              <Route index element={<AuthPage />} />
               <Route path="issues" element={<IssueList />} />
               <Route path="addIssue" element={<AddIssue />} />
             </Route>
