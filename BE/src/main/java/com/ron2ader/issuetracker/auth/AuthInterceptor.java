@@ -1,5 +1,6 @@
 package com.ron2ader.issuetracker.auth;
 
+import com.ron2ader.issuetracker.auth.jwt.AuthToken;
 import com.ron2ader.issuetracker.auth.jwt.JwtProvider;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -15,14 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
 
-    private static final String BEARER = "Bearer ";
-
     private final JwtProvider jwtProvider;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if(request.getMethod().matches(HttpMethod.OPTIONS.toString())) {
+        if (isPreFlight(request.getMethod())) {
             return true;
         }
 
@@ -32,22 +31,19 @@ public class AuthInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        String[] headerAndValue = tokenHeader.split(" ");
-        if (!isInvalidTokenType(headerAndValue[0])) {
-            return false;
-        }
+        AuthToken authToken = AuthToken.from(tokenHeader);
 
-        Claims claims = jwtProvider.verifyToken(headerAndValue[1]);
+        Claims claims = jwtProvider.verifyToken(authToken.getToken());
         String audience = claims.getAudience();
 
         request.setAttribute("userId", audience);
         return true;
     }
 
-    private boolean isInvalidTokenType(String header) {
-        if (header.equals(BEARER)) {
-            return false;
+    private boolean isPreFlight(String httpMethod) {
+        if (httpMethod.matches(HttpMethod.OPTIONS.name())) {
+            return true;
         }
-        return true;
+        return false;
     }
 }

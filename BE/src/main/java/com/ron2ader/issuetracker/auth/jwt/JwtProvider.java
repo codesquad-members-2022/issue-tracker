@@ -26,33 +26,28 @@ public class JwtProvider {
                 .build();
 
     public String generateAccessToken(String userId) {
-        Date now = new Date();
-        Date expirationTime = new Date(now.getTime() + ACCESS_EXPIRATION_TIME);
-        return Jwts.builder()
-                .setSubject(SUBJECT_ACCESS)
-                .setIssuer(JWT_ISSUER)
-                .setAudience(userId)
-                .setIssuedAt(now)
-                .setExpiration(expirationTime)
-                .signWith(secretkey)
-                .compact();
+        return generateToken(userId, SUBJECT_ACCESS, ACCESS_EXPIRATION_TIME);
     }
 
     public String generateRefreshToken(String userId) {
-        Date now = new Date();
-        Date expirationTime = new Date(now.getTime() + REFRESH_EXPIRATION_TIME);
-        return Jwts.builder()
-                .setSubject(SUBJECT_REFRESH)
-                .setIssuer(JWT_ISSUER)
-                .setAudience(userId)
-                .setIssuedAt(now)
-                .setExpiration(expirationTime)
-                .signWith(secretkey)
-                .compact();
+        return generateToken(userId, SUBJECT_REFRESH, REFRESH_EXPIRATION_TIME);
     }
 
     public Claims verifyToken(String token) {
         return jwtParser.parseClaimsJws(token).getBody();
+    }
+
+    private String generateToken(String userId, String subject, long expirationTime) {
+        Date now = new Date();
+        Date expiration = new Date(now.getTime() + expirationTime);
+        return Jwts.builder()
+                .setSubject(subject)
+                .setIssuer(JWT_ISSUER)
+                .setAudience(userId)
+                .setIssuedAt(now)
+                .setExpiration(expiration)
+                .signWith(secretkey)
+                .compact();
     }
 
 }
