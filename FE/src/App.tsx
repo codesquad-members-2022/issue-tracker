@@ -1,12 +1,8 @@
-import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '@/styles/GlobalStyle';
-import * as CommonStyle from '@/styles/common';
+import { useRoutes } from 'react-router-dom';
+import { routes } from './router';
 
 const App = () => {
-  return (
-    <ThemeProvider theme={CommonStyle}>
-      <GlobalStyle />
-    </ThemeProvider>
-  );
+  const element = useRoutes(routes);
+  return <div>{element}</div>;
 };
 export default App;
