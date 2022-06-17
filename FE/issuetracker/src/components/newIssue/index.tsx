@@ -17,7 +17,7 @@ function NewIssue() {
   return (
     <S.NewIssueWrap>
       <S.NewIssueTitle>새로운 이슈 작성</S.NewIssueTitle>
-      <S.TitleUnderLine />
+      <S.UnderLine />
       <S.NewIssueContent>
         <S.IssueContentLeft>
           <S.ImgAndTitle>
@@ -34,6 +34,12 @@ function NewIssue() {
         </S.IssueContentLeft>
         <S.AdditionalContents>{additionalContents}</S.AdditionalContents>
       </S.NewIssueContent>
+      <S.UnderLine />
+      <S.Buttons>
+        <I.cross />
+        <S.CancelText>작성 취소</S.CancelText>
+        <S.CompleteBtn>완료</S.CompleteBtn>
+      </S.Buttons>
     </S.NewIssueWrap>
   );
 }
