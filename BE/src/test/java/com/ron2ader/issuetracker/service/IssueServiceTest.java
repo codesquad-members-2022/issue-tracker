@@ -44,7 +44,7 @@ class IssueServiceTest {
 
     @Test
     void registerIssueTest() {
-        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest, "ron2");
+        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest.getTitle(), issueCreateRequest.getContents(), "ron2");
 
         assertThat(issueDetailResponse.getMemberDto().getMemberId()).isEqualTo("ron2");
         assertThat(issueDetailResponse.getMemberDto().getAvatarUrl()).isEqualTo("asdfasdf.com");
@@ -53,7 +53,7 @@ class IssueServiceTest {
 
     @Test
     void findByIdTest() {
-        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest, "ron2");
+        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest.getTitle(), issueCreateRequest.getContents(), "ron2");
         IssueDetailResponse findIssue = issueService.findById(issueDetailResponse.getIssueDetail().getId());
 
         assertThat(findIssue).isEqualTo(issueDetailResponse);
@@ -62,7 +62,7 @@ class IssueServiceTest {
     @Test
     void findAllByOpenStatusPagingTest() {
         for (int i = 0; i < 10; i++) {
-            issueService.registerIssue(issues.get(i), "ron2");
+            issueService.registerIssue(issues.get(i).getTitle(), issues.get(i).getTitle(), "ron2");
         }
 
         Page<IssueSimpleResponse> allByOpenStatus = issueService.findAllByOpenStatus(PageRequest.of(0, 5), true);

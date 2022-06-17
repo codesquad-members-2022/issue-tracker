@@ -35,6 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(authInterceptor)
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/auth/github", "/auth/refresh", "/error");
+                .excludePathPatterns("/auth/github", "/auth/refresh");
     }
 }
