@@ -9,7 +9,7 @@ import { parsedQueryType } from './AuthForm';
 const authFetcher = async (code: parsedQueryType) => {
   console.log(code);
   const response = await fetch(
-    `https://test-234b2-default-rtdb.firebaseio.com/.json`,
+    ` http://3.34.47.60:8080/auth/github?code=${code}`,
   );
 
   return response.json();
@@ -19,6 +19,9 @@ const LoginCallBack = ({ code }: { code: parsedQueryType }) => {
   const navigate = useNavigate();
   const { status, data } = useQuery(['auth', code], () => authFetcher(code));
 
+  if (status === 'error') {
+    console.log(status);
+  }
   if (status === 'success') {
     // localStorage.setItem('token', JSON.stringify(data));
     useEffect(() => {
