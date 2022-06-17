@@ -13,9 +13,11 @@ final class PullTableCellViewModel {
     let projectName: Observable<String?> = Observable(nil)
     let labelList: Observable<[LabelViewModel]?> = Observable(nil)
     let commentCount: Observable<Int?> = Observable(nil)
-    let cellData: Observable<PullListModel?> = Observable(nil)
     
-    func configureCellData(with data: PullListModel) {
-        // TODO: PRTableCellViewModel 구성하기
+    func configureCellData(with data: Pull) {
+        // TODO: PRTableCellViewModel 구성하기 (지금은 임시로 title, body, mileStone의 title만 표시하도록 함)
+        self.title.value = data.title
+        self.content.value = data.body
+        self.projectName.value = data.milestone?.title
     }
 }

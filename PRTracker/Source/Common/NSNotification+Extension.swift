@@ -9,4 +9,5 @@ import Foundation
 
 extension NSNotification.Name {
     static let TableViewDidReload = NSNotification.Name("TableViewDidReloadNotification")
+    static let PullListDidChange = NSNotification.Name("PullListDidChangeNotification")
 }

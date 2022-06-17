@@ -25,6 +25,10 @@ class PullListViewController: UIViewController {
     private func bind() {
         viewModel.pullViewModelList.bind { tableCellViewModels in
             self.cellViewModel = tableCellViewModels ?? []
+            
+            NotificationCenter.default.post(name: .PullListDidChange,
+                                            object: nil,
+                                            userInfo: ["cellViewModels": self.cellViewModel])
         }
     }
     

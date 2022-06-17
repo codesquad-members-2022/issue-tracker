@@ -10,23 +10,31 @@ import UIKit
 class PullListTableViewController: UITableViewController {
     
     private let viewModel = PullTableCellViewModel()
+    private var viewModelLists = [PullTableCellViewModel]()
     private var cellData: PullListModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
         refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: UIControl.Event.valueChanged)
+        
+        configureObserver()
     }
     
-    private func bind() {
-        // TODO: TableViewCell에 들어갈 데이터 바인딩
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(forName: .PullListDidChange,
+                                                           object: nil,
+                                                           queue: .main) { noti in
+            guard let datas = noti.userInfo?["cellViewModels"] as? [PullTableCellViewModel] else { return }
+            self.viewModelLists = datas
+        }
     }
     
     @objc func didPullToRefresh() {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
             NotificationCenter.default.post(name: .TableViewDidReload, object: nil)
+            self.tableView.reloadData()
         }
     }
 
@@ -37,10 +45,12 @@ class PullListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PullListTableViewCell else { return UITableViewCell() }
-        cell.title.text = cellData?.title
-        cell.content.text = cellData?.content
-        cell.projectName.text = cellData?.projectName
+        cell.configure(with: viewModelLists[indexPath.row])
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModelLists.count
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

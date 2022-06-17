@@ -16,4 +16,10 @@ class PullListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    func configure(with model: PullTableCellViewModel) {
+        title.text = model.title.value
+        content.text = model.content.value
+        projectName.text = model.projectName.value
+    }
 }
