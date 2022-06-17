@@ -1,13 +1,14 @@
 package com.ron2ader.issuetracker.auth.jwt;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class AuthToken {
 
-    private static final String BEARER = "Bearer";
+    private static final String BEARER_TYPE = "Bearer";
 
     private String tokenType;
     private String token;
@@ -22,7 +23,7 @@ public class AuthToken {
     }
 
     private static void validateToken(String tokenType) {
-        if (tokenType.matches(BEARER)) {
+        if (tokenType.equalsIgnoreCase(BEARER_TYPE)) {
             throw new IllegalArgumentException();
         }
     }

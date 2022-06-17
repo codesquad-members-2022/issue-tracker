@@ -11,6 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
@@ -19,31 +20,32 @@ public class AuthInterceptor implements HandlerInterceptor {
     private final JwtProvider jwtProvider;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
-        if (isPreFlight(request.getMethod())) {
+        if (isPreFlightRequest(request.getMethod())) {
             return true;
         }
 
-        String tokenHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if (tokenHeader == null) {
+        if (Optional.ofNullable(token).isEmpty()) {
             return false;
         }
 
-        AuthToken authToken = AuthToken.from(tokenHeader);
+        AuthToken authToken = AuthToken.from(token);
 
-        Claims claims = jwtProvider.verifyToken(authToken.getToken());
+        Claims claims = jwtProvider.parseToken(authToken.getToken());
         String audience = claims.getAudience();
 
         request.setAttribute("userId", audience);
         return true;
     }
 
-    private boolean isPreFlight(String httpMethod) {
+    private boolean isPreFlightRequest(String httpMethod) {
         if (httpMethod.matches(HttpMethod.OPTIONS.name())) {
             return true;
         }
         return false;
     }
+
 }

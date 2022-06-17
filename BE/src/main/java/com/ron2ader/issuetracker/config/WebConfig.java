@@ -30,11 +30,11 @@ public class WebConfig implements WebMvcConfigurer {
                .allowedOrigins("*");
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authInterceptor)
-                .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/auth/github", "/auth/refresh");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(authInterceptor)
+//                .order(1)
+//                .addPathPatterns()
+//                .excludePathPatterns();
+//    }
 }

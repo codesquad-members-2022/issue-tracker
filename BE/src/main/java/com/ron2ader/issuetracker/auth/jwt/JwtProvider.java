@@ -33,7 +33,7 @@ public class JwtProvider {
         return generateToken(userId, SUBJECT_REFRESH, REFRESH_EXPIRATION_TIME);
     }
 
-    public Claims verifyToken(String token) {
+    public Claims parseToken(String token) {
         return jwtParser.parseClaimsJws(token).getBody();
     }
 
