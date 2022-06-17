@@ -25,8 +25,6 @@ public class AuthController {
         GithubToken githubToken = githubOAuthService.requestAccessToken(code);
         GithubUserInfo githubUserInfo = githubOAuthService.requestUserInfo(githubToken);
 
-        System.out.println("githubUserInfo.getUserId() = " + githubUserInfo.getUserId());
-
         Member member = memberService.upsert(Member.of(githubUserInfo.getUserId(), githubUserInfo.getAvatarUrl()));
 
         String accessToken = jwtProvider.generateAccessToken(member.getMemberId());
