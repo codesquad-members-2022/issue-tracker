@@ -33,7 +33,6 @@ class IssueTrackingRepository {
                    let response = response as? HTTPURLResponse,
                    response.statusCode == 200 {
                     guard let issueResponse: IssueResponse = DecodeManagerImplement.decodeJson(data: data) else { return }
-//                    let issueResponse = try JSONDecoder().decode(IssueResponse.self, from: data)
                     result = issueResponse.body
                 }
             } catch {
@@ -56,7 +55,6 @@ class IssueTrackingRepository {
         do {
             let jsonData = try Data(contentsOf: fileLocation)
             guard let issueList: IssueResponse = DecodeManagerImplement.decodeJson(data: jsonData) else { return nil }
-//            let issueList = try JSONDecoder().decode(IssueResponse.self, from: jsonData)
             return issueList.body
         } catch {
             // TODO: - error 처리
