@@ -36,19 +36,10 @@ final class SignInViewController: UIViewController {
         }
     }
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        viewModel = SignInViewModel()
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view = signInView
+        viewModel = SignInViewModel()
         setGitHubSignInButtonAction()
     }
 }
