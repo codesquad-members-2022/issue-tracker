@@ -9,20 +9,34 @@ import UIKit
 
 class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    private var issueData: [IssueItem] = [.init(title: "제목", issueDescription: "이슈에 대한 설명(최대 두 줄까지 보여줄 수 있다)", milestoneName: "마일스톤 이름") ]
+    var data: [IssueItem] = [
+        .init(id: 1, title: "제목", content: "이슈에 대한 설명", milestoneName: "마일스톤 이름", labels: [
+            .init(title: "레이블 이름", backgroundColor: "#677ae5")
+        ]),
+        .init(id: 2, title: "제목", content: "이슈에 대한 설명", milestoneName: "마일스톤 이름", labels: [
+            .init(title: "Bug", backgroundColor: "#20bb87"),
+            .init(title: "iOS", backgroundColor: "#20bb87")
+        ])
+    ]
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return issueData.count
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        issueData.count
+        data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCollectionViewCell.identifier, for: indexPath) as? IssueCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+        cell.configure(title: data[indexPath.item].title,
+                       issueDescription: data[indexPath.item].content,
+                       milestoneName: data[indexPath.item].milestoneName,
+                       labelName: data[indexPath.item].labels[0].title,
+                       labelBackgroundColor: data[indexPath.item].labels[0].backgroundColor)
         
         return cell
     }

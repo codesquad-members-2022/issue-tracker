@@ -24,18 +24,14 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     private var title: UILabel = {
         let title = UILabel()
-        let titleAttributedString = NSMutableAttributedString(string: "제목")
         title.font = UIFont(name: "SFProDisplay-Bold", size: 22)
-        title.attributedText = titleAttributedString
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
     
     private var issueDescription: UILabel = {
         let issueDescription = UILabel()
-        let issueDescriptionAttributedString = NSMutableAttributedString(string: "마일스톤 이름")
         issueDescription.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-        issueDescription.attributedText = issueDescriptionAttributedString
         issueDescription.translatesAutoresizingMaskIntoConstraints = false
         return issueDescription
     }()
@@ -48,29 +44,26 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     private var milestoneName: UILabel = {
         let milestoneName = UILabel()
-        let milestoneNameAttributedString = NSMutableAttributedString(string: "마일스톤 이름")
-        milestoneName.attributedText = milestoneNameAttributedString
         milestoneName.font = UIFont(name: "SFProDisplay-Regular", size: 17)
         milestoneName.translatesAutoresizingMaskIntoConstraints = false
         return milestoneName
     }()
     
-    private let labelName: UILabel = {
-        let labelName = UILabel()
-        let labelNameAttributedString = NSMutableAttributedString(string: "  레이블이름  ")
-        labelName.attributedText = labelNameAttributedString
+    private let labelName: PaddingLabel = {
+        let labelName = PaddingLabel()
         labelName.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        labelName.setEdgeInset(top: 4, bottom: 4, left: 16, right: 16)
         labelName.clipsToBounds = true
-        labelName.layer.cornerRadius = 10
-        labelName.backgroundColor = .systemGray
         labelName.translatesAutoresizingMaskIntoConstraints = false
         return labelName
     }()
     
-    func configure(title: String?, issueDescription: String?, milestoneName: String?) {
+    func configure(title: String?, issueDescription: String?, milestoneName: String?, labelName: String?, labelBackgroundColor: String) {
         self.title.text = title
         self.issueDescription.text = issueDescription
         self.milestoneName.text = milestoneName
+        self.labelName.text = labelName
+        self.labelName.backgroundColor = UIColor.init(hex: labelBackgroundColor)
     }
     
     override func layoutSubviews() {
@@ -103,6 +96,8 @@ final class IssueCollectionViewCell: UICollectionViewCell {
             make.leading.equalTo(title)
             make.bottom.lessThanOrEqualTo(-24)
         }
+
+        labelName.layer.cornerRadius = labelName.frame.height/2
     }
     
 }
