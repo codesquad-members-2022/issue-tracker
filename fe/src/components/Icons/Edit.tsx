@@ -1,4 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from "react";
 import DefaultIconProps from "./DefaultIconProps";
 
 function EditIcon({ size = { width: "16", height: "16" } }: DefaultIconProps) {

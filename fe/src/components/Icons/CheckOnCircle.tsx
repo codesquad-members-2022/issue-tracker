@@ -1,3 +1,4 @@
+import React from "react";
 import DefaultIconProps from "./DefaultIconProps";
 
 function CheckOnCircleIcon({ size = { width: "16", height: "16" } }: DefaultIconProps) {
