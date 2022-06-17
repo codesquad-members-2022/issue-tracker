@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 interface ILogoProps {
   type: 'large' | 'medium';
+  title?: string;
 }
 
 const LargeStyle = css`
