@@ -26,7 +26,7 @@ function IssueList() {
               <S.BtnContentCount>(2)</S.BtnContentCount>
             </S.MileStoneBtn>
           </S.Buttons>
-          <S.IssueOption>
+          <S.IssueOption to="/newIssue">
             <I.plus />
             이슈 작성
           </S.IssueOption>
