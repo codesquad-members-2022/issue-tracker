@@ -15,11 +15,13 @@ final class UserInfoInputStackView: UIStackView {
         label.text = "아이디"
         return label
     }()
+    
     private let IDTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "아이디를 입력해주세요"
         return textField
     }()
+    
     private lazy var IDStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal

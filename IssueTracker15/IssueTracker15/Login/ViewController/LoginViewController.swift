@@ -8,7 +8,11 @@
 import UIKit
 import SnapKit
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, ViewBinding {
+    
+    private var vm: LoginViewModel?
+    private let userInfoInputStackView = UserInfoInputStackView()
+    private let oAuthLoginStackView = OAuthLoginStackView()
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -17,13 +21,11 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    private let userInfoInputStackView = UserInfoInputStackView()
-    private let oAuthLoginStackView = OAuthLoginStackView()
-    
-    private let loginButton: UIButton = {
-        let button = UIButton()
+    private lazy var loginButton: TestButton = {
+        let button = TestButton()
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.setVC(self)
         return button
     }()
     
@@ -34,13 +36,20 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        vm = LoginViewModel { data, target in
+            if let data = data {
+                target.receive(data)
+            }
+        }
+        
         addViews()
         setUp()
+    }
+    
+    func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
+        self.vm?.request(target, param: param)
     }
     
     private func addViews() {
