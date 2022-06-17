@@ -23,10 +23,10 @@ final class AppFlowCoordinator: Coordinator {
     }
 
     func start() {
-        startFlow()
+        runLoginFlow()
     }
 
-    func startFlow() {
+    private func runLoginFlow() {
         let flow = LoginFlowCoordinator(navigationController: navigationController)
         flow.start()
     }

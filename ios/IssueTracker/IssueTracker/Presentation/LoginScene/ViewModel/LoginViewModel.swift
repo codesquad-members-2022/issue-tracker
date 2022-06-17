@@ -11,7 +11,7 @@ protocol LoginViewModelInput {}
 
 protocol LoginViewModelOutput {}
 
-protocol LoginViewModel: LoginViewModelInput & LoginViewModelOutput {
+protocol LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
     var input: LoginViewModelInput { get }
     var output: LoginViewModelOutput { get }
 }
