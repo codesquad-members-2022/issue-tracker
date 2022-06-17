@@ -1,0 +1,18 @@
+//
+//  GitHubClient.xcconfig
+//  IssueTracker
+//
+//  Created by YEONGJIN JANG on 2022/06/17.
+//
+//let clientID = "e6386d0321b6dc2820c0"
+//let scope = "repo user"
+
+OTHER_SWIFT_FLAGS[config=GITHUBCLIENT][sdk=*] = $(inherited) -DDEBUG
+OTHER_SWIFT_FLAGS[config=GITHUBCLIENT][sdk=*] = $(inherited) -DALPHA
+OTHER_SWIFT_FLAGS[config=GITHUBCLIENT][sdk=*] = $(inherited) -DRELEASE
+
+CLIENT_ID = e6386d0321b6dc2820c0
+
+ROLE_SCOPE = repo user
+
+CLIENT_SECRET = 5f71ec5552ff96d0cac78118449404aec504fb64
