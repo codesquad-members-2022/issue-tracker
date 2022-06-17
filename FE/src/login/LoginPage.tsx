@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Button, { ButtonBox } from '@/common/Button';
 import { COLORS, GREYSCALE } from '@/constants';
@@ -8,15 +8,12 @@ function LoginPage() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [ErrorMessage, setErrorMessage] = useState('');
+  const idRef = useRef<HTMLInputElement>(null);
 
   const isValidUser = () => {
     // id, password 체크 함수
     // 백엔드 로그인 기능 개발전까지 false를 일관 반환 처리함
     return false;
-  };
-
-  const resetErrorMessage = () => {
-    setErrorMessage('');
   };
 
   const handleUserInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,9 +33,13 @@ function LoginPage() {
   ) => {
     if (!isValidUser()) {
       event.preventDefault();
-      setId('');
       setPassword('');
       setErrorMessage('아이디와 비밀번호가 일치하지 않습니다.');
+
+      if (!idRef.current) {
+        return;
+      }
+      idRef.current.focus();
       return;
     }
     // 로그인 성공
@@ -58,7 +59,7 @@ function LoginPage() {
             minLength={6}
             maxLength={16}
             inputHandler={handleUserInput}
-            focusHandler={resetErrorMessage}
+            refElement={idRef}
           />
           <TextInput
             type="password"
@@ -67,7 +68,6 @@ function LoginPage() {
             minLength={6}
             maxLength={12}
             inputHandler={handleUserInput}
-            focusHandler={resetErrorMessage}
           />
         </Inputs>
         <Button
