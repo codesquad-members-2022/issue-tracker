@@ -9,11 +9,26 @@ import UIKit
 
 class ListingViewController: UIViewController {
 
+    private let viewModel = ListingViewModel()
+    private var modelData: ListingModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         configureObserver()
         configureNavigationBar()
+        requestData()
+    }
+    
+    private func bind() {
+        viewModel.mockData.bind { modelList in
+            self.modelData = modelList?.first
+        }
+    }
+    
+    private func requestData() {
+        viewModel.requestData()
     }
     
     private func configureSearchController() {

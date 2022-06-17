@@ -60,6 +60,10 @@
 		D0E98CDC285BAEE90051413E /* CustomBarButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDA285BAEE80051413E /* CustomBarButton .swift */; };
 		D0E98CDE285BC5A70051413E /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */; };
 		D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */; };
+		D0E98CE2285C01530051413E /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE1285C01530051413E /* MockDataService.swift */; };
+		D0E98CE3285C01530051413E /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE1285C01530051413E /* MockDataService.swift */; };
+		D0E98CE8285C02800051413E /* ListingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE7285C02800051413E /* ListingModel.swift */; };
+		D0E98CE9285C02800051413E /* ListingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE7285C02800051413E /* ListingModel.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +115,8 @@
 		D0E98CD2285B088A0051413E /* ListingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableViewController.swift; sourceTree = "<group>"; };
 		D0E98CDA285BAEE80051413E /* CustomBarButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomBarButton .swift"; sourceTree = "<group>"; };
 		D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
+		D0E98CE1285C01530051413E /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
+		D0E98CE7285C02800051413E /* ListingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +162,7 @@
 		BC9709402859C87800E54F93 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D0E98CE0285C014B0051413E /* Mock */,
 				D04099DB2859C6930008B517 /* Observable.swift */,
 				BC9709412859C88100E54F93 /* Logger.swift */,
 				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
@@ -286,6 +293,7 @@
 			children = (
 				BCF57BFF285704FE0059E61D /* ListingManager.swift */,
 				BC97093A2859B23D00E54F93 /* Pull.swift */,
+				D0E98CE7285C02800051413E /* ListingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -310,6 +318,14 @@
 				D0E98CDA285BAEE80051413E /* CustomBarButton .swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D0E98CE0285C014B0051413E /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				D0E98CE1285C01530051413E /* MockDataService.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E98CE8285C02800051413E /* ListingModel.swift in Sources */,
 				D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */,
 				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
 				D0E98CDB285BAEE90051413E /* CustomBarButton .swift in Sources */,
@@ -522,6 +539,7 @@
 				BC97093B2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */,
+				D0E98CE2285C01530051413E /* MockDataService.swift in Sources */,
 				BCF57BFD285704F40059E61D /* ListingViewModel.swift in Sources */,
 				D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */,
 				D04099D22859C08B0008B517 /* ListingViewController.swift in Sources */,
@@ -545,6 +563,7 @@
 				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
 				D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
+				D0E98CE9285C02800051413E /* ListingModel.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PRTableCellViewModel.swift in Sources */,
 				D0E98CD4285B088A0051413E /* ListingTableViewController.swift in Sources */,
@@ -552,6 +571,7 @@
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
 				BC97093F2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
+				D0E98CE3285C01530051413E /* MockDataService.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
