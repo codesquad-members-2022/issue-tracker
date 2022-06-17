@@ -1,5 +1,5 @@
 //
-//  SingInStubURLSession.swift
+//  StubURLSession.swift
 //  IssueTracker
 //
 //  Created by 김한솔 on 2022/06/16.
@@ -24,7 +24,7 @@ struct DummyData {
     }
 }
 
-class SingInStubURLSession: URLSessionProtocol {
+class StubURLSession: URLSessionProtocol {
     var dummyData: DummyData?
 
     init(dummy: DummyData) {
