@@ -48,8 +48,6 @@
 		D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D12859C08B0008B517 /* ListingViewController.swift */; };
 		D04099E72859DA630008B517 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC1285701FB0059E61D /* AppDelegate.swift */; };
 		D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC3285701FB0059E61D /* SceneDelegate.swift */; };
-		D0E98CC3285AF7AD0051413E /* cutsom-env-variable.sh in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */; };
-		D0E98CC4285AF7AD0051413E /* cutsom-env-variable.sh in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */; };
 		D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
 		D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
 		D0E98CD0285B05000051413E /* LabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CCF285B05000051413E /* LabelView.xib */; };
@@ -111,7 +109,6 @@
 		D04099DB2859C6930008B517 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D04099DD2859C9320008B517 /* PRTableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTableCellViewModel.swift; sourceTree = "<group>"; };
 		D04099DF2859C9400008B517 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
-		D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "cutsom-env-variable.sh"; path = "../../../Downloads/cutsom-env-variable.sh"; sourceTree = "<group>"; };
 		D0E98CC5285AF81C0051413E /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D0E98CCF285B05000051413E /* LabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelView.xib; sourceTree = "<group>"; };
 		D0E98CD2285B088A0051413E /* ListingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +174,6 @@
 		BCF57BB5285701FB0059E61D = {
 			isa = PBXGroup;
 			children = (
-				D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */,
 				66EEB7B6BFA7FE3231B5FC2C /* Frameworks */,
 				0AD76636DBCD5EEADBFE5630 /* Pods */,
 				BCF57BBF285701FB0059E61D /* Products */,
@@ -421,7 +417,6 @@
 				D0E98CD0285B05000051413E /* LabelView.xib in Resources */,
 				BCF57BCB285701FC0059E61D /* Assets.xcassets in Resources */,
 				BCF57BC9285701FB0059E61D /* Main.storyboard in Resources */,
-				D0E98CC3285AF7AD0051413E /* cutsom-env-variable.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,7 +424,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0E98CC4285AF7AD0051413E /* cutsom-env-variable.sh in Resources */,
 				D0E98CD1285B05000051413E /* LabelView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
