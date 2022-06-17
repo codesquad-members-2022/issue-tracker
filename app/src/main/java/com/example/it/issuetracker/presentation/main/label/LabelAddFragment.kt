@@ -40,7 +40,7 @@ class LabelAddFragment : Fragment() {
                         binding.editSubject.text.toString(),
                         binding.editDescription.text.toString(),
                         binding.editBackground.text.toString(),
-                        "#FFFFFFFF"
+                        viewModel.textColor.value
                     )
                     true
                 }
