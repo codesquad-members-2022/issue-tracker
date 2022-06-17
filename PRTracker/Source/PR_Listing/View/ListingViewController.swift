@@ -10,7 +10,7 @@ import UIKit
 class ListingViewController: UIViewController {
 
     private let viewModel = ListingViewModel()
-    private var modelData: ListingModel?
+    private var modelData: [ListingModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +22,8 @@ class ListingViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.mockData.bind { modelList in
-            self.modelData = modelList?.first
+        viewModel.mockData.bind { modelLists in
+            self.modelData = modelLists
         }
     }
     

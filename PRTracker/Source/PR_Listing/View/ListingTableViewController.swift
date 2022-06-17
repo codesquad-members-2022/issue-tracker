@@ -9,10 +9,17 @@ import UIKit
 
 class ListingTableViewController: UITableViewController {
     
+    private let viewModel = PRTableCellViewModel()
+    private var cellData: ListingModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bind()
         refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: UIControl.Event.valueChanged)
+    }
+    
+    private func bind() {
     }
     
     @objc func didPullToRefresh() {
@@ -26,16 +33,6 @@ class ListingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
