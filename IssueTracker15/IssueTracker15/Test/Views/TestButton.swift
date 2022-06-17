@@ -20,6 +20,7 @@ class TestButton: UIButton, ViewBindable {
     func receive(_ responseData: Any) {
         print(responseData)
     }
+    
     func setVC(_ binding: ViewBinding) {
         self.vc = binding
     }

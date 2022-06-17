@@ -10,7 +10,7 @@ class TestUseCase: UseCaseResponsible {
     static let shared = TestUseCase()
     private var storeCancellable: Set<AnyCancellable> = []
     
-    func requestFromUseCase(_ completionBlock: @escaping (Any?)->Void) {
+    func requestFromUseCase(_ completionBlock: @escaping (Any?) -> Void) {
         RequestModel.request(self).result().sink { result in
             switch result {
             case .success(let data):

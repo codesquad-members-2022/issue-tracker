@@ -24,7 +24,6 @@
 		1B174851285885710028E037 /* TestUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174846285885710028E037 /* TestUseCase.swift */; };
 		1B174852285885710028E037 /* TestDecodableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174847285885710028E037 /* TestDecodableType.swift */; };
 		1B174853285885710028E037 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174848285885710028E037 /* RequestModel.swift */; };
-		1BA1960C2858888900A4D7B1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1BA1960B2858888900A4D7B1 /* .swiftlint.yml */; };
 		1BD7504F2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */; };
 		1BD75055285886C40025DDC8 /* IDChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174835285885640028E037 /* IDChecker.swift */; };
 		1BD75056285886C70025DDC8 /* PasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174836285885640028E037 /* PasswordChecker.swift */; };
@@ -36,8 +35,15 @@
 		8D2113852859E6BA00B65676 /* MockContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2113842859E6BA00B65676 /* MockContainer.swift */; };
 		8D2113862859E78E00B65676 /* UseCaseResponsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174845285885710028E037 /* UseCaseResponsible.swift */; };
 		8D2113882859E7B700B65676 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2113872859E7B700B65676 /* MockData.swift */; };
+		8D21138C285AC4F800B65676 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21138B285AC4F800B65676 /* LoginViewController.swift */; };
+		8D21138E285ADFA700B65676 /* OAuthLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21138D285ADFA700B65676 /* OAuthLoginButton.swift */; };
+		8D211395285AE5C100B65676 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8D211394285AE5C100B65676 /* .swiftlint.yml */; };
+		8D2113B8285B0D0500B65676 /* UserInfoInputStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2113B7285B0D0400B65676 /* UserInfoInputStackView.swift */; };
+		8D2113BA285B1C6700B65676 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2113B9285B1C6700B65676 /* UIView.swift */; };
 		8D66A2C1285959CF001B514C /* Resolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D66A2C0285959CF001B514C /* Resolvable.swift */; };
 		8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D66A2ED28598CA1001B514C /* UseCaseContainer.swift */; };
+		8DDEBAE8285B382400A4E4DC /* OAuthLoginStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDEBAE7285B382400A4E4DC /* OAuthLoginStackView.swift */; };
+		8DDEBAEB285B57B000A4E4DC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */; };
 		8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +84,6 @@
 		1B174846285885710028E037 /* TestUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUseCase.swift; sourceTree = "<group>"; };
 		1B174847285885710028E037 /* TestDecodableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDecodableType.swift; sourceTree = "<group>"; };
 		1B174848285885710028E037 /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
-		1BA1960B2858888900A4D7B1 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		1BD7504C2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RegularExpressionCheckerUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionCheckerUnitTest.swift; sourceTree = "<group>"; };
 		6E5A22FB498819D6DAD72D75 /* Pods-IssueTracker15.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,8 +92,15 @@
 		8D21137A2859E5FD00B65676 /* ContainerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerUnitTest.swift; sourceTree = "<group>"; };
 		8D2113842859E6BA00B65676 /* MockContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContainer.swift; sourceTree = "<group>"; };
 		8D2113872859E7B700B65676 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		8D21138B285AC4F800B65676 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8D21138D285ADFA700B65676 /* OAuthLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginButton.swift; sourceTree = "<group>"; };
+		8D211394285AE5C100B65676 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		8D2113B7285B0D0400B65676 /* UserInfoInputStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoInputStackView.swift; sourceTree = "<group>"; };
+		8D2113B9285B1C6700B65676 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8D66A2C0285959CF001B514C /* Resolvable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolvable.swift; sourceTree = "<group>"; };
 		8D66A2ED28598CA1001B514C /* UseCaseContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseContainer.swift; sourceTree = "<group>"; };
+		8DDEBAE7285B382400A4E4DC /* OAuthLoginStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginStackView.swift; sourceTree = "<group>"; };
+		8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerWrapper.swift; sourceTree = "<group>"; };
 		978ACBA6F4626FB73B12E9D4 /* Pods-IssueTracker15.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +134,7 @@
 		1B174814285885180028E037 = {
 			isa = PBXGroup;
 			children = (
+				8D211394285AE5C100B65676 /* .swiftlint.yml */,
 				1B17481F285885180028E037 /* IssueTracker15 */,
 				1BD7504D2858867E0025DDC8 /* RegularExpressionCheckerUnitTest */,
 				8D2113792859E5FD00B65676 /* ContainerUnitTest */,
@@ -145,11 +158,12 @@
 			isa = PBXGroup;
 			children = (
 				1B174824285885180028E037 /* ViewController.swift */,
+				8DDEBAE9285B3F0D00A4E4DC /* Login */,
+				8D2113BB285B1C7A00B65676 /* Extension */,
 				1B174834285885640028E037 /* RegularExpressionChecker */,
 				1B174839285885710028E037 /* Test */,
 				1B1748542858857B0028E037 /* SupportingFiles */,
 				1B17482E285885190028E037 /* Info.plist */,
-				1BA1960B2858888900A4D7B1 /* .swiftlint.yml */,
 			);
 			path = IssueTracker15;
 			sourceTree = "<group>";
@@ -242,6 +256,14 @@
 			path = ContainerUnitTest;
 			sourceTree = "<group>";
 		};
+		8D2113BB285B1C7A00B65676 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8D2113B9285B1C6700B65676 /* UIView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		8D66A2C628595EB2001B514C /* Container */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +272,42 @@
 				8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */,
 			);
 			path = Container;
+			sourceTree = "<group>";
+		};
+		8DDEBAE9285B3F0D00A4E4DC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8DDEBAEC285B59EF00A4E4DC /* ViewController */,
+				8DDEBAED285B59FA00A4E4DC /* View */,
+				8DDEBAEE285B5A0100A4E4DC /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		8DDEBAEC285B59EF00A4E4DC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8D21138B285AC4F800B65676 /* LoginViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8DDEBAED285B59FA00A4E4DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8D2113B7285B0D0400B65676 /* UserInfoInputStackView.swift */,
+				8DDEBAE7285B382400A4E4DC /* OAuthLoginStackView.swift */,
+				8D21138D285ADFA700B65676 /* OAuthLoginButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8DDEBAEE285B5A0100A4E4DC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		AE925EF14FEC98BC13A2354E /* Frameworks */ = {
@@ -376,7 +434,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BA1960C2858888900A4D7B1 /* .swiftlint.yml in Resources */,
+				8D211395285AE5C100B65676 /* .swiftlint.yml in Resources */,
 				1B17482A285885190028E037 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,8 +470,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "${PODS_ROOT}/SwiftLint/swiftlint";
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 		979FC2E6F0FB8262A3A8B74B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -465,10 +523,16 @@
 				1B174850285885710028E037 /* UseCaseResponsible.swift in Sources */,
 				1B17484A285885710028E037 /* LargeStringAdaptable.swift in Sources */,
 				8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */,
+				8D21138E285ADFA700B65676 /* OAuthLoginButton.swift in Sources */,
 				1B17484D285885710028E037 /* BoldStringAdaptable.swift in Sources */,
 				1B17484B285885710028E037 /* ViewTextBindable.swift in Sources */,
+				8DDEBAE8285B382400A4E4DC /* OAuthLoginStackView.swift in Sources */,
+				8D2113BA285B1C6700B65676 /* UIView.swift in Sources */,
+				8D2113B8285B0D0500B65676 /* UserInfoInputStackView.swift in Sources */,
 				1B17484E285885710028E037 /* TestLabel.swift in Sources */,
 				1B174837285885640028E037 /* IDChecker.swift in Sources */,
+				8D21138C285AC4F800B65676 /* LoginViewController.swift in Sources */,
+				8DDEBAEB285B57B000A4E4DC /* LoginViewModel.swift in Sources */,
 				1B174853285885710028E037 /* RequestModel.swift in Sources */,
 				1B174851285885710028E037 /* TestUseCase.swift in Sources */,
 				1B174825285885180028E037 /* ViewController.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 class MockContainer: Resolvable {
     typealias Value = MockProtocol
     
-    var map: [ObjectIdentifier: MockProtocol] = [:]
+    var map: [ObjectIdentifier: Value] = [:]
     
     func regist<T>(instance: T) {
         let identifier = ObjectIdentifier(T.self)
