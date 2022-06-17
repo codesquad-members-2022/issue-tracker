@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
-export const NewIssueWrap = styled.div``;
+export const NewIssueWrap = styled.div`
+  height: 150vh;
+`;
 
 export const NewIssueTitle = styled.div`
   ${({ theme }) => theme.fontStyles.display};
@@ -37,11 +39,38 @@ export const AdditionalContents = styled.div`
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
 `;
-export const AdditionalContent = styled.div`
+export const AdditionalContent = styled.div<{ idx: number }>`
   ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
   padding: 34px 32px;
   width: 100%;
-  border-top: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
+  border-top: ${({ idx }) => (idx === 0 ? 'none' : '1px solid #D9DBE9')};
   ${({ theme }) => theme.fontStyles.linkSmall};
   color: ${({ theme }) => theme.fontColors.gray2};
+`;
+export const InputArea = styled.div`
+  width: 880px;
+  /* height: 343px; */
+  border-radius: 16px;
+  background: ${({ theme }) => theme.backgroundColors.gray3};
+  padding: 16px 24px 0 24px;
+  margin: 16px 0 0 64px;
+`;
+export const NewIssueInput = styled.textarea`
+  width: 100%;
+  height: 280px;
+  ${({ theme }) => theme.fontStyles.textSmall};
+  color: ${({ theme }) => theme.fontColors.gray4};
+`;
+export const IssueContentLeft = styled.div`
+  width: 940px;
+`;
+export const AttatchFile = styled.div`
+  width: 100%;
+  height: 52px;
+  ${mixin.flexbox({ horizontal: 'flex-start', vertical: 'center' })};
+  gap: 10px;
+  ${({ theme }) => theme.fontStyles.linkSmall};
+  color: ${({ theme }) => theme.fontColors.gray2};
+  border-top: 1px dashed ${({ theme }) => theme.backgroundColors.gray4};
+  margin-top: 10px;
 `;
