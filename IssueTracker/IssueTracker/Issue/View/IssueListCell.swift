@@ -1,5 +1,13 @@
 import UIKit
 
+extension UIStackView {
+    func clearSubviews() {
+        self.arrangedSubviews.forEach { view in
+            self.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+    }
+}
 
 final class IssueListCell: UICollectionViewCell {
     
@@ -16,12 +24,16 @@ final class IssueListCell: UICollectionViewCell {
         self.titleLabel.text = title
         self.descriptionLabel.text = description
         self.milestoneLabel.text = milestone
-        // TODO: - label갯수만큼 for 돌려서 붙이기
-//        self.labelNameView.updateView(title: labelName)
+        // TODO: - 스택뷰를 ScrollView 로 바꾸기
+        self.labelsStackView.clearSubviews()
+        for label in labels {
+            let view = CapsuleTextView(title: label.name, hexColor: label.color)
+            labelsStackView.addArrangedSubview(view)
+        }
     }
     
     private func setupViews() {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel, milestoneLabel, labelNameView])
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel, milestoneLabel, labelsStackView])
         stackView.alignment = .leading
         stackView.spacing = 16
         stackView.distribution = .equalSpacing
@@ -64,9 +76,12 @@ final class IssueListCell: UICollectionViewCell {
         return label
     }()
     
-    private let labelNameView: CapsuleTextView = {
-        let view = CapsuleTextView(title: "label")
-        return view
+    private let labelsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.distribution = .equalSpacing
+        return stackView
     }()
 }
 
