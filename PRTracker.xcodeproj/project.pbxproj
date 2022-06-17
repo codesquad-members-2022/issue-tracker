@@ -64,6 +64,8 @@
 		D0E98CE3285C01530051413E /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE1285C01530051413E /* MockDataService.swift */; };
 		D0E98CE8285C02800051413E /* ListingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE7285C02800051413E /* ListingModel.swift */; };
 		D0E98CE9285C02800051413E /* ListingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE7285C02800051413E /* ListingModel.swift */; };
+		D0E98CEB285C107E0051413E /* ListingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CEA285C107E0051413E /* ListingTableViewCell.swift */; };
+		D0E98CEC285C107E0051413E /* ListingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CEA285C107E0051413E /* ListingTableViewCell.swift */; };
 		D5A878A597F113E8227422D3 /* Pods_PRTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399D402CF093CCA09829837A /* Pods_PRTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +119,7 @@
 		D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		D0E98CE1285C01530051413E /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
 		D0E98CE7285C02800051413E /* ListingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingModel.swift; sourceTree = "<group>"; };
+		D0E98CEA285C107E0051413E /* ListingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,11 +165,11 @@
 		BC9709402859C87800E54F93 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				D0E98CE0285C014B0051413E /* Mock */,
-				D04099DB2859C6930008B517 /* Observable.swift */,
 				BC9709412859C88100E54F93 /* Logger.swift */,
-				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
+				D0E98CE0285C014B0051413E /* Mock */,
 				D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */,
+				D04099DB2859C6930008B517 /* Observable.swift */,
+				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -175,11 +178,11 @@
 			isa = PBXGroup;
 			children = (
 				D0E98CC2285AF7AD0051413E /* cutsom-env-variable.sh */,
+				66EEB7B6BFA7FE3231B5FC2C /* Frameworks */,
+				0AD76636DBCD5EEADBFE5630 /* Pods */,
+				BCF57BBF285701FB0059E61D /* Products */,
 				BCF57BC0285701FB0059E61D /* PRTracker */,
 				BCF57BD7285701FD0059E61D /* PRTrackerTests */,
-				BCF57BBF285701FB0059E61D /* Products */,
-				0AD76636DBCD5EEADBFE5630 /* Pods */,
-				66EEB7B6BFA7FE3231B5FC2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,8 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				BCF57BF72857049A0059E61D /* Model */,
-				BCF57BF82857049E0059E61D /* ViewModel */,
 				BCF57BF6285704950059E61D /* View */,
+				BCF57BF82857049E0059E61D /* ViewModel */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -264,8 +267,8 @@
 		BCF57BF6285704950059E61D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BCF57BC5285701FB0059E61D /* ViewController.swift */,
 				BCF57C0B285705220059E61D /* LoginView.swift */,
+				BCF57BC5285701FB0059E61D /* ViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -273,8 +276,8 @@
 		BCF57BF72857049A0059E61D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BCF57C05285705130059E61D /* OAuthManger.swift */,
 				BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */,
+				BCF57C05285705130059E61D /* OAuthManger.swift */,
 				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
 			);
 			path = Model;
@@ -292,8 +295,8 @@
 			isa = PBXGroup;
 			children = (
 				BCF57BFF285704FE0059E61D /* ListingManager.swift */,
-				BC97093A2859B23D00E54F93 /* Pull.swift */,
 				D0E98CE7285C02800051413E /* ListingModel.swift */,
+				BC97093A2859B23D00E54F93 /* Pull.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,9 +304,9 @@
 		BCF57BFA285704D00059E61D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				D04099DF2859C9400008B517 /* LabelViewModel.swift */,
 				BCF57BFC285704F40059E61D /* ListingViewModel.swift */,
 				D04099DD2859C9320008B517 /* PRTableCellViewModel.swift */,
-				D04099DF2859C9400008B517 /* LabelViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -311,11 +314,12 @@
 		BCF57BFB285704D30059E61D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D0E98CDA285BAEE80051413E /* CustomBarButton .swift */,
 				D0E98CCF285B05000051413E /* LabelView.xib */,
 				BCF57C022857050A0059E61D /* ListingTableView.swift */,
-				D04099D12859C08B0008B517 /* ListingViewController.swift */,
+				D0E98CEA285C107E0051413E /* ListingTableViewCell.swift */,
 				D0E98CD2285B088A0051413E /* ListingTableViewController.swift */,
-				D0E98CDA285BAEE80051413E /* CustomBarButton .swift */,
+				D04099D12859C08B0008B517 /* ListingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -521,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0E98CE8285C02800051413E /* ListingModel.swift in Sources */,
+				D0E98CEB285C107E0051413E /* ListingTableViewCell.swift in Sources */,
 				D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */,
 				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
 				D0E98CDB285BAEE90051413E /* CustomBarButton .swift in Sources */,
@@ -569,6 +574,7 @@
 				D0E98CD4285B088A0051413E /* ListingTableViewController.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
+				D0E98CEC285C107E0051413E /* ListingTableViewCell.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
 				BC97093F2859C1EB00E54F93 /* KeyChainManger.swift in Sources */,
 				D0E98CE3285C01530051413E /* MockDataService.swift in Sources */,

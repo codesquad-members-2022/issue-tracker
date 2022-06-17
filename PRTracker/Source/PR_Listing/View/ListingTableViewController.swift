@@ -20,6 +20,7 @@ class ListingTableViewController: UITableViewController {
     }
     
     private func bind() {
+        // TODO: TableViewCell에 들어갈 데이터 바인딩
     }
     
     @objc func didPullToRefresh() {
@@ -32,6 +33,15 @@ class ListingTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListingTableViewCell else { return UITableViewCell() }
+        cell.title.text = cellData?.title
+        cell.content.text = cellData?.content
+        cell.projectName.text = cellData?.projectName
+        print("cellData~~~", cellData)
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

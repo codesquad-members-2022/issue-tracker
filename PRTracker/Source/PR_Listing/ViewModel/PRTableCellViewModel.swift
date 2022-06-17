@@ -13,4 +13,9 @@ final class PRTableCellViewModel {
     let projectName: Observable<String?> = Observable(nil)
     let labelList: Observable<[LabelViewModel]?> = Observable(nil)
     let commentCount: Observable<Int?> = Observable(nil)
+    let cellData: Observable<ListingModel?> = Observable(nil)
+    
+    func configureCellData(with data: ListingModel) {
+        // TODO: PRTableCellViewModel 구성하기
+    }
 }
