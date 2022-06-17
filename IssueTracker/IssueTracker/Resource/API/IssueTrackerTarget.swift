@@ -15,7 +15,7 @@ extension IssueTrackerTarget: BaseTarget {
     var baseURL: URL? {
         switch self {
         case .requestAccessToken:
-            return URL(string: "https://github.com/login/oauth")
+            return URL(string: "https://github.com")
         }
     }
     // MARK: - End Point
