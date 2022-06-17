@@ -13,6 +13,10 @@
 		BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
 		BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
 		BC2F596A285C1AC10012D18C /* PullManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5969285C1AC10012D18C /* PullManager.swift */; };
+		BC2F596C285C26AB0012D18C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596B285C26AB0012D18C /* NetworkService.swift */; };
+		BC2F596D285C26AB0012D18C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596B285C26AB0012D18C /* NetworkService.swift */; };
+		BC2F596F285C26D60012D18C /* UserManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManger.swift */; };
+		BC2F5970285C26D60012D18C /* UserManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManger.swift */; };
 		BC97093B2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093C2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093E2859C1EB00E54F93 /* KeyChainManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */; };
@@ -77,6 +81,8 @@
 		BC2F5965285B6FBB0012D18C /* PRTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PRTracker.entitlements; sourceTree = "<group>"; };
 		BC2F5966285B70100012D18C /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		BC2F5969285C1AC10012D18C /* PullManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullManager.swift; sourceTree = "<group>"; };
+		BC2F596B285C26AB0012D18C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		BC2F596E285C26D60012D18C /* UserManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManger.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
 		BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManger.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -257,6 +263,8 @@
 			children = (
 				BCF57C05285705130059E61D /* OAuthManager.swift */,
 				BC2F5969285C1AC10012D18C /* PullManager.swift */,
+				BC2F596E285C26D60012D18C /* UserManger.swift */,
+				BC2F596B285C26AB0012D18C /* NetworkService.swift */,
 				BC2F5966285B70100012D18C /* AppleLoginManager.swift */,
 				BC97093D2859C1EB00E54F93 /* KeyChainManger.swift */,
 				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
@@ -497,6 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2F596C285C26AB0012D18C /* NetworkService.swift in Sources */,
 				BC2F5963285AE4040012D18C /* Secrets.swift in Sources */,
 				BCF57C032857050A0059E61D /* ListingTableView.swift in Sources */,
 				BCF57C06285705130059E61D /* OAuthManager.swift in Sources */,
@@ -508,6 +517,7 @@
 				BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */,
 				BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */,
 				D04099DA2859C34A0008B517 /* ReplaceRootSegue.swift in Sources */,
+				BC2F596F285C26D60012D18C /* UserManger.swift in Sources */,
 				BC9709422859C88100E54F93 /* Logger.swift in Sources */,
 				BC97093B2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
@@ -532,9 +542,11 @@
 				BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */,
 				D04099E72859DA630008B517 /* AppDelegate.swift in Sources */,
 				D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */,
+				BC2F5970285C26D60012D18C /* UserManger.swift in Sources */,
 				D04099E12859D91C0008B517 /* Observable.swift in Sources */,
 				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
 				D04099E52859D9D00008B517 /* ListingViewController.swift in Sources */,
+				BC2F596D285C26AB0012D18C /* NetworkService.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				BCF57C042857050A0059E61D /* ListingTableView.swift in Sources */,
 				BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */,
