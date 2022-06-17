@@ -12,6 +12,7 @@ export const HeaderWrap = styled.div<{ checkPage: boolean }>`
 `;
 export const Title = styled(Link)`
   ${({ theme }) => theme.fontStyles.logoMedium};
+  text-decoration: none;
 `;
 export const AccountImg = styled.img`
   width: 44px;
