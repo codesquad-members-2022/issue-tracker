@@ -3,7 +3,6 @@ import Login from 'components/Login/Index';
 import { Route, Routes } from 'react-router-dom';
 import Issue from 'components/Issue/index';
 import NewIssue from 'components/newIssue';
-import Header from 'components/header';
 
 function Router() {
   return (
