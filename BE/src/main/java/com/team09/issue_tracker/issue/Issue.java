@@ -1,6 +1,8 @@
 package com.team09.issue_tracker.issue;
 
 import com.team09.issue_tracker.common.BaseTimeEntity;
+import com.team09.issue_tracker.common.CommonResponseDto;
+import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
 import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
 import com.team09.issue_tracker.milestone.Milestone;
 import java.util.ArrayList;
@@ -15,8 +17,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-
+@Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Issue extends BaseTimeEntity {
 
@@ -40,6 +50,17 @@ public class Issue extends BaseTimeEntity {
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
 	private List<IssueLabel> issueLabels = new ArrayList<>();
 
+
+	public static Issue fromForMandatory(IssueSaveRequestDto issueSaveRequestDto,
+		boolean isOpened, Long memberId) {
+		return Issue.builder()
+			.title(issueSaveRequestDto.getTitle())
+			.content(issueSaveRequestDto.getContent())
+			.isOpened(isOpened)
+			.memberId(memberId)
+			.build();
+	}
+
 	public IssueListResponseDto toResponseDto() {
 		return IssueListResponseDto.builder()
 			.id(id)
@@ -51,4 +72,9 @@ public class Issue extends BaseTimeEntity {
 					.collect(Collectors.toList()))
 			.build();
 	}
+
+	public CommonResponseDto toCommonResponse() {
+		return new CommonResponseDto(id);
+	}
+
 }
