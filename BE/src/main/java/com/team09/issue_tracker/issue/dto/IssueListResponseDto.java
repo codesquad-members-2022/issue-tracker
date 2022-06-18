@@ -16,6 +16,7 @@ public class IssueListResponseDto {
 	private String title;
 	private String content;
 	private String milestoneTitle;
+	private boolean isOpened;
 	private List<LabelSelectResponseDto> labels;
 
 }
