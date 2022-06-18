@@ -23,7 +23,7 @@ class LabelAddFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLabelAddBinding.inflate(inflater)
         binding.lifecycleOwner = this

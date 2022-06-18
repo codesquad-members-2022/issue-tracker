@@ -1,6 +1,7 @@
 package com.example.it.issuetracker.presentation.main.issue
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,7 @@ class IssueFragment : Fragment() {
 
     private lateinit var binding: FragmentIssueBinding
     private val viewModel by viewModel<IssueViewModel>()
-    private val adapter = IssueAdapter({ editMode() }, { defaultMode() })
+    private val adapter = IssueAdapter { toggleMode() }
     private lateinit var job: Job
 
     override fun onCreateView(
@@ -34,6 +35,10 @@ class IssueFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+    }
+
+    override fun onResume() {
+        super.onResume()
         observerData()
     }
 
@@ -49,6 +54,20 @@ class IssueFragment : Fragment() {
             DividerItemDecoration(context, LinearLayoutManager(context).orientation)
         rvIssue.addItemDecoration(dividerItemDecoration)
         toolbarEditIssue.setNavigationOnClickListener { toggleMode() }
+        ivDelete.setOnClickListener { deleteIssues() }
+        ivClose.setOnClickListener { closeIssues() }
+    }
+
+    private fun closeIssues() {
+        viewModel.closeIssue()
+        binding.toolbarDefaultIssue.isVisible = true
+        binding.toolbarEditIssue.isVisible = false
+    }
+
+    private fun deleteIssues() {
+        viewModel.deleteIssue()
+        binding.toolbarDefaultIssue.isVisible = true
+        binding.toolbarEditIssue.isVisible = false
     }
 
     private fun observerData() {
@@ -79,6 +98,7 @@ class IssueFragment : Fragment() {
 
     private fun handlerSuccess(state: IssueUiState.GetIssues) {
         binding.progressBar.isVisible = false
+        Log.d("test", "handlerSuccess: ${state.issues}")
         adapter.submitList(state.issues)
     }
 
@@ -100,6 +120,8 @@ class IssueFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
+        binding.toolbarDefaultIssue.isVisible = true
+        binding.toolbarEditIssue.isVisible = false
         viewModel.updateDefaultViewType()
     }
 
