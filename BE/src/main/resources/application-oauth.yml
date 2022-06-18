@@ -1,0 +1,16 @@
+oauth2:
+  user:
+    github:
+      client-id: ${CLIENT_ID}
+      client-secret: ${CLIENT_SECRET}
+      redirect-uri: http://localhost:8080/login/oauth2/code/github
+#https://github.com/login/oauth/authorize?response_type=code
+#  &client_id=111e371f7c4210fad9e8&redirect_uri=http://localhost:8080/login/oauth2/code/github&scope=user%3Aemail%2Cread%3Aorg%2Cread%3Auser
+
+  provider:
+    github:
+      token-uri: https://github.com/login/oauth/access_token
+      user-info-uri: https://api.github.com/user
+jwt:
+  issuer: ${ISSUER}
+  secret-key: ${SECRET_KEY}
