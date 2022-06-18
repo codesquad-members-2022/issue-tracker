@@ -43,5 +43,8 @@ public class Issue extends BaseTimeEntity {
 
 	private Long memberId;
 
+	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
+	private List<IssueLabel> issueLabels = new ArrayList<>();
+
 
 }
