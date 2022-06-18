@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
 export const NewIssueWrap = styled.div`
+<<<<<<< HEAD
   height: 150vh;
+=======
+  height: 130vh;
+>>>>>>> origin/11-feat-fe-newissue-레이아웃-구현
 `;
 
 export const NewIssueTitle = styled.div`
@@ -10,7 +14,11 @@ export const NewIssueTitle = styled.div`
   color: ${({ theme }) => theme.fontColors.gray5};
 `;
 
+<<<<<<< HEAD
 export const TitleUnderLine = styled.div`
+=======
+export const UnderLine = styled.div`
+>>>>>>> origin/11-feat-fe-newissue-레이아웃-구현
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   margin: 32px 0;
@@ -74,3 +82,29 @@ export const AttatchFile = styled.div`
   border-top: 1px dashed ${({ theme }) => theme.backgroundColors.gray4};
   margin-top: 10px;
 `;
+<<<<<<< HEAD
+=======
+export const Buttons = styled.div`
+  ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
+  float: right;
+  height: 56px;
+  gap: 10px;
+  color: ${({ theme }) => theme.fontColors.gray2};
+`;
+
+export const CancelText = styled.span`
+  ${({ theme }) => theme.fontStyles.linkSmall};
+  color: ${({ theme }) => theme.fontColors.gray2};
+`;
+export const CompleteBtn = styled.button`
+  ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
+  width: 240px;
+  height: 100%;
+  opacity: 0.5;
+  border-radius: 20px;
+  background: ${({ theme }) => theme.backgroundColors.blue2};
+  ${({ theme }) => theme.fontStyles.linkMedium};
+  color: ${({ theme }) => theme.fontColors.gray1};
+  margin-left: 22px;
+`;
+>>>>>>> origin/11-feat-fe-newissue-레이아웃-구현

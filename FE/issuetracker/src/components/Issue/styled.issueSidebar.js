@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
+<<<<<<< HEAD
 export const sidebarWrapper = styled.aside``;
 
 export const sidebar = styled.div`
+=======
+export const sidebar = styled.aside`
+>>>>>>> origin/11-feat-fe-newissue-레이아웃-구현
   width: 308px;
   height: 504px;
   border-radius: 16px;
@@ -54,6 +58,7 @@ export const userName = styled.span`
 
 export const label = styled.label`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })};
+<<<<<<< HEAD
   ${({ theme }) => theme.fontStyles.textXSmall};
   width: 121px;
   height: 28px;
@@ -99,3 +104,12 @@ export const deleteButton = styled.button.attrs(() => ({ type: 'button' }))`
 export const deleteButtonText = styled.span`
   ${({ theme }) => theme.fontStyles.linkSSmall};
 `;
+=======
+  width: 121px;
+  height: 28px;
+  margin: 16px 0;
+  border-radius: 30px;
+  background: ${({ theme }) => theme.backgroundColors.purple1};
+  color: ${({ theme }) => theme.fontColors.gray1};
+`;
+>>>>>>> origin/11-feat-fe-newissue-레이아웃-구현

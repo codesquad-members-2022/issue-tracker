@@ -4,7 +4,10 @@ import { mixin } from 'design/GlobalStyles';
 export const issueTitleWrapper = styled.div`
   ${mixin.flexbox({ vertical: 'center' })};
   position: relative;
+<<<<<<< HEAD
   margin-top: 12px;
+=======
+>>>>>>> origin/11-feat-fe-newissue-레이아웃-구현
 `;
 
 export const issueTitle = styled.div`

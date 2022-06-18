@@ -4,7 +4,11 @@ import { mixin } from 'design/GlobalStyles';
 export const commentArticle = styled.article`
   ${mixin.flexbox({})};
   height: 124px;
+<<<<<<< HEAD
   margin-top: 16px;
+=======
+  margin-bottom: 24px;
+>>>>>>> origin/11-feat-fe-newissue-레이아웃-구현
 `;
 
 export const commentUserImage = styled.figure`
