@@ -24,7 +24,8 @@ public class Label {
 
 	private String backgroundColor;
 
-
+	@Transient
+	private Long writerId;
 
 	public LabelSelectResponseDto toResponseDto() {
 		return LabelSelectResponseDto.builder()
