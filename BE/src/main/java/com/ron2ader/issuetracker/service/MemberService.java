@@ -22,10 +22,12 @@ public class MemberService {
     }
 
     public Member upsert(Member member) {
-        Member findMember = memberRepository.findByMemberId(member.getMemberId())
-            .map(mem -> mem.update(member))
-            .orElse(member);
+        Member findMember = memberRepository.findByMemberId(member.getMemberId()).orElseThrow(NoSuchElementException::new);
 
-        return memberRepository.save(findMember);
+        if (findMember.isUpdatable(member)) {
+            findMember.update(member);
+        }
+
+        return findMember;
     }
 }
