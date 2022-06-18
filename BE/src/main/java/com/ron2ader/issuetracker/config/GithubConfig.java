@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @RequiredArgsConstructor
-@PropertySource("classpath:github.properties")
+@PropertySource("classpath:auth.yml")
 @EnableConfigurationProperties(GithubProperties.class)
 public class GithubConfig {
 

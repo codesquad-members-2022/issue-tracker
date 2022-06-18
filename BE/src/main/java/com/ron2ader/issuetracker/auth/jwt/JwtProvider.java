@@ -17,21 +17,18 @@ public class JwtProvider {
 
     private final JwtProperties jwtProperties;
 
-    private static final long ACCESS_EXPIRATION_TIME = 15 * 60 * 1000;
-    private static final long REFRESH_EXPIRATION_TIME = 60 * 60 * 1000 * 3;
-
-    private final Key secretkey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private final JwtParser jwtParser = Jwts.parserBuilder()
                 .requireIssuer(jwtProperties.getIssuer())
-                .setSigningKey(secretkey)
+                .setSigningKey(secretKey)
                 .build();
 
     public String generateAccessToken(String userId) {
-        return generateToken(userId, jwtProperties.getSubjectAccess(), ACCESS_EXPIRATION_TIME);
+        return generateToken(userId, jwtProperties.getAccessSubject(), jwtProperties.getAccessExpirationTime());
     }
 
     public String generateRefreshToken(String userId) {
-        return generateToken(userId, jwtProperties.getSubjectRefresh(), REFRESH_EXPIRATION_TIME);
+        return generateToken(userId, jwtProperties.getRefreshSubject(), jwtProperties.getRefreshExpirationTime());
     }
 
     public Claims parseToken(String token) {
@@ -47,7 +44,7 @@ public class JwtProvider {
                 .setAudience(userId)
                 .setIssuedAt(now)
                 .setExpiration(expiration)
-                .signWith(secretkey)
+                .signWith(secretKey)
                 .compact();
     }
 

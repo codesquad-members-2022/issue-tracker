@@ -11,7 +11,10 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
 
-    private final String subjectAccess;
-    private final String subjectRefresh;
     private final String issuer;
+    private final String accessSubject;
+    private final String refreshSubject;
+    private final long accessExpirationTime;
+    private final long refreshExpirationTime;
+
 }

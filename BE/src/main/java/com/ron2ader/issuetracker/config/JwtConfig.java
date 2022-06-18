@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @RequiredArgsConstructor
-@PropertySource("classpath:jwt.properties")
+@PropertySource("classpath:auth.yml")
 @EnableConfigurationProperties(JwtProperties.class)
 public class JwtConfig {
 
