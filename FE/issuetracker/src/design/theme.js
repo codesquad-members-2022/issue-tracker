@@ -4,9 +4,9 @@ const backgroundColors = {
   gray3: '#EFF0F6',
   gray4: '#D9DBE9',
   gray5: '#14142B',
-  bule1: '#C7EBFF',
-  bule2: ' #007AFF',
-  bule3: '#004DE3',
+  blue1: '#C7EBFF',
+  blue2: ' #007AFF',
+  blue3: '#004DE3',
   purple1: '#0025E7',
   purple2: '#CCD4FF',
 };
@@ -15,7 +15,7 @@ const fontColors = {
   gray2: '#6E7191',
   gray3: '#4E4B66',
   gray4: '#A0A3BD',
-  gray5: '14142B',
+  gray5: '#14142B',
   purple: '#0025E7',
   red: '#FF3B30',
 };
