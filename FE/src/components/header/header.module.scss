@@ -1,0 +1,12 @@
+.box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 9.4rem;
+  margin: 0 8rem;
+
+  span {
+    font-size: 3.2rem;
+    font-weight: 400;
+  }
+}
