@@ -1,12 +1,13 @@
 package com.ron2ader.issuetracker.controller;
 
+import com.ron2ader.issuetracker.auth.Login;
 import com.ron2ader.issuetracker.auth.github.GithubToken;
 import com.ron2ader.issuetracker.auth.github.GithubUserInfo;
 import com.ron2ader.issuetracker.auth.jwt.JwtProvider;
 import com.ron2ader.issuetracker.controller.authdto.Tokens;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.domain.member.Member;
-import com.ron2ader.issuetracker.service.GithubOAuthService;
+import com.ron2ader.issuetracker.service.AuthService;
 import com.ron2ader.issuetracker.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final GithubOAuthService githubOAuthService;
+    private final AuthService githubOAuthService;
     private final MemberService memberService;
     private final JwtProvider jwtProvider;
 
@@ -34,8 +35,8 @@ public class AuthController {
     }
 
     @GetMapping("/auth/refresh")
-    public Tokens requestNewTokens(Member member) {
-        MemberDto findMember = memberService.findMember(member.getMemberId());
+    public Tokens requestNewTokens(@Login MemberDto memberDto) {
+        MemberDto findMember = memberService.findMember(memberDto.getMemberId());
 
         String accessToken = jwtProvider.generateAccessToken(findMember.getMemberId());
         String refreshToken = jwtProvider.generateRefreshToken(findMember.getMemberId());

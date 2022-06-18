@@ -1,9 +1,6 @@
 package com.ron2ader.issuetracker.auth.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -31,8 +28,17 @@ public class JwtProvider {
         return generateToken(userId, jwtProperties.getRefreshSubject(), jwtProperties.getRefreshExpirationTime());
     }
 
-    public Claims parseToken(String token) {
-        return jwtParser.parseClaimsJws(token).getBody();
+    public String getPayload(String token) {
+        return jwtParser.parseClaimsJws(token).getBody().getAudience();
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jws<Claims> claims = jwtParser.parseClaimsJws(token);
+            return !claims.getBody().getExpiration().before(new Date());
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
     }
 
     private String generateToken(String userId, String subject, long expirationTime) {
