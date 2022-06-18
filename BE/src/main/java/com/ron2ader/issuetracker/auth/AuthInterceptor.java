@@ -26,26 +26,20 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
-
-        if (Optional.ofNullable(token).isEmpty()) {
-            return false;
-        }
+        String token = Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
+                .orElseThrow(RuntimeException::new); // 예외정의 및 처리 필요
 
         AuthToken authToken = AuthToken.from(token);
 
         Claims claims = jwtProvider.parseToken(authToken.getToken());
         String audience = claims.getAudience();
 
-        request.setAttribute("userId", audience);
+        request.setAttribute(HttpHeaders.AUTHORIZATION, audience);
         return true;
     }
 
     private boolean isPreFlightRequest(String httpMethod) {
-        if (httpMethod.matches(HttpMethod.OPTIONS.name())) {
-            return true;
-        }
-        return false;
+        return httpMethod.matches(HttpMethod.OPTIONS.name());
     }
 
 }
