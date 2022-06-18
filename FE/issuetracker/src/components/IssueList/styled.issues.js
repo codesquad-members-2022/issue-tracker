@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
 export const IssuesWrap = styled.div`
-  width: 1280px;
+  width: 100%;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   padding-bottom: 11px;

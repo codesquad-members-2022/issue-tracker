@@ -20,13 +20,12 @@ const fontColors = {
   red: '#FF3B30',
 };
 const fontStyles = {
-  logo: {
+  logoMedium: {
     fontFamily: 'Montserrat',
     fontStyle: 'italic',
-    fontWeight: 900,
+    fontWeight: 500,
     fontSize: '32px',
-    lineHeight: '46.34px',
-    letter: '-4%',
+    lineHeight: '40px',
   },
   logoLarge: {
     fontFamily: 'Montserrat',
