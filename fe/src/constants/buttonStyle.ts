@@ -17,10 +17,12 @@ export const buttonStyle = {
     initial: {
       bgColor: "primary",
       fontColor: "offWhite",
+      borderColor: "none",
     },
     hover: {
       bgColor: "primaryDark",
       fontColor: "offWhite",
+      borderColor: "none",
     },
   },
   secondary: {
@@ -34,6 +36,9 @@ export const buttonStyle = {
       fontColor: "primaryDark",
       borderColor: "primaryDark",
     },
+  },
+  focus: {
+    borderColor: "primaryLight",
   },
   fontSize: {
     large: "small",
