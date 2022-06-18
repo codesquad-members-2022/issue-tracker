@@ -58,6 +58,11 @@ const COLOR = {
     background: PALETTE.GREEN[100],
     border: PALETTE.GREEN[200],
     text: PALETTE.GREEN[300]
+  },
+  lengthCheck: {
+    background: PALETTE.RED[100],
+    border: PALETTE.RED[200],
+    text: PALETTE.RED[300]
   }
 };
 
