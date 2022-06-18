@@ -15,7 +15,7 @@ public class JwtToken {
 
     public static JwtToken from(String tokenHeader) {
         String[] split = tokenHeader.split(" ");
-        if (split.length != 2 || validateToken(tokenHeader)) {
+        if (split.length != 2 || !validateToken(tokenHeader)) {
             throw new IllegalArgumentException();
         }
 
@@ -23,10 +23,7 @@ public class JwtToken {
     }
 
     private static boolean validateToken(String tokenType) {
-        if (tokenType.equalsIgnoreCase(BEARER_TYPE)) {
-            return true;
-        }
-        return false;
+        return tokenType.equalsIgnoreCase(BEARER_TYPE);
     }
 
 }
