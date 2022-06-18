@@ -4,9 +4,11 @@ import com.team09.issue_tracker.common.BaseTimeEntity;
 import com.team09.issue_tracker.common.CommonResponseDto;
 import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
 import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
+import com.team09.issue_tracker.label.Label;
 import com.team09.issue_tracker.milestone.Milestone;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,10 +22,8 @@ import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -50,7 +50,6 @@ public class Issue extends BaseTimeEntity {
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
 	private List<IssueLabel> issueLabels = new ArrayList<>();
 
-
 	public static Issue fromForMandatory(IssueSaveRequestDto issueSaveRequestDto,
 		boolean isOpened, Long memberId) {
 		return Issue.builder()
@@ -66,10 +65,14 @@ public class Issue extends BaseTimeEntity {
 			.id(id)
 			.title(title)
 			.content(content)
-			.milestoneTitle(milestone.getTitle())
-			.labels(
-				issueLabels.stream().map(issueLabel -> issueLabel.getLabel().toResponseDto())
-					.collect(Collectors.toList()))
+			.isOpened(isOpened)
+			.milestoneTitle(Optional.ofNullable(milestone)
+				.map(Milestone::getTitle)
+				.orElse(""))
+			.labels(issueLabels.stream()
+				.map(IssueLabel::getLabel)
+				.map(Label::toResponseDto)
+				.collect(Collectors.toList()))
 			.build();
 	}
 
