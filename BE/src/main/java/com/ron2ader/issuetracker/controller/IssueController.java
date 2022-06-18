@@ -1,8 +1,10 @@
 package com.ron2ader.issuetracker.controller;
 
+import com.ron2ader.issuetracker.auth.Login;
 import com.ron2ader.issuetracker.controller.issuedto.IssueCreateRequest;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
 import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
+import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.service.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,9 +22,9 @@ public class IssueController {
     private final IssueService issueService;
 
     @PostMapping("/issues")
-    public ResponseEntity<IssueDetailResponse> register(IssueCreateRequest issueCreateRequest) {
+    public ResponseEntity<IssueDetailResponse> register(@Login MemberDto memberDto, IssueCreateRequest issueCreateRequest) {
 
-        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest, "ron2"); // 임시 아이디
+        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest.getTitle(), issueCreateRequest.getContents(), memberDto.getMemberId()); // 임시 아이디
 
         return ResponseEntity.ok(issueDetailResponse);
     }

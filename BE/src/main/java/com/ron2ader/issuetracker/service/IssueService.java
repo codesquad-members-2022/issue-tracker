@@ -26,13 +26,13 @@ public class IssueService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public IssueDetailResponse registerIssue(IssueCreateRequest issueCreateRequest, String issuerId) {
+    public IssueDetailResponse registerIssue(String title, String contents, String issuerId) {
         //TODO
         // s3에 파일을 보내고 url을 받는다
 
         Member member = memberRepository.findByMemberId(issuerId).orElseThrow(NoSuchElementException::new);
-        Issue savedIssue = issueRepository.save(Issue.of(member, issueCreateRequest.getTitle(),
-                issueCreateRequest.getContents(), null));
+        Issue savedIssue = issueRepository.save(Issue.of(member, title,
+                contents, null));
 
         return new IssueDetailResponse(MemberDto.from(member), IssueDetail.from(savedIssue));
     }
