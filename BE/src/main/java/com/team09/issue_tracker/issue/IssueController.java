@@ -2,10 +2,10 @@ package com.team09.issue_tracker.issue;
 
 import com.team09.issue_tracker.common.CommonResponseDto;
 import com.team09.issue_tracker.issue.dto.IssueCreateAndUpdateRequestDto;
-import com.team09.issue_tracker.issue.dto.IssueFindAllResponseDto;
+import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
 import com.team09.issue_tracker.issue.dto.IssueFindByIdResponseDto;
-import java.util.Collections;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/issues")
 public class IssueController {
 
+	private final IssueService issueService;
+	private final static Long MEMBER_ID = 1L;
+
 	@GetMapping
-	public ResponseEntity<List<IssueFindAllResponseDto>> findAll() {
-		return ResponseEntity.ok(Collections.singletonList(new IssueFindAllResponseDto()));
+	public ResponseEntity<List<IssueListResponseDto>> selectOpened() {
+		//TODO : 상수로 사용한 MEMBER_ID는 로그인 구현 완료시 http request 에서 가져오는 것으로 변경
+		List<IssueListResponseDto> response = issueService.selectOpened(MEMBER_ID);
+
+		return ResponseEntity.ok().body(response);
 	}
 
 	@GetMapping("/{id}")
@@ -49,15 +56,15 @@ public class IssueController {
 	}
 
 	@GetMapping(";type=title")
-	public ResponseEntity<List<IssueFindAllResponseDto>> findByTitle(
+	public ResponseEntity<List<IssueListResponseDto>> findByTitle(
 		@RequestParam final String title) {
-		return ResponseEntity.ok(Collections.singletonList(new IssueFindAllResponseDto()));
+		return ResponseEntity.ok().build();
 	}
 
 	@GetMapping(";type=filter")
-	public ResponseEntity<List<IssueFindAllResponseDto>> findBySearchCondition(
+	public ResponseEntity<List<IssueListResponseDto>> findBySearchCondition(
 		@ModelAttribute final String issueSearchDto) {
-		return ResponseEntity.ok(Collections.singletonList(new IssueFindAllResponseDto()));
+		return ResponseEntity.ok().build();
 	}
 
 	@PatchMapping
