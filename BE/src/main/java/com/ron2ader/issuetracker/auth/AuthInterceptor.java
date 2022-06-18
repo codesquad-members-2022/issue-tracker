@@ -1,7 +1,7 @@
 package com.ron2ader.issuetracker.auth;
 
-import com.ron2ader.issuetracker.auth.jwt.AuthToken;
 import com.ron2ader.issuetracker.auth.jwt.JwtProvider;
+import com.ron2ader.issuetracker.auth.jwt.JwtToken;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -29,9 +29,9 @@ public class AuthInterceptor implements HandlerInterceptor {
         String token = Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
                 .orElseThrow(RuntimeException::new); // 예외정의 및 처리 필요
 
-        AuthToken authToken = AuthToken.from(token);
+        JwtToken jwtToken = JwtToken.from(token);
 
-        Claims claims = jwtProvider.parseToken(authToken.getToken());
+        Claims claims = jwtProvider.parseToken(jwtToken.getToken());
         String audience = claims.getAudience();
 
         request.setAttribute(HttpHeaders.AUTHORIZATION, audience);
