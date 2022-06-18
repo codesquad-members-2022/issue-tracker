@@ -15,14 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Getter
+
 @Entity
 public class Issue extends BaseTimeEntity {
 
@@ -46,5 +40,15 @@ public class Issue extends BaseTimeEntity {
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
 	private List<IssueLabel> issueLabels = new ArrayList<>();
 
-
+	public IssueListResponseDto toResponseDto() {
+		return IssueListResponseDto.builder()
+			.id(id)
+			.title(title)
+			.content(content)
+			.milestoneTitle(milestone.getTitle())
+			.labels(
+				issueLabels.stream().map(issueLabel -> issueLabel.getLabel().toResponseDto())
+					.collect(Collectors.toList()))
+			.build();
+	}
 }
