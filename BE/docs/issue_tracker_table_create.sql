@@ -51,22 +51,22 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 create TABLE IF NOT EXISTS `issue_tracker`.`issue` (
   `issue_id` BIGINT NOT NULL AUTO_INCREMENT,  
-  `title` VARCHAR(50) NULL DEFAULT NULL,
-  `content` VARCHAR(255) NULL DEFAULT NULL,
-  `is_opened` BIT(1) NOT NULL,  
+  `title` VARCHAR(50) NOT NULL,
+  `content` VARCHAR(255) NOT NULL,
+  `is_opened` BIT(1) NOT NULL,
+  `member_id` BIGINT NOT NULL,
   `milestone_id` BIGINT NULL DEFAULT NULL,
-  `member_id` BIGINT NULL DEFAULT NULL,
   `created_at` DATETIME(6) NULL DEFAULT NULL,
   `modified_at` DATETIME(6) NULL DEFAULT NULL,
   PRIMARY KEY (`issue_id`),
-  INDEX `fk_issue_milestone_id` (`milestone_id` ASC) VISIBLE,
   INDEX `fk_issue_member_id` (`member_id` ASC) VISIBLE,
-  CONSTRAINT `fk_issue_milestone`
-    FOREIGN KEY (`milestone_id`)
-    REFERENCES `issue_tracker`.`milestone` (`milestone_id`),
+  INDEX `fk_issue_milestone_id` (`milestone_id` ASC) VISIBLE,
   CONSTRAINT `fk_issue_member`
     FOREIGN KEY (`member_id`)
-    REFERENCES `issue_tracker`.`member` (`member_id`))
+    REFERENCES `issue_tracker`.`member` (`member_id`),
+  CONSTRAINT `fk_issue_milestone`
+    FOREIGN KEY (`milestone_id`)
+    REFERENCES `issue_tracker`.`milestone` (`milestone_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
