@@ -1,39 +1,51 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 
-interface InputProps {
-  size: string;
+import { FlexCenterBox } from "styles/boxes";
+import DropDownIcon from "components/Icons/DropDown";
+import { indicatorStyle as style } from "constants/dropDownMenuStyle";
+
+interface IndicatorProps {
+  width?: number;
+  height?: number;
+  gap?: number;
+  text?: string;
 }
 
-function Input({ size }) {
+interface StyledIndicatorProps {
+  width: number;
+  height: number;
+}
+
+function Indicator({ width = 62, height = 32, gap = 8, text = "Text" }: IndicatorProps) {
   return (
-    <InputWrapper>
-      <Title>아이디</Title>
-      <TextInput placeholder={size === "large" ? "아이디" : "제목"} />;
-    </InputWrapper>
+    <StyledIndicator width={width} height={height} gap={gap}>
+      {text}
+      <DropDownIcon />
+    </StyledIndicator>
   );
 }
 
-const InputWrapper = styled.div`
-  width: 340px;
-  height: 64px;
-  background: #fefefe;
-  border: 1px solid #14142b;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px 24px;
+const StyledIndicator = styled(FlexCenterBox)<StyledIndicatorProps>`
+  ${({ theme: { fontSize, fontWeight, colors }, width, height }) => {
+    const initialColor = style.color.initial;
+    const hoverColor = style.color.hover;
+
+    return css`
+      width: ${width}px;
+      height: ${height}px;
+      color: ${colors[initialColor]};
+      font-size: ${fontSize[style.fontSize]};
+      font-weight: ${fontWeight[style.fontWeight]};
+
+      &:hover {
+        color: ${colors[hoverColor]};
+        path {
+          stroke: ${colors[hoverColor]};
+        }
+      }
+    `;
+  }}
 `;
 
-const Title = styled.div`
-  width: 292px;
-  height: 28px;
-`;
-
-const TextInput = styled.input`
-  width: 290px;
-  height: 28px;
-`;
-
-export default Input;
+export default Indicator;

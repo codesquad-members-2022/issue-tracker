@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-export const FlexCenterBox = styled.div`
+interface FlexCenterBoxProps {
+  gap?: number;
+}
+
+export const FlexCenterBox = styled.div<FlexCenterBoxProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: ${({ gap }) => gap}px;
 `;
 
 interface IconBoxProps {
