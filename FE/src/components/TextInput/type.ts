@@ -1,4 +1,4 @@
-import { Status } from '@/constants/message';
+import { Status } from '@/components/InputMessage/type';
 import { StyledComponent } from 'styled-components';
 
 type StyleType = 'large' | 'medium' | 'small';
@@ -28,9 +28,10 @@ interface ITextInputProps extends IStyleProps {
   styleType?: StyleType;
   placeholder?: string;
   label?: string;
-  maxLength?: number;
   type?: string;
+  name: string;
   as?: StyledComponent<'div', any, IStyled_textInput, never>;
+  handleChange?: Function;
 }
 
 export type { StyleType, IStyleProps, IStyled_label, IStyled_textInput, ITextInputProps };

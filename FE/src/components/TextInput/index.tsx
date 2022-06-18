@@ -7,9 +7,10 @@ const MIN_INPUT_VALUE_LENGTH = 1;
 export default function TextInput({
   placeholder = '',
   label,
-  maxLength,
   type = 'text',
+  name,
   as,
+  handleChange,
   ...props
 }: ITextInputProps) {
   const [visibleLabel, setVisibleLabel] = useState(false);
@@ -18,6 +19,11 @@ export default function TextInput({
   const showLabel = (event: React.ChangeEvent<HTMLInputElement>) => {
     const hasValue = event.target.value.length >= MIN_INPUT_VALUE_LENGTH;
     setVisibleLabel(hasValue);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (handleChange) handleChange(event);
+    showLabel(event);
   };
 
   return (
@@ -30,10 +36,10 @@ export default function TextInput({
       <Styled_textInput
         {...props}
         type={type}
+        name={name}
         placeholder={placeholder}
-        maxLength={maxLength}
         visibleLabel={visibleLabel}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => label && showLabel(event)}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleInputChange(event)}
       ></Styled_textInput>
     </TextInputWrap>
   );

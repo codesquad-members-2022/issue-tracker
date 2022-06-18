@@ -5,12 +5,6 @@ const Styled_logoWrapper = styled.div`
   margin-bottom: 60px;
 `;
 
-const Styled_loginInput = styled(Styled_textInputWrap)`
-  & + & {
-    margin-top: 16px;
-  }
-`;
-
 const Styled_contents = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,6 +24,12 @@ const Styled_span = styled.span`
   margin: 24px 0;
 `;
 
+const Styled_loginInputWrap = styled(Styled_textInputWrap)`
+  & + & {
+    margin-top: 16px;
+  }
+`;
+
 const Styled_buttonWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -40,10 +40,10 @@ const Styled_buttonWrapper = styled.div`
 `;
 
 export {
-  Styled_contents,
-  Styled_loginInput,
   Styled_logoWrapper,
+  Styled_contents,
   Styled_form,
   Styled_span,
+  Styled_loginInputWrap,
   Styled_buttonWrapper
 };
