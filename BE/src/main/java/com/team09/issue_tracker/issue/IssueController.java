@@ -1,7 +1,7 @@
 package com.team09.issue_tracker.issue;
 
 import com.team09.issue_tracker.common.CommonResponseDto;
-import com.team09.issue_tracker.issue.dto.IssueCreateAndUpdateRequestDto;
+import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
 import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
 import com.team09.issue_tracker.issue.dto.IssueFindByIdResponseDto;
 import java.util.List;
@@ -41,8 +41,10 @@ public class IssueController {
 
 	@PostMapping
 	public ResponseEntity<CommonResponseDto> create(
-		@RequestBody IssueCreateAndUpdateRequestDto issueCreateRequestDto) {
-		return ResponseEntity.ok(new CommonResponseDto());
+		@RequestBody IssueSaveRequestDto issueCreateRequestDto) {
+		CommonResponseDto response = issueService.create(issueCreateRequestDto, MEMBER_ID);
+
+		return ResponseEntity.ok().body(response);
 	}
 
 	@DeleteMapping("/{id}")
@@ -51,7 +53,8 @@ public class IssueController {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<CommonResponseDto> updateState(@PathVariable final Long id, @RequestParam final Boolean setClose) {
+	public ResponseEntity<CommonResponseDto> updateState(@PathVariable final Long id,
+		@RequestParam final Boolean setClose) {
 		return ResponseEntity.ok(new CommonResponseDto());
 	}
 
@@ -69,7 +72,7 @@ public class IssueController {
 
 	@PatchMapping
 	public ResponseEntity<CommonResponseDto> updateAllState(@RequestParam final Boolean close,
-		@RequestBody final IssueCreateAndUpdateRequestDto issueUpdateAllRequestDto) {
+		@RequestBody final IssueSaveRequestDto issueUpdateAllRequestDto) {
 		return ResponseEntity.ok(new CommonResponseDto());
 	}
 }
