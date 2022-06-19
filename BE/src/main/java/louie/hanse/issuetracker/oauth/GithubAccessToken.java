@@ -12,4 +12,8 @@ public class GithubAccessToken {
     private String accessToken;
     private String tokenType;
     private String scope;
+
+    public String getAuthorizationValue() {
+        return "Bearer " + accessToken;
+    }
 }
