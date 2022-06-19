@@ -18,14 +18,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "milestone")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MileStone {
+public class Milestone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "milestone_id")
     private Long id;
 
-    @OneToMany(mappedBy = "mileStone")
+    @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
 
     private String subject;

@@ -1,8 +1,6 @@
 package codesquad.issuetracker.domain;
 
 import javax.persistence.CascadeType;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -41,7 +39,7 @@ public class Issue {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
-    private MileStone mileStone;
+    private Milestone milestone;
 
     @OneToMany(mappedBy = "issue")
     private List<Image> images = new ArrayList<>();

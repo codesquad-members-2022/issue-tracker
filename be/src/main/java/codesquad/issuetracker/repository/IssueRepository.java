@@ -4,7 +4,7 @@ import static codesquad.issuetracker.domain.QAssignee.assignee;
 import static codesquad.issuetracker.domain.QIssue.issue;
 import static codesquad.issuetracker.domain.QIssueLabel.issueLabel;
 import static codesquad.issuetracker.domain.QMember.member;
-import static codesquad.issuetracker.domain.QMileStone.mileStone;
+import static codesquad.issuetracker.domain.QMilestone.milestone;
 import static codesquad.issuetracker.domain.QReply.reply;
 import static codesquad.issuetracker.domain.QLabel.label;
 import static org.springframework.util.ObjectUtils.isEmpty;
@@ -15,7 +15,7 @@ import codesquad.issuetracker.dto.issue.IssueSearchCondition;
 import codesquad.issuetracker.dto.issue.QIssueDto;
 import codesquad.issuetracker.dto.label.LabelDto;
 import codesquad.issuetracker.dto.label.QLabelDto;
-import codesquad.issuetracker.dto.milestone.QMileStoneDto;
+import codesquad.issuetracker.dto.milestone.QMilestoneDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -40,17 +40,17 @@ public class IssueRepository {
                 member.identity,
                 member.profileUrl,
                 issue.createdDateTime,
-                new QMileStoneDto(mileStone.id, mileStone.subject)
+                new QMilestoneDto(milestone.id, milestone.subject)
             )
         ).from(issue)
             .join(issue.member, member)
-            .leftJoin(issue.mileStone, mileStone)
+            .leftJoin(issue.milestone, milestone)
             .leftJoin(issue.assignees, assignee)
             .leftJoin(issue.replies, reply)
             .leftJoin(issue.issueLabels, issueLabel)
             .where(statusEq(condition.getStatus()),
                 writerIdEq(condition.getWriterId()),
-                mileStoneIdEq(condition.getMilestoneId()),
+                milestoneIdEq(condition.getMilestoneId()),
                 assigneeIdEq(condition.getAssigneeId()),
                 replierIdEq(condition.getReplierId()),
                 labelIdEq(condition.getLabelId())
@@ -93,8 +93,8 @@ public class IssueRepository {
         return writerId == null ? null : issue.member.id.eq(writerId);
     }
 
-    private BooleanExpression mileStoneIdEq(Long mileStoneId) {
-        return mileStoneId == null ? null : issue.mileStone.id.eq(mileStoneId);
+    private BooleanExpression milestoneIdEq(Long milestoneId) {
+        return milestoneId == null ? null : issue.milestone.id.eq(milestoneId);
     }
 
     private BooleanExpression assigneeIdEq(Long assigneeId) {
