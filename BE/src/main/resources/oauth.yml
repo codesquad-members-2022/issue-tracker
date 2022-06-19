@@ -1,0 +1,7 @@
+oauth:
+  callback_url: http://localhost:8080/login/callback
+  client_id: 2e27ae458bb2d6e9f6cb
+  client_secret: 135a542b437cdb1cb39401958e209fca297a8695
+  access_token_api_url: https://github.com/login/oauth/access_token
+  access_scope: user:email
+  login_form_url: https://github.com/login/oauth/authorize?client_id=2e27ae458bb2d6e9f6cb&scope=user:email&redirect_uri=http://localhost:8080/login/callback
