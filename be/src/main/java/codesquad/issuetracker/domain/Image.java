@@ -30,5 +30,5 @@ public class Image {
     @NotNull
     private Issue issue;
 
-    private String imageUrl;
+    private String url;
 }

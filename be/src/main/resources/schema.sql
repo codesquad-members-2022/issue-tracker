@@ -46,7 +46,7 @@ CREATE TABLE issue
 CREATE TABLE image (
     image_id BIGINT NOT NULL AUTO_INCREMENT,
     issue_id BIGINT NOT NULL,
-    image_url VARCHAR (255),
+    url VARCHAR (255),
     PRIMARY KEY (image_id),
     FOREIGN KEY (issue_id) REFERENCES issue (issue_id)
 );
