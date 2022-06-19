@@ -1,18 +1,15 @@
 package louie.hanse.issuetracker.oauth;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.ToString;
 
 @ToString
 @Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class GithubAccessToken {
-    @JsonProperty("access_token")
     private String accessToken;
-
-    @JsonProperty("token_type")
     private String tokenType;
-
-    @JsonProperty("scope")
     private String scope;
 }
