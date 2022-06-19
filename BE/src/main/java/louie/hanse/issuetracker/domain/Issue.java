@@ -28,4 +28,7 @@ public class Issue {
     private String title;
     private LocalDateTime createDateTime;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
 }
