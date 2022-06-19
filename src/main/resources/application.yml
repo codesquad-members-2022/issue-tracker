@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/issuetracker
+    username: donggi
+    password: '0614'
+
+  jpa:
+    database: mysql
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
