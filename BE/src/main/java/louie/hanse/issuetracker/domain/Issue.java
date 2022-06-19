@@ -25,6 +25,13 @@ public class Issue {
     @JoinColumn
     private Milestone milestone;
 
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn
+    private Member writer;
+
+    @OneToMany(mappedBy = "issue")
+    private List<IssueManager> issueManagers = new ArrayList<>();
+
     private String title;
     private LocalDateTime createDateTime;
 

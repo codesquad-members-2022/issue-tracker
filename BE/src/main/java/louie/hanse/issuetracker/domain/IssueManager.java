@@ -5,10 +5,9 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class IssueLabel {
+public class IssueManager {
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -17,5 +16,5 @@ public class IssueLabel {
 
     @ManyToOne
     @JoinColumn
-    private Label Label;
+    private Member manger;
 }
