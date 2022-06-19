@@ -12,12 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "member")
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
@@ -32,7 +36,7 @@ public class Member {
     private String identity;
     private String password;
     private String email;
-    private String nickname;
+    private String name;
     private String profileUrl;
 
     @OneToMany(mappedBy = "member")

@@ -14,7 +14,7 @@ CREATE TABLE member
     identity    VARCHAR(255),
     password    VARCHAR(255),
     email       VARCHAR(255),
-    nickname    VARCHAR(32),
+    name    VARCHAR(32),
     profile_url VARCHAR(255),
     PRIMARY KEY (member_id)
 );
