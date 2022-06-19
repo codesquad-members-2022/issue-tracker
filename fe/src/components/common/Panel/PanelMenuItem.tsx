@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { panelStyle as style } from "constants/dropDownMenuStyle";
-import { PanelMenuItemProps } from "./PanelInterface";
 import Thumbnail from "components/common/Thumbnail";
 import RadioButton from "../button/RadioButton";
+import { PanelMenuItemProps } from "./PanelInterface";
 
 function PanelMenuItem({ type, text, thumbnail, onClick }: PanelMenuItemProps) {
   const [isChecked, setIsChecked] = useState(false);

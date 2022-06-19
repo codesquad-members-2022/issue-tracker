@@ -6,10 +6,11 @@ import DropDownIcon from "components/Icons/DropDown";
 import { indicatorStyle as style } from "constants/dropDownMenuStyle";
 
 interface IndicatorProps {
-  width?: number;
-  height?: number;
-  gap?: number;
+  width: number;
+  height: number;
+  gap: number;
   text?: string;
+  onClick?: () => void;
 }
 
 interface StyledIndicatorProps {
@@ -17,9 +18,9 @@ interface StyledIndicatorProps {
   height: number;
 }
 
-function Indicator({ width = 62, height = 32, gap = 8, text = "Text" }: IndicatorProps) {
+function Indicator({ width, height, gap, text = "Text", onClick }: IndicatorProps) {
   return (
-    <StyledIndicator width={width} height={height} gap={gap}>
+    <StyledIndicator width={width} height={height} gap={gap} onClick={onClick}>
       {text}
       <DropDownIcon />
     </StyledIndicator>
@@ -37,6 +38,7 @@ const StyledIndicator = styled(FlexCenterBox)<StyledIndicatorProps>`
       color: ${colors[initialColor]};
       font-size: ${fontSize[style.fontSize]};
       font-weight: ${fontWeight[style.fontWeight]};
+      cursor: pointer;
 
       &:hover {
         color: ${colors[hoverColor]};

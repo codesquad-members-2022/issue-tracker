@@ -23,3 +23,21 @@ export const panelStyle = {
   },
   borderColor: "line",
 };
+
+export interface DropDownStyle {
+  indicator: { width: number; height: number; gap: number };
+  panel: { width: number; position: "left" | "right"; mg?: string };
+}
+
+export const DropDownDefaultStyle: DropDownStyle = {
+  indicator: {
+    width: 62,
+    height: 32,
+    gap: 8,
+  },
+  panel: {
+    width: 240,
+    position: "left",
+    mg: "10px 0 0 0",
+  },
+};

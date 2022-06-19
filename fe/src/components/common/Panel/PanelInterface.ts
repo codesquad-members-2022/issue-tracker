@@ -16,12 +16,18 @@ export interface PanelMenuItemProps {
 }
 
 export interface PanelProps {
-  width?: number;
-  menuList?: MenuList;
+  width: number;
+  position: "left" | "right";
+  mg?: string;
+  menuList: MenuList;
   type?: "checkbox" | "list";
+  isOpen?: boolean;
   onClick?: () => void;
 }
 
 export interface StyledPanelProps {
   width: number;
+  position: "left" | "right";
+  isOpen: boolean;
+  mg: string;
 }
