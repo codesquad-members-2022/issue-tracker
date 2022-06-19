@@ -2,44 +2,20 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { panelStyle as style } from "constants/dropDownMenuStyle";
-import Thumbnail from "components/common/Thumbnail";
-import RadioButton from "./button/RadioButton";
+import { PanelProps, StyledPanelProps } from "./PanelInterface";
+import PanelMenuItem from "./PanelMenuItem";
 
-interface ThumbnailData {
-  url?: string;
-  hex?: string;
-}
-
-interface MenuItem {
-  text: string;
-  thumbnail?: ThumbnailData;
-}
-
-interface MenuList {
-  title: string;
-  items: MenuItem[];
-}
-
-interface PanelProps {
-  width?: number;
-  menuList?: MenuList;
-  type?: "checkbox" | "list";
-}
-
-interface StyledPanelProps {
-  width: number;
-}
-
-function Panel({ width = 240, menuList = { title: "Title", items: [{ text: "item" }] }, type = "list" }: PanelProps) {
+function Panel({
+  width = 240,
+  menuList = { title: "Title", items: [{ text: "item" }] },
+  type = "list",
+  onClick,
+}: PanelProps) {
   return (
     <StyledPanel width={width}>
-      <MenuTitle>{menuList.title}</MenuTitle>
+      <PanelMenuTitle>{menuList.title}</PanelMenuTitle>
       {menuList.items.map(({ text, thumbnail }) => (
-        <MenuItem key={text}>
-          {thumbnail ? <Thumbnail data={thumbnail} /> : null}
-          {text}
-          {type === "checkbox" ? <RadioButton width={16} height={16} /> : null}
-        </MenuItem>
+        <PanelMenuItem key={text} type={type} text={text} thumbnail={thumbnail} onClick={onClick} />
       ))}
     </StyledPanel>
   );
@@ -63,17 +39,7 @@ const StyledPanel = styled.ul<StyledPanelProps>`
   }}
 `;
 
-const MenuItem = styled.li`
-  display: flex;
-  align-items: center;
-  padding: 8px 16px;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid ${({ theme: { colors } }) => colors[style.borderColor]};
-  }
-`;
-
-const MenuTitle = styled(MenuItem)`
+const PanelMenuTitle = styled.div`
   ${({ theme: { fontSize, colors } }) => {
     const titleStyle = style.title;
 

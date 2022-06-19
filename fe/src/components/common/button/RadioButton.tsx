@@ -8,26 +8,16 @@ import CheckOnCircleIcon from "components/Icons/CheckOnCircle";
 interface RadioButtonProps {
   width?: number;
   height?: number;
+  isChecked: boolean;
 }
 
 interface StyledRadioButtonProps {
   isChecked?: boolean;
 }
 
-function RadioButton({ width = 16, height = 16 }: RadioButtonProps) {
-  const [isChecked, setChecked] = useState(false);
-
-  const handleButtonClick = () => (isChecked ? setChecked(false) : setChecked(true));
-
+function RadioButton({ width = 16, height = 16, isChecked = false }: RadioButtonProps) {
   return (
-    <StyledRadioButton
-      as="button"
-      type="button"
-      width={width}
-      height={height}
-      onClick={handleButtonClick}
-      isChecked={isChecked}
-    >
+    <StyledRadioButton as="button" type="button" width={width} height={height} isChecked={isChecked}>
       {isChecked ? <CheckOnCircleIcon /> : <CheckOffCircleIcon />}
     </StyledRadioButton>
   );
