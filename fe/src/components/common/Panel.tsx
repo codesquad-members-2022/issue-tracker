@@ -1,39 +1,89 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 
-interface InputProps {
-  size: string;
+import { panelStyle as style } from "constants/dropDownMenuStyle";
+import Thumbnail from "components/common/Thumbnail";
+import RadioButton from "./button/RadioButton";
+
+interface ThumbnailData {
+  url?: string;
+  hex?: string;
 }
 
-function Input({ size }) {
+interface MenuItem {
+  text: string;
+  thumbnail?: ThumbnailData;
+}
+
+interface MenuList {
+  title: string;
+  items: MenuItem[];
+}
+
+interface PanelProps {
+  width?: number;
+  menuList?: MenuList;
+  type?: "checkbox" | "list";
+}
+
+interface StyledPanelProps {
+  width: number;
+}
+
+function Panel({ width = 240, menuList = { title: "Title", items: [{ text: "item" }] }, type = "list" }: PanelProps) {
   return (
-    <InputWrapper>
-      <Title>아이디</Title>
-      <TextInput placeholder={size === "large" ? "아이디" : "제목"} />;
-    </InputWrapper>
+    <StyledPanel width={width}>
+      <MenuTitle>{menuList.title}</MenuTitle>
+      {menuList.items.map(({ text, thumbnail }) => (
+        <MenuItem key={text}>
+          {thumbnail ? <Thumbnail data={thumbnail} /> : null}
+          {text}
+          {type === "checkbox" ? <RadioButton width={16} height={16} /> : null}
+        </MenuItem>
+      ))}
+    </StyledPanel>
   );
 }
 
-const InputWrapper = styled.div`
-  width: 340px;
-  height: 64px;
-  background: #fefefe;
-  border: 1px solid #14142b;
-  border-radius: 16px;
+const StyledPanel = styled.ul<StyledPanelProps>`
+  ${({ theme: { fontSize, fontWeight, colors }, width }) => {
+    const defaultStyle = style.default;
+
+    return css`
+      width: ${width}px;
+      background-color: ${colors[defaultStyle.bgColor]};
+      color: ${colors[defaultStyle.fontColor]};
+      font-weight: ${fontWeight[defaultStyle.fontWeight]};
+      font-size: ${fontSize[defaultStyle.fontSize]};
+      border: 1px solid ${colors[style.borderColor]};
+      border-radius: 16px;
+      overflow: hidden;
+      line-height: 28px;
+    `;
+  }}
+`;
+
+const MenuItem = styled.li`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px 24px;
+  align-items: center;
+  padding: 8px 16px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid ${({ theme: { colors } }) => colors[style.borderColor]};
+  }
 `;
 
-const Title = styled.div`
-  width: 292px;
-  height: 28px;
+const MenuTitle = styled(MenuItem)`
+  ${({ theme: { fontSize, colors } }) => {
+    const titleStyle = style.title;
+
+    return css`
+      background-color: ${colors[titleStyle.bgColor]};
+      color: ${colors[titleStyle.fontColor]};
+      font-size: ${fontSize[titleStyle.fontSize]};
+      line-height: 32px;
+    `;
+  }}
 `;
 
-const TextInput = styled.input`
-  width: 290px;
-  height: 28px;
-`;
-
-export default Input;
+export default Panel;
