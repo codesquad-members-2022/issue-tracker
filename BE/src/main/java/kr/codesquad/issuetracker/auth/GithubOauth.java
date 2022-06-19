@@ -5,8 +5,6 @@ import static kr.codesquad.issuetracker.auth.utils.OauthUtils.TOKEN;
 import kr.codesquad.issuetracker.auth.dto.AccessTokenRequestDto;
 import kr.codesquad.issuetracker.auth.dto.AccessTokenResponseDto;
 import kr.codesquad.issuetracker.auth.dto.UserProfile;
-import kr.codesquad.issuetracker.auth.service.GithubService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,28 +22,22 @@ public class GithubOauth {
 	private final String userUri;
 
 	private final WebClient webClient;
-	private final GithubService githubService;
 
 	public GithubOauth(@Value("${oauth2.user.github.client-id}") String clientId,
 						@Value("${oauth2.user.github.client-secret}") String clientSecret,
 						@Value("${oauth2.provider.github.token-uri}") String accessTokenUri,
 						@Value("${oauth2.provider.github.user-info-uri}") String userUri,
-						WebClient webClient,
-						GithubService githubService) {
+						WebClient webClient) {
 		this.clientId = clientId;
 		this.clientSecret = clientSecret;
 		this.accessTokenUri = accessTokenUri;
 		this.userUri = userUri;
 		this.webClient = webClient;
-		this.githubService = githubService;
 	}
 
 	public AccessTokenResponseDto getToken(String code) {
-		AccessTokenRequestDto accessTokenRequest = AccessTokenRequestDto.builder()
-			.clientId(clientId)
-			.clientSecret(clientSecret)
-			.code(code)
-			.build();
+		AccessTokenRequestDto accessTokenRequest =
+			new AccessTokenRequestDto(clientId, clientSecret, code);
 
 		//TODO:exception만들기
 		return webClient.post()

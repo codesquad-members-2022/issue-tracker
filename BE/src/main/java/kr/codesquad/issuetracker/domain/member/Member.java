@@ -19,7 +19,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -41,13 +40,20 @@ public class Member {
 	@OneToMany(mappedBy = "member")
 	private List<Comment> comments = new ArrayList<>();
 
+	public Member(String name, String email, String imageUrl, String token) {
+		this.name = name;
+		this.email = email;
+		this.imageUrl = imageUrl;
+		this.token = token;
+	}
+
 	public static Member createMember(UserProfile userInfo, String token) {
-		return Member.builder()
-			.name(userInfo.getLogin())
-			.email(userInfo.getEmail())
-			.imageUrl(userInfo.getAvatarUrl())
-			.token(token)
-			.build();
+		return new Member(
+			userInfo.getLogin(),
+			userInfo.getEmail(),
+			userInfo.getAvatarUrl(),
+			token
+		);
 	}
 
 }

@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import kr.codesquad.issuetracker.domain.BaseTimeEntity;
-import kr.codesquad.issuetracker.domain.image.CommentImage;
+import kr.codesquad.issuetracker.domain.image.Image;
 import kr.codesquad.issuetracker.domain.issue.Issue;
 import kr.codesquad.issuetracker.domain.member.Member;
 
@@ -29,11 +29,11 @@ public class Comment extends BaseTimeEntity {
 	private String content;
 
 	@OneToMany(mappedBy = "comment")
-	private List<CommentImage> commentImages = new ArrayList<>();
+	private List<Image> images = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
-	private Member member;
+	private Member writer;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "issue_id")
