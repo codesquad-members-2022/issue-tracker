@@ -1,13 +1,14 @@
 package louie.hanse.issuetracker.oauth;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Getter;
 import lombok.ToString;
 
 @ToString
+@Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class GithubUser {
-    @JsonProperty("login")
-    private String userName;
-
-    @JsonProperty("avatar_url")
-    private String avatarImageURL;
+    private String login;
+    private String avatarUrl;
 }
