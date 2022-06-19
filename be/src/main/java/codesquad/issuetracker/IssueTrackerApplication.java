@@ -12,10 +12,4 @@ public class IssueTrackerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IssueTrackerApplication.class, args);
 	}
-
-	@Bean
-	JPAQueryFactory jpaQueryFactory(EntityManager em) {
-		return new JPAQueryFactory(em);
-	}
-
 }
