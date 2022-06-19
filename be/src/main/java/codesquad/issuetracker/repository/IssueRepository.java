@@ -16,9 +16,12 @@ import codesquad.issuetracker.dto.issue.QIssueDto;
 import codesquad.issuetracker.dto.label.LabelDto;
 import codesquad.issuetracker.dto.label.QLabelDto;
 import codesquad.issuetracker.dto.milestone.QMileStoneDto;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -64,6 +67,22 @@ public class IssueRepository {
             .join(label).on(issueLabel.label.id.eq(label.id))
             .where(issue.id.eq(issueId))
             .fetch();
+    }
+
+    public Map<IssueStatus, Long> findCountOfIssuesByStatus() {
+        List<Tuple> tuples = queryFactory
+            .select(issue.status, issue.count())
+            .from(issue)
+            .groupBy(issue.status)
+            .fetch();
+
+        Map<IssueStatus, Long> countOfIssuesByStatus = new HashMap<>();
+
+        for (Tuple tuple : tuples) {
+            countOfIssuesByStatus.put(tuple.get(issue.status), tuple.get(issue.count()));
+        }
+
+        return countOfIssuesByStatus;
     }
 
     private BooleanExpression statusEq(String status) {

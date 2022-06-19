@@ -1,10 +1,13 @@
 package codesquad.issuetracker.service;
 
+import codesquad.issuetracker.domain.IssueStatus;
+import codesquad.issuetracker.dto.issue.IssueCountDto;
 import codesquad.issuetracker.dto.issue.IssueDto;
 import codesquad.issuetracker.dto.issue.IssueDtoList;
 import codesquad.issuetracker.dto.issue.IssueSearchCondition;
 import codesquad.issuetracker.repository.IssueRepository;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,5 +25,13 @@ public class IssueService {
             issue.setLabels(issueRepository.findLabelsOfIssue(issue.getId()));
         }
         return new IssueDtoList(issues);
+    }
+
+    public IssueCountDto getCountOfIssuesByStatus() {
+        Map<IssueStatus, Long> countOfIssuesByStatus = issueRepository.findCountOfIssuesByStatus();
+        return new IssueCountDto(
+            countOfIssuesByStatus.getOrDefault(IssueStatus.OPEN, 0L),
+            countOfIssuesByStatus.getOrDefault(IssueStatus.CLOSED, 0L)
+        );
     }
 }
