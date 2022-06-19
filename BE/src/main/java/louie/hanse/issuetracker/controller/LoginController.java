@@ -36,8 +36,4 @@ public class LoginController {
         memberService.login(githubUser);
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return oAuthProperties.toString();
-    }
 }
