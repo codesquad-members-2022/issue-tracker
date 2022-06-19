@@ -49,9 +49,12 @@ class LabelAddFragment : Fragment() {
     }
 
     private fun initView() {
+        val saveMenu = binding.toolbar.menu.findItem(R.id.label_save)
         binding.toolbar.setNavigationOnClickListener { popBackStack() }
         binding.editSubject.doAfterTextChanged { input ->
-            viewModel.title.value = input.toString()
+            val text = input.toString()
+            saveMenu.isEnabled = text.isNotEmpty()
+            viewModel.title.value = text
         }
     }
 
