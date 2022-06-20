@@ -1,11 +1,10 @@
 package kr.codesquad.issuetracker.auth;
 
 import io.jsonwebtoken.Claims;
-import java.util.NoSuchElementException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kr.codesquad.issuetracker.auth.exception.AuthHeaderNotFoundException;
-import kr.codesquad.issuetracker.auth.exception.IllegalJwtFormatException;
+import kr.codesquad.issuetracker.auth.exception.CustomException;
+import kr.codesquad.issuetracker.auth.exception.ErrorCode;
 import kr.codesquad.issuetracker.auth.jwt.JWTHandler;
 import kr.codesquad.issuetracker.core.user.User;
 import kr.codesquad.issuetracker.core.user.UserRepository;
@@ -31,7 +30,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         String userId = extractUserId(request);
         User user = userRepository.findByGitHubId(userId)
-                .orElseThrow(() -> new NoSuchElementException());
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         request.setAttribute(USER_ID, user.getUserId());
 
@@ -49,10 +48,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     private void verifyHeader(String authorization) {
         if (authorization.trim().isEmpty() || authorization == null) {
-            throw new AuthHeaderNotFoundException();
+            throw new CustomException(ErrorCode.TOKEN_NOT_FOUND);
         }
         if (!authorization.startsWith(BEARER)) {
-            throw new IllegalJwtFormatException("Authorization 헤더는 'Bearer'로 시작해야 합니다.");
+            throw new CustomException(ErrorCode.TOKEN_TYPE_INCORRECT);
         }
     }
 
