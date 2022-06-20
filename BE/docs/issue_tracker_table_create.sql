@@ -17,7 +17,8 @@ USE `issue_tracker` ;
 -- -----------------------------------------------------
 create TABLE IF NOT EXISTS `issue_tracker`.`member` (
   `member_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `user_id` VARCHAR(20) NULL DEFAULT NULL,
+  `user_id` VARCHAR(20) NULL DEFAULT NULL UNIQUE,
+  `email` VARCHAR(20) NULL DEFAULT NULL,
   `name` VARCHAR(20) NULL DEFAULT NULL,
   `type` VARCHAR(10) NULL DEFAULT NULL,  
   `img_url` VARCHAR(100) NULL DEFAULT NULL,
