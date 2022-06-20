@@ -32,4 +32,12 @@
     <string name="label_issue_search">issue_search</string>
     <string name="labellist_title">레이블</string>
     <string name="add_new_label_title">새로운 레이블</string>
+    <string name="label_title">제목</string>
+    <string name="label_description">설명</string>
+    <string name="label_optional_description">선택사항</string>
+    <string name="label_title_required">필수 입력</string>
+    <string name="label_background_color">배경색</string>
+    <string name="go_back">뒤로가기</string>
+    <string name="change_random_color">색상변경</string>
+    <string name="label_save">저장</string>
 </resources>

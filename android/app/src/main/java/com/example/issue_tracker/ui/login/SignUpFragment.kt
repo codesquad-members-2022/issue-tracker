@@ -1,4 +1,4 @@
-package com.example.issue_tracker
+package com.example.issue_tracker.ui.login
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.FragmentSignUpBinding
-import java.util.regex.Pattern
 
 
 class SignUpFragment : Fragment() {
@@ -31,19 +31,8 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.nextButton.isEnabled = false
-
         binding.idTextInputLayout.editText?.addTextChangedListener(idListener)
-        binding.idTextInputEditText.hint = resources.getString(R.string.id_hint)
-        binding.idTextInputEditText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                binding.idTextInputEditText.hint = ""
-            } else {
-                binding.idTextInputEditText.hint = resources.getString(R.string.id_hint)
-            }
-        }
-
         binding.passwordTextInputLayout.editText?.addTextChangedListener(passwordListener)
-
         binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(
             passwordRecheckListener
         )
@@ -143,12 +132,14 @@ class SignUpFragment : Fragment() {
 
     // 이메일 정규식 확인
     private fun checkEmailRegex(id: String): Boolean {
-        val emailValidation =
-            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
-        return Pattern.matches(emailValidation, id)
+        return emailValidation.matches(id)
     }
 
     fun flagCheck() {
         binding.nextButton.isEnabled = idFlag && passwordFlag && passwordCheckFlag
+    }
+
+    companion object {
+        private val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$".toRegex()
     }
 }

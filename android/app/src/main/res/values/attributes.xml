@@ -3,4 +3,8 @@
     <declare-styleable name="LoginCustomButton">
         <attr name="text" format="reference|string" />
     </declare-styleable>
+
+    <declare-styleable name="CustomLabel">
+        <attr name="title" format="reference|string" />
+    </declare-styleable>
 </resources>

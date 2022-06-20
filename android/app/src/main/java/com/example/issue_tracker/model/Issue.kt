@@ -1,4 +1,4 @@
-package com.example.issue_tracker
+package com.example.issue_tracker.model
 
 data class Issue(
     val issueId: Int,
@@ -9,7 +9,8 @@ data class Issue(
 )
 
 data class Label(
-    val labelId: Int,
-    val labelContents: String,
-    val labelColor: String
+    val labelId: Int?,
+    val labelTitle: String?,
+    val labelContents: String?,
+    val labelColor: String?
 )

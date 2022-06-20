@@ -3,7 +3,7 @@
     package="com.example.issue_tracker">
 
     <application
-        android:name=".MainApplication"
+        android:name=".ui.common.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Issuetracker">
         <activity
-            android:name=".IssueActivity"
+            android:name=".ui.IssueActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

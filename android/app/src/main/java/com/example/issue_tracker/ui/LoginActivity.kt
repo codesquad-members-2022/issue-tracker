@@ -1,10 +1,11 @@
-package com.example.issue_tracker
+package com.example.issue_tracker.ui
 
 import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.issue_tracker.R
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
