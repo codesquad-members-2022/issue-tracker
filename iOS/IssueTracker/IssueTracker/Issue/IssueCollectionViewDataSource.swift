@@ -41,18 +41,26 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: IssueCollectionHeaderView.identifier, for: indexPath) as? IssueCollectionHeaderView else {
                 return UICollectionReusableView()
             }
-            header.setHeaderTitle(text: "이슈")
+            let sectionType = SectionList.allCases[indexPath.section]
+            switch sectionType {
+            case .issue:
+                header.setHeaderTitle(text: "이슈")
+            case .otherwise:
+                header.setHeaderTitle(text: "")
+        }
             return header
-        } else {
+        default:
             return UICollectionReusableView()
         }
     }
     
-    enum CreateIssueSection {
-        case issueCount([IssueItem])
+    enum SectionList: Int, CaseIterable {
+        case issue = 0
+        case otherwise
     }
 }
