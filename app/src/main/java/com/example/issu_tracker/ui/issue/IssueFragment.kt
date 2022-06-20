@@ -34,7 +34,9 @@ class IssueFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
 
         val conditions = arguments?.getParcelable<FilterCondition>("filterCondition")
-        println(conditions)
+        conditions?.let {
+            homeViewModel.filterIssueList(conditions)
+        }
 
         settingRecyclerview()
         updateRecyclerview()
@@ -45,8 +47,15 @@ class IssueFragment : Fragment() {
     private fun updateRecyclerview() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                homeViewModel.issueList.collect {
-                    issueAdapter.submitList(it)
+                launch {
+                    homeViewModel.issueList.collect {
+                        issueAdapter.submitList(it)
+                    }
+                }
+                launch {
+                    homeViewModel.filteredIssueList.collect {
+                        issueAdapter.submitList(it)
+                    }
                 }
             }
         }

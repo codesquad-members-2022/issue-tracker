@@ -10,9 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".filter.FilterFragment">
+        tools:context=".ui.filter.FilterFragment">
 
-        <com.example.issu_tracker.filter.CustomToolbar
+        <com.example.issu_tracker.ui.filter.CustomToolbar
             android:id="@+id/tb_filter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             app:toolbarNavigationIcon="@drawable/ic_clear"
             app:toolbarTitle="@string/toolbar_title_filter" />
 
-        <com.example.issu_tracker.filter.ConditionBar
+        <com.example.issu_tracker.ui.filter.ConditionBar
             android:id="@+id/cb_filter_state"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tb_filter" />
 
-        <com.example.issu_tracker.filter.ConditionBar
+        <com.example.issu_tracker.ui.filter.ConditionBar
             android:id="@+id/cb_filter_writer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cb_filter_state" />
 
-        <com.example.issu_tracker.filter.ConditionBar
+        <com.example.issu_tracker.ui.filter.ConditionBar
             android:id="@+id/cb_filter_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cb_filter_writer" />
 
-        <com.example.issu_tracker.filter.ConditionBar
+        <com.example.issu_tracker.ui.filter.ConditionBar
             android:id="@+id/cb_filter_mileStone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

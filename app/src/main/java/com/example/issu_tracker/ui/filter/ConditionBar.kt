@@ -1,4 +1,4 @@
-package com.example.issu_tracker.filter
+package com.example.issu_tracker.ui.filter
 
 import android.content.Context
 import android.util.AttributeSet

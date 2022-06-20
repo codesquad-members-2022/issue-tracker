@@ -1,4 +1,4 @@
-package com.example.issu_tracker.filter
+package com.example.issu_tracker.ui.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +23,7 @@ import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_LABEL_CONDITION
 import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_MILESTONE_CONDITION
 import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_STATE_CONDITION
 import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_WRITER_CONDITION
+import com.example.issu_tracker.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -106,7 +108,10 @@ class FilterFragment : Fragment() {
     private fun setSecondActionItemClickEvent() {
         binding.tbFilter.secondActionItem.setOnMenuItemClickListener {
             val savedValues = viewModel.saveConditionValues()
-            navController.navigate(R.id.action_filterFragment_to_issueFragment2, bundleOf("filterCondition" to savedValues))
+            navController.navigate(
+                R.id.action_filterFragment_to_issueFragment2,
+                bundleOf("filterCondition" to savedValues)
+            )
             true
         }
     }
