@@ -74,26 +74,26 @@ public class IssueRepository {
     }
 
     private BooleanExpression statusEq(String status) {
-        return hasText(status) ? null : issue.status.eq(IssueStatus.valueOf(status));
+        return hasText(status) ? issue.status.eq(IssueStatus.valueOf(status)) : null;
     }
 
     private BooleanExpression writerIdentityEq(String writer) {
-        return hasText(writer) ? null : issue.writer.identity.eq(writer);
+        return hasText(writer) ? issue.writer.identity.eq(writer) : null;
     }
 
     private BooleanExpression milestoneSubjectEq(String milestoneSubject) {
-        return hasText(milestoneSubject) ? null : issue.milestone.subject.eq(milestoneSubject);
+        return hasText(milestoneSubject) ? issue.milestone.subject.eq(milestoneSubject) : null;
     }
 
     private BooleanExpression assigneeIdentityEq(String assignee) {
-        return hasText(assignee) ? null : QAssignee.assignee.member.identity.eq(assignee);
+        return hasText(assignee) ? QAssignee.assignee.member.identity.eq(assignee) : null;
     }
 
     private BooleanExpression replierIdentityEq(String replier) {
-        return hasText(replier) ? null : reply.member.identity.eq(replier);
+        return hasText(replier) ? reply.member.identity.eq(replier) : null;
     }
 
     private BooleanExpression labelNameEq(String labelName) {
-        return hasText(labelName) ? null : issueLabel.label.name.eq(labelName);
+        return hasText(labelName) ? issueLabel.label.name.eq(labelName) : null;
     }
 }
