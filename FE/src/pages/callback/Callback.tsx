@@ -1,13 +1,9 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import qs from 'qs';
 import LoginLoading from '@components/loginCallback/LoginLoading';
 import LoginError from '@components/loginCallback/LoginError';
-
-// import React, { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { parsedQueryType } from './AuthForm';
 
 // // backend url : http://3.34.47.60:8080/auth/github?code=${code}
 // // test url : https://test-234b2-default-rtdb.firebaseio.com/.json
@@ -19,7 +15,6 @@ const authFetcher = async () => {
   const response = await fetch(
     `https://test-234b2-default-rtdb.firebaseio.com/.`,
   );
-  console.log(response);
   if (!response.ok) {
     throw new Error('response not ok');
   }
@@ -28,6 +23,7 @@ const authFetcher = async () => {
 };
 
 const Callback = () => {
+  const navigate = useNavigate();
   const { search } = useLocation();
   const { code } = qs.parse(search, {
     ignoreQueryPrefix: true,
@@ -46,6 +42,12 @@ const Callback = () => {
     console.log('error');
     return <LoginError />;
   }
+
+  if (status === 'success') {
+    navigate('/issues');
+  }
+
+  return <></>;
 };
 
 export default Callback;
