@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Button, { ButtonBox } from '@/common/Button';
 import { COLORS, GREYSCALE } from '@/constants';
@@ -25,6 +25,7 @@ function LoginPage() {
       case 'password':
         setPassword(value);
         break;
+      default:
     }
   };
 
@@ -40,7 +41,6 @@ function LoginPage() {
         return;
       }
       idRef.current.focus();
-      return;
     }
     // 로그인 성공
   };

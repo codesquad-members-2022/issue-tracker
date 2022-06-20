@@ -13,4 +13,4 @@ const COLORS = {
   DARK_GREEN: '#00A028',
 };
 
-export { COLORS };
+export default COLORS;

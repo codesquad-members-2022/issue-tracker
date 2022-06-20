@@ -1,6 +1,5 @@
-import { GREYSCALE } from '@/constants';
-import React from 'react';
 import styled from 'styled-components';
+import { GREYSCALE } from '@/constants';
 
 type TextInputProps = {
   type: 'text' | 'password';
@@ -31,7 +30,7 @@ function TextInput({
         maxLength={maxLength}
         onChange={inputHandler}
         ref={refElement}
-      ></InputBox>
+      />
     </TextInputBox>
   );
 }

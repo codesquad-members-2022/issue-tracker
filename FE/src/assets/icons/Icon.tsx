@@ -1,5 +1,4 @@
-import React from 'react';
-import { icons } from '@/assets/icons/svgs';
+import icons from '@/assets/icons/svgs';
 
 type IconProps = {
   iconName: keyof typeof icons;
