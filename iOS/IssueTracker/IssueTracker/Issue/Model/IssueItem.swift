@@ -8,7 +8,14 @@
 import Foundation
 
 struct IssueItem {
-    let title: String
-    let issueDescription: String
+    let id: Int
+    let title, content: String
     let milestoneName: String
+    let labels: [Label]
+    
+}
+
+struct Label {
+    let title: String
+    let backgroundColor: String
 }

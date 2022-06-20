@@ -9,51 +9,46 @@ import UIKit
 
 final class SignInViewController: UIViewController {
     private lazy var signInView = SignInView(frame: view.frame)
+    private var viewModel: SignInViewModelProtocol? {
+        didSet {
+            viewModel?.buttonAction = { url in
+                DispatchQueue.main.async {
+                    UIApplication.shared.open(url)
+                }
+            }
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        setObserver()
-        setGitHubSignInButtonAction()
+            viewModel?.errorAction = { [weak self] errorDescription in
+                let alert = UIAlertController(title: "다시 로그인 해주세요", message: errorDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel)
+                alert.addAction(alertAction)
+                DispatchQueue.main.async {
+                    self?.present(alert, animated: true)
+                }
+            }
+
+            viewModel?.presentAction = { [weak self] in
+                DispatchQueue.main.async {
+                    let tabBarController = TabBarController()
+                    tabBarController.modalPresentationStyle = .fullScreen
+                    self?.present(tabBarController, animated: true)
+                }
+            }
+        }
     }
 
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         view = signInView
+        viewModel = SignInViewModel()
+        setGitHubSignInButtonAction()
     }
 }
 
 // MARK: - Private Method
 private extension SignInViewController {
-    func setObserver() {
-        NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didGetSignInError, object: nil, queue: nil) { [weak self] notification in
-            let alert = UIAlertController(title: "다시 로그인 해주세요", message: notification.description, preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .cancel)
-            alert.addAction(alertAction)
-            DispatchQueue.main.async {
-                self?.present(alert, animated: true)
-            }
-        }
-    }
-
     func setGitHubSignInButtonAction() {
-        let gitHubSignInButtonAction = UIAction { _ in
-            SignInManager.shared.requestCode { result in
-                switch result {
-                case let .success(url):
-                    DispatchQueue.main.async {
-                        UIApplication.shared.open(url)
-                    }
-                case let .failure(error):
-                    print(error)
-                }
-            }
-        }
-
-        signInView.setGitHubSignInButtonAction(gitHubSignInButtonAction)
+        signInView.setGitHubSignInButtonAction(UIAction { [weak self] _ in
+            self?.viewModel?.requestOAuthCode()
+        })
     }
 }
