@@ -3,15 +3,15 @@ import Alamofire
 
 typealias UserToken = String
 
+enum NetworkError: Error {
+    case issueNotFound
+    case tokenNotFound
+    case storageKeyNotFound
+}
+
 final class NetworkManager {
     public static let shared = NetworkManager()
     private init() {}
-    
-    enum NetworkError: Error {
-        case issueNotFound
-        case tokenNotFound
-        case storageKeyNotFound
-    }
     
     func requestCode(completion: @escaping (Result<URL, NetworkError>) -> Void) {
         let scope = "repo,user"
@@ -36,35 +36,6 @@ final class NetworkManager {
         }
     }
     
-    func requestAccessToken(with code: String, completion: @escaping (Result<UserToken, NetworkError>) -> Void) {
-        let url = RequestURL.accessToken.description
-        let privateStorage = PrivateStorage()
-        guard let clientId = try? privateStorage.getClientId(),
-            let clientSecret = try? privateStorage.getClientSecret() else {
-            completion(.failure(.storageKeyNotFound))
-            return
-        }
-        
-        let parameters = [
-            QueryParameter.clientId.description: "\(clientId)",
-            QueryParameter.clientSecret.description: "\(clientSecret)",
-            QueryParameter.code.description: code
-        ]
-        let headers: HTTPHeaders = [
-            NetworkHeader.accept.getHttpHeader()
-        ]
-        
-        AF.request(url, method: .post, parameters: parameters, headers: headers).responseDecodable(of: [String: String].self) { (response) in
-            switch response.result {
-            case .success(let json):
-                if let accessToken = json["access_token"] {
-                    completion(.success(accessToken))
-                }
-            case .failure:
-                completion(.failure(.tokenNotFound))
-            }
-        }
-    }
 
     func requestIssues(accessToken: String, completion: @escaping (Result<[Issue], NetworkError>) -> Void) {
         let urlString = RequestURL.issues.description

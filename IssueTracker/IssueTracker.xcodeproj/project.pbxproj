@@ -24,6 +24,7 @@
 		985CAB4C28603AE9005E709D /* NetworkHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB4B28603AE9005E709D /* NetworkHeader.swift */; };
 		985CAB4E28603AFF005E709D /* QueryParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB4D28603AFF005E709D /* QueryParameter.swift */; };
 		985CAB5028603B15005E709D /* RequestURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB4F28603B15005E709D /* RequestURL.swift */; };
+		985CAB53286068A4005E709D /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB52286068A4005E709D /* OAuthManager.swift */; };
 		988510D628572B8700CC2DA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988510D528572B8700CC2DA9 /* AppDelegate.swift */; };
 		988510DA28572B8700CC2DA9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988510D928572B8700CC2DA9 /* ViewController.swift */; };
 		988510DF28572B8900CC2DA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 988510DE28572B8900CC2DA9 /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		985CAB4B28603AE9005E709D /* NetworkHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHeader.swift; sourceTree = "<group>"; };
 		985CAB4D28603AFF005E709D /* QueryParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameter.swift; sourceTree = "<group>"; };
 		985CAB4F28603B15005E709D /* RequestURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestURL.swift; sourceTree = "<group>"; };
+		985CAB52286068A4005E709D /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		988510D228572B8700CC2DA9 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		988510D528572B8700CC2DA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		988510D928572B8700CC2DA9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		985CAB5128606898005E709D /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				985CAB52286068A4005E709D /* OAuthManager.swift */,
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
 		988510C928572B8700CC2DA9 = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +202,7 @@
 		988510D428572B8700CC2DA9 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				985CAB5128606898005E709D /* OAuth */,
 				985CAB4A28603AD3005E709D /* Network */,
 				985CAB45285C19D0005E709D /* Extension */,
 				983E66CA285B2AD300C9B975 /* Model */,
@@ -370,6 +381,7 @@
 				981BD43B285B128F00DDDE64 /* CapsuleTextView.swift in Sources */,
 				985CAB5028603B15005E709D /* RequestURL.swift in Sources */,
 				983E66C8285B212A00C9B975 /* NetworkManager.swift in Sources */,
+				985CAB53286068A4005E709D /* OAuthManager.swift in Sources */,
 				98130E1B285AC8A5001B6DA1 /* IssueViewController.swift in Sources */,
 				988510DA28572B8700CC2DA9 /* ViewController.swift in Sources */,
 				981BD43D285B12AC00DDDE64 /* IssueListCell.swift in Sources */,
