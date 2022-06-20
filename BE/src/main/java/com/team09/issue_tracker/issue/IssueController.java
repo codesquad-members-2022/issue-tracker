@@ -3,7 +3,7 @@ package com.team09.issue_tracker.issue;
 import com.team09.issue_tracker.common.CommonResponseDto;
 import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
 import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
-import com.team09.issue_tracker.issue.dto.IssueFindByIdResponseDto;
+import com.team09.issue_tracker.issue.dto.IssueDetailResponseDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,16 +27,18 @@ public class IssueController {
 	private final static Long MEMBER_ID = 1L;
 
 	@GetMapping
-	public ResponseEntity<List<IssueListResponseDto>> selectOpened() {
+	public ResponseEntity<List<IssueListResponseDto>> selectOpenedList() {
 		//TODO : 상수로 사용한 MEMBER_ID는 로그인 구현 완료시 http request 에서 가져오는 것으로 변경
-		List<IssueListResponseDto> response = issueService.selectOpened(MEMBER_ID);
+		List<IssueListResponseDto> response = issueService.selectOpenedList(MEMBER_ID);
 
 		return ResponseEntity.ok().body(response);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<IssueFindByIdResponseDto> findById(@PathVariable final Long id) {
-		return ResponseEntity.ok(new IssueFindByIdResponseDto());
+	public ResponseEntity<IssueDetailResponseDto> selectOneById(@PathVariable final Long id) {
+		IssueDetailResponseDto response = issueService.selectOneById(id, MEMBER_ID);
+
+		return ResponseEntity.ok().body(response);
 	}
 
 	@PostMapping
