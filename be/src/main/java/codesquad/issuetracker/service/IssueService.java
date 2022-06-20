@@ -6,6 +6,7 @@ import codesquad.issuetracker.dto.issue.IssueDto;
 import codesquad.issuetracker.dto.issue.IssueDtos;
 import codesquad.issuetracker.dto.issue.IssueSearchCondition;
 import codesquad.issuetracker.repository.IssueRepository;
+import codesquad.issuetracker.repository.LabelRepository;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class IssueService {
 
     private final IssueRepository issueRepository;
+    private final LabelRepository labelRepository;
 
     public IssueDtos getIssuesByCriteria(IssueSearchCondition condition) {
         List<IssueDto> issues = issueRepository.search(condition);
         for (IssueDto issue : issues) {
-            issue.setLabels(issueRepository.findLabelsOfIssue(issue.getId()));
+            issue.setLabels(labelRepository.findAllByIssueId(issue.getId()));
         }
+
         return new IssueDtos(issues);
     }
 
