@@ -1,11 +1,9 @@
-import React, { SetStateAction, Suspense, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import qs, { ParsedQs } from 'qs';
+import React from 'react';
+import { ParsedQs } from 'qs';
 import styles from './AuthForm.module.scss';
-import { Input } from '@UI/Input';
-import { authActions } from '../../store/authStore';
+import { Input } from '../../UI/Input';
 import GithubLoginBtn from './GithubLoginBtn';
+import useInput from '../../hooks/useInput';
 
 export type parsedQueryType =
   | string
@@ -16,12 +14,27 @@ export type parsedQueryType =
   | null;
 
 const AuthForm = () => {
-  const dispatch = useDispatch();
-  const idSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // 아이디로 로그인
-    // todo, form validator 만들기
-    dispatch(authActions.login());
+  const {
+    value: enteredID,
+    isValid: idIsValid,
+    valueChangeHandler: IDChangedHandler,
+    reset: resetID,
+  } = useInput((value) => value.length > 5);
+
+  const {
+    value: enteredPassword,
+    isValid: passWordIsValid,
+    valueChangeHandler: passWordChangedHandler,
+    reset: resetPassword,
+  } = useInput((value) => value.length > 5);
+
+  const formIsValid = idIsValid && passWordIsValid;
+
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    resetID();
+    resetPassword();
   };
 
   return (
@@ -30,13 +43,16 @@ const AuthForm = () => {
       <div className={styles.wrapper}>
         <GithubLoginBtn />
         <div className={styles.divider}>or</div>
-        <form className={styles.form} onSubmit={idSubmitHandler}>
+        <form className={styles.form} onSubmit={submitHandler}>
           <Input
-            label="email"
+            label="id"
             info={{
-              id: 'email',
-              type: 'email',
+              id: 'id',
+              type: 'text',
               placeholder: '아이디',
+              value: enteredID,
+              onChange: IDChangedHandler,
+              maxLength: 12,
             }}
           />
           <Input
@@ -45,9 +61,16 @@ const AuthForm = () => {
               id: 'password',
               type: 'password',
               placeholder: '비밀번호',
+              value: enteredPassword,
+              onChange: passWordChangedHandler,
+              maxLength: 12,
             }}
           />
-          <button type="submit" className={styles.login_button}>
+          <button
+            type="submit"
+            className={styles.login_button}
+            disabled={!formIsValid}
+          >
             아이디로 로그인
           </button>
         </form>

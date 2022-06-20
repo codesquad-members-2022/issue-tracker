@@ -9,4 +9,7 @@ module.exports = {
   },
   roots: ['..'],
   testEnvironment: 'jest-environment-jsdom',
+  moduleNameMapper: {
+    '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
+  },
 };
