@@ -36,6 +36,7 @@
 		02AEC2F628600AF500AAE835 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2F528600AF500AAE835 /* URLSession+Extension.swift */; };
 		02AEC2F828600B2D00AAE835 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2F728600B2D00AAE835 /* DummyData.swift */; };
 		02AEC2FB28600B8200AAE835 /* SignInStubURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2FA28600B8200AAE835 /* SignInStubURLSessionDataTask.swift */; };
+		02AEC2FD28600E8500AAE835 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2FC28600E8500AAE835 /* Observable.swift */; };
 		5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C028573E400088EC11 /* AppDelegate.swift */; };
 		5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C228573E400088EC11 /* SceneDelegate.swift */; };
 		5B29A0C528573E400088EC11 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C428573E400088EC11 /* IssueViewController.swift */; };
@@ -118,6 +119,7 @@
 		02AEC2F528600AF500AAE835 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		02AEC2F728600B2D00AAE835 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		02AEC2FA28600B8200AAE835 /* SignInStubURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInStubURLSessionDataTask.swift; sourceTree = "<group>"; };
+		02AEC2FC28600E8500AAE835 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		27B2358B9B31125F065826EB /* Pods-IssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3630D8BA3D14FDF118C50CF9 /* libPods-IssueTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B29A0BD28573E400088EC11 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				024F43C02859C924008C4235 /* Extension */,
+				02AEC2FC28600E8500AAE835 /* Observable.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */,
 				5BE928DB2859B94A00D237AB /* IssueCollectionViewDataSource.swift in Sources */,
 				02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */,
+				02AEC2FD28600E8500AAE835 /* Observable.swift in Sources */,
 				5BE928D72858568B00D237AB /* MilestoneViewController.swift in Sources */,
 				5BE928D92858569C00D237AB /* MyAccountViewController.swift in Sources */,
 				02AEC2F828600B2D00AAE835 /* DummyData.swift in Sources */,
