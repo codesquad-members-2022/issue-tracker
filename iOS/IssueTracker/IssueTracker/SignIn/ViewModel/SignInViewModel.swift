@@ -7,33 +7,51 @@
 
 import Foundation
 
-protocol SignInViewModelProtocol: AnyObject {
-    var buttonAction: Observable<URL?> { get }
-    var errorAction: Observable<String> { get }
-    var presentAction: Observable<Void> { get }
-    func requestOAuthCode()
+protocol SignInViewModelInput {
+    func didSelect()
+}
+
+protocol SignInViewModelOutput {
+    var error: Observable<String> { get }
+}
+
+protocol SignInViewModelProtocol: SignInViewModelInput, SignInViewModelOutput {
+    /* SignInViewModelActions의 presentTabBarController 프로퍼티를 SceneDelegate에서 DI시에 설정해주려고 하니,
+     SceneDelegate에는 `present()` 메소드가 없어서 해당 프로퍼티를 설정할 수 없었음.
+     그로인해, SignInVC에서 해당 프로퍼티를 설정해줄 수 있도록 메소드 제공 */
+    func setPresentAction(_ action: @escaping () -> Void)
+}
+
+struct SignInViewModelActions {
+    let openURL: (URL) -> Void
+    var presentTabBarController: () -> Void = { }
 }
 
 final class SignInViewModel: SignInViewModelProtocol {
+    private(set) var error: Observable<String> = Observable("")
     private let useCase: SignInManagable
-    private(set) var buttonAction: Observable<URL?> = Observable(URL(string: ""))
-    private(set) var errorAction: Observable<String> = Observable("")
-    private(set) var presentAction: Observable<Void> = Observable(Void())
+    private var actions: SignInViewModelActions?
 
-    init(useCase: SignInManagable) {
+    init(useCase: SignInManagable,
+         actions: SignInViewModelActions) {
         self.useCase = useCase
+        self.actions = actions
         setObserver()
     }
 
-    func requestOAuthCode() {
-        useCase.requestCode { [weak self] result in
+    func didSelect() {
+        useCase.requestCode { [weak self] (result) in
             switch result {
-            case let .success(url):
-                self?.buttonAction.value = url
-            case let .failure(error):
-                self?.errorAction.value = error.localizedDescription
+            case .success(let url):
+                self?.actions?.openURL(url)
+            case .failure(let error):
+                self?.error.value = error.localizedDescription
             }
         }
+    }
+
+    func setPresentAction(_ action: @escaping () -> Void) {
+        actions?.presentTabBarController = action
     }
 }
 
@@ -41,11 +59,11 @@ final class SignInViewModel: SignInViewModelProtocol {
 private extension SignInViewModel {
     func setObserver() {
         NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didGetSignInError, object: nil, queue: nil) { [weak self] notification in
-            self?.errorAction.value = notification.description
+            self?.error.value = notification.description
             }
 
         NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didSignIn, object: nil, queue: nil) { [weak self] _ in
-            self?.presentAction.notifyObservers()
+            self?.actions?.presentTabBarController()
         }
     }
 }

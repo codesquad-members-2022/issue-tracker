@@ -48,10 +48,20 @@ extension SceneDelegate {
 private extension SceneDelegate {
     func selectRootViewController() -> UIViewController {
         return UserDefaultManager.isSavedJWTToken() ?
-        TabBarController() : SignInViewController(viewModel: SignInViewModel(useCase: SignInManager()))
+        TabBarController() : makeSignInViewController()
     }
 
     func saveJWTToken(jwtToken: String) {
         UserDefaultManager.saveJWTToken(jwtToken)
+    }
+
+    func makeSignInViewController() -> UIViewController {
+        let openURL: (URL) -> Void = { (url) in
+            UIApplication.shared.open(url)
+        }
+
+        return SignInViewController(
+            viewModel: SignInViewModel(useCase: SignInManager(),
+                                       actions: SignInViewModelActions(openURL: openURL)))
     }
 }

@@ -32,22 +32,15 @@ final class SignInViewController: UIViewController {
 private extension SignInViewController {
     func bind(to viewModel: SignInViewModelProtocol) {
         signInView.setGitHubSignInButtonAction(UIAction { [weak self] _ in
-            self?.viewModel.requestOAuthCode()
+            self?.viewModel.didSelect()
         })
 
-        viewModel.buttonAction.bind(on: self) { url in
-            guard let url = url else { return }
-            UIApplication.shared.open(url)
-        }
-
-        viewModel.errorAction.bind(on: self) { [weak self] message in
+        viewModel.error.bind(on: self) { [weak self] message in
             self?.showAlert(of: message)
         }
 
-        viewModel.presentAction.bind(on: self) { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.presentTabBarController()
-            }
+        viewModel.setPresentAction { [weak self] in
+            self?.presentTabBarController()
         }
     }
 
