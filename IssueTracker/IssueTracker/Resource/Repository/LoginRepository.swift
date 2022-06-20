@@ -24,7 +24,7 @@ final class LoginRepository {
         UIApplication.shared.open(url)
     }
 
-    func getGithubAccessCode(_ target: BaseTarget, _ completion: @escaping (String) -> Void) {
+    func getGithubAccessToken(_ target: BaseTarget, _ completion: @escaping (String) -> Void) {
 
         guard let request = RequestRepository.makeURLRequest(with: target) else { return }
         RequestRepository.sendRequest(with: request) { data in

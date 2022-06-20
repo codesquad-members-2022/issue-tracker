@@ -28,9 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let response = URLContexts.first?.url,
         let authorizedCode = response.absoluteString.components(separatedBy: "code=").last else { return }
 
-        let target = IssueTrackerTarget.requestAccessToken(code: authorizedCode)
+        let urlRequest = IssueTrackerTarget.requestAccessToken(code: authorizedCode)
 
-        loginRepository.getGithubAccessCode(target) { token in
+        loginRepository.getGithubAccessToken(urlRequest) { token in
             UserDefaults.standard.set("access_token", forKey: token)
             DispatchQueue.main.async {
                 self.window?.rootViewController = TabBarViewController()
