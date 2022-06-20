@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Icon } from '@/components/Icon';
 import Label from '@/components/Label';
+import { Status } from '@/components/Label/type';
 import { LABEL } from '@/styles/common';
 
 export default {
@@ -10,9 +11,20 @@ export default {
 } as ComponentMeta<typeof Label>;
 
 export const Default: ComponentStory<typeof Label> = ({ children, ...args }) => {
+  const getIcon = (status: Status) => {
+    switch (status) {
+      case 'open':
+        return <Icon IconType="openLabel" color={LABEL[status].color} />;
+      case 'close':
+        return <Icon IconType="closeLabel" color={LABEL[status].color} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <Label {...args}>
-      <Icon IconType="openLabel" color={LABEL[args.status].color} />
+      {getIcon(args.status)}
       열린 이슈
     </Label>
   );

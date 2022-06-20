@@ -72,11 +72,26 @@ const ERROR = {
 const LABEL = {
   open: {
     background: PALETTE.BLUE[100],
-    color: PALETTE.BLUE[200]
+    color: PALETTE.BLUE[200],
+    border: PALETTE.BLUE[200]
   },
   close: {
     background: PALETTE.BLUE.DARK[100],
-    color: PALETTE.BLUE.DARK[200]
+    color: PALETTE.BLUE.DARK[200],
+    border: PALETTE.BLUE.DARK[200]
+  },
+  dark: {
+    background: PALETTE.GREY[100],
+    color: PALETTE.WHITE
+  },
+  light: {
+    background: PALETTE.GREY[600],
+    color: PALETTE.BLACK
+  },
+  line: {
+    background: PALETTE.WHITE,
+    color: PALETTE.GREY[200],
+    border: PALETTE.GREY[400]
   }
 };
 
