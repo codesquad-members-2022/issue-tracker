@@ -40,7 +40,7 @@ export default function TextInput({
         placeholder={placeholder}
         visibleLabel={visibleLabel}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleInputChange(event)}
-      ></$TextInput>
+      />
     </TextInputWrap>
   );
 }
