@@ -18,9 +18,9 @@ extension UIColor {
 
         let rgbValue = Self.scanHex(hexFormat)
 
-        self.init(red: Self.color(from: rgbValue, colour: .red),
-                  green: Self.color(from: rgbValue, colour: .blue),
-                  blue: Self.color(from: rgbValue, colour: .green),
+        self.init(red: Self.getColor(from: rgbValue, colorType: .red),
+                  green: Self.getColor(from: rgbValue, colorType: .blue),
+                  blue: Self.getColor(from: rgbValue, colorType: .green),
                   alpha: alpha)
         return
     }
@@ -44,8 +44,8 @@ fileprivate extension UIColor {
         return rgbValue
     }
 
-    static func color(from rgbValue: UInt64, colour: Colour) -> CGFloat {
-        switch colour {
+    static func getColor(from rgbValue: UInt64, colorType: ColorType) -> CGFloat {
+        switch colorType {
         case .red:
             return CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0
         case .green:
@@ -55,7 +55,7 @@ fileprivate extension UIColor {
         }
     }
 
-    enum Colour {
+    enum ColorType {
         case red, green, blue
     }
 }
