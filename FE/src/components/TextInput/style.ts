@@ -17,8 +17,8 @@ const largeTextInput = css<I$TextInput>`
   padding: ${({ visibleLabel }) => (visibleLabel ? '28px 24px 8px' : '16px 24px')};
   border-radius: 16px;
   background: ${({ theme, status }) =>
-    status ? theme.COLOR[status].background : theme.COLOR.inputBackground};
-  border: ${({ theme, status }) => (status ? `1px solid ${theme.COLOR[status].border}` : 0)};
+    status ? theme.ERROR[status].background : theme.COLOR.inputBackground};
+  border: ${({ theme, status }) => (status ? `1px solid ${theme.ERROR[status].border}` : 0)};
   ${commonEventStyle}
   :focus {
     padding: ${({ visibleLabel }) => (visibleLabel ? '27px 23px 7px' : '15px 23px')};
@@ -27,7 +27,7 @@ const largeTextInput = css<I$TextInput>`
 
 const largeLabel = css<I$Label>`
   top: 8px;
-  color: ${({ theme, status }) => (status ? theme.COLOR[status].text : theme.COLOR.label)};
+  color: ${({ theme, status }) => (status ? theme.ERROR[status].text : theme.COLOR.label)};
 `;
 
 const mediumTextInput = css<I$TextInput>`
@@ -53,8 +53,8 @@ const smallTextInput = css<I$TextInput>`
   padding: ${({ visibleLabel }) => (visibleLabel ? '6px 24px 6px 112px' : '6px 24px')};
   border-radius: 11px;
   background: ${({ theme, status }) =>
-    status ? theme.COLOR[status].background : theme.COLOR.inputBackground};
-  border: ${({ theme, status }) => (status ? `1px solid ${theme.COLOR[status].border}` : 0)};
+    status ? theme.ERROR[status].background : theme.COLOR.inputBackground};
+  border: ${({ theme, status }) => (status ? `1px solid ${theme.ERROR[status].border}` : 0)};
   ${commonEventStyle}
   :focus {
     padding: ${({ visibleLabel }) => (visibleLabel ? '5px 23px 5px 111px' : '5px 23px')};
@@ -65,7 +65,7 @@ const smallTextInput = css<I$TextInput>`
 const smallLabel = css<I$Label>`
   top: 50%;
   transform: translateY(-50%);
-  color: ${({ theme, status }) => (status ? theme.COLOR[status].text : theme.COLOR.label)};
+  color: ${({ theme, status }) => (status ? theme.ERROR[status].text : theme.COLOR.label)};
 `;
 
 const getStyleTypes = (styleType: StyleType) => {

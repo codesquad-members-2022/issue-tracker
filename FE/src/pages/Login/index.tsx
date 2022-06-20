@@ -4,7 +4,7 @@ import Logo from '@/components/Logo';
 import TextInput from '@/components/TextInput';
 import InputMessage from '@/components/InputMessage';
 import useInputTextValue from '@/hooks/useInputTextValue';
-import { InputName, LimitLength, Error } from '@/pages/Login/type';
+import { InputName, Error } from '@/pages/Login/type';
 import Layout from '@/layout';
 import {
   $LogoWrapper,
@@ -18,15 +18,21 @@ import { COLOR } from '@/styles/common';
 
 const TEXT_INPUT_DEBOUNCE_TIME = 300;
 
-const LIMIT_LENGTH: Record<InputName, LimitLength> = {
+const LIMIT_LENGTH = {
   id: { min: 6, max: 16 },
   pw: { min: 6, max: 12 }
 };
 
 const ERROR_MESSAGE = {
-  successID: () => '사용 가능한 아이디 입니다.',
-  errorID: () => '이미 사용하고 있는 아이디 입니다.',
-  lengthCheck: (min: number, max: number) => `최소 ${min}자리에서 ${max}까지 입력하세요.`
+  id: {
+    success: '사용 가능한 아이디 입니다.',
+    error: '이미 사용하고 있는 아이디 입니다.',
+    lengthCheck: `최소 ${LIMIT_LENGTH.id.min}자리에서 ${LIMIT_LENGTH.id.max}까지 입력하세요.`
+  },
+  pw: {
+    success: '사용 가능한 비밀번호 입니다.',
+    lengthCheck: `최소 ${LIMIT_LENGTH.pw.min}자리에서 ${LIMIT_LENGTH.pw.max}까지 입력하세요.`
+  }
 };
 
 const initialError = {
@@ -35,25 +41,40 @@ const initialError = {
 };
 
 export default function Login() {
-  const { inputInfo, updateInputValue, checkInputValueLength } = useInputTextValue('');
-  const [error, setError] = useState<Error>(initialError);
+  const { inputInfo, updateInputValue, checkInputValueLength } = useInputTextValue<InputName>('');
+  const [error, setError] = useState<Error>({ id: initialError, pw: initialError });
 
-  const toggleLengthErrorMessage = () => {
-    if (!inputInfo) return;
+  const setLengthError = () => {
+    if (!inputInfo.name) return;
 
-    const isRightLength = checkInputValueLength(LIMIT_LENGTH.id.min, LIMIT_LENGTH.id.max);
+    const isRightLength = checkInputValueLength(
+      LIMIT_LENGTH[inputInfo.name].min,
+      LIMIT_LENGTH[inputInfo.name].max
+    );
+    const newError = { ...error };
+
     if (isRightLength) {
-      setError(initialError);
+      newError[inputInfo.name] = {
+        status: 'success',
+        message: ERROR_MESSAGE[inputInfo.name].success
+      };
     } else {
-      const message = ERROR_MESSAGE.lengthCheck(LIMIT_LENGTH.id.min, LIMIT_LENGTH.id.max);
-      setError({ status: 'lengthCheck', message: message });
+      newError[inputInfo.name] = {
+        status: 'lengthCheck',
+        message: ERROR_MESSAGE[inputInfo.name].lengthCheck
+      };
     }
+
+    setError(newError);
   };
 
-  useEffect(() => {
-    if (!inputInfo.value) return;
-    toggleLengthErrorMessage();
-  }, [inputInfo]);
+  useEffect(setLengthError, [inputInfo]);
+
+  const hasError = () => {
+    const inputNames = Object.keys(error) as InputName[];
+    const errorStatus = inputNames.find((name: InputName) => error[name].status !== 'success');
+    return errorStatus !== undefined;
+  };
 
   return (
     <Layout>
@@ -65,39 +86,39 @@ export default function Login() {
         <$Span>or</$Span>
         <$Form>
           <$LoginInputWrap>
-            <TextInput
+            <TextInput<InputName>
               styleType="large"
               placeholder="아이디"
               label="아이디"
               name="id"
-              handleChange={(target: HTMLInputElement) =>
-                updateInputValue(target, TEXT_INPUT_DEBOUNCE_TIME)
+              status={error.id.status}
+              handleChange={({ name, value }: { name: InputName; value: string }) =>
+                updateInputValue(name, value, TEXT_INPUT_DEBOUNCE_TIME)
               }
             />
-            {inputInfo.name === 'id'
-              ? inputInfo.value &&
-                error.status && <InputMessage status={error.status}>{error.message}</InputMessage>
-              : null}
+            {error.id.status && (
+              <InputMessage status={error.id.status}>{error.id.message}</InputMessage>
+            )}
           </$LoginInputWrap>
           <$LoginInputWrap>
-            <TextInput
+            <TextInput<InputName>
               styleType="large"
               placeholder="비밀번호"
               label="비밀번호"
               name="pw"
-              handleChange={(target: HTMLInputElement) =>
-                updateInputValue(target, TEXT_INPUT_DEBOUNCE_TIME)
+              status={error.pw.status}
+              handleChange={({ name, value }: { name: InputName; value: string }) =>
+                updateInputValue(name, value, TEXT_INPUT_DEBOUNCE_TIME)
               }
               type="password"
             />
-            {inputInfo.name === 'pw'
-              ? inputInfo.value &&
-                error.status && <InputMessage status={error.status}>{error.message}</InputMessage>
-              : null}
+            {error.pw.status && (
+              <InputMessage status={error.pw.status}>{error.pw.message}</InputMessage>
+            )}
           </$LoginInputWrap>
         </$Form>
         <$ButtonWrapper>
-          <Button styleType="large" text="아이디로 로그인" disabled={true} />
+          <Button styleType="large" text="아이디로 로그인" disabled={hasError()} />
           <Button styleType="smallText" text="회원가입" />
         </$ButtonWrapper>
       </$Contents>

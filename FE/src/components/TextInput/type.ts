@@ -4,7 +4,7 @@ import { StyledComponent } from 'styled-components';
 type StyleType = 'large' | 'medium' | 'small';
 
 interface IStyleProps {
-  status?: Status;
+  status: Status;
   width?: string;
   height?: string;
   color?: string;
@@ -24,12 +24,12 @@ interface I$TextInput extends IStyleProps {
   visibleLabel: boolean;
 }
 
-interface ITextInputProps extends IStyleProps {
+interface ITextInputProps<T> extends IStyleProps {
   styleType?: StyleType;
   placeholder?: string;
   label?: string;
   type?: string;
-  name: string;
+  name: T;
   as?: StyledComponent<'div', any, I$TextInput, never>;
   handleChange?: Function;
 }

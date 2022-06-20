@@ -8,8 +8,8 @@ interface LimitLength {
 }
 
 interface Error {
-  status: Status;
-  message: string;
+  id: { status: Status; message: string };
+  pw: { status: Status; message: string };
 }
 
 export type { InputName, LimitLength, Error };

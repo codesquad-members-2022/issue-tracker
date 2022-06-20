@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import debounce from '@/utils/debounce';
 
-export default function useInputTextValue(value: string) {
-  const [inputInfo, setInputValue] = useState<{ name: string | null; value: string }>({
+export default function useInputTextValue<T>(value: string) {
+  const [inputInfo, setInputValue] = useState<{ name: T | null; value: string }>({
     name: null,
     value
   });
 
-  const updateInputValue = (target: HTMLInputElement, ms?: number) => {
+  const updateInputValue = (name: T, value: string, ms?: number) => {
     debounce(
       () =>
         setInputValue({
-          name: target.name,
-          value: target.value
+          name: name,
+          value: value
         }),
       ms ? ms : 0
     );

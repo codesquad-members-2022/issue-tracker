@@ -4,7 +4,7 @@ import { ITextInputProps } from '@/components/TextInput/type';
 
 const MIN_INPUT_VALUE_LENGTH = 1;
 
-export default function TextInput({
+export default function TextInput<T extends string>({
   placeholder = '',
   label,
   type = 'text',
@@ -12,7 +12,7 @@ export default function TextInput({
   as,
   handleChange,
   ...props
-}: ITextInputProps) {
+}: ITextInputProps<T>) {
   const [visibleLabel, setVisibleLabel] = useState(false);
   const TextInputWrap = as || $TextInputWrap;
 
