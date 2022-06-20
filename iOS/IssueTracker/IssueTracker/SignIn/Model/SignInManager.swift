@@ -10,6 +10,11 @@ import Foundation
 struct SignInManager {
     private let clientID = Bundle.main.clientID
     private let clientSecret = Bundle.main.clientSecret
+    var urlSession: URLSessionProtocol
+    
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
+        self.urlSession = urlSession
+    }
 
     func requestCode(completion: @escaping (Result<URL, Error>) -> Void) {
         let networkTarget = SignInNetworkTarget.requestCode(clientID: clientID)
