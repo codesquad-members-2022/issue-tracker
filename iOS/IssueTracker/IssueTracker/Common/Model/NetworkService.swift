@@ -46,10 +46,6 @@ private extension NetworkService {
         if let url = components.url {
             var request = URLRequest(url: url)
             request.httpMethod = target.method
-            if let target = target as? SignInNetworkTarget,
-               target.isAcceptJSON {
-                request.addValue("application/json", forHTTPHeaderField: "Accept")
-            }
 
             return request
         }
