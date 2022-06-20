@@ -2,6 +2,7 @@ package com.team09.issue_tracker.issue;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.team09.issue_tracker.issue.domain.Issue;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class IssueSelectRepositoryTest {
 		boolean isOpened = true;
 
 		//when
-		List<Issue> issues = issueRepository.findByWriterIdAndIsOpened(writerId,
+		List<Issue> issues = issueRepository.findByMemberIdAndIsOpened(writerId,
 			isOpened);
 
 		//then
