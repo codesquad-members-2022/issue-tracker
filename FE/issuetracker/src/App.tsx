@@ -4,12 +4,14 @@ import { BrowserRouter } from 'react-router-dom';
 import Router from 'Router';
 import GlobalStyles from 'design/GlobalStyles';
 import 'assets/style.css';
+import Header from 'components/header';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <BrowserRouter>
+        <Header />
         <Router />
       </BrowserRouter>
     </ThemeProvider>

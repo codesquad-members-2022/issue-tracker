@@ -39,3 +39,7 @@ export const calendar = styled(Common).attrs({ className: 'icon-calendar' })``;
 export const refresh = styled(Common).attrs({ className: 'icon-refresh-ccw' })``;
 
 export const alertCircle = styled(Common).attrs({ className: 'icon-alert-circle' })``;
+
+export const dropdownArrow = styled(Common).attrs({ className: 'icon-dropdown-arrow' })`
+  font-size: 3px;
+`;
