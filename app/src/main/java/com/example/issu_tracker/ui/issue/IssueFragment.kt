@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.Navigation
@@ -24,7 +25,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class IssueFragment : Fragment() {
     private lateinit var binding: FragmentIssueBinding
-    private val issueAdapter = IssueAdapter()
+    private lateinit var issueAdapter: IssueAdapter
     private val homeViewModel: HomeViewModel by activityViewModels<HomeViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +53,15 @@ class IssueFragment : Fragment() {
     }
 
     private fun settingRecyclerview() {
+        issueAdapter = IssueAdapter()
+        issueAdapter.swipeDeleteListener = object : SwipeDeleteListener {
+            override fun deleteItem(itemId: String) {
+              viewLifecycleOwner.lifecycleScope.launch {
+                  homeViewModel.deleteIssue(itemId)
+              }
+            }
+        }
+
         binding.rvIssue.adapter = issueAdapter
         binding.rvIssue.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -67,4 +77,8 @@ class IssueFragment : Fragment() {
             navController.navigate(R.id.action_issueFragment2_to_filterFragment)
         }
     }
+}
+
+interface SwipeDeleteListener {
+    fun deleteItem(itemId: String)
 }

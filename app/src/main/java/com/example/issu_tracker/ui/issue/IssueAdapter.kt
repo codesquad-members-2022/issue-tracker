@@ -12,6 +12,8 @@ import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.databinding.ItemIssueBinding
 
 class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) {
+    var swipeDeleteListener : SwipeDeleteListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueViewHolder {
         val binding: ItemIssueBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -26,12 +28,17 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) 
         holder.bind(getItem(position))
     }
 
-    class IssueViewHolder(private val binding: ItemIssueBinding) :
+   inner class IssueViewHolder(private val binding: ItemIssueBinding) :
         RecyclerView.ViewHolder(binding.root) {
         var isSwiped = false
 
         fun bind(issue: Issue) {
             binding.issue = issue
+
+            binding.clDeleteContainer.setOnClickListener {
+                Log.d("eventEvent", "erase")
+                swipeDeleteListener?.deleteItem( issue.id)
+            }
 
             binding.root.setOnLongClickListener {
                 Log.d("eventEvent", "LongClick")
@@ -43,6 +50,7 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) 
 
         }
     }
+
     override fun getItemViewType(position: Int): Int {
         return position
     }

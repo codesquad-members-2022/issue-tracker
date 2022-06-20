@@ -26,4 +26,9 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         val issueDummyData = repository.loadIssues()
         _issueList.value = issueDummyData
     }
+
+    suspend fun deleteIssue(itemId: String) {
+        repository.deleteIssue(itemId)
+        getIssueList()
+    }
 }

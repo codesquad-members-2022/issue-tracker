@@ -19,7 +19,6 @@ class LabelAdapter(private val labels: List<Label>) :
         fun bind(item: Label) {
             binding.tvLabelContent.text = item.content
 
-
             val background = ContextCompat.getDrawable(
                 binding.tvLabelContent.context,
                 R.drawable.round_rectangle_background
