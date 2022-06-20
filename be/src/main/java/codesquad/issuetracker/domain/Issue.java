@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "issue")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Issue {
+public class Issue extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,10 +58,5 @@ public class Issue {
 
     @Enumerated(EnumType.STRING)
     private IssueStatus status;
-
-    @Column(name = "created_datetime")
-    private LocalDateTime createdDateTime;
-    @Column(name = "updated_datetime")
-    private LocalDateTime updatedDateTime;
 
 }
