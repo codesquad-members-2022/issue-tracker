@@ -16,7 +16,9 @@ class RequestModel {
     
     static func networkRequest(urgency: RequestUrgency? = nil) -> DataResponsePublisher<TestDecodableType>? {
         // 이전 프로젝트에서 사용한 REST-API를 이용하여 기능 테스트 중입니다.
-        guard let url = URL(string: "https://public.codesquad.kr/jk/boostcamp/starbuckst-loading.json") else { return nil }
+        guard let url = URL(string: "https://public.codesquad.kr/jk/boostcamp/starbuckst-loading.json") else {
+            return nil
+        }
         
         var request = URLRequest(url: url)
         request.method = .get

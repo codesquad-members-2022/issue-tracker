@@ -8,9 +8,7 @@ import Combine
 class TestUseCase: UseCaseResponsible {
     
     static let shared = TestUseCase()
-    private var storeCancellable: Set<AnyCancellable> = []
-    
-    private var cancellable = Set<AnyCancellable>()
+    private var cancellables: Set<AnyCancellable> = []
     
     func requestFromUseCase(_ completionBlock: @escaping (Any?) -> Void) {
         RequestModel
@@ -20,13 +18,11 @@ class TestUseCase: UseCaseResponsible {
             .sink(receiveValue: { result in
                 switch result {
                 case .success(let data):
-                    print(data)
                     completionBlock(data)
                 case .failure(let error):
-                    print(error)
                     completionBlock(error)
                 }
             })
-            .store(in: &cancellable)
+            .store(in: &cancellables)
     }
 }
