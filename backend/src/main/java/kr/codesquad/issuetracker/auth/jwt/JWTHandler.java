@@ -1,6 +1,8 @@
 package kr.codesquad.issuetracker.auth.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import javax.crypto.SecretKey;
@@ -10,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class JWTHandler {
 
     private final JwtProperties jwtProperties;
 
-    private JWTHandler() throws InstantiationException {
-        throw new InstantiationException();
+    @Autowired
+    private JWTHandler(JwtProperties jwtProperties) {
+        this.jwtProperties = jwtProperties;
     }
 
     public JWT createToken(GitHubUserInfo gitHubUserInfo) {
@@ -31,8 +33,15 @@ public class JWTHandler {
         return new JWT(jwt);
     }
 
-    public SecretKey createSecretKey() {
+    private SecretKey createSecretKey() {
         return Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes(StandardCharsets.UTF_8));
     }
 
+    public Claims decodeJwt(String token) {
+        return Jwts.parserBuilder()
+            .setSigningKey(createSecretKey())
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+    }
 }
