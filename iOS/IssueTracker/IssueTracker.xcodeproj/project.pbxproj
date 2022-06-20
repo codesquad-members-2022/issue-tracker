@@ -24,11 +24,11 @@
 		024F43BB2859B7F6008C4235 /* ClientKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 024F43BA2859B7F6008C4235 /* ClientKey.plist */; };
 		024F43BD2859B857008C4235 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F43BC2859B857008C4235 /* Bundle+Extension.swift */; };
 		024F43BF2859C63C008C4235 /* .swiftLint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 024F43BE2859C63C008C4235 /* .swiftLint.yml */; };
-		027C7E84285A3AF300A5175B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E83285A3AF300A5175B /* NetworkManager.swift */; };
+		027C7E84285A3AF300A5175B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E83285A3AF300A5175B /* NetworkService.swift */; };
 		027C7E86285A42B900A5175B /* SignInNetworkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E85285A42B900A5175B /* SignInNetworkTarget.swift */; };
 		027C7E88285ABF1200A5175B /* StubURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E87285ABF1200A5175B /* StubURLSession.swift */; };
 		027C7E91285AF9F500A5175B /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E90285AF9F500A5175B /* UserDefaultManager.swift */; };
-		027C7E96285B14F600A5175B /* NetworkTargetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E95285B14F600A5175B /* NetworkTargetable.swift */; };
+		027C7E96285B14F600A5175B /* NetworkTargetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E95285B14F600A5175B /* NetworkTargetProtocol.swift */; };
 		027C7E9D285B954700A5175B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E9C285B954700A5175B /* SignInViewModel.swift */; };
 		02AEC2EE285C1AF500AAE835 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */; };
 		02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */; };
@@ -107,11 +107,11 @@
 		024F43BA2859B7F6008C4235 /* ClientKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ClientKey.plist; sourceTree = "<group>"; };
 		024F43BC2859B857008C4235 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		024F43BE2859C63C008C4235 /* .swiftLint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftLint.yml; sourceTree = "<group>"; };
-		027C7E83285A3AF300A5175B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		027C7E83285A3AF300A5175B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		027C7E85285A42B900A5175B /* SignInNetworkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInNetworkTarget.swift; sourceTree = "<group>"; };
 		027C7E87285ABF1200A5175B /* StubURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubURLSession.swift; sourceTree = "<group>"; };
 		027C7E90285AF9F500A5175B /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
-		027C7E95285B14F600A5175B /* NetworkTargetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTargetable.swift; sourceTree = "<group>"; };
+		027C7E95285B14F600A5175B /* NetworkTargetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTargetProtocol.swift; sourceTree = "<group>"; };
 		027C7E9C285B954700A5175B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -314,9 +314,9 @@
 			isa = PBXGroup;
 			children = (
 				027C7E97285B14FA00A5175B /* Protocols */,
-				027C7E90285AF9F500A5175B /* UserDefaultManager.swift */,
-				027C7E83285A3AF300A5175B /* NetworkManager.swift */,
 				02AEC2F928600B6A00AAE835 /* Mock */,
+				027C7E90285AF9F500A5175B /* UserDefaultManager.swift */,
+				027C7E83285A3AF300A5175B /* NetworkService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,7 +324,7 @@
 		027C7E97285B14FA00A5175B /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				027C7E95285B14F600A5175B /* NetworkTargetable.swift */,
+				027C7E95285B14F600A5175B /* NetworkTargetProtocol.swift */,
 				02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */,
 			);
 			path = Protocols;
@@ -689,9 +689,9 @@
 				5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */,
 				027C7E9D285B954700A5175B /* SignInViewModel.swift in Sources */,
 				5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */,
-				027C7E96285B14F600A5175B /* NetworkTargetable.swift in Sources */,
+				027C7E96285B14F600A5175B /* NetworkTargetProtocol.swift in Sources */,
 				5BE928D32858553800D237AB /* TabBarController.swift in Sources */,
-				027C7E84285A3AF300A5175B /* NetworkManager.swift in Sources */,
+				027C7E84285A3AF300A5175B /* NetworkService.swift in Sources */,
 				5BE928D52858567900D237AB /* LabelViewController.swift in Sources */,
 				02AEC2EE285C1AF500AAE835 /* PaddingLabel.swift in Sources */,
 				5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */,

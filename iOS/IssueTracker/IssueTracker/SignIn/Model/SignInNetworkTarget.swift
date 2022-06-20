@@ -12,7 +12,7 @@ enum SignInNetworkTarget {
     case requestAccessToken(clientID: String, clientSecret: String, code: String)
 }
 
-extension SignInNetworkTarget: NetworkTargetable {
+extension SignInNetworkTarget: NetworkTargetProtocol {
     var queryItem: [URLQueryItem]? {
         switch self {
         case .requestCode(let clientID):

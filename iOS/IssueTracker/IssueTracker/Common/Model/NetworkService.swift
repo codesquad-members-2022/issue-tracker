@@ -1,5 +1,5 @@
 //
-//  NetworkManager.swift
+//  NetworkService.swift
 //  IssueTracker
 //
 //  Created by 김한솔 on 2022/06/16.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct NetworkManager<T: Decodable> {
-    static func fetchData(target: NetworkTargetable, completion: @escaping (Result<T, NetworkError>) -> Void) {
+struct NetworkService<T: Decodable> {
+    static func fetchData(target: NetworkTargetProtocol, completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard let request = makeRequest(target: target) else {
             return completion(.failure(NetworkError.invalidURL))
         }
@@ -38,8 +38,8 @@ struct NetworkManager<T: Decodable> {
     }
 }
 
-private extension NetworkManager {
-    static func makeRequest(target: NetworkTargetable) -> URLRequest? {
+private extension NetworkService {
+    static func makeRequest(target: NetworkTargetProtocol) -> URLRequest? {
         var components = URLComponents(string: target.url) ?? URLComponents()
         components.queryItems = target.queryItem
 
