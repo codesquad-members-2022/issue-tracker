@@ -8,12 +8,12 @@
 import Foundation
 
 struct NetworkService<T: Decodable> {
-    static func fetchData(target: NetworkTargetProtocol, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    static func fetchData(target: NetworkTargetProtocol, urlSession: URLSessionProtocol = URLSession.shared, completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard let request = makeRequest(target: target) else {
             return completion(.failure(NetworkError.invalidURL))
         }
 
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
+        urlSession.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
                 return completion(.failure(NetworkError.transferError))
             }
