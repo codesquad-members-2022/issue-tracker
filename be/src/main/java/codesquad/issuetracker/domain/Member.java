@@ -39,7 +39,7 @@ public class Member {
     private String name;
     private String profileUrl;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "writer")
     private List<Issue> issues = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
