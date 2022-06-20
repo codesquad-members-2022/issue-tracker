@@ -2,16 +2,16 @@ import styled from 'styled-components';
 import { COLORS, GREYSCALE } from '@/constants';
 
 type ButtonProps = {
-  isDisabled: boolean;
+  disabled: boolean;
   label: string;
-  clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-function Button({ isDisabled, label, clickHandler }: ButtonProps) {
-  const Box = isDisabled ? ButtonBoxDisabled : ButtonBoxAbled;
+function Button({ disabled, label, onClick }: ButtonProps) {
+  const Box = disabled ? ButtonBoxDisabled : ButtonBoxAbled;
 
   return (
-    <Box disabled={isDisabled} onClick={clickHandler}>
+    <Box disabled={disabled} onClick={onClick}>
       {label}
     </Box>
   );

@@ -58,8 +58,8 @@ function LoginPage() {
             value={id}
             minLength={6}
             maxLength={16}
-            inputHandler={handleUserInput}
-            refElement={idRef}
+            onChange={handleUserInput}
+            ref={idRef}
           />
           <TextInput
             type="password"
@@ -67,13 +67,13 @@ function LoginPage() {
             value={password}
             minLength={6}
             maxLength={12}
-            inputHandler={handleUserInput}
+            onChange={handleUserInput}
           />
         </Inputs>
         <Button
           label="아이디로 로그인"
-          isDisabled={!(id && password)}
-          clickHandler={handleLoginButtonClick}
+          disabled={!(id && password)}
+          onClick={handleLoginButtonClick}
         />
       </LoginForm>
       {ErrorMessage && <ErrorMesageBox>{ErrorMessage}</ErrorMesageBox>}

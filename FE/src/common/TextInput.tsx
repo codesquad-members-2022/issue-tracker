@@ -7,8 +7,8 @@ type TextInputProps = {
   value: string;
   minLength: number;
   maxLength: number;
-  inputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  refElement?: React.MutableRefObject<null | HTMLInputElement>;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  ref?: React.MutableRefObject<null | HTMLInputElement>;
 };
 
 function TextInput({
@@ -17,8 +17,8 @@ function TextInput({
   value,
   minLength,
   maxLength,
-  inputHandler,
-  refElement,
+  onChange,
+  ref,
 }: TextInputProps) {
   return (
     <TextInputBox>
@@ -28,8 +28,8 @@ function TextInput({
         value={value}
         minLength={minLength}
         maxLength={maxLength}
-        onChange={inputHandler}
-        ref={refElement}
+        onChange={onChange}
+        ref={ref}
       />
     </TextInputBox>
   );

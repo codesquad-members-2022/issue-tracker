@@ -2,7 +2,6 @@
   "name": "fe",
   "version": "1.0.0",
   "description": "",
-  "main": ".eslintrc.js",
   "scripts": {
     "dev": "cross-env webpack-dev-server --config config/webpack.dev.js --open --hot --progress",
     "prod": "cross-env webpack-dev-server --config config/webpack.prod.js",
