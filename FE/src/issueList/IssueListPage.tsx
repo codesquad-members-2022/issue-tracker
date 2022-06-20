@@ -1,7 +1,12 @@
 import React from 'react';
+import IssueHeader from './IssueHeader';
 
 function IssueListPage() {
-  return <div>리스트</div>;
+  return (
+    <div>
+      <IssueHeader />
+    </div>
+  );
 }
 
 export default IssueListPage;
