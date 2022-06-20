@@ -55,8 +55,7 @@ public class IssueController {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<CommonResponseDto> updateState(@PathVariable final Long id,
-		@RequestParam final Boolean setClose) {
+	public ResponseEntity<CommonResponseDto> updateState(@PathVariable final Long id, @RequestParam final Boolean isClose) {
 		return ResponseEntity.ok(new CommonResponseDto());
 	}
 
@@ -73,7 +72,7 @@ public class IssueController {
 	}
 
 	@PatchMapping
-	public ResponseEntity<CommonResponseDto> updateAllState(@RequestParam final Boolean close,
+	public ResponseEntity<CommonResponseDto> updateAllState(@RequestParam final Boolean isClose,
 		@RequestBody final IssueSaveRequestDto issueUpdateAllRequestDto) {
 		return ResponseEntity.ok(new CommonResponseDto());
 	}
