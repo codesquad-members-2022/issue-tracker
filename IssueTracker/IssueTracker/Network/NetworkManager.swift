@@ -72,8 +72,12 @@ final class NetworkManager {
             NetworkHeader.acceptV3.getHttpHeader(),
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
         ]
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
         AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [Issue].self) { (response) in
+            .responseDecodable(of: [Issue].self, decoder: decoder) { (response) in
             switch response.result {
             case let .success(decodeData):
                 completion(.success(decodeData))

@@ -1,4 +1,5 @@
 import Foundation
+import Alamofire
 
 enum NetworkHeader {
     case accept

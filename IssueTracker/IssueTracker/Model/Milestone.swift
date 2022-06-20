@@ -14,13 +14,4 @@ struct Milestone: Codable {
     let openIssues, closedIssues: Int
     let state: String
     let dueOn: String? // Date?
-
-    enum CodingKeys: String, CodingKey {
-        case title
-        case description = "description"
-        case openIssues = "open_issues"
-        case closedIssues = "closed_issues"
-        case state
-        case dueOn = "due_on"
-    }
 }
