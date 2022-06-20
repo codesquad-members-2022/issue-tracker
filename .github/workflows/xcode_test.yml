@@ -4,6 +4,9 @@ jobs:
     runs-on: macos-latest
     steps: 
      - uses: actions/checkout@v2
+     - uses: actions/setup-ruby@v1
+       with:
+        ruby-version: '2.6'
      - uses: actions/cache@v2
        with:
         path: Pods
@@ -13,6 +16,15 @@ jobs:
      - name: CocoaPod Install
        run: 
         pod install
+     - name: Create Secret file
+       env:
+         CLIENT_ID_GITHUB: ${{ secrets.CLIENT_ID_GITHUB }}
+         CLIENT_SECRET_GITHUB: ${{ secrets.CLIENT_SECRET_GITHUB }}
+       run:
+         ruby create_secrets.rb
      - name: Running test 🧪
+       env:
+         CLIENT_ID_GITHUB: ${{ secrets.CLIENT_ID_GITHUB }}
+         CLIENT_SECRET_GITHUB: ${{ secrets.CLIENT_SECRET_GITHUB }}
        run:
         xcodebuild test -destination 'platform=iOS Simulator,OS=15.2,name=iPhone 12' -workspace PRTracker.xcworkspace -scheme PRTracker
