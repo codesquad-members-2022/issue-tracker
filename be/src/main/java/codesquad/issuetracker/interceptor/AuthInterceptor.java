@@ -41,13 +41,13 @@ public class AuthInterceptor implements HandlerInterceptor {
     }
 
     private void setResponseHeader(HttpServletResponse response) {
-        response.setStatus(HttpStatus.FORBIDDEN.value());
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json");
         response.setCharacterEncoding(String.valueOf(StandardCharsets.UTF_8));
     }
 
     private void setResponseBody(HttpServletResponse response) throws IOException {
-        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.FORBIDDEN, "access 토큰이 만료되었습니다.");
+        ResponseMessage responseMessage = new ResponseMessage(HttpStatus.UNAUTHORIZED, "access 토큰이 만료되었습니다.");
         String stringOfResponseMessage = new ObjectMapper().writeValueAsString(responseMessage);
         response.getWriter().write(stringOfResponseMessage);
     }
