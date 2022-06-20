@@ -4,6 +4,7 @@ type InputPropType = {
   label: string;
   info: {
     id: string;
+    name: string;
     type: string;
     placeholder: string;
     value: string;

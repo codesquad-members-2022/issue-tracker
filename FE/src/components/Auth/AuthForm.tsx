@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ParsedQs } from 'qs';
 import styles from './AuthForm.module.scss';
-import { Input } from '../../UI/Input';
+import { Input, InputWithRef } from '../../UI/Input';
 import GithubLoginBtn from './GithubLoginBtn';
 import useInput from '../../hooks/useInput';
 
@@ -14,6 +14,7 @@ export type parsedQueryType =
   | null;
 
 const AuthForm = () => {
+  const idRef = useRef<HTMLInputElement>(null);
   const {
     value: enteredID,
     isValid: idIsValid,
@@ -28,11 +29,17 @@ const AuthForm = () => {
     reset: resetPassword,
   } = useInput((value) => value.length > 5);
 
+  useEffect(() => {
+    idRef.current && idRef.current.focus();
+  }, []);
   const formIsValid = idIsValid && passWordIsValid;
 
-  const submitHandler = (e: React.FormEvent) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const form = e.target as HTMLFormElement;
+    () => {
+      console.log(form);
+    };
     resetID();
     resetPassword();
   };
@@ -43,11 +50,17 @@ const AuthForm = () => {
       <div className={styles.wrapper}>
         <GithubLoginBtn />
         <div className={styles.divider}>or</div>
-        <form className={styles.form} onSubmit={submitHandler}>
-          <Input
+        <form
+          data-testid="form"
+          className={styles.form}
+          onSubmit={submitHandler}
+        >
+          <InputWithRef
+            ref={idRef}
             label="id"
             info={{
               id: 'id',
+              name: 'idInput',
               type: 'text',
               placeholder: '아이디',
               value: enteredID,
@@ -59,6 +72,7 @@ const AuthForm = () => {
             label="password"
             info={{
               id: 'password',
+              name: 'passwordInput',
               type: 'password',
               placeholder: '비밀번호',
               value: enteredPassword,
@@ -69,7 +83,7 @@ const AuthForm = () => {
           <button
             type="submit"
             className={styles.login_button}
-            disabled={!formIsValid}
+            disabled={formIsValid ? false : true}
           >
             아이디로 로그인
           </button>
