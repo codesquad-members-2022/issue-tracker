@@ -1,4 +1,4 @@
-package com.team09.issue_tracker.issue;
+package com.team09.issue_tracker.issue.domain;
 
 import com.team09.issue_tracker.label.Label;
 import javax.persistence.Column;

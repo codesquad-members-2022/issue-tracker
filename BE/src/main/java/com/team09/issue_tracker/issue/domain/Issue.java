@@ -1,7 +1,8 @@
-package com.team09.issue_tracker.issue;
+package com.team09.issue_tracker.issue.domain;
 
 import com.team09.issue_tracker.common.BaseTimeEntity;
 import com.team09.issue_tracker.common.CommonResponseDto;
+import com.team09.issue_tracker.issue.dto.IssueDetailResponseDto;
 import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
 import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
 import com.team09.issue_tracker.label.Label;
@@ -50,6 +51,25 @@ public class Issue extends BaseTimeEntity {
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
 	private List<IssueLabel> issueLabels = new ArrayList<>();
 
+	public boolean isWriter(Long memberId) {
+		if (memberId.equals(this.memberId)) {
+			return true;
+		}
+		return false;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
 	public static Issue fromForMandatory(IssueSaveRequestDto issueSaveRequestDto,
 		boolean isOpened, Long memberId) {
 		return Issue.builder()
@@ -60,7 +80,11 @@ public class Issue extends BaseTimeEntity {
 			.build();
 	}
 
-	public IssueListResponseDto toResponseDto() {
+	public CommonResponseDto toCommonResponse() {
+		return new CommonResponseDto(id);
+	}
+
+	public IssueListResponseDto toListResponse() {
 		return IssueListResponseDto.builder()
 			.id(id)
 			.title(title)
@@ -76,8 +100,17 @@ public class Issue extends BaseTimeEntity {
 			.build();
 	}
 
-	public CommonResponseDto toCommonResponse() {
-		return new CommonResponseDto(id);
+	public IssueDetailResponseDto toDetailResponse(boolean isEditable) {
+		return IssueDetailResponseDto.builder()
+			.id(id)
+			.title(title)
+			.content(content)
+			.isOpened(isOpened)
+			.milestoneTitle(Optional.ofNullable(milestone)
+				.map(Milestone::getTitle)
+				.orElse(""))
+			.isEditable(isEditable)
+			.build();
 	}
 
 }

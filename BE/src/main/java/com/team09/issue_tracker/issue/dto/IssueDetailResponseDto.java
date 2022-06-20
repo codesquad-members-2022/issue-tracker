@@ -1,19 +1,21 @@
 package com.team09.issue_tracker.issue.dto;
 
-import com.team09.issue_tracker.comment.Comment;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-public class IssueFindByIdResponseDto {
+public class IssueDetailResponseDto {
 
 	private Long id;
 	private String title;
-	private boolean isOpened;
 	private String content;
+	private boolean isOpened;
 	private String milestoneTitle;
-	private List<Comment> comments;
+	private boolean isEditable;
 
 }
