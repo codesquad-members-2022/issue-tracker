@@ -1,7 +1,7 @@
 package com.team09.issue_tracker.comment;
 
 import com.team09.issue_tracker.common.BaseTimeEntity;
-import com.team09.issue_tracker.issue.Issue;
+import com.team09.issue_tracker.issue.domain.Issue;
 import com.team09.issue_tracker.member.Member;
 import javax.persistence.Column;
 import javax.persistence.Entity;

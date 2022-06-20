@@ -4,6 +4,7 @@ package com.team09.issue_tracker.issue;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.team09.issue_tracker.issue.domain.Issue;
 import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
