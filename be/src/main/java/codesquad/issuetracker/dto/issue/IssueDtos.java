@@ -4,11 +4,11 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class IssueDtoList {
+public class IssueDtos {
 
     private final List<IssueDto> issues;
 
-    public IssueDtoList(List<IssueDto> issues) {
+    public IssueDtos(List<IssueDto> issues) {
         this.issues = issues;
     }
 }

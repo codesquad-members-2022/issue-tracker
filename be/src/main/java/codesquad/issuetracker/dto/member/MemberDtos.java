@@ -4,11 +4,11 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class MemberDtoList {
+public class MemberDtos {
 
     private List<MemberDto> members;
 
-    public MemberDtoList(List<MemberDto> members) {
+    public MemberDtos(List<MemberDto> members) {
         this.members = members;
     }
 }

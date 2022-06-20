@@ -5,12 +5,12 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class LabelDtoList {
+public class LabelDtos {
 
     private final List<LabelDto> labels;
 
     @QueryProjection
-    public LabelDtoList(List<LabelDto> labels) {
+    public LabelDtos(List<LabelDto> labels) {
         this.labels = labels;
     }
 }

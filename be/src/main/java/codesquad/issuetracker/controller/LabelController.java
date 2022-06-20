@@ -1,6 +1,6 @@
 package codesquad.issuetracker.controller;
 
-import codesquad.issuetracker.dto.label.LabelDtoList;
+import codesquad.issuetracker.dto.label.LabelDtos;
 import codesquad.issuetracker.service.LabelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ public class LabelController {
     private final LabelService labelService;
 
     @GetMapping("/api/labels")
-    public LabelDtoList labels() {
+    public LabelDtos labels() {
         return labelService.getLabels();
     }
 
