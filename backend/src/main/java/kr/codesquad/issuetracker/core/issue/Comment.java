@@ -1,6 +1,5 @@
 package kr.codesquad.issuetracker.core.issue;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,13 +1,11 @@
 package kr.codesquad.issuetracker.core.milestone;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import kr.codesquad.issuetracker.core.issue.Issue;
 

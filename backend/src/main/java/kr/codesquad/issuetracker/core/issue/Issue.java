@@ -1,6 +1,5 @@
 package kr.codesquad.issuetracker.core.issue;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +11,6 @@ import javax.persistence.OneToMany;
 import kr.codesquad.issuetracker.common.BaseTimeEntity;
 import kr.codesquad.issuetracker.core.label.Label;
 import kr.codesquad.issuetracker.core.milestone.Milestone;
-import kr.codesquad.issuetracker.core.user.User;
 
 @Entity
 public class Issue extends BaseTimeEntity {
