@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PullManager {
+struct IssueManager {
     
     let keyChainService: KeyChainService
     let networkService: NetworkService
@@ -18,7 +18,13 @@ struct PullManager {
         self.networkService = networkService
     }
     
-    func getPulls(owner: User, repo: [Repo], then completion: @escaping ([Pull]?) -> Void) {
-        // TODO: PULL 요청 로직
+    func getPulls(then completion: @escaping ([Pull]?) -> Void) {
+        guard let accessToken = keyChainService.load(service: "access-token", account: "github") else {
+            Log.error("Access Token is not found")
+            return completion(nil)
+        }
+        
+        
     }
 }
+

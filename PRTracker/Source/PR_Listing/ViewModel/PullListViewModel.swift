@@ -9,7 +9,7 @@ import Foundation
 
 final class PullListViewModel {
     private var mockDataService = MockDataService()
-    private var pulls: [Pull]?
+    private var pulls: [Issue]?
     
     var pullViewModelList: Observable<[PullTableCellViewModel]?> = Observable(nil)
     
@@ -27,7 +27,7 @@ final class PullListViewModel {
         }
     }
     
-    private func convertPullsToPullCellViewModel(_ list: [Pull]) {
+    private func convertPullsToPullCellViewModel(_ list: [Issue]) {
         var tableCellViewModelLists = [PullTableCellViewModel]()
         for pull in list {
             let tableCellViewModel = PullTableCellViewModel()

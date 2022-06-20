@@ -10,7 +10,7 @@ import UIKit
 class PullListViewController: UIViewController {
 
     private let viewModel = PullListViewModel()
-    private var pullListDatas: [Pull]?
+    private var pullListDatas: [Issue]?
     private var cellViewModel = [PullTableCellViewModel]()
     
     override func viewDidLoad() {

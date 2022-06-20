@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pull: Codable {
+struct Issue: Codable {
     let id: Int
     let title: String
     let body: String?
@@ -16,6 +16,7 @@ struct Pull: Codable {
     let assignees: [User]?
     let labels: [Label]
     let milestone: Milestone?
+    let pull: Pull
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -24,19 +25,18 @@ struct Pull: Codable {
         case state
         case creator = "user"
         case assignees
+        case pull = "pull_request"
         case labels
         case milestone
     }
 }
 
-struct User: Codable {
-    let id: Int
-    let name: String?
-    let reposURL: String?
+
+struct Pull: Codable {
+    let url: String
     
     enum CodingKeys: String, CodingKey {
-        case id, name
-        case reposURL = "repos_url"
+        case url
     }
 }
 
