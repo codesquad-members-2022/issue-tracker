@@ -14,10 +14,14 @@ final class NetworkManager {
     
     func requestAccessToken(with code: String, completion: @escaping (Result<UserToken, NetworkError>) -> Void) {
         let url = "https://github.com/login/oauth/access_token"
-        let parameters = ["client_id": "\(PrivateStorage.clientId)",
-                          "client_secret": "\(PrivateStorage.clientSecret)",
-                          "code": code]
-        let headers: HTTPHeaders = ["Accept": "application/json"]
+        let parameters = [
+            "client_id": "\(PrivateStorage.clientId)",
+            "client_secret": "\(PrivateStorage.clientSecret)",
+            "code": code
+        ]
+        let headers: HTTPHeaders = [
+            "Accept": "application/json"
+        ]
         
         AF.request(url, method: .post, parameters: parameters, headers: headers).responseDecodable(of: [String: String].self) { (response) in
             switch response.result {
