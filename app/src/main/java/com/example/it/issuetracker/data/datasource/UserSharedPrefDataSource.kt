@@ -3,7 +3,7 @@ package com.example.it.issuetracker.data.datasource
 import android.content.Context
 import androidx.core.content.edit
 
-class SharedPrefDataSource(context: Context) {
+class UserSharedPrefDataSource(context: Context) {
 
     private val sharedPref = context.getSharedPreferences("user", Context.MODE_PRIVATE)
 
@@ -15,7 +15,7 @@ class SharedPrefDataSource(context: Context) {
     }
 
     fun getData(key: String): String {
-        return sharedPref.getString(key, "") ?: throw NullPointerException(NULL_POINT_ERROR_MESSAGE)
+        return requireNotNull(sharedPref.getString(key, ""))
     }
 
     companion object {

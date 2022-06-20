@@ -6,6 +6,7 @@ import com.example.it.issuetracker.data.dto.LabelDto
 import com.example.it.issuetracker.domain.repository.LabelRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class LabelViewModel(
@@ -21,8 +22,9 @@ class LabelViewModel(
     fun getLabelInfoList() {
         viewModelScope.launch {
             _dataLoading.value = true
-            val labelInfoList = labelRepository.getLabelInfoList()
-            _labelList.value = labelInfoList.labelDto
+            labelRepository.getLabelInfoList().collectLatest {
+                _labelList.value = it
+            }
             _dataLoading.value = false
         }
     }

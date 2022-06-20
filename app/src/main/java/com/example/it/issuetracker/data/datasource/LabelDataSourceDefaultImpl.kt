@@ -1,9 +1,10 @@
 package com.example.it.issuetracker.data.datasource
 
 import com.example.it.issuetracker.data.dto.LabelDto
-import com.example.it.issuetracker.data.dto.LabelInfoListDto
 import com.example.it.issuetracker.data.network.IssueTrackerService
 import com.example.it.issuetracker.domain.model.Label
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class LabelDataSourceDefaultImpl(
     private val issuerTrackerApi: IssueTrackerService,
@@ -11,8 +12,8 @@ class LabelDataSourceDefaultImpl(
 
     private val database = mutableListOf<LabelDto>()
 
-    override suspend fun getLabelInfoList(): LabelInfoListDto {
-        return LabelInfoListDto(LabelFakeDatabase.getAll())
+    override fun getLabelInfoList(): Flow<List<LabelDto>> = flow {
+        emit(LabelFakeDatabase.getAll())
     }
 
     override suspend fun addLabel(label: Label) {
