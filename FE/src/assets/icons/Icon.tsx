@@ -1,6 +1,5 @@
 import React from 'react';
 import { icons } from '@/assets/icons/svgs';
-import { GREYSCALE } from '@/constants';
 
 type IconProps = {
   iconName: keyof typeof icons;
@@ -14,7 +13,7 @@ function Icon({
   iconName,
   width = 16,
   height = 16,
-  stroke = GREYSCALE.TITLE_ACTION,
+  stroke = 'none',
   fill = 'none',
 }: IconProps) {
   const IconSvg = icons[iconName];

@@ -49,6 +49,11 @@ const IssueMenus = styled.ul`
   gap: 24px;
 `;
 
+const SelectedIssueText = styled.p`
+  ${({ theme }) => theme.TYPOGRAPHY.LINK_SMALL}
+  color: ${GREYSCALE.LABEL};
+`;
+
 const IssueTabs = styled.ul`
   ${({ theme }) => theme.LAYOUT.flexLayoutMixin()}
   margin-left: auto;
