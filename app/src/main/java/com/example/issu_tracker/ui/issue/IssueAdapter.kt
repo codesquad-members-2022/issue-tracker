@@ -1,5 +1,6 @@
 package com.example.issu_tracker.ui.issue
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -27,9 +28,23 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) 
 
     class IssueViewHolder(private val binding: ItemIssueBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        var isSwiped = false
+
         fun bind(issue: Issue) {
             binding.issue = issue
+
+            binding.root.setOnLongClickListener {
+                Log.d("eventEvent", "LongClick")
+                return@setOnLongClickListener (true)
+            }
+            binding.root.setOnClickListener {
+                Log.d("eventEvent", "click")
+            }
+
         }
+    }
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     companion object {
