@@ -23,18 +23,24 @@ interface IButtonStyleProps {
   fontWeight?: string;
 }
 
-interface I$ButtonProps extends IButtonStyleProps {
+interface IButtonProps extends IButtonStyleProps {
   styleType?: ButtonStyleType;
   iconType?: IconTypes;
   text?: string;
   children?: React.ReactNode;
   disabled?: boolean;
+  hoverStyle?: IButtonStyleProps;
+  activeStyle?: IButtonStyleProps;
+  disabledStyle?: IButtonStyleProps;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 interface I$ButtonType extends IButtonStyleProps {
   styleType?: ButtonStyleType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  hoverStyle?: IButtonStyleProps;
+  activeStyle?: IButtonStyleProps;
+  disabledStyle?: IButtonStyleProps;
 }
 
-export type { I$ButtonProps, ButtonStyleType, IButtonStyleProps, ButtonStyle, I$ButtonType };
+export type { IButtonProps, ButtonStyleType, IButtonStyleProps, ButtonStyle, I$ButtonType };

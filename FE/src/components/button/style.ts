@@ -104,8 +104,8 @@ const textEventStyle = css<I$ButtonType>`
 `;
 
 const large = css`
-  width: 340px;
-  height: 64px;
+  min-width: 340px;
+  min-height: 64px;
   border-radius: 20px;
   ${standardColorStyle}
   ${standardEventStyle}
@@ -113,8 +113,8 @@ const large = css`
 `;
 
 const mediumStandard = css`
-  width: 240px;
-  height: 56px;
+  min-width: 240px;
+  min-height: 56px;
   border-radius: 20px;
   ${standardColorStyle}
   ${standardEventStyle}
@@ -122,8 +122,8 @@ const mediumStandard = css`
 `;
 
 const smallStandard = css`
-  width: 120px;
-  height: 40px;
+  min-width: 120px;
+  min-height: 40px;
   border-radius: 11px;
   ${standardColorStyle}
   ${standardEventStyle}
@@ -131,8 +131,8 @@ const smallStandard = css`
 `;
 
 const smallSecondary = css`
-  width: 120px;
-  height: 40px;
+  min-width: 120px;
+  min-height: 40px;
   border: 2px solid;
   border-radius: 11px;
   ${secondaryColorStyle}
@@ -140,16 +140,19 @@ const smallSecondary = css`
 `;
 
 const mediumText = css`
-  width: 87px;
-  height: 32px;
+  min-width: 87px;
+  min-height: 32px;
   ${textColorStyle}
   ${textEventStyle}
   ${mediumFontStyle}
+  svg {
+    padding-right: 5px;
+  }
 `;
 
 const smallText = css`
-  width: 70px;
-  height: 32px;
+  min-width: 70px;
+  min-height: 32px;
   ${textColorStyle}
   ${textEventStyle}
   ${smallFontStyle}
@@ -164,31 +167,47 @@ const buttonStyle: ButtonStyle = {
   smallText: smallText
 };
 
-const createCustomStyle = (styleType: ButtonStyleType, props: IButtonStyleProps) => css`
+const createCustomStyle = (props: IButtonStyleProps, styleType?: ButtonStyleType) => css`
   ${styleType && buttonStyle[styleType]}
-  ${props.width && { width: props.width }}
-  ${props.height && { height: props.height }}
-  ${props.color && CustomColorStyle}
+  ${props.width && { 'min-width': props.width }}
+  ${props.height && { 'min-height': props.height }}
   ${props.background && { background: props.background }}
   ${props.border && { border: props.border }}
   ${props.borderRadius && { 'border-radius': props.borderRadius }}
   ${props.fontSize && { 'font-size': props.fontSize }}
   ${props.fontWeight && { 'font-weight': props.fontWeight }}
+  ${props.color && {
+    color: props.color,
+    'border-color': props.color,
+    'svg > path': {
+      stroke: props.color
+    }
+  }}
 `;
 
-const CustomColorStyle = css<I$ButtonType>`
-  color: ${({ color }) => color};
-  svg > path {
-    stroke: ${({ color }) => color};
+const createCustomEventStyle = (
+  hoverStyle: IButtonStyleProps | undefined,
+  activeStyle: IButtonStyleProps | undefined,
+  disabledStyle: IButtonStyleProps | undefined
+) => css`
+  :hover {
+    ${hoverStyle && createCustomStyle(hoverStyle)}
   }
-  border-color: ${({ color }) => color};
+  :enabled:active {
+    ${activeStyle && createCustomStyle(activeStyle)}
+  }
+  :disabled {
+    ${disabledStyle && createCustomStyle(disabledStyle)}
+  }
 `;
 
 const $Button = styled.button<I$ButtonType>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ styleType = 'large', ...props }) => createCustomStyle(styleType, props)}
+  ${({ styleType = 'large', ...props }) => createCustomStyle(props, styleType)}
+  ${({ hoverStyle, activeStyle, disabledStyle }) =>
+    createCustomEventStyle(hoverStyle, activeStyle, disabledStyle)}
 `;
 
 const $TextWrapper = styled.span`
