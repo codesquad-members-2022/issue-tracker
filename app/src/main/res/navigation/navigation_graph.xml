@@ -31,7 +31,7 @@
         tools:layout="@layout/fragment_my_account" />
     <fragment
         android:id="@+id/filterFragment"
-        android:name="com.example.issu_tracker.filter.FilterFragment"
+        android:name="com.example.issu_tracker.ui.filter.FilterFragment"
         android:label="fragment_filter"
         tools:layout="@layout/fragment_filter" >
         <action
