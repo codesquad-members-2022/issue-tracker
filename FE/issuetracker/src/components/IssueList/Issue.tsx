@@ -1,8 +1,10 @@
 import * as S from 'components/IssueList/styled.issue';
 import * as I from 'design/icons';
-import Label, { AccountImg } from 'components/common/Common';
+
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 import { CheckBox } from './styled.issues';
+
+import Label, { AccountImg } from 'components/common/Common';
 
 function Issue() {
   const title = 'FE';

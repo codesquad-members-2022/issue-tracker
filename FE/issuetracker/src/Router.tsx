@@ -1,10 +1,10 @@
-import IssueList from 'components/IssueList/index';
-import Login from 'components/Login/Index';
+import IssueList from 'components/IssueList';
+import Login from 'components/Login';
 import { Route, Routes } from 'react-router-dom';
-import Issue from 'components/Issue/index';
+import Issue from 'components/Issue';
 import NewIssue from 'components/newIssue';
 import LabelPage from 'components/LabelPage';
-import MileStone from 'components/milestone/Index';
+import MileStone from 'components/milestone';
 
 function Router() {
   return (

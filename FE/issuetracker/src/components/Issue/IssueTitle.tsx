@@ -1,5 +1,6 @@
 import * as S from 'components/Issue/styled.issueTitle';
-import TitleButton from 'components/Issue/TitleButton';
+import * as I from 'design/icons';
+import IssueTitleButton from 'components/Issue/IssueTitleButton';
 
 function IssueTitle() {
   return (
@@ -7,8 +8,8 @@ function IssueTitle() {
       <S.issueTitle>FE 이슈트래커 디자인 시스템 구현</S.issueTitle>
       <S.issueNumber>#2</S.issueNumber>
       <S.buttonWrapper>
-        <TitleButton buttonType="editButton" buttonText="제목 편집" />
-        <TitleButton buttonType="archiveButton" buttonText="이슈 닫기" />
+        <IssueTitleButton buttonIcon={<I.edit />} buttonText="제목 편집" />
+        <IssueTitleButton buttonIcon={<I.archive />} buttonText="이슈 닫기" />
       </S.buttonWrapper>
     </S.issueTitleWrapper>
   );
