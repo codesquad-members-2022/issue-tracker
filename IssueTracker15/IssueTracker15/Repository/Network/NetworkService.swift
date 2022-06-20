@@ -17,33 +17,11 @@ class NetworkService<T: Codable> {
         }
         
         switch method {
-        case .get:
-            return get(request: request, urgency)
-        case .post:
-            return post(request: request, urgency)
+        case .get, .post:
+            return getSession(urgency).request(request).publishDecodable(type: T.self)
         default:
             return nil
         }
-    }
-    
-    private func get(request: URLRequest, _ urgency: RequestUrgency = .effective ) -> DataResponsePublisher<T>? {
-        guard request.method == .get else {
-            return nil
-        }
-        
-        return getSession(urgency)
-            .request(request)
-            .publishDecodable(type: T.self)
-    }
-    
-    private func post(request: URLRequest, _ urgency: RequestUrgency = .effective) -> DataResponsePublisher<T>? {
-        guard request.method == .post else {
-            return nil
-        }
-        
-        return getSession(urgency)
-            .request(request)
-            .publishDecodable(type: T.self)
     }
     
     private func getSession(_ urgency: RequestUrgency) -> Session {
