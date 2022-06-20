@@ -11,8 +11,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
+import com.example.issu_tracker.SwipeHelperCallback
 import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.databinding.FragmentIssueBinding
 import com.example.issu_tracker.ui.home.HomeViewModel
@@ -53,6 +55,10 @@ class IssueFragment : Fragment() {
         binding.rvIssue.adapter = issueAdapter
         binding.rvIssue.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        val swipeHelperCallback = SwipeHelperCallback()
+        val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
+        itemTouchHelper.attachToRecyclerView(binding.rvIssue)
     }
 
     private fun navigateFilterScreen() {
