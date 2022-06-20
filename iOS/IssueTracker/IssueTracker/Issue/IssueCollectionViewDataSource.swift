@@ -33,9 +33,7 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let items = data[indexPath.item]
-        cell.configure(title: items.title, issueDescription: items.content,
-                       milestoneName: items.milestoneName, labelName: items.labels[0].title,
-                       labelBackgroundColor: items.labels[0].backgroundColor)
+        cell.configure(with: items)
         
         return cell
     }
