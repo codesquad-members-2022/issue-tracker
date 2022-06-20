@@ -22,7 +22,6 @@ final class Observable<T> {
 
     func bind(on observer: AnyObject, observerBlock: @escaping (T) -> Void) {
         observers.append(Observer(observer: observer, block: observerBlock))
-        observerBlock(self.value)
     }
 
     func notifyObservers() {

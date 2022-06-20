@@ -14,7 +14,6 @@ final class SignInViewController: UIViewController {
     init(viewModel: SignInViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        bind(to: viewModel)
     }
 
     @available(*, unavailable)
@@ -25,6 +24,7 @@ final class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = signInView
+        bind(to: viewModel)
     }
 }
 
@@ -45,20 +45,26 @@ private extension SignInViewController {
         }
 
         viewModel.presentAction.bind(on: self) { [weak self] _ in
-            self?.presentTabBarController()
+            DispatchQueue.main.async {
+                self?.presentTabBarController()
+            }
         }
     }
 
     func showAlert(of errorMessage: String) {
-        let alert = UIAlertController(title: "다시 로그인해주세요.", message: errorMessage, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .cancel)
-        alert.addAction(alertAction)
-        present(alert, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: "다시 로그인해주세요.", message: errorMessage, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .cancel)
+            alert.addAction(alertAction)
+            self?.present(alert, animated: true)
+        }
     }
 
     func presentTabBarController() {
-        let tabBarController = TabBarController()
-        tabBarController.modalPresentationStyle = .fullScreen
-        present(tabBarController, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            let tabBarController = TabBarController()
+            tabBarController.modalPresentationStyle = .fullScreen
+            self?.present(tabBarController, animated: true)
+        }
     }
 }
