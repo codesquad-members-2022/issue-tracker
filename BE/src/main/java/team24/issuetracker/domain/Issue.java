@@ -14,11 +14,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Issue {
@@ -55,4 +57,6 @@ public class Issue {
     @OneToMany(mappedBy = "issue")
     @JsonManagedReference
     private List<Comment> comments;
+
+    private boolean isDeleted;
 }

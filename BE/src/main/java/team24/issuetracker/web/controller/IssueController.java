@@ -19,27 +19,22 @@ public class IssueController {
 
 	private final IssueService issueService;
 
-	@GetMapping
-	public List<IssueListResponse> findIssues() {
-		return issueService.findIssues();
-	}
-
-	@GetMapping("created_by/{id}")
+	@GetMapping("created-by/{id}")
 	public List<IssueListResponse> findByWriter(@PathVariable("id") Long id) {
 		return issueService.findIssuesCreatedByMe(id);
 	}
 
-	@GetMapping("assigned_to{id}")
+	@GetMapping("assigned-to/{id}")
 	public List<IssueListResponse> findByAssignee(@PathVariable("id") Long id) {
 		return issueService.findIssuesAssignedToMe(id);
 	}
 
-	@GetMapping("commented_by/{id}")
+	@GetMapping("commented-by/{id}")
 	public List<IssueListResponse> findByComment(@PathVariable("id") Long id) {
 		return issueService.findIssuesCommentedByMe(id);
 	}
 
-	@GetMapping("filter")
+	@GetMapping
 	public List<IssueListResponse> findClosedIssues(@RequestParam("closed") Boolean isClosed) {
 		return issueService.findByIsClosed(isClosed);
 	}
