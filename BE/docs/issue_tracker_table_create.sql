@@ -188,17 +188,20 @@ ALTER TABLE issue_label ADD UNIQUE (issue_id, label_id);
 -- -----------------------------------------------------
 create TABLE IF NOT EXISTS `issue_tracker`.`issue_member` (
   `issue_member_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `issue_id` BIGINT NULL DEFAULT NULL,
   `member_id` BIGINT NULL DEFAULT NULL,
+  `issue_id` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`issue_member_id`),
-  INDEX `fk_issue_member_issue_id` (`issue_id` ASC) VISIBLE,
   INDEX `fk_issue_member_member_id` (`member_id` ASC) VISIBLE,
-  CONSTRAINT `fk_issue_member_issue`
-    FOREIGN KEY (`issue_id`)
-    REFERENCES `issue_tracker`.`issue` (`issue_id`),
+  INDEX `fk_issue_member_issue_id` (`issue_id` ASC) VISIBLE,
   CONSTRAINT `fk_issue_member_member`
     FOREIGN KEY (`member_id`)
-    REFERENCES `issue_tracker`.`member` (`member_id`))
+    REFERENCES `issue_tracker`.`member` (`member_id`),
+  CONSTRAINT `fk_issue_member_issue`
+    FOREIGN KEY (`issue_id`)
+    REFERENCES `issue_tracker`.`issue` (`issue_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
+-- TODO : 해당 제약 사항, 컬럼 순서 무엇이 좋을 지 확인하기
+ALTER TABLE issue_member ADD UNIQUE (member_id, issue_id);
