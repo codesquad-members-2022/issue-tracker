@@ -7,7 +7,8 @@ object LabelFakeDatabase {
 
     private val database = mutableListOf<LabelDto>()
 
-    val size = database.size
+    val size: Int
+        get() = database.size
 
     suspend fun add(labelDto: LabelDto) {
         delay(1000)
@@ -17,5 +18,18 @@ object LabelFakeDatabase {
     suspend fun getAll(): List<LabelDto> {
         delay(1000)
         return database.toList()
+    }
+
+    suspend fun edit(labelDto: LabelDto) {
+        delay(1000)
+        val data = database.find { it.id == labelDto.id }
+        val index = database.indexOf(data)
+        database.add(index, labelDto)
+        database.remove(data)
+    }
+
+    suspend fun delete(id: Int) {
+        val labelInfo = database.find { it.id == id }
+        database.remove(labelInfo)
     }
 }
