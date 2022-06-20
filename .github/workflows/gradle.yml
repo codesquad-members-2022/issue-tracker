@@ -84,7 +84,7 @@ jobs:
       - name: Start CodeDeploy
         run: |
           aws deploy create-deployment \
-          --application-name Issue-Tracker-WAS-Deploy \
-          --deployment-group-name Issue-Tracker-WAS-Deploy-Group \
+          --application-name Issue-Tracker-Application \
+          --deployment-group-name Issue-Tracker-Deploy-Group \
           --s3-location bucket=issue-tracker-was-bucket,key=issue-tracker.zip,bundleType=zip
 
