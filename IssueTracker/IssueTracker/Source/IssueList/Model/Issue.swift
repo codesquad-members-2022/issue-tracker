@@ -9,8 +9,8 @@ import Foundation
 
 struct Issue: Codable {
     let title: String
-    let description: String
-    let milestone: Milestone?
-    let tag: Tag?
-    let state: IssueState?
+//    let description: String
+//    let milestone: Milestone?
+//    let tag: Tag?
+//    let state: IssueState?
 }
