@@ -1,4 +1,4 @@
-import { PALETTE, COLOR } from '@/styles/common/color';
+import { PALETTE, COLOR, ERROR, LABEL } from '@/styles/common/color';
 import { FONT, TYPOGRAPHY } from '@/styles/common/font';
 
-export { PALETTE, COLOR, FONT, TYPOGRAPHY };
+export { PALETTE, COLOR, ERROR, LABEL, FONT, TYPOGRAPHY };
