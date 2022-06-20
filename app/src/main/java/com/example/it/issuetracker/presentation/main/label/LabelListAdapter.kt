@@ -23,7 +23,22 @@ class LabelListAdapter(
 
         fun bind(label: Label) {
             binding.labelInfo = label
+            setItemClickListener(label)
+            setItemLayoutChange(label)
+        }
 
+        private fun setItemLayoutChange(label: Label) {
+            binding.cbEdit.setOnCheckedChangeListener { _, isChecked ->
+                label.isChecked = isChecked
+            }
+
+            when (label.mode) {
+                Mode.DEFAULT -> binding.cbEdit.isVisible = false
+                Mode.EDIT -> binding.cbEdit.isVisible = true
+            }
+        }
+
+        private fun setItemClickListener(label: Label) {
             if (label.mode == Mode.DEFAULT) {
                 itemView.setOnClickListener {
                     itemClickListener(label)
@@ -33,19 +48,9 @@ class LabelListAdapter(
                     binding.cbEdit.isChecked = !binding.cbEdit.isChecked
                 }
             }
-
             itemView.setOnLongClickListener {
                 editModeListener(true)
                 true
-            }
-
-            binding.cbEdit.setOnCheckedChangeListener { _, isChecked ->
-                label.isChecked = isChecked
-            }
-
-            when (label.mode) {
-                Mode.DEFAULT -> binding.cbEdit.isVisible = false
-                Mode.EDIT -> binding.cbEdit.isVisible = true
             }
         }
     }
