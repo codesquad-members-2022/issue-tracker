@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
 export const labelListLayout = styled.div`
-  width: 1280px;
+  width: 100%;
   min-height: 367px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   border-radius: 16px;
