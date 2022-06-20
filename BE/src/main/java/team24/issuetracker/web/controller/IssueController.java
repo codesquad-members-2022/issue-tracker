@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,6 @@ import team24.issuetracker.web.service.IssueService;
 public class IssueController {
 
 	private final IssueService issueService;
-
-	@GetMapping
-	public List<IssueListResponse> findIssues() {
-		return issueService.findIssues();
-	}
 
 	@GetMapping("created-by/{id}")
 	public List<IssueListResponse> findByWriter(@PathVariable("id") Long id) {
@@ -38,8 +34,8 @@ public class IssueController {
 		return issueService.findIssuesCommentedByMe(id);
 	}
 
-	@GetMapping("closed={isClosed}")
-	public List<IssueListResponse> findClosedIssues(@PathVariable("isClosed") Boolean isClosed) {
+	@GetMapping
+	public List<IssueListResponse> findClosedIssues(@RequestParam("closed") Boolean isClosed) {
 		return issueService.findByIsClosed(isClosed);
 	}
 }
