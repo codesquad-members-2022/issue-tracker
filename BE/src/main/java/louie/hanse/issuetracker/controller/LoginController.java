@@ -3,7 +3,7 @@ package louie.hanse.issuetracker.controller;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import louie.hanse.issuetracker.OAuthProperties;
+import louie.hanse.issuetracker.oauth.OAuthProperties;
 import louie.hanse.issuetracker.oauth.GithubAccessToken;
 import louie.hanse.issuetracker.oauth.GithubUser;
 import louie.hanse.issuetracker.oauth.OAuthService;
@@ -33,7 +33,8 @@ public class LoginController {
     public void login(String code) {
         GithubAccessToken githubAccessToken = oAuthService.getAccessToken(code);
         GithubUser githubUser = oAuthService.getUserInfo(githubAccessToken);
-        memberService.login(githubUser);
+        Long memberId = memberService.login(githubUser);
+
     }
 
 }

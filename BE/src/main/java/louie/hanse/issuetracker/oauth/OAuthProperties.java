@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker;
+package louie.hanse.issuetracker.oauth;
 
 import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;

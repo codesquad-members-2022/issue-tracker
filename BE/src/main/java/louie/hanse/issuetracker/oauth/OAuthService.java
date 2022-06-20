@@ -1,7 +1,6 @@
 package louie.hanse.issuetracker.oauth;
 
 import lombok.RequiredArgsConstructor;
-import louie.hanse.issuetracker.OAuthProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
