@@ -6,14 +6,13 @@ import static codesquad.issuetracker.domain.QIssueLabel.issueLabel;
 import static codesquad.issuetracker.domain.QMember.member;
 import static codesquad.issuetracker.domain.QMilestone.milestone;
 import static codesquad.issuetracker.domain.QReply.reply;
+import static codesquad.issuetracker.domain.QLabel.label;
 import static org.springframework.util.StringUtils.hasText;
 
+import codesquad.issuetracker.domain.Issue;
 import codesquad.issuetracker.domain.IssueStatus;
 import codesquad.issuetracker.domain.QAssignee;
-import codesquad.issuetracker.dto.issue.IssueDto;
 import codesquad.issuetracker.dto.issue.IssueSearchCondition;
-import codesquad.issuetracker.dto.issue.QIssueDto;
-import codesquad.issuetracker.dto.milestone.QMilestoneDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -29,23 +28,14 @@ public class IssueRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<IssueDto> search(IssueSearchCondition condition) {
-        return queryFactory.select(
-            new QIssueDto(
-                issue.id,
-                issue.subject,
-                issue.description,
-                member.identity,
-                member.profileUrl,
-                issue.createdDateTime,
-                new QMilestoneDto(milestone.id, milestone.subject)
-            )
-        ).from(issue)
-            .join(issue.writer, member)
-            .leftJoin(issue.milestone, milestone)
+    public List<Issue> search(IssueSearchCondition condition) {
+        return queryFactory.selectFrom(issue).distinct()
+            .join(issue.writer, member).fetchJoin()
+            .leftJoin(issue.milestone, milestone).fetchJoin()
             .leftJoin(issue.assignees, assignee)
             .leftJoin(issue.replies, reply)
-            .leftJoin(issue.issueLabels, issueLabel)
+            .leftJoin(issue.issueLabels, issueLabel).fetchJoin()
+            .join(label).on(issueLabel.label.id.eq(label.id))
             .where(statusEq(condition.getStatus().name()),
                 writerIdentityEq(condition.getWriter()),
                 milestoneSubjectEq(condition.getMilestone()),
@@ -53,7 +43,6 @@ public class IssueRepository {
                 replierIdentityEq(condition.getReplier()),
                 labelNameEq(condition.getLabel())
             )
-            .groupBy(issue.id)
             .fetch();
     }
 

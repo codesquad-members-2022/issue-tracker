@@ -1,13 +1,20 @@
 package codesquad.issuetracker.dto.issue;
 
+import codesquad.issuetracker.domain.Issue;
+import codesquad.issuetracker.domain.Label;
+import codesquad.issuetracker.domain.Member;
+import codesquad.issuetracker.domain.Milestone;
 import codesquad.issuetracker.dto.label.LabelDto;
 import codesquad.issuetracker.dto.milestone.MilestoneDto;
-import com.querydsl.core.annotations.QueryProjection;
+import codesquad.issuetracker.mapper.LabelMapper;
+import codesquad.issuetracker.mapper.MilestoneMapper;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class IssueDto {
 
     private Long id;
@@ -16,22 +23,16 @@ public class IssueDto {
     private String writer;
     private String profileUrl;
     private LocalDateTime createdDateTime;
-    private List<LabelDto> labels;
     private MilestoneDto milestone;
+    private List<LabelDto> labels;
 
-    @QueryProjection
-    public IssueDto(Long id, String subject, String description, String writer,
-        String profileUrl, LocalDateTime createdDateTime, MilestoneDto milestone) {
-        this.id = id;
-        this.subject = subject;
-        this.description = description;
-        this.writer = writer;
-        this.profileUrl = profileUrl;
-        this.createdDateTime = createdDateTime;
-        this.milestone = milestone;
-    }
+    private IssueDto() {}
 
-    public void setLabels(List<LabelDto> labels) {
-        this.labels = labels;
+    public static IssueDto of(Issue issue, Milestone milestone, List<Label> labels) {
+        Member writer = issue.getWriter();
+        return new IssueDto(issue.getId(), issue.getSubject(), issue.getDescription(),
+            writer.getIdentity(), writer.getProfileUrl(), issue.getCreatedDateTime(),
+            MilestoneMapper.convertToDto(milestone),
+            LabelMapper.convertToListDto(labels));
     }
 }

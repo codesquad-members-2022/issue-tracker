@@ -1,14 +1,16 @@
 package codesquad.issuetracker.service;
 
+import codesquad.issuetracker.domain.Issue;
+import codesquad.issuetracker.domain.IssueLabel;
 import codesquad.issuetracker.domain.IssueStatus;
 import codesquad.issuetracker.dto.issue.IssueCountDto;
 import codesquad.issuetracker.dto.issue.IssueDto;
 import codesquad.issuetracker.dto.issue.IssueDtos;
 import codesquad.issuetracker.dto.issue.IssueSearchCondition;
 import codesquad.issuetracker.repository.IssueRepository;
-import codesquad.issuetracker.repository.LabelRepository;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,15 +21,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class IssueService {
 
     private final IssueRepository issueRepository;
-    private final LabelRepository labelRepository;
 
     public IssueDtos getIssuesByCriteria(IssueSearchCondition condition) {
-        List<IssueDto> issues = issueRepository.search(condition);
-        for (IssueDto issue : issues) {
-            issue.setLabels(labelRepository.findAllByIssueId(issue.getId()));
-        }
+        List<Issue> issues = issueRepository.search(condition);
 
-        return new IssueDtos(issues);
+        return new IssueDtos(
+            issues.stream()
+                .map(issue -> IssueDto.of(issue,
+                    issue.getMilestone(),
+                    issue.getIssueLabels().stream().map(IssueLabel::getLabel).collect(Collectors.toList())
+                    )
+                )
+                .collect(Collectors.toList())
+        );
     }
 
     public IssueCountDto getCountOfIssuesByStatus() {

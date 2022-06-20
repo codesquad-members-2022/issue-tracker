@@ -19,7 +19,8 @@ public class MilestoneRepository {
         return queryFactory
             .select(new QMilestoneDto(
                 milestone.id,
-                milestone.subject
+                milestone.subject,
+                milestone.description
             ))
             .from(milestone)
             .fetch();

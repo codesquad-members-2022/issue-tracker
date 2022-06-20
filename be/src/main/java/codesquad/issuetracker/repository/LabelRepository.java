@@ -27,13 +27,4 @@ public class LabelRepository {
             .from(label)
             .fetch();
     }
-
-    public List<LabelDto> findAllByIssueId(Long issueId) {
-        return queryFactory
-            .select(new QLabelDto(label.id, label.name, label.description, label.color))
-            .from(issueLabel)
-            .join(label).on(issueLabel.label.id.eq(label.id))
-            .where(issueLabel.issue.id.eq(issueId))
-            .fetch();
-    }
 }

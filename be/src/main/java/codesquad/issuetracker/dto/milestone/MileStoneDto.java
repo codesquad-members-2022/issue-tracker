@@ -8,10 +8,12 @@ public class MilestoneDto {
 
     private Long id;
     private String subject;
+    private String description;
 
     @QueryProjection
-    public MilestoneDto(Long id, String subject) {
+    public MilestoneDto(Long id, String subject, String description) {
         this.id = id;
         this.subject = subject;
+        this.description = description;
     }
 }
