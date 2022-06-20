@@ -4,5 +4,16 @@
 
 import Foundation
 
-struct TestDecodableType: Decodable {
+struct TestDecodableType: Codable {
+    let title: String
+    let range: String
+    let target: String
+    let description: String
+    
+    enum CodingKeys: String, CodingKey {
+      case title
+      case range
+      case target
+      case description
+    }
 }

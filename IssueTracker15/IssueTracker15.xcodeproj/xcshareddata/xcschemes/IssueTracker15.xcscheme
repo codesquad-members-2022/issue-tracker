@@ -62,6 +62,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1B87F719285C38FD002B47B7"
+               BuildableName = "ViewModelUnitTest.xctest"
+               BlueprintName = "ViewModelUnitTest"
                BlueprintIdentifier = "8D2113772859E5FD00B65676"
                BuildableName = "ContainerUnitTest.xctest"
                BlueprintName = "ContainerUnitTest"
