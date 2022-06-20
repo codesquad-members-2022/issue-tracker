@@ -5,6 +5,7 @@ final class NetworkManager {
     enum NetworkError: Error {
         case issueNotFound
         case tokenNotFound
+        case storageKeyNotFound
     }
     
     public static let shared = NetworkManager()
@@ -14,9 +15,17 @@ final class NetworkManager {
     
     func requestAccessToken(with code: String, completion: @escaping (Result<UserToken, NetworkError>) -> Void) {
         let url = "https://github.com/login/oauth/access_token"
+        
+        let privateStorage = PrivateStorage()
+        guard let clientId = try? privateStorage.getClientId(),
+            let clientSecret = try? privateStorage.getClientSecret() else {
+            completion(.failure(.storageKeyNotFound))
+            return
+        }
+        
         let parameters = [
-            "client_id": "\(PrivateStorage.clientId)",
-            "client_secret": "\(PrivateStorage.clientSecret)",
+            "client_id": "\(clientId)",
+            "client_secret": "\(clientSecret)",
             "code": code
         ]
         let headers: HTTPHeaders = [
@@ -46,7 +55,7 @@ final class NetworkManager {
             switch response.result {
             case let .success(decodeData):
                 completion(.success(decodeData))
-            case let .failure(error):
+            case .failure:
                 completion(.failure(.issueNotFound))
             }
         }

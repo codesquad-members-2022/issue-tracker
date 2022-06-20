@@ -48,14 +48,22 @@ class ViewController: UIViewController {
         guard var urlComponents = URLComponents(string: urlString) else {
            return
         }
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: PrivateStorage.clientId),
-            URLQueryItem(name: "scope", value: scope),
-        ]
         
-        if let url = urlComponents.url {
-            UIApplication.shared.open(url) // 새 사파리 창을 열기
+        do {
+            let clientId = try PrivateStorage().getClientId()
+            urlComponents.queryItems = [
+                URLQueryItem(name: "client_id", value: clientId),
+                URLQueryItem(name: "scope", value: scope),
+            ]
+            
+            if let url = urlComponents.url {
+                UIApplication.shared.open(url) // 새 사파리 창을 열기
+            }
+        } catch(let error) {
+            print(error.localizedDescription)
         }
+        
+
     }
 }
 

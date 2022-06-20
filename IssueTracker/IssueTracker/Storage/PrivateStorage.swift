@@ -9,27 +9,31 @@ import Foundation
 
 struct PrivateStorage {
     
-    static private let configPath = Bundle.main.path(forResource: "Config", ofType: "plist")
+    private let configPath = Bundle.main.path(forResource: "Config", ofType: "plist")
     
-    static var clientId: String {
-        get {
-            guard let configDic = configPath,
-               let plist = NSDictionary(contentsOfFile: configDic),
-               let oauthClientId = plist.object(forKey: "OAUTH_CLIENT_ID") as? String else {
-                fatalError("Could not find 'client_id' from 'Config.plist'.")
-            }
-            return oauthClientId
-        }
+    private let clientIdKey = "OAUTH_CLIENT_ID"
+    private let clientSecretKey = "OAUTH_CLIENT_SECRET"
+    
+    enum PrivateStorageError: Error {
+        case clientIdNotFound
+        case clientSecretNotFound
     }
     
-    static var clientSecret: String {
-        get {
-            guard let configDic = configPath,
-               let plist = NSDictionary(contentsOfFile: configDic),
-               let oauthClientId = plist.object(forKey: "OAUTH_CLIENT_SECRET") as? String else {
-                fatalError("Could not find 'client_secret' from 'Config.plist'.")
-            }
-            return oauthClientId
+    func getClientId() throws -> String {
+        guard let configDic = configPath,
+           let plist = NSDictionary(contentsOfFile: configDic),
+           let oauthClientId = plist.object(forKey: clientIdKey) as? String else {
+            throw PrivateStorageError.clientIdNotFound
         }
+        return oauthClientId
+    }
+    
+    func getClientSecret() throws -> String {
+        guard let configDic = configPath,
+           let plist = NSDictionary(contentsOfFile: configDic),
+           let oauthClientId = plist.object(forKey: clientSecretKey) as? String else {
+            throw PrivateStorageError.clientSecretNotFound
+        }
+        return oauthClientId
     }
 }
