@@ -1,8 +1,9 @@
 package com.example.issu_tracker.data.repository
 
 import android.util.Log
-import com.example.issu_tracker.data.*
-import com.google.firebase.firestore.DocumentSnapshot
+import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.IssueDto
+import com.example.issu_tracker.data.toIssue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -12,11 +13,22 @@ class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFire
     override suspend fun loadIssues(): List<Issue> {
         val list = mutableListOf<Issue>()
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_PATH).get().await()
+
         collectionData.documents.forEach {
             val issueObj = it.toObject(IssueDto::class.java)
-            issueObj?.let { it1 -> it1.toIssue()?.let { it2 -> list.add(it2) } }
+            issueObj?.id = it.id
+            issueObj?.let { it1 ->
+                it1.toIssue()?.let { it2 -> list.add(it2) }
+                // 데이터를 추가하는 코드
+                // fireStore.collection(FIREBASE_COLLECTION_PATH).document().set(it1)
+            }
         }
         return list
+    }
+
+    override suspend fun deleteIssue(itemId: String) {
+        fireStore.collection(FIREBASE_COLLECTION_PATH).document(itemId)
+            .delete().await()
     }
 
     companion object {
