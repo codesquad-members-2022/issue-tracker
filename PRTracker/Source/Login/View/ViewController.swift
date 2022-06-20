@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func githubLoginButtonTapped(_ sender: Any) {
-        // TODO: OAuthManager에게 인증 요청
         viewModel.requestGithubLogin()
     }
     
