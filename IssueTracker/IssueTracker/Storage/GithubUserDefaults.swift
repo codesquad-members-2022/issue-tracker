@@ -9,6 +9,6 @@ struct GithubUserDefaults {
     }
 
     static func getToken() -> String? {
-        return UserDefaults.standard.string(forKey: self.key) ?? nil
+        return UserDefaults.standard.string(forKey: self.key)
     }
 }
