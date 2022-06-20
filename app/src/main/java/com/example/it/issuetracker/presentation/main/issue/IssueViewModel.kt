@@ -26,20 +26,31 @@ class IssueViewModel(
     }
 
     fun toggleViewType() {
-        val new = mutableListOf<Issue>()
-        val editIssueList = (_uiState.value as IssueUiState.GetIssues).issues.map { issue ->
-            when (issue.viewType) {
-                Mode.DEFAULT -> issue.copy(viewType = Mode.EDIT)
-                Mode.EDIT -> issue.copy(viewType = Mode.DEFAULT)
+        when (_uiState.value) {
+            is IssueUiState.GetIssues -> {
+                val editIssueList = (_uiState.value as IssueUiState.GetIssues).issues.map { issue ->
+                    when (issue.viewType) {
+                        Mode.DEFAULT -> issue.copy(viewType = Mode.EDIT)
+                        Mode.EDIT -> issue.copy(viewType = Mode.DEFAULT)
+                    }
+                }
+                _uiState.value = IssueUiState.GetIssues(editIssueList)
             }
+            else -> {}
         }
-        _uiState.value = IssueUiState.GetIssues(editIssueList)
     }
 
     fun updateDefaultViewType() {
-        val defaultIssueList =
-            (_uiState.value as IssueUiState.GetIssues).issues.map { issue -> issue.copy(viewType = Mode.DEFAULT) }
-        _uiState.value = IssueUiState.GetIssues(defaultIssueList)
+        when (_uiState.value) {
+            is IssueUiState.GetIssues -> {
+                val defaultIssueList =
+                    (_uiState.value as IssueUiState.GetIssues).issues.map { issue ->
+                        issue.copy(viewType = Mode.DEFAULT)
+                    }
+                _uiState.value = IssueUiState.GetIssues(defaultIssueList)
+            }
+            else -> {}
+        }
     }
 
     fun deleteIssue() = viewModelScope.launch {

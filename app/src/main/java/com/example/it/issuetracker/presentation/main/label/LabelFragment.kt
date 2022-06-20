@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentLabelBinding
+import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LabelFragment : Fragment() {
 
     private lateinit var binding: FragmentLabelBinding
-
     private val viewModel by viewModel<LabelViewModel>()
+    private val adapter: LabelListAdapter = LabelListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,13 +32,21 @@ class LabelFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupToolbar()
-        setupRecyclerView()
-        viewModel.getLabelInfoList()
+        initView()
+        observerData()
     }
 
-    private fun setupRecyclerView() {
-        binding.recyclerviewLabelItem.adapter = LabelListAdapter()
-        binding.recyclerviewLabelItem.layoutManager = LinearLayoutManager(requireContext())
+    private fun observerData() {
+        repeatOnLifecycleExtension {
+            viewModel.labelList.collectLatest {
+                adapter.submitList(it)
+            }
+        }
+    }
+
+    private fun initView() = with(binding) {
+        viewModel.getLabelInfoList()
+        recyclerviewLabelItem.adapter = adapter
     }
 
     private fun setupToolbar() {
@@ -45,7 +54,7 @@ class LabelFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.add_label -> {
                     parentFragmentManager.commit {
-                        addToBackStack(null)
+                        addToBackStack("label_list")
                         replace(R.id.container_main, LabelAddFragment())
                     }
                     true

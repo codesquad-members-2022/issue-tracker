@@ -2,7 +2,7 @@ package com.example.it.issuetracker.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.it.issuetracker.data.datasource.SharedPrefDataSource
+import com.example.it.issuetracker.data.datasource.UserSharedPrefDataSource
 import com.example.it.issuetracker.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val loginRepository: LoginRepository,
-    private val sharedPref: SharedPrefDataSource,
+    private val sharedPref: UserSharedPrefDataSource,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.UnInitialization)

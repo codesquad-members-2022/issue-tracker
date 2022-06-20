@@ -6,20 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentLabelAddBinding
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LabelAddFragment : Fragment() {
 
     private lateinit var binding: FragmentLabelAddBinding
-
     private val viewModel by viewModel<LabelAddViewModel>()
-
-    private lateinit var job: Job
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +56,7 @@ class LabelAddFragment : Fragment() {
     }
 
     private fun observerData() {
-        job = lifecycleScope.launch {
+        repeatOnLifecycleExtension {
             viewModel.completeSaveLabel.collect { complete ->
                 if (complete) popBackStack()
             }
@@ -68,11 +64,6 @@ class LabelAddFragment : Fragment() {
     }
 
     private fun popBackStack() {
-        parentFragmentManager.popBackStack()
-    }
-
-    override fun onStop() {
-        job.cancel()
-        super.onStop()
+        parentFragmentManager.popBackStack("label_list", FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 }
