@@ -1,13 +1,25 @@
 package com.example.issu_tracker.data.repository
 
-import com.example.issu_tracker.data.Issue
+import android.util.Log
+import com.example.issu_tracker.data.*
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class HomeRepositoryImpl : HomeRepository {
-    override fun loadIssues(): List<Issue> {
-        // TODO 추후 수정 예정
-        return listOf(
-            Issue(0, "마일스톤", "Document", "그라운드 룰", "Issue_tracker 의 그라운드 룰을 정의합니다."),
-            Issue(1, "마일스톤", "Feature", "리사이클러뷰 구현", "리사이클러뷰를 구현했습니다."),
-        )
+class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFirestore) :
+    HomeRepository {
+    override suspend fun loadIssues(): List<Issue> {
+        val list = mutableListOf<Issue>()
+        val collectionData = fireStore.collection(FIREBASE_COLLECTION_PATH).get().await()
+        collectionData.documents.forEach {
+            val issueObj = it.toObject(IssueDto::class.java)
+            issueObj?.let { it1 -> it1.toIssue()?.let { it2 -> list.add(it2) } }
+        }
+        return list
+    }
+
+    companion object {
+        const val FIREBASE_COLLECTION_PATH = "Issue"
     }
 }

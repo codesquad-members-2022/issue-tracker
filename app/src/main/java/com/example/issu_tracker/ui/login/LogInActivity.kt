@@ -19,7 +19,7 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
+
 @AndroidEntryPoint
 class LogInActivity : AppCompatActivity() {
 
