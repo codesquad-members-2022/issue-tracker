@@ -2,8 +2,9 @@ package com.example.it.issuetracker.presentation.main.label
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.it.issuetracker.data.dto.LabelDto
+import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.domain.repository.LabelRepository
+import com.example.it.issuetracker.presentation.main.issue.Mode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -13,11 +14,26 @@ class LabelViewModel(
     private val labelRepository: LabelRepository,
 ) : ViewModel() {
 
-    private var _labelList = MutableStateFlow<List<LabelDto>>(emptyList())
+    private var _labelList = MutableStateFlow<List<Label>>(emptyList())
     val labelList = _labelList.asStateFlow()
 
     private var _dataLoading = MutableStateFlow(false)
     val dataLoading = _dataLoading.asStateFlow()
+
+    private var _editMode = MutableStateFlow(false)
+    val editMode = _editMode.asStateFlow()
+
+    private var _completeDelete = MutableStateFlow(false)
+    val completeDelete = _completeDelete.asStateFlow()
+
+    private var hasData = false
+
+    fun start() {
+        if (!hasData) {
+            getLabelInfoList()
+            hasData = true
+        }
+    }
 
     fun getLabelInfoList() {
         viewModelScope.launch {
