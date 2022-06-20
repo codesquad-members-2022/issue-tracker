@@ -22,10 +22,45 @@ class LabelViewModel(
     fun getLabelInfoList() {
         viewModelScope.launch {
             _dataLoading.value = true
-            labelRepository.getLabelInfoList().collectLatest {
-                _labelList.value = it
+            labelRepository.getLabelInfoList().collectLatest { labelDtoList ->
+                _labelList.value = labelDtoList.map { dto ->
+                    Label(
+                        dto.id,
+                        dto.title,
+                        dto.description,
+                        dto.color,
+                        dto.textColor
+                    )
+                }
+                _dataLoading.value = false
             }
-            _dataLoading.value = false
         }
+    }
+
+    fun changeEditMode(editMode: Boolean) {
+        if (editMode == _editMode.value) return
+
+        val editModeList = _labelList.value.map {
+            if (it.mode == Mode.DEFAULT) {
+                it.copy(mode = Mode.EDIT)
+            } else {
+                it.copy(mode = Mode.DEFAULT)
+            }
+        }
+
+        _editMode.value = editMode
+        _labelList.value = editModeList
+    }
+
+    fun deleteItems() {
+        _completeDelete.value = false
+        viewModelScope.launch {
+            _labelList.value.filter {
+                it.isChecked
+            }.forEach {
+                labelRepository.deleteLabelInfo(it.id)
+            }
+        }
+        _completeDelete.value = true
     }
 }
