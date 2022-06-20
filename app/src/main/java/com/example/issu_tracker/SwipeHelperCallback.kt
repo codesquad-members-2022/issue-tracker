@@ -21,7 +21,7 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
     ): Int {
 
         val view = getView(viewHolder)
-        clamp = view.width.toFloat() / 10 * 3
+        clamp = view.width.toFloat() * (0.3f)
 
         return makeMovementFlags(0, LEFT or RIGHT)
     }
@@ -99,13 +99,13 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
         isSwiped: Boolean,
         currentlyActive: Boolean
     ): Float {
-        val maxSwipedPosition = -view.width.toFloat() / 10 * 3
+
         val right = 0f
 
         val x = if (isSwiped) {
-            if (currentlyActive) dX - clamp else -clamp
+            if (currentlyActive) -clamp + dX else -clamp
         } else dX
-        return kotlin.math.min(max(maxSwipedPosition, x), right)
+        return kotlin.math.min(max(-clamp, x), right)
     }
 
     private fun getView(viewHolder: RecyclerView.ViewHolder): View {

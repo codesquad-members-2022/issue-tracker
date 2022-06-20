@@ -12,7 +12,7 @@ import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.databinding.ItemIssueBinding
 
 class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) {
-    var swipeDeleteListener : SwipeDeleteListener? = null
+    var swipeDeleteListener: SwipeDeleteListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueViewHolder {
         val binding: ItemIssueBinding = DataBindingUtil.inflate(
@@ -28,16 +28,17 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) 
         holder.bind(getItem(position))
     }
 
-   inner class IssueViewHolder(private val binding: ItemIssueBinding) :
+    inner class IssueViewHolder(private val binding: ItemIssueBinding) :
         RecyclerView.ViewHolder(binding.root) {
         var isSwiped = false
 
         fun bind(issue: Issue) {
             binding.issue = issue
-
-            binding.clDeleteContainer.setOnClickListener {
-                Log.d("eventEvent", "erase")
-                swipeDeleteListener?.deleteItem( issue.id)
+            Log.d("eventEvent", isSwiped.toString())
+            binding.tvDeleteClose.setOnClickListener {
+                if (isSwiped) {
+                    swipeDeleteListener?.deleteItem(issue.id)
+                }
             }
 
             binding.root.setOnLongClickListener {
