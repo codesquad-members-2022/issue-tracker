@@ -1,10 +1,5 @@
 import styled, { css } from 'styled-components';
-import {
-  StyleType,
-  IStyleProps,
-  IStyled_label,
-  IStyled_textInput
-} from '@/components/TextInput/type';
+import { StyleType, IStyleProps, I$Label, I$TextInput } from '@/components/TextInput/type';
 
 const standardEventStyle = css`
   :focus {
@@ -16,7 +11,7 @@ const standardEventStyle = css`
   }
 `;
 
-const largeTextInput = css<IStyled_textInput>`
+const largeTextInput = css<I$TextInput>`
   width: 340px;
   height: 60px;
   padding: ${({ visibleLabel }) => (visibleLabel ? '28px 24px 8px' : '16px 24px')};
@@ -30,12 +25,12 @@ const largeTextInput = css<IStyled_textInput>`
   }
 `;
 
-const largeLabel = css<IStyled_label>`
+const largeLabel = css<I$Label>`
   top: 8px;
   color: ${({ theme, status }) => (status ? theme.COLOR[status].text : theme.COLOR.label)};
 `;
 
-const mediumTextInput = css<IStyled_textInput>`
+const mediumTextInput = css<I$TextInput>`
   width: 320px;
   height: 56px;
   padding: ${({ visibleLabel }) => (visibleLabel ? '24px 24px 4px' : '14px 24px')};
@@ -52,7 +47,7 @@ const mediumLabel = css`
   color: ${({ theme }) => theme.COLOR.label};
 `;
 
-const smallTextInput = css<IStyled_textInput>`
+const smallTextInput = css<I$TextInput>`
   width: 300px;
   height: 40px;
   padding: ${({ visibleLabel }) => (visibleLabel ? '6px 24px 6px 112px' : '6px 24px')};
@@ -67,7 +62,7 @@ const smallTextInput = css<IStyled_textInput>`
   }
 `;
 
-const smallLabel = css<IStyled_label>`
+const smallLabel = css<I$Label>`
   top: 50%;
   transform: translateY(-50%);
   color: ${({ theme, status }) => (status ? theme.COLOR[status].text : theme.COLOR.label)};
@@ -107,11 +102,11 @@ const createCustomTextInputStyle = (styleType: StyleType, props: IStyleProps) =>
   ${props.borderRadius && { 'border-radius': props.borderRadius }}
 `;
 
-const Styled_textInputWrap = styled.div`
+const $TextInputWrap = styled.div`
   position: relative;
 `;
 
-const Styled_label = styled.label<IStyled_label>`
+const $Label = styled.label<I$Label>`
   position: absolute;
   left: 24px;
   display: ${({ visible }) => (visible ? 'block' : 'none')};
@@ -119,7 +114,7 @@ const Styled_label = styled.label<IStyled_label>`
   ${({ styleType = 'large' }) => createCustomLabelStyle(styleType)}
 `;
 
-const Styled_textInput = styled.input<IStyled_textInput>`
+const $TextInput = styled.input<I$TextInput>`
   color: ${({ theme }) => theme.COLOR.title};
   &::placeholder {
     color: ${({ theme }) => theme.COLOR.placeholder};
@@ -130,4 +125,4 @@ const Styled_textInput = styled.input<IStyled_textInput>`
   ${({ styleType = 'large', ...props }) => createCustomTextInputStyle(styleType, props)}
 `;
 
-export { Styled_textInputWrap, Styled_label, Styled_textInput };
+export { $TextInputWrap, $Label, $TextInput };

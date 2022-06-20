@@ -1,12 +1,12 @@
-import { Styled_button, Styled_TextWrapper } from '@/components/Button/style';
-import { IButtonProps } from '@/components/Button/type';
+import { $Button, $TextWrapper } from '@/components/Button/style';
+import { I$ButtonProps } from '@/components/Button/type';
 import { Icon } from '@/components/Icon';
 
-export default function Button({ iconType, iconColor, text, children, ...props }: IButtonProps) {
+export default function Button({ iconType, iconColor, text, children, ...props }: I$ButtonProps) {
   return (
-    <Styled_button {...props}>
+    <$Button {...props}>
       {iconType && <Icon IconType={iconType} color={iconColor} />}
-      <Styled_TextWrapper>{text || children}</Styled_TextWrapper>
-    </Styled_button>
+      <$TextWrapper>{text || children}</$TextWrapper>
+    </$Button>
   );
 }

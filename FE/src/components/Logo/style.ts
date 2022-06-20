@@ -13,10 +13,10 @@ const MediumStyle = css`
   font: ${({ theme }) => theme.TYPOGRAPHY.logo.medium};
 `;
 
-const Styled_logo = styled.h1<ILogoProps>`
+const $Logo = styled.h1<ILogoProps>`
   ${({ type }) => (type === 'large' ? LargeStyle : MediumStyle)}
   font-style: italic;
 `;
 
-export { Styled_logo };
+export { $Logo };
 export type { ILogoProps };

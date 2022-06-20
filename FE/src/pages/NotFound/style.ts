@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Styled_contents = styled.div`
+const $Contents = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,4 +8,4 @@ const Styled_contents = styled.div`
   min-height: 100vh;
 `;
 
-export { Styled_contents };
+export { $Contents };

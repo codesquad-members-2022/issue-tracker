@@ -21,12 +21,12 @@ interface IconProps {
 
 function Icon({ IconType, color }: IconProps) {
   const Icon = icons[IconType];
-  const Styled_Icon = styled(Icon)`
+  const $Icon = styled(Icon)`
     path {
       stroke: ${color || PALETTE.WHITE};
     }
   `;
-  return <Styled_Icon />;
+  return <$Icon />;
 }
 
 export type { IconTypes };

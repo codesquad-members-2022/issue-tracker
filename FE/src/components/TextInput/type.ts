@@ -13,13 +13,13 @@ interface IStyleProps {
   borderRadius?: string;
 }
 
-interface IStyled_label {
+interface I$Label {
   styleType?: StyleType;
   status?: string;
   visible: boolean;
 }
 
-interface IStyled_textInput extends IStyleProps {
+interface I$TextInput extends IStyleProps {
   styleType?: StyleType;
   visibleLabel: boolean;
 }
@@ -30,8 +30,8 @@ interface ITextInputProps extends IStyleProps {
   label?: string;
   type?: string;
   name: string;
-  as?: StyledComponent<'div', any, IStyled_textInput, never>;
+  as?: StyledComponent<'div', any, I$TextInput, never>;
   handleChange?: Function;
 }
 
-export type { StyleType, IStyleProps, IStyled_label, IStyled_textInput, ITextInputProps };
+export type { StyleType, IStyleProps, I$Label, I$TextInput, ITextInputProps };

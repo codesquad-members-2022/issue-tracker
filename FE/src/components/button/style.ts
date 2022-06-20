@@ -2,7 +2,7 @@ import {
   IButtonStyleProps,
   ButtonStyle,
   ButtonStyleType,
-  IStyled_buttonType
+  I$ButtonType
 } from '@/components/Button/type';
 import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
@@ -46,7 +46,7 @@ const smallFontStyle = css`
   font-weight: ${({ theme }) => `${theme.FONT.WEIGHT.BOLD}`};
 `;
 
-const standardEventStyle = css<IStyled_buttonType>`
+const standardEventStyle = css<I$ButtonType>`
   :enabled:hover {
     background: ${({ theme, background }) =>
       !background ? theme.COLOR.primary.hover : darken(0.1, background)};
@@ -63,7 +63,7 @@ const standardEventStyle = css<IStyled_buttonType>`
   }
 `;
 
-const secondaryEventStyle = css<IStyled_buttonType>`
+const secondaryEventStyle = css<I$ButtonType>`
   :hover {
     color: ${({ theme, color }) => (!color ? theme.COLOR.primary.hover : darken(0.1, color))};
     border-color: ${({ theme, color }) =>
@@ -85,7 +85,7 @@ const secondaryEventStyle = css<IStyled_buttonType>`
   }
 `;
 
-const textEventStyle = css<IStyled_buttonType>`
+const textEventStyle = css<I$ButtonType>`
   :hover {
     color: ${({ theme, color }) => (!color ? theme.COLOR.body : darken(0.1, color))};
     svg > path {
@@ -176,7 +176,7 @@ const createCustomStyle = (styleType: ButtonStyleType, props: IButtonStyleProps)
   ${props.fontWeight && { 'font-weight': props.fontWeight }}
 `;
 
-const CustomColorStyle = css<IStyled_buttonType>`
+const CustomColorStyle = css<I$ButtonType>`
   color: ${({ color }) => color};
   svg > path {
     stroke: ${({ color }) => color};
@@ -184,15 +184,15 @@ const CustomColorStyle = css<IStyled_buttonType>`
   border-color: ${({ color }) => color};
 `;
 
-const Styled_button = styled.button<IStyled_buttonType>`
+const $Button = styled.button<I$ButtonType>`
   display: flex;
   justify-content: center;
   align-items: center;
   ${({ styleType = 'large', ...props }) => createCustomStyle(styleType, props)}
 `;
 
-const Styled_TextWrapper = styled.span`
+const $TextWrapper = styled.span`
   padding-left: 4px;
 `;
 
-export { Styled_button, Styled_TextWrapper };
+export { $Button, $TextWrapper };

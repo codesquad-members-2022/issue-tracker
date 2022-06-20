@@ -7,12 +7,12 @@ import useInputTextValue from '@/hooks/useInputTextValue';
 import { InputName, LimitLength, Error } from '@/pages/Login/type';
 import Layout from '@/layout';
 import {
-  Styled_logoWrapper,
-  Styled_contents,
-  Styled_form,
-  Styled_span,
-  Styled_loginInputWrap,
-  Styled_buttonWrapper
+  $LogoWrapper,
+  $Contents,
+  $Form,
+  $Span,
+  $LoginInputWrap,
+  $ButtonWrapper
 } from '@/pages/Login/style';
 import { COLOR } from '@/styles/common';
 
@@ -57,14 +57,14 @@ export default function Login() {
 
   return (
     <Layout>
-      <Styled_contents>
-        <Styled_logoWrapper>
+      <$Contents>
+        <$LogoWrapper>
           <Logo type="large" />
-        </Styled_logoWrapper>
+        </$LogoWrapper>
         <Button styleType="large" text="GitHub 계정으로 로그인" background={COLOR.title} />
-        <Styled_span>or</Styled_span>
-        <Styled_form>
-          <Styled_loginInputWrap>
+        <$Span>or</$Span>
+        <$Form>
+          <$LoginInputWrap>
             <TextInput
               styleType="large"
               placeholder="아이디"
@@ -78,8 +78,8 @@ export default function Login() {
               ? inputInfo.value &&
                 error.status && <InputMessage status={error.status}>{error.message}</InputMessage>
               : null}
-          </Styled_loginInputWrap>
-          <Styled_loginInputWrap>
+          </$LoginInputWrap>
+          <$LoginInputWrap>
             <TextInput
               styleType="large"
               placeholder="비밀번호"
@@ -94,13 +94,13 @@ export default function Login() {
               ? inputInfo.value &&
                 error.status && <InputMessage status={error.status}>{error.message}</InputMessage>
               : null}
-          </Styled_loginInputWrap>
-        </Styled_form>
-        <Styled_buttonWrapper>
+          </$LoginInputWrap>
+        </$Form>
+        <$ButtonWrapper>
           <Button styleType="large" text="아이디로 로그인" disabled={true} />
           <Button styleType="smallText" text="회원가입" />
-        </Styled_buttonWrapper>
-      </Styled_contents>
+        </$ButtonWrapper>
+      </$Contents>
     </Layout>
   );
 }

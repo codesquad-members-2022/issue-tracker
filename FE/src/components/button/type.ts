@@ -23,7 +23,7 @@ interface IButtonStyleProps {
   fontWeight?: string;
 }
 
-interface IButtonProps extends IButtonStyleProps {
+interface I$ButtonProps extends IButtonStyleProps {
   styleType?: ButtonStyleType;
   iconType?: IconTypes;
   text?: string;
@@ -32,9 +32,9 @@ interface IButtonProps extends IButtonStyleProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-interface IStyled_buttonType extends IButtonStyleProps {
+interface I$ButtonType extends IButtonStyleProps {
   styleType?: ButtonStyleType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export type { IButtonProps, ButtonStyleType, IButtonStyleProps, ButtonStyle, IStyled_buttonType };
+export type { I$ButtonProps, ButtonStyleType, IButtonStyleProps, ButtonStyle, I$ButtonType };
