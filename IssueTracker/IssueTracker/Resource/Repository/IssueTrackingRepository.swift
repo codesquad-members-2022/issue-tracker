@@ -14,34 +14,18 @@ protocol IssueTracking {
 
 final class IssueTrackingRepository {
 
-    func requestIssues(url: String,
+    func requestIssues(with target: IssueTrackerTarget,
                        completion: @escaping (Result<[Issue]?, NetworkError>) -> Void) {
-        guard let requestURL = URL(string: url) else {
-            return completion(.failure(.invalidUrlError))
+        guard let request = Provider.makeURLRequest(with: target)
+        else { return completion(.failure(.invalidTarget)) }
+
+        Provider.request(with: request) { data in
+            guard let issueList = DecodeManagerImplement
+                    .decodeJson(data: data, type: [Issue].self) else { return }
+            return completion(.success(issueList))
         }
-        var result: [Issue] = []
-        let session = URLSession.shared
-
-        session.dataTask(with: requestURL) {
-            data, response, error in
-            do {
-                guard error == nil else {
-                    return completion(.failure(.cantReachedServerError))
-                }
-
-                if let data = data,
-                   let response = response as? HTTPURLResponse,
-                   response.statusCode == 200 {
-                    guard let issueResponse: IssueResponse = DecodeManagerImplement.decodeJson(data: data) else { return }
-                    result = issueResponse.body
-                }
-            } catch {
-                completion(.failure(.invalidJsonError))
-            }
-        }
-
-        return completion(.success(result))
     }
+    
     // MARK: - Local에 JSON 파일로 [Issue] 를 로딩
     func getIssuesOnFailure() -> [Issue]? {
         let fileName: String = "Issue"
@@ -54,7 +38,7 @@ final class IssueTrackingRepository {
 
         do {
             let jsonData = try Data(contentsOf: fileLocation)
-            guard let issueList: IssueResponse = DecodeManagerImplement.decodeJson(data: jsonData) else { return nil }
+            guard let issueList: IssueResponse = DecodeManagerImplement.decodeJson(data: jsonData, type: IssueResponse.self) else { return nil }
             return issueList.body
         } catch {
             // TODO: - error 처리
