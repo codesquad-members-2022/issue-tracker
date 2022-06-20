@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { StyleType, IStyleProps, I$Label, I$TextInput } from '@/components/TextInput/type';
 
-const standardEventStyle = css`
+const commonEventStyle = css`
   :focus {
     background: ${({ theme }) => theme.PALETTE.WHITE};
     border: 1px solid ${({ theme }) => theme.COLOR.title};
@@ -19,7 +19,7 @@ const largeTextInput = css<I$TextInput>`
   background: ${({ theme, status }) =>
     status ? theme.COLOR[status].background : theme.COLOR.inputBackground};
   border: ${({ theme, status }) => (status ? `1px solid ${theme.COLOR[status].border}` : 0)};
-  ${standardEventStyle}
+  ${commonEventStyle}
   :focus {
     padding: ${({ visibleLabel }) => (visibleLabel ? '27px 23px 7px' : '15px 23px')};
   }
@@ -36,7 +36,7 @@ const mediumTextInput = css<I$TextInput>`
   padding: ${({ visibleLabel }) => (visibleLabel ? '24px 24px 4px' : '14px 24px')};
   border-radius: 14px;
   background: ${({ theme }) => theme.COLOR.inputBackground};
-  ${standardEventStyle}
+  ${commonEventStyle}
   :focus {
     padding: ${({ visibleLabel }) => (visibleLabel ? '23px 23px 3px' : '13px 23px')};
   }
@@ -55,7 +55,7 @@ const smallTextInput = css<I$TextInput>`
   background: ${({ theme, status }) =>
     status ? theme.COLOR[status].background : theme.COLOR.inputBackground};
   border: ${({ theme, status }) => (status ? `1px solid ${theme.COLOR[status].border}` : 0)};
-  ${standardEventStyle}
+  ${commonEventStyle}
   :focus {
     padding: ${({ visibleLabel }) => (visibleLabel ? '5px 23px 5px 111px' : '5px 23px')};
     transition: none;
