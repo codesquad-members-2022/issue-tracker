@@ -1,8 +1,10 @@
-package com.example.issu_tracker.filter
+package com.example.issu_tracker.ui.filter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.FilterCondition
+import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.repository.FilterRepository
 import com.example.issu_tracker.ui.common.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FilterViewModel @Inject constructor() : ViewModel() {
+class FilterViewModel @Inject constructor(private val repository: FilterRepository) : ViewModel() {
 
     private val _stateStateFlow = MutableStateFlow<List<String>>(mutableListOf(""))
     val stateStateFlow = _stateStateFlow.asStateFlow()
@@ -44,11 +46,31 @@ class FilterViewModel @Inject constructor() : ViewModel() {
         }
         test.add(DEFAULT_VALUE)
         viewModelScope.launch {
-            _stateStateFlow.emit(test)
-            _writerStateFlow.emit(test)
-            _labelStateFlow.emit(test)
+            setStateList()
+            setWriterList()
+            setLabelList()
             _mileStoneStateFlow.emit(test)
         }
+    }
+
+    private suspend fun setStateList() {
+        val stateList = mutableListOf<String>()
+        stateList.add("열린 이슈")
+        stateList.add("닫힌 이슈")
+        stateList.add(DEFAULT_VALUE)
+        _stateStateFlow.emit(stateList)
+    }
+
+    private suspend fun setLabelList() {
+        val labelList = repository.loadLabel().toMutableList()
+        labelList.add(DEFAULT_VALUE)
+        _labelStateFlow.emit(labelList)
+    }
+
+    private suspend fun setWriterList() {
+        val writerList = repository.loadUsers().toMutableList()
+        writerList.add(DEFAULT_VALUE)
+        _writerStateFlow.emit(writerList)
     }
 
     fun inputSpinnerValue(text: String, conditionType: Int) {
