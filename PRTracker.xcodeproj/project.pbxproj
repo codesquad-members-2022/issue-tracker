@@ -11,12 +11,19 @@
 		BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
 		BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
 		BC2F596A285C1AC10012D18C /* PullManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5969285C1AC10012D18C /* PullManager.swift */; };
-		BC2F596F285C26D60012D18C /* UserManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManger.swift */; };
-		BC2F5970285C26D60012D18C /* UserManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManger.swift */; };
+		BC2F596F285C26D60012D18C /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManager.swift */; };
+		BC2F5970285C26D60012D18C /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManager.swift */; };
 		BC2F5975285C2A660012D18C /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5974285C2A660012D18C /* Repo.swift */; };
 		BC2F5976285C2A660012D18C /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5974285C2A660012D18C /* Repo.swift */; };
 		BC2F5978285C2ADC0012D18C /* RepoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5977285C2ADC0012D18C /* RepoManager.swift */; };
 		BC2F5979285C2ADC0012D18C /* RepoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5977285C2ADC0012D18C /* RepoManager.swift */; };
+		BC2F597E286065610012D18C /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F597D286065610012D18C /* UserManagerTests.swift */; };
+		BC2F5982286075520012D18C /* KeyChainStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5981286075520012D18C /* KeyChainStub.swift */; };
+		BC2F59862860759B0012D18C /* PullManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59852860759B0012D18C /* PullManagerTests.swift */; };
+		BC2F598828607C340012D18C /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598728607C340012D18C /* IssueManager.swift */; };
+		BC2F598928607C340012D18C /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598728607C340012D18C /* IssueManager.swift */; };
+		BC2F598B286092EE0012D18C /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */; };
+		BC2F598C286092EE0012D18C /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */; };
 		BC97093B2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC97093C2859B23D00E54F93 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Pull.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
@@ -97,9 +104,14 @@
 		BC2F5965285B6FBB0012D18C /* PRTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PRTracker.entitlements; sourceTree = "<group>"; };
 		BC2F5966285B70100012D18C /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		BC2F5969285C1AC10012D18C /* PullManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullManager.swift; sourceTree = "<group>"; };
-		BC2F596E285C26D60012D18C /* UserManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManger.swift; sourceTree = "<group>"; };
+		BC2F596E285C26D60012D18C /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BC2F5974285C2A660012D18C /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		BC2F5977285C2ADC0012D18C /* RepoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoManager.swift; sourceTree = "<group>"; };
+		BC2F597D286065610012D18C /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
+		BC2F5981286075520012D18C /* KeyChainStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainStub.swift; sourceTree = "<group>"; };
+		BC2F59852860759B0012D18C /* PullManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullManagerTests.swift; sourceTree = "<group>"; };
+		BC2F598728607C340012D18C /* IssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueManager.swift; sourceTree = "<group>"; };
+		BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -185,6 +197,7 @@
 				D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */,
 				D04099DB2859C6930008B517 /* Observable.swift */,
 				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
+				BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -224,6 +237,9 @@
 			isa = PBXGroup;
 			children = (
 				BCF57BD8285701FD0059E61D /* PRTrackerTests.swift */,
+				BC2F597D286065610012D18C /* UserManagerTests.swift */,
+				BC2F59852860759B0012D18C /* PullManagerTests.swift */,
+				BC2F5981286075520012D18C /* KeyChainStub.swift */,
 			);
 			path = PRTrackerTests;
 			sourceTree = "<group>";
@@ -293,8 +309,9 @@
 			children = (
 				BCF57C05285705130059E61D /* GitHubLoginManager.swift */,
 				BC2F5969285C1AC10012D18C /* PullManager.swift */,
+				BC2F598728607C340012D18C /* IssueManager.swift */,
 				BC2F5977285C2ADC0012D18C /* RepoManager.swift */,
-				BC2F596E285C26D60012D18C /* UserManger.swift */,
+				BC2F596E285C26D60012D18C /* UserManager.swift */,
 				BC2F5966285B70100012D18C /* AppleLoginManager.swift */,
 				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
 			);
@@ -548,7 +565,7 @@
 				BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */,
 				BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */,
 				D04099DA2859C34A0008B517 /* ReplaceRootSegue.swift in Sources */,
-				BC2F596F285C26D60012D18C /* UserManger.swift in Sources */,
+				BC2F596F285C26D60012D18C /* UserManager.swift in Sources */,
 				BC9709422859C88100E54F93 /* Logger.swift in Sources */,
 				BC97093B2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
@@ -557,9 +574,11 @@
 				BCF57BFD285704F40059E61D /* PullListViewModel.swift in Sources */,
 				D04099D22859C08B0008B517 /* PullListViewController.swift in Sources */,
 				D04099DE2859C9320008B517 /* PullTableCellViewModel.swift in Sources */,
+				BC2F598B286092EE0012D18C /* URLRequest+Extension.swift in Sources */,
 				BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */,
 				D0E98D05285CE97D0051413E /* NetworkService.swift in Sources */,
 				D0E98D06285CE97D0051413E /* KeyChainService.swift in Sources */,
+				BC2F598828607C340012D18C /* IssueManager.swift in Sources */,
 				D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */,
 				BC2F596A285C1AC10012D18C /* PullManager.swift in Sources */,
 			);
@@ -576,22 +595,25 @@
 				D0E98D09285CEAD50051413E /* PullManager.swift in Sources */,
 				BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */,
+				BC2F5982286075520012D18C /* KeyChainStub.swift in Sources */,
 				D0E98CDC285BAEE90051413E /* CustomBarButton .swift in Sources */,
 				D04099E72859DA630008B517 /* AppDelegate.swift in Sources */,
+				BC2F59862860759B0012D18C /* PullManagerTests.swift in Sources */,
 				D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */,
-				BC2F5970285C26D60012D18C /* UserManger.swift in Sources */,
+				BC2F5970285C26D60012D18C /* UserManager.swift in Sources */,
 				D04099E12859D91C0008B517 /* Observable.swift in Sources */,
 				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
 				D04099E52859D9D00008B517 /* PullListViewController.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CE9285C02800051413E /* PullListModel.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PullTableCellViewModel.swift in Sources */,
+				BC2F598928607C340012D18C /* IssueManager.swift in Sources */,
 				D0E98CD4285B088A0051413E /* PullListTableViewController.swift in Sources */,
 				BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Pull.swift in Sources */,
-				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CEC285C107E0051413E /* PullListTableViewCell.swift in Sources */,
 				D0E98CE3285C01530051413E /* MockDataService.swift in Sources */,
+				BC2F598C286092EE0012D18C /* URLRequest+Extension.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
@@ -600,6 +622,7 @@
 				D0E98D07285CEABA0051413E /* KeyChainService.swift in Sources */,
 				D0E98D08285CEAC00051413E /* NetworkService.swift in Sources */,
 				D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */,
+				BC2F597E286065610012D18C /* UserManagerTests.swift in Sources */,
 				BC2F5976285C2A660012D18C /* Repo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
