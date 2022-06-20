@@ -7,6 +7,7 @@ import codesquad.issuetracker.dto.issue.IssueCountDto;
 import codesquad.issuetracker.dto.issue.IssueDto;
 import codesquad.issuetracker.dto.issue.IssueDtos;
 import codesquad.issuetracker.dto.issue.IssueSearchCondition;
+import codesquad.issuetracker.dto.issue.IssueStatusUpdateForm;
 import codesquad.issuetracker.repository.IssueRepository;
 import java.util.List;
 import java.util.Map;
@@ -42,5 +43,10 @@ public class IssueService {
             countOfIssuesByStatus.getOrDefault(IssueStatus.OPEN, 0L),
             countOfIssuesByStatus.getOrDefault(IssueStatus.CLOSED, 0L)
         );
+    }
+
+    @Transactional
+    public void updateStatusByIssueId(IssueStatusUpdateForm updateForm) {
+        issueRepository.update(updateForm.getUpdatedStatus(), updateForm.getIdOfIssues());
     }
 }

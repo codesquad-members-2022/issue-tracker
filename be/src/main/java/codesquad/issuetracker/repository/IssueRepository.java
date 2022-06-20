@@ -62,6 +62,14 @@ public class IssueRepository {
         return countOfIssuesByStatus;
     }
 
+    public void update(IssueStatus updatedStatus, List<Long> idOfIssues) {
+        queryFactory
+            .update(issue)
+            .set(issue.status, updatedStatus)
+            .where(issue.id.in(idOfIssues))
+            .execute();
+    }
+
     private BooleanExpression statusEq(String status) {
         return hasText(status) ? issue.status.eq(IssueStatus.valueOf(status)) : null;
     }
