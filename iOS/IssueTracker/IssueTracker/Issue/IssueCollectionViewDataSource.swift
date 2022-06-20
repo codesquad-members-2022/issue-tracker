@@ -28,15 +28,14 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCollectionViewCell.identifier, for: indexPath) as? IssueCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
-        cell.configure(title: data[indexPath.item].title,
-                       issueDescription: data[indexPath.item].content,
-                       milestoneName: data[indexPath.item].milestoneName,
-                       labelName: data[indexPath.item].labels[0].title,
-                       labelBackgroundColor: data[indexPath.item].labels[0].backgroundColor)
+        let items = data[indexPath.item]
+        cell.configure(title: items.title, issueDescription: items.content,
+                       milestoneName: items.milestoneName, labelName: items.labels[0].title,
+                       labelBackgroundColor: items.labels[0].backgroundColor)
         
         return cell
     }
@@ -51,5 +50,9 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         } else {
             return UICollectionReusableView()
         }
+    }
+    
+    enum CreateIssueSection {
+        case issueCount([IssueItem])
     }
 }
