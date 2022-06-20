@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let rootViewController =
         GithubUserDefaults.getToken() != nil
-            ? IssueViewController()
+            ? UINavigationController(rootViewController: IssueViewController())
             : ViewController()
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
@@ -40,7 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     switch result {
                     case .success(let accessToken):
                         GithubUserDefaults.setToken(uid: accessToken)
-                        self.window?.rootViewController = IssueViewController()
+                        self.window?.rootViewController =
+                        UINavigationController(rootViewController: IssueViewController())
                     case .failure(let error):
                         // TODO: 로그인 실패 얼럿띄우기
                         print(error)
