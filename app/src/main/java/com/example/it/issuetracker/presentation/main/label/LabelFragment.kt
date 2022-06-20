@@ -34,7 +34,6 @@ class LabelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
 
-        setupToolbar()
         initView()
         observerData()
     }
@@ -58,7 +57,7 @@ class LabelFragment : Fragment() {
 
     private fun initView() {
         binding.recyclerviewLabelItem.adapter = adapter
-        observerData()
+        setupToolbar()
         viewModel.start()
     }
 
