@@ -24,33 +24,17 @@ final class LoginView: UIView {
         return label
     }()
 
-    private let githubLoginButton: UIButton = {
-        var config = UIButton.Configuration.bordered()
-        config.baseBackgroundColor = .white
-        config.baseForegroundColor = .black
-        config.background.strokeColor = .line
-        config.cornerStyle = .medium
-        config.title = "GitHub 계정으로 로그인"
-        config.image = UIImage(named: "git")
-        config.imagePadding = 10
-        config.imagePlacement = .leading
-
-        let button = UIButton(configuration: config)
+    private let githubLoginButton: LoginButton = {
+        let button = LoginButton()
+        button.setTitle("GitHub 계정으로 로그인", for: .normal)
+        button.setImage(UIImage(named: "git"), for: .normal)
         return button
     }()
 
-    private let appleLoginButton: UIButton = {
-        var config = UIButton.Configuration.bordered()
-        config.baseBackgroundColor = .white
-        config.baseForegroundColor = .black
-        config.background.strokeColor = .line
-        config.cornerStyle = .medium
-        config.title = "Apple 계정으로 로그인"
-        config.image = UIImage(named: "apple")
-        config.imagePadding = 10
-        config.imagePlacement = .leading
-
-        let button = UIButton(configuration: config)
+    private let appleLoginButton: LoginButton = {
+        let button = LoginButton()
+        button.setTitle("Apple 계정으로 로그인", for: .normal)
+        button.setImage(UIImage(named: "apple"), for: .normal)
         return button
     }()
 

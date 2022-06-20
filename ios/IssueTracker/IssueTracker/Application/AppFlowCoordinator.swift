@@ -11,11 +11,17 @@ protocol Coordinator: AnyObject {
     func start()
 }
 
+protocol AppFlowCoordinatorDependencies {
+    func makeLoginFlowDIContainer() -> DIContainer
+}
+
 final class AppFlowCoordinator: Coordinator {
     private let navigationController: UINavigationController
+    private let appDIContainer: AppFlowCoordinatorDependencies
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, dependency: AppFlowCoordinatorDependencies) {
         self.navigationController = navigationController
+        self.appDIContainer = dependency
     }
 
     deinit {
@@ -23,11 +29,12 @@ final class AppFlowCoordinator: Coordinator {
     }
 
     func start() {
-        startFlow()
+        runLoginFlow()
     }
 
-    func startFlow() {
-        let flow = LoginFlowCoordinator(navigationController: navigationController)
+    func runLoginFlow() {
+        let container = appDIContainer.makeLoginFlowDIContainer()
+        let flow = container.makeCoordinator(navigationController: navigationController)
         flow.start()
     }
 }

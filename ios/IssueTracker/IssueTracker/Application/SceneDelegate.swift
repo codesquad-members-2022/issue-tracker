@@ -17,8 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let navigationController = UINavigationController()
+        let appContainer = AppFlowDIContainer()
 
-        appCoordinator = AppFlowCoordinator(navigationController: navigationController)
+        appCoordinator = AppFlowCoordinator(navigationController: navigationController, dependency: appContainer)
 
         appCoordinator?.start()
 
