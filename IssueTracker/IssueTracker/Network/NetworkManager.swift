@@ -1,27 +1,11 @@
 import Foundation
 import Alamofire
 
-enum RequestURL: CustomStringConvertible {
-    case authorize
-    case accessToken
-    case issues
-    
-    var description: String {
-        switch self {
-        case .authorize:
-            return "https://github.com/login/oauth/authorize"
-        case .accessToken:
-            return "https://github.com/login/oauth/access_token"
-        case .issues:
-            return "https://api.github.com/issues"
-        }
-    }
-}
+typealias UserToken = String
 
 final class NetworkManager {
     public static let shared = NetworkManager()
     private init() {}
-    typealias UserToken = String
     
     enum NetworkError: Error {
         case issueNotFound
@@ -39,8 +23,8 @@ final class NetworkManager {
         do {
             let clientId = try PrivateStorage().getClientId()
             urlComponents.queryItems = [
-                URLQueryItem(name: "client_id", value: clientId),
-                URLQueryItem(name: "scope", value: scope),
+                URLQueryItem(name: QueryParameter.clientId.description, value: clientId),
+                URLQueryItem(name: QueryParameter.scope.description, value: scope),
             ]
             
             guard let url = urlComponents.url else {
@@ -62,12 +46,12 @@ final class NetworkManager {
         }
         
         let parameters = [
-            "client_id": "\(clientId)",
-            "client_secret": "\(clientSecret)",
-            "code": code
+            QueryParameter.clientId.description: "\(clientId)",
+            QueryParameter.clientSecret.description: "\(clientSecret)",
+            QueryParameter.code.description: code
         ]
         let headers: HTTPHeaders = [
-            "Accept": "application/json"
+            NetworkHeader.accept.getHttpHeader()
         ]
         
         AF.request(url, method: .post, parameters: parameters, headers: headers).responseDecodable(of: [String: String].self) { (response) in
@@ -81,12 +65,12 @@ final class NetworkManager {
             }
         }
     }
-    
+
     func requestIssues(accessToken: String, completion: @escaping (Result<[Issue], NetworkError>) -> Void) {
         let urlString = RequestURL.issues.description
         let headers: HTTPHeaders = [
-            "Accept": "application/vnd.github.v3+json",
-            "Authorization": "token \(accessToken)"
+            NetworkHeader.acceptV3.getHttpHeader(),
+            NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
         ]
         AF.request(urlString, method: .get, headers: headers)
             .responseDecodable(of: [Issue].self) { (response) in
