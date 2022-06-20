@@ -13,6 +13,29 @@ final class NetworkManager {
     
     typealias UserToken = String
     
+    func requestCode(completion: @escaping (Result<URL, NetworkError>) -> Void) {
+        let scope = "repo,user"
+        let urlString = "https://github.com/login/oauth/authorize"
+        guard var urlComponents = URLComponents(string: urlString) else {
+           return
+        }
+        
+        do {
+            let clientId = try PrivateStorage().getClientId()
+            urlComponents.queryItems = [
+                URLQueryItem(name: "client_id", value: clientId),
+                URLQueryItem(name: "scope", value: scope),
+            ]
+            
+            guard let url = urlComponents.url else {
+                return
+            }
+            completion(.success(url))
+        } catch {
+            completion(.failure(.storageKeyNotFound))
+        }
+    }
+    
     func requestAccessToken(with code: String, completion: @escaping (Result<UserToken, NetworkError>) -> Void) {
         let url = "https://github.com/login/oauth/access_token"
         

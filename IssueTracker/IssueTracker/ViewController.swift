@@ -37,33 +37,21 @@ class ViewController: UIViewController {
         configuration.image = UIImage(named: "GitHub-Mark")
         configuration.imagePadding = 8
         let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { _ in
-            self.requestLogin()
+            self.touchedLoginButton()
         }))
         return button
     }()
     
-    private func requestLogin() {
-        let scope = "repo,user"
-        let urlString = "https://github.com/login/oauth/authorize"
-        guard var urlComponents = URLComponents(string: urlString) else {
-           return
-        }
-        
-        do {
-            let clientId = try PrivateStorage().getClientId()
-            urlComponents.queryItems = [
-                URLQueryItem(name: "client_id", value: clientId),
-                URLQueryItem(name: "scope", value: scope),
-            ]
-            
-            if let url = urlComponents.url {
-                UIApplication.shared.open(url) // 새 사파리 창을 열기
+    private func touchedLoginButton() {
+        NetworkManager.shared.requestCode { result in
+            switch result {
+            case .success(let url):
+                UIApplication.shared.open(url)
+            case .failure(let error):
+                // TODO: - 로그인 하지 못했을때 에러처리
+                print(error)
             }
-        } catch(let error) {
-            print(error.localizedDescription)
         }
-        
-
     }
 }
 
