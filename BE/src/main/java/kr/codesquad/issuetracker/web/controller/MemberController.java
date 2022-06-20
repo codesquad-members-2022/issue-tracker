@@ -1,10 +1,9 @@
 package kr.codesquad.issuetracker.web.controller;
 
-import kr.codesquad.issuetracker.service.UserService;
-import kr.codesquad.issuetracker.web.dto.user.UserResponseDto;
+import kr.codesquad.issuetracker.service.MemberService;
+import kr.codesquad.issuetracker.web.dto.member.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class UserController {
+public class MemberController {
 
-	private final UserService userService;
+	private final MemberService memberService;
 
 	@PostMapping("/login/oauth2/code/github")
-	public UserResponseDto login(@RequestParam String code) {
+	public MemberResponseDto login(@RequestParam String code) {
 		log.debug("로그인 요청");
-		return userService.login(code);
+		return memberService.login(code);
 	}
 }
