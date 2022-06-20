@@ -16,7 +16,7 @@ struct Issue: Codable {
     let assignees: [User]?
     let labels: [Label]
     let milestone: Milestone?
-    let pull: Pull
+    let pull: Pull?
     
     enum CodingKeys: String, CodingKey {
         case id
