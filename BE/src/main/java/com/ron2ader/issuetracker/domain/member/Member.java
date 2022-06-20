@@ -1,0 +1,40 @@
+package com.ron2ader.issuetracker.domain.member;
+
+import com.ron2ader.issuetracker.domain.common.BaseEntity;
+import lombok.*;
+import org.springframework.data.domain.Page;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.*;
+
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
+@Table(name = "member")
+public class Member extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String memberId;
+
+    private String avatarUrl;
+
+    public static Member of(String memberId, String avatarUrl) {
+        return new Member(null, memberId, avatarUrl);
+    }
+
+    public void update(Member member) {
+        this.memberId = member.getMemberId();
+        this.avatarUrl = member.getAvatarUrl();
+    }
+
+    public boolean isUpdatable(Member member) {
+        if (member == null) {
+            return false;
+        }
+        return !this.memberId.equals(member.getMemberId()) || !this.avatarUrl.equals(member.getAvatarUrl());
+    }
+}
