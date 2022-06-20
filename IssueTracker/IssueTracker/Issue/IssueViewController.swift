@@ -63,7 +63,7 @@ final class IssueViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: "IssueListCell")
+        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         return collectionView
@@ -90,7 +90,7 @@ extension IssueViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueListCell", for: indexPath) as? IssueListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.identifier, for: indexPath) as? IssueListCell else {
             return UICollectionViewCell()
         }
         let data = issues[indexPath.row]
