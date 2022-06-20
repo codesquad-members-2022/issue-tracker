@@ -1,21 +1,37 @@
 import Foundation
 import Alamofire
 
+enum RequestURL: CustomStringConvertible {
+    case authorize
+    case accessToken
+    case issues
+    
+    var description: String {
+        switch self {
+        case .authorize:
+            return "https://github.com/login/oauth/authorize"
+        case .accessToken:
+            return "https://github.com/login/oauth/access_token"
+        case .issues:
+            return "https://api.github.com/issues"
+        }
+    }
+}
+
 final class NetworkManager {
+    public static let shared = NetworkManager()
+    private init() {}
+    typealias UserToken = String
+    
     enum NetworkError: Error {
         case issueNotFound
         case tokenNotFound
         case storageKeyNotFound
     }
     
-    public static let shared = NetworkManager()
-    private init() {}
-    
-    typealias UserToken = String
-    
     func requestCode(completion: @escaping (Result<URL, NetworkError>) -> Void) {
         let scope = "repo,user"
-        let urlString = "https://github.com/login/oauth/authorize"
+        let urlString = RequestURL.authorize.description
         guard var urlComponents = URLComponents(string: urlString) else {
            return
         }
@@ -37,8 +53,7 @@ final class NetworkManager {
     }
     
     func requestAccessToken(with code: String, completion: @escaping (Result<UserToken, NetworkError>) -> Void) {
-        let url = "https://github.com/login/oauth/access_token"
-        
+        let url = RequestURL.accessToken.description
         let privateStorage = PrivateStorage()
         guard let clientId = try? privateStorage.getClientId(),
             let clientSecret = try? privateStorage.getClientSecret() else {
@@ -68,7 +83,7 @@ final class NetworkManager {
     }
     
     func requestIssues(accessToken: String, completion: @escaping (Result<[Issue], NetworkError>) -> Void) {
-        let urlString = "https://api.github.com/issues"
+        let urlString = RequestURL.issues.description
         let headers: HTTPHeaders = [
             "Accept": "application/vnd.github.v3+json",
             "Authorization": "token \(accessToken)"
