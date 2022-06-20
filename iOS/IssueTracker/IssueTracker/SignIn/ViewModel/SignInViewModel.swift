@@ -15,12 +15,13 @@ protocol SignInViewModelProtocol: AnyObject {
 }
 
 final class SignInViewModel: SignInViewModelProtocol {
-    private let useCase = SignInManager()
+    private let useCase: SignInManagable
     private(set) var buttonAction: Observable<URL?> = Observable(URL(string: ""))
     private(set) var errorAction: Observable<String> = Observable("")
     private(set) var presentAction: Observable<Void> = Observable(Void())
 
-    init() {
+    init(useCase: SignInManagable) {
+        self.useCase = useCase
         setObserver()
     }
 
