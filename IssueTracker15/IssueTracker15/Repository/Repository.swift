@@ -12,7 +12,14 @@ import Alamofire
 class Repository {
     static let shared = Repository()
     
-    var networkService = NetworkService<TestDecodableType>()
+    let serviceWrapper = ContainerWrapper(container: ServiceContainer<Any>())
+    
+    func getNetworkService<T: Codable>(resultType: T.Type) -> NetworkService<T>? {
+        let service = NetworkService<T>()
+        
+        serviceWrapper.regist(instance: service)
+        return serviceWrapper.resolve(type: NetworkService<T>.self) as? NetworkService<T>
+    }
 }
 
 enum ServiceType {

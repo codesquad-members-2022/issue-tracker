@@ -23,7 +23,7 @@ class RequestModel {
         
         return Repository
             .shared
-            .networkService
-            .request(request, urgency: urgency ?? .urgent)
+            .getNetworkService(resultType: TestDecodableType.self)?
+            .request(request, urgency: .urgent)
     }
 }

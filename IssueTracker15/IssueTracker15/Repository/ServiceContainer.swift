@@ -8,7 +8,7 @@
 import Foundation
 
 /// Service들을 Repository에서 DI 하고자 만든 클래스. 현재 사용하지 않음.
-class ServiceContainer<S: Transferable>: Resolvable {
+class ServiceContainer<S>: Resolvable {
     
     typealias Value = S
     

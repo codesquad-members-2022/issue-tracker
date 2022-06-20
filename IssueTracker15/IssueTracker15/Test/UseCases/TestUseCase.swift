@@ -12,25 +12,21 @@ class TestUseCase: UseCaseResponsible {
     
     private var cancellable = Set<AnyCancellable>()
     
-    func requestFromUseCase(_ completionBlock: @escaping (Any?)->Void) {
+    func requestFromUseCase(_ completionBlock: @escaping (Any?) -> Void) {
         RequestModel
             .networkRequest(urgency: .urgent)?
-            .value()
+            .result()
             .subscribe(on: DispatchQueue.global())
-            .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case .failure(let error):
-                        print(error)
-                    case .finished:
-                        print("haha")
-                    }
-                },
-                receiveValue: { data in
-                    print("kaka")
+            .sink(receiveValue: { result in
+                switch result {
+                case .success(let data):
+                    print(data)
                     completionBlock(data)
+                case .failure(let error):
+                    print(error)
+                    completionBlock(error)
                 }
-            )
+            })
             .store(in: &cancellable)
     }
 }
