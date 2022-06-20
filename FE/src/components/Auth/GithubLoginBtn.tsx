@@ -11,7 +11,7 @@ const GithubLoginBtn = () => {
     <div>
       <a
         className={styles.link}
-        href="https://github.com/login/oauth/authorize?client_id=565469f738966f8bc11a&redirect_uri=http://localhost:8081/"
+        href="https://github.com/login/oauth/authorize?client_id=565469f738966f8bc11a&redirect_uri=http://localhost:8081/callback"
       >
         <div className={styles.github_button}>깃허브로 로그인</div>
       </a>
