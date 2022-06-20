@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentLabelAddBinding
+import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,13 +17,22 @@ class LabelAddFragment : Fragment() {
 
     private lateinit var binding: FragmentLabelAddBinding
     private val viewModel by viewModel<LabelAddViewModel>()
+    private var editLabelInfo: Label? = null
+    private var clickSaveListener: (() -> Unit)? = null
+
+    fun setOnClickSaveListener(listener: () -> Unit) {
+        clickSaveListener = listener
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLabelAddBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        editLabelInfo = arguments?.getParcelable("label")
+
         return binding.root
     }
 
@@ -32,12 +42,11 @@ class LabelAddFragment : Fragment() {
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.label_save -> {
-                    viewModel.addLabel(
-                        binding.editSubject.text.toString(),
-                        binding.editDescription.text.toString(),
-                        binding.editBackground.text.toString(),
-                        viewModel.textColor.value
-                    )
+                    if (editLabelInfo == null) {
+                        addLabel()
+                    } else {
+                        editLabel()
+                    }
                     true
                 }
                 else -> false
@@ -48,7 +57,33 @@ class LabelAddFragment : Fragment() {
         observerData()
     }
 
+    private fun addLabel() {
+        viewModel.addLabel(
+            binding.editSubject.text.toString(),
+            binding.editDescription.text.toString(),
+            binding.editBackground.text.toString(),
+            viewModel.textColor.value
+        )
+    }
+
+    private fun editLabel() {
+        editLabelInfo?.let { editLabel ->
+            val labelInfo = editLabel.copy(
+                title = binding.editSubject.text.toString(),
+                description = binding.editDescription.text.toString(),
+                color = binding.editBackground.text.toString(),
+                textColor = viewModel.textColor.value
+            )
+
+            viewModel.editLabel(labelInfo)
+        }
+    }
+
     private fun initView() {
+        editLabelInfo?.let {
+            viewModel.setData(it)
+        }
+
         val saveMenu = binding.toolbar.menu.findItem(R.id.label_save)
         binding.toolbar.setNavigationOnClickListener { popBackStack() }
         binding.editSubject.doAfterTextChanged { input ->
@@ -61,7 +96,10 @@ class LabelAddFragment : Fragment() {
     private fun observerData() {
         repeatOnLifecycleExtension {
             viewModel.completeSaveLabel.collect { complete ->
-                if (complete) popBackStack()
+                if (complete) {
+                    clickSaveListener?.invoke()
+                    popBackStack()
+                }
             }
         }
     }
