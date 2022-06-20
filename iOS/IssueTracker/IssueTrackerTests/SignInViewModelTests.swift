@@ -11,24 +11,38 @@ import XCTest
 class SignInViewModelTests: XCTestCase {
 
     var sut: SignInViewModel!
+    var testString = ""
 
     override func setUpWithError() throws {
-        sut = SignInViewModel(useCase: MockSignInManager())
+        let openURL: (URL) -> Void = { (url) in
+            self.testString = url.description
+        }
+        sut = SignInViewModel(useCase: MockSignInManager(),
+                              actions: SignInViewModelActions(
+                                openURL: openURL,
+                                presentTabBarController: { }))
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
 
-    func test_requestOAuthCode호출시_buttonAction이_잘호출되는지() {
-        var checkString = ""
-        sut.buttonAction.bind(on: self) { url in
-            checkString = "buttonAction called"
+    func test_didSelect호출시_설정된URL이_잘호출되는지() {
+        sut.didSelect()
+        XCTAssertEqual(self.testString, "https://example.com")
+    }
+
+    func test_setPresentAction로_presentAction설정시_잘설정되는지() {
+        var testString2 = ""
+        let confirmationString = "Test Completed"
+
+        sut.setPresentAction {
+            testString2 = confirmationString
         }
 
-        sut.requestOAuthCode()
+        NotificationCenter.default.post(name: SceneDelegate.NotificationNames.didSignIn, object: self)
 
-        XCTAssertEqual(checkString, "buttonAction called")
+        XCTAssertEqual(testString2, confirmationString)
     }
 }
 
