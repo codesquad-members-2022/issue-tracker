@@ -7,8 +7,7 @@ export default function useInputTextValue(value: string) {
     value
   });
 
-  const updateInputValue = (event: React.ChangeEvent<HTMLInputElement>, ms?: number) => {
-    const target = event.target;
+  const updateInputValue = (target: HTMLInputElement, ms?: number) => {
     debounce(
       () =>
         setInputValue({

@@ -70,8 +70,8 @@ export default function Login() {
               placeholder="아이디"
               label="아이디"
               name="id"
-              handleChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                updateInputValue(event, TEXT_INPUT_DEBOUNCE_TIME)
+              handleChange={(target: HTMLInputElement) =>
+                updateInputValue(target, TEXT_INPUT_DEBOUNCE_TIME)
               }
             />
             {inputInfo.name === 'id'
@@ -85,8 +85,8 @@ export default function Login() {
               placeholder="비밀번호"
               label="비밀번호"
               name="pw"
-              handleChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                updateInputValue(event, TEXT_INPUT_DEBOUNCE_TIME)
+              handleChange={(target: HTMLInputElement) =>
+                updateInputValue(target, TEXT_INPUT_DEBOUNCE_TIME)
               }
               type="password"
             />

@@ -16,14 +16,14 @@ export default function TextInput({
   const [visibleLabel, setVisibleLabel] = useState(false);
   const TextInputWrap = as || $TextInputWrap;
 
-  const showLabel = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const hasValue = event.target.value.length >= MIN_INPUT_VALUE_LENGTH;
+  const showLabel = (target: HTMLInputElement) => {
+    const hasValue = target.value.length >= MIN_INPUT_VALUE_LENGTH;
     setVisibleLabel(hasValue);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (handleChange) handleChange(event);
-    showLabel(event);
+  const handleInputChange = (target: HTMLInputElement) => {
+    if (handleChange) handleChange(target);
+    showLabel(target);
   };
 
   return (
@@ -39,7 +39,7 @@ export default function TextInput({
         name={name}
         placeholder={placeholder}
         visibleLabel={visibleLabel}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleInputChange(event)}
+        onChange={({ target }: { target: HTMLInputElement }) => handleInputChange(target)}
       />
     </TextInputWrap>
   );
