@@ -12,7 +12,7 @@ protocol IssueTracking {
     func getIssuesOnFailure() -> [Issue]?
 }
 
-class IssueTrackingRepository {
+final class IssueTrackingRepository {
 
     func requestIssues(url: String,
                        completion: @escaping (Result<[Issue]?, NetworkError>) -> Void) {

@@ -11,7 +11,7 @@ protocol DecodeManager {
     static func decodeJson<T: Codable>(data: Data) -> T?
 }
 
-class DecodeManagerImplement: DecodeManager {
+final class DecodeManagerImplement: DecodeManager {
 
     static func decodeJson<T: Codable>(data: Data) -> T? {
         do {

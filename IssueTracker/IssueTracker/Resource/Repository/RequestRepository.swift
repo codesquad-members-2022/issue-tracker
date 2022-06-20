@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RequestRepository {
+final class RequestRepository {
 
     static func sendRequest(with request: URLRequest, _ completion: @escaping (Data) -> Void) {
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -15,7 +15,7 @@ class RequestRepository {
                 print(error.localizedDescription)
                 return
             }
-            guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode.isSuccess else {
                   return
               }
             guard let data = data else { return }

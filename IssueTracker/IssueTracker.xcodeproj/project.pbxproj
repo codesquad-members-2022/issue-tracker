@@ -33,6 +33,7 @@
 		B3BFBD3828572E5400D69A34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBD3728572E5400D69A34 /* SceneDelegate.swift */; };
 		B3BFBD3A28572E5400D69A34 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBD3928572E5400D69A34 /* LoginViewController.swift */; };
 		B3BFBD3F28572E6C00D69A34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3BFBD3E28572E6C00D69A34 /* Assets.xcassets */; };
+		B3D736E9286008440053E887 /* Extension+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D736E8286008440053E887 /* Extension+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		B3BFBD3928572E5400D69A34 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B3BFBD3E28572E6C00D69A34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3BFBD4328572E6C00D69A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3D736E8286008440053E887 /* Extension+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+.swift"; sourceTree = "<group>"; };
 		C0F9D2A98896B0988903BE82 /* Pods-IssueTracker.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.dev.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +151,7 @@
 				B3BFBD3728572E5400D69A34 /* SceneDelegate.swift */,
 				B3BFBD3928572E5400D69A34 /* LoginViewController.swift */,
 				00E87233285C3C3600C527B5 /* Eevironment.swift */,
+				B3D736E8286008440053E887 /* Extension+.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 			files = (
 				B3773F352858648E008C4AAF /* TabBarViewController.swift in Sources */,
 				B3BFBD3A28572E5400D69A34 /* LoginViewController.swift in Sources */,
+				B3D736E9286008440053E887 /* Extension+.swift in Sources */,
 				B3773F37285864E2008C4AAF /* IssueListViewController.swift in Sources */,
 				B3BFBD3628572E5400D69A34 /* AppDelegate.swift in Sources */,
 				B3773F2E28585237008C4AAF /* Tag.swift in Sources */,

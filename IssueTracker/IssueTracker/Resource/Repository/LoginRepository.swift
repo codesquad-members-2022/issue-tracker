@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LoginRepository {
+final class LoginRepository {
 
     func requestGithubAuthorize() {
         let clientID = Environment.clientId
@@ -28,9 +28,8 @@ class LoginRepository {
 
         guard let request = RequestRepository.makeURLRequest(with: target) else { return }
         RequestRepository.sendRequest(with: request) { data in
-            guard let jsonData = try! JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
-
-            guard let access_token = jsonData["access_token"] as? String else { return }
+            guard let jsonData = try! JSONSerialization.jsonObject(with: data) as? [String: Any],
+                    let access_token = jsonData["access_token"] as? String else { return }
             completion(access_token)
         }
     }
