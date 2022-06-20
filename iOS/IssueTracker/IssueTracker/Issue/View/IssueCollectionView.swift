@@ -13,6 +13,7 @@ final class IssueCollectionView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         addSubview(collectionView)
+        collectionView.delegate = self
     }
     
     @available(*, unavailable)
@@ -26,7 +27,6 @@ final class IssueCollectionView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 5
         flowLayout.estimatedItemSize = CGSize(width: 350, height: 240)
-        flowLayout.headerReferenceSize = .init(width: UIScreen.main.bounds.width, height: 41)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         
         collectionView.isScrollEnabled = true
@@ -46,5 +46,11 @@ final class IssueCollectionView: UIView {
         collectionView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(self)
         }
+    }
+}
+
+extension IssueCollectionView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.frame.width, height: 80)
     }
 }

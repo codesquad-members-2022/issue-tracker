@@ -14,6 +14,7 @@ final class IssueCollectionHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(headerTitle)
+        addSubview(searchBar)
     }
     
     @available(*, unavailable)
@@ -31,6 +32,12 @@ final class IssueCollectionHeaderView: UICollectionReusableView {
         return headerTitle
     }()
     
+    private var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Search"
+        return searchBar
+    }()
+    
     func setHeaderTitle(text: String?) {
         headerTitle.text = text
     }
@@ -39,7 +46,14 @@ final class IssueCollectionHeaderView: UICollectionReusableView {
         headerTitle.snp.makeConstraints { make in
             make.top.equalTo(self)
             make.leading.equalTo(self).offset(16)
-            make.bottom.equalTo(self).offset(-8)
+//            make.bottom.equalTo(searchBar.snp.top)
+        }
+        
+        searchBar.snp.makeConstraints { make in
+            make.top.equalTo(headerTitle.snp.bottom).offset(9)
+            make.leading.equalTo(headerTitle.snp.leading)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.bottom.equalTo(self).offset(9)
         }
     }
 }
