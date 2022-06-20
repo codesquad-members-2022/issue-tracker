@@ -20,6 +20,8 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'import'],
   rules: {
+    'jsx-a11y/label-has-associated-control': 'off',
+    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'import/prefer-default-export': 0,
     'prettier/prettier': 0,

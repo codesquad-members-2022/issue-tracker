@@ -18,7 +18,7 @@ function Login(): JSX.Element {
         <S.OR
           fontWeight="bold"
           fontSize="sm"
-          lineheight="short"
+          lineHeight="short"
           color="placeholder"
         >
           OR
@@ -32,7 +32,7 @@ function Login(): JSX.Element {
           to="/"
           fontWeight="bold"
           fontSize="xs"
-          lineheight="shorter"
+          lineHeight="shorter"
           color="body"
         >
           회원가입

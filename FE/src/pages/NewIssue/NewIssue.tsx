@@ -1,6 +1,7 @@
-import React from 'react';
+import { AAA } from './NewIssue.styled';
+import TextArea from '../../common/TextArea/TextArea';
 
 function NewIssue(): JSX.Element {
-  return <div />;
+  return <TextArea active />;
 }
 export default NewIssue;
