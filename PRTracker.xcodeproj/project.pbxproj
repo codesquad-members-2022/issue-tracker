@@ -22,8 +22,8 @@
 		BC2F598C286092EE0012D18C /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */; };
 		BC2F598E2860979D0012D18C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598D2860979D0012D18C /* User.swift */; };
 		BC2F598F2860979D0012D18C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598D2860979D0012D18C /* User.swift */; };
-		BC2F5991286098B70012D18C /* TestURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* TestURLProtocol.swift */; };
-		BC2F5992286098B70012D18C /* TestURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* TestURLProtocol.swift */; };
+		BC2F5991286098B70012D18C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* URLProtocolStub.swift */; };
+		BC2F5992286098B70012D18C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* URLProtocolStub.swift */; };
 		BC97093B2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC97093C2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
@@ -111,7 +111,7 @@
 		BC2F59852860759B0012D18C /* PullManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullManagerTests.swift; sourceTree = "<group>"; };
 		BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		BC2F598D2860979D0012D18C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		BC2F5990286098B70012D18C /* TestURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestURLProtocol.swift; sourceTree = "<group>"; };
+		BC2F5990286098B70012D18C /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 				BC2F597D286065610012D18C /* UserManagerTests.swift */,
 				BC2F59852860759B0012D18C /* PullManagerTests.swift */,
 				BC2F5981286075520012D18C /* KeyChainStub.swift */,
-				BC2F5990286098B70012D18C /* TestURLProtocol.swift */,
+				BC2F5990286098B70012D18C /* URLProtocolStub.swift */,
 			);
 			path = PRTrackerTests;
 			sourceTree = "<group>";
@@ -570,7 +570,7 @@
 				BC97093B2859B23D00E54F93 /* Issue.swift in Sources */,
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
 				BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */,
-				BC2F5991286098B70012D18C /* TestURLProtocol.swift in Sources */,
+				BC2F5991286098B70012D18C /* URLProtocolStub.swift in Sources */,
 				D0E98CE2285C01530051413E /* MockDataService.swift in Sources */,
 				BCF57BFD285704F40059E61D /* PullListViewModel.swift in Sources */,
 				D04099D22859C08B0008B517 /* PullListViewController.swift in Sources */,
@@ -617,7 +617,7 @@
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57BFE285704F40059E61D /* PullListViewModel.swift in Sources */,
-				BC2F5992286098B70012D18C /* TestURLProtocol.swift in Sources */,
+				BC2F5992286098B70012D18C /* URLProtocolStub.swift in Sources */,
 				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
 				D0E98D07285CEABA0051413E /* KeyChainService.swift in Sources */,
 				D0E98D08285CEAC00051413E /* NetworkService.swift in Sources */,

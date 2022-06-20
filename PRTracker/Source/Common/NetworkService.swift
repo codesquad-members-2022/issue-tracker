@@ -13,8 +13,14 @@ protocol NetworkService {
 
 struct NetworkManger: NetworkService {
     
+    let session: URLSession
+    
+    init(urlSession: URLSession = URLSession.shared) {
+        self.session = urlSession
+    }
+    
     func get<T: Codable>(request: URLRequest, then completion: @escaping (T?) -> Void) {
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        session.dataTask(with: request) { data, _, error in
             if let error = error {
                 Log.error(error.localizedDescription)
                 return
