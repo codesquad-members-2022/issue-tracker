@@ -1,6 +1,7 @@
 package kr.codesquad.issuetracker.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import kr.codesquad.issuetracker.core.user.User;
 import lombok.Getter;
 
 @Getter
@@ -11,4 +12,7 @@ public class GitHubUserInfo {
     private String email;
     private String name;
 
+    public User createUser() {
+        return new User(userId, email, name);
+    }
 }
