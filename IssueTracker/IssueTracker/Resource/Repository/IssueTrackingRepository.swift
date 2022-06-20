@@ -1,24 +1,19 @@
 //
-//  DecodeManager.swift
+//  IssueTrackingRepository.swift
 //  IssueTracker
 //
-//  Created by YEONGJIN JANG on 2022/06/14.
+//  Created by 최예주 on 2022/06/17.
 //
 
 import Foundation
 
-protocol DecodeManager {
+protocol IssueTracking {
     func requestIssues(url: String, completion: @escaping (Result<[Issue]?, NetworkError>) -> Void )
     func getIssuesOnFailure() -> [Issue]?
 }
 
-enum NetworkError: Error {
-    case invalidJsonError
-    case invalidUrlError
-    case cantReachedServerError
-}
+final class IssueTrackingRepository {
 
-class DecodeManagerImplement: DecodeManager {
     func requestIssues(url: String,
                        completion: @escaping (Result<[Issue]?, NetworkError>) -> Void) {
         guard let requestURL = URL(string: url) else {
@@ -37,7 +32,7 @@ class DecodeManagerImplement: DecodeManager {
                 if let data = data,
                    let response = response as? HTTPURLResponse,
                    response.statusCode == 200 {
-                    let issueResponse = try JSONDecoder().decode(IssueResponse.self, from: data)
+                    guard let issueResponse: IssueResponse = DecodeManagerImplement.decodeJson(data: data) else { return }
                     result = issueResponse.body
                 }
             } catch {
@@ -59,7 +54,7 @@ class DecodeManagerImplement: DecodeManager {
 
         do {
             let jsonData = try Data(contentsOf: fileLocation)
-            let issueList = try JSONDecoder().decode(IssueResponse.self, from: jsonData)
+            guard let issueList: IssueResponse = DecodeManagerImplement.decodeJson(data: jsonData) else { return nil }
             return issueList.body
         } catch {
             // TODO: - error 처리

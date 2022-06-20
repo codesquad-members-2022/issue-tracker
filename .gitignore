@@ -5,6 +5,9 @@
 ## User settings
 xcuserdata/
 
+### XCConfig ###
+XCConfig/
+
 ## Xcode 8 and earlier
 *.xcscmblueprint
 *.xccheckout

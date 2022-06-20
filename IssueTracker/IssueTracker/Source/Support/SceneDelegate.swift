@@ -15,7 +15,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
 
-        window?.rootViewController = TabBarViewController()
+        // TODO: Access token 유효성 검사 후 화면 흐름 제어하기
+
+        window?.rootViewController = LoginViewController()
         window?.makeKeyAndVisible()
     }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+
+        let loginRepository = LoginRepository()
+
+        guard let response = URLContexts.first?.url,
+        let authorizedCode = response.absoluteString.components(separatedBy: "code=").last else { return }
+
+        let urlRequest = IssueTrackerTarget.requestAccessToken(code: authorizedCode)
+
+        loginRepository.getGithubAccessToken(urlRequest) { token in
+            UserDefaults.standard.set("access_token", forKey: token)
+            DispatchQueue.main.async {
+                self.window?.rootViewController = TabBarViewController()
+            }
+        }
+
+    }
+
 }
