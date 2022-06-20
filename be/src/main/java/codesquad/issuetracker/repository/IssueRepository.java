@@ -6,15 +6,13 @@ import static codesquad.issuetracker.domain.QIssueLabel.issueLabel;
 import static codesquad.issuetracker.domain.QMember.member;
 import static codesquad.issuetracker.domain.QMilestone.milestone;
 import static codesquad.issuetracker.domain.QReply.reply;
-import static codesquad.issuetracker.domain.QLabel.label;
-import static org.springframework.util.ObjectUtils.isEmpty;
+import static org.springframework.util.StringUtils.hasText;
 
 import codesquad.issuetracker.domain.IssueStatus;
+import codesquad.issuetracker.domain.QAssignee;
 import codesquad.issuetracker.dto.issue.IssueDto;
 import codesquad.issuetracker.dto.issue.IssueSearchCondition;
 import codesquad.issuetracker.dto.issue.QIssueDto;
-import codesquad.issuetracker.dto.label.LabelDto;
-import codesquad.issuetracker.dto.label.QLabelDto;
 import codesquad.issuetracker.dto.milestone.QMilestoneDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -43,29 +41,19 @@ public class IssueRepository {
                 new QMilestoneDto(milestone.id, milestone.subject)
             )
         ).from(issue)
-            .join(issue.member, member)
+            .join(issue.writer, member)
             .leftJoin(issue.milestone, milestone)
             .leftJoin(issue.assignees, assignee)
             .leftJoin(issue.replies, reply)
             .leftJoin(issue.issueLabels, issueLabel)
-            .where(statusEq(condition.getStatus()),
-                writerIdEq(condition.getWriterId()),
-                milestoneIdEq(condition.getMilestoneId()),
-                assigneeIdEq(condition.getAssigneeId()),
-                replierIdEq(condition.getReplierId()),
-                labelIdEq(condition.getLabelId())
+            .where(statusEq(condition.getStatus().name()),
+                writerIdentityEq(condition.getWriter()),
+                milestoneSubjectEq(condition.getMilestone()),
+                assigneeIdentityEq(condition.getAssignee()),
+                replierIdentityEq(condition.getReplier()),
+                labelNameEq(condition.getLabel())
             )
             .groupBy(issue.id)
-            .fetch();
-    }
-
-    public List<LabelDto> findLabelsOfIssue(Long issueId) {
-        return queryFactory
-            .select(new QLabelDto(label.id, label.name, label.description, label.color))
-            .from(issue)
-            .join(issue.issueLabels, issueLabel)
-            .join(label).on(issueLabel.label.id.eq(label.id))
-            .where(issue.id.eq(issueId))
             .fetch();
     }
 
@@ -86,27 +74,26 @@ public class IssueRepository {
     }
 
     private BooleanExpression statusEq(String status) {
-        return isEmpty(status) ? null : issue.status.eq(IssueStatus.valueOf(status));
+        return hasText(status) ? null : issue.status.eq(IssueStatus.valueOf(status));
     }
 
-    private BooleanExpression writerIdEq(Long writerId) {
-        return writerId == null ? null : issue.member.id.eq(writerId);
+    private BooleanExpression writerIdentityEq(String writer) {
+        return hasText(writer) ? null : issue.writer.identity.eq(writer);
     }
 
-    private BooleanExpression milestoneIdEq(Long milestoneId) {
-        return milestoneId == null ? null : issue.milestone.id.eq(milestoneId);
+    private BooleanExpression milestoneSubjectEq(String milestoneSubject) {
+        return hasText(milestoneSubject) ? null : issue.milestone.subject.eq(milestoneSubject);
     }
 
-    private BooleanExpression assigneeIdEq(Long assigneeId) {
-        return assigneeId == null ? null : assignee.member.id.eq(assigneeId);
+    private BooleanExpression assigneeIdentityEq(String assignee) {
+        return hasText(assignee) ? null : QAssignee.assignee.member.identity.eq(assignee);
     }
 
-    private BooleanExpression replierIdEq(Long replierId) {
-        return replierId == null ? null : reply.member.id.eq(replierId);
+    private BooleanExpression replierIdentityEq(String replier) {
+        return hasText(replier) ? null : reply.member.identity.eq(replier);
     }
 
-    private BooleanExpression labelIdEq(Long labelId) {
-        return labelId == null ? null : issueLabel.label.id.eq(labelId);
+    private BooleanExpression labelNameEq(String labelName) {
+        return hasText(labelName) ? null : issueLabel.label.name.eq(labelName);
     }
-
 }
