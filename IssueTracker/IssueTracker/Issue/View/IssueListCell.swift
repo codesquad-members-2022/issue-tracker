@@ -12,7 +12,7 @@ final class IssueListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateViews(title: String, description: String, milestone: String?, labels: [Label]) {
+    func updateViews(title: String, description: String?, milestone: String?, labels: [Label]) {
         self.titleLabel.text = title
         self.descriptionLabel.text = description
         self.milestoneLabel.text = milestone

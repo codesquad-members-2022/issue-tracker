@@ -94,7 +94,7 @@ extension IssueViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let data = issues[indexPath.row]
-        cell.updateViews(title: data.title, description: data.body ?? "", milestone: data.milestone?.title, labels: data.labels)
+        cell.updateViews(title: data.title, description: data.body, milestone: data.milestone?.title, labels: data.labels)
         return cell
     }
 }
