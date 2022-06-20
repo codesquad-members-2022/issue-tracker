@@ -11,3 +11,5 @@ cloud:
     stack:
       auto: false
 
+# application 실행 지연을 막기위해서 vm options에 아래 설정을 추가해줘야함
+# -Dcom.amazonaws.sdk.disableEc2Metadata=true
