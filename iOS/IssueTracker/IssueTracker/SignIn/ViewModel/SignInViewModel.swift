@@ -8,17 +8,17 @@
 import Foundation
 
 protocol SignInViewModelProtocol: AnyObject {
-    var buttonAction: ((URL) -> Void)? { get set }
-    var errorAction: ((String) -> Void)? { get set }
-    var presentAction: (() -> Void)? { get set }
+    var buttonAction: Observable<URL?> { get }
+    var errorAction: Observable<String> { get }
+    var presentAction: Observable<Void> { get }
     func requestOAuthCode()
 }
 
 final class SignInViewModel: SignInViewModelProtocol {
     private let useCase = SignInManager()
-    var buttonAction: ((URL) -> Void)?
-    var errorAction: ((String) -> Void)?
-    var presentAction: (() -> Void)?
+    private(set) var buttonAction: Observable<URL?> = Observable(URL(string: ""))
+    private(set) var errorAction: Observable<String> = Observable("")
+    private(set) var presentAction: Observable<Void> = Observable(Void())
 
     init() {
         setObserver()
@@ -28,9 +28,9 @@ final class SignInViewModel: SignInViewModelProtocol {
         useCase.requestCode { [weak self] result in
             switch result {
             case let .success(url):
-                self?.buttonAction?(url)
+                self?.buttonAction.value = url
             case let .failure(error):
-                self?.errorAction?(error.localizedDescription)
+                self?.errorAction.value = error.localizedDescription
             }
         }
     }
@@ -40,11 +40,11 @@ final class SignInViewModel: SignInViewModelProtocol {
 private extension SignInViewModel {
     func setObserver() {
         NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didGetSignInError, object: nil, queue: nil) { [weak self] notification in
-            self?.errorAction?(notification.description)
+            self?.errorAction.value = notification.description
             }
 
         NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didSignIn, object: nil, queue: nil) { [weak self] _ in
-            self?.presentAction?()
+            self?.presentAction.notifyObservers()
         }
     }
 }
