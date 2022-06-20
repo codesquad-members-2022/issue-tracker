@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol SignInManagable {
+    func requestCode(completion: @escaping (Result<URL, Error>) -> Void)
+    func requestJWTToken(codeURL: URL, completion: @escaping (Result<[String: String], NetworkError>) -> Void)
+}
+
 struct SignInManager {
     private let clientID = Bundle.main.clientID
     private let clientSecret = Bundle.main.clientSecret
@@ -15,7 +20,10 @@ struct SignInManager {
     init(urlSession: URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
+}
 
+//MARK: - SignInManagable Method
+extension SignInManager: SignInManagable {
     func requestCode(completion: @escaping (Result<URL, Error>) -> Void) {
         let networkTarget = SignInNetworkTarget.requestCode(clientID: clientID)
         var components = URLComponents(string: networkTarget.url) ?? URLComponents()
