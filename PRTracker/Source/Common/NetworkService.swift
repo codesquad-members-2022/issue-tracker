@@ -33,4 +33,5 @@ struct NetworkManger: NetworkService {
             completion(decoded)
         }.resume()
     }
+    
 }
