@@ -17,4 +17,8 @@ class StubURLSession: URLSessionProtocol {
     func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         return SignInStubURLSessionDataTask(dummy: dummyData, completionHandler: completionHandler)
     }
+
+    func dataTask(with urlRequest: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        return SignInStubURLSessionDataTask(dummy: dummyData, completionHandler: completionHandler)
+    }
 }
