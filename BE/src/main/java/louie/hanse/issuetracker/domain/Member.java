@@ -23,4 +23,8 @@ public class Member {
         this.socialId = socialId;
         this.avatarImageUrl = avatarImageUrl;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

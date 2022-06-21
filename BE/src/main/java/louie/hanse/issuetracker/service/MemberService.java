@@ -15,11 +15,15 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void login(GithubUser githubUser) {
-        boolean existsBySocialId = memberRepository.existsBySocialId(githubUser.getLogin());
-        if (!existsBySocialId) {
-            Member member = new Member(githubUser.getLogin(), githubUser.getAvatarUrl());
+    public Long login(GithubUser githubUser) {
+        //            TODO 커스텀 예외 추가하기
+        Member member = memberRepository.findBySocialId(githubUser.getLogin())
+            .orElse(null);
+
+        if (member == null) {
+            member = new Member(githubUser.getLogin(), githubUser.getAvatarUrl());
             memberRepository.save(member);
         }
+        return member.getId();
     }
 }

@@ -2,6 +2,7 @@ package louie.hanse.issuetracker.domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -11,11 +12,11 @@ public class IssueLabel {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn
     private Issue issue;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn
-    private Label Label;
+    private Label label;
 }
