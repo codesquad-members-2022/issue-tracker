@@ -7,7 +7,7 @@ import louie.hanse.issuetracker.jwt.JwtProvider;
 import louie.hanse.issuetracker.oauth.GithubAccessToken;
 import louie.hanse.issuetracker.oauth.GithubUser;
 import louie.hanse.issuetracker.oauth.OAuthProperties;
-import louie.hanse.issuetracker.oauth.OAuthService;
+import louie.hanse.issuetracker.service.OAuthService;
 import louie.hanse.issuetracker.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
