@@ -17,8 +17,8 @@ export interface PanelMenuItemProps {
 
 export interface PanelProps {
   width: number;
-  position: "left" | "right";
-  mg?: string;
+  position: string;
+  top?: number;
   menuList: MenuList;
   type?: "checkbox" | "list";
   isOpen?: boolean;
@@ -27,7 +27,7 @@ export interface PanelProps {
 
 export interface StyledPanelProps {
   width: number;
-  position: "left" | "right";
+  position: string;
   isOpen: boolean;
-  mg: string;
+  top: number;
 }

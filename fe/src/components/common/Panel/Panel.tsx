@@ -5,9 +5,9 @@ import { panelStyle as style } from "constants/dropDownMenuStyle";
 import { PanelProps, StyledPanelProps } from "./PanelInterface";
 import PanelMenuItem from "./PanelMenuItem";
 
-function Panel({ width, position, mg = `0`, menuList, type = "list", isOpen = false, onClick }: PanelProps) {
+function Panel({ width, position, top = 0, menuList, type = "list", isOpen = false, onClick }: PanelProps) {
   return (
-    <StyledPanel width={width} isOpen={isOpen} position={position} mg={mg}>
+    <StyledPanel width={width} isOpen={isOpen} position={position} top={top}>
       <PanelMenuTitle>{menuList.title}</PanelMenuTitle>
       {menuList.items.map(({ text, thumbnail }) => (
         <PanelMenuItem key={text} type={type} text={text} thumbnail={thumbnail} onClick={onClick} />
@@ -17,14 +17,14 @@ function Panel({ width, position, mg = `0`, menuList, type = "list", isOpen = fa
 }
 
 const StyledPanel = styled.ul<StyledPanelProps>`
-  ${({ theme: { fontSize, fontWeight, colors }, width, position, mg, isOpen }) => {
+  ${({ theme: { fontSize, fontWeight, colors }, width, position, top, isOpen }) => {
     const defaultStyle = style.default;
 
     return css`
       position: absolute;
       display: ${isOpen ? "block" : "none"};
       ${position === "left" ? `left: 0` : `right: 0`};
-      margin: ${mg};
+      top: ${top}px;
       width: ${width}px;
       background-color: ${colors[defaultStyle.bgColor]};
       color: ${colors[defaultStyle.fontColor]};

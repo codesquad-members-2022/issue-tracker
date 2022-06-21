@@ -26,7 +26,7 @@ export const panelStyle = {
 
 export interface DropDownStyle {
   indicator: { width: number; height: number; gap: number };
-  panel: { width: number; position: "left" | "right"; mg?: string };
+  panel: { width: number; position: "left" | "right"; top: number };
 }
 
 export const DropDownDefaultStyle: DropDownStyle = {
@@ -38,6 +38,6 @@ export const DropDownDefaultStyle: DropDownStyle = {
   panel: {
     width: 240,
     position: "left",
-    mg: "10px 0 0 0",
+    top: 30,
   },
 };
