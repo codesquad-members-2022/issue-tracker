@@ -17,7 +17,7 @@ module.exports = {
     fileLoaderRule.exclude = /\.svg$/;
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack']
+      use: ['@svgr/webpack', 'url-loader']
     });
     config.resolve.modules = [path.resolve(__dirname, '..'), 'node_modules', 'styles'];
     config.resolve.alias = {
