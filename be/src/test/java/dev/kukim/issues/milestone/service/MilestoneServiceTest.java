@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import dev.kukim.issues.MysqlTestContainer;
 import dev.kukim.issues.common.exception.InvalidSearchRequestParamException;
+import dev.kukim.issues.milestone.controller.request.MilestoneCreateRequest;
+import dev.kukim.issues.milestone.controller.response.MileStoneResponse;
 import dev.kukim.issues.milestone.controller.response.MilestoneListResponse;
 import dev.kukim.issues.milestone.domain.Milestone;
 import dev.kukim.issues.milestone.domain.repository.MileStoneRepository;
@@ -26,11 +28,13 @@ class MilestoneServiceTest extends MysqlTestContainer {
 	MileStoneRepository mileStoneRepository;
 
 	Milestone milestone;
+	MilestoneCreateRequest milestoneCreateRequest;
 
 	@BeforeEach
 	void initObject() {
 		// 테스트 마일스톤 객체 준비
 		this.milestone = Milestone.of("마일스톤1", "description1", LocalDate.now(), true);
+		this.milestoneCreateRequest = MilestoneCreateRequest.of("마일스톤 요청1", "description1", LocalDate.now());
 	}
 
 	@BeforeEach
@@ -62,7 +66,7 @@ class MilestoneServiceTest extends MysqlTestContainer {
 
 		MilestoneListResponse milestoneListResponse = milestoneService.findAllBy("close");
 
-		assertThat(milestoneListResponse.getMilestones()).hasSize(0);
+		assertThat(milestoneListResponse.getMilestones()).isEmpty();
 	}
 
 	@Test
@@ -71,5 +75,13 @@ class MilestoneServiceTest extends MysqlTestContainer {
 			.isInstanceOf(InvalidSearchRequestParamException.class);
 	}
 
+	@Test
+	void 만약_마일스톤생성_요청이들어온다면_마일스톤을_생성하고_저장한_마일스톤을_리턴한다() {
+		milestoneCreateRequest.setTitle("마일스톤 저장 요청1");
+		milestoneCreateRequest.setDescription("내용 1");
 
+		MileStoneResponse mileStoneResponse = milestoneService.save(milestoneCreateRequest);
+
+		assertThat(mileStoneResponse.getTitle()).isEqualTo("마일스톤 저장 요청1");
+	}
 }
