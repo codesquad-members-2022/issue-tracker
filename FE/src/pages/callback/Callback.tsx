@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import qs from 'qs';
@@ -13,7 +13,7 @@ import LoginError from '@components/loginCallback/LoginError';
 
 const authFetcher = async () => {
   const response = await fetch(
-    `https://test-234b2-default-rtdb.firebaseio.com/.`,
+    `https://test-234b2-default-rtdb.firebaseio.com/.json`,
   );
   if (!response.ok) {
     throw new Error('response not ok');
