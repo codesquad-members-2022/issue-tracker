@@ -12,6 +12,7 @@ class PullListTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var projectName: UILabel!
+    @IBOutlet weak var milestone: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,5 +22,6 @@ class PullListTableViewCell: UITableViewCell {
         title.text = model.title.value
         content.text = model.content.value
         projectName.text = model.projectName.value
+        milestone.text = model.labelList.value?.first?.name.value
     }
 }
