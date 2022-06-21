@@ -53,6 +53,10 @@
     <style name="Body2.white" >
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="Body2.grey" >
+        <item name="android:textColor">@color/label2</item>
+    </style>
     
     <style name="ToolbarTheme" parent="Theme.MaterialComponents.NoActionBar" >
         <item name="android:tint">@color/white</item>

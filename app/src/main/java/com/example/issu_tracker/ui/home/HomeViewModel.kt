@@ -36,7 +36,6 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         repository.deleteIssue(itemId)
         getIssueList()
     }
-}
 
     fun filterIssueList(condition: FilterCondition) {
         val filteredIssueList = _issueList.value
@@ -52,7 +51,8 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                 } else {
                     true
                 }
-            }.filter {
+            }
+            .filter {
                 it.label.any { label ->
                     if (condition.label.isNotEmpty()) {
                         label.content == condition.label

@@ -1,8 +1,6 @@
 package com.example.issu_tracker.data
 import java.lang.Exception
 
-data class Label(val color: String = "", val content: String = "")
-
 data class IssueDto(
     var id: String = "",
     val commets: List<Comment> = listOf(),

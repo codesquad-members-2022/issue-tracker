@@ -79,7 +79,7 @@ class FilterFragment : Fragment() {
 
     private suspend fun setMileStoneSpinner() {
         viewModel.mileStoneStateFlow.collect {
-            setSpinner(binding.cbFilterMileStone.spinner, it, FILTER_TYPE_MILESTONE_CONDITION)
+            setSpinner(binding.cbFilterMilestone.spinner, it, FILTER_TYPE_MILESTONE_CONDITION)
         }
     }
 
@@ -100,7 +100,7 @@ class FilterFragment : Fragment() {
             binding.cbFilterState.spinner.setSelection(viewModel.stateStateFlow.value.size - SPINNER_DEFAULT_INDEX)
             binding.cbFilterWriter.spinner.setSelection(viewModel.writerStateFlow.value.size - SPINNER_DEFAULT_INDEX)
             binding.cbFilterLabel.spinner.setSelection(viewModel.labelStateFlow.value.size - SPINNER_DEFAULT_INDEX)
-            binding.cbFilterMileStone.spinner.setSelection(viewModel.mileStoneStateFlow.value.size - SPINNER_DEFAULT_INDEX)
+            binding.cbFilterMilestone.spinner.setSelection(viewModel.mileStoneStateFlow.value.size - SPINNER_DEFAULT_INDEX)
             true
         }
     }

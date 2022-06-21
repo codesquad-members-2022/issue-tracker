@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.issu_tracker"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -74,4 +74,7 @@ dependencies {
     testImplementation 'androidx.test.ext:junit:1.1.2'
     testImplementation "org.robolectric:robolectric:4.4"
 
+    // Markwon (display markdown)
+    implementation "io.noties.markwon:core:$markwon_version"
+    implementation "io.noties.markwon:editor:$markwon_version"
 }

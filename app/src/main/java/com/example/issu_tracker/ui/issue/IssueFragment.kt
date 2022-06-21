@@ -11,7 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
@@ -26,23 +28,35 @@ import kotlinx.coroutines.launch
 class IssueFragment : Fragment() {
     private lateinit var binding: FragmentIssueBinding
     private lateinit var issueAdapter: IssueAdapter
+    private lateinit var navController: NavController
     private val homeViewModel: HomeViewModel by activityViewModels<HomeViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(binding.root)
+
+        saveFilterConditionFromFilterFragment()
+        settingRecyclerview()
+        updateRecyclerview()
+        navigateFilterScreen()
+        navigateIssueEditor()
+    }
+
+    private fun saveFilterConditionFromFilterFragment() {
         val conditions = arguments?.getParcelable<FilterCondition>("filterCondition")
         conditions?.let {
             homeViewModel.filterIssueList(conditions)
         }
-
-        settingRecyclerview()
-        updateRecyclerview()
-        navigateFilterScreen()
-        return binding.root
     }
+
 
     private fun updateRecyclerview() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -65,9 +79,9 @@ class IssueFragment : Fragment() {
         issueAdapter = IssueAdapter()
         issueAdapter.swipeDeleteListener = object : SwipeDeleteListener {
             override fun deleteItem(itemId: String) {
-              viewLifecycleOwner.lifecycleScope.launch {
-                  homeViewModel.deleteIssue(itemId)
-              }
+                viewLifecycleOwner.lifecycleScope.launch {
+                    homeViewModel.deleteIssue(itemId)
+                }
             }
         }
 
@@ -82,8 +96,13 @@ class IssueFragment : Fragment() {
 
     private fun navigateFilterScreen() {
         binding.ivIssueMenu.setOnClickListener {
-            val navController = Navigation.findNavController(binding.root)
             navController.navigate(R.id.action_issueFragment2_to_filterFragment)
+        }
+    }
+
+    private fun navigateIssueEditor() {
+        binding.fabIssueEdit.setOnClickListener {
+            navController.navigate(R.id.action_issueFragment2_to_issueEditor)
         }
     }
 }

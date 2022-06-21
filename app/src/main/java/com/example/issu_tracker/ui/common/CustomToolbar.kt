@@ -1,4 +1,4 @@
-package com.example.issu_tracker.ui.filter
+package com.example.issu_tracker.ui.common
 
 import android.content.Context
 import android.graphics.drawable.Drawable
