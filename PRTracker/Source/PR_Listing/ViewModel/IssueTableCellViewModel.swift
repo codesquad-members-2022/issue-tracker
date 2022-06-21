@@ -1,5 +1,5 @@
 //
-//  PullTableCellViewModel.swift
+//  IssueTableCellViewModel.swift
 //  PRTracker
 //
 //  Created by 안상희 on 2022/06/15.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PullTableCellViewModel {
+final class IssueTableCellViewModel {
     let title: Observable<String?> = Observable(nil)
     let content: Observable<String?> = Observable(nil)
     let projectName: Observable<String?> = Observable(nil)

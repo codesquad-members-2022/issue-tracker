@@ -8,7 +8,7 @@
 import Foundation
 
 final class MockDataService {
-    func getMockPullList(completion: ([Issue]?) -> Void) {
+    func getMockIssues(completion: ([Issue]?) -> Void) {
         let user1 = User(id: 0, name: "Eddy", userName: "EddySong", reposURL: "url~")
         let user2 = User(id: 1, name: "Selina", userName: "iOS-h", reposURL: "url!")
         let label1 = Label(id: 0, color: "Blue", name: "Documentation")

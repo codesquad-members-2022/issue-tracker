@@ -18,7 +18,7 @@ class PullListTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func configure(with viewModel: PullTableCellViewModel) {
+    func configure(with viewModel: IssueTableCellViewModel) {
         title.text = viewModel.title.value
         content.text = viewModel.content.value
         projectName.text = viewModel.projectName.value
