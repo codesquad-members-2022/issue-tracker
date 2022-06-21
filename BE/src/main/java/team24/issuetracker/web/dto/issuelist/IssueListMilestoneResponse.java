@@ -1,4 +1,4 @@
-package team24.issuetracker.web.dto;
+package team24.issuetracker.web.dto.issuelist;
 
 import lombok.Getter;
 import team24.issuetracker.domain.Milestone;

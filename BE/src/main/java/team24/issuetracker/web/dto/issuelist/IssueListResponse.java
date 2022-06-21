@@ -1,4 +1,4 @@
-package team24.issuetracker.web.dto;
+package team24.issuetracker.web.dto.issuelist;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,7 +8,6 @@ import lombok.Getter;
 import team24.issuetracker.domain.Issue;
 import team24.issuetracker.domain.IssueLabel;
 import team24.issuetracker.domain.IssueUser;
-import team24.issuetracker.domain.Milestone;
 
 @Getter
 public class IssueListResponse {

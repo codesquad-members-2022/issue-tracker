@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import team24.issuetracker.web.dto.IssueListResponse;
+import team24.issuetracker.web.dto.issuelist.IssueListResponse;
 import team24.issuetracker.web.service.IssueService;
 
 @RestController
