@@ -32,7 +32,20 @@ public class MemberRepository {
             .fetch();
     }
 
-    public Member findByGithubIdentity(String identity) {
+    public MemberDto findById(Long memberId) {
+        return queryFactory
+            .select(new QMemberDto(
+                member.id,
+                member.identity,
+                member.name,
+                member.profileUrl
+            ))
+            .from(member)
+            .where(member.id.eq(memberId))
+            .fetchOne();
+    }
+
+    public Member findByIdentity(String identity) {
         return queryFactory
             .selectFrom(member)
             .where(

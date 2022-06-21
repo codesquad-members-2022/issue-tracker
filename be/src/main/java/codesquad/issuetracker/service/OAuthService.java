@@ -78,7 +78,7 @@ public class OAuthService {
     }
 
     private Long saveMember(AuthMemberInformation authMemberInformation) {
-        Member member = memberRepository.findByGithubIdentity(authMemberInformation.getIdentity());
+        Member member = memberRepository.findByIdentity(authMemberInformation.getIdentity());
 
         if (member == null) {
             return memberRepository.save(authMemberInformation);

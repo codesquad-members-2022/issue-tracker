@@ -1,5 +1,6 @@
 package codesquad.issuetracker.service;
 
+import codesquad.issuetracker.dto.member.MemberDto;
 import codesquad.issuetracker.dto.member.MemberDtos;
 import codesquad.issuetracker.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,10 @@ public class MemberService {
 
     public MemberDtos getMembers() {
         return new MemberDtos(memberRepository.findAll());
+    }
+
+    public MemberDto getMemberById(Long memberId) {
+        return memberRepository.findById(memberId);
     }
 
 }
