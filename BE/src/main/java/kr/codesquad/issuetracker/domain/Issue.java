@@ -28,7 +28,7 @@ public class Issue {
     private String content;
 
     @OneToMany(mappedBy = "issue")
-    private List<IssueMembers> issueMembersList = new ArrayList<>();
+    private final List<IssueMembers> issueMembersList = new ArrayList<>();
 
     @ManyToOne(fetch = LAZY)
     private Member member;
