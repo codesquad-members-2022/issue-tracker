@@ -32,30 +32,25 @@ public class Issue {
     private String title;
     private String content;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     private User writer;
 
     @OneToMany(mappedBy = "issue")
-    @JsonManagedReference
-    private List<Assignee> assignees;
+    private List<IssueUser> assignees;
 
     @OneToMany(mappedBy = "issue")
     @JsonManagedReference
     private List<IssueLabel> issueLabels;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     private Milestone milestone;
     private boolean isClosed;
 
     @OneToMany(mappedBy = "issue")
-    @JsonManagedReference
     private List<Image> images;
     private LocalDateTime writtenTime;
 
     @OneToMany(mappedBy = "issue")
-    @JsonManagedReference
     private List<Comment> comments;
 
     private boolean isDeleted;

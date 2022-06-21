@@ -25,7 +25,6 @@ public class Image {
     private Long id;
     private String imagePath;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     private Issue issue;
 }
