@@ -24,16 +24,6 @@ class ViewController: UIViewController {
         viewModel.requestGithubLogin()
     }
     
-    @IBAction func appleLoginButtonTapped(_ sender: Any) {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.fullName, .email]
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        let loginManager = AppleLoginManager()
-        controller.delegate = loginManager
-        controller.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
-        controller.performRequests()
-    }
-    
     private let viewModel: LoginViewModel = LoginViewModel()
     
     override func viewDidLoad() {

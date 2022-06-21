@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1DE61695C83CB1A5484B159C /* Pods_PRTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F85B983D296BEA49342F0 /* Pods_PRTrackerTests.framework */; };
-		BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
-		BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5966285B70100012D18C /* AppleLoginManager.swift */; };
 		BC2F596A285C1AC10012D18C /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5969285C1AC10012D18C /* IssueManager.swift */; };
 		BC2F596F285C26D60012D18C /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManager.swift */; };
 		BC2F5970285C26D60012D18C /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManager.swift */; };
@@ -104,7 +102,6 @@
 		A6AE00453ECCCA10D6CD0525 /* Pods-PRTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B82F1307FAF9E5A90C63CAFE /* Pods-PRTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		BC2F5965285B6FBB0012D18C /* PRTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PRTracker.entitlements; sourceTree = "<group>"; };
-		BC2F5966285B70100012D18C /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		BC2F5969285C1AC10012D18C /* IssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueManager.swift; sourceTree = "<group>"; };
 		BC2F596E285C26D60012D18C /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BC2F5974285C2A660012D18C /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
@@ -315,7 +312,6 @@
 				BCF57C05285705130059E61D /* GitHubLoginManager.swift */,
 				BC2F5969285C1AC10012D18C /* IssueManager.swift */,
 				BC2F596E285C26D60012D18C /* UserManager.swift */,
-				BC2F5966285B70100012D18C /* AppleLoginManager.swift */,
 				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
 			);
 			path = Model;
@@ -582,7 +578,6 @@
 				D04099D22859C08B0008B517 /* PullListViewController.swift in Sources */,
 				D04099DE2859C9320008B517 /* PullTableCellViewModel.swift in Sources */,
 				BC2F598B286092EE0012D18C /* URLRequest+Extension.swift in Sources */,
-				BC2F5967285B70100012D18C /* AppleLoginManager.swift in Sources */,
 				D0E98D05285CE97D0051413E /* NetworkService.swift in Sources */,
 				D0E98D06285CE97D0051413E /* KeyChainService.swift in Sources */,
 				D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */,
@@ -614,7 +609,6 @@
 				D0E98CE9285C02800051413E /* PullListModel.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PullTableCellViewModel.swift in Sources */,
 				D0E98CD4285B088A0051413E /* PullListTableViewController.swift in Sources */,
-				BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Issue.swift in Sources */,
 				D0E98CEC285C107E0051413E /* PullListTableViewCell.swift in Sources */,
 				D0E98CE3285C01530051413E /* MockDataService.swift in Sources */,
