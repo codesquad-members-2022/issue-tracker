@@ -11,6 +11,12 @@ export const FlexCenterBox = styled.div<FlexCenterBoxProps>`
   gap: ${({ gap }) => gap}px;
 `;
 
+export const FlexBetweenBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 interface IconBoxProps {
   width: number;
   height: number;
