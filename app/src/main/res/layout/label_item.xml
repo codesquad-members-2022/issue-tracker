@@ -7,15 +7,26 @@
 
         <import type="android.graphics.Color" />
 
+        <import type="android.view.View" />
+
         <variable
             name="labelInfo"
-            type="com.example.it.issuetracker.data.dto.LabelDto" />
+            type="com.example.it.issuetracker.domain.model.Label" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/cb_edit"
+            android:layout_width="129dp"
+            android:layout_height="0dp"
+            android:checked="@{labelInfo.isChecked}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/label_title"
@@ -32,13 +43,13 @@
             android:paddingBottom="6dp"
             android:text="@{labelInfo.title}"
             android:textColor="@{Color.parseColor(labelInfo.textColor)}"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cb_edit"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Label"
             tools:textColor="@color/white" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -49,7 +60,7 @@
             android:text="@{labelInfo.description}"
             app:layout_constraintBottom_toTopOf="@id/line"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cb_edit"
             app:layout_constraintTop_toBottomOf="@id/label_title"
             tools:text="가나다라마바사아자차카타파하 치키차카초코초코초 치키차카초코초코초" />
 

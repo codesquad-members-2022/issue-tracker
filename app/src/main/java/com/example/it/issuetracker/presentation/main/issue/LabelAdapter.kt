@@ -30,7 +30,7 @@ class LabelAdapter : ListAdapter<Label, LabelAdapter.LabelViewHolder>(LabelDiffU
 
 class LabelDiffUtil : DiffUtil.ItemCallback<Label>() {
     override fun areItemsTheSame(oldItem: Label, newItem: Label): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Label, newItem: Label): Boolean {

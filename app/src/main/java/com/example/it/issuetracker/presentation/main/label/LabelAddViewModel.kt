@@ -3,6 +3,7 @@ package com.example.it.issuetracker.presentation.main.label
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.domain.model.Label
+import com.example.it.issuetracker.domain.model.toDto
 import com.example.it.issuetracker.domain.repository.LabelRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -49,7 +50,14 @@ class LabelAddViewModel(
         this.textColor.value = textColor
 
         viewModelScope.launch {
-            labelRepository.addLabel(Label(title, description, backgroundColor, textColor))
+            labelRepository.addLabel(title, description, backgroundColor, textColor)
+            _completeSaveLabel.value = true
+        }
+    }
+
+    fun editLabel(label: Label) {
+        viewModelScope.launch {
+            labelRepository.editLabel(label.toDto())
             _completeSaveLabel.value = true
         }
     }
@@ -59,5 +67,12 @@ class LabelAddViewModel(
         val contentColor = colorMap[color]
         backgroundColor.value = color
         textColor.value = contentColor ?: "#FFFFFFFF"
+    }
+
+    fun setData(label: Label) {
+        this.title.value = label.title
+        this.description.value = label.description
+        this.backgroundColor.value = label.color
+        this.textColor.value = label.textColor
     }
 }
