@@ -5,7 +5,12 @@ import kotlinx.coroutines.delay
 
 object LabelFakeDatabase {
 
-    val database = mutableListOf<LabelDto>()
+    val database = mutableListOf(
+        LabelDto(1, "feature", "Feature 1", "#B71C1C", "#FFFFFFFF"),
+        LabelDto(2, "documentation", "documentation 1", "#F57F17", "#FFFFFFFF"),
+        LabelDto(3, "bug", "bug 1", "#FFEE58", "#FF000000"),
+        LabelDto(4, "fix", "fix 1", "#0288D1", "#FF000000"),
+    )
 
     val size: Int
         get() = database.size
