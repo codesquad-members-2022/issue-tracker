@@ -1,5 +1,6 @@
 package com.example.issu_tracker.data
 
+import java.io.Serializable
 import java.lang.Exception
 
 data class IssueDto(
@@ -22,7 +23,7 @@ data class Issue(
     val state: Boolean,
     val title: String,
     val user: User,
-)
+) : Serializable
 
 fun IssueDto.toIssue(): Issue? {
     return try {

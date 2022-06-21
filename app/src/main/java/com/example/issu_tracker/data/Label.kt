@@ -1,3 +1,5 @@
 package com.example.issu_tracker.data
 
-data class Label(val color: String = "", val content: String = "")
+import java.io.Serializable
+
+data class Label(val color: String = "", val content: String = "") :Serializable

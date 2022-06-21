@@ -56,7 +56,7 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) 
             }
 
             binding.root.setOnClickListener {
-                Log.d("eventEvent", "click")
+              issueAdapterEventListener?.getIntoDetail(issue)
             }
 
             binding.cbIssueSelector.setOnCheckedChangeListener { _, isChecked ->

@@ -1,7 +1,7 @@
 package com.example.issu_tracker.ui.issue
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +16,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
-import com.example.issu_tracker.SwipeHelperCallback
+import com.example.issu_tracker.ui.common.SwipeHelperCallback
 import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.databinding.FragmentIssueBinding
+import com.example.issu_tracker.ui.DetailIssueActivity
 import com.example.issu_tracker.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -139,6 +140,12 @@ class IssueFragment : Fragment() {
             override fun deleteInCheckList(issue: Issue) {
                 issueViewModel.deleteSelectedIssue(issue)
             }
+
+            override fun getIntoDetail(issue: Issue) {
+                val intent = Intent(requireContext(), DetailIssueActivity::class.java)
+                intent.putExtra("issue", issue)
+                startActivity(intent)
+            }
         }
 
         binding.rvIssue.adapter = issueAdapter
@@ -164,4 +171,5 @@ interface IssueAdapterEventListener {
     fun switchToOriginMode()
     fun addInCheckList(issue: Issue)
     fun deleteInCheckList(issue: Issue)
+    fun getIntoDetail(issue: Issue)
 }
