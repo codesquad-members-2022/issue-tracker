@@ -57,7 +57,6 @@ const StyledDropDown = styled.div<StyledDropDownProps>`
       position: relative;
       width: ${width}px;
       height: ${height}px;
-      right: 0;
     `;
   }}
 `;
