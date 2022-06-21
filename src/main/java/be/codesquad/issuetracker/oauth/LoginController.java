@@ -22,8 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private static final int EXPIRED_SECOND = 24 * 60 * 60;
-
     private static final String CLIENT_ID = "ff50ff7342e90de02060";
     private static final String REDIRECT_URI = "https://github.com/login/oauth/authorize";
 
@@ -50,7 +48,8 @@ public class LoginController {
         TokenInformation token = githubOAuthClient.getToken(code);
         GithubUser githubUser = githubOAuthClient.getUser(token.getAccess_token());
         User user = loginService.upsertUser(githubUser);
-//        String accessToken = JwtFactory.create(user, EXPIRED_SECOND);
+        String jwtToken = JwtFactory.create(user);
+        log.debug("jwtToken: {}", jwtToken);
 //
 //        ResponseCookie cookie = ResponseCookie.from("access_token", accessToken)
 //            .maxAge(EXPIRED_SECOND)
