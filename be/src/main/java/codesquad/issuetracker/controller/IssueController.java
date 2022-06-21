@@ -1,7 +1,6 @@
 package codesquad.issuetracker.controller;
 
 import codesquad.issuetracker.dto.ResponseMessage;
-import codesquad.issuetracker.dto.issue.IssueCountDto;
 import codesquad.issuetracker.dto.issue.IssueDtos;
 import codesquad.issuetracker.dto.issue.IssueSearchCondition;
 import codesquad.issuetracker.dto.issue.IssueStatusUpdateForm;
@@ -23,11 +22,6 @@ public class IssueController {
     public IssueDtos issues(IssueSearchCondition condition) {
         return issueService.getIssuesByCriteria(condition);
     }
-
-    @GetMapping("/api/issues/count")
-    public IssueCountDto count() {
-        return issueService.getCountOfIssuesByStatus();
-     }
 
     @PatchMapping("/api/issues/status/update")
     public ResponseMessage update(@RequestBody IssueStatusUpdateForm updateForm) {

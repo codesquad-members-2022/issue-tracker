@@ -4,7 +4,6 @@ import codesquad.issuetracker.domain.Assignee;
 import codesquad.issuetracker.domain.Issue;
 import codesquad.issuetracker.domain.IssueLabel;
 import codesquad.issuetracker.domain.IssueStatus;
-import codesquad.issuetracker.dto.issue.IssueCountDto;
 import codesquad.issuetracker.dto.issue.IssueDto;
 import codesquad.issuetracker.dto.issue.IssueDtos;
 import codesquad.issuetracker.dto.issue.IssueSearchCondition;
@@ -26,8 +25,11 @@ public class IssueService {
 
     public IssueDtos getIssuesByCriteria(IssueSearchCondition condition) {
         List<Issue> issues = issueRepository.search(condition);
+        Map<IssueStatus, Long> countOfIssuesByStatus = issueRepository.findCountOfIssuesByStatus();
 
         return new IssueDtos(
+            countOfIssuesByStatus.getOrDefault(IssueStatus.OPEN, 0L),
+            countOfIssuesByStatus.getOrDefault(IssueStatus.CLOSED, 0L),
             issues.stream()
                 .map(issue -> IssueDto.of(issue,
                     issue.getMilestone(),
@@ -36,14 +38,6 @@ public class IssueService {
                     )
                 )
                 .collect(Collectors.toList())
-        );
-    }
-
-    public IssueCountDto getCountOfIssuesByStatus() {
-        Map<IssueStatus, Long> countOfIssuesByStatus = issueRepository.findCountOfIssuesByStatus();
-        return new IssueCountDto(
-            countOfIssuesByStatus.getOrDefault(IssueStatus.OPEN, 0L),
-            countOfIssuesByStatus.getOrDefault(IssueStatus.CLOSED, 0L)
         );
     }
 
