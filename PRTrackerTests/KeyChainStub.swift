@@ -26,3 +26,16 @@ struct KeyChainFailureStub: KeyChainService {
         return nil
     }
 }
+
+class KeyChainSaveStub: KeyChainService {
+    
+    private var saved = [(string: String, service: String, account: String)]()
+    
+    func save(_ string: String, service: String, account: String) {
+        saved.append((string, service, account))
+    }
+    
+    func load(service: String, account: String) -> String? {
+        return Secrets.accessToken
+    }
+}

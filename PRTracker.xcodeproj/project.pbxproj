@@ -28,6 +28,9 @@
 		BC2F5998286162F60012D18C /* dummyResponseIssues.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5996286162F60012D18C /* dummyResponseIssues.json */; };
 		BC2F599A286167E70012D18C /* DummyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5999286167E70012D18C /* DummyResponse.swift */; };
 		BC2F599B286167E70012D18C /* DummyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5999286167E70012D18C /* DummyResponse.swift */; };
+		BC2F599E286168450012D18C /* GithubLoginManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599C286168450012D18C /* GithubLoginManagerTests.swift */; };
+		BC2F59A028616A940012D18C /* UIApplicationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599F28616A940012D18C /* UIApplicationStub.swift */; };
+		BC2F59A128616A940012D18C /* UIApplicationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599F28616A940012D18C /* UIApplicationStub.swift */; };
 		BC97093B2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC97093C2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
@@ -117,6 +120,8 @@
 		BC2F5993286153AF0012D18C /* dummyResponseUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dummyResponseUser.json; sourceTree = "<group>"; };
 		BC2F5996286162F60012D18C /* dummyResponseIssues.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dummyResponseIssues.json; sourceTree = "<group>"; };
 		BC2F5999286167E70012D18C /* DummyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyResponse.swift; sourceTree = "<group>"; };
+		BC2F599C286168450012D18C /* GithubLoginManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManagerTests.swift; sourceTree = "<group>"; };
+		BC2F599F28616A940012D18C /* UIApplicationStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationStub.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -242,7 +247,9 @@
 			children = (
 				BC2F597D286065610012D18C /* UserManagerTests.swift */,
 				BC2F59852860759B0012D18C /* IssueManagerTests.swift */,
+				BC2F599C286168450012D18C /* GithubLoginManagerTests.swift */,
 				BC2F5981286075520012D18C /* KeyChainStub.swift */,
+				BC2F599F28616A940012D18C /* UIApplicationStub.swift */,
 				BC2F5999286167E70012D18C /* DummyResponse.swift */,
 				BC2F5990286098B70012D18C /* URLProtocolStub.swift */,
 			);
@@ -571,6 +578,7 @@
 				BC2F5975285C2A660012D18C /* Repo.swift in Sources */,
 				BCF57C0C285705220059E61D /* LoginView.swift in Sources */,
 				D04099DC2859C6930008B517 /* Observable.swift in Sources */,
+				BC2F59A028616A940012D18C /* UIApplicationStub.swift in Sources */,
 				D0E98CD3285B088A0051413E /* PullListTableViewController.swift in Sources */,
 				BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */,
 				BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */,
@@ -615,6 +623,8 @@
 				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
 				D04099E52859D9D00008B517 /* PullListViewController.swift in Sources */,
 				D0E98CE9285C02800051413E /* PullListModel.swift in Sources */,
+				BC2F59A128616A940012D18C /* UIApplicationStub.swift in Sources */,
+				BC2F599E286168450012D18C /* GithubLoginManagerTests.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PullTableCellViewModel.swift in Sources */,
 				D0E98CD4285B088A0051413E /* PullListTableViewController.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Issue.swift in Sources */,
