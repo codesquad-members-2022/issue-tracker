@@ -1,5 +1,6 @@
 package com.example.issu_tracker.ui.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.FilterCondition
@@ -32,16 +33,20 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     }
 
     suspend fun updateIssueSate(itemId: String, boolean: Boolean) {
-        repository.updateIssueState(itemId , boolean)
+        repository.updateIssueState(itemId, boolean)
         getIssueList()
     }
 
     suspend fun deleteIssueList(issueList: List<Issue>) {
-
+        repository.deleteIssueList(issueList)
+        getIssueList()
+        Log.d("updateDelte", issueList.toString())
     }
 
     suspend fun updateIssueList(issueList: List<Issue>, boolean: Boolean) {
-
+        repository.updateIssueListState(issueList, boolean)
+        getIssueList()
+        Log.d("updateDelte", issueList.toString())
     }
 
 

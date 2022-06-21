@@ -5,6 +5,10 @@ import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.data.IssueDto
 import com.example.issu_tracker.data.toIssue
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -36,16 +40,22 @@ class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFire
 
     }
 
-    override suspend fun updateIssueState(list: List<Issue>, boolean: Boolean) {
-        TODO("Not yet implemented")
+
+    override suspend fun deleteIssueList(list: List<Issue>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            for (i in list) {
+                fireStore.collection(FIREBASE_COLLECTION_PATH).document(i.id).delete()
+            }
+        }.join()
     }
 
-    override suspend fun deleteIssueList(itemId: String) {
-        TODO("Not yet implemented")
-    }
 
-    override suspend fun updateIssueList(list: List<Issue>, boolean: Boolean) {
-        TODO("Not yet implemented")
+    override suspend fun updateIssueListState(list: List<Issue>, boolean: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            for (i in list) {
+                fireStore.collection(FIREBASE_COLLECTION_PATH).document(i.id).update("state", false)
+            }
+        }.join()
     }
 
     companion object {

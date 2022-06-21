@@ -38,12 +38,11 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) 
         fun bind(issue: Issue) {
             if (isEditMode) {
                 binding.cbIssueSelector.visibility = View.VISIBLE
-                binding.cbIssueSelector.isChecked = (issue.isSelected)
+                binding.cbIssueSelector.isChecked = false
             } else {
                 binding.cbIssueSelector.visibility = View.GONE
             }
             binding.issue = issue
-            Log.d("eventEvent", isSwiped.toString())
 
             binding.tvDeleteClose.setOnClickListener {
                 if (isSwiped) {
@@ -84,6 +83,4 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil) 
 
         }
     }
-
-
 }

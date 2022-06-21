@@ -20,6 +20,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
                 android:id="@+id/cl_issue_original_mode_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/issue_tracker_blue"
 
-                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton

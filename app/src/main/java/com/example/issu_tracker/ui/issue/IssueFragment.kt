@@ -56,11 +56,29 @@ class IssueFragment : Fragment() {
             binding.clIssueEditModeTop.visibility = View.GONE
             // + 전체 선택해제 구현
             issueAdapter.notifyDataSetChanged()
+            issueViewModel.clearSelectedList()
         }
 
-        // 선택요소 닫기
+        // 선택요소 수정
+        binding.ibIssueClose.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    homeViewModel.updateIssueList(issueViewModel.selectedIssueList.value, false)
+                    issueViewModel.clearSelectedList()
+                }
+            }
+        }
 
         // 선택요소 삭제
+        binding.ibIssueDelete.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    homeViewModel.deleteIssueList(issueViewModel.selectedIssueList.value)
+                    issueViewModel.clearSelectedList()
+                }
+            }
+        }
+
     }
 
     private fun updateRecyclerview() {

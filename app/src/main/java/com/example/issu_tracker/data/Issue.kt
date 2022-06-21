@@ -22,7 +22,6 @@ data class Issue(
     val state: Boolean,
     val title: String,
     val user: User,
-    var isSelected: Boolean = false
 )
 
 fun IssueDto.toIssue(): Issue? {

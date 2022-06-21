@@ -12,14 +12,18 @@ class IssueViewModel : ViewModel() {
     val selectedIssueList: StateFlow<List<Issue>> = _selectedIssueList
 
 
-     fun addSelectedIssue(issue: Issue) {
+    fun addSelectedIssue(issue: Issue) {
         _selectedIssueList.value.add(issue)
 
-         Log.d("testforClose" , selectedIssueList.value.toString())
+        Log.d("testforClose", selectedIssueList.value.toString())
     }
 
-     fun deleteSelectedIssue(issue: Issue) {
+    fun deleteSelectedIssue(issue: Issue) {
         _selectedIssueList.value.remove(issue)
-         Log.d("testforClose" , selectedIssueList.value.toString())
+        Log.d("testforClose", selectedIssueList.value.toString())
+    }
+
+    fun clearSelectedList() {
+        _selectedIssueList.value.clear()
     }
 }
