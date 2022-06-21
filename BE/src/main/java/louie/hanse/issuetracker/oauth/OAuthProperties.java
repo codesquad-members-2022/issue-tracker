@@ -1,30 +1,22 @@
 package louie.hanse.issuetracker.oauth;
 
-import lombok.ToString;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
-@ToString
 @ConstructorBinding
+@RequiredArgsConstructor
+@Getter
 @ConfigurationProperties(prefix = "oauth")
 public class OAuthProperties {
 
-    public final String clientId;
-    public final String callbackUrl;
-    public final String clientSecret;
-    public final String accessTokenApiUrl;
-    public final String accessScope;
-    public final String loginFormUrl;
-    public final String userApiUrl;
+    private final String clientId;
+    private final String callbackUrl;
+    private final String clientSecret;
+    private final String accessTokenApiUrl;
+    private final String accessScope;
+    private final String loginFormUrl;
+    private final String userApiUrl;
 
-    public OAuthProperties(String clientId, String callbackUrl, String clientSecret,
-        String accessTokenApiUrl, String accessScope, String loginFormUrl, String userApiUrl) {
-        this.clientId = clientId;
-        this.callbackUrl = callbackUrl;
-        this.clientSecret = clientSecret;
-        this.accessTokenApiUrl = accessTokenApiUrl;
-        this.accessScope = accessScope;
-        this.loginFormUrl = loginFormUrl;
-        this.userApiUrl = userApiUrl;
-    }
 }
