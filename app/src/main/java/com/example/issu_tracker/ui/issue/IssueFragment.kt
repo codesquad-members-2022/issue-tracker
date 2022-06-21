@@ -1,6 +1,7 @@
 package com.example.issu_tracker.ui.issue
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,18 @@ class IssueFragment : Fragment() {
         updateRecyclerview()
         navigateFilterScreen()
         listenEditModeEvent()
+        setSelectedIssueCount()
         return binding.root
+    }
+
+    private fun setSelectedIssueCount() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                issueViewModel.selectedIssueList.collect {
+                    binding.tvIssueSelectedCount.text = it.size.toString()
+                }
+            }
+        }
     }
 
     private fun listenEditModeEvent() {
@@ -54,7 +66,6 @@ class IssueFragment : Fragment() {
             issueAdapter.isEditMode = false
             binding.clIssueOriginalModeTop.visibility = View.VISIBLE
             binding.clIssueEditModeTop.visibility = View.GONE
-            // + 전체 선택해제 구현
             issueAdapter.notifyDataSetChanged()
             issueViewModel.clearSelectedList()
         }

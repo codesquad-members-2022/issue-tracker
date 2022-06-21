@@ -8,22 +8,24 @@ import kotlinx.coroutines.flow.StateFlow
 
 class IssueViewModel : ViewModel() {
 
-    private val _selectedIssueList = MutableStateFlow<MutableList<Issue>>(mutableListOf())
+    private val _selectedIssueList = MutableStateFlow<List<Issue>>(mutableListOf())
     val selectedIssueList: StateFlow<List<Issue>> = _selectedIssueList
 
-
     fun addSelectedIssue(issue: Issue) {
-        _selectedIssueList.value.add(issue)
-
-        Log.d("testforClose", selectedIssueList.value.toString())
+        val newList = _selectedIssueList.value.toMutableList()
+        newList.add(issue)
+        _selectedIssueList.value = newList
     }
 
     fun deleteSelectedIssue(issue: Issue) {
-        _selectedIssueList.value.remove(issue)
-        Log.d("testforClose", selectedIssueList.value.toString())
+        val newList = _selectedIssueList.value.toMutableList()
+        newList.remove(issue)
+        _selectedIssueList.value = newList
     }
 
     fun clearSelectedList() {
-        _selectedIssueList.value.clear()
+        val newList = _selectedIssueList.value.toMutableList()
+        newList.clear()
+        _selectedIssueList.value = newList
     }
 }

@@ -20,7 +20,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:visibility="gone"
                 android:id="@+id/cl_issue_original_mode_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,13 +61,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/issue_tracker_blue"
+                android:padding="15dp"
+                android:visibility="gone"
 
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
                     android:id="@+id/ib_edit_close"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:background="@drawable/ic_clear"
                     android:backgroundTint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -80,18 +81,22 @@
                     style="@style/HeadLine6.26.bold"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
                     android:paddingLeft="10dp"
-                    android:text="@string/temp_string"
                     android:textColor="@color/white"
+                    app:layout_constraintEnd_toStartOf="@+id/ib_issue_delete"
                     app:layout_constraintStart_toEndOf="@+id/ib_edit_close"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
 
                 <ImageButton
                     android:id="@+id/ib_issue_delete"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/ic_baseline_restore_from_trash_24"
                     android:backgroundTint="@color/white"
+                    app:layout_constraintEnd_toStartOf="@+id/ib_issue_close"
                     app:layout_constraintStart_toEndOf="@+id/tv_issue_selected_count"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,8 +119,10 @@
             android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_top" />
+            app:layout_constraintTop_toBottomOf="@id/cl_top"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

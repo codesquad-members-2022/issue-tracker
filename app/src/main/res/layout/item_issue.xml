@@ -37,6 +37,7 @@
 
 
         <CheckBox
+            android:theme="@style/checkBoxStyle"
             android:id="@+id/cb_issue_selector"
             android:layout_width="0dp"
             android:layout_height="match_parent"
