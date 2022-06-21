@@ -12,9 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "members")
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +32,15 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Comment> commentList = new ArrayList<>();
+
+    @Builder
+    public Member(Long id, String name, String email, String githubId, String imageUrl, List<Issue> issueList, List<Comment> commentList) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.githubId = githubId;
+        this.imageUrl = imageUrl;
+        this.issueList = issueList;
+        this.commentList = commentList;
+    }
 }
