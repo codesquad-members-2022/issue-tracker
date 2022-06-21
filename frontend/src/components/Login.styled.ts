@@ -2,7 +2,7 @@ import { setBackgroundColor, flexLayoutMixin } from 'src/utils/utils';
 import styled from 'styled-components';
 
 type LoginBoxType = {
-  backgroundColor: string;
+  loginType: string;
 };
 
 export const FlexBox = styled.div`
@@ -24,7 +24,7 @@ export const Title = styled.div`
   font-size: 3.5rem;
   line-height: 72px;
   margin-bottom: 53px;
-  color: #14142b;
+  color: #cdd9e5;
 `;
 
 export const LoginBox = styled.button<LoginBoxType>`
@@ -33,11 +33,15 @@ export const LoginBox = styled.button<LoginBoxType>`
   height: 64px;
   font-size: 1.125rem;
   padding: 16px 24px;
-  ${({ backgroundColor }) => setBackgroundColor(backgroundColor)};
-  color: white;
+  ${({ loginType }) => setBackgroundColor(loginType === 'Github' ? '#14142b' : '#007aff')};
+  color: #cdd9e5;
   border-radius: 16px;
+  border: 0;
   cursor: pointer;
   margin: 8px 0;
+  &:hover {
+    ${({ loginType }) => setBackgroundColor(loginType === 'Github' ? '#212121' : '#004de3')};
+  }
 `;
 
 export const InputBox = styled.div`
@@ -58,7 +62,7 @@ export const InputBox = styled.div`
 `;
 
 export const SignUp = styled.div`
-  color: #4e4b66;
+  color: #cdd9e5;
   font-size: 0.75rem;
   cursor: pointer;
 `;
