@@ -1,8 +1,10 @@
 package dev.kukim.issues.milestone.service;
 
 import dev.kukim.issues.common.domain.Status;
+import dev.kukim.issues.milestone.controller.request.MilestoneCreateRequest;
 import dev.kukim.issues.milestone.controller.response.MileStoneResponse;
 import dev.kukim.issues.milestone.controller.response.MilestoneListResponse;
+import dev.kukim.issues.milestone.domain.Milestone;
 import dev.kukim.issues.milestone.domain.repository.MileStoneRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,5 +27,11 @@ public class MilestoneService {
 			.collect(Collectors.toList());
 
 		return MilestoneListResponse.of(mileStoneResponses);
+	}
+
+	public MileStoneResponse save(MilestoneCreateRequest milestoneCreateRequest) {
+		Milestone saveMilestone = mileStoneRepository.save(Milestone.of(milestoneCreateRequest));
+
+		return MileStoneResponse.createBy(saveMilestone);
 	}
 }

@@ -2,6 +2,7 @@ package dev.kukim.issues.milestone.domain;
 
 import dev.kukim.issues.common.domain.BaseTimeEntity;
 import dev.kukim.issues.issue.domain.Issue;
+import dev.kukim.issues.milestone.controller.request.MilestoneCreateRequest;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
@@ -40,5 +41,10 @@ public class Milestone extends BaseTimeEntity {
 
 	public static Milestone of(String title, String description, LocalDate dueDate, boolean isOpen) {
 		return new Milestone(title, description, dueDate, isOpen);
+	}
+
+	public static Milestone of(MilestoneCreateRequest milestoneCreateRequest) {
+		return new Milestone(milestoneCreateRequest.getTitle(), milestoneCreateRequest.getDescription(),
+			milestoneCreateRequest.getDueDate(), true);
 	}
 }
