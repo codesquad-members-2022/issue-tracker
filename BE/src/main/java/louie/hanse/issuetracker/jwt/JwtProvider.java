@@ -12,8 +12,8 @@ import static javax.management.timer.Timer.ONE_WEEK;
 
 @Component
 public class JwtProvider {
-    public final String issuer;
-    public final Algorithm algorithm;
+    private final String issuer;
+    private final Algorithm algorithm;
 
     public JwtProvider(JwtProperties jwtProperties) {
         this.issuer = jwtProperties.getIssuer();
@@ -30,9 +30,22 @@ public class JwtProvider {
         return createToken("refreshToken", memberId, expiresAt);
     }
 
+    public void verifyAccessToken(String accessToken) {
+        verifyToken(accessToken, "accessToken");
+    }
+
+    public void verifyRefreshToken(String refreshToken) {
+        verifyToken(refreshToken, "refreshToken");
+    }
+
+    public Long decodeMemberId(String token) {
+        return JWT.decode(token)
+                .getClaim("memberId")
+                .asLong();
+    }
+
     private String createToken(String subject, Long memberId, Date expiresAt) {
         Date issuedAt = Date.from(Instant.now());
-
         return JWT.create()
                 .withIssuer(issuer)
                 .withSubject(subject)
@@ -44,4 +57,13 @@ public class JwtProvider {
 
                 .sign(algorithm);
     }
+
+    private void verifyToken(String token, String subject) {
+        JWT.require(algorithm)
+                .withIssuer(issuer)
+                .withSubject(subject)
+                .build()
+                .verify(token);
+    }
+
 }

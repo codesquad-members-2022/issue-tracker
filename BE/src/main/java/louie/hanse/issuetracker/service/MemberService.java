@@ -16,7 +16,6 @@ public class MemberService {
 
     @Transactional
     public Long login(GithubUser githubUser) {
-        //            TODO 커스텀 예외 추가하기
         Member member = memberRepository.findBySocialId(githubUser.getLogin())
             .orElse(null);
 
@@ -25,5 +24,21 @@ public class MemberService {
             memberRepository.save(member);
         }
         return member.getId();
+    }
+
+    public String findRefreshTokenById(Long id) {
+        return findByIdOrThrow(id).getRefreshToken();
+    }
+
+    @Transactional
+    public void updateRefreshToken(String refreshToken, Long id) {
+        Member member = findByIdOrThrow(id);
+        member.changeRefreshToken(refreshToken);
+    }
+
+    private Member findByIdOrThrow(Long id) {
+//            TODO 커스텀 예외 추가하기
+        return memberRepository.findById(id)
+                .orElseThrow(IllegalStateException::new);
     }
 }
