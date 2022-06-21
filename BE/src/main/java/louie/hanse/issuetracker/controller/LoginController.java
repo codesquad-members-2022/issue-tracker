@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 
 @Slf4j
@@ -33,14 +34,16 @@ public class LoginController {
     }
 
     @GetMapping("/login/callback")
-    public void login(String code) {
+    public void login(String code, HttpServletResponse response) {
         GithubAccessToken githubAccessToken = oAuthService.getAccessToken(code);
         GithubUser githubUser = oAuthService.getUserInfo(githubAccessToken);
         Long memberId = memberService.login(githubUser);
 
         String accessToken = jwtProvider.createAccessToken(memberId);
-        log.info("accessToken {}", accessToken);
+        String refreshToken = jwtProvider.createRefreshToken(memberId);
 
+        response.setHeader("Access-Token", accessToken);
+        response.setHeader("Refresh-Token", refreshToken);
     }
 
 }

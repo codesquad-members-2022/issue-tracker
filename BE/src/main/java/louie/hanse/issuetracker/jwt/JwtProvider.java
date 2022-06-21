@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.Date;
 
 import static javax.management.timer.Timer.ONE_HOUR;
+import static javax.management.timer.Timer.ONE_WEEK;
 
 @Component
 public class JwtProvider {
@@ -19,13 +20,22 @@ public class JwtProvider {
         this.algorithm = Algorithm.HMAC256(jwtProperties.getSecretKey());
     }
 
-    public String createAccessToken(Long memberId){
-        Date issuedAt = Date.from(Instant.now());
+    public String createAccessToken(Long memberId) {
         Date expiresAt = Date.from(Instant.now().plusMillis(ONE_HOUR));
+        return createToken("accessToken", memberId, expiresAt);
+    }
+
+    public String createRefreshToken(Long memberId) {
+        Date expiresAt = Date.from(Instant.now().plusMillis(ONE_WEEK));
+        return createToken("refreshToken", memberId, expiresAt);
+    }
+
+    private String createToken(String subject, Long memberId, Date expiresAt) {
+        Date issuedAt = Date.from(Instant.now());
 
         return JWT.create()
                 .withIssuer(issuer)
-                .withSubject("accessToken")
+                .withSubject(subject)
                 .withAudience(memberId.toString())
                 .withIssuedAt(issuedAt)
                 .withExpiresAt(expiresAt)
