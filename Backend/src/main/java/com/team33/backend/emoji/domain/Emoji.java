@@ -45,4 +45,10 @@ public class Emoji {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public void registComment(Comment comment) {
+        if (comment != null) {
+            this.comment = comment;
+        }
+    }
 }

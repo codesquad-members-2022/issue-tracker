@@ -2,8 +2,8 @@ package com.team33.backend.issue.repository.query;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.team33.backend.issue.controller.dto.MilestoneCount;
-import com.team33.backend.issue.controller.dto.MilestoneResponse;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneCount;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneResponse;
 import com.team33.backend.issue.domain.QIssue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

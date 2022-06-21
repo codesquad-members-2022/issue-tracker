@@ -19,14 +19,14 @@ public class EmojiController {
     private final EmojiService emojiService;
 
     @GetMapping
-    public List<EmotionResponse> getEmotions(){
+    public List<EmotionResponse> getEmotions() {
         return emojiService.getEmotions().stream()
                 .map(EmotionResponse::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
     @GetMapping("/{id}")
-    public EmotionResponse getEmotionById(@PathVariable Long id){
+    public EmotionResponse getEmotionById(@PathVariable Long id) {
         return new EmotionResponse(emojiService.getEmotionById(id));
     }
 }

@@ -21,8 +21,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -50,17 +52,62 @@ public class Comment extends CommonEntity {
     @JoinColumn(name = "issue_id", nullable = false)
     private Issue issue;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
-    private List<Emoji> emojis = new ArrayList<>();
+    @OneToMany(mappedBy = "comment", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Set<Emoji> emojis = new HashSet<>();
 
-    public Comment(String content, List<Image> images, Member member, Issue issue) {
+    public Comment(String content, Member member, Issue issue) {
+        validateContent(content);
         this.content = content;
-        this.images = images;
+        validateMember(member);
         this.member = member;
+        validateIssue(issue);
         this.issue = issue;
     }
 
     protected Comment() {
+    }
+
+    private void validateContent(String content) {
+        if (content == null || content.isBlank()) {
+            throw new IllegalArgumentException("내용을 입력해주세요.");
+        }
+    }
+
+    private void validateMember(Member member) {
+        if (member == null) {
+            throw new IllegalArgumentException("회원정보가 존재하지 않습니다.");
+        }
+    }
+
+    private void validateIssue(Issue issue) {
+        if (issue == null) {
+            throw new IllegalArgumentException("이슈정보가 존재하지 않습니다.");
+        }
+    }
+
+    public void editComment(String content) {
+        validateContent(content);
+        this.content = content;
+    }
+
+    public void addImage(Image image) {
+        if (image != null) {
+            this.images.add(image);
+            image.addImageToComment(this);
+        }
+    }
+
+    public void addImages(List<Image> images) {
+        for (Image image : images) {
+            if (image != null) {
+                this.images.add(image);
+                image.addImageToComment(this);
+            }
+        }
+    }
+
+    public void deleteComment() {
+        deleted.isTrue();
     }
 
     @Override
@@ -74,13 +121,5 @@ public class Comment extends CommonEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    public void editComment(String content) {
-        this.content = content;
-    }
-
-    public void deleteComment() {
-        deleted.isTrue();
     }
 }

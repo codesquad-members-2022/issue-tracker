@@ -1,12 +1,12 @@
 package com.team33.backend.issue.controller;
 
-import com.team33.backend.issue.controller.dto.MilestomeEditRequest;
-import com.team33.backend.issue.controller.dto.MilestomeEditResponse;
-import com.team33.backend.issue.controller.dto.MilestoneCount;
-import com.team33.backend.issue.controller.dto.MilestoneCreateRequest;
-import com.team33.backend.issue.controller.dto.MilestoneCreateResponse;
-import com.team33.backend.issue.controller.dto.MilestoneDeleteResponse;
-import com.team33.backend.issue.controller.dto.MilestoneResponse;
+import com.team33.backend.issue.controller.dto.milestone.MilestomeEditRequest;
+import com.team33.backend.issue.controller.dto.milestone.MilestomeEditResponse;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneCount;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneCreateRequest;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneCreateResponse;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneDeleteResponse;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneResponse;
 import com.team33.backend.issue.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;

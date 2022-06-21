@@ -12,7 +12,9 @@ import com.team33.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -31,7 +33,7 @@ public class CommentService {
         Issue findIssue = issueRepository.findById(request.getIssueId()).orElseThrow();
 
         // 이미지는 일단 없다고 가정
-        Comment newComment = new Comment(request.getContent(), null, findMember, findIssue);
+        Comment newComment = new Comment(request.getContent(), findMember, findIssue);
         return commentRepository.save(newComment);
     }
 

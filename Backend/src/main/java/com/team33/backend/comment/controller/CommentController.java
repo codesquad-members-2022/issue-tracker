@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,13 +29,13 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    public CommentWriteResponse writeComment(HttpServletRequest servletRequest, @RequestBody CommentWriteRequest request) {
+    public CommentWriteResponse writeComment(HttpServletRequest servletRequest, @Valid @RequestBody CommentWriteRequest request) {
         String memberId = (String) servletRequest.getAttribute("memberId");
         return new CommentWriteResponse(commentService.writeComment(memberId, request));
     }
 
     @PutMapping("/{commentId}}")
-    public CommentEditResponse edieComment(@PathVariable Long commentId, @RequestBody CommentEditRequest request) {
+    public CommentEditResponse edieComment(@PathVariable Long commentId, @Valid @RequestBody CommentEditRequest request) {
         return new CommentEditResponse(commentService.editComment(commentId, request));
     }
 

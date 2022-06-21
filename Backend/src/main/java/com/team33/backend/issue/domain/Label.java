@@ -14,7 +14,8 @@ import java.util.Objects;
 @Getter
 public class Label {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 50)
@@ -28,6 +29,20 @@ public class Label {
     @NotBlank
     private String color;
 
+    public void editLabel(String name, String description, String color) {
+        this.name = name;
+        this.description = description;
+        validateColor(color);
+        this.color = color;
+    }
+
+    private void validateColor(String color) {
+        if (color != null && color.length() == 6) {
+            this.color = color;
+        }
+        throw new IllegalArgumentException("Label 색상을 선택해주세요.");
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,4 +55,5 @@ public class Label {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

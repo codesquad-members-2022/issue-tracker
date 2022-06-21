@@ -12,7 +12,8 @@ import java.util.Objects;
 @Getter
 public class Image {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 4096)
@@ -30,6 +31,12 @@ public class Image {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
     private Comment comment;
+
+    public void addImageToComment(Comment comment) {
+        if (comment != null) {
+            this.comment = comment;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
