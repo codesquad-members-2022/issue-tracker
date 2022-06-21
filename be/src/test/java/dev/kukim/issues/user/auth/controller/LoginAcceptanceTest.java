@@ -15,7 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-@DisplayName("LoginAcceptanceTest 클래스")
+@DisplayName("Login 인수테스트")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class LoginAcceptanceTest extends MysqlTestContainer {
 
