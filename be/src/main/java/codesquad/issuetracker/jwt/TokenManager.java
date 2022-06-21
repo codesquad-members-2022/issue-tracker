@@ -19,6 +19,13 @@ public class TokenManager {
         valueOperations.set(memberId, refreshToken, Duration.ofMinutes(2));
     }
 
+    public void validateDurationOfRefreshToken(String memberId) {
+        ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+        if (valueOperations.get(memberId) == null) {
+            throw new IllegalArgumentException("refresh 토큰의 만료기한이 지났습니다. 다시 로그인 해주세요.");
+        }
+    }
+
     public boolean validateLogInStatusOfAccessToken(String accessToken) {
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         return valueOperations.get(accessToken) != LOGOUT_FLAG;

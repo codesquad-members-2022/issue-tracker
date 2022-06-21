@@ -51,9 +51,7 @@ public class AuthController {
     @PostMapping("/api/access-token/reissue")
     public ResponseMessage reissue(HttpServletRequest request, HttpServletResponse response) {
         Token refreshToken = refreshTokenProvider.convertToObject(TokenUtils.getRefreshToken(request));
-        if (!refreshToken.validateExpirationOfToken()) {
-            throw new IllegalArgumentException("refresh 토큰의 만료기한이 지났습니다. 다시 로그인 해주세요.");
-        }
+        tokenManager.validateDurationOfRefreshToken(refreshToken.getMemberId());
         AccessToken renewedAccessToken = accessTokenProvider.createToken(refreshToken.getMemberId());
         response.addHeader("access-token", renewedAccessToken.getToken());
 
