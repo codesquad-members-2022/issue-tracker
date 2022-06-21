@@ -1,5 +1,5 @@
 //
-//  RepoManager.swift
+//  UserManger.swift
 //  PRTracker
 //
 //  Created by Bumgeun Song on 2022/06/17.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct RepoManager {
+struct UserManager {
+    
     
     let keyChainService: KeyChainService
     let networkService: NetworkService
@@ -18,20 +19,18 @@ struct RepoManager {
         self.networkService = networkService
     }
     
-    func getRepos(of user: User, then completion: @escaping ([Repo]?) -> Void) {
+    func getCurrentUser(then completion: @escaping (User?) -> Void) {
         guard let accessToken = keyChainService.load(service: "access-token", account: "github") else {
             Log.error("Access Token is not found")
             return completion(nil)
         }
         
-        guard let repoURLString = user.reposURL, let url = URL(string: repoURLString) else {
-            Log.error("User API URL is wrong")
+        guard let url = URL(string: BaseURL.user) else {
+            Log.error("Wrong Base URL: \(BaseURL.user)")
             return completion(nil)
         }
         
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
+        let request = URLRequest(url: url, with: accessToken)
         
         networkService.get(request: request, then: completion)
     }

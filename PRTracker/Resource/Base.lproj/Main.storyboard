@@ -159,9 +159,6 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Apple 계정으로 로그인"/>
-                                        <connections>
-                                            <action selector="appleLoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NXa-Kl-MG2"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -186,7 +183,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="appleLoginButton" destination="6nd-Or-d8H" id="KtI-4e-bd7"/>
                         <outlet property="githubLoginButton" destination="ze4-gF-XCp" id="v0Q-Sb-XDu"/>
                         <segue destination="sVA-oP-Vgq" kind="custom" identifier="loginSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="toQ-Cc-Ot1"/>
                     </connections>

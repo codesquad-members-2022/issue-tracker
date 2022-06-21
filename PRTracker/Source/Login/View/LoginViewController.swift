@@ -21,18 +21,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func githubLoginButtonTapped(_ sender: Any) {
-        // TODO: OAuthManager에게 인증 요청
         viewModel.requestGithubLogin()
-    }
-    
-    @IBAction func appleLoginButtonTapped(_ sender: Any) {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.fullName, .email]
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        let loginManager = AppleLoginManager()
-        controller.delegate = loginManager
-        controller.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
-        controller.performRequests()
     }
     
     private let viewModel: LoginViewModel = LoginViewModel()

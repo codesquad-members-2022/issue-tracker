@@ -1,5 +1,5 @@
 //
-//  UserManger.swift
+//  PullManager.swift
 //  PRTracker
 //
 //  Created by Bumgeun Song on 2022/06/17.
@@ -7,9 +7,8 @@
 
 import Foundation
 
-struct UserManager {
+struct IssueManager {
     
-    static let userURL = "https://api.github.com/user"
     let keyChainService: KeyChainService
     let networkService: NetworkService
     
@@ -19,21 +18,20 @@ struct UserManager {
         self.networkService = networkService
     }
     
-    func getCurrentUser(then completion: @escaping (User?) -> Void) {
+    func getIssues(then completion: @escaping ([Issue]?) -> Void) {
         guard let accessToken = keyChainService.load(service: "access-token", account: "github") else {
             Log.error("Access Token is not found")
             return completion(nil)
         }
         
-        guard let url = URL(string: Self.userURL) else {
-            Log.error("User API URL is wrong")
+        guard let url = URL(string: BaseURL.issues) else {
+            Log.error("Wrong Base URL: \(BaseURL.issues)")
             return completion(nil)
         }
         
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
+        let request = URLRequest(url: url, with: accessToken)
         
         networkService.get(request: request, then: completion)
     }
 }
+

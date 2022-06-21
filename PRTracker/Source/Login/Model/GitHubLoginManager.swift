@@ -19,11 +19,15 @@ struct GitHubLoginManager {
     
     let keyChainService: KeyChainService
     let networkService: NetworkService
+    let uiApplication: UIApplication
     
     init(keyChainService: KeyChainService = KeyChainManager(),
-         networkService: NetworkService = NetworkManger()) {
+         networkService: NetworkService = NetworkManger(),
+         uiApplication: UIApplication = UIApplication.shared
+    ) {
         self.keyChainService = keyChainService
         self.networkService = networkService
+        self.uiApplication = uiApplication
     }
     
     func requestAuthorization() {
@@ -33,7 +37,7 @@ struct GitHubLoginManager {
             URLQueryItem(name: "scope", value: GitHubLoginManager.requiredScope)
         ]
         guard let url = components.url else { return }
-        UIApplication.shared.open(url)
+        uiApplication.open(url)
     }
     
     func getAccessToken(with code: String) {

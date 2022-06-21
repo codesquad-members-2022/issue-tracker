@@ -11,7 +11,7 @@ class PullListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private let viewModel = PullListViewModel()
+    private let viewModel = IssueListViewModel()
     private var isSearchControllerConfigured = false
     
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ class PullListViewController: UIViewController {
     }
     
     private func configureBind() {
-        viewModel.pullViewModelList.bind { _ in
+        viewModel.issueViewModels.bind { _ in
             self.tableView.reloadData()
         }
     }
