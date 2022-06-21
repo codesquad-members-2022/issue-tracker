@@ -3,8 +3,8 @@ package kr.codesquad.issuetracker.auth;
 import io.jsonwebtoken.Claims;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import kr.codesquad.issuetracker.auth.exception.CustomException;
-import kr.codesquad.issuetracker.auth.exception.ErrorCode;
+import kr.codesquad.issuetracker.exception.CustomException;
+import kr.codesquad.issuetracker.exception.ErrorCode;
 import kr.codesquad.issuetracker.auth.jwt.JWTHandler;
 import kr.codesquad.issuetracker.core.user.User;
 import kr.codesquad.issuetracker.core.user.UserRepository;
@@ -23,11 +23,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     private static final String BEARER = "Bearer";
     private static final String USER_ID = "userId";
 
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
         Object handler) throws Exception {
-
         String userId = extractUserId(request);
         User user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
@@ -37,7 +35,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         return true;
     }
 
-    private String extractUserId(HttpServletRequest request)  {
+    private String extractUserId(HttpServletRequest request) {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         verifyHeader(authHeader);
 
