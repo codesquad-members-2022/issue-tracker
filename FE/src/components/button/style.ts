@@ -145,9 +145,6 @@ const mediumText = css`
   ${textColorStyle}
   ${textEventStyle}
   ${mediumFontStyle}
-  svg {
-    padding-right: 5px;
-  }
 `;
 
 const smallText = css`
@@ -205,13 +202,10 @@ const $Button = styled.button<I$ButtonType>`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: ${({ gap }) => (!gap ? '8px' : gap)};
   ${({ styleType = 'large', ...props }) => createCustomStyle(props, styleType)}
   ${({ hoverStyle, activeStyle, disabledStyle }) =>
-    createCustomEventStyle(hoverStyle, activeStyle, disabledStyle)}
+    createCustomEventStyle(hoverStyle, activeStyle, disabledStyle)};
 `;
 
-const $TextWrapper = styled.span`
-  padding-left: 4px;
-`;
-
-export { $Button, $TextWrapper };
+export { $Button };
