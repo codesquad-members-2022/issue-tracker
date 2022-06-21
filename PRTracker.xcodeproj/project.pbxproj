@@ -31,6 +31,8 @@
 		BC2F599E286168450012D18C /* GithubLoginManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599C286168450012D18C /* GithubLoginManagerTests.swift */; };
 		BC2F59A028616A940012D18C /* UIApplicationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599F28616A940012D18C /* UIApplicationStub.swift */; };
 		BC2F59A128616A940012D18C /* UIApplicationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599F28616A940012D18C /* UIApplicationStub.swift */; };
+		BC2F59A32861F2620012D18C /* BaseURLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A22861F2620012D18C /* BaseURLString.swift */; };
+		BC2F59A42861F3580012D18C /* BaseURLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A22861F2620012D18C /* BaseURLString.swift */; };
 		BC97093B2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC97093C2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
@@ -122,6 +124,7 @@
 		BC2F5999286167E70012D18C /* DummyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyResponse.swift; sourceTree = "<group>"; };
 		BC2F599C286168450012D18C /* GithubLoginManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManagerTests.swift; sourceTree = "<group>"; };
 		BC2F599F28616A940012D18C /* UIApplicationStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationStub.swift; sourceTree = "<group>"; };
+		BC2F59A22861F2620012D18C /* BaseURLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLString.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -207,6 +210,7 @@
 				D04099DB2859C6930008B517 /* Observable.swift */,
 				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
 				BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */,
+				BC2F59A22861F2620012D18C /* BaseURLString.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -598,6 +602,7 @@
 				D0E98D06285CE97D0051413E /* KeyChainService.swift in Sources */,
 				D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */,
 				BC2F596A285C1AC10012D18C /* IssueManager.swift in Sources */,
+				BC2F59A32861F2620012D18C /* BaseURLString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +641,7 @@
 				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57BFE285704F40059E61D /* PullListViewModel.swift in Sources */,
 				BC2F5992286098B70012D18C /* URLProtocolStub.swift in Sources */,
+				BC2F59A42861F3580012D18C /* BaseURLString.swift in Sources */,
 				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
 				D0E98D07285CEABA0051413E /* KeyChainService.swift in Sources */,
 				D0E98D08285CEAC00051413E /* NetworkService.swift in Sources */,

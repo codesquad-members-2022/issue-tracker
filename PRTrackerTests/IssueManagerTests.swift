@@ -26,9 +26,9 @@ class IssueManagerTests: XCTestCase {
     
     func test_IssueManager_should_return_Issue_when_token_is_stored() throws {
         // Given - keyChain에 token이 저장돼 있을 때
-        guard let userURL = URL(string: "https://api.github.com/user") else {
-            XCTFail("Failed to generate URL")
-            return
+        guard let url = URL(string: BaseURL.issues) else {
+            Log.error("Wrong Base URL: \(BaseURL.issues)")
+            return 
         }
         
         guard let dummyData = DummyResponse.issues.data else {
@@ -37,7 +37,7 @@ class IssueManagerTests: XCTestCase {
         }
         
         // URLSession에 dummy Reponse 주입
-        URLProtocolStub.testURLs = [userURL: dummyData]
+        URLProtocolStub.testURLs = [url: dummyData]
         
         // When - Issue 정보를 요청하면
         sut.getIssues { issues in

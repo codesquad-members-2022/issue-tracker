@@ -9,7 +9,7 @@ import Foundation
 
 struct UserManager {
     
-    static let userURL = "https://api.github.com/user"
+    
     let keyChainService: KeyChainService
     let networkService: NetworkService
     
@@ -25,8 +25,8 @@ struct UserManager {
             return completion(nil)
         }
         
-        guard let url = URL(string: Self.userURL) else {
-            Log.error("User API URL is wrong")
+        guard let url = URL(string: BaseURL.user) else {
+            Log.error("Wrong Base URL: \(BaseURL.user)")
             return completion(nil)
         }
         

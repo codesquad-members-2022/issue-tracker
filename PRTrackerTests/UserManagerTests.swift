@@ -25,8 +25,8 @@ class UserManagerTests: XCTestCase {
     
     func test_UserManager_should_return_User_when_token_is_stored() throws {
         // Given - keyChain에 token이 저장돼 있을 때
-        guard let userURL = URL(string: "https://api.github.com/user") else {
-            XCTFail("Failed to generate URL")
+        guard let url = URL(string: BaseURL.user) else {
+            Log.error("Wrong Base URL: \(BaseURL.user)")
             return
         }
         
@@ -36,7 +36,7 @@ class UserManagerTests: XCTestCase {
         }
         
         // URLSession에 dummy Reponse 주입
-        URLProtocolStub.testURLs = [userURL: dummyData]
+        URLProtocolStub.testURLs = [url: dummyData]
         
         // When - User 정보를 요청하면
         sut.getCurrentUser { user in

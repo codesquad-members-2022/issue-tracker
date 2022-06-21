@@ -12,8 +12,6 @@ struct IssueManager {
     let keyChainService: KeyChainService
     let networkService: NetworkService
     
-    static let issueURL = "https://api.github.com/issues"
-    
     init(keyChainService: KeyChainService = KeyChainManager(),
          networkService: NetworkService = NetworkManger()) {
         self.keyChainService = keyChainService
@@ -26,8 +24,8 @@ struct IssueManager {
             return completion(nil)
         }
         
-        guard let url = URL(string: Self.issueURL) else {
-            Log.error("User API URL is wrong")
+        guard let url = URL(string: BaseURL.issues) else {
+            Log.error("Wrong Base URL: \(BaseURL.issues)")
             return completion(nil)
         }
         
