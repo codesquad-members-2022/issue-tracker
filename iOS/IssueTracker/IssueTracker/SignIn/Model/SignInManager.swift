@@ -22,7 +22,7 @@ struct SignInManager {
     }
 }
 
-//MARK: - SignInManagable Method
+// MARK: - SignInManagable Method
 extension SignInManager: SignInManagable {
     func requestCode(completion: @escaping (Result<URL, Error>) -> Void) {
         let networkTarget = SignInNetworkTarget.requestCode(clientID: clientID)
@@ -36,8 +36,10 @@ extension SignInManager: SignInManagable {
     }
 
     func requestJWTToken(codeURL: URL, completion: @escaping (Result<[String: String], NetworkError>) -> Void) {
-        if codeURL.absoluteString.starts(with: "issuetrackerapp://"),
-           let code = codeURL.absoluteString.split(separator: "=").last.map({String($0)}) { 
+        if let code = URLComponents(string: codeURL.absoluteString)?
+            .queryItems?
+            .filter({ $0.name == "code" })
+            .first?.value {
             NetworkService<[String: String]>.fetchData(
                 target: SignInNetworkTarget.requestJWTTokenFromGitHub(code: code),
                 urlSession: urlSession,
