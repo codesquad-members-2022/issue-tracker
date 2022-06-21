@@ -20,10 +20,14 @@ public class MilestoneService {
 		List<Milestone> milestoneList = milestoneRepository.findAll();
 		List<MilestoneListResponse> milestoneListResponses = new ArrayList<>();
 		for (Milestone milestone : milestoneList) {
-			long totalIssue = milestone.getIssues().size();
-			long openedIssue = milestone.getIssues().stream().filter(issue -> !issue.isClosed()).count();
-			milestoneListResponses.add(new MilestoneListResponse(milestone, totalIssue, openedIssue));
+			long totalIssueCount = milestone.getIssues().size();
+			long openedIssueCount = countOpenedIssue(milestone);
+			milestoneListResponses.add(new MilestoneListResponse(milestone, totalIssueCount, openedIssueCount));
 		}
-		return  milestoneListResponses;
+		return milestoneListResponses;
+	}
+
+	private Long countOpenedIssue(Milestone milestone) {
+		return milestone.getIssues().stream().filter(issue -> !issue.isClosed()).count();
 	}
 }
