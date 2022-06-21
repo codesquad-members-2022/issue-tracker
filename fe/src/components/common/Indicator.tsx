@@ -28,13 +28,14 @@ function Indicator({ width, height, gap, text = "Text", onClick }: IndicatorProp
 }
 
 const StyledIndicator = styled(FlexCenterBox)<StyledIndicatorProps>`
-  ${({ theme: { fontSize, fontWeight, colors }, width, height }) => {
+  ${({ theme: { fontSize, fontWeight, colors }, width, height, gap }) => {
     const initialColor = style.color.initial;
     const hoverColor = style.color.hover;
 
     return css`
       width: ${width}px;
       height: ${height}px;
+      gap: ${gap}px;
       color: ${colors[initialColor]};
       font-size: ${fontSize[style.fontSize]};
       font-weight: ${fontWeight[style.fontWeight]};

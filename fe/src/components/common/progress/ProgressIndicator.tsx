@@ -23,7 +23,6 @@ const ProgressBar = styled.progress`
     const { bgColor, valueColor } = progressStyle.bar;
 
     return css`
-      top: 0;
       width: 100%;
       height: 8px;
       -webkit-appearance: none;
