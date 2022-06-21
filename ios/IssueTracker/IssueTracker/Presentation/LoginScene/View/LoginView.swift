@@ -8,7 +8,13 @@
 import SnapKit
 import UIKit
 
+protocol LoginViewDelegate: AnyObject {
+    func didClickGitHubLogin()
+}
+
 final class LoginView: UIView {
+    weak var delegate: LoginViewDelegate?
+
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -42,6 +48,7 @@ final class LoginView: UIView {
         super.init(frame: frame)
         backgroundColor = .graybg
         layout()
+        registerAction()
     }
 
     @available(*, unavailable)
@@ -70,5 +77,11 @@ final class LoginView: UIView {
             $0.leading.equalToSuperview().offset(50)
             $0.trailing.equalToSuperview().offset(-50)
         }
+    }
+
+    private func registerAction() {
+        githubLoginButton.addAction(.init(handler: { [weak self] _ in
+            self?.delegate?.didClickGitHubLogin()
+        }), for: .touchUpInside)
     }
 }

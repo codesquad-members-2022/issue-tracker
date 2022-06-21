@@ -25,7 +25,12 @@ final class LoginFlowCoordinator: Coordinator {
     }
 
     func start() {
-        let action = LoginViewModelAction(showMainScene: showMainTabBar)
+        let action = LoginViewModelAction(
+            showMainScene: showMainTabBar,
+            showGithubLoginScene: showGithubLogin,
+            showAppleLoginScene: showAppleLogin
+        )
+
         let viewController = dependency.makeLoginViewController(action: action)
         navigationController.viewControllers = [viewController]
     }
@@ -33,4 +38,16 @@ final class LoginFlowCoordinator: Coordinator {
     private func showMainTabBar() {
         // new flow start or push view controller
     }
+
+    private func showGithubLogin() {
+        guard let url = URL(string: "https://github.com/login/oauth/authorize?client_id=1f7a746c1d01cc6de0bf") else {
+            return
+        }
+
+        UIApplication.shared.open(url) { _ in
+            print("Trigger")
+        }
+    }
+
+    private func showAppleLogin() {}
 }

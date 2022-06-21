@@ -14,25 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: UISceneSession Lifecycle
-
     func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
         UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_: UIApplication, open url: URL, options _: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        if let scheme = url.scheme,
-           scheme.localizedCaseInsensitiveCompare("com.issueTracker") == .orderedSame,
-           let view = url.host
-        {
-            var parameters: [String: String] = [:]
-
-            URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
-                parameters[$0.name] = $0.value
-            }
-
-            //			redirect(to: view, with: parameters)
-        }
-
-        return true
     }
 }

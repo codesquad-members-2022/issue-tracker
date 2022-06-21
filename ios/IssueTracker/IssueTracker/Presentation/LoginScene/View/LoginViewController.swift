@@ -28,6 +28,7 @@ final class LoginViewController: UIViewController, View {
         view.backgroundColor = .systemBackground
         layout()
         bind()
+        loginView.delegate = self
     }
 
     deinit {
@@ -52,5 +53,11 @@ final class LoginViewController: UIViewController, View {
                 viewModel.showMainScene()
             }
         }
+    }
+}
+
+extension LoginViewController: LoginViewDelegate {
+    func didClickGitHubLogin() {
+        viewModel?.showLoginScene(type: .github)
     }
 }
