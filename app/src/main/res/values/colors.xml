@@ -11,6 +11,7 @@
     <color name="gray">#FFE5E5EA</color>
     <color name="light_gray">#BDBCBC</color>
     <color name="dark_gray">#87878D</color>
+    <color name="transparent_gray">#F2F2F7</color>
 
     <!-- label dark color -->
     <color name="dark_red">#B71C1C</color>

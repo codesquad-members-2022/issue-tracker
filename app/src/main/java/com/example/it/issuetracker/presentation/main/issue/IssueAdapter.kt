@@ -10,8 +10,7 @@ import com.example.it.issuetracker.databinding.ItemIssueBinding
 import com.example.it.issuetracker.domain.model.Issue
 
 class IssueAdapter(
-    private val editListener: () -> Unit,
-    private val defaultListener: () -> Unit,
+    private val toggle: () -> Unit,
 ) : ListAdapter<Issue, RecyclerView.ViewHolder>(IssueDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -19,12 +18,12 @@ class IssueAdapter(
             0 -> {
                 val binding =
                     ItemIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                IssueViewHolder(binding, editListener)
+                IssueViewHolder(binding, toggle)
             }
             else -> {
                 val binding =
                     ItemEditIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                IssueEditViewHolder(binding, defaultListener)
+                IssueEditViewHolder(binding, toggle)
             }
         }
     }
@@ -46,7 +45,7 @@ class IssueAdapter(
 
     class IssueViewHolder(
         private val binding: ItemIssueBinding,
-        private val editListener: () -> Unit,
+        private val toggle: () -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val adapter = LabelAdapter()
@@ -56,7 +55,7 @@ class IssueAdapter(
             binding.rvLabel.adapter = adapter
             adapter.submitList(issue.label)
             binding.container.setOnLongClickListener {
-                editListener()
+                toggle()
                 true
             }
         }
@@ -64,7 +63,7 @@ class IssueAdapter(
 
     class IssueEditViewHolder(
         private val binding: ItemEditIssueBinding,
-        private val defaultListener: () -> Unit,
+        private val toggle: () -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val adapter = LabelAdapter()
@@ -77,7 +76,7 @@ class IssueAdapter(
                 issue.isChecked = isChecked
             }
             binding.container.setOnLongClickListener {
-                defaultListener()
+                toggle()
                 true
             }
         }

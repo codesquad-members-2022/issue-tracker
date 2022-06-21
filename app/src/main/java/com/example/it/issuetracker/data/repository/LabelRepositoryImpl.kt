@@ -16,7 +16,7 @@ class LabelRepositoryImpl(
         title: String,
         description: String,
         backgroundColor: String,
-        textColor: String
+        textColor: String,
     ) {
         dataSource.addLabel(title, description, backgroundColor, textColor)
     }

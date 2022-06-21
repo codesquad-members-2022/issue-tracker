@@ -5,7 +5,7 @@ import kotlinx.coroutines.delay
 
 object LabelFakeDatabase {
 
-    private val database = mutableListOf<LabelDto>()
+    val database = mutableListOf<LabelDto>()
 
     val size: Int
         get() = database.size
@@ -24,8 +24,7 @@ object LabelFakeDatabase {
         delay(1000)
         val data = database.find { it.id == labelDto.id }
         val index = database.indexOf(data)
-        database.add(index, labelDto)
-        database.remove(data)
+        database[index] = labelDto
     }
 
     suspend fun delete(id: Int) {

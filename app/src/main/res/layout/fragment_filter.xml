@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.main.issue.filter.FilterFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_filter_issue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_exit">
+
+            <TextView
+                style="@style/Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="필터"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"
+                android:minWidth="50dp"
+                android:text="적용"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"
+                android:minWidth="50dp"
+                android:text="초기화"
+                android:textColor="@color/white" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.example.it.issuetracker.presentation.customview.CustomFilter
+            android:id="@+id/filter_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_filter_issue"
+            app:title="상태" />
+
+        <com.example.it.issuetracker.presentation.customview.CustomFilter
+            android:id="@+id/filter_writer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_state"
+            app:title="작성자" />
+
+        <com.example.it.issuetracker.presentation.customview.CustomFilter
+            android:id="@+id/filter_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_writer"
+            app:title="레이블" />
+
+        <com.example.it.issuetracker.presentation.customview.CustomFilter
+            android:id="@+id/filter_milestone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/filter_label"
+            app:title="마일스톤" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

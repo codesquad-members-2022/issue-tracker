@@ -3,7 +3,7 @@ package com.example.it.issuetracker.presentation.main.label
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.domain.model.Label
-import com.example.it.issuetracker.domain.model.toDto
+import com.example.it.issuetracker.domain.model.toLabelDto
 import com.example.it.issuetracker.domain.repository.LabelRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -57,7 +57,7 @@ class LabelAddViewModel(
 
     fun editLabel(label: Label) {
         viewModelScope.launch {
-            labelRepository.editLabel(label.toDto())
+            labelRepository.editLabel(label.toLabelDto())
             _completeSaveLabel.value = true
         }
     }

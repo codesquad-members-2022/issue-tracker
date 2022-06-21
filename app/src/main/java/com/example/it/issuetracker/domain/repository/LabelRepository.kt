@@ -11,7 +11,7 @@ interface LabelRepository {
         title: String,
         description: String,
         backgroundColor: String,
-        textColor: String
+        textColor: String,
     )
 
     suspend fun editLabel(labelDto: LabelDto)
