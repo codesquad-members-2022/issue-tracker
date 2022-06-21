@@ -31,19 +31,14 @@ class IssueViewController: UIViewController {
     private func createSearchController() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "Search"
-//        searchController.searchResultsUpdater = self
-    
+        searchController.automaticallyShowsCancelButton = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        
         self.navigationItem.title = "이슈"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.searchController = searchController
-    }
-    
-}
-
-extension IssueViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
     }
     
 }

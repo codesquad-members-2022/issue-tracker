@@ -16,6 +16,10 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         .init(id: 2, title: "제목", content: "이슈에 대한 설명", milestoneName: "마일스톤 이름", labels: [
             .init(title: "Bug", backgroundColor: "#20bb87"),
             .init(title: "iOS", backgroundColor: "#20bb87")
+        ]),
+        .init(id: 3, title: "제목", content: "이슈에 대한 설명", milestoneName: "마일스톤 이름", labels: [
+            .init(title: "Bug", backgroundColor: "#20bb87"),
+            .init(title: "iOS", backgroundColor: "#20bb87")
         ])
     ]
     
