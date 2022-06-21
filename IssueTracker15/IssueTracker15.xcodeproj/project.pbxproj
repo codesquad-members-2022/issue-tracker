@@ -66,6 +66,12 @@
 		8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D66A2ED28598CA1001B514C /* UseCaseContainer.swift */; };
 		8DDEBAE8285B382400A4E4DC /* OAuthLoginStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDEBAE7285B382400A4E4DC /* OAuthLoginStackView.swift */; };
 		8DDEBAEB285B57B000A4E4DC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */; };
+		8DF770B228619F9500C02D1F /* AppleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770B028619F9500C02D1F /* AppleLoginUseCase.swift */; };
+		8DF770B328619F9500C02D1F /* GithubLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770B128619F9500C02D1F /* GithubLoginUseCase.swift */; };
+		8DF770B62861A00100C02D1F /* OAuthLoginSource .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770B52861A00100C02D1F /* OAuthLoginSource .swift */; };
+		8DF770B82861A00F00C02D1F /* AccessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770B72861A00F00C02D1F /* AccessInfo.swift */; };
+		8DF770BC2861A26200C02D1F /* AppleLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770BA2861A26200C02D1F /* AppleLoginModel.swift */; };
+		8DF770BD2861A26200C02D1F /* GitHubLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770BB2861A26200C02D1F /* GitHubLoginModel.swift */; };
 		8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +160,12 @@
 		8D66A2ED28598CA1001B514C /* UseCaseContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseContainer.swift; sourceTree = "<group>"; };
 		8DDEBAE7285B382400A4E4DC /* OAuthLoginStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginStackView.swift; sourceTree = "<group>"; };
 		8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8DF770B028619F9500C02D1F /* AppleLoginUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleLoginUseCase.swift; sourceTree = "<group>"; };
+		8DF770B128619F9500C02D1F /* GithubLoginUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubLoginUseCase.swift; sourceTree = "<group>"; };
+		8DF770B52861A00100C02D1F /* OAuthLoginSource .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OAuthLoginSource .swift"; sourceTree = "<group>"; };
+		8DF770B72861A00F00C02D1F /* AccessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessInfo.swift; sourceTree = "<group>"; };
+		8DF770BA2861A26200C02D1F /* AppleLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleLoginModel.swift; sourceTree = "<group>"; };
+		8DF770BB2861A26200C02D1F /* GitHubLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubLoginModel.swift; sourceTree = "<group>"; };
 		8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerWrapper.swift; sourceTree = "<group>"; };
 		978ACBA6F4626FB73B12E9D4 /* Pods-IssueTracker15.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -425,8 +437,12 @@
 		8DDEBAE9285B3F0D00A4E4DC /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				8DF770B72861A00F00C02D1F /* AccessInfo.swift */,
+				8DF770B52861A00100C02D1F /* OAuthLoginSource .swift */,
 				8DDEBAEC285B59EF00A4E4DC /* ViewController */,
+				8DF770B92861A26200C02D1F /* Model */,
 				8DDEBAED285B59FA00A4E4DC /* View */,
+				8DF770B428619F9900C02D1F /* UseCase */,
 				8DDEBAEE285B5A0100A4E4DC /* ViewModel */,
 			);
 			path = Login;
@@ -456,6 +472,24 @@
 				8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8DF770B428619F9900C02D1F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				8DF770B028619F9500C02D1F /* AppleLoginUseCase.swift */,
+				8DF770B128619F9500C02D1F /* GithubLoginUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		8DF770B92861A26200C02D1F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DF770BA2861A26200C02D1F /* AppleLoginModel.swift */,
+				8DF770BB2861A26200C02D1F /* GitHubLoginModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AE925EF14FEC98BC13A2354E /* Frameworks */ = {
@@ -706,20 +740,24 @@
 				1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */,
 				1B1A818828608D8A003C135A /* LabelDTO.swift in Sources */,
 				1B17484A285885710028E037 /* LargeStringAdaptable.swift in Sources */,
+				8DF770B228619F9500C02D1F /* AppleLoginUseCase.swift in Sources */,
 				1B1A81A528617FB3003C135A /* IssueListFooterReusableView.swift in Sources */,
 				8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */,
 				8D21138E285ADFA700B65676 /* OAuthLoginButton.swift in Sources */,
 				1B17484D285885710028E037 /* BoldStringAdaptable.swift in Sources */,
+				8DF770B62861A00100C02D1F /* OAuthLoginSource .swift in Sources */,
 				1B1A818C28608E3A003C135A /* PullRequestDTO.swift in Sources */,
 				1B17484B285885710028E037 /* ViewTextBindable.swift in Sources */,
 				8DDEBAE8285B382400A4E4DC /* OAuthLoginStackView.swift in Sources */,
 				1B1A81A02860AABC003C135A /* IssueViewModel.swift in Sources */,
+				8DF770BC2861A26200C02D1F /* AppleLoginModel.swift in Sources */,
 				8D2113BA285B1C6700B65676 /* UIView.swift in Sources */,
 				1B1A81A3286160F5003C135A /* IssueListHeaderReusableView.swift in Sources */,
 				8D2113B8285B0D0500B65676 /* UserInfoInputStackView.swift in Sources */,
 				1B1A81952860A0F6003C135A /* IssueListCell.swift in Sources */,
 				1B17484E285885710028E037 /* TestLabel.swift in Sources */,
 				1B174837285885640028E037 /* IDChecker.swift in Sources */,
+				8DF770B82861A00F00C02D1F /* AccessInfo.swift in Sources */,
 				8D21138C285AC4F800B65676 /* LoginViewController.swift in Sources */,
 				1B1A818628608CEE003C135A /* UserDTO.swift in Sources */,
 				8DDEBAEB285B57B000A4E4DC /* LoginViewModel.swift in Sources */,
@@ -740,9 +778,11 @@
 				8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */,
 				1B87F70F285C221D002B47B7 /* Transferable.swift in Sources */,
 				1B174852285885710028E037 /* TestDecodableType.swift in Sources */,
+				8DF770BD2861A26200C02D1F /* GitHubLoginModel.swift in Sources */,
 				1B1A819C2860A814003C135A /* LabelNavigationController.swift in Sources */,
 				1B174823285885180028E037 /* SceneDelegate.swift in Sources */,
 				1B17484F285885710028E037 /* TestButton.swift in Sources */,
+				8DF770B328619F9500C02D1F /* GithubLoginUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

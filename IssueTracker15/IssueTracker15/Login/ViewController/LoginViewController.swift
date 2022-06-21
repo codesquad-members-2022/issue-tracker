@@ -11,8 +11,24 @@ import SnapKit
 final class LoginViewController: UIViewController, ViewBinding {
     
     private var vm: LoginViewModel?
-    private let userInfoInputStackView = UserInfoInputStackView()
-    private let oAuthLoginStackView = OAuthLoginStackView()
+    
+    private lazy var userInfoInputStackView: UserInfoInputStackView = {
+        let stackView = UserInfoInputStackView()
+        stackView.subviews.forEach {
+            guard let bindableView = $0 as? ViewBindable else { return }
+            bindableView.setVC(self)
+        }
+        return stackView
+    }()
+    
+    private lazy var oAuthLoginStackView: OAuthLoginStackView = {
+        let stackView = OAuthLoginStackView()
+        stackView.subviews.forEach {
+            guard let bindableView = $0 as? ViewBindable else { return }
+            bindableView.setVC(self)
+        }
+        return stackView
+    }()
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -21,11 +37,10 @@ final class LoginViewController: UIViewController, ViewBinding {
         return label
     }()
     
-    private lazy var loginButton: TestButton = {
-        let button = TestButton()
+    private lazy var loginButton: UIButton = {
+        let button = UIButton()
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(UIColor.systemBlue, for: .normal)
-        button.setVC(self)
         return button
     }()
     
@@ -38,10 +53,9 @@ final class LoginViewController: UIViewController, ViewBinding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = LoginViewModel { data, target in
-            if let data = data {
-                target.receive(data)
-            }
+        vm = LoginViewModel { loginUrl, _ in
+            guard let loginUrl = loginUrl as? URL else { return }
+            UIApplication.shared.open(loginUrl)
         }
         
         addViews()
