@@ -1,6 +1,10 @@
-package louie.hanse.issuetracker.oauth;
+package louie.hanse.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
+import louie.hanse.issuetracker.oauth.GithubAccessToken;
+import louie.hanse.issuetracker.oauth.GithubAccessTokenRequest;
+import louie.hanse.issuetracker.oauth.GithubUser;
+import louie.hanse.issuetracker.oauth.OAuthProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -22,10 +26,7 @@ public class OAuthService {
             .bodyValue(accessTokenRequest)
             .retrieve()
             .bodyToMono(GithubAccessToken.class)
-            .blockOptional()
-
-//            TODO 커스텀 예외 추가하기
-            .orElseThrow(IllegalStateException::new);
+            .block();
     }
 
     public GithubUser getUserInfo(GithubAccessToken githubAccessToken) {
@@ -35,9 +36,6 @@ public class OAuthService {
             .header(HttpHeaders.AUTHORIZATION, githubAccessToken.getAuthorizationValue())
             .retrieve()
             .bodyToMono(GithubUser.class)
-            .blockOptional()
-
-//            TODO 커스텀 예외 추가하기
-            .orElseThrow(IllegalStateException::new);
+            .block();
     }
 }

@@ -2,6 +2,7 @@ package louie.hanse.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
 import louie.hanse.issuetracker.domain.Member;
+import louie.hanse.issuetracker.exception.MemberNotFoundException;
 import louie.hanse.issuetracker.oauth.GithubUser;
 import louie.hanse.issuetracker.repository.MemberRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class MemberService {
     @Transactional
     public Long login(GithubUser githubUser) {
         Member member = memberRepository.findBySocialId(githubUser.getLogin())
-            .orElse(null);
+                .orElse(null);
 
         if (member == null) {
             member = new Member(githubUser.getLogin(), githubUser.getAvatarUrl());
@@ -37,8 +38,8 @@ public class MemberService {
     }
 
     private Member findByIdOrThrow(Long id) {
-//            TODO 커스텀 예외 추가하기
-        return memberRepository.findById(id)
-                .orElseThrow(IllegalStateException::new);
+        return memberRepository.findById(id).orElseThrow(() -> {
+                    throw new MemberNotFoundException("해당 id를 가진 회원이 존재하지 않습니다.");
+                });
     }
 }
