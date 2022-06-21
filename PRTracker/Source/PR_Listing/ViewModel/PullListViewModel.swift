@@ -23,18 +23,17 @@ final class PullListViewModel {
     func requestPullListData() {
         mockDataService.getMockPullList { pullListModels in
             guard let pulls = pullListModels else { return }
-            self.pullViewModelList.value = convertPullsToPullCellViewModel(pulls)
+            self.pullViewModelList.value = convertModelToViewModel(pulls)
         }
     }
     
-    private func convertPullsToPullCellViewModel(_ list: [Pull]) -> [PullTableCellViewModel] {
-        var tableCellViewModelLists = [PullTableCellViewModel]()
-        for pull in list {
+    private func convertModelToViewModel(_ list: [Pull]) -> [PullTableCellViewModel] {
+        let tableCellViewModelList = list.map { pull -> PullTableCellViewModel in
             let tableCellViewModel = PullTableCellViewModel()
             tableCellViewModel.configureCellData(with: pull)
-            tableCellViewModelLists.append(tableCellViewModel)
+            return tableCellViewModel
         }
-        return tableCellViewModelLists
+        return tableCellViewModelList
     }
     
     func getCellViewModel(index: Int) -> PullTableCellViewModel? {

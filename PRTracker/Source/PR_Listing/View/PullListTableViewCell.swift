@@ -18,10 +18,10 @@ class PullListTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func configure(with model: PullTableCellViewModel) {
-        title.text = model.title.value
-        content.text = model.content.value
-        projectName.text = model.projectName.value
-        milestone.text = model.labelList.value?.first?.name.value
+    func configure(with viewModel: PullTableCellViewModel) {
+        title.text = viewModel.title.value
+        content.text = viewModel.content.value
+        projectName.text = viewModel.projectName.value
+        milestone.text = viewModel.labelList.value?.first?.name.value
     }
 }

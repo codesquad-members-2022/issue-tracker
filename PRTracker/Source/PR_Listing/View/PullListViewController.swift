@@ -12,20 +12,19 @@ class PullListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let viewModel = PullListViewModel()
-    private let cellViewModel = PullTableCellViewModel()
     private var isSearchControllerConfigured = false
     private var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
+        configureBind()
         configureNavigationBar()
         configureRefreshControl()
         requestData()
     }
     
-    private func bind() {
+    private func configureBind() {
         viewModel.pullViewModelList.bind { _ in
             self.tableView.reloadData()
         }
@@ -68,7 +67,6 @@ class PullListViewController: UIViewController {
             self.refreshControl.endRefreshing()
             
             if !self.isSearchControllerConfigured {
-                print("hihihihihihi")
                 DispatchQueue.main.async {
                     self.configureSearchController()
                 }
@@ -95,8 +93,11 @@ extension PullListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PullListTableViewCell else { return UITableViewCell() }
-        guard let cellViewModel = viewModel.getCellViewModel(index: indexPath.row) else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
+                                                       for: indexPath) as? PullListTableViewCell,
+              let cellViewModel = viewModel.getCellViewModel(index: indexPath.row) else {
+            return UITableViewCell()
+        }
         cell.configure(with: cellViewModel)
         return cell
     }
