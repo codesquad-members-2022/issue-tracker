@@ -1,6 +1,6 @@
 package kr.codesquad.issuetracker.auth;
 
-import static kr.codesquad.issuetracker.auth.utils.OauthUtils.TOKEN;
+import static kr.codesquad.issuetracker.auth.utils.Utils.TOKEN;
 
 import kr.codesquad.issuetracker.auth.dto.AccessTokenRequestDto;
 import kr.codesquad.issuetracker.auth.dto.AccessTokenResponseDto;

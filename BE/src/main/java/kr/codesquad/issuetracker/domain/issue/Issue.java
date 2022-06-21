@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import kr.codesquad.issuetracker.domain.BaseTimeEntity;
+import kr.codesquad.issuetracker.domain.Status;
 import kr.codesquad.issuetracker.domain.comment.Comment;
 import kr.codesquad.issuetracker.domain.image.Image;
 import kr.codesquad.issuetracker.domain.label.Label;

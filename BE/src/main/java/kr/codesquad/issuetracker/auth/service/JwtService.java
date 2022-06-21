@@ -1,9 +1,12 @@
 package kr.codesquad.issuetracker.auth.service;
 
-import static kr.codesquad.issuetracker.auth.utils.OauthUtils.USER_ID;
+import static kr.codesquad.issuetracker.auth.utils.Utils.EXPIRATION_TIME;
+import static kr.codesquad.issuetracker.auth.utils.Utils.MEMBER_ID;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Date;
 import kr.codesquad.issuetracker.domain.member.Member;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtService {
-
 	private final String ISSUER;
 	private final String SECRET_KEY;
 
@@ -22,10 +24,25 @@ public class JwtService {
 	}
 
 	public String createToken(Member member) {
+		Date now = new Date();
 		return JWT.create()
-			.withExpiresAt(new Date())
-			.withClaim(USER_ID, member.getId())
+			.withIssuedAt(now)
+			.withExpiresAt(new Date(now.getTime() + EXPIRATION_TIME))
+			.withClaim(MEMBER_ID, member.getId())
 			.withIssuer(ISSUER)
 			.sign(Algorithm.HMAC256(SECRET_KEY));
+	}
+
+	public DecodedJWT verifyToken(String jwt) {
+		JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET_KEY))
+			.acceptExpiresAt(EXPIRATION_TIME)
+			.withIssuer(ISSUER)
+			.build();
+
+		return verifier.verify(jwt);
+	}
+
+	public Long getMemberId(DecodedJWT jwt) {
+		return jwt.getClaim(MEMBER_ID).asLong();
 	}
 }

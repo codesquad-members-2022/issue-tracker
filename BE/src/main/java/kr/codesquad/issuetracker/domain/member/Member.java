@@ -37,7 +37,7 @@ public class Member {
 
 	private String token;
 
-	@OneToMany(mappedBy = "member")
+	@OneToMany(mappedBy = "writer")
 	private List<Comment> comments = new ArrayList<>();
 
 	public Member(String name, String email, String imageUrl, String token) {
