@@ -14,4 +14,5 @@ public class IssueSearchCondition {
     private String replier;
     private String label;
     private String milestone;
+    private String exclusions;
 }

@@ -19,6 +19,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -26,9 +27,13 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class IssueRepository {
 
+    private static final String EXCLUSION_CONDITION_LABEL = "LABEL";
+    private static final String EXCLUSION_CONDITION_MILESTONE = "MILESTONE";
+    private static final String EXCLUSION_CONDITION_ASSIGNEE = "ASSIGNEE";
+
     private final JPAQueryFactory queryFactory;
 
-    public List<Issue> search(IssueSearchCondition condition) {
+    public List<Issue> search(IssueSearchCondition condition, Set<String> exclusionConditions) {
         return queryFactory.selectFrom(issue).distinct()
             .join(issue.writer, member).fetchJoin()
             .leftJoin(issue.milestone, milestone).fetchJoin()
@@ -42,12 +47,15 @@ public class IssueRepository {
                 milestoneSubjectEq(condition.getMilestone()),
                 assigneeIdentityEq(condition.getAssignee()),
                 replierIdentityEq(condition.getReplier()),
-                labelNameEq(condition.getLabel())
+                labelNameEq(condition.getLabel()),
+                isUnLabeled(exclusionConditions.contains(EXCLUSION_CONDITION_LABEL)),
+                isNoMilestone(exclusionConditions.contains(EXCLUSION_CONDITION_MILESTONE)),
+                isAssignedToNobody(exclusionConditions.contains(EXCLUSION_CONDITION_ASSIGNEE))
             )
             .fetch();
     }
 
-    public Map<IssueStatus, Long> findCountOfIssuesByStatus(IssueSearchCondition condition) {
+    public Map<IssueStatus, Long> findCountOfIssuesByStatus(IssueSearchCondition condition, Set<String> exclusionConditions) {
         List<Tuple> tuples = queryFactory
             .select(issue.status, issue.id.countDistinct())
             .from(issue)
@@ -60,7 +68,10 @@ public class IssueRepository {
                 milestoneSubjectEq(condition.getMilestone()),
                 assigneeIdentityEq(condition.getAssignee()),
                 replierIdentityEq(condition.getReplier()),
-                labelNameEq(condition.getLabel())
+                labelNameEq(condition.getLabel()),
+                isUnLabeled(exclusionConditions.contains(EXCLUSION_CONDITION_LABEL)),
+                isNoMilestone(exclusionConditions.contains(EXCLUSION_CONDITION_MILESTONE)),
+                isAssignedToNobody(exclusionConditions.contains(EXCLUSION_CONDITION_ASSIGNEE))
             )
             .groupBy(issue.status)
             .fetch();
@@ -104,5 +115,17 @@ public class IssueRepository {
 
     private BooleanExpression labelNameEq(String labelName) {
         return hasText(labelName) ? issueLabel.label.name.eq(labelName) : null;
+    }
+
+    private BooleanExpression isUnLabeled(boolean flag) {
+        return flag ? issueLabel.id.isNull() : null;
+    }
+
+    private BooleanExpression isNoMilestone(boolean flag) {
+        return flag ? issue.milestone.id.isNull() : null;
+    }
+
+    private BooleanExpression isAssignedToNobody(boolean flag) {
+        return flag ? assignee.id.isNull() : null;
     }
 }
