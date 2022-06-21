@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class IssueSearchCondition {
 
-    private IssueStatus status;
+    private IssueStatus status = IssueStatus.OPEN;
     private String writer;
     private String assignee;
     private String replier;

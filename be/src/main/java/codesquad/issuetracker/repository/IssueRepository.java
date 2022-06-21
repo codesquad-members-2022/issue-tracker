@@ -33,9 +33,10 @@ public class IssueRepository {
             .join(issue.writer, member).fetchJoin()
             .leftJoin(issue.milestone, milestone).fetchJoin()
             .leftJoin(issue.assignees, assignee)
+            .leftJoin(member).on(assignee.member.id.eq(member.id))
             .leftJoin(issue.replies, reply)
             .leftJoin(issue.issueLabels, issueLabel).fetchJoin()
-            .join(label).on(issueLabel.label.id.eq(label.id))
+            .leftJoin(label).on(issueLabel.label.id.eq(label.id))
             .where(statusEq(condition.getStatus().name()),
                 writerIdentityEq(condition.getWriter()),
                 milestoneSubjectEq(condition.getMilestone()),

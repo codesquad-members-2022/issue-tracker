@@ -5,8 +5,10 @@ import codesquad.issuetracker.domain.Label;
 import codesquad.issuetracker.domain.Member;
 import codesquad.issuetracker.domain.Milestone;
 import codesquad.issuetracker.dto.label.LabelDto;
+import codesquad.issuetracker.dto.member.MemberDto;
 import codesquad.issuetracker.dto.milestone.MilestoneDto;
 import codesquad.issuetracker.mapper.LabelMapper;
+import codesquad.issuetracker.mapper.MemberMapper;
 import codesquad.issuetracker.mapper.MilestoneMapper;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,15 +26,17 @@ public class IssueDto {
     private String profileUrl;
     private LocalDateTime createdDateTime;
     private MilestoneDto milestone;
+    private List<MemberDto> assignees;
     private List<LabelDto> labels;
 
     private IssueDto() {}
 
-    public static IssueDto of(Issue issue, Milestone milestone, List<Label> labels) {
+    public static IssueDto of(Issue issue, Milestone milestone, List<Member> assignees, List<Label> labels) {
         Member writer = issue.getWriter();
         return new IssueDto(issue.getId(), issue.getSubject(), issue.getDescription(),
             writer.getIdentity(), writer.getProfileUrl(), issue.getCreatedDateTime(),
             MilestoneMapper.convertToDto(milestone),
+            MemberMapper.convertToListDto(assignees),
             LabelMapper.convertToListDto(labels));
     }
 }

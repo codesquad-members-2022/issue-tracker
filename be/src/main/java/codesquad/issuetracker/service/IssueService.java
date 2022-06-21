@@ -1,5 +1,6 @@
 package codesquad.issuetracker.service;
 
+import codesquad.issuetracker.domain.Assignee;
 import codesquad.issuetracker.domain.Issue;
 import codesquad.issuetracker.domain.IssueLabel;
 import codesquad.issuetracker.domain.IssueStatus;
@@ -30,6 +31,7 @@ public class IssueService {
             issues.stream()
                 .map(issue -> IssueDto.of(issue,
                     issue.getMilestone(),
+                    issue.getAssignees().stream().map(Assignee::getMember).collect(Collectors.toList()),
                     issue.getIssueLabels().stream().map(IssueLabel::getLabel).collect(Collectors.toList())
                     )
                 )

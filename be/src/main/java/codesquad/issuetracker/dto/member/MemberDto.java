@@ -8,14 +8,14 @@ public class MemberDto {
 
     private Long memberId;
     private String identity;
-    private String nickname;
+    private String name;
     private String profileUrl;
 
     @QueryProjection
-    public MemberDto(Long memberId, String identity, String nickname, String profileUrl) {
+    public MemberDto(Long memberId, String identity, String name, String profileUrl) {
         this.memberId = memberId;
         this.identity = identity;
-        this.nickname = nickname;
+        this.name = name;
         this.profileUrl = profileUrl;
     }
 }
