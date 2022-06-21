@@ -18,6 +18,7 @@ public class Member {
 
     private String socialId;
     private String avatarImageUrl;
+    private String refreshToken;
 
     public Member(String socialId, String avatarImageUrl) {
         this.socialId = socialId;
@@ -26,5 +27,13 @@ public class Member {
 
     public Long getId() {
         return id;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void changeRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }
