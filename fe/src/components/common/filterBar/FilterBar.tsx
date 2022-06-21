@@ -5,7 +5,7 @@ import { filterBarStyle, filterStyle } from "constants/filterBarStyle";
 import { DEFAULT_VALUE } from "constants/filterBarText";
 import { FlexCenterBox } from "styles/boxes";
 import Indicator from "../Indicator";
-import Panel from "../Panel/Panel";
+import Panel from "../panel/Panel";
 import FilterBarInput from "./FilterBarInput";
 import { FilterBarProps, StyledFilterBarProps } from "./FilterBarInterface";
 

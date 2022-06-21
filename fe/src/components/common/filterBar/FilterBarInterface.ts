@@ -1,4 +1,4 @@
-import { MenuList } from "../Panel/PanelInterface";
+import { MenuList } from "../panel/PanelInterface";
 
 export interface FilterBarProps {
   menuList: MenuList;

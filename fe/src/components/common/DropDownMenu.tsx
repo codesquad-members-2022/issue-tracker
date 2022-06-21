@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
 import Indicator from "./Indicator";
-import Panel from "./Panel/Panel";
-import { MenuList } from "./Panel/PanelInterface";
+import Panel from "./panel/Panel";
+import { MenuList } from "./panel/PanelInterface";
 import { DropDownDefaultStyle, DropDownStyle } from "../../constants/dropDownMenuStyle";
 
 interface DropDownMenuProps {
