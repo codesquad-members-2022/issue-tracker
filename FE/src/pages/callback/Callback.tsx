@@ -1,25 +1,43 @@
 import React, { useEffect } from 'react';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
-import qs from 'qs';
+import qs, { ParsedQs } from 'qs';
 import LoginLoading from '@components/loginCallback/LoginLoading';
 import LoginError from '@components/loginCallback/LoginError';
 
 // // backend url : http://3.34.47.60:8080/auth/github?code=${code}
 // // test url : https://test-234b2-default-rtdb.firebaseio.com/.json
 
-// 리액트 쿼리 오류핸들링이 계속 안먹히던 이유가,
-// suspense 사용을 모두 true로 해놨기 때문이라는거 . . . .
+export type parsedQueryType =
+  | string
+  | ParsedQs
+  | string[]
+  | ParsedQs[]
+  | undefined
+  | null;
 
-const authFetcher = async () => {
-  const response = await fetch(
-    `https://test-234b2-default-rtdb.firebaseio.com/.json`,
-  );
+const queryClient = new QueryClient();
+
+const fetchAuth = async (code: parsedQueryType) => {
+  const response = await fetch(`http://localhost:3030/jwttoken`);
   if (!response.ok) {
     throw new Error('response not ok');
   }
 
   return response.json();
+};
+
+const fetchIssues = async () => {
+  const response = await fetch(`http://localhost:3030/issues`);
+  if (!response.ok) {
+    throw new Error('response not ok');
+  }
+
+  return response.json();
+};
+
+const prefetchTodos = async (token: { access: string; refersh: string }) => {
+  await queryClient.prefetchQuery('issues', () => fetchIssues(token));
 };
 
 const Callback = () => {
@@ -28,22 +46,25 @@ const Callback = () => {
   const { code } = qs.parse(search, {
     ignoreQueryPrefix: true,
   });
-  // 원래는 이 code를 통해서 로그인 요청을 보내는 거지만,
-  // 임시 url로 페치요청
-  const { status, data } = useQuery('auth', authFetcher, {
+
+  const { status, data } = useQuery(['auth', code], () => fetchAuth(code), {
     refetchOnWindowFocus: false,
     retry: false,
   });
 
+  useEffect(() => {
+    if (status === 'success') {
+      prefetchTodos(data);
+      navigate('/issues');
+    }
+  }, [status]);
+
   if (status === 'loading') {
     return <LoginLoading />;
   }
+
   if (status === 'error') {
     return <LoginError />;
-  }
-
-  if (status === 'success') {
-    navigate('/issues');
   }
 
   return <></>;

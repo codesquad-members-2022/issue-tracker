@@ -5,17 +5,16 @@ import { rest } from 'msw';
 // rest.get('url', (req, res, tx))
 
 export const handlers = [
-  rest.get('http://localhost:3030/scoops', (req, res, ctx) => {
+  rest.get('http://localhost:3030/jwttoken', (req, res, ctx) => {
     return res(
-      ctx.json([
-        { name: 'Chocolate', imagePath: '/image/chocolate.png' },
-        { name: 'Vanilla', imagePath: '/images/vanilla.png' },
-      ]),
+      ctx.json({
+        access: '1234567891',
+        refresh: '1234567891',
+      }),
     );
   }),
 
-  // topping 루트를 위한 핸들러를  추가한다.
-  rest.get('http://localhost:3030/toppings', (req, res, ctx) => {
+  rest.get('http://localhost:3030/issues', (req, res, ctx) => {
     return res(
       ctx.json([
         { name: 'Cherries', imagePath: '/images/cherries.png' },
