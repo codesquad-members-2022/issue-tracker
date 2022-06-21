@@ -37,3 +37,32 @@
 #### 도메인 및 테이블 설계
 + ERD
 > ![image](https://user-images.githubusercontent.com/82401504/174156926-30c45c19-01ab-441b-994b-7a7714fa058e.PNG)
+
+## 2주차 수요일 리뷰 요청
+
+### 진행 내용
+#### 애플리케이션
+##### 완료
++ 이슈 목록 조회 API 기능 보완
+  + status 파라미터의 기본 값을 'OPEN'으로 설정
+  + 응답 데이터 상에 assignee 정보 추가
++ Github OAuth 연동 로그인 기능 구현
++ JWT 활용 로그인 검증 기능 구현
+  + access 및 refresh token 발행, refresh token redis에 저장
+  + access 토큰 재발급 및 로그아웃 기능 구현
++ 이슈 상태(OPEN, CLOSE) 변경 API 기능 구현
++ 로그인 상태 정보 조회 API 기능 구현
+##### 진행 예정
++ S3 이미지 업로드 기능 구현
+
+#### API 명세서
++ <a href="https://near-snipe-0de.notion.site/API-Description-be8af8c4d6b44f668f3a8f03368ea978">API 명세서 확인하기(클릭)</a><br/>
+
+#### 인프라
++ Nginx, redis 도커 컨테이너 생성(완료)
++ 깃허브 액션 및 도커 활용 스프링 부트 웹 앱 배포(완료)
++ 깃허브 액션 및 도커 활용 리액트 웹 앱 배포(진행 예정)
+
+#### 도메인 및 테이블 설계
++ ERD
+> ![image](https://user-images.githubusercontent.com/82401504/174830795-b4674c2b-1faa-4f00-b189-64d9805d64d8.png)
