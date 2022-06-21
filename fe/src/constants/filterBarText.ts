@@ -10,3 +10,5 @@ export const FILTER_BAR_MENU = {
 };
 
 export const DEFAULT_VALUE = "is: issue is:open";
+
+export const PLACEHOLDER = "Search all issues";

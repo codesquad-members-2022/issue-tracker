@@ -4,19 +4,10 @@ import styled, { css } from "styled-components";
 import { filterBarStyle, filterStyle } from "constants/filterBarStyle";
 import { DEFAULT_VALUE } from "constants/filterBarText";
 import { FlexCenterBox } from "styles/boxes";
-import SearchIcon from "components/Icons/Search";
-import Indicator from "./Indicator";
-import Panel from "./Panel/Panel";
-import { MenuList } from "./Panel/PanelInterface";
-
-interface FilterBarProps {
-  menuList: MenuList;
-  handlePanelClick?: () => void;
-}
-
-interface StyledFilterBarProps {
-  isFocus: boolean;
-}
+import Indicator from "../Indicator";
+import Panel from "../Panel/Panel";
+import FilterBarInput from "./FilterBarInput";
+import { FilterBarProps, StyledFilterBarProps } from "./FilterBarInterface";
 
 function FilterBar({ menuList, handlePanelClick }: FilterBarProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,15 +54,7 @@ function FilterBar({ menuList, handlePanelClick }: FilterBarProps) {
             onClick={handlePanelClick}
           />
         </Filter>
-        <InputBox isFocus={isFocus}>
-          <SearchIcon />
-          <Input
-            ref={inputRef}
-            placeholder="Search all issues"
-            value={inputValue}
-            onChange={({ target }) => setInputValue(target.value)}
-          />
-        </InputBox>
+        <FilterBarInput isFocus={isFocus} inputRef={inputRef} inputValue={inputValue} setInputValue={setInputValue} />
       </StyledFilterBar>
     </div>
   );
@@ -104,48 +87,6 @@ const Filter = styled(FlexCenterBox)<StyledFilterBarProps>`
 
       &:hover {
         background: ${colors[hover.bgColor]};
-      }
-    `;
-  }}
-`;
-
-const InputBox = styled.div<StyledFilterBarProps>`
-  ${({ theme: { colors }, isFocus }) => {
-    const { initial, active } = filterBarStyle.input;
-    const { width: filterWidth } = filterBarStyle.filter;
-    const {
-      size: { width: overallWidth },
-    } = filterBarStyle.overall;
-
-    return css`
-      display: flex;
-      align-items: center;
-      padding: 0 26px;
-      width: ${overallWidth - filterWidth}px;
-      height: 100%;
-      background: ${isFocus ? colors[active.bgColor] : colors[initial.bgColor]};
-      color: ${colors[initial.fontColor]};
-
-      path {
-        stroke: ${colors[initial.fontColor]};
-      }
-    `;
-  }}
-`;
-
-const Input = styled.input`
-  ${({ theme: { colors }, value }) => {
-    const { initial, active } = filterBarStyle.input;
-    const ftColor = value === DEFAULT_VALUE ? initial.fontColor : active.fontColor;
-
-    return css`
-      margin-left: 11px;
-      width: 100%;
-      height: 100%;
-      color: ${colors[ftColor]};
-
-      &::placeholder {
-        color: ${colors[ftColor]};
       }
     `;
   }}
