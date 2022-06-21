@@ -24,6 +24,10 @@
 		BC2F5992286098B70012D18C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* URLProtocolStub.swift */; };
 		BC2F5994286153AF0012D18C /* dummyResponseUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5993286153AF0012D18C /* dummyResponseUser.json */; };
 		BC2F5995286155510012D18C /* dummyResponseUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5993286153AF0012D18C /* dummyResponseUser.json */; };
+		BC2F5997286162F60012D18C /* dummyResponseIssues.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5996286162F60012D18C /* dummyResponseIssues.json */; };
+		BC2F5998286162F60012D18C /* dummyResponseIssues.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5996286162F60012D18C /* dummyResponseIssues.json */; };
+		BC2F599A286167E70012D18C /* DummyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5999286167E70012D18C /* DummyResponse.swift */; };
+		BC2F599B286167E70012D18C /* DummyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5999286167E70012D18C /* DummyResponse.swift */; };
 		BC97093B2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC97093C2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
@@ -36,7 +40,6 @@
 		BCF57BC9285701FB0059E61D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF57BC7285701FB0059E61D /* Main.storyboard */; };
 		BCF57BCB285701FC0059E61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF57BCA285701FC0059E61D /* Assets.xcassets */; };
 		BCF57BCE285701FC0059E61D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF57BCC285701FC0059E61D /* LaunchScreen.storyboard */; };
-		BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BD8285701FD0059E61D /* PRTrackerTests.swift */; };
 		BCF57BFD285704F40059E61D /* PullListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BFC285704F40059E61D /* PullListViewModel.swift */; };
 		BCF57BFE285704F40059E61D /* PullListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BFC285704F40059E61D /* PullListViewModel.swift */; };
 		BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BFF285704FE0059E61D /* ListingManager.swift */; };
@@ -112,6 +115,8 @@
 		BC2F598D2860979D0012D18C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BC2F5990286098B70012D18C /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		BC2F5993286153AF0012D18C /* dummyResponseUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dummyResponseUser.json; sourceTree = "<group>"; };
+		BC2F5996286162F60012D18C /* dummyResponseIssues.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dummyResponseIssues.json; sourceTree = "<group>"; };
+		BC2F5999286167E70012D18C /* DummyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyResponse.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -124,7 +129,6 @@
 		BCF57BCD285701FC0059E61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCF57BCF285701FC0059E61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCF57BD4285701FD0059E61D /* PRTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PRTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCF57BD8285701FD0059E61D /* PRTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTrackerTests.swift; sourceTree = "<group>"; };
 		BCF57BFC285704F40059E61D /* PullListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullListViewModel.swift; sourceTree = "<group>"; };
 		BCF57BFF285704FE0059E61D /* ListingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingManager.swift; sourceTree = "<group>"; };
 		BCF57C05285705130059E61D /* GitHubLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLoginManager.swift; sourceTree = "<group>"; };
@@ -236,10 +240,10 @@
 		BCF57BD7285701FD0059E61D /* PRTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				BCF57BD8285701FD0059E61D /* PRTrackerTests.swift */,
 				BC2F597D286065610012D18C /* UserManagerTests.swift */,
 				BC2F59852860759B0012D18C /* IssueManagerTests.swift */,
 				BC2F5981286075520012D18C /* KeyChainStub.swift */,
+				BC2F5999286167E70012D18C /* DummyResponse.swift */,
 				BC2F5990286098B70012D18C /* URLProtocolStub.swift */,
 			);
 			path = PRTrackerTests;
@@ -262,6 +266,7 @@
 				BCF57BC7285701FB0059E61D /* Main.storyboard */,
 				BCF57BCC285701FC0059E61D /* LaunchScreen.storyboard */,
 				BC2F5993286153AF0012D18C /* dummyResponseUser.json */,
+				BC2F5996286162F60012D18C /* dummyResponseIssues.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -310,8 +315,6 @@
 			isa = PBXGroup;
 			children = (
 				BCF57C05285705130059E61D /* GitHubLoginManager.swift */,
-				BC2F5969285C1AC10012D18C /* IssueManager.swift */,
-				BC2F596E285C26D60012D18C /* UserManager.swift */,
 				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
 			);
 			path = Model;
@@ -333,6 +336,8 @@
 				BC97093A2859B23D00E54F93 /* Issue.swift */,
 				BC2F598D2860979D0012D18C /* User.swift */,
 				BC2F5974285C2A660012D18C /* Repo.swift */,
+				BC2F5969285C1AC10012D18C /* IssueManager.swift */,
+				BC2F596E285C26D60012D18C /* UserManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCF57BCE285701FC0059E61D /* LaunchScreen.storyboard in Resources */,
+				BC2F5997286162F60012D18C /* dummyResponseIssues.json in Resources */,
 				D0E98CD0285B05000051413E /* LabelView.xib in Resources */,
 				BCF57BCB285701FC0059E61D /* Assets.xcassets in Resources */,
 				BC2F5995286155510012D18C /* dummyResponseUser.json in Resources */,
@@ -457,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC2F5994286153AF0012D18C /* dummyResponseUser.json in Resources */,
+				BC2F5998286162F60012D18C /* dummyResponseIssues.json in Resources */,
 				D0E98CD1285B05000051413E /* LabelView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,6 +567,7 @@
 				BCF57C06285705130059E61D /* GitHubLoginManager.swift in Sources */,
 				BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */,
+				BC2F599A286167E70012D18C /* DummyResponse.swift in Sources */,
 				BC2F5975285C2A660012D18C /* Repo.swift in Sources */,
 				BCF57C0C285705220059E61D /* LoginView.swift in Sources */,
 				D04099DC2859C6930008B517 /* Observable.swift in Sources */,
@@ -594,6 +602,7 @@
 				BCF57C0D285705220059E61D /* LoginView.swift in Sources */,
 				D0E98D09285CEAD50051413E /* IssueManager.swift in Sources */,
 				BCF57C01285704FE0059E61D /* ListingManager.swift in Sources */,
+				BC2F599B286167E70012D18C /* DummyResponse.swift in Sources */,
 				BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */,
 				BC2F5982286075520012D18C /* KeyChainStub.swift in Sources */,
 				D0E98CDC285BAEE90051413E /* CustomBarButton .swift in Sources */,
@@ -605,7 +614,6 @@
 				BC2F598F2860979D0012D18C /* User.swift in Sources */,
 				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
 				D04099E52859D9D00008B517 /* PullListViewController.swift in Sources */,
-				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CE9285C02800051413E /* PullListModel.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PullTableCellViewModel.swift in Sources */,
 				D0E98CD4285B088A0051413E /* PullListTableViewController.swift in Sources */,

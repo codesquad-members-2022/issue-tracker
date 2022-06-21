@@ -20,7 +20,7 @@ struct IssueManager {
         self.networkService = networkService
     }
     
-    func getPulls(then completion: @escaping ([Issue]?) -> Void) {
+    func getIssues(then completion: @escaping ([Issue]?) -> Void) {
         guard let accessToken = keyChainService.load(service: "access-token", account: "github") else {
             Log.error("Access Token is not found")
             return completion(nil)

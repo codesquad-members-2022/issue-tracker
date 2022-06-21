@@ -25,13 +25,17 @@ class UserManagerTests: XCTestCase {
     
     func test_UserManager_should_return_User_when_token_is_stored() throws {
         // Given - keyChain에 token이 저장돼 있을 때
-        guard let userURL = URL(string: "https://api.github.com/user"),
-                let url = Bundle.main.url(forResource: "dummyResponseUser", withExtension: "json"),
-                let dummyData = try? Data(contentsOf: url) else {
-            XCTFail("Cannot find dummyResponseUser")
+        guard let userURL = URL(string: "https://api.github.com/user") else {
+            XCTFail("Failed to generate URL")
             return
         }
         
+        guard let dummyData = DummyResponse.user.data else {
+            XCTFail("Cannot find \(DummyResponse.user)")
+            return
+        }
+        
+        // URLSession에 dummy Reponse 주입
         URLProtocolStub.testURLs = [userURL: dummyData]
         
         // When - User 정보를 요청하면
@@ -46,16 +50,13 @@ class UserManagerTests: XCTestCase {
     
     func test_UserManager_should_return_nil_when_token_is_not_stored() throws {
         // Given - keyChain에 token이 안 저장돼 있을 때
-        let expectation = XCTestExpectation(description: "User info not returned")
         sut = UserManager(keyChainService: KeyChainFailureStub())
         
         // When - User 정보를 요청하면
-        // Then - nil을 return한다.
         sut.getCurrentUser { user in
+            // Then - nil을 return한다.
             XCTAssertNil(user)
-            expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.5)
     }
 
 }
