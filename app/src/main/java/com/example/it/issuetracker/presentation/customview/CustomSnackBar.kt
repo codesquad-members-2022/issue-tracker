@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.presentation.common
+package com.example.it.issuetracker.presentation.customview
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +11,11 @@ import com.google.android.material.snackbar.Snackbar
 class CustomSnackBar(
     view: View,
     private val message: String,
+    private val onClick: () -> Unit,
 ) {
 
     private val context = view.context
-    private val snackbar = Snackbar.make(view, "", 5000)
+    private val snackbar = Snackbar.make(view, "", 2000)
     private val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
 
     private val inflater = LayoutInflater.from(context)
@@ -37,7 +38,7 @@ class CustomSnackBar(
 
     private fun initData() = with(binding) {
         tvMessage.text = message
-        btnCancel.setOnClickListener {}
+        btnCancel.setOnClickListener { onClick() }
     }
 
     fun show() {
@@ -45,6 +46,7 @@ class CustomSnackBar(
     }
 
     companion object {
-        fun make(view: View, message: String) = CustomSnackBar(view, message)
+        fun make(view: View, message: String, onClick: () -> Unit) =
+            CustomSnackBar(view, message, onClick)
     }
 }

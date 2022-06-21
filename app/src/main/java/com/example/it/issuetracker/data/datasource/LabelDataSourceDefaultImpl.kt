@@ -17,7 +17,7 @@ class LabelDataSourceDefaultImpl(
         title: String,
         description: String,
         backgroundColor: String,
-        textColor: String
+        textColor: String,
     ) {
         LabelFakeDatabase.add(
             LabelDto(

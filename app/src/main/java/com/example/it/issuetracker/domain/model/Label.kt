@@ -11,9 +11,9 @@ data class Label(
     val color: String,
     val textColor: String,
     var isChecked: Boolean = false,
-    val mode: Mode = Mode.DEFAULT
+    val mode: Mode = Mode.DEFAULT,
 ) : Serializable
 
-fun Label.toDto(): LabelDto {
+fun Label.toLabelDto(): LabelDto {
     return LabelDto(id, title, description, color, textColor)
 }

@@ -1,7 +1,6 @@
 package com.example.it.issuetracker.presentation.main.issue
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentIssueBinding
+import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
-import kotlinx.coroutines.Job
+import com.example.it.issuetracker.presentation.customview.CustomSnackBar
+import com.example.it.issuetracker.presentation.main.issue.filter.FilterFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,7 +22,6 @@ class IssueFragment : Fragment() {
     private lateinit var binding: FragmentIssueBinding
     private val viewModel by viewModel<IssueViewModel>()
     private val adapter = IssueAdapter { toggleMode() }
-    private lateinit var job: Job
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,11 +33,14 @@ class IssueFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
-    }
 
-    override fun onResume() {
-        super.onResume()
+        val bundle = arguments
+        if (bundle != null) {
+            val filterList = bundle.getSerializable("filter") as List<Issue>
+            viewModel.getFilterList(filterList)
+        }
+
+        initView()
         observerData()
     }
 
@@ -55,6 +58,12 @@ class IssueFragment : Fragment() {
         toolbarEditIssue.setNavigationOnClickListener { toggleMode() }
         ivDelete.setOnClickListener { deleteIssues() }
         ivClose.setOnClickListener { closeIssues() }
+        toolbarDefaultIssue.setNavigationOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.container_main, FilterFragment())
+                .addToBackStack("filter")
+                .commit()
+        }
     }
 
     private fun closeIssues() {
@@ -85,6 +94,16 @@ class IssueFragment : Fragment() {
                 }
             }
         }
+
+        repeatOnLifecycleExtension {
+            viewModel.cache.collectLatest {
+                if (it.message != "") {
+                    CustomSnackBar.make(binding.issueContainer, "선택한 이슈를 닫았습니다.") {
+                        viewModel.revertIssue(it.issues)
+                    }.show()
+                }
+            }
+        }
     }
 
     private fun handlerUnInitialization() {
@@ -97,7 +116,12 @@ class IssueFragment : Fragment() {
 
     private fun handlerSuccess(state: IssueUiState.GetIssues) {
         binding.progressBar.isVisible = false
-        adapter.submitList(state.issues)
+        if (state.issues.isEmpty()) {
+            binding.tvSearchResult.isVisible = true
+        } else {
+            binding.tvSearchResult.isVisible = false
+            adapter.submitList(state.issues)
+        }
     }
 
     private fun toggleMode() {

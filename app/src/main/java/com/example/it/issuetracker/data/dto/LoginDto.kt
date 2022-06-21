@@ -10,10 +10,13 @@ data class LoginDto(
     @Json(name = "jwt")
     val jwt: String,
 
+    @Json(name = "id")
+    val id: Long,
+
     @Json(name = "imageUrl")
     val imageUrl: String,
 )
 
 
 fun LoginDto.toLoginInformation(): LoginInformation =
-    LoginInformation(jwt = jwt, imageUrl = imageUrl)
+    LoginInformation(jwt = jwt, imageUrl = imageUrl, id = id)

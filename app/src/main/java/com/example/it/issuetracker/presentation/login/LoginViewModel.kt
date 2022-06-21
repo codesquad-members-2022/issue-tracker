@@ -26,4 +26,8 @@ class LoginViewModel(
         sharedPref.saveData("jwt", jwt)
     }
 
+    fun saveId(id: Long) {
+        sharedPref.saveData("id", id)
+    }
+
 }

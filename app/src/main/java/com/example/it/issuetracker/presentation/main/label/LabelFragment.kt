@@ -34,6 +34,8 @@ class LabelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
 
+        setupToolbar()
+        viewModel.getLabelInfoList()
         initView()
         observerData()
     }
