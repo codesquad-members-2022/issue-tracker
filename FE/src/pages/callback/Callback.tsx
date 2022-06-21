@@ -36,10 +36,9 @@ const Callback = () => {
   });
 
   if (status === 'loading') {
-    return <div>loading</div>;
+    return <LoginLoading />;
   }
   if (status === 'error') {
-    console.log('error');
     return <LoginError />;
   }
 

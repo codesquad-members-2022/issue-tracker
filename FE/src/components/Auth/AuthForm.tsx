@@ -32,6 +32,7 @@ const AuthForm = () => {
   useEffect(() => {
     idRef.current && idRef.current.focus();
   }, []);
+  
   const formIsValid = idIsValid && passWordIsValid;
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {

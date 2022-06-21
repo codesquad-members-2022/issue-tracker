@@ -95,9 +95,12 @@ describe('<AuthForm>', () => {
     // await waitFor(() => {
     //   expect(IDInput()).toHaveValue('123456789012');
     // });
+    // 위 테스트가 왜 안되는지 고민해보려고 일단 남겨놓았습니다!
+
     expect(IDInput()).toHaveAttribute('maxLength', '12');
     expect(passwordInput()).toHaveAttribute('maxLength', '12');
   });
+  
   it('github 로그인 버튼은 깃허브 로그인 링크로 연결된다.', () => {
     const { GitHubLoginBtn } = renderAuthForm();
     expect(GitHubLoginBtn().closest('a')).toHaveAttribute(

@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './layout.module.scss';
+import styles from './LoginCallback.module.scss';
 import { useNavigate } from 'react-router-dom';
+
 const AuthError = () => {
   const navigate = useNavigate();
   return (
