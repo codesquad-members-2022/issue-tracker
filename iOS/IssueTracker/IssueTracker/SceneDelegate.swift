@@ -18,8 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         let startViewController = selectRootViewController()
-        navigation.setViewControllers([startViewController], animated: false)
-        self.window?.rootViewController = navigation
+        self.window?.rootViewController = startViewController
         window?.makeKeyAndVisible()
     }
 
@@ -30,7 +29,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 case let .success(jwtToken):
                     self?.saveJWTToken(jwtToken: jwtToken["JWT_access_token"] ?? "")
                     DispatchQueue.main.async {
-                        self?.navigation.setViewControllers([TabBarController()], animated: false)
+                        let rootViewController = TabBarController()
+                        self?.window?.rootViewController = rootViewController
                     }
                 case let .failure(error):
                     NotificationCenter.default.post(name: NotificationNames.didGetSignInError, object: error)
