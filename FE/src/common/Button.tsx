@@ -11,7 +11,7 @@ function Button({ disabled, label, onClick }: ButtonProps) {
   const Box = disabled ? ButtonBoxDisabled : ButtonBoxAbled;
 
   return (
-    <Box disabled={disabled} onClick={onClick}>
+    <Box type="button" disabled={disabled} onClick={onClick}>
       {label}
     </Box>
   );

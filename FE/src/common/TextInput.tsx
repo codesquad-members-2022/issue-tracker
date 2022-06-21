@@ -1,35 +1,33 @@
 import styled from 'styled-components';
 import { GREYSCALE } from '@/constants';
+import { MutableRefObject } from 'react';
 
 type TextInputProps = {
   type: 'text' | 'password';
   placeholder: string;
-  value: string;
   minLength: number;
   maxLength: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  ref?: React.MutableRefObject<null | HTMLInputElement>;
+  refElement: MutableRefObject<null | HTMLInputElement>;
 };
 
 function TextInput({
   type,
   placeholder,
-  value,
   minLength,
   maxLength,
   onChange,
-  ref,
+  refElement,
 }: TextInputProps) {
   return (
     <TextInputBox>
       <InputBox
         type={type}
         placeholder={placeholder}
-        value={value}
         minLength={minLength}
         maxLength={maxLength}
         onChange={onChange}
-        ref={ref}
+        ref={refElement}
       />
     </TextInputBox>
   );
