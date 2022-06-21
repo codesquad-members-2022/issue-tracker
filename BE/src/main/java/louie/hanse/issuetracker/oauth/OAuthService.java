@@ -14,10 +14,10 @@ public class OAuthService {
 
     public GithubAccessToken getAccessToken(String code) {
         GithubAccessTokenRequest accessTokenRequest = new GithubAccessTokenRequest(
-            oAuthProperties.clientId, oAuthProperties.clientSecret, code);
+            oAuthProperties.getClientId(), oAuthProperties.getClientSecret(), code);
 
         return WebClient.create()
-            .post().uri(oAuthProperties.accessTokenApiUrl)
+            .post().uri(oAuthProperties.getAccessTokenApiUrl())
             .accept(MediaType.APPLICATION_JSON)
             .bodyValue(accessTokenRequest)
             .retrieve()
@@ -30,7 +30,7 @@ public class OAuthService {
 
     public GithubUser getUserInfo(GithubAccessToken githubAccessToken) {
         return WebClient.create()
-            .get().uri(oAuthProperties.userApiUrl)
+            .get().uri(oAuthProperties.getUserApiUrl())
             .accept(MediaType.APPLICATION_JSON)
             .header(HttpHeaders.AUTHORIZATION, githubAccessToken.getAuthorizationValue())
             .retrieve()
