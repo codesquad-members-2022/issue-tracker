@@ -51,6 +51,7 @@ class LabelViewModel(
                 _dataLoading.value = false
             }
         }
+        _completeDelete.value = false
     }
 
     fun changeEditMode(editMode: Boolean) {
