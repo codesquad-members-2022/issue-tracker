@@ -36,8 +36,6 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         repository.deleteIssue(itemId)
         getIssueList()
     }
-}
-
     fun filterIssueList(condition: FilterCondition) {
         val filteredIssueList = _issueList.value
             .filter {
@@ -65,4 +63,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         _filteredIssueList.value = filteredIssueList
     }
 }
+
+
+
 
