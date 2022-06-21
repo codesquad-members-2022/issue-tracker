@@ -22,4 +22,6 @@ public class Milestone {
     private String description;
     private LocalDate completedDate;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

@@ -23,7 +23,12 @@ public class Comment {
     @JoinColumn
     private Issue issue;
 
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn
+    private Member writer;
+
     private String content;
     private LocalDateTime createdDateTime;
+    private LocalDateTime updatedDateTime;
 
 }

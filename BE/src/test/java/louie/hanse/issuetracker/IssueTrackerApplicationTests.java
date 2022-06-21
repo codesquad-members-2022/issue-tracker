@@ -1,13 +1,32 @@
 package louie.hanse.issuetracker;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class IssueTrackerApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() throws Exception {
+        throwCheckedException();
+    }
 
+    void throwCheckedException() {
+        try {
+            throw new Exception();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void throwUnCheckedException() {
+        throw new RuntimeException();
+    }
+
+    static class CheckedException extends Exception {
+
+    }
+
+    static class UnCheckedException extends RuntimeException {
+
+    }
 }

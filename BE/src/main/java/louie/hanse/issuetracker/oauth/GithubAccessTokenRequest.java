@@ -5,9 +5,10 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+
 @RequiredArgsConstructor
 @Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class GithubAccessTokenRequest {
     private final String clientId;
     private final String clientSecret;
