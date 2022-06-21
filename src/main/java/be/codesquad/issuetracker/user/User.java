@@ -26,10 +26,9 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public User update(@NonNull User user) {
+    public void update(User user) {
         this.authId = user.getAuthId();
         this.username = user.getUsername();
         this.imageUrl = user.getImageUrl();
-        return this;
     }
 }
