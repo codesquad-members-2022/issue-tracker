@@ -35,9 +35,3 @@ class IssueListCell: UICollectionViewCell {
         }
     }
 }
-
-extension UICollectionViewCell {
-    static var reuseIdentifier: String {
-        return String(describing: Self.self)
-    }
-}

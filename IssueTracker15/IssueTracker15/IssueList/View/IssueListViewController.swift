@@ -7,66 +7,102 @@
 
 import UIKit
 
+enum Section {
+    case main
+}
+
 class IssueListViewController: UIViewController {
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, IssueDTO>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, IssueDTO>
+    // MARK: - typealias(shorten type definition) ref by raywenderlich
+    typealias IssueDataSource = UICollectionViewDiffableDataSource<Section, IssueDTO>
+    typealias IssueSnapshot = NSDiffableDataSourceSnapshot<Section, IssueDTO>
     
+    // MARK: - ViewModel
     private var vm: IssueListViewModel?
     
+    // MARK: - CollectionView Data
     private var issueList = Array(repeating: IssueDTO.empty, count: 25) {
         didSet {
             self.applySnapshot()
         }
     }
     
+    // MARK: - Navigation Bar Buttons
+    private var leftFilterButton: () -> UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("필터", for: .normal)
+        button.setImage(UIImage(systemName: "line.3.horizontal.decrease"), for: .normal)
+        button.sizeToFit()
+        button.addAction(
+            UIAction(title: "query") { _ in
+                print("QueryActionButton TouchUpInside")
+            },
+            for: .touchUpInside
+        )
+        return button
+    }
+    
+    private var rightSelectButton: () -> UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        button.setTitle("선택", for: .normal)
+        button.sizeToFit()
+        button.addAction(
+            UIAction(title: "select") { _ in
+                print("SelectActionButton TouchUpInside")
+            },
+            for: .touchUpInside
+        )
+        return button
+    }
+    
+    // MARK: - Initialize CollectionView
     private lazy var issueListCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
-        collectionView.isScrollEnabled = true
         collectionView.register(IssueListCell.self,
-                                forCellWithReuseIdentifier: IssueListCell.reuseIdentifier)
+                                forCellWithReuseIdentifier: IssueListCell.reuseIdentifier) // Register Cell
         collectionView.register(IssueListHeaderReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: IssueListHeaderReusableView.reuseIdentifier)
+                                withReuseIdentifier: IssueListHeaderReusableView.reuseIdentifier) // Register Header
         collectionView.register(IssueListFooterReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                                withReuseIdentifier: IssueListFooterReusableView.reuseIdentifier)
-        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { (_, _) -> NSCollectionLayoutSection? in
-            let size = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(200)
-            )
-            let item = NSCollectionLayoutItem(layoutSize: size)
-            let section = NSCollectionLayoutSection(group: NSCollectionLayoutGroup.vertical(layoutSize: size, subitem: item, count: 1))
-            
-            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1),
-                    heightDimension: .estimated(55)
-                ),
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top
-            )
-            let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1),
-                    heightDimension: .estimated(60)
-                ),
-                elementKind: UICollectionView.elementKindSectionFooter,
-                alignment: .bottom
-            )
-            section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
-            
-            return section
-        })
+                                withReuseIdentifier: IssueListFooterReusableView.reuseIdentifier) // Register Footer
+        collectionView.collectionViewLayout = issueListViewLayout()
+        
         return collectionView
     }()
     
-    private lazy var issueDataSource: DataSource = {
-        DataSource(
+    private var issueListViewLayout: () -> UICollectionViewCompositionalLayout = {
+        
+        UICollectionViewCompositionalLayout(sectionProvider: { (_, _) -> NSCollectionLayoutSection? in
+            let item = NSCollectionLayoutItem(layoutSize: .cellSize)
+            let section = NSCollectionLayoutSection(// Definition Layout Cells in Section
+                group: NSCollectionLayoutGroup.vertical(layoutSize: .cellSize, subitem: item, count: 1)
+            )
+            
+            section.boundarySupplementaryItems = [
+                NSCollectionLayoutBoundarySupplementaryItem( // Definition Layout Header
+                    layoutSize: .headerSize,
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .top
+                ),
+                NSCollectionLayoutBoundarySupplementaryItem( // Definition Layout Footer
+                    layoutSize: .footerSize,
+                    elementKind: UICollectionView.elementKindSectionFooter,
+                    alignment: .bottom
+                )
+            ]
+            
+            return section
+        })
+    }
+    
+    private lazy var issueDataSource: IssueDataSource = {
+        IssueDataSource(
             collectionView: issueListCollectionView,
             cellProvider: { (collectionView, indexPath, issue) -> UICollectionViewCell? in
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.reuseIdentifier, for: indexPath) as? IssueListCell
@@ -79,28 +115,9 @@ class IssueListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let queryAction = UIAction(title: "query") { _ in
-            print("QueryActionButton TouchUpInside")
-        }
-        let checkSelectAction = UIAction(title: "checkSelect") { _ in
-            print("CheckSelectButton TouchUpInside")
-        }
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftFilterButton())
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightSelectButton())
         
-        let leftFilterButton = UIButton(type: .system)
-        leftFilterButton.setTitle("필터", for: .normal)
-        leftFilterButton.setImage(UIImage(systemName: "line.3.horizontal.decrease"), for: .normal)
-        leftFilterButton.sizeToFit()
-        leftFilterButton.addAction(queryAction, for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftFilterButton)
-        
-        let rightSelectButton = UIButton(type: .system)
-        rightSelectButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        rightSelectButton.setTitle("선택", for: .normal)
-        rightSelectButton.sizeToFit()
-        rightSelectButton.addAction(checkSelectAction, for: .touchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightSelectButton)
-        
-//        vm = IssueListViewModel { param, bindable in }
         vm = IssueListViewModel()
         
         view.addSubview(issueListCollectionView)
@@ -112,10 +129,10 @@ class IssueListViewController: UIViewController {
     }
     
     private func applySnapshot(animatingDifferences: Bool = true) {
-        var issueSnapshot = Snapshot()
+        var issueSnapshot = IssueSnapshot()
         var items = issueList
         
-        for i in items.indices {
+        for i in items.indices { // issueList items are Hashable with id property.
             items[i].id = i
         }
         
@@ -124,9 +141,15 @@ class IssueListViewController: UIViewController {
         issueDataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
-                return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: IssueListHeaderReusableView.reuseIdentifier, for: indexPath) as? IssueListHeaderReusableView
+                return collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: IssueListHeaderReusableView.reuseIdentifier,
+                    for: indexPath) as? IssueListHeaderReusableView
             case UICollectionView.elementKindSectionFooter:
-                return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: IssueListFooterReusableView.reuseIdentifier, for: indexPath) as? IssueListFooterReusableView
+                return collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: IssueListFooterReusableView.reuseIdentifier,
+                    for: indexPath) as? IssueListFooterReusableView
             default:
                 return nil
             }
@@ -135,13 +158,37 @@ class IssueListViewController: UIViewController {
     }
 }
 
+// MARK: - CollectionView Delegate
 extension IssueListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        vm?.request(, param: issueDataSource.itemIdentifier(for: indexPath))
         vm?.request(param: issueDataSource.itemIdentifier(for: indexPath))
     }
 }
 
-enum Section {
-    case main
+// MARK: - NSCollectionLayoutSize extension private
+private extension NSCollectionLayoutSize {
+    static var headerSize: NSCollectionLayoutSize {
+        NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1), heightDimension: .estimated(55)
+        )
+    }
+    
+    static var footerSize: NSCollectionLayoutSize {
+        NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1), heightDimension: .estimated(55)
+        )
+    }
+    
+    static var cellSize: NSCollectionLayoutSize {
+        NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1), heightDimension: .absolute(200)
+        )
+    }
+}
+
+// MARK: - Definition reuseIdentifiers
+private extension UICollectionReusableView {
+    static var reuseIdentifier: String {
+        String(describing: Self.self)
+    }
 }

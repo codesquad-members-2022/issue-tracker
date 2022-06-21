@@ -8,9 +8,6 @@
 import UIKit
 
 class IssueListHeaderReusableView: UICollectionReusableView {
-    static var reuseIdentifier: String {
-        return String(describing: Self.self)
-    }
     
     let titleLabel: UILabel = {
         let label = UILabel()

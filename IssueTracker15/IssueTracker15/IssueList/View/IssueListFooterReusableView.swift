@@ -8,15 +8,13 @@
 import UIKit
 
 class IssueListFooterReusableView: UICollectionReusableView {
-    static var reuseIdentifier: String {
-        return String(describing: Self.self)
-    }
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.font = UIFont(name: "SFProDisplay-Regular", size: 13)
         label.text = "아래로 당기면 검색바가 보여요!👀"
+        label.textAlignment = .center
         return label
     }()
     
