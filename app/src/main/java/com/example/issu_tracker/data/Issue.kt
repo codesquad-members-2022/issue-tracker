@@ -1,4 +1,5 @@
 package com.example.issu_tracker.data
+
 import java.lang.Exception
 
 data class IssueDto(
@@ -20,7 +21,8 @@ data class Issue(
     val mileStone: String,
     val state: Boolean,
     val title: String,
-    val user: User
+    val user: User,
+    var isSelected: Boolean = false
 )
 
 fun IssueDto.toIssue(): Issue? {
