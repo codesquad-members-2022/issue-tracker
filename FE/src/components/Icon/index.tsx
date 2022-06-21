@@ -37,12 +37,12 @@ const icons: Icons = {
 };
 
 interface IconProps {
-  IconType: IconTypes;
+  iconType: IconTypes;
   color?: string;
 }
 
-function Icon({ IconType, color }: IconProps) {
-  const Icon = icons[IconType];
+function Icon({ iconType, color }: IconProps) {
+  const Icon = icons[iconType];
   const $Icon = styled(Icon)`
     path {
       stroke: ${color || PALETTE.WHITE};
