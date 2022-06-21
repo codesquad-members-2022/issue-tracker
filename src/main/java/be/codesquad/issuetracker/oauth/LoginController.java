@@ -1,7 +1,7 @@
 package be.codesquad.issuetracker.oauth;
 
-import be.codesquad.issuetracker.oauth.dto.GithubToken;
 import be.codesquad.issuetracker.oauth.dto.GithubUser;
+import be.codesquad.issuetracker.oauth.dto.TokenInformation;
 import be.codesquad.issuetracker.user.User;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
@@ -25,21 +25,20 @@ public class LoginController {
     private static final int EXPIRED_SECOND = 24 * 60 * 60;
 
     private static final String CLIENT_ID = "ff50ff7342e90de02060";
-    private static final String AUTHORIZE_PATH = "https://github.com/login/oauth/authorize";
+    private static final String REDIRECT_URI = "https://github.com/login/oauth/authorize";
 
     private final LoginService loginService;
-    private final GithubOAuthClient githubOAuthClient;
+    private final AuthService githubOAuthClient;
 
     @GetMapping()
     public ResponseEntity<Void> githubLogin() {
         URI location = UriComponentsBuilder
-            .fromPath(AUTHORIZE_PATH)
+            .fromPath(REDIRECT_URI)
             .queryParam("client_id", CLIENT_ID)
             .build()
             .toUri();
 
-        log.debug("location: {}", location);
-        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY)
+        return ResponseEntity.status(HttpStatus.FOUND)
             .header(HttpHeaders.LOCATION, location.toString())
             .build();
     }
@@ -48,24 +47,18 @@ public class LoginController {
     public ResponseEntity<Void> githubLoginCallback(
         @RequestParam(value = "code", required = false) String code
     ) {
-        GithubToken token = githubOAuthClient.getToken(code);
-        GithubUser githubUser = githubOAuthClient.getUser(token.getAccessToken());
-        User user = loginService.upsertUser(
-            new User(
-                githubUser.getGithubId(),
-                githubUser.getUsername(),
-                githubUser.getImageUrl()
-            )
-        );
-
-        String accessToken = JwtFactory.create(user, EXPIRED_SECOND);
-        ResponseCookie cookie = ResponseCookie.from("access_token", accessToken)
-            .maxAge(EXPIRED_SECOND)
-            .path("/")
-            .build();
+        TokenInformation token = githubOAuthClient.getToken(code);
+        GithubUser githubUser = githubOAuthClient.getUser(token.getAccess_token());
+        User user = loginService.upsertUser(githubUser);
+//        String accessToken = JwtFactory.create(user, EXPIRED_SECOND);
+//
+//        ResponseCookie cookie = ResponseCookie.from("access_token", accessToken)
+//            .maxAge(EXPIRED_SECOND)
+//            .path("/")
+//            .build();
 
         return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY)
-            .header(HttpHeaders.SET_COOKIE, cookie.toString())
+//            .header(HttpHeaders.SET_COOKIE, cookie.toString())
             .header(HttpHeaders.LOCATION, "/")
             .build();
     }
