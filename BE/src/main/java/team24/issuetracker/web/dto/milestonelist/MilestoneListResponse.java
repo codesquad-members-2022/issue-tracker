@@ -20,7 +20,7 @@ public class MilestoneListResponse {
 		this.title = milestone.getTitle();
 		this.description = milestone.getDescription();
 		this.dueDate = milestone.getDueDate();
-		this.openedIssue = calculateClosedIssue(total, openedIssue);
+		this.openedIssue = openedIssue;
 		this.closedIssue = calculateClosedIssue(total, openedIssue);
 		this.progress = calculateProgress(total, openedIssue);
 	}
