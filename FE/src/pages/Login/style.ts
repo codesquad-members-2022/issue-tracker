@@ -13,11 +13,11 @@ const $Contents = styled.div`
   min-height: 100vh;
 `;
 
-const $Form = styled.form`
+const $LoginForm = styled.form`
   margin-bottom: 24px;
 `;
 
-const $Span = styled.span`
+const $DecoText = styled.span`
   color: ${({ theme }) => theme.COLOR.placeholder};
   font-size: ${({ theme }) => theme.FONT.SIZE.BASE};
   font-weight: ${({ theme }) => theme.FONT.WEIGHT.BOLD};
@@ -39,4 +39,4 @@ const $ButtonWrapper = styled.div`
   }
 `;
 
-export { $LogoWrapper, $Contents, $Form, $Span, $LoginInputWrap, $ButtonWrapper };
+export { $LogoWrapper, $Contents, $LoginForm, $DecoText, $LoginInputWrap, $ButtonWrapper };

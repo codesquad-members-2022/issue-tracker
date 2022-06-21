@@ -9,8 +9,8 @@ import Layout from '@/layout';
 import {
   $LogoWrapper,
   $Contents,
-  $Form,
-  $Span,
+  $LoginForm,
+  $DecoText,
   $LoginInputWrap,
   $ButtonWrapper
 } from '@/pages/Login/style';
@@ -83,8 +83,8 @@ export default function Login() {
           <Logo type="large" />
         </$LogoWrapper>
         <Button styleType="large" text="GitHub 계정으로 로그인" background={COLOR.title} />
-        <$Span>or</$Span>
-        <$Form>
+        <$DecoText>or</$DecoText>
+        <$LoginForm>
           <$LoginInputWrap>
             <TextInput<InputName>
               styleType="large"
@@ -116,7 +116,7 @@ export default function Login() {
               <InputMessage status={error.pw.status}>{error.pw.message}</InputMessage>
             )}
           </$LoginInputWrap>
-        </$Form>
+        </$LoginForm>
         <$ButtonWrapper>
           <Button styleType="large" text="아이디로 로그인" disabled={hasError()} />
           <Button styleType="smallText" text="회원가입" />
