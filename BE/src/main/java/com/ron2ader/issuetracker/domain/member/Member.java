@@ -1,6 +1,7 @@
 package com.ron2ader.issuetracker.domain.member;
 
 import com.ron2ader.issuetracker.domain.common.BaseEntity;
+import java.util.Objects;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,5 +38,22 @@ public class Member extends BaseEntity {
             return false;
         }
         return !this.memberId.equals(member.getMemberId()) || !this.avatarUrl.equals(member.getAvatarUrl());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Member member = (Member) o;
+        return Objects.equals(id, member.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
