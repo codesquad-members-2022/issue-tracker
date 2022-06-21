@@ -4,6 +4,7 @@ import com.ron2ader.issuetracker.auth.Login;
 import com.ron2ader.issuetracker.controller.issuedto.IssueCreateRequest;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
 import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssuesResponse;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.service.IssueService;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +38,13 @@ public class IssueController {
     }
 
     @GetMapping("/issues")
-    public ResponseEntity<Page<IssueSimpleResponse>> showIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
+    public IssuesResponse showIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
+        Page<IssueSimpleResponse> issues = issueService.findByOpenStatus(pageable, openStatus);
+        Long countByStatus = issueService.countByStatus(!openStatus);
 
-        Page<IssueSimpleResponse> issues = issueService.findByCondition(pageable, openStatus);
-
-        return ResponseEntity.ok(issues);
+        if (openStatus) {
+            return new IssuesResponse(issues.getTotalElements(), countByStatus, issues);
+        }
+        return new IssuesResponse(countByStatus, issues.getTotalElements(), issues);
     }
 }

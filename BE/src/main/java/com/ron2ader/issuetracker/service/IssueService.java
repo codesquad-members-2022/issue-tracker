@@ -46,8 +46,13 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public Page<IssueSimpleResponse> findByCondition(Pageable pageable, Boolean openStatus) {
+    public Page<IssueSimpleResponse> findByOpenStatus(Pageable pageable, Boolean openStatus) {
         Page<Issue> issues = issueRepository.findByCondition(pageable, IssueCondition.of(openStatus, null, null, null));
         return issues.map(IssueSimpleResponse::from);
+    }
+
+    @Transactional(readOnly = true)
+    public Long countByStatus(Boolean openStatus) {
+        return issueRepository.countByOpenStatus(openStatus);
     }
 }
