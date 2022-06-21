@@ -8,6 +8,10 @@
 import Foundation
 
 struct LabelDTO: Codable {
+    static var empty: LabelDTO {
+        LabelDTO(id: 0, node_id: "", url: "", name: "", desc: "", color: "", isDefault: false)
+    }
+    
     var id: Int
     var node_id: String
     var url: String

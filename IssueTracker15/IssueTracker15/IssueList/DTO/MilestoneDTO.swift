@@ -8,6 +8,10 @@
 import Foundation
 
 struct MilestoneDTO: Codable {
+    static var empty: MilestoneDTO {
+        MilestoneDTO(url: "", html_url: "'", labels_url: "", id: 0, node_id: "", number: 0, state: "", title: "", description: "", creator: UserDTO.empty, open_issues: 0, closed_issues: 0, created_at: "", updated_at: "", closed_at: "", due_on: "")
+    }
+    
     var url: String
     var html_url: String
     var labels_url: String

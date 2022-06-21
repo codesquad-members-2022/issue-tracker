@@ -14,7 +14,7 @@ class IssueListViewController: UIViewController {
     
     private var vm: IssueListViewModel?
     
-    private var issueList = [IssueDTO]() {
+    private var issueList = Array(repeating: IssueDTO.empty, count: 25) {
         didSet {
             self.applySnapshot()
         }
@@ -26,7 +26,42 @@ class IssueListViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.isScrollEnabled = true
-        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.reuseIdentifier)
+        collectionView.register(IssueListCell.self,
+                                forCellWithReuseIdentifier: IssueListCell.reuseIdentifier)
+        collectionView.register(IssueListHeaderReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: IssueListHeaderReusableView.reuseIdentifier)
+        collectionView.register(IssueListFooterReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: IssueListFooterReusableView.reuseIdentifier)
+        collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(sectionProvider: { (_, _) -> NSCollectionLayoutSection? in
+            let size = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(200)
+            )
+            let item = NSCollectionLayoutItem(layoutSize: size)
+            let section = NSCollectionLayoutSection(group: NSCollectionLayoutGroup.vertical(layoutSize: size, subitem: item, count: 1))
+            
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .estimated(55)
+                ),
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+            let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .estimated(60)
+                ),
+                elementKind: UICollectionView.elementKindSectionFooter,
+                alignment: .bottom
+            )
+            section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
+            
+            return section
+        })
         return collectionView
     }()
     
@@ -34,7 +69,7 @@ class IssueListViewController: UIViewController {
         DataSource(
             collectionView: issueListCollectionView,
             cellProvider: { (collectionView, indexPath, issue) -> UICollectionViewCell? in
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as? IssueListCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.reuseIdentifier, for: indexPath) as? IssueListCell
                 cell?.issueDTO = issue
                 return cell
             }
@@ -78,8 +113,24 @@ class IssueListViewController: UIViewController {
     
     private func applySnapshot(animatingDifferences: Bool = true) {
         var issueSnapshot = Snapshot()
+        var items = issueList
+        
+        for i in items.indices {
+            items[i].id = i
+        }
+        
         issueSnapshot.appendSections([Section.main])
-        issueSnapshot.appendItems([IssueDTO]())
+        issueSnapshot.appendItems(items)
+        issueDataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: IssueListHeaderReusableView.reuseIdentifier, for: indexPath) as? IssueListHeaderReusableView
+            case UICollectionView.elementKindSectionFooter:
+                return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: IssueListFooterReusableView.reuseIdentifier, for: indexPath) as? IssueListFooterReusableView
+            default:
+                return nil
+            }
+        }
         issueDataSource.apply(issueSnapshot, animatingDifferences: animatingDifferences)
     }
 }

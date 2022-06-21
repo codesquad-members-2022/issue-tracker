@@ -8,6 +8,10 @@
 import Foundation
 
 struct PullRequestDTO: Codable {
+    static var empty: PullRequestDTO {
+        PullRequestDTO(url: "", html_url: "", diff_url: "", patch_url: "")
+    }
+    
     var url: String
     var html_url: String
     var diff_url: String

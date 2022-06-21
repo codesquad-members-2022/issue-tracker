@@ -37,6 +37,8 @@
 		1B1A819C2860A814003C135A /* LabelNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A819B2860A814003C135A /* LabelNavigationController.swift */; };
 		1B1A819E2860A828003C135A /* MilestoneNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A819D2860A828003C135A /* MilestoneNavigationController.swift */; };
 		1B1A81A02860AABC003C135A /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A819F2860AABC003C135A /* IssueViewModel.swift */; };
+		1B1A81A3286160F5003C135A /* IssueListHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81A2286160F5003C135A /* IssueListHeaderReusableView.swift */; };
+		1B1A81A528617FB3003C135A /* IssueListFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81A428617FB3003C135A /* IssueListFooterReusableView.swift */; };
 		1B87F704285B6C7A002B47B7 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */; };
 		1B87F705285B6C7A002B47B7 /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */; };
 		1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F702285B6C7A002B47B7 /* NetworkService.swift */; };
@@ -125,6 +127,8 @@
 		1B1A819B2860A814003C135A /* LabelNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNavigationController.swift; sourceTree = "<group>"; };
 		1B1A819D2860A828003C135A /* MilestoneNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneNavigationController.swift; sourceTree = "<group>"; };
 		1B1A819F2860AABC003C135A /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
+		1B1A81A2286160F5003C135A /* IssueListHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListHeaderReusableView.swift; sourceTree = "<group>"; };
+		1B1A81A428617FB3003C135A /* IssueListFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFooterReusableView.swift; sourceTree = "<group>"; };
 		1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
 		1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
 		1B87F702285B6C7A002B47B7 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -332,6 +336,8 @@
 			children = (
 				1B1A8192286090A1003C135A /* IssueListViewController.swift */,
 				1B1A81942860A0F6003C135A /* IssueListCell.swift */,
+				1B1A81A2286160F5003C135A /* IssueListHeaderReusableView.swift */,
+				1B1A81A428617FB3003C135A /* IssueListFooterReusableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -700,6 +706,7 @@
 				1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */,
 				1B1A818828608D8A003C135A /* LabelDTO.swift in Sources */,
 				1B17484A285885710028E037 /* LargeStringAdaptable.swift in Sources */,
+				1B1A81A528617FB3003C135A /* IssueListFooterReusableView.swift in Sources */,
 				8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */,
 				8D21138E285ADFA700B65676 /* OAuthLoginButton.swift in Sources */,
 				1B17484D285885710028E037 /* BoldStringAdaptable.swift in Sources */,
@@ -708,6 +715,7 @@
 				8DDEBAE8285B382400A4E4DC /* OAuthLoginStackView.swift in Sources */,
 				1B1A81A02860AABC003C135A /* IssueViewModel.swift in Sources */,
 				8D2113BA285B1C6700B65676 /* UIView.swift in Sources */,
+				1B1A81A3286160F5003C135A /* IssueListHeaderReusableView.swift in Sources */,
 				8D2113B8285B0D0500B65676 /* UserInfoInputStackView.swift in Sources */,
 				1B1A81952860A0F6003C135A /* IssueListCell.swift in Sources */,
 				1B17484E285885710028E037 /* TestLabel.swift in Sources */,

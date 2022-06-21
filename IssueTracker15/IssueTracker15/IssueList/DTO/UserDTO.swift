@@ -8,6 +8,9 @@
 import Foundation
 
 struct UserDTO: Codable {
+    static var empty: UserDTO {
+        UserDTO(login: "", id: 0, node_id: "", avatar_url: "", gravatar_id: "", url: "", html_url: "", followers_url: "", following_url: "", gists_url: "", starred_url: "", subscriptions_url: "", organizations_url: "", repos_url: "", events_url: "", received_events_url: "", type: "", site_admin: false)
+    }
     var login: String
     var id: Int
     var node_id: String
