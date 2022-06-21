@@ -29,7 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         Object handler) throws Exception {
 
         String userId = extractUserId(request);
-        User user = userRepository.findByGitHubId(userId)
+        User user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         request.setAttribute(USER_ID, user.getUserId());
