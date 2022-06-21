@@ -57,8 +57,6 @@
 		D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
 		D0E98CD0285B05000051413E /* LabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CCF285B05000051413E /* LabelView.xib */; };
 		D0E98CD1285B05000051413E /* LabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CCF285B05000051413E /* LabelView.xib */; };
-		D0E98CD3285B088A0051413E /* PullListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CD2285B088A0051413E /* PullListTableViewController.swift */; };
-		D0E98CD4285B088A0051413E /* PullListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CD2285B088A0051413E /* PullListTableViewController.swift */; };
 		D0E98CDB285BAEE90051413E /* CustomBarButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDA285BAEE80051413E /* CustomBarButton .swift */; };
 		D0E98CDC285BAEE90051413E /* CustomBarButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDA285BAEE80051413E /* CustomBarButton .swift */; };
 		D0E98CDE285BC5A70051413E /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */; };
@@ -125,7 +123,6 @@
 		D04099DF2859C9400008B517 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
 		D0E98CC5285AF81C0051413E /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D0E98CCF285B05000051413E /* LabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelView.xib; sourceTree = "<group>"; };
-		D0E98CD2285B088A0051413E /* PullListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullListTableViewController.swift; sourceTree = "<group>"; };
 		D0E98CDA285BAEE80051413E /* CustomBarButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomBarButton .swift"; sourceTree = "<group>"; };
 		D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		D0E98CE1285C01530051413E /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
@@ -336,7 +333,6 @@
 				D0E98CDA285BAEE80051413E /* CustomBarButton .swift */,
 				D0E98CCF285B05000051413E /* LabelView.xib */,
 				D0E98CEA285C107E0051413E /* PullListTableViewCell.swift */,
-				D0E98CD2285B088A0051413E /* PullListTableViewController.swift */,
 				D04099D12859C08B0008B517 /* PullListViewController.swift */,
 			);
 			path = View;
@@ -544,7 +540,6 @@
 				BC2F5975285C2A660012D18C /* Repo.swift in Sources */,
 				BCF57C0C285705220059E61D /* LoginView.swift in Sources */,
 				D04099DC2859C6930008B517 /* Observable.swift in Sources */,
-				D0E98CD3285B088A0051413E /* PullListTableViewController.swift in Sources */,
 				BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */,
 				BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */,
 				D04099DA2859C34A0008B517 /* ReplaceRootSegue.swift in Sources */,
@@ -586,7 +581,6 @@
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CE9285C02800051413E /* PullListModel.swift in Sources */,
 				D04099E22859D9BD0008B517 /* PullTableCellViewModel.swift in Sources */,
-				D0E98CD4285B088A0051413E /* PullListTableViewController.swift in Sources */,
 				BC2F5968285B70100012D18C /* AppleLoginManager.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Pull.swift in Sources */,
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
