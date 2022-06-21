@@ -1,9 +1,8 @@
-import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyles from './GlobalStyles';
-import { theme } from './theme';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from '@/login/LoginPage';
+import GlobalStyles from './GlobalStyles';
+import theme from './theme';
 
 export default function App() {
   return (
@@ -11,7 +10,7 @@ export default function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="login" element={<LoginPage />}></Route>
+          <Route path="login" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

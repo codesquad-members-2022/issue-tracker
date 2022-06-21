@@ -1,0 +1,16 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ],
+    "@babel/preset-typescript"
+  ]
+}
+
+// 출처: https://ryuhojin.tistory.com/19 [프론트엔드 복습노트:티스토리]

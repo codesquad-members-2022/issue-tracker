@@ -39,4 +39,5 @@ const icons = {
   userImageSmall,
   xSquare,
 };
-export { icons };
+
+export default icons;
