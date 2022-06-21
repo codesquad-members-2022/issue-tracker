@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:id="@+id/tv_subject"
+            style="@style/Subtitle1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/noto_sans_kr"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tv_progress_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="제목" />
+
+        <TextView
+            android:id="@+id/tv_progress_value"
+            style="@style/Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_green"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_subject"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_subject"
+            tools:text="진행률(%)" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            style="@style/Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subject"
+            tools:text="마일스톤에 대한 설명 (한 줄만 보여짐, 생략 가능)" />
+
+        <ImageView
+            android:id="@+id/iv_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/calendar_image_content"
+            android:src="@drawable/ic_calendar_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+        <TextView
+            android:id="@+id/tv_deadline"
+            style="@style/Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@id/iv_calendar"
+            app:layout_constraintStart_toEndOf="@id/iv_calendar"
+            app:layout_constraintTop_toTopOf="@id/iv_calendar"
+            tools:text="완료일(생략 가능)" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_deadline">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_open_issue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/open_issue_text_color"
+                app:chipBackgroundColor="@color/open_issue_bg_color"
+                app:chipIcon="@drawable/ic_info_blue"
+                app:chipIconSize="20dp"
+                app:chipStrokeColor="@color/open_issue_text_color"
+                app:chipStrokeWidth="1dp"
+                app:iconStartPadding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_deadline"
+                tools:text="열린 이슈 1개" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_close_issue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/close_issue_text_color"
+                app:chipBackgroundColor="@color/close_issue_bg_color"
+                app:chipIcon="@drawable/ic_close_blue"
+                app:chipIconSize="15dp"
+                app:chipStrokeColor="@color/close_issue_text_color"
+                app:chipStrokeWidth="1dp"
+                app:iconStartPadding="5dp"
+                app:layout_constraintStart_toEndOf="@id/chip_open_issue"
+                app:layout_constraintTop_toBottomOf="@id/tv_deadline"
+                tools:text="닫힌 이슈 1개" />
+        </com.google.android.material.chip.ChipGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

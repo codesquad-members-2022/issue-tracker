@@ -35,8 +35,10 @@
     <string name="delete_label">delete label</string>
     <string name="select_items_count">선택된 항목 : %d개</string>
     <string name="select_label">레이블 선택</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="not_found_result">검색 결과가 없습니다.</string>
+    <string name="milestone_toolbar_title_string">마일스톤</string>
+    <string name="milestone_toolbar_edit_string">마일스톤 선택</string>
+    <string name="milestone_toolbar_new_string">새로운 마일스톤</string>
+    <string name="calendar_image_content">calendar image</string>
 
 </resources>
