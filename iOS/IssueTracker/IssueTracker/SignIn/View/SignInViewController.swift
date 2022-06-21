@@ -39,8 +39,8 @@ private extension SignInViewController {
             self?.showAlert(of: message)
         }
 
-        viewModel.setPresentAction { [weak self] in
-            self?.presentTabBarController()
+        viewModel.setOpenURLAction { url in
+            UIApplication.shared.open(url)
         }
     }
 

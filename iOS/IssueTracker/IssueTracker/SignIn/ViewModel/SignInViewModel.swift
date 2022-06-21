@@ -16,15 +16,11 @@ protocol SignInViewModelOutput {
 }
 
 protocol SignInViewModelProtocol: SignInViewModelInput, SignInViewModelOutput {
-    /* SignInViewModelActions의 presentTabBarController 프로퍼티를 SceneDelegate에서 DI시에 설정해주려고 하니,
-     SceneDelegate에는 `present()` 메소드가 없어서 해당 프로퍼티를 설정할 수 없었음.
-     그로인해, SignInVC에서 해당 프로퍼티를 설정해줄 수 있도록 메소드 제공 */
-    func setPresentAction(_ action: @escaping () -> Void)
+    func setOpenURLAction(_ action: @escaping (URL) -> Void)
 }
 
 struct SignInViewModelActions {
-    let openURL: (URL) -> Void
-    var presentTabBarController: () -> Void = { }
+    var openURL: (URL) -> Void = { _ in }
 }
 
 final class SignInViewModel: SignInViewModelProtocol {
@@ -32,10 +28,8 @@ final class SignInViewModel: SignInViewModelProtocol {
     private let useCase: SignInManagable
     private var actions: SignInViewModelActions?
 
-    init(useCase: SignInManagable,
-         actions: SignInViewModelActions) {
+    init(useCase: SignInManagable) {
         self.useCase = useCase
-        self.actions = actions
         setObserver()
     }
 
@@ -50,8 +44,8 @@ final class SignInViewModel: SignInViewModelProtocol {
         }
     }
 
-    func setPresentAction(_ action: @escaping () -> Void) {
-        actions?.presentTabBarController = action
+    func setOpenURLAction(_ action: @escaping (URL) -> Void) {
+        self.actions?.openURL = action
     }
 }
 
@@ -61,9 +55,5 @@ private extension SignInViewModel {
         NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didGetSignInError, object: nil, queue: nil) { [weak self] notification in
             self?.error.value = notification.description
             }
-
-        NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didSignIn, object: nil, queue: nil) { [weak self] _ in
-            self?.actions?.presentTabBarController()
-        }
     }
 }

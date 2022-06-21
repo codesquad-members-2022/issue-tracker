@@ -11,13 +11,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private let signInManager = SignInManager()
+    private let navigation = UINavigationController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let rootVC = selectRootViewController()
-        self.window?.rootViewController = rootVC
+        let startViewController = selectRootViewController()
+        navigation.setViewControllers([startViewController], animated: false)
+        self.window?.rootViewController = navigation
         window?.makeKeyAndVisible()
     }
 
@@ -27,7 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 switch result {
                 case let .success(jwtToken):
                     self?.saveJWTToken(jwtToken: jwtToken["JWT_access_token"] ?? "")
-                    NotificationCenter.default.post(name: NotificationNames.didSignIn, object: self)
+                    DispatchQueue.main.async {
+                        self?.navigation.setViewControllers([TabBarController()], animated: false)
+                    }
                 case let .failure(error):
                     NotificationCenter.default.post(name: NotificationNames.didGetSignInError, object: error)
                 }
@@ -56,12 +60,7 @@ private extension SceneDelegate {
     }
 
     func makeSignInViewController() -> UIViewController {
-        let openURL: (URL) -> Void = { (url) in
-            UIApplication.shared.open(url)
-        }
-
         return SignInViewController(
-            viewModel: SignInViewModel(useCase: SignInManager(),
-                                       actions: SignInViewModelActions(openURL: openURL)))
+            viewModel: SignInViewModel(useCase: SignInManager()))
     }
 }
