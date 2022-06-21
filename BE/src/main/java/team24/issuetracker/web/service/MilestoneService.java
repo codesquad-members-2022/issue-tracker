@@ -1,10 +1,11 @@
 package team24.issuetracker.web.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
-import team24.issuetracker.domain.Issue;
+
+import lombok.RequiredArgsConstructor;
 import team24.issuetracker.domain.Milestone;
 import team24.issuetracker.web.dto.milestonelist.MilestoneListResponse;
 import team24.issuetracker.web.repository.MilestoneRepository;
@@ -17,7 +18,12 @@ public class MilestoneService {
 
 	public List<MilestoneListResponse> findAll() {
 		List<Milestone> milestoneList = milestoneRepository.findAll();
-		milestoneList.stream().map(Milestone::getIssues).collect(Collectors.toList())
-
+		List<MilestoneListResponse> milestoneListResponses = new ArrayList<>();
+		for (Milestone milestone : milestoneList) {
+			long totalIssue = milestone.getIssues().size();
+			long openedIssue = milestone.getIssues().stream().filter(issue -> !issue.isClosed()).count();
+			milestoneListResponses.add(new MilestoneListResponse(milestone, totalIssue, openedIssue));
+		}
+		return  milestoneListResponses;
 	}
 }
