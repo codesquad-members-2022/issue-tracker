@@ -1,5 +1,6 @@
 package com.ron2ader.issuetracker.service;
 
+import com.ron2ader.issuetracker.controller.issuedto.IssueCondition;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetail;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
 import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
@@ -45,9 +46,8 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public Page<IssueSimpleResponse> findAllByOpenStatus(Pageable pageable, Boolean openStatus) {
-        Page<Issue> issues = issueRepository.findAllByOpenStatus(pageable, openStatus);
+    public Page<IssueSimpleResponse> findByCondition(Pageable pageable, Boolean openStatus) {
+        Page<Issue> issues = issueRepository.findByCondition(pageable, IssueCondition.of(openStatus, null, null, null));
         return issues.map(IssueSimpleResponse::from);
     }
-
 }
