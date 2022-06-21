@@ -20,6 +20,8 @@ class FilterViewModel(
 
     private val _labelList = MutableStateFlow<List<LabelDto>>(emptyList())
     val labelList = _labelList.asStateFlow()
+    private val _labelIndex = MutableStateFlow<Int>(0)
+    val labelIndex = _labelIndex.asStateFlow()
 
     private val _issues = MutableStateFlow<List<Issue>>(emptyList())
     val issues = _issues.asStateFlow()
@@ -34,12 +36,18 @@ class FilterViewModel(
         "내가 댓글을 남긴 이슈",
         "닫힌 이슈"))
     val state = _state.asStateFlow()
+    private val _stateIndex = MutableStateFlow<Int>(0)
+    val stateIndex = _stateIndex.asStateFlow()
 
     private val _writer = MutableStateFlow<List<Member>>(emptyList())
     val writer = _writer.asStateFlow()
+    private val _writerIndex = MutableStateFlow<Int>(0)
+    val writerIndex = _writerIndex.asStateFlow()
 
     private val _milestoneList = MutableStateFlow<List<MileStone>>(emptyList())
     val milestoneList = _milestoneList.asStateFlow()
+    private val _milestoneIndex = MutableStateFlow<Int>(0)
+    val milestoneIndex = _milestoneIndex.asStateFlow()
 
     private val _filtering = MutableStateFlow<HashMap<String, Any>>(hashMapOf())
 
@@ -81,10 +89,11 @@ class FilterViewModel(
         _eventApply.emit(true)
     }
 
-    fun clickFilterItem(item: String, type: Int) {
+    fun clickFilterItem(item: String, type: Int, position: Int) {
         val userId = sharedPref.getData("id")
         when (type) {
             0 -> {
+                _stateIndex.value = position
                 when (item) {
                     "열린 이슈", "닫힌 이슈" -> {
                         _filtering.value["status"] = item == "열린 이슈"
@@ -119,6 +128,7 @@ class FilterViewModel(
                 }
             }
             1 -> {
+                _writerIndex.value = position
                 if (item == "선택") {
                     _filtering.value.remove("writerId")
                 } else {
@@ -127,6 +137,7 @@ class FilterViewModel(
                 }
             }
             2 -> {
+                _labelIndex.value = position
                 if (item == "선택") {
                     _filtering.value.remove("label")
                 } else {
@@ -135,6 +146,7 @@ class FilterViewModel(
                 }
             }
             else -> {
+                _milestoneIndex.value = position
                 if (item == "선택") {
                     _filtering.value.remove("milestone")
                 } else {

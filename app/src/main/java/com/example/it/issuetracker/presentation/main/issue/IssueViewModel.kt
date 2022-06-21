@@ -17,6 +17,8 @@ class IssueViewModel(
     private val _uiState = MutableStateFlow<IssueUiState>(IssueUiState.UnInitialization)
     val uiState = _uiState.asStateFlow()
 
+    private var _init: Boolean = true
+
     private val _cache = MutableStateFlow<CacheIssue>(CacheIssue(sortedMapOf(), ""))
     val cache = _cache.asStateFlow()
 
@@ -120,6 +122,10 @@ class IssueViewModel(
     }
 
     fun getFilterList(value: List<Issue>) {
+        if (value.isEmpty()) {
+            _uiState.update { IssueUiState.NotFound }
+            return
+        }
         _uiState.update { IssueUiState.GetIssues(value) }
     }
 }

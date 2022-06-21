@@ -14,13 +14,16 @@ import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.customview.CustomSnackBar
 import com.example.it.issuetracker.presentation.main.issue.filter.FilterFragment
+import com.example.it.issuetracker.presentation.main.issue.filter.FilterViewModel
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IssueFragment : Fragment() {
 
     private lateinit var binding: FragmentIssueBinding
     private val viewModel by viewModel<IssueViewModel>()
+    private val filterViewModel by sharedViewModel<FilterViewModel>()
     private val adapter = IssueAdapter { toggleMode() }
 
     override fun onCreateView(
@@ -91,6 +94,9 @@ class IssueFragment : Fragment() {
                     is IssueUiState.GetIssues -> {
                         handlerSuccess(state)
                     }
+                    is IssueUiState.NotFound -> {
+                        handlerNotFound()
+                    }
                 }
             }
         }
@@ -106,6 +112,11 @@ class IssueFragment : Fragment() {
         }
     }
 
+    private fun handlerNotFound() {
+        binding.progressBar.isVisible = false
+        binding.tvSearchResult.isVisible = true
+    }
+
     private fun handlerUnInitialization() {
         binding.progressBar.isVisible = false
     }
@@ -116,12 +127,8 @@ class IssueFragment : Fragment() {
 
     private fun handlerSuccess(state: IssueUiState.GetIssues) {
         binding.progressBar.isVisible = false
-        if (state.issues.isEmpty()) {
-            binding.tvSearchResult.isVisible = true
-        } else {
-            binding.tvSearchResult.isVisible = false
-            adapter.submitList(state.issues)
-        }
+        binding.tvSearchResult.isVisible = false
+        adapter.submitList(state.issues)
     }
 
     private fun toggleMode() {

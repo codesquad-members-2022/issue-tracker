@@ -13,13 +13,13 @@ import com.example.it.issuetracker.databinding.FragmentFilterBinding
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.issue.IssueFragment
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.Serializable
 
 class FilterFragment : Fragment() {
 
     private lateinit var binding: FragmentFilterBinding
-    private val viewModel by viewModel<FilterViewModel>()
+    private val viewModel by sharedViewModel<FilterViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +37,10 @@ class FilterFragment : Fragment() {
     private fun initView() {
         setupSpinner()
         setupSpinnerHandler()
+        setEvent()
+    }
+
+    private fun setEvent() {
         binding.toolbarFilterIssue.setNavigationOnClickListener {
             parentFragmentManager.popBackStack("filter", FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
@@ -51,7 +55,6 @@ class FilterFragment : Fragment() {
         binding.btnApply.setOnClickListener {
             viewModel.getFilterList()
         }
-
     }
 
     private fun setupSpinner() {
@@ -60,6 +63,7 @@ class FilterFragment : Fragment() {
                 val list = it.map { label -> label.title }
                 binding.filterLabel.spinner.adapter =
                     SpinnerAdapter(requireContext(), R.layout.item_spinner, list)
+                binding.filterLabel.spinner.setSelection(viewModel.labelIndex.value)
             }
         }
 
@@ -67,6 +71,7 @@ class FilterFragment : Fragment() {
             viewModel.state.collectLatest {
                 binding.filterState.spinner.adapter =
                     SpinnerAdapter(requireContext(), R.layout.item_spinner, it)
+                binding.filterState.spinner.setSelection(viewModel.stateIndex.value)
             }
         }
 
@@ -75,6 +80,7 @@ class FilterFragment : Fragment() {
                 val writer = it.map { member -> member.name }
                 binding.filterWriter.spinner.adapter =
                     SpinnerAdapter(requireContext(), R.layout.item_spinner, writer)
+                binding.filterWriter.spinner.setSelection(viewModel.writerIndex.value)
             }
         }
 
@@ -83,6 +89,7 @@ class FilterFragment : Fragment() {
                 val milestone = it.map { milestone -> milestone.name }
                 binding.filterMilestone.spinner.adapter =
                     SpinnerAdapter(requireContext(), R.layout.item_spinner, milestone)
+                binding.filterMilestone.spinner.setSelection(viewModel.milestoneIndex.value)
             }
         }
 
@@ -112,7 +119,7 @@ class FilterFragment : Fragment() {
                     id: Long,
                 ) {
                     viewModel.clickFilterItem(binding.filterState.spinner.selectedItem.toString(),
-                        0)
+                        0, position)
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit
@@ -127,7 +134,7 @@ class FilterFragment : Fragment() {
                     id: Long,
                 ) {
                     viewModel.clickFilterItem(binding.filterWriter.spinner.selectedItem.toString(),
-                        1)
+                        1, position)
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit
@@ -142,7 +149,7 @@ class FilterFragment : Fragment() {
                     id: Long,
                 ) {
                     viewModel.clickFilterItem(binding.filterLabel.spinner.selectedItem.toString(),
-                        2)
+                        2, position)
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit
@@ -157,7 +164,7 @@ class FilterFragment : Fragment() {
                     id: Long,
                 ) {
                     viewModel.clickFilterItem(binding.filterMilestone.spinner.selectedItem.toString(),
-                        3)
+                        3, position)
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit
