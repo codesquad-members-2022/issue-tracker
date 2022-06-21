@@ -13,7 +13,8 @@ export const MileStoneWrap = styled.div<{ idx: number }>`
 
 export const MileStoneTop = styled.div`
   width: 100%;
-  ${mixin.flexbox({ dir: 'column', horizontal: 'center', vertical: 'space-between' })};
+  height: 32px;
+  ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
 `;
 export const MileStoneTopLeft = styled.div`
   ${mixin.flexbox({ vertical: 'center' })};
@@ -33,4 +34,36 @@ export const DueDate = styled.div`
   ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
   gap: 10px;
 `;
-export const MileStoneTopRight = styled.div``;
+export const MileStoneTopRight = styled.div`
+  ${mixin.flexbox({ horizontal: 'flex-end', vertical: 'center' })};
+  gap: 10px;
+`;
+export const CloseMileStone = styled.div`
+  ${mixin.flexbox({ vertical: 'center' })};
+  ${({ theme }) => theme.fontStyles.linkSSmall};
+  color: ${({ theme }) => theme.fontColors.gray2};
+  gap: 5px;
+  margin-right: 20px;
+`;
+
+export const MileStoneBottom = styled.div`
+  width: 100%;
+  ${mixin.flexbox({ horizontal: 'space-between', vertical: 'center' })};
+`;
+export const Discription = styled.div`
+  ${({ theme }) => theme.fontStyles.textSmall};
+  color: ${({ theme }) => theme.fontColors.gray2};
+`;
+export const MileStoneProgressBar = styled.div`
+  ${mixin.flexbox({ dir: 'column', horizontal: 'center' })};
+  gap: 8px;
+`;
+export const ProgressStatus = styled.div`
+  width: 100%;
+  ${mixin.flexbox({ horizontal: 'space-between' })};
+`;
+export const CompleteRate = styled.div`
+  ${({ theme }) => theme.fontStyles.textXSmall};
+  color: ${({ theme }) => theme.fontColors.gray2};
+`;
+export const IssueStatus = styled(CompleteRate)``;

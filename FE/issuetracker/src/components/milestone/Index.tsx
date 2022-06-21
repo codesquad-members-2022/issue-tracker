@@ -1,8 +1,8 @@
 import * as I from 'design/icons';
 import * as S from 'components/milestone/styled/styled.index';
-import LabelAndMileStoneBtns from 'components/common/LabelAndMileStoneBtns';
 import * as L from 'components/LabelPage/styled.labelList';
 import { keyMaker } from 'utils/util';
+import LabelAndMileStoneBtns from 'components/common/LabelAndMileStoneBtns';
 import MileStone from './MileStone';
 
 const mileStones: Array<string> = ['마일스톤 제목', '마스터즈 코스'];

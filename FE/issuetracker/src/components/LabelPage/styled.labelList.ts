@@ -7,7 +7,7 @@ export const labelListLayout = styled.div`
   border-radius: 16px;
   margin-top: 24px;
   padding-bottom: 10px;
-  background:${({theme})=>theme.backgroundColors.gray1};
+  background: ${({ theme }) => theme.backgroundColors.gray1};
 `;
 
 export const labelListTop = styled.div`
