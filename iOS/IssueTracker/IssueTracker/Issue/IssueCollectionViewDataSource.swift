@@ -28,28 +28,13 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCollectionViewCell.identifier, for: indexPath) as? IssueCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
-        cell.configure(title: data[indexPath.item].title,
-                       issueDescription: data[indexPath.item].content,
-                       milestoneName: data[indexPath.item].milestoneName,
-                       labelName: data[indexPath.item].labels[0].title,
-                       labelBackgroundColor: data[indexPath.item].labels[0].backgroundColor)
+        let items = data[indexPath.item]
+        cell.configure(with: items)
         
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: IssueCollectionHeaderView.identifier, for: indexPath) as? IssueCollectionHeaderView else {
-                return UICollectionReusableView()
-            }
-            header.setHeaderTitle(text: "이슈")
-            return header
-        } else {
-            return UICollectionReusableView()
-        }
     }
 }

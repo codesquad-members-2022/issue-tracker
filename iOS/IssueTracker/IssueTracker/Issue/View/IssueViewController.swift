@@ -15,6 +15,7 @@ class IssueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createNavigationBarButton()
+        createSearchController()
         self.view = issueCollectionView
         issueCollectionView.setDataSource(dataSource)
     }
@@ -27,10 +28,22 @@ class IssueViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
+    private func createSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Search"
+//        searchController.searchResultsUpdater = self
+    
+        self.navigationItem.title = "이슈"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.searchController = searchController
+    }
+    
 }
 
-extension IssueViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: 200)
+extension IssueViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
+    
 }
