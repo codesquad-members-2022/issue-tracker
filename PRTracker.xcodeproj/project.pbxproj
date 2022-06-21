@@ -17,13 +17,15 @@
 		BC2F5976285C2A660012D18C /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5974285C2A660012D18C /* Repo.swift */; };
 		BC2F597E286065610012D18C /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F597D286065610012D18C /* UserManagerTests.swift */; };
 		BC2F5982286075520012D18C /* KeyChainStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5981286075520012D18C /* KeyChainStub.swift */; };
-		BC2F59862860759B0012D18C /* PullManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59852860759B0012D18C /* PullManagerTests.swift */; };
+		BC2F59862860759B0012D18C /* IssueManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59852860759B0012D18C /* IssueManagerTests.swift */; };
 		BC2F598B286092EE0012D18C /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */; };
 		BC2F598C286092EE0012D18C /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */; };
 		BC2F598E2860979D0012D18C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598D2860979D0012D18C /* User.swift */; };
 		BC2F598F2860979D0012D18C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598D2860979D0012D18C /* User.swift */; };
 		BC2F5991286098B70012D18C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* URLProtocolStub.swift */; };
 		BC2F5992286098B70012D18C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* URLProtocolStub.swift */; };
+		BC2F5994286153AF0012D18C /* dummyResponseUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5993286153AF0012D18C /* dummyResponseUser.json */; };
+		BC2F5995286155510012D18C /* dummyResponseUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5993286153AF0012D18C /* dummyResponseUser.json */; };
 		BC97093B2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC97093C2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
@@ -108,10 +110,11 @@
 		BC2F5974285C2A660012D18C /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		BC2F597D286065610012D18C /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		BC2F5981286075520012D18C /* KeyChainStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainStub.swift; sourceTree = "<group>"; };
-		BC2F59852860759B0012D18C /* PullManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullManagerTests.swift; sourceTree = "<group>"; };
+		BC2F59852860759B0012D18C /* IssueManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueManagerTests.swift; sourceTree = "<group>"; };
 		BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		BC2F598D2860979D0012D18C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BC2F5990286098B70012D18C /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		BC2F5993286153AF0012D18C /* dummyResponseUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dummyResponseUser.json; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -238,7 +241,7 @@
 			children = (
 				BCF57BD8285701FD0059E61D /* PRTrackerTests.swift */,
 				BC2F597D286065610012D18C /* UserManagerTests.swift */,
-				BC2F59852860759B0012D18C /* PullManagerTests.swift */,
+				BC2F59852860759B0012D18C /* IssueManagerTests.swift */,
 				BC2F5981286075520012D18C /* KeyChainStub.swift */,
 				BC2F5990286098B70012D18C /* URLProtocolStub.swift */,
 			);
@@ -261,6 +264,7 @@
 				BCF57BCA285701FC0059E61D /* Assets.xcassets */,
 				BCF57BC7285701FB0059E61D /* Main.storyboard */,
 				BCF57BCC285701FC0059E61D /* LaunchScreen.storyboard */,
+				BC2F5993286153AF0012D18C /* dummyResponseUser.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -447,6 +451,7 @@
 				BCF57BCE285701FC0059E61D /* LaunchScreen.storyboard in Resources */,
 				D0E98CD0285B05000051413E /* LabelView.xib in Resources */,
 				BCF57BCB285701FC0059E61D /* Assets.xcassets in Resources */,
+				BC2F5995286155510012D18C /* dummyResponseUser.json in Resources */,
 				BCF57BC9285701FB0059E61D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +460,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2F5994286153AF0012D18C /* dummyResponseUser.json in Resources */,
 				D0E98CD1285B05000051413E /* LabelView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,7 +603,7 @@
 				BC2F5982286075520012D18C /* KeyChainStub.swift in Sources */,
 				D0E98CDC285BAEE90051413E /* CustomBarButton .swift in Sources */,
 				D04099E72859DA630008B517 /* AppDelegate.swift in Sources */,
-				BC2F59862860759B0012D18C /* PullManagerTests.swift in Sources */,
+				BC2F59862860759B0012D18C /* IssueManagerTests.swift in Sources */,
 				D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */,
 				BC2F5970285C26D60012D18C /* UserManager.swift in Sources */,
 				D04099E12859D91C0008B517 /* Observable.swift in Sources */,
