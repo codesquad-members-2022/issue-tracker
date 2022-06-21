@@ -82,7 +82,9 @@ export default function Login() {
         <$LogoWrapper>
           <Logo type="large" />
         </$LogoWrapper>
-        <Button styleType="large" text="GitHub 계정으로 로그인" background={COLOR.title} />
+        <Button styleType="large" background={COLOR.title}>
+          {'GitHub 계정으로 로그인'}
+        </Button>
         <$DecoText>or</$DecoText>
         <$LoginForm>
           <$LoginInputWrap>
@@ -118,8 +120,10 @@ export default function Login() {
           </$LoginInputWrap>
         </$LoginForm>
         <$ButtonWrapper>
-          <Button styleType="large" text="아이디로 로그인" disabled={hasError()} />
-          <Button styleType="smallText" text="회원가입" />
+          <Button styleType="large" disabled={hasError()}>
+            {'아이디로 로그인'}
+          </Button>
+          <Button styleType="smallText">{'회원가입'}</Button>
         </$ButtonWrapper>
       </$Contents>
     </Layout>
