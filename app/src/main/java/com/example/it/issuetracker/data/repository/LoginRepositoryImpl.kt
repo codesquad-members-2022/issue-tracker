@@ -1,51 +1,17 @@
 package com.example.it.issuetracker.data.repository
 
+import com.example.it.issuetracker.data.dto.toLoginInformation
+import com.example.it.issuetracker.data.network.IssueTrackerService
+import com.example.it.issuetracker.domain.model.LoginInformation
 import com.example.it.issuetracker.domain.repository.LoginRepository
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
 
 class LoginRepositoryImpl(
-    private val db: FirebaseFirestore = FirebaseFirestore.getInstance(),
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance(),
+    private val issuerTrackerApi: IssueTrackerService,
 ) : LoginRepository {
-    override suspend fun signInWithCredential(
-        auth: FirebaseAuth,
-        credential: AuthCredential,
-    ): Result<String> {
-        return runCatching {
-            val authResult = auth.signInWithCredential(credential).await()
-            authResult.user?.uid ?: throw NullPointerException("Error")
-        }
-    }
 
-    override suspend fun checkUserRegistered(userUid: String): Result<Boolean> {
-        return runCatching {
-            val documentReference = db.collection("users").document(userUid)
-            val snapshot = documentReference.get().await()
-            snapshot.exists()
-        }
-    }
+    override suspend fun loginOAuthGithub(code: String): LoginInformation {
+        val loginDto = issuerTrackerApi.loginOAuthGithub(code)
 
-    override suspend fun getUserUidList(): Result<List<String>> {
-        return runCatching {
-            val querySnapshot = db.collection("users").get().await()
-            val snapshots = querySnapshot.documents
-            snapshots.map { it.id }
-        }
-    }
-
-    override suspend fun registerUser(userList: List<String>): Result<Boolean> {
-        return runCatching {
-            val currentUid =
-                firebaseAuth.currentUser?.uid ?: throw NullPointerException("Null Pointer Error")
-            if (userList.contains(currentUid)) {
-                throw Exception("Duplicated uid Error")
-            }
-            val data = hashMapOf("uid" to currentUid)
-            db.collection("users").document(currentUid).set(data)
-            true
-        }
+        return loginDto.toLoginInformation()
     }
 }

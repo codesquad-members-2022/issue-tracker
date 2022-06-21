@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="issue"
+            type="com.example.it.issuetracker.domain.model.Issue" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="16dp">
+
+        <CheckBox
+            android:id="@+id/cb_edit"
+            android:layout_width="129dp"
+            android:layout_height="0dp"
+            android:checked="@{issue.isChecked}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_milestone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_milestone"
+            app:layout_constraintStart_toEndOf="@id/cb_edit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/light_gray" />
+
+        <TextView
+            android:id="@+id/tv_milestone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:text="@{issue.mileStone.name}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_milestone"
+            app:layout_constraintStart_toEndOf="@id/iv_milestone"
+            app:layout_constraintTop_toTopOf="@id/iv_milestone"
+            tools:text="마일스톤" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{issue.title}"
+            app:layout_constraintStart_toStartOf="@id/iv_milestone"
+            app:layout_constraintTop_toBottomOf="@id/iv_milestone"
+            tools:text="제목" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{issue.description}"
+            app:layout_constraintStart_toStartOf="@id/iv_milestone"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="이슈에 대한 설명" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_milestone"
+            app:layout_constraintTop_toBottomOf="@id/tv_description"
+            tools:listitem="@layout/item_label" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
