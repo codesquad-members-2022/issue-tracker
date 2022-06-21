@@ -24,11 +24,11 @@ protocol LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
 }
 
 protocol LoginFlowAction {
-    var goToMainScene: () -> Void { get }
+    var showMainScene: () -> Void { get }
 }
 
 struct LoginViewModelAction: LoginFlowAction {
-    var goToMainScene: () -> Void
+    var showMainScene: () -> Void
 }
 
 struct DefaultLoginViewModel: LoginViewModel {
@@ -53,6 +53,6 @@ struct DefaultLoginViewModel: LoginViewModel {
 // MARK: - Navigation
 extension DefaultLoginViewModel {
     func showMainScene() {
-        navigationAction.goToMainScene()
+        navigationAction.showMainScene()
     }
 }

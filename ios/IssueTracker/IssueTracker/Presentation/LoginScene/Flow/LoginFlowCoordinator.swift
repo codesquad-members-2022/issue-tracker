@@ -25,7 +25,7 @@ final class LoginFlowCoordinator: Coordinator {
     }
 
     func start() {
-        let action = LoginViewModelAction(goToMainScene: showMainTabBar)
+        let action = LoginViewModelAction(showMainScene: showMainTabBar)
         let viewController = dependency.makeLoginViewController(action: action)
         navigationController.viewControllers = [viewController]
     }

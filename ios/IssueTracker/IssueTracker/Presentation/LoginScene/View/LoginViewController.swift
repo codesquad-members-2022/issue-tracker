@@ -7,8 +7,14 @@
 
 import UIKit
 
-final class LoginViewController: UIViewController {
-    static func create(with viewModel: LoginViewModel) -> LoginViewController {
+protocol View {
+    associatedtype ViewModel
+
+    static func create(with viewModel: ViewModel) -> UIViewController
+}
+
+final class LoginViewController: UIViewController, View {
+    static func create(with viewModel: LoginViewModel) -> UIViewController {
         let viewController = LoginViewController()
         viewController.viewModel = viewModel
         return viewController
@@ -41,8 +47,8 @@ final class LoginViewController: UIViewController {
             return
         }
 
-        viewModel.output.isAuthenticated.bind { result in
-            if result == true {
+        viewModel.output.isAuthenticated.bind { isAuthenticated in
+            if isAuthenticated {
                 viewModel.showMainScene()
             }
         }
