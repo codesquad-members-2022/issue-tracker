@@ -229,7 +229,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9vs-JS-hKo">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="153" id="AAz-Gh-a3C" customClass="PullListTableViewCell" customModule="PRTracker" customModuleProvider="target">
@@ -266,14 +266,18 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="U0h-Vb-Gos" firstAttribute="leading" secondItem="5Iy-74-9QI" secondAttribute="leadingMargin" id="4Pl-xF-BfT"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Sf-Ie-iLg" secondAttribute="trailing" constant="20" symbolic="YES" id="FEa-DB-glp"/>
                                                 <constraint firstItem="S0r-jd-fbG" firstAttribute="top" secondItem="U0h-Vb-Gos" secondAttribute="bottom" constant="16" id="LYa-pF-LbN"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EkM-s6-I1y" secondAttribute="trailing" constant="20" symbolic="YES" id="OHY-QF-zpj"/>
                                                 <constraint firstItem="6Sf-Ie-iLg" firstAttribute="leading" secondItem="5Iy-74-9QI" secondAttribute="leadingMargin" id="TvF-V0-WDe"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="U0h-Vb-Gos" secondAttribute="trailing" constant="20" symbolic="YES" id="Z8S-hv-cQl"/>
                                                 <constraint firstItem="EkM-s6-I1y" firstAttribute="leading" secondItem="5Iy-74-9QI" secondAttribute="leadingMargin" id="gTG-Cw-ABY"/>
                                                 <constraint firstItem="6Sf-Ie-iLg" firstAttribute="top" secondItem="S0r-jd-fbG" secondAttribute="bottom" constant="16" id="j0c-Mj-KlL"/>
                                                 <constraint firstItem="S0r-jd-fbG" firstAttribute="leading" secondItem="5Iy-74-9QI" secondAttribute="leadingMargin" id="nes-e4-uKd"/>
                                                 <constraint firstItem="EkM-s6-I1y" firstAttribute="top" secondItem="6Sf-Ie-iLg" secondAttribute="bottom" constant="20" id="p9N-LK-Wg0"/>
                                                 <constraint firstAttribute="bottom" secondItem="EkM-s6-I1y" secondAttribute="bottom" id="qy7-NZ-XX7"/>
                                                 <constraint firstItem="U0h-Vb-Gos" firstAttribute="top" secondItem="5Iy-74-9QI" secondAttribute="topMargin" id="rVJ-kb-TqB"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="S0r-jd-fbG" secondAttribute="trailing" constant="20" symbolic="YES" id="tH2-YJ-ru4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

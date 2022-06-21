@@ -13,14 +13,12 @@ class PullListViewController: UIViewController {
     
     private let viewModel = PullListViewModel()
     private var isSearchControllerConfigured = false
-    private var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureBind()
         configureNavigationBar()
-        configureRefreshControl()
         requestData()
     }
     
@@ -41,9 +39,8 @@ class PullListViewController: UIViewController {
         searchController.searchBar.delegate = self
         searchController.searchBar.showsCancelButton = false
         searchController.hidesNavigationBarDuringPresentation = false
-        
         self.navigationItem.searchController = searchController
-        
+        navigationController?.navigationItem.hidesSearchBarWhenScrolling = true
         isSearchControllerConfigured = true
     }
     
@@ -53,23 +50,14 @@ class PullListViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(customView: button.right)
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        self.navigationItem.hidesSearchBarWhenScrolling = true
         self.navigationItem.title = "PR"
     }
     
-    private func configureRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: UIControl.Event.valueChanged)
-        self.tableView.refreshControl = refreshControl
-    }
-    
-    @objc func didPullToRefresh() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
-            
-            if !self.isSearchControllerConfigured {
-                DispatchQueue.main.async {
-                    self.configureSearchController()
-                }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !self.isSearchControllerConfigured {
+            DispatchQueue.main.async {
+                self.configureSearchController()
             }
         }
     }
