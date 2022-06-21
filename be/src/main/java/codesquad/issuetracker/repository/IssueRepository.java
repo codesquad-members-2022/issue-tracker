@@ -47,17 +47,28 @@ public class IssueRepository {
             .fetch();
     }
 
-    public Map<IssueStatus, Long> findCountOfIssuesByStatus() {
+    public Map<IssueStatus, Long> findCountOfIssuesByStatus(IssueSearchCondition condition) {
         List<Tuple> tuples = queryFactory
-            .select(issue.status, issue.count())
+            .select(issue.status, issue.id.countDistinct())
             .from(issue)
+            .join(issue.writer, member)
+            .leftJoin(issue.milestone, milestone)
+            .leftJoin(issue.assignees, assignee)
+            .leftJoin(issue.replies, reply)
+            .leftJoin(issue.issueLabels, issueLabel)
+            .where(writerIdentityEq(condition.getWriter()),
+                milestoneSubjectEq(condition.getMilestone()),
+                assigneeIdentityEq(condition.getAssignee()),
+                replierIdentityEq(condition.getReplier()),
+                labelNameEq(condition.getLabel())
+            )
             .groupBy(issue.status)
             .fetch();
 
         Map<IssueStatus, Long> countOfIssuesByStatus = new HashMap<>();
 
         for (Tuple tuple : tuples) {
-            countOfIssuesByStatus.put(tuple.get(issue.status), tuple.get(issue.count()));
+            countOfIssuesByStatus.put(tuple.get(issue.status), tuple.get(issue.id.countDistinct()));
         }
 
         return countOfIssuesByStatus;

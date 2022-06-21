@@ -58,5 +58,4 @@ public class Issue extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private IssueStatus status;
-
 }

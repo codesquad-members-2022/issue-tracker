@@ -25,7 +25,7 @@ public class IssueService {
 
     public IssueDtos getIssuesByCriteria(IssueSearchCondition condition) {
         List<Issue> issues = issueRepository.search(condition);
-        Map<IssueStatus, Long> countOfIssuesByStatus = issueRepository.findCountOfIssuesByStatus();
+        Map<IssueStatus, Long> countOfIssuesByStatus = issueRepository.findCountOfIssuesByStatus(condition);
 
         return new IssueDtos(
             countOfIssuesByStatus.getOrDefault(IssueStatus.OPEN, 0L),
