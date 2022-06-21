@@ -1,6 +1,7 @@
 package codesquad.issuetracker.dto.issue;
 
 import codesquad.issuetracker.domain.Issue;
+import codesquad.issuetracker.domain.IssueStatus;
 import codesquad.issuetracker.domain.Label;
 import codesquad.issuetracker.domain.Member;
 import codesquad.issuetracker.domain.Milestone;
@@ -20,6 +21,7 @@ import lombok.Getter;
 public class IssueDto {
 
     private Long id;
+    private IssueStatus status;
     private String subject;
     private String description;
     private String writer;
@@ -33,7 +35,7 @@ public class IssueDto {
 
     public static IssueDto of(Issue issue, Milestone milestone, List<Member> assignees, List<Label> labels) {
         Member writer = issue.getWriter();
-        return new IssueDto(issue.getId(), issue.getSubject(), issue.getDescription(),
+        return new IssueDto(issue.getId(), issue.getStatus(), issue.getSubject(), issue.getDescription(),
             writer.getIdentity(), writer.getProfileUrl(), issue.getCreatedDateTime(),
             MilestoneMapper.convertToDto(milestone),
             MemberMapper.convertToListDto(assignees),
