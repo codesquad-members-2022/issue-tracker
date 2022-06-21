@@ -51,8 +51,19 @@ class IssueListViewController: UIViewController {
             print("CheckSelectButton TouchUpInside")
         }
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "필터", image: UIImage(systemName: "line.3.horizontal.decrease"), primaryAction: queryAction, menu: .none)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "선택", image: UIImage(systemName: "checkmark.circle"), primaryAction: checkSelectAction, menu: .none)
+        let leftFilterButton = UIButton(type: .system)
+        leftFilterButton.setTitle("필터", for: .normal)
+        leftFilterButton.setImage(UIImage(systemName: "line.3.horizontal.decrease"), for: .normal)
+        leftFilterButton.sizeToFit()
+        leftFilterButton.addAction(queryAction, for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftFilterButton)
+        
+        let rightSelectButton = UIButton(type: .system)
+        rightSelectButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        rightSelectButton.setTitle("선택", for: .normal)
+        rightSelectButton.sizeToFit()
+        rightSelectButton.addAction(checkSelectAction, for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightSelectButton)
         
 //        vm = IssueListViewModel { param, bindable in }
         vm = IssueListViewModel()
