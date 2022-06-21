@@ -2,12 +2,15 @@ package kr.codesquad.issuetracker.auth.annotation;
 
 import static kr.codesquad.issuetracker.auth.utils.Utils.AUTHORIZATION;
 import static kr.codesquad.issuetracker.auth.utils.Utils.BEARER;
+import static kr.codesquad.issuetracker.exception.ErrorMessage.*;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import javax.servlet.http.HttpServletRequest;
 import kr.codesquad.issuetracker.auth.service.JwtService;
 import kr.codesquad.issuetracker.domain.member.Member;
 import kr.codesquad.issuetracker.domain.member.MemberRepository;
+import kr.codesquad.issuetracker.exception.CustomException;
+import kr.codesquad.issuetracker.exception.ErrorMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -29,7 +32,6 @@ public class LoginVerifyResolver implements HandlerMethodArgumentResolver {
 		return parameter.hasMethodAnnotation(LoginVerify.class);
 	}
 
-	//TODO: 에러처리 필요
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 		NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
@@ -39,7 +41,8 @@ public class LoginVerifyResolver implements HandlerMethodArgumentResolver {
 		String jwt = header.substring(BEARER.length()).trim();
 		DecodedJWT decodedJWT = jwtService.verifyToken(jwt);
 		Long memberId = jwtService.getMemberId(decodedJWT);
-		Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
+		Member member = memberRepository.findById(memberId)
+			.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
 		return member.getName();
 	}
 }

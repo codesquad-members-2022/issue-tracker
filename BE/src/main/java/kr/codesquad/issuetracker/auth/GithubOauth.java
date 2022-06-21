@@ -1,10 +1,13 @@
 package kr.codesquad.issuetracker.auth;
 
 import static kr.codesquad.issuetracker.auth.utils.Utils.TOKEN;
+import static kr.codesquad.issuetracker.exception.ErrorMessage.ACCESS_TOKEN_NOT_FOUND;
+import static kr.codesquad.issuetracker.exception.ErrorMessage.GITHUB_USER_INFO_NOT_FOUND;
 
 import kr.codesquad.issuetracker.auth.dto.AccessTokenRequestDto;
 import kr.codesquad.issuetracker.auth.dto.AccessTokenResponseDto;
 import kr.codesquad.issuetracker.auth.dto.UserProfile;
+import kr.codesquad.issuetracker.exception.CustomException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,7 +42,6 @@ public class GithubOauth {
 		AccessTokenRequestDto accessTokenRequest =
 			new AccessTokenRequestDto(clientId, clientSecret, code);
 
-		//TODO:exception만들기
 		return webClient.post()
 			.uri(accessTokenUri)
 			.accept(MediaType.APPLICATION_JSON)
@@ -48,10 +50,9 @@ public class GithubOauth {
 			.onStatus(HttpStatus::is4xxClientError, error -> Mono.error(RuntimeException::new))
 			.bodyToMono(AccessTokenResponseDto.class)
 			.blockOptional()
-			.orElseThrow(RuntimeException::new);
+			.orElseThrow(() -> new CustomException(ACCESS_TOKEN_NOT_FOUND));
 	}
 
-	//TODO:exception만들기
 	public UserProfile getUserInfo(String accessToken) {
 		return webClient.get()
 			.uri(userUri)
@@ -61,6 +62,6 @@ public class GithubOauth {
 			.onStatus(HttpStatus::is4xxClientError, error -> Mono.error(RuntimeException::new))
 			.bodyToMono(UserProfile.class)
 			.blockOptional()
-			.orElseThrow(RuntimeException::new);
+			.orElseThrow(() -> new CustomException(GITHUB_USER_INFO_NOT_FOUND));
 	}
 }
