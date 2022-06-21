@@ -2,7 +2,7 @@ import { $Button } from '@/components/Button/style';
 import { COLOR } from '@/styles/common';
 import styled, { css } from 'styled-components';
 
-const $UL = styled.ul`
+const $Tab = styled.ul`
   display: flex;
   width: fit-content;
   border: 1px solid ${({ theme }) => theme.COLOR.line};
@@ -10,7 +10,7 @@ const $UL = styled.ul`
   overflow: hidden;
 `;
 
-const $LI = styled.li`
+const $TabItem = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,4 +22,4 @@ const $LI = styled.li`
   }
 `;
 
-export { $UL, $LI };
+export { $Tab, $TabItem };

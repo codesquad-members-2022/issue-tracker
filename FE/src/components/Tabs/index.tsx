@@ -1,6 +1,6 @@
 import Button from '../Button';
 import { COLOR } from '@/styles/common';
-import { $LI, $UL } from '@/components/Tabs/style';
+import { $Tab, $TabItem } from '@/components/Tabs/style';
 import { listItem, ITabs } from '@/components/Tabs/type';
 import { IButtonProps, IButtonStyleProps } from '@/components/Button/type';
 import { IconTypes } from '@/components/Icon';
@@ -32,12 +32,12 @@ const createButtonText = ({ name, count }: listItem) => `
 
 export default function Tabs({ list }: ITabs) {
   return (
-    <$UL>
+    <$Tab>
       {list?.map(({ name, iconType, count }) => (
-        <$LI key={name}>
+        <$TabItem key={name}>
           <Button {...getButtonProps(iconType)}>{createButtonText({ name, count })}</Button>
-        </$LI>
+        </$TabItem>
       ))}
-    </$UL>
+    </$Tab>
   );
 }
