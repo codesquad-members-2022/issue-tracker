@@ -57,8 +57,6 @@
 		D0E98CD1285B05000051413E /* LabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CCF285B05000051413E /* LabelView.xib */; };
 		D0E98CDB285BAEE90051413E /* CustomBarButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDA285BAEE80051413E /* CustomBarButton .swift */; };
 		D0E98CDC285BAEE90051413E /* CustomBarButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDA285BAEE80051413E /* CustomBarButton .swift */; };
-		D0E98CDE285BC5A70051413E /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */; };
-		D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */; };
 		D0E98CE2285C01530051413E /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE1285C01530051413E /* MockDataService.swift */; };
 		D0E98CE3285C01530051413E /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE1285C01530051413E /* MockDataService.swift */; };
 		D0E98CE8285C02800051413E /* PullListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CE7285C02800051413E /* PullListModel.swift */; };
@@ -121,7 +119,6 @@
 		D0E98CC5285AF81C0051413E /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D0E98CCF285B05000051413E /* LabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelView.xib; sourceTree = "<group>"; };
 		D0E98CDA285BAEE80051413E /* CustomBarButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomBarButton .swift"; sourceTree = "<group>"; };
-		D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		D0E98CE1285C01530051413E /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
 		D0E98CE7285C02800051413E /* PullListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullListModel.swift; sourceTree = "<group>"; };
 		D0E98CEA285C107E0051413E /* PullListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullListTableViewCell.swift; sourceTree = "<group>"; };
@@ -176,7 +173,6 @@
 				BC9709412859C88100E54F93 /* Logger.swift */,
 				D0E98CE1285C01530051413E /* MockDataService.swift */,
 				D0E98D03285CE97D0051413E /* NetworkService.swift */,
-				D0E98CDD285BC5A70051413E /* NSNotification+Extension.swift */,
 				D04099DB2859C6930008B517 /* Observable.swift */,
 				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
 			);
@@ -528,7 +524,6 @@
 				D0E98CEB285C107E0051413E /* PullListTableViewCell.swift in Sources */,
 				D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */,
 				D0E98CDB285BAEE90051413E /* CustomBarButton .swift in Sources */,
-				D0E98CDE285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57C06285705130059E61D /* GitHubLoginManager.swift in Sources */,
 				BC2F5978285C2ADC0012D18C /* RepoManager.swift in Sources */,
 				BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */,
@@ -582,7 +577,6 @@
 				D0E98CE3285C01530051413E /* MockDataService.swift in Sources */,
 				BCF57C0E2857053F0059E61D /* LoginViewController.swift in Sources */,
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
-				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57BFE285704F40059E61D /* PullListViewModel.swift in Sources */,
 				D04099E42859D9CB0008B517 /* LabelViewModel.swift in Sources */,
 				D0E98D07285CEABA0051413E /* KeyChainService.swift in Sources */,
