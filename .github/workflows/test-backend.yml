@@ -1,0 +1,36 @@
+name: Backend Build & Test
+
+on:
+  push:
+    branches: [backend]
+
+jobs:
+  buildAndDeploy:
+    name: Project Build & Test
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./Backend
+
+    steps:
+      # https://github.com/actions/setup-java#basic
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "temurin"
+          cache: gradle
+
+      # https://github.com/actions/cache/blob/main/examples.md#java---gradle
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: gradle build
+        run: ./gradlew build

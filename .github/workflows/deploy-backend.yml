@@ -1,0 +1,65 @@
+name: Backend Deploy
+
+on:
+  push:
+    branches: [deploy-backend]
+
+jobs:
+  buildAndDeploy:
+    name: Project Build & Test & Deploy
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./Backend
+    env:
+      PROEJCT_NAME: issue-tracker
+
+    steps:
+      # https://github.com/actions/setup-java#basic
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "temurin"
+          cache: gradle
+
+      # https://github.com/actions/cache/blob/main/examples.md#java---gradle
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: gradle build
+        run: ./gradlew build
+
+      - name: create zip
+        run: zip -r ./$PROEJCT_NAME.zip ./build/libs/*.jar ./scripts/* appspec.yml
+
+      - name: AWS Credential 설정
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+      
+      - name: Upload to AWS S3
+        env: 
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        run: aws s3 cp ./$PROEJCT_NAME.zip s3://$AWS_S3_BUCKET/$PROEJCT_NAME.zip
+
+      - name: Launch AWS CodeDeploy
+        env: 
+          APPLICATION_NAME: issue-tracker-deploy
+          DEPLOY_GROUP: backend-deploy-group
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        run: aws deploy create-deployment 
+          --application-name $APPLICATION_NAME
+          --deployment-group $DEPLOY_GROUP
+          --s3-location bucket=$AWS_S3_BUCKET,key=$PROEJCT_NAME.zip,bundleType=zip
+
+      
