@@ -7,8 +7,13 @@
 
 import UIKit
 
-final class OAuthLoginButton: UIButton {
-    
+enum LoginType: String {
+    case gitHub = "GitHub 계정으로 로그인"
+    case apple = "Apple 계정으로 로그인"
+}
+
+final class OAuthLoginButton: UIButton, ViewBindable {
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -16,6 +21,24 @@ final class OAuthLoginButton: UIButton {
     
     @available(*, unavailable) required init?(coder: NSCoder) {
         fatalError("init with coder is unavailable")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        sendAction(nil)
+    }
+    
+    var vc: ViewBinding?
+    
+    func sendAction(_ param: Any?) {
+        // GitHubLogin과 Apple로그인을 구분
+        vc?.inputViewEvent(self, LoginType(rawValue: titleLabel?.text ?? ""))
+    }
+    
+    func receive(_ responseData: Any) {  }
+    
+    func setVC(_ binding: ViewBinding) {
+        self.vc = binding
     }
     
     private func setUp() {
@@ -37,5 +60,4 @@ final class OAuthLoginButton: UIButton {
         self.configuration?.imagePadding = 8.0
         self.configuration?.image = image
     }
-    
 }
