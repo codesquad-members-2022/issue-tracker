@@ -25,7 +25,7 @@
 		BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709442859CACC00E54F93 /* TokenResponse.swift */; };
 		BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC1285701FB0059E61D /* AppDelegate.swift */; };
 		BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC3285701FB0059E61D /* SceneDelegate.swift */; };
-		BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC5285701FB0059E61D /* ViewController.swift */; };
+		BCF57BC6285701FB0059E61D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC5285701FB0059E61D /* LoginViewController.swift */; };
 		BCF57BC9285701FB0059E61D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF57BC7285701FB0059E61D /* Main.storyboard */; };
 		BCF57BCB285701FC0059E61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF57BCA285701FC0059E61D /* Assets.xcassets */; };
 		BCF57BCE285701FC0059E61D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF57BCC285701FC0059E61D /* LaunchScreen.storyboard */; };
@@ -40,7 +40,7 @@
 		BCF57C0A2857051C0059E61D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C082857051C0059E61D /* LoginViewModel.swift */; };
 		BCF57C0C285705220059E61D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C0B285705220059E61D /* LoginView.swift */; };
 		BCF57C0D285705220059E61D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57C0B285705220059E61D /* LoginView.swift */; };
-		BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC5285701FB0059E61D /* ViewController.swift */; };
+		BCF57C0E2857053F0059E61D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC5285701FB0059E61D /* LoginViewController.swift */; };
 		D04099D22859C08B0008B517 /* PullListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D12859C08B0008B517 /* PullListViewController.swift */; };
 		D04099DA2859C34A0008B517 /* ReplaceRootSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */; };
 		D04099DC2859C6930008B517 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04099DB2859C6930008B517 /* Observable.swift */; };
@@ -104,7 +104,7 @@
 		BCF57BBE285701FB0059E61D /* PRTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PRTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF57BC1285701FB0059E61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCF57BC3285701FB0059E61D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BCF57BC5285701FB0059E61D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BCF57BC5285701FB0059E61D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BCF57BC8285701FB0059E61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BCF57BCA285701FC0059E61D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCF57BCD285701FC0059E61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -280,7 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				BCF57C0B285705220059E61D /* LoginView.swift */,
-				BCF57BC5285701FB0059E61D /* ViewController.swift */,
+				BCF57BC5285701FB0059E61D /* LoginViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -536,7 +536,7 @@
 				BCF57C06285705130059E61D /* GitHubLoginManager.swift in Sources */,
 				BC2F5978285C2ADC0012D18C /* RepoManager.swift in Sources */,
 				BC9709452859CACC00E54F93 /* TokenResponse.swift in Sources */,
-				BCF57BC6285701FB0059E61D /* ViewController.swift in Sources */,
+				BCF57BC6285701FB0059E61D /* LoginViewController.swift in Sources */,
 				BC2F5975285C2A660012D18C /* Repo.swift in Sources */,
 				BCF57C0C285705220059E61D /* LoginView.swift in Sources */,
 				D04099DC2859C6930008B517 /* Observable.swift in Sources */,
@@ -586,7 +586,7 @@
 				BCF57BD9285701FD0059E61D /* PRTrackerTests.swift in Sources */,
 				D0E98CEC285C107E0051413E /* PullListTableViewCell.swift in Sources */,
 				D0E98CE3285C01530051413E /* MockDataService.swift in Sources */,
-				BCF57C0E2857053F0059E61D /* ViewController.swift in Sources */,
+				BCF57C0E2857053F0059E61D /* LoginViewController.swift in Sources */,
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				D0E98CDF285BC5A70051413E /* NSNotification+Extension.swift in Sources */,
 				BCF57BFE285704F40059E61D /* PullListViewModel.swift in Sources */,
