@@ -2,10 +2,17 @@ import * as I from 'design/icons';
 import * as S from 'components/milestone/styled/styled.index';
 import LabelAndMileStoneBtns from 'components/common/LabelAndMileStoneBtns';
 import * as L from 'components/LabelPage/styled.labelList';
+import { keyMaker } from 'utils/util';
+import MileStone from './MileStone';
 
+const mileStones: Array<string> = ['마일스톤 제목', '마스터즈 코스'];
+const mileStoneList = mileStones.map((title, idx) => {
+  const key: string = keyMaker();
+  return <MileStone key={key} idx={idx} title={title} />;
+});
 function MileStonePage() {
   return (
-    <S.MileStoneWrapper>
+    <S.MileStonePageWrapper>
       <LabelAndMileStoneBtns />
       <L.labelListLayout>
         <L.labelListTop>
@@ -20,8 +27,9 @@ function MileStonePage() {
             </S.ClosedMileStone>
           </S.MileStoneStatus>
         </L.labelListTop>
+        {mileStoneList}
       </L.labelListLayout>
-    </S.MileStoneWrapper>
+    </S.MileStonePageWrapper>
   );
 }
 

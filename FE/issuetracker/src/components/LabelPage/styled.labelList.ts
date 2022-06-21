@@ -3,10 +3,11 @@ import { mixin } from 'design/GlobalStyles';
 
 export const labelListLayout = styled.div`
   width: 100%;
-  min-height: 367px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   border-radius: 16px;
   margin-top: 24px;
+  padding-bottom: 10px;
+  background:${({theme})=>theme.backgroundColors.gray1};
 `;
 
 export const labelListTop = styled.div`

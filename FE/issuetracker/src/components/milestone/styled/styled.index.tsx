@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
-export const MileStoneWrapper = styled.div``;
+export const MileStonePageWrapper = styled.div``;
 
 export const MileStoneStatus = styled.div`
   ${mixin.flexbox({ vertical: 'center', horizontal: 'center' })};
   height: 100%;
   gap: 30px;
+  border-bottom: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
 `;
 export const OpenedMileStone = styled.div`
   ${({ theme }) => theme.fontStyles.linkSmall};
