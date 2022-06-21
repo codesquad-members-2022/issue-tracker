@@ -13,7 +13,6 @@ final class IssueCollectionView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         addSubview(collectionView)
-        collectionView.delegate = self
     }
     
     @available(*, unavailable)
@@ -33,7 +32,6 @@ final class IssueCollectionView: UIView {
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true
         collectionView.register(IssueCollectionViewCell.self, forCellWithReuseIdentifier: IssueCollectionViewCell.identifier)
-        collectionView.register(IssueCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: IssueCollectionHeaderView.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -46,11 +44,5 @@ final class IssueCollectionView: UIView {
         collectionView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalTo(self)
         }
-    }
-}
-
-extension IssueCollectionView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.frame.width, height: 80)
     }
 }
