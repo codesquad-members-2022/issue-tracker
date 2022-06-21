@@ -1,4 +1,4 @@
-package kr.codesquad.issuetracker.auth.exception;
+package kr.codesquad.issuetracker.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
