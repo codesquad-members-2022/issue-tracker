@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="editToolbarTitle"
+            type="String" />
+
+        <variable
+            name="defaultToolbarTitle"
+            type="String" />
+
+        <variable
+            name="editToolbarVisible"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/label_appbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/default_toolbar"
+                style="@style/Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:background="@color/white"
+                android:visibility="@{editToolbarVisible? View.GONE : View.VISIBLE}"
+                app:menu="@menu/label_default_menu"
+                app:title="@{defaultToolbarTitle}"
+                tools:title="타이틀" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/edit_toolbar"
+                style="@style/Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:background="@color/main"
+                android:visibility="@{editToolbarVisible? View.VISIBLE : View.GONE}"
+                app:menu="@menu/label_edit_menu"
+                app:navigationIcon="@drawable/ic_exit"
+                app:title="@{editToolbarTitle}"
+                app:titleTextColor="@color/white"
+                tools:visibility="gone" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

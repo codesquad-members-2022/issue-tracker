@@ -55,7 +55,7 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
     private fun setupToolbar() {
         binding.recyclerviewLabelItem.adapter = adapter
         binding.recyclerviewLabelItem.layoutManager = LinearLayoutManager(requireContext())
-        binding.defaultToolbar.setOnMenuItemClickListener { menuItem ->
+        binding.toolbarLayout.defaultToolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.add_label -> {
                     navigatePage(null)
@@ -65,7 +65,7 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
             }
         }
 
-        binding.editToolbar.setOnMenuItemClickListener { menuItem ->
+        binding.toolbarLayout.editToolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.delete_label -> {
                     viewModel.deleteItems()
@@ -74,7 +74,7 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
                 else -> false
             }
         }
-        binding.editToolbar.setNavigationOnClickListener { viewModel.changeEditMode(false) }
+        binding.toolbarLayout.editToolbar.setNavigationOnClickListener { viewModel.changeEditMode(false) }
     }
 
     private fun navigatePage(label: Label?) {
