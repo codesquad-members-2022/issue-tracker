@@ -8,7 +8,6 @@ import com.example.issu_tracker.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,10 +31,20 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         _issueList.value = issueDummyData
     }
 
-    suspend fun deleteIssue(itemId: String) {
-        repository.deleteIssue(itemId)
+    suspend fun updateIssueSate(itemId: String, boolean: Boolean) {
+        repository.updateIssueState(itemId , boolean)
         getIssueList()
     }
+
+    suspend fun deleteIssueList(issueList: List<Issue>) {
+
+    }
+
+    suspend fun updateIssueList(issueList: List<Issue>, boolean: Boolean) {
+
+    }
+
+
     fun filterIssueList(condition: FilterCondition) {
         val filteredIssueList = _issueList.value
             .filter {

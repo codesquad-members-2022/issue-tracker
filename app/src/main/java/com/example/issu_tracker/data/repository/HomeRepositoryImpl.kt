@@ -26,9 +26,26 @@ class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFire
         return list
     }
 
-    override suspend fun deleteIssue(itemId: String) {
+    override suspend fun updateIssueState(itemId: String, boolean: Boolean) {
+//delete 문
+//        fireStore.collection(FIREBASE_COLLECTION_PATH).document(itemId)
+//            .delete().await()
+
         fireStore.collection(FIREBASE_COLLECTION_PATH).document(itemId)
-            .delete().await()
+            .update("state", false).await()
+
+    }
+
+    override suspend fun updateIssueState(list: List<Issue>, boolean: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteIssueList(itemId: String) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateIssueList(list: List<Issue>, boolean: Boolean) {
+        TODO("Not yet implemented")
     }
 
     companion object {

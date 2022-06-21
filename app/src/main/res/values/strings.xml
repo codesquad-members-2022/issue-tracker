@@ -16,4 +16,5 @@
     <string name="condition_title_writer">작성자</string>
     <string name="condition_title_label">레이블</string>
     <string name="condition_title_mile_stone">마일스톤</string>
+    <string name="issue_close">닫기</string>
 </resources>
