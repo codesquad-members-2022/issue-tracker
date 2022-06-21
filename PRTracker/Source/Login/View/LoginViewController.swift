@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  PRTracker
 //
 //  Created by Bumgeun Song on 2022/06/13.
@@ -8,7 +8,7 @@
 import UIKit
 import AuthenticationServices
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var githubLoginButton: UIButton!
     @IBOutlet weak var appleLoginButton: UIButton!
