@@ -52,6 +52,13 @@
   + access 토큰 재발급 및 로그아웃 기능 구현
 + 이슈 상태(OPEN, CLOSE) 변경 API 기능 구현
 + 로그인 상태 정보 조회 API 기능 구현
+
+##### Github OAuth 연동 로그인 흐름도
+> ![image](https://user-images.githubusercontent.com/82401504/174836244-fc48ced7-2d43-40d5-b2a7-7d3998b4ffff.png)
+
+##### JWT 로그인 검증 흐름도
+> ![image](https://user-images.githubusercontent.com/82401504/174836367-4dd4d730-5b21-45b6-a6ff-f988e9eae83a.png)
+
 ##### 진행 예정
 + S3 이미지 업로드 기능 구현
 
