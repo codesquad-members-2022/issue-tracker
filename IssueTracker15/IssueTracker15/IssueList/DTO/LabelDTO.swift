@@ -12,8 +12,18 @@ struct LabelDTO: Codable {
     var node_id: String
     var url: String
     var name: String
-    var description: String
+    var desc: String
     var color: String
     /// Original Name : default
     var isDefault: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case node_id
+        case url
+        case name
+        case desc = "description"
+        case color
+        case isDefault = "default"
+    }
 }
