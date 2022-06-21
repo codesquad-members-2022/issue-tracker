@@ -31,7 +31,7 @@ class LabelAddFragment : Fragment() {
         binding = FragmentLabelAddBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        editLabelInfo = arguments?.getParcelable("label")
+        editLabelInfo = arguments?.getSerializable("label") as? Label
 
         return binding.root
     }
