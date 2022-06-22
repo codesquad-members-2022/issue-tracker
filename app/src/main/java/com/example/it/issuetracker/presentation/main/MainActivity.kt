@@ -9,7 +9,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.ActivityMainBinding
-import com.example.it.issuetracker.presentation.main.issue.IssueFragment
+import com.example.it.issuetracker.presentation.main.issue.list.IssueFragment
 import com.example.it.issuetracker.presentation.main.issue.filter.FilterViewModel
 import com.example.it.issuetracker.presentation.main.label.LabelFragment
 import com.example.it.issuetracker.presentation.main.milestone.MilestoneFragment

@@ -11,7 +11,7 @@
         android:id="@+id/issue_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.main.issue.IssueFragment">
+        tools:context=".presentation.main.issue.list.IssueFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar_container"

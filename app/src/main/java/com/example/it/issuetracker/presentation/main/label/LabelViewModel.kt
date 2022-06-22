@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.domain.repository.LabelRepository
-import com.example.it.issuetracker.presentation.main.issue.Mode
+import com.example.it.issuetracker.presentation.main.issue.list.Mode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest

@@ -1,7 +1,7 @@
 package com.example.it.issuetracker.domain.model
 
-import com.example.it.issuetracker.presentation.main.issue.Mode
-import com.example.it.issuetracker.presentation.main.issue.Mode.DEFAULT
+import com.example.it.issuetracker.presentation.main.issue.list.Mode
+import com.example.it.issuetracker.presentation.main.issue.list.Mode.DEFAULT
 import java.io.Serializable
 
 data class Issue(

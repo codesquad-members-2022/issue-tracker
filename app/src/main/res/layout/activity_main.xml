@@ -14,7 +14,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/container_main"
-            android:name="com.example.it.issuetracker.presentation.main.issue.IssueFragment"
+            android:name="com.example.it.issuetracker.presentation.main.issue.list.IssueFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/bottom_navigation_main"

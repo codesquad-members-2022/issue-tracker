@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.presentation.main.issue
+package com.example.it.issuetracker.presentation.main.issue.register
 
 import android.os.Bundle
 import android.view.LayoutInflater

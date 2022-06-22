@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.presentation.main.issue
+package com.example.it.issuetracker.presentation.main.issue.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import com.example.it.issuetracker.databinding.FragmentIssueBinding
 import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.customview.CustomSnackBar
+import com.example.it.issuetracker.presentation.main.issue.register.RegisterIssueFragment
 import com.example.it.issuetracker.presentation.main.issue.filter.FilterFragment
 import com.example.it.issuetracker.presentation.main.issue.filter.FilterViewModel
 import kotlinx.coroutines.flow.collectLatest

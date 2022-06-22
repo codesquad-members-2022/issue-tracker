@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.it.issuetracker.databinding.LabelItemBinding
 import com.example.it.issuetracker.domain.model.Label
-import com.example.it.issuetracker.presentation.main.issue.Mode
+import com.example.it.issuetracker.presentation.main.issue.list.Mode
 
 class LabelListAdapter(
     private val editModeListener: (editMode: Boolean) -> Unit,

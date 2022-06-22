@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.presentation.main.issue
+package com.example.it.issuetracker.presentation.main.issue.list
 
 import com.example.it.issuetracker.domain.model.Issue
 

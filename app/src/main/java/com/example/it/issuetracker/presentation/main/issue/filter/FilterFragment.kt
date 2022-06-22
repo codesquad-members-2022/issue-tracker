@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentFilterBinding
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
-import com.example.it.issuetracker.presentation.main.issue.IssueFragment
+import com.example.it.issuetracker.presentation.main.issue.list.IssueFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.Serializable
