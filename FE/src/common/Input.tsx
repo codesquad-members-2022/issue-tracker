@@ -4,12 +4,13 @@ type InputPropType = {
   label: string;
   info: {
     id: string;
-    name: string;
+    name?: string;
     type: string;
-    placeholder: string;
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    maxLength: number;
+    placeholder?: string;
+    value?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    maxLength?: number;
+    checked?: boolean;
   };
 };
 

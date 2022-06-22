@@ -1,9 +1,9 @@
-import React from 'react';
-import { Input } from '@UI/Input';
+import React, { useEffect } from 'react';
 import styles from './Issue.module.scss';
 import IssuesNav from './IssuesNav';
 import Issue from './Issue';
-import { QueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
+import { useCheckbox } from '../../hooks/useCheckbox';
 
 const fetchIssues = async () => {
   const response = await fetch(`http://localhost:3030/issues`);
@@ -14,23 +14,66 @@ const fetchIssues = async () => {
   return response.json();
 };
 
-const queryClient = new QueryClient();
+type fetchedDataType = {
+  content: fetchedContentType[];
+  // 여기에 추가 되는 타입들이 있을 것 같아서, 일단 이렇게 작성했습니다.
+};
+
+type fetchedContentType = {
+  memberDto: {
+    memberId: string;
+    avatarUrl: string;
+  };
+  issueNumber: number;
+  title: string;
+  milestoneTitle: string;
+  createdAt: string;
+};
 
 const Issues = () => {
-  const { data } = useQuery('issues', fetchIssues);
-  console.log(data);
+  const { status, data, dataUpdatedAt } = useQuery('issues', fetchIssues, {
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
 
-  // if (status === 'loading') {
-  //   console.log('loading');
-  // }
+  const {
+    checkedIssues,
+    allCheckboxHandler,
+    checkboxHandler,
+    allBoxIsChecked,
+  } = useCheckbox(data);
+
   return (
-    <>
-      <div className={styles.wrapper}>
-        <IssuesNav />
-        <Issue />
-        <Issue />
-      </div>
-    </>
+    <div className={styles.wrapper}>
+      <IssuesNav
+        allCheckboxHandler={allCheckboxHandler}
+        checkedIssues={checkedIssues}
+        isChecked={allBoxIsChecked}
+      />
+      {data &&
+        data.content.map(
+          ({
+            issueNumber,
+            title,
+            milestoneTitle,
+            createdAt,
+            memberDto,
+          }: fetchedContentType) => (
+            <Issue
+              key={issueNumber}
+              id={issueNumber}
+              userId={memberDto.memberId}
+              userImg={memberDto.avatarUrl}
+              title={title}
+              milestoneTitle={milestoneTitle}
+              createdAt={new Date(createdAt).getTime()}
+              fetchedAt={dataUpdatedAt}
+              checkboxHandler={checkboxHandler}
+              checkedIssues={checkedIssues}
+            />
+          ),
+        )}
+    </div>
   );
 };
 
