@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import dev.kukim.learning.lombok.builder.object.TestUser;
 import dev.kukim.learning.lombok.builder.object.TestUser2;
+import dev.kukim.learning.lombok.builder.object.TestUser3;
 import org.junit.jupiter.api.Test;
 
 // 롬북 생성자 @NonNull : https://lemontia.tistory.com/913
@@ -46,5 +47,20 @@ class BuilderTest {
 
 		assertThat(user.toString()).contains("id=1").contains("thirdPartyId=1234").contains("name=haha");
 		assertThat(user2.toString()).contains("thirdPartyId=1234").contains("name=haha");
+	}
+
+	@Test
+	void 클래스레벨에_Builder_붙이고_builderMethodName_사용과_기본값_파라미터테스트() {
+		TestUser3 user1 = TestUser3.builder(1234L, "haha")
+			.id(1L)
+			.build();
+
+		TestUser3 user2 = TestUser3.builder(1234L, "haha")
+			.id(1L)
+			.avatarUrl("haha.com")
+			.build();
+
+		assertThat(user1.getAvatarUrl()).startsWith("test.com");
+		assertThat(user2.getAvatarUrl()).startsWith("haha.com");
 	}
 }
