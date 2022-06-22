@@ -8,6 +8,7 @@ import EditAndCloseButtons from 'components/Issue/buttons/EditAndCloseButtons';
 import IssueTitleContent from 'components/Issue/IssueTitleContent';
 import IssueTitleInput from 'components/Issue/IssueTitleInput';
 import { issueState } from 'context/issue';
+import { calculateInterval, getNowISOString } from 'utils/util';
 
 function IssueTitle() {
   const [issueData, setIssueData] = useRecoilState(issueState);
@@ -33,9 +34,18 @@ function IssueTitle() {
     setEditable(false);
   };
 
+  const writeIssueLog = (isClosed: boolean) => {
+    const interval = calculateInterval(issueData.writtenTime);
+    const log = `이 이슈가 ${interval}초 전에 ${issueData.writer.name}에 의해 `;
+    const issueStateText = isClosed ? '닫혔습니다' : '열렸습니다';
+    return log + issueStateText;
+  };
+
   const toggleIssueState = () => {
     const updatedIssueData = {
       ...issueData,
+      writtenTime: getNowISOString(),
+      log: writeIssueLog(issueData.closed),
       closed: !issueData.closed,
     };
     setIssueData(updatedIssueData);

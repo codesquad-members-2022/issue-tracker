@@ -8,7 +8,9 @@ function IssueDetail() {
   return (
     <S.issueDetailWrapper>
       <IssueLabel isIssueClosed={issueData.closed} />
-      <S.issueDetail>이 이슈가 20분 전에 Oni님에 의해 열렸습니다 - 코멘트 1개</S.issueDetail>
+      <S.issueDetail>
+        {issueData.log} - 코멘트 {issueData.comments.length}개
+      </S.issueDetail>
     </S.issueDetailWrapper>
   );
 }
