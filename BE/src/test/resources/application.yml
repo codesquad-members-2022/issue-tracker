@@ -1,9 +1,8 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://3.39.96.36:3306/issuetracker
-    username: ${MY_DATABASE_USERNAME}
-    password: ${MY_DATABASE_PASSWORD}
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testIssueTracker;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
   config:
     import: classpath:oauth.yml
 
@@ -20,7 +19,11 @@ spring:
   sql:
     init:
       mode: always
-      encoding: UTF-8
 
-logging.level:
-  org.hibernate.SQL: debug
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    sql: DEBUG
