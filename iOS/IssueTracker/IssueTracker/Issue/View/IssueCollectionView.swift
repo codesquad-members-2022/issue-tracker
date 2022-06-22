@@ -21,7 +21,7 @@ final class IssueCollectionView: UIView {
         fatalError()
     }
     
-    private var collectionView: UICollectionView = {
+    var collectionView: UICollectionView = {
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 5
