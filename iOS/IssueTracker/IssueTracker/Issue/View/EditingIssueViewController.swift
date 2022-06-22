@@ -52,12 +52,19 @@ private extension EditingIssueViewController {
     func setNavigationBar() {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.titleView = selectContentViewSegment
+        selectContentViewSegment.addAction(UIAction { [weak self] _ in
+            self?.didSegmentValueChanged()
+        }, for: .valueChanged)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         navigationItem.rightBarButtonItem?.isEnabled = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
         cancelButton.addAction(UIAction {_ in
             self.navigationController?.popViewController(animated: true)
         }, for: .touchUpInside)
+    }
+
+    func didSegmentValueChanged() {
+        editingIssueView.changeContentView(to: selectContentViewSegment.selectedSegmentIndex)
     }
 }
 
@@ -90,10 +97,6 @@ extension EditingIssueViewController: UITextViewDelegate {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.textColor = .gray
             textView.text = placeholder
-        } else if !editingIssueView.isTitleTextFieldEmpty {
-            navigationItem.rightBarButtonItem?.isEnabled = true
-        } else {
-            navigationItem.rightBarButtonItem?.isEnabled = false
         }
     }
 }

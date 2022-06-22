@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyMarkdown
 
 final class EditingIssueView: UIView {
     private let titleStackView: UIStackView = {
@@ -29,7 +30,21 @@ final class EditingIssueView: UIView {
         let screenSize = UIScreen.main.bounds.size
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont(name: "SFProDisplay-Regular", size: 17.0/812.0 * screenSize.height)
+        textField.alpha = 1
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         return textField
+    }()
+
+    private let previewTextView: UITextView = {
+        let textView = UITextView()
+        let screenSize = UIScreen.main.bounds.size
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont(name: "SFProDisplay-Regualr", size: 17/812.0 * screenSize.height)
+        textView.alpha = 0
+        textView.isEditable = false
+        textView.isPagingEnabled = true
+        return textView
     }()
 
     private let dividingView: UIView = {
@@ -46,6 +61,8 @@ final class EditingIssueView: UIView {
         textView.font = UIFont(name: "SFProDisplay-Regular", size: 17.0/812.0 * screenSize.height)
         textView.text = "코멘트는 여기에 작성하세요."
         textView.textColor = .gray
+        textView.autocorrectionType = .no
+        textView.autocapitalizationType = .none
         return textView
     }()
 
@@ -63,7 +80,7 @@ final class EditingIssueView: UIView {
         backgroundColor = .white
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(titleTextField)
-        addSubviews(titleStackView, dividingView, contentTextView)
+        addSubviews(titleStackView, dividingView, contentTextView, previewTextView)
         addActionToTitleTextField()
     }
 
@@ -78,6 +95,19 @@ final class EditingIssueView: UIView {
 
     func setTitleTextFieldDelegate(_ delegate: UITextFieldDelegate) {
         titleTextField.delegate = delegate
+    }
+
+    func changeContentView(to selectedIndex: Int) {
+        let unselectedIndex = (selectedIndex == 0) ? 1 : 0
+        let contentViews = [contentTextView, previewTextView]
+
+        if contentTextView.text != "코멘트는 여기에 작성하세요." {
+            previewTextView.attributedText = SwiftyMarkdown(string: contentTextView.text).attributedString()
+        }
+        UIView.animate(withDuration: 0.5) {
+            contentViews[selectedIndex].alpha = 1
+            contentViews[unselectedIndex].alpha = 0
+        }
     }
     
     override func layoutSubviews() {
@@ -104,7 +134,11 @@ final class EditingIssueView: UIView {
         contentTextView.snp.makeConstraints { make in
             make.top.equalTo(dividingView.snp.bottom).offset(10.5/812 * screenSize.height)
             make.leading.trailing.equalTo(titleStackView)
-            make.height.equalTo(399/812 * screenSize.height)
+            make.height.equalTo(410/812 * screenSize.height)
+        }
+
+        previewTextView.snp.makeConstraints { make in
+            make.edges.equalTo(contentTextView)
         }
     }
 }

@@ -1,20 +1,24 @@
 PODS:
   - SnapKit (5.6.0)
   - SwiftLint (0.47.1)
+  - SwiftyMarkdown (1.2.4)
 
 DEPENDENCIES:
   - SnapKit
   - SwiftLint
+  - SwiftyMarkdown
 
 SPEC REPOS:
   trunk:
     - SnapKit
     - SwiftLint
+    - SwiftyMarkdown
 
 SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
+  SwiftyMarkdown: 7cdec87c6ab5cd9ea0e22ced288e889960649ba5
 
-PODFILE CHECKSUM: 4822d11a34623e54529e1f53af0fb9ce599be4de
+PODFILE CHECKSUM: 8ccd4c402dc423af0897b465450bc11d8ca177f3
 
 COCOAPODS: 1.11.3
