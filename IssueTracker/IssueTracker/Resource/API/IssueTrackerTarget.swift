@@ -62,8 +62,10 @@ extension IssueTrackerTarget: BaseTarget {
         }
     }
 
-    var header: HTTPHeader {
+    var header: HTTPHeader? {
         switch self {
+        case .requestAuthorizeCode:
+            return nil
         case .requestAccessToken:
             return .oauth
         case .requestIssueList(let token):

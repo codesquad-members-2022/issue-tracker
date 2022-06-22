@@ -13,5 +13,5 @@ protocol BaseTarget {
     var path: String? { get }
     var parameter: [String: String]? { get }
     var method: HTTPMethod { get }
-    var header: HTTPHeader { get }
+    var header: HTTPHeader? { get }
 }

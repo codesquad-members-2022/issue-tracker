@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         issueListViewModel.loginFailure = {
             DispatchQueue.main.async {
-                self.window?.rootViewController = LoginViewController()
+                self.window?.rootViewController = LoginViewController(viewModel: LoginViewModel(repository: LoginRepository()))
             }
         }
 

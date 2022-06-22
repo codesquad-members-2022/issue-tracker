@@ -44,11 +44,12 @@ final class Provider {
                 let requestBody = try? JSONSerialization.data(withJSONObject: param, options: .init())
                 request.httpBody = requestBody
             }
-
-            for (key, value) in target.header.header {
-                  request.addValue(value, forHTTPHeaderField: key)
+            if let header = target.header {
+                for (key, value) in  header.dictionary {
+                    request.addValue(value, forHTTPHeaderField: key)
+                }
+                request.httpMethod = target.method.value
             }
-            request.httpMethod = target.method.value
 
             return request
         }

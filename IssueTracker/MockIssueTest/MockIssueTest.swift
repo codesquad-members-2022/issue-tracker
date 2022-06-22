@@ -40,9 +40,15 @@ class MockIssueTest: XCTestCase {
     }
 
     func testHasQueryIdAndScope() throws {
-        guard let request = Provider.makeURLRequest(with: .requestAuthorizeCode),
+        // when
+        let authrizeRequestTarget = IssueTrackerTarget.requestAuthorizeCode
+
+        // given
+        guard let request = Provider
+                .makeURLRequest(with: authrizeRequestTarget),
               let query = request.url?.query else { return }
 
+        // then
         XCTAssertTrue(query.contains("client_id"), "query doesn't have CLIENT_ID, \(query)")
         XCTAssertTrue(query.contains("scope"), "query doesn't have SCOPE, \(query)")
     }
