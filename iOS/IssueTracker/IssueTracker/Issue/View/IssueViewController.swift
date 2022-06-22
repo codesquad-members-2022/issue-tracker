@@ -30,6 +30,7 @@ class IssueViewController: UIViewController {
         createSearchController()
         self.view = issueCollectionView
         issueCollectionView.setDataSource(dataSource)
+        setButtonAction()
     }
     
     private func createNavigationBarButton() {
@@ -49,5 +50,11 @@ class IssueViewController: UIViewController {
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.searchController = searchController
     }
-    
+
+    private func setButtonAction() {
+        issueCollectionView.setNewIssueButtonAction(UIAction { [weak self] _ in
+            let editingIssueViewController = EditingIssueViewController()
+            self?.navigationController?.pushViewController(editingIssueViewController, animated: true)
+        })
+    }
 }

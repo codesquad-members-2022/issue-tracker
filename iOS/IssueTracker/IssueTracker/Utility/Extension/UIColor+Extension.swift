@@ -62,4 +62,5 @@ fileprivate extension UIColor {
 
 extension UIColor {
     static let primary1 = UIColor(hex: "#007AFF")
+    static let gray5 = UIColor(hex: "#E5E5EA")
 }
