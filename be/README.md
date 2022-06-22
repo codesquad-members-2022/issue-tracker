@@ -43,9 +43,11 @@
 ### 진행 내용
 #### 애플리케이션
 ##### 완료
-+ 이슈 목록 조회 API 기능 보완
++ 이슈 목록 조회 API 기능 개선 및 보완
   + status 파라미터의 기본 값을 'OPEN'으로 설정
-  + 응답 데이터 상에 assignee 정보 추가
+  + 응답 데이터 상에 assignee 관련 데이터 추가
+  + 응답 데이터 상에 이슈 상태별 개수 데이터 추가
+  + 제외 조건 및 여러 개의 라벨로 이슈 목록 검생 가능
 + Github OAuth 연동 로그인 기능 구현
 + JWT 활용 로그인 검증 기능 구현
   + access 및 refresh token 발행, refresh token redis에 저장
