@@ -1,4 +1,4 @@
-package com.example.issu_tracker
+package com.example.issu_tracker.ui.common
 
 import android.graphics.Canvas
 import android.util.Log
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.LEFT
 import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
 import androidx.recyclerview.widget.RecyclerView
+import com.example.issu_tracker.R
 import com.example.issu_tracker.ui.issue.IssueAdapter
 import java.lang.Math.max
 
