@@ -38,7 +38,7 @@ jobs:
 
       # npm 패키지 설치
       - name: install npm dependencies
-        run: npm install
+        run: npm ci
 
       # 리액트 빌드
       - name: build react
