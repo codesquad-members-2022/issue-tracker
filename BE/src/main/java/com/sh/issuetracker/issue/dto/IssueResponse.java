@@ -47,6 +47,8 @@ public class IssueResponse {
 		}
 	}
 
+	@Getter
+	@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 	public static class LabelDesign {
 		private final String name;
 		private final String backgroundColor;
