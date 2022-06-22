@@ -8,7 +8,19 @@
 import UIKit
 
 class IssueViewController: UIViewController {
-    
+
+    private let leftButton: CustomBarButton = {
+        let button = CustomBarButton()
+        button.setConfiguration(title: "filter", imageSystemName: "line.3.horizontal.decrease", imagePlacement: .leading)
+        return button
+    }()
+
+    private let rightButton: CustomBarButton = {
+        let button = CustomBarButton()
+        button.setConfiguration(title: "선택", imageSystemName: "checkmark.circle", imagePlacement: .trailing)
+        return button
+    }()
+
     private lazy var issueCollectionView = IssueCollectionView(frame: view.frame)
     private var dataSource = IssueCollectionViewDataSource()
     
@@ -21,11 +33,8 @@ class IssueViewController: UIViewController {
     }
     
     private func createNavigationBarButton() {
-        let customButton = CustomBarButton()
-        let leftBarButton = UIBarButtonItem(customView: customButton.leftButton)
-        let rightBarButton = UIBarButtonItem(customView: customButton.rightButton)
-        self.navigationItem.leftBarButtonItem = leftBarButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
     }
     
     private func createSearchController() {

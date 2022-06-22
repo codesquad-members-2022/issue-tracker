@@ -7,32 +7,24 @@
 
 import UIKit
 
-final class CustomBarButton {
+final class CustomBarButton: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configuration = UIButton.Configuration.plain()
+    }
     
-    let leftButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.image = UIImage(named: "filter")
-        config.imagePadding = 10
-        
-        var titleAttribute = AttributedString.init("필터")
-        titleAttribute.font = .systemFont(ofSize: 17.0, weight: .light)
-        config.attributedTitle = titleAttribute
-        
-        let leftButton = UIButton(configuration: config)
-        return leftButton
-    }()
-    
-    let rightButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.image = UIImage(systemName: "checkmark.circle")
-        config.imagePlacement = NSDirectionalRectEdge.trailing
-        config.imagePadding = 10
-        
-        var titleAttribute = AttributedString.init("선택")
-        titleAttribute.font = .systemFont(ofSize: 17.0, weight: .light)
-        config.attributedTitle = titleAttribute
-        
-        let rightButton = UIButton(configuration: config)
-        return rightButton
-    }()
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setConfiguration(title: String, imageSystemName: String, imagePlacement: NSDirectionalRectEdge) {
+        var attributedTitle = AttributedString(title)
+        attributedTitle.font = UIFont(name: "SFProDisplay-Regualr", size: 17)
+        configuration?.attributedTitle = attributedTitle
+
+        configuration?.image = UIImage(systemName: imageSystemName)
+        configuration?.imagePlacement = imagePlacement
+        configuration?.imagePadding = 4
+    }
 }
