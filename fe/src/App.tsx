@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       {/* <Input size="small" type="success" /> */}
-      <TextArea />
+      <TextArea type="filled" />
     </div>
   );
 }
