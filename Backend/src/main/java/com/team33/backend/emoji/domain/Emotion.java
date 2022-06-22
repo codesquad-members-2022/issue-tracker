@@ -1,4 +1,4 @@
-package com.team33.backend.emoji.service;
+package com.team33.backend.emoji.domain;
 
 import lombok.Getter;
 

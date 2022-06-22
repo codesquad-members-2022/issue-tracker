@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/milestones")
@@ -28,6 +30,11 @@ public class MilestoneController {
     @GetMapping("/{milestoneId}")
     public MilestoneResponse getMilestones(@PathVariable Long milestoneId) {
         return new MilestoneResponse(milestoneService.findMilestoneById(milestoneId));
+    }
+
+    @GetMapping("/{issueId}")
+    public List<MilestoneResponse> getMilestonesByIssueId(@PathVariable Long issueId) {
+        return milestoneService.findMilestoneByIssueId(issueId);
     }
 
     @PostMapping

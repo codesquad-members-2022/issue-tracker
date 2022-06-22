@@ -20,11 +20,10 @@ public class MilestoneQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public MilestoneCount countIssueMilestoneCount(Long milestoneId) {
-        QIssue qIssue = new QIssue("qIssue");
         return queryFactory.select(Projections.fields(MilestoneCount.class,
-                        qIssue.count().as("count")))
-                .from(qIssue)
-                .where(qIssue.milestone.id.eq(milestoneId))
+                        issue.count().as("count")))
+                .from(issue)
+                .where(issue.milestone.id.eq(milestoneId))
                 .fetchOne();
     }
 

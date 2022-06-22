@@ -5,6 +5,7 @@ import com.team33.backend.issue.controller.dto.label.LabelEditRequest;
 import com.team33.backend.issue.controller.dto.label.LabelEditResponse;
 import com.team33.backend.issue.service.LabelService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +24,8 @@ public class LabelController {
         return new LabelEditResponse(labelService.editLabel(labelId, request));
     }
 
-    @PutMapping("{labelId}")
+    @DeleteMapping("{labelId}")
     public LabelDeleteResponse editLabel(@PathVariable Long labelId){
         return new LabelDeleteResponse(labelService.deleteLabelById(labelId));
     }
-
 }

@@ -1,6 +1,6 @@
 package com.team33.backend.emoji.controller.dto;
 
-import com.team33.backend.emoji.service.Emotion;
+import com.team33.backend.emoji.domain.Emotion;
 import lombok.Getter;
 
 @Getter

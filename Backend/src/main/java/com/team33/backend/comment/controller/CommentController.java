@@ -34,12 +34,12 @@ public class CommentController {
         return new CommentWriteResponse(commentService.writeComment(memberId, request));
     }
 
-    @PutMapping("/{commentId}}")
+    @PutMapping("/{commentId}")
     public CommentEditResponse edieComment(@PathVariable Long commentId, @Valid @RequestBody CommentEditRequest request) {
         return new CommentEditResponse(commentService.editComment(commentId, request));
     }
 
-    @DeleteMapping("{commentId}")
+//    @DeleteMapping("{commentId}")
     public CommentDeleteResponse deleteComment(@PathVariable Long commentId) {
         return new CommentDeleteResponse(commentService.deleteComment(commentId));
     }
