@@ -24,19 +24,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class IssueController {
 
 	private final IssueService issueService;
+	private final IssueValidateService issueValidateService;
+
+	//TODO : 상수로 사용한 MEMBER_ID는 로그인 구현 완료시 http request 에서 가져오는 것으로 변경
 	private final static Long MEMBER_ID = 1L;
 
 	@GetMapping
 	public ResponseEntity<List<IssueListResponseDto>> selectOpenedList() {
-		//TODO : 상수로 사용한 MEMBER_ID는 로그인 구현 완료시 http request 에서 가져오는 것으로 변경
 		List<IssueListResponseDto> response = issueService.selectOpenedList(MEMBER_ID);
 
 		return ResponseEntity.ok().body(response);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<IssueDetailResponseDto> selectOneById(@PathVariable final Long id) {
-		IssueDetailResponseDto response = issueService.selectOneById(id, MEMBER_ID);
+	public ResponseEntity<IssueDetailResponseDto> selectDetailById(@PathVariable final Long id) {
+		IssueDetailResponseDto response = issueService.selectDetailById(id, MEMBER_ID);
 
 		return ResponseEntity.ok().body(response);
 	}
@@ -44,9 +46,31 @@ public class IssueController {
 	@PostMapping
 	public ResponseEntity<CommonResponseDto> create(
 		@RequestBody IssueSaveRequestDto issueCreateRequestDto) {
+
+		validateCreateRequestDto(issueCreateRequestDto);
+
+		//이슈 생성
 		CommonResponseDto response = issueService.create(issueCreateRequestDto, MEMBER_ID);
 
 		return ResponseEntity.ok().body(response);
+	}
+
+	private void validateCreateRequestDto(IssueSaveRequestDto issueCreateRequestDto) {
+		//mileStoneId 검증
+		if (issueCreateRequestDto.getMilestoneId() != null) {
+			issueValidateService.validateMyMilestoneId(
+				issueCreateRequestDto.getMilestoneId(), MEMBER_ID);
+		}
+
+		//labelsIds 검증
+		if (issueCreateRequestDto.getLabelIds() != null) {
+			issueValidateService.validateMyLabelIds(issueCreateRequestDto.getLabelIds(), MEMBER_ID);
+		}
+
+		//assigneeIds 검증
+		if (issueCreateRequestDto.getAssigneeIds() != null) {
+			issueValidateService.validateMember(issueCreateRequestDto.getAssigneeIds());
+		}
 	}
 
 	@DeleteMapping("/{id}")
@@ -55,7 +79,8 @@ public class IssueController {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<CommonResponseDto> updateState(@PathVariable final Long id, @RequestParam final Boolean isClose) {
+	public ResponseEntity<CommonResponseDto> updateState(@PathVariable final Long id,
+		@RequestParam final Boolean isClose) {
 		return ResponseEntity.ok(new CommonResponseDto());
 	}
 
