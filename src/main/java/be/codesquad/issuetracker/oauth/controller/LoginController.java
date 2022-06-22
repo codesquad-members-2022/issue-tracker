@@ -54,8 +54,8 @@ public class LoginController {
         String jwtToken = JwtFactory.create(user, EXPIRED_SECOND);
         log.debug("jwtToken: {}", jwtToken);
 
+        // TODO: 2022/06/22 로그인 하기 직전의 페이지 url을 ?state= 로 받아뒀다가 body에 담아서 보내주는 방식
         return ResponseEntity.status(HttpStatus.OK)
-            .header(HttpHeaders.LOCATION, "/")
             .body(jwtToken);
     }
 }
