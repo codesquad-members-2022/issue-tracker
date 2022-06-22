@@ -20,7 +20,7 @@ protocol SignInViewModelProtocol: SignInViewModelInput, SignInViewModelOutput {
 }
 
 struct SignInViewModelActions {
-    var openURL: (URL) -> Void = { _ in }
+    let openURL: (URL) -> Void
 }
 
 final class SignInViewModel: SignInViewModelProtocol {
@@ -45,7 +45,7 @@ final class SignInViewModel: SignInViewModelProtocol {
     }
 
     func setOpenURLAction(_ action: @escaping (URL) -> Void) {
-        self.actions?.openURL = action
+        actions = SignInViewModelActions(openURL: action)
     }
 }
 
