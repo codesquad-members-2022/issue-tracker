@@ -23,7 +23,7 @@ export const Tab = styled.div<TabType>`
     css`
       border: 2px solid #30363d;
       z-index: 1;
-      border-bottom: none;
+      border-bottom: #22272d;
     `};
   padding: 16px;
   font-size: 0.875rem;

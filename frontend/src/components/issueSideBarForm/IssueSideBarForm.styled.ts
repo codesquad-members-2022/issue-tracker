@@ -6,7 +6,9 @@ type ContentType = {
 };
 
 export const IssueSideBarFormBox = styled.div`
+  position: relative;
   margin-top: 24px;
+  font-size: 0.75rem;
   &:first-child {
     margin-top: 0;
   }
@@ -15,6 +17,8 @@ export const IssueSideBarFormBox = styled.div`
 export const IssueSideBarHeader = styled.div`
   ${flexLayoutMixin('row', 'space-between', 'center')};
   margin-bottom: 20px;
+  fill: #8b949e;
+  cursor: pointer;
 `;
 
 export const IssueSideBarFormContent = styled.div<ContentType>`
