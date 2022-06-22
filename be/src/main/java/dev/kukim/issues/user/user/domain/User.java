@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -35,7 +36,8 @@ public class User {
 	private String avatarUrl;
 
 	@Builder
-	public User(Long thirdPartyId, String name, String email, String avatarUrl) {
+	public User(Long id, @NonNull Long thirdPartyId, @NonNull String name, String email, String avatarUrl) {
+		this.id = id;
 		this.thirdPartyId = thirdPartyId;
 		this.name = name;
 		this.email = email;
