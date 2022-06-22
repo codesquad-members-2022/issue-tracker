@@ -12,8 +12,8 @@ class IssueListHeaderReusableView: UICollectionReusableView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 34)
-        label.text = "이슈"
+        label.font = label.font.withSize(34)
+        label.text = "이슈 선택"
         return label
     }()
     

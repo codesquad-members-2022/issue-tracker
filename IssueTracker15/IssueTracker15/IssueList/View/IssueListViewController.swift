@@ -11,6 +11,20 @@ enum Section {
     case main
 }
 
+enum IssueListStatus {
+    case list
+    case selection
+    
+    mutating func toggle() {
+        switch self {
+        case .list:
+            self = .selection
+        case .selection:
+            self = .list
+        }
+    }
+}
+
 class IssueListViewController: UIViewController {
     
     // MARK: - typealias(shorten type definition) ref by raywenderlich
@@ -20,43 +34,57 @@ class IssueListViewController: UIViewController {
     // MARK: - ViewModel
     private var vm: IssueListViewModel?
     
-    // MARK: - CollectionView Data
+    // MARK: - IssueCollectionView Properties
     private var issueList = Array(repeating: IssueDTO.empty, count: 25) {
         didSet {
             self.applySnapshot()
         }
     }
     
-    // MARK: - Navigation Bar Buttons
-    private var leftFilterButton: () -> UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("필터", for: .normal)
-        button.setImage(UIImage(systemName: "line.3.horizontal.decrease"), for: .normal)
-        button.sizeToFit()
-        button.addAction(
-            UIAction(title: "query") { _ in
-                print("QueryActionButton TouchUpInside")
-            },
-            for: .touchUpInside
-        )
-        return button
+    private var currentViewState: IssueListStatus = .list {
+        willSet {
+            switch currentViewState {
+            case .list:
+                print("이슈 리스트 기본화면을 보여주세요.")
+            case .selection:
+                print("이슈 리스트 선택화면을 보여주세요.")
+            }
+        }
     }
     
-    private var rightSelectButton: () -> UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        button.setTitle("선택", for: .normal)
-        button.sizeToFit()
-        button.addAction(
-            UIAction(title: "select") { _ in
-                print("SelectActionButton TouchUpInside")
-            },
-            for: .touchUpInside
+    // MARK: - Navigation Bar Actions
+    
+    private var filterBarButtonAction: UIAction {
+        UIAction(
+            title: "필터",
+            image: UIImage.filterButtonImage,
+            identifier: nil,
+            discoverabilityTitle: "Filter Issue List",
+            attributes: [],
+            state: .on,
+            handler: { _ in
+                let filterVC = IssueFilterItemSelectViewController()
+                filterVC.setVC(self)
+                self.show(filterVC, sender: nil)
+            }
         )
-        return button
     }
     
-    // MARK: - Initialize CollectionView
+    private var selectIssueBarButtonAction: UIAction {
+        UIAction(
+            title: "선택",
+            image: UIImage.checkButtonImage,
+            identifier: nil,
+            discoverabilityTitle: "Select Issue List",
+            attributes: [],
+            state: .on,
+            handler: { _ in
+                self.currentViewState.toggle()
+            }
+        )
+    }
+    
+    // MARK: - Initialize IssueCollectionView
     private lazy var issueListCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -107,18 +135,22 @@ class IssueListViewController: UIViewController {
             cellProvider: { (collectionView, indexPath, issue) -> UICollectionViewCell? in
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.reuseIdentifier, for: indexPath) as? IssueListCell
                 cell?.issueDTO = issue
+                cell?.setVC(self)
                 return cell
             }
         )
     }()
     
+    // MARK: - ViewController LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftFilterButton())
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightSelectButton())
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIButton(type: .system, primaryAction: filterBarButtonAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: UIButton(type: .system, primaryAction: selectIssueBarButtonAction))
         
-        vm = IssueListViewModel()
+        vm = IssueListViewModel { param, bindable in
+            print("Actions move to Issue Detail ViewController using \(String(describing: param)), \(bindable)")
+        }
         
         view.addSubview(issueListCollectionView)
         issueListCollectionView.snp.makeConstraints {
@@ -128,6 +160,7 @@ class IssueListViewController: UIViewController {
         applySnapshot()
     }
     
+    // MARK: - IssueViewController Apply/Reload
     private func applySnapshot(animatingDifferences: Bool = true) {
         var issueSnapshot = IssueSnapshot()
         var items = issueList
@@ -158,10 +191,26 @@ class IssueListViewController: UIViewController {
     }
 }
 
+extension IssueListViewController: ViewBinding {
+    func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
+        if (target as? IssueListCell) != nil {
+            if currentViewState == .selection, let state = param as? CheckButtonSelected {
+                var mutateState = state
+                mutateState.toggle()
+                target.receive(mutateState)
+            } else {
+                print("IssueListCell Selected")
+            }
+        } else if (target as? IssueFilterItemSelectViewController) != nil {
+            print("IssueFilterItemSelectViewController Showed")
+        }
+    }
+}
+
 // MARK: - CollectionView Delegate
 extension IssueListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        vm?.request(param: issueDataSource.itemIdentifier(for: indexPath))
+        print("IssueListCell Delegate for Issue Detail")
     }
 }
 
