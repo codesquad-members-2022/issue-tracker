@@ -1,11 +1,11 @@
 package com.team09.issue_tracker.issue;
 
 import com.team09.issue_tracker.common.CommonResponseDto;
-import com.team09.issue_tracker.issue.dto.IssueCreateAndUpdateRequestDto;
-import com.team09.issue_tracker.issue.dto.IssueFindAllResponseDto;
-import com.team09.issue_tracker.issue.dto.IssueFindByIdResponseDto;
-import java.util.Collections;
+import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
+import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
+import com.team09.issue_tracker.issue.dto.IssueDetailResponseDto;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,24 +18,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/issues")
 public class IssueController {
 
+	private final IssueService issueService;
+	private final static Long MEMBER_ID = 1L;
+
 	@GetMapping
-	public ResponseEntity<List<IssueFindAllResponseDto>> findAll() {
-		return ResponseEntity.ok(Collections.singletonList(new IssueFindAllResponseDto()));
+	public ResponseEntity<List<IssueListResponseDto>> selectOpenedList() {
+		//TODO : 상수로 사용한 MEMBER_ID는 로그인 구현 완료시 http request 에서 가져오는 것으로 변경
+		List<IssueListResponseDto> response = issueService.selectOpenedList(MEMBER_ID);
+
+		return ResponseEntity.ok().body(response);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<IssueFindByIdResponseDto> findById(@PathVariable final Long id) {
-		return ResponseEntity.ok(new IssueFindByIdResponseDto());
+	public ResponseEntity<IssueDetailResponseDto> selectOneById(@PathVariable final Long id) {
+		IssueDetailResponseDto response = issueService.selectOneById(id, MEMBER_ID);
+
+		return ResponseEntity.ok().body(response);
 	}
 
 	@PostMapping
 	public ResponseEntity<CommonResponseDto> create(
-		@RequestBody IssueCreateAndUpdateRequestDto issueCreateRequestDto) {
-		return ResponseEntity.ok(new CommonResponseDto());
+		@RequestBody IssueSaveRequestDto issueCreateRequestDto) {
+		CommonResponseDto response = issueService.create(issueCreateRequestDto, MEMBER_ID);
+
+		return ResponseEntity.ok().body(response);
 	}
 
 	@DeleteMapping("/{id}")
@@ -49,20 +60,20 @@ public class IssueController {
 	}
 
 	@GetMapping(";type=title")
-	public ResponseEntity<List<IssueFindAllResponseDto>> findByTitle(
+	public ResponseEntity<List<IssueListResponseDto>> findByTitle(
 		@RequestParam final String title) {
-		return ResponseEntity.ok(Collections.singletonList(new IssueFindAllResponseDto()));
+		return ResponseEntity.ok().build();
 	}
 
 	@GetMapping(";type=filter")
-	public ResponseEntity<List<IssueFindAllResponseDto>> findBySearchCondition(
+	public ResponseEntity<List<IssueListResponseDto>> findBySearchCondition(
 		@ModelAttribute final String issueSearchDto) {
-		return ResponseEntity.ok(Collections.singletonList(new IssueFindAllResponseDto()));
+		return ResponseEntity.ok().build();
 	}
 
 	@PatchMapping
 	public ResponseEntity<CommonResponseDto> updateAllState(@RequestParam final Boolean isClose,
-		@RequestBody final IssueCreateAndUpdateRequestDto issueUpdateAllRequestDto) {
+		@RequestBody final IssueSaveRequestDto issueUpdateAllRequestDto) {
 		return ResponseEntity.ok(new CommonResponseDto());
 	}
 }
