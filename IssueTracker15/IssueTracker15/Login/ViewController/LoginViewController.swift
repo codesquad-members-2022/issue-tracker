@@ -53,6 +53,7 @@ final class LoginViewController: UIViewController, ViewBinding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         vm = LoginViewModel { loginUrl, _ in
             guard let loginUrl = loginUrl as? URL else { return }
             UIApplication.shared.open(loginUrl)

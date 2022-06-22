@@ -10,12 +10,13 @@ import Foundation
 struct GitHubLoginModel {
     
     func getLoginURL() -> URL? {
-        let baseUrlString = OAuthLoginSource.LoginUrlString.github.rawValue
-        let clientID = OAuthLoginSource.ClientID.github.rawValue
+        let baseUrlString = Bundle.main.gitLoginURL
+        let clientID = Bundle.main.gitClientID
         var components = URLComponents(string: baseUrlString)
         
         components?.queryItems = [
-            URLQueryItem(name: "client_id", value: clientID)
+            URLQueryItem(name: OAuthLoginSourceKey.GitHub.Query.clientID.rawValue,
+                         value: clientID)
         ]
         
         guard let url = components?.url else { return nil }
