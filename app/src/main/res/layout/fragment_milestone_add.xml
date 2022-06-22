@@ -10,6 +10,10 @@
             name="toolbarTitle"
             type="String" />
 
+        <variable
+            name="viewModel"
+            type="com.example.it.issuetracker.presentation.main.milestone.MilestoneAddViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,6 +47,7 @@
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
             android:hint="@string/must_input_string"
+            android:text="@{viewModel.title}"
             app:layout_constraintBottom_toBottomOf="@id/tv_subject"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_subject"
@@ -69,6 +74,7 @@
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
             android:hint="@string/optional_input_string"
+            android:text="@{viewModel.description}"
             app:layout_constraintBottom_toBottomOf="@id/tv_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_description"
@@ -92,15 +98,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="4dp"
             android:background="@android:color/transparent"
-            android:textColor="@color/dark_gray"
             android:hint="@string/optional_input_date_string"
+            android:text="@{viewModel.deadline}"
+            android:textColor="@color/dark_gray"
             app:layout_constraintBottom_toBottomOf="@id/tv_complete_date"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_clear_date"
             app:layout_constraintStart_toEndOf="@id/tv_complete_date"
             app:layout_constraintTop_toTopOf="@id/tv_complete_date" />
 
+        <ImageButton
+            android:id="@+id/btn_clear_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/clear_date_string"
+            android:onClick="@{() -> viewModel.clearDeadline()}"
+            android:src="@drawable/ic_exit_grey"
+            app:layout_constraintBottom_toBottomOf="@id/edit_complete_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/edit_complete_date" />
 
         <View
             android:id="@+id/divider"

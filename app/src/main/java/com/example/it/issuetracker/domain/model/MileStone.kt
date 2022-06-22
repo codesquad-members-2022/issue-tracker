@@ -1,5 +1,6 @@
 package com.example.it.issuetracker.domain.model
 
+import com.example.it.issuetracker.data.dto.MilestoneDto
 import com.example.it.issuetracker.presentation.main.issue.list.Mode
 import java.io.Serializable
 
@@ -14,3 +15,15 @@ data class MileStone(
     var isChecked: Boolean = false,
     val mode: Mode = Mode.DEFAULT
 ) : Serializable
+
+fun MileStone.toMileStoneDto(): MilestoneDto {
+    return MilestoneDto(
+        id,
+        title,
+        description,
+        startDate,
+        deadLine,
+        openedIssue,
+        closedIssue
+    )
+}

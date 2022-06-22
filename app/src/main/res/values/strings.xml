@@ -48,5 +48,8 @@
     <string name="open_issue_string">열린 이슈 %d개</string>
     <string name="close_issue_string">닫힌 이슈 %d개</string>
     <string name="not_deadline_string">기한없음</string>
+    <string name="milestone_add_string">새로운 마일스톤</string>
+    <string name="milestone_edit_string">마일스톤 수정</string>
+    <string name="clear_date_string">날짜 초기화</string>
 
 </resources>

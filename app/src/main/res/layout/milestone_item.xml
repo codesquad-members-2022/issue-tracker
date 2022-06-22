@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="android.text.TextUtils" />
+
         <variable
             name="milestoneInfo"
             type="com.example.it.issuetracker.domain.model.MileStone" />
@@ -84,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{milestoneInfo.deadLine==null? @string/not_deadline_string : milestoneInfo.deadLine}"
+            android:text="@{TextUtils.isEmpty(milestoneInfo.deadLine)? @string/not_deadline_string : milestoneInfo.deadLine}"
             android:textColor="@color/dark_gray"
             app:layout_constraintBottom_toBottomOf="@id/iv_calendar"
             app:layout_constraintStart_toEndOf="@id/iv_calendar"
