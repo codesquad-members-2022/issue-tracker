@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.team09.issue_tracker.issue.domain.Issue;
 import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
-import org.assertj.core.api.Assertions;
+import com.team09.issue_tracker.milestone.Milestone;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +26,29 @@ public class IssueCreateRepositoryTest {
 	IssueRepository issueRepository;
 	final Long MEMBER_ID = 1L;
 
-	@DisplayName("필수 요소만 가진 이슈")
-	@Test
-	void saveOnlyMandatory() {
-		//given
-		IssueSaveRequestDto issueSaveRequestDto = IssueSaveRequestDto.builder()
-			.title("제목")
-			.content("내용")
-			.build();
-		boolean isOpened = true;
-		Issue issue = Issue.fromForMandatory(issueSaveRequestDto, isOpened, MEMBER_ID);
+	/** TODO : repository 테스트인데, 일부 서비스 테스트 요소가 들어가 있는 것 같다.
+	 		 왜냐면, request parameter를 엔티티로 변환하는 과정이 들어가 있는 것 같다.
+	 **/
+//	@DisplayName("필수 요소만 가진 이슈")
+//	@Test
+//	void saveOnlyMandatory() {
+//		//given
+//		IssueSaveRequestDto issueSaveRequestDto = IssueSaveRequestDto.builder()
+//			.title("제목")
+//			.content("내용")
+//			.build();
+//		boolean isOpened = true;
+//		Issue issue = Issue.from(issueSaveRequestDto, isOpened, MEMBER_ID);
+//
+//		//when
+//		Issue savedIssue = issueRepository.save(issue);
+//
+//		//then
+//		assertAll(
+//			() -> assertThat(savedIssue.getTitle()).isEqualTo("제목"),
+//			() -> assertThat(savedIssue.getContent()).isEqualTo("내용")
+//		);
+//	}
+	
 
-		//when
-		Issue savedIssue = issueRepository.save(issue);
-
-		//then
-		assertAll(
-			() -> assertThat(savedIssue.getTitle()).isEqualTo("제목"),
-			() -> assertThat(savedIssue.getContent()).isEqualTo("내용")
-		);
-	}
 }
