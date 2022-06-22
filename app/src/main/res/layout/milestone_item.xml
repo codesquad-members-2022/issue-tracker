@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="milestoneInfo"
+            type="com.example.it.issuetracker.domain.model.MileStone" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

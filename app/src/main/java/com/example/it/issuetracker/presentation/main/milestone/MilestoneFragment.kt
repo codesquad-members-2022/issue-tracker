@@ -13,6 +13,8 @@ class MilestoneFragment : Fragment() {
 
     private lateinit var binding: FragmentMilestoneBinding
 
+    private val adapter = MilestoneAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -42,5 +44,6 @@ class MilestoneFragment : Fragment() {
                 else -> false
             }
         }
+        binding.recyclerviewMilestoneItem.adapter = adapter
     }
 }
