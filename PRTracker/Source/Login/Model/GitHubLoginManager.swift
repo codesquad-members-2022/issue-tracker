@@ -48,7 +48,7 @@ struct GitHubLoginManager {
         guard let url = makeAccessTokenURL(with: code) else { return }
         let request = makeAccessTokenRequest(with: url)
         
-        networkService.request(request, method: .get) { (response: TokenResponse?) -> Void in
+        networkService.request(request) { (response: TokenResponse?) -> Void in
             guard let response = response else {
                 Log.error("Network Request for access token is failed")
                 return
@@ -133,7 +133,7 @@ struct GitHubLoginManager {
     
     private func makeAccessTokenRequest(with url: URL) -> URLRequest {
         var request = URLRequest(url: url)
-        request.setValue("application/vnd.github.v3+json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
         return request
     }
 }

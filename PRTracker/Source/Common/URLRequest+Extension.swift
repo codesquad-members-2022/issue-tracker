@@ -10,7 +10,6 @@ import Foundation
 extension URLRequest {
     init(url: URL, with token: String) {
         self.init(url: url)
-        self.setValue("application/json", forHTTPHeaderField: "Accept")
         self.setValue("token \(token)", forHTTPHeaderField: "Authorization")
     }
 }
