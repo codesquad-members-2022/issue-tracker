@@ -10,6 +10,7 @@ type InputPropType = {
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     maxLength: number;
+    checked: boolean;
   };
 };
 

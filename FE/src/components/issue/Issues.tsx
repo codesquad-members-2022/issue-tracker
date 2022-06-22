@@ -1,9 +1,9 @@
-import React, { SetStateAction, useEffect, useState } from 'react';
-import { Input } from '@UI/Input';
+import React, { useEffect } from 'react';
 import styles from './Issue.module.scss';
 import IssuesNav from './IssuesNav';
 import Issue from './Issue';
-import { QueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
+import { useCheckbox } from '../../hooks/useCheckbox';
 
 const fetchIssues = async () => {
   const response = await fetch(`http://localhost:3030/issues`);
@@ -31,44 +31,29 @@ type fetchedContentType = {
 };
 
 const Issues = () => {
-  const [checkedIssues, setCheckedIssues] = useState<string[]>([]);
   const { status, data, dataUpdatedAt } = useQuery('issues', fetchIssues, {
     refetchOnWindowFocus: false,
     retry: false,
   });
 
+  const {
+    checkedIssues,
+    allCheckboxHandler,
+    checkboxHandler,
+    allBoxIsChecked,
+    chekced,
+  } = useCheckbox(data);
+
   useEffect(() => {
     console.log(checkedIssues);
   }, [checkedIssues]);
-
-  const allCheckboxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    if (isChecked) {
-      const allChecboxes = data.content.map((v) => String(v.issueNumber));
-      setCheckedIssues(allChecboxes);
-    } else {
-      setCheckedIssues([]);
-    }
-  };
-  const checkboxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentBoxId = e.target.id;
-
-    const aleadyChecked = checkedIssues.includes(currentBoxId);
-    if (aleadyChecked) {
-      const newState = checkedIssues.filter((issue) => issue !== currentBoxId);
-      setCheckedIssues(newState);
-    } else {
-      setCheckedIssues((prev) => [...prev, currentBoxId]);
-    }
-  };
-
-  useEffect(() => {
-    console.log(checkedIssues, 'clicked');
-  }, [checkedIssues]);
-
   return (
     <div className={styles.wrapper}>
-      <IssuesNav allCheckboxHandler={allCheckboxHandler} />
+      <IssuesNav
+        allCheckboxHandler={allCheckboxHandler}
+        checkedIssues={checkedIssues}
+        isChecked={allBoxIsChecked}
+      />
       {data &&
         data.content.map(
           ({
@@ -89,6 +74,7 @@ const Issues = () => {
               fetchedAt={dataUpdatedAt}
               checkboxHandler={checkboxHandler}
               checkedIssues={checkedIssues}
+              chekced={chekced}
             />
           ),
         )}

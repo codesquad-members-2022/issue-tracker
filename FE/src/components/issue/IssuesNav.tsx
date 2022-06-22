@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './IssuesNav.module.scss';
 import { Input } from '@UI/Input';
 
-const IssuesNav = ({ allCheckboxHandler }) => {
+const IssuesNav = ({ allCheckboxHandler, checkedIssues, isChecked }) => {
   return (
     <nav className={styles.navWrapper}>
       <div className={styles.leftWrapper}>
@@ -14,12 +14,18 @@ const IssuesNav = ({ allCheckboxHandler }) => {
               type: 'checkbox',
               value: 'allSelect',
               onChange: allCheckboxHandler,
+              checked: isChecked,
             }}
           />
         </div>
         <div className={styles.nav__contentWrapper}>
-          <span>열린 이슈</span>
-          <span>닫힌 이슈</span>
+          {!isChecked && (
+            <>
+              <span>열린 이슈</span>
+              <span>닫힌 이슈</span>
+            </>
+          )}
+          {isChecked && <span>{checkedIssues.length}개의 이슈가 선택됨</span>}
         </div>
       </div>
 

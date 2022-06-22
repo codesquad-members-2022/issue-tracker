@@ -38,6 +38,8 @@ type IssuePropType = {
   fetchedAt: number;
   userId: string;
   userImg: string;
+  checkboxHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  checkedIssues: string[];
 };
 
 const Issue = ({
@@ -53,10 +55,12 @@ const Issue = ({
 }: IssuePropType) => {
   const passedTime = elapsedText(fetchedAt, createdAt);
   const [isChecked, setIsChecked] = useState(false);
+
   useEffect(() => {
     if (checkedIssues.includes(String(id))) setIsChecked(true);
     else setIsChecked(false);
   }, [checkedIssues]);
+
   return (
     <div className={styles.issueWrapper}>
       <div className={styles.leftWrapper}>
