@@ -19,5 +19,4 @@ public class LabelController {
 	public List<LabelListResponse> findLabels(){
 		return labelService.findLabel();
 	}
-
 }

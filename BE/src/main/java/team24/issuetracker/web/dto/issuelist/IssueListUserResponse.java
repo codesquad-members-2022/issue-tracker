@@ -6,10 +6,10 @@ import team24.issuetracker.domain.User;
 @Getter
 public class IssueListUserResponse {
 
-	private Long id;
-	private String name;
-	private String email;
-	private String profileImage;
+	private final Long id;
+	private final String name;
+	private final String email;
+	private final String profileImage;
 
 	public IssueListUserResponse(User user) {
 		this.id = user.getId();

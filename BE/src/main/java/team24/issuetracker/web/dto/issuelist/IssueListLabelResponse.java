@@ -6,12 +6,11 @@ import team24.issuetracker.domain.Label;
 @Getter
 public class IssueListLabelResponse {
 
-	private Long id;
-	private String title;
+	private final Long id;
+	private final String title;
 
 	public IssueListLabelResponse(Label label) {
 		this.id = label.getId();
 		this.title = label.getTitle();
 	}
-
 }
