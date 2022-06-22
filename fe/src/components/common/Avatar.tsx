@@ -25,7 +25,6 @@ const Div = styled.div<{ size: AvatarTemplateType }>`
   overflow: hidden;
   border-radius: ${AVATAR_STYLES.BORDER_RADIUS}%;
   border: 1px solid ${AVATAR_STYLES.BORDER_COLOR};
-  margin: auto 0;
 `;
 
 type AvatarTemplateType = keyof typeof SIZE.AVATAR;

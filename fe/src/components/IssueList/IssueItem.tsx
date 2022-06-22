@@ -28,7 +28,9 @@ function IssueItem({ number, title, author, milestone }: IssueItemProps) {
           </Text>
         </IssueInfo>
       </Contents>
-      <Avatar size="SMALL" imgSource="null" />
+      <div className="flex-center">
+        <Avatar size="SMALL" imgSource="null" />
+      </div>
     </Wrapper>
   );
 }
