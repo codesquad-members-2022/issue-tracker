@@ -6,6 +6,7 @@ import com.example.it.issuetracker.presentation.main.issue.list.IssueViewModel
 import com.example.it.issuetracker.presentation.main.issue.search.SearchViewModel
 import com.example.it.issuetracker.presentation.main.label.LabelAddViewModel
 import com.example.it.issuetracker.presentation.main.label.LabelViewModel
+import com.example.it.issuetracker.presentation.main.milestone.MilestoneViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -16,4 +17,5 @@ val viewModelModule = module {
     viewModel { IssueViewModel(get()) }
     viewModel { FilterViewModel(get(), get(), get()) }
     viewModel { SearchViewModel(get()) }
+    viewModel { MilestoneViewModel(get()) }
 }
