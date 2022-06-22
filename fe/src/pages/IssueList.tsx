@@ -10,6 +10,7 @@ import ListContainer from 'components/common/ListContainer';
 import Tabs from 'components/common/Tabs';
 import { COLOR } from 'styles/color';
 import mainHeaderStyle from 'styles/mainHeaderStyle';
+import Z_INDEX from 'styles/zIndex';
 
 const ISSUES: IssueType[] = [
   { id: '1234', number: 1, title: '비비 천재 1', author: '비비', milestone: '마일스톤 1' },
@@ -29,7 +30,7 @@ type IssueType = {
 
 function IssueList() {
   return (
-    <main className="wrap">
+    <Main className="wrap">
       <Header avatarUrl="null" />
       <MainHeader>
         <FilterBar placeholder="Search all Issues" />
@@ -56,9 +57,13 @@ function IssueList() {
             />
           ))) || <BlankMessage text="등록된 이슈가 없습니다" />}
       </ListContainer>
-    </main>
+    </Main>
   );
 }
+
+const Main = styled.main`
+  z-index: ${Z_INDEX.ROOT};
+`;
 
 const MainHeader = styled.div`
   ${mainHeaderStyle};

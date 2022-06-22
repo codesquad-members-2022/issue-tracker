@@ -4,6 +4,7 @@ import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
 import SIZE from 'styles/size';
 import Icon from './Icon';
+import Modal from './Modal';
 
 function DropdownBtn({
   name,
@@ -14,7 +15,7 @@ function DropdownBtn({
   height = `${SIZE.DROPDOWN_BTN.HEIGHT}px`,
   className,
 }: DropdownBtnProps) {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false);
 
   return (
     <Wrapper width={width} height={height} className={className}>
@@ -27,12 +28,14 @@ function DropdownBtn({
           stroke="inherit"
         />
       </Button>
-      <Child startLocation={startLocation}>{isClicked && children}</Child>
+      <Child startLocation={startLocation}>
+        {isModalActive && <Modal setIsModalActive={setIsModalActive}>{children}</Modal>}
+      </Child>
     </Wrapper>
   );
 
   function handleClickedBtn() {
-    setIsClicked(!isClicked);
+    setIsModalActive(!isModalActive);
   }
 }
 
@@ -68,6 +71,7 @@ const Child = styled.div<ChildProps>`
   position: absolute;
   top: 90%;
   right: ${({ startLocation }) => startLocation === 'RIGHT' && 0};
+  left: ${({ startLocation }) => startLocation === 'LEFT' && 0};
 `;
 
 type ChildProps = Pick<DropdownBtnProps, 'startLocation'>;

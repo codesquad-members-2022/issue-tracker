@@ -18,10 +18,10 @@ function IssueHeader() {
       </LeftBtns>
       <RightBtns>
         <DropdownBtn name="담당자" startLocation="RIGHT">
-          <div>나는 모달</div>
+          <div>BB</div>
         </DropdownBtn>
-        <DropdownBtn name="레이블" startLocation="RIGHT">
-          <div>나는 모달</div>
+        <DropdownBtn name="레이블" startLocation="LEFT">
+          <div>나는 모달 ㅋㅋ</div>
         </DropdownBtn>
         <DropdownBtn name="마일스톤" startLocation="RIGHT">
           <div>나는 모달</div>

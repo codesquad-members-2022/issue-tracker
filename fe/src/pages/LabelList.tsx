@@ -53,10 +53,10 @@ function LabelList() {
           </Text>
         }
       >
-        {(!hasData &&
+        {(hasData &&
           LABEL_MOCK_DATA.map(({ id, label, desc }) => (
             <LabelItem id={id} key={id} label={label} desc={desc} />
-          ))) || <BlankMessage text="등록된 이 없습니다" />}
+          ))) || <BlankMessage text="등록된 라벨이 없습니다" />}
       </ListContainer>
     </main>
   );

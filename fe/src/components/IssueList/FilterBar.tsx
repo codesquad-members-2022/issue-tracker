@@ -24,7 +24,7 @@ function FilterBar({ placeholder }: { placeholder: string }) {
         gap={SIZE.FILTER_BAR.GAP}
         className="filter-dropdown"
       >
-        필터 아이템
+        <div>이런이런이런</div>
       </DropdownBtn>
 
       <div className="input-area flex-center">
@@ -55,7 +55,6 @@ const Wrapper = styled.div<{ isFocused: boolean }>`
   border-radius: 11px;
   border: 1px solid ${({ isFocused }) => (isFocused ? COLOR.BLACK : COLOR.GREY[300])};
   background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[300])};
-  overflow: hidden;
 
   .filter-dropdown:hover {
     background-color: ${COLOR.GREY[300]};
