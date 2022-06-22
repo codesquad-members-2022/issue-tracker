@@ -17,8 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let issueListViewModel = IssueListViewModel()
 
-        issueListViewModel.loadIssueList() // issueList 요청
-
         issueListViewModel.loginSuccess = {
             DispatchQueue.main.async {
                 let issueListVC = IssueListViewController()
@@ -26,12 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 issueListVC.viewModel = issueListViewModel
             }
         }
-
         issueListViewModel.loginFailure = {
             DispatchQueue.main.async {
                 self.window?.rootViewController = LoginViewController(viewModel: LoginViewModel(repository: LoginRepository()))
             }
         }
+        issueListViewModel.loadIssueList() // issueList 요청
 
         window?.makeKeyAndVisible()
     }

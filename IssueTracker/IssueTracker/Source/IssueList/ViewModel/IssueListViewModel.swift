@@ -20,7 +20,7 @@ final class IssueListViewModel {
     var loginFailure: (() -> Void)?
 
     func loadIssueList() {
-        guard let token = UserDefaults.standard.object(forKey: Environment.token) as? String else { return }
+        guard let token = UserDefaults.standard.object(forKey: Environment.token) as? String else { self.loginSuccess?() return }
         let target = IssueTrackerTarget.requestIssueList(token: token)
         issueRepository.requestIssues(with: target) { response in
             switch response {
