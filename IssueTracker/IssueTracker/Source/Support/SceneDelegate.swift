@@ -14,9 +14,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = LoginViewController(
-            viewModel: LoginViewModel(repository: LoginRepository())
-        )
+
+        let issueListViewModel = IssueListViewModel()
+
+        issueListViewModel.loadIssueList() // issueList 요청
+
+        issueListViewModel.loginSuccess = {
+            DispatchQueue.main.async {
+                let issueListVC = IssueListViewController()
+                self.window?.rootViewController = issueListVC
+                issueListVC.viewModel = issueListViewModel
+            }
+        }
+
+        issueListViewModel.loginFailure = {
+            DispatchQueue.main.async {
+                self.window?.rootViewController = LoginViewController()
+            }
+        }
 
         window?.makeKeyAndVisible()
     }
@@ -32,9 +47,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         loginRepository.getGithubAccessToken(urlRequest) { tokenValue in
             UserDefaults.standard.set(tokenValue, forKey: Environment.token)
-            DispatchQueue.main.async {
-                self.window?.rootViewController = TabBarViewController()
-            }
         }
     }
 
