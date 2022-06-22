@@ -15,6 +15,7 @@ import {
   $ButtonWrapper
 } from '@/pages/Login/style';
 import { COLOR } from '@/styles/common';
+import { getLoginURL } from '@/api/githubOauth';
 
 const TEXT_INPUT_DEBOUNCE_TIME = 300;
 
@@ -70,6 +71,17 @@ export default function Login() {
 
   useEffect(setLengthError, [inputInfo]);
 
+  const [loginURL, setURL] = useState('/login');
+
+  const getGithubLoginURL = async () => {
+    const urlResult = await getLoginURL();
+    if (urlResult?.data?.login_url) setURL(urlResult.data.login_url);
+  };
+
+  useEffect(() => {
+    getGithubLoginURL();
+  }, []);
+
   const hasError = () => {
     const inputNames = Object.keys(error) as InputName[];
     const errorStatus = inputNames.find((name: InputName) => error[name].status !== 'success');
@@ -82,7 +94,7 @@ export default function Login() {
         <$LogoWrapper>
           <Logo type="large" />
         </$LogoWrapper>
-        <Button styleType="large" background={COLOR.title}>
+        <Button as="a" href={loginURL} styleType="large" background={COLOR.title}>
           {'GitHub 계정으로 로그인'}
         </Button>
         <$DecoText>or</$DecoText>
