@@ -6,7 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import dev.kukim.issues.MysqlTestContainer;
 import dev.kukim.issues.common.exception.InvalidSearchRequestParamException;
 import dev.kukim.issues.milestone.controller.request.MilestoneCreateRequest;
-import dev.kukim.issues.milestone.controller.response.MileStoneResponse;
+import dev.kukim.issues.milestone.controller.request.MilestoneUpdateRequest;
+import dev.kukim.issues.milestone.controller.response.MilestoneResponse;
 import dev.kukim.issues.milestone.controller.response.MilestoneListResponse;
 import dev.kukim.issues.milestone.domain.Milestone;
 import dev.kukim.issues.milestone.domain.repository.MileStoneRepository;
@@ -29,12 +30,21 @@ class MilestoneServiceTest extends MysqlTestContainer {
 
 	Milestone milestone;
 	MilestoneCreateRequest milestoneCreateRequest;
+	MilestoneUpdateRequest milestoneUpdateRequest;
 
 	@BeforeEach
 	void initObject() {
 		// 테스트 마일스톤 객체 준비
-		this.milestone = Milestone.of("마일스톤1", "description1", LocalDate.now(), true);
-		this.milestoneCreateRequest = MilestoneCreateRequest.of("마일스톤 요청1", "description1", LocalDate.now());
+		this.milestone = Milestone.builder()
+			.title("마일스톤1")
+			.description("description1")
+			.dueDate(LocalDate.now())
+			.isOpen(true)
+			.build();
+		this.milestoneCreateRequest = MilestoneCreateRequest.of("마일스톤 요청1", "description1",
+			LocalDate.now());
+
+		this.milestoneUpdateRequest = MilestoneUpdateRequest.of("마일스톤 제목변경", null, null, null);
 	}
 
 	@BeforeEach
@@ -53,7 +63,8 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		MilestoneListResponse milestoneListResponse = milestoneService.findAllBy("open");
 
 		assertThat(milestoneListResponse.getMilestones()).hasSize(1);
-		assertThat(milestoneListResponse.getMilestones()).extracting("title").contains("테스트 마일스톤 1");
+		assertThat(milestoneListResponse.getMilestones()).extracting("title")
+			.contains("테스트 마일스톤 1");
 	}
 
 
@@ -80,8 +91,41 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestoneCreateRequest.setTitle("마일스톤 저장 요청1");
 		milestoneCreateRequest.setDescription("내용 1");
 
-		MileStoneResponse mileStoneResponse = milestoneService.save(milestoneCreateRequest);
+		MilestoneResponse mileStoneResponse = milestoneService.save(milestoneCreateRequest);
 
 		assertThat(mileStoneResponse.getTitle()).isEqualTo("마일스톤 저장 요청1");
 	}
+
+
+	@Test
+	void 만약_특정_마일스톤_제목_수정_요청이들어온다면_마일스톤을_수정하고_수정한_마일스톤을_리턴한다() {
+		milestoneCreateRequest.setTitle("마일스톤 1");
+		MilestoneResponse saveMilestone = milestoneService.save(milestoneCreateRequest);
+		milestoneUpdateRequest.setTitle("마일스톤 제목수정 1");
+
+		MilestoneResponse updateMilestone = milestoneService.update(saveMilestone.getId(),
+			milestoneUpdateRequest);
+
+		assertThat(updateMilestone.getId()).isEqualTo(saveMilestone.getId());
+		assertThat(updateMilestone.getTitle()).isEqualTo("마일스톤 제목수정 1");
+	}
+
+	@Test
+	void 만약_특정_마일스톤_많은내용_수정_요청이들어온다면_마일스톤을_수정하고_수정한_마일스톤을_리턴한다() {
+		milestoneCreateRequest.setTitle("마일스톤 1");
+		MilestoneResponse saveMilestone = milestoneService.save(milestoneCreateRequest);
+		milestoneUpdateRequest.setTitle("마일스톤 제목수정 2");
+		milestoneUpdateRequest.setDescription("내용 수정");
+		milestoneUpdateRequest.setOpen(false);
+
+
+		MilestoneResponse updateMilestone = milestoneService.update(saveMilestone.getId(),
+			milestoneUpdateRequest);
+
+		assertThat(updateMilestone.getId()).isEqualTo(saveMilestone.getId());
+		assertThat(updateMilestone.getTitle()).isEqualTo("마일스톤 제목수정 2");
+		assertThat(updateMilestone.getDescription()).isEqualTo("내용 수정");
+		assertThat(updateMilestone.isOpen()).isFalse();
+	}
+
 }
