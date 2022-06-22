@@ -4,12 +4,15 @@ spring:
     url: jdbc:mysql://localhost:3306/issuetracker
     username: donggi
     password: '0614'
-
   jpa:
-    database: mysql
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+    defer-datasource-initialization: true
 
 logging:
   level:
-    org:
-      springframework:
-        web: DEBUG
+    be.codesquad.issuetracker: debug

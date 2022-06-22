@@ -1,5 +1,6 @@
-package be.codesquad.issuetracker.user;
+package be.codesquad.issuetracker.user.repository;
 
+import be.codesquad.issuetracker.user.domain.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

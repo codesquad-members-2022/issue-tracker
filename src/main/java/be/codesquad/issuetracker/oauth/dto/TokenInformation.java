@@ -3,12 +3,10 @@ package be.codesquad.issuetracker.oauth.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
-@Component
 @Getter
 @Setter
-public class GithubToken {
+public class TokenInformation {
 
     @JsonProperty("access_token")
     private String accessToken;
