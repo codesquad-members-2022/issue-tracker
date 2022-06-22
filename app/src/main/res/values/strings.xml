@@ -45,5 +45,8 @@
     <!-- milestone -->
     <string name="milestone_complete_date">완료일</string>
     <string name="optional_input_date_string">선택 사항(YYYY-MM-DD)</string>
+    <string name="open_issue_string">열린 이슈 %d개</string>
+    <string name="close_issue_string">닫힌 이슈 %d개</string>
+    <string name="not_deadline_string">기한없음</string>
 
 </resources>

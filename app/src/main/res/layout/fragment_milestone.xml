@@ -6,6 +6,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.it.issuetracker.presentation.main.milestone.MilestoneViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,16 +22,19 @@
             layout="@layout/toolbar_edit_layout"
             bind:defaultToolbarTitle="@{@string/milestone_toolbar_title_string}"
             bind:editToolbarTitle="@{@string/milestone_toolbar_edit_string}"
-            bind:editToolbarVisible="@{false}" />
+            bind:editToolbarVisible="@{viewModel.editMode}" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:enabled="@{!viewModel.editMode}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+            app:onRefreshListener="@{viewModel::getMilestoneInfoList}"
+            app:refreshing="@{viewModel.dataLoading}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_milestone_item"

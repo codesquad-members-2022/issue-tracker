@@ -1,53 +1,98 @@
 package com.example.it.issuetracker.presentation.main.milestone
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentMilestoneBinding
+import com.example.it.issuetracker.domain.model.MileStone
+import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MilestoneFragment : Fragment() {
-
-    private lateinit var binding: FragmentMilestoneBinding
+class MilestoneFragment : BaseFragment<FragmentMilestoneBinding>(R.layout.fragment_milestone) {
 
     private val viewModel by viewModel<MilestoneViewModel>()
 
-    private val adapter = MilestoneAdapter()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentMilestoneBinding.inflate(inflater)
-        binding.lifecycleOwner = this.viewLifecycleOwner
-        return binding.root
-    }
+    private val adapter = MilestoneAdapter({ viewModel.changeEditMode(it) }, { navigatePage(it) })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
+        setupToolbar()
+        viewModel.getMilestoneInfoList()
         initView()
+        observerData()
     }
 
-    private fun initView() {
-        binding.toolbarLayout.defaultToolbar.setOnMenuItemClickListener { menu ->
-            when (menu.itemId) {
+    override fun observerData() {
+        repeatOnLifecycleExtension {
+            viewModel.milestoneList.collectLatest {
+                adapter.submitList(it)
+            }
+        }
+
+        repeatOnLifecycleExtension {
+            viewModel.completeDelete.collect { complete ->
+                if (complete) {
+                    viewModel.getMilestoneInfoList()
+                    viewModel.changeEditMode(false)
+                }
+            }
+        }
+    }
+
+    override fun initView() {
+        binding.recyclerviewMilestoneItem.adapter = adapter
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
+        binding.recyclerviewMilestoneItem.addItemDecoration(dividerItemDecoration)
+        setupToolbar()
+        viewModel.start()
+    }
+
+    private fun setupToolbar() {
+        binding.toolbarLayout.defaultToolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
                 R.id.add_blue_icon -> {
-                    val addFragment = MilestoneAddFragment()
-                    parentFragmentManager.commit {
-                        addToBackStack("milestone_add")
-                        replace(R.id.container_main, addFragment)
-                    }
+                    navigatePage(null)
                     true
                 }
                 else -> false
             }
         }
-        binding.recyclerviewMilestoneItem.adapter = adapter
+
+        binding.toolbarLayout.editToolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.delete_white_icon -> {
+                    viewModel.deleteItems()
+                    true
+                }
+                else -> false
+            }
+        }
+        binding.toolbarLayout.editToolbar.setNavigationOnClickListener {
+            viewModel.changeEditMode(
+                false
+            )
+        }
+    }
+
+    private fun navigatePage(milestone: MileStone?) {
+        val addFragment = MilestoneAddFragment()
+        addFragment.setOnClickSaveListener { viewModel.getMilestoneInfoList() }
+        parentFragmentManager.commit {
+            addToBackStack("milestone_list")
+            if (milestone == null) replace(R.id.container_main, addFragment)
+            else {
+                addFragment.arguments = bundleOf("milestone" to milestone)
+                replace(R.id.container_main, addFragment)
+            }
+        }
     }
 }

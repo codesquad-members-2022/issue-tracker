@@ -10,7 +10,9 @@ object MilestoneFakeDatabase {
             id = 1,
             title = "마일스톤",
             deadLine = "2022-06-14",
-            description = ""
+            description = "",
+            openedIssue = 1,
+            closedIssue = 1
         ),
         MilestoneDto(
             id = 2,
@@ -22,12 +24,14 @@ object MilestoneFakeDatabase {
             id = 3,
             title = "테스트 그룹",
             deadLine = "2022-06-17",
-            description = ""
+            description = "",
+            openedIssue = 3,
+            closedIssue = 2
         ),
         MilestoneDto(
             id = 4,
             title = "마스터즈 코스 숫자",
-            deadLine = "2022-06-20",
+            deadLine = null,
             description = ""
         )
     )

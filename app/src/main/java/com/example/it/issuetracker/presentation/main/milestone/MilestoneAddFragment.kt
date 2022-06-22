@@ -12,8 +12,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MilestoneAddFragment : Fragment() {
 
     private lateinit var binding: FragmentMilestoneAddBinding
-
     private val viewModel by viewModel<MilestoneViewModel>()
+    private var clickSaveListener: (() -> Unit)? = null
+
+    fun setOnClickSaveListener(listener: () -> Unit) {
+        clickSaveListener = listener
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
