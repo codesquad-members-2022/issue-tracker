@@ -1,5 +1,6 @@
 package com.sh.issuetracker.member;
 
+<<<<<<< HEAD
 import com.sh.issuetracker.project.Project;
 import com.sh.issuetracker.user.User;
 
@@ -9,6 +10,24 @@ import org.hibernate.annotations.Where;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+=======
+import com.sh.issuetracker.issue.Issue;
+import com.sh.issuetracker.project.Project;
+import com.sh.issuetracker.user.User;
+
+import org.hibernate.annotations.Where;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+>>>>>>> b7681b9 ([juolly/issue-tracker #43] feat: Member)
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.NamedAttributeNode;
