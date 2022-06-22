@@ -8,6 +8,8 @@ import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.domain.repository.IssueTrackerRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.util.*
 
 class IssueTrackerRepositoryImpl(
@@ -53,6 +55,12 @@ class IssueTrackerRepositoryImpl(
     override suspend fun getFilterList(value: HashMap<String, Any>): Result<List<Issue>> {
         return issueTrackerDataSource.getFilterList(value).map { issues ->
             issues.map { issue -> issue.toIssue() }
+        }
+    }
+
+    override fun findIssue(title: String): Flow<List<Issue>> {
+        return issueTrackerDataSource.findByIssueName(title).map {
+            it.map { issue -> issue.toIssue() }
         }
     }
 }

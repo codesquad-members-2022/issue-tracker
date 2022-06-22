@@ -1,9 +1,7 @@
 package com.example.it.issuetracker.presentation.main.issue.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,11 +12,8 @@ import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.customview.CustomSnackBar
-import com.example.it.issuetracker.presentation.main.issue.register.RegisterIssueFragment
-import com.example.it.issuetracker.presentation.main.issue.filter.FilterFragment
-import com.example.it.issuetracker.presentation.main.issue.filter.FilterViewModel
+import com.example.it.issuetracker.presentation.main.issue.search.SearchFragment
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue) {
@@ -40,12 +35,8 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
     }
 
     override fun initView() = with(binding) {
-        btnIssue.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.container_main, RegisterIssueFragment())
-                .addToBackStack("register_issue")
-                .commit()
-        }
+        ivSearch.setOnClickListener { navigateFragment(SearchFragment(), "search_issue") }
+        btnIssue.setOnClickListener { navigateFragment(SearchFragment(), "register_issue") }
         rvIssue.adapter = adapter
         val dividerItemDecoration =
             DividerItemDecoration(context, LinearLayoutManager(context).orientation)
@@ -54,11 +45,18 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
         ivDelete.setOnClickListener { deleteIssues() }
         ivClose.setOnClickListener { closeIssues() }
         toolbarDefaultIssue.setNavigationOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.container_main, FilterFragment())
-                .addToBackStack("filter")
-                .commit()
+            navigateFragment(
+                SearchFragment(),
+                "filter"
+            )
         }
+    }
+
+    private fun navigateFragment(fragment: Fragment, name: String) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.container_main, fragment)
+            .addToBackStack(name)
+            .commit()
     }
 
     private fun closeIssues() {

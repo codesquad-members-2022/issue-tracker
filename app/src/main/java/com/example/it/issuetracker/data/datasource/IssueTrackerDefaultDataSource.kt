@@ -6,6 +6,8 @@ import com.example.it.issuetracker.data.dto.MemberDto
 import com.example.it.issuetracker.data.dto.MilestoneDto
 import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.domain.model.MileStone
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import java.util.*
 
 class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
@@ -195,5 +197,10 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             }
             filterList
         }
+    }
+
+    override fun findByIssueName(title: String): Flow<List<IssueDto>> = flow {
+        val result = issues.filter { it.title.contains(title) }
+        emit(result)
     }
 }
