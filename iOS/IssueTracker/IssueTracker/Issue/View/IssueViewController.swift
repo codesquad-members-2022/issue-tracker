@@ -36,9 +36,8 @@ class IssueViewController: UIViewController {
         issueCollectionView.setCollectionViewDelegate(self)
     }
     private func setNavigationItems() {
-        let customButton = CustomBarButton()
-        let leftBarButton = UIBarButtonItem(customView: customButton.leftButton)
-        let rightBarButton = UIBarButtonItem(customView: customButton.rightButton)
+        let leftBarButton = UIBarButtonItem(customView: leftButton)
+        let rightBarButton = UIBarButtonItem(customView: rightButton)
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
         
@@ -63,6 +62,7 @@ class IssueViewController: UIViewController {
             let editingIssueViewController = EditingIssueViewController()
             self?.navigationController?.pushViewController(editingIssueViewController, animated: true)
         })
+    }
 }
 
 extension IssueViewController: UICollectionViewDelegate {
