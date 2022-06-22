@@ -1,6 +1,7 @@
 package com.sh.issuetracker.label.dto;
 
 import com.sh.issuetracker.label.Label;
+import com.sh.issuetracker.label.TextColor;
 import com.sh.issuetracker.project.Project;
 
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class LabelRequest {
 				this.name,
 				this.description,
 				this.backgroundColor,
-				Label.TextColor.from(this.fontColor),
+				TextColor.from(this.fontColor),
 				projectInfo);
 		}
 	}
