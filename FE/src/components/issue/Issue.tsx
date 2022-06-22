@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Issue.module.scss';
 import { Input } from '@UI/Input';
 
@@ -31,7 +31,7 @@ function elapsedText(fetchedTime: number, createdTime: number) {
 }
 
 type IssuePropType = {
-  id: string;
+  id: number;
   title: string;
   milestoneTitle: string;
   createdAt: number;
@@ -48,19 +48,27 @@ const Issue = ({
   fetchedAt,
   userId,
   userImg,
+  checkboxHandler,
+  checkedIssues,
 }: IssuePropType) => {
   const passedTime = elapsedText(fetchedAt, createdAt);
-
+  const [isChecked, setIsChecked] = useState(false);
+  useEffect(() => {
+    if (checkedIssues.includes(String(id))) setIsChecked(true);
+    else setIsChecked(false);
+  }, [checkedIssues]);
   return (
     <div className={styles.issueWrapper}>
       <div className={styles.leftWrapper}>
         <div className={styles.checkBoxWrapper}>
           <Input
-            label="issueSelect"
+            label={`issue${id}`}
             info={{
-              id: 'issueSelect',
+              id: `${id}`,
               type: 'checkbox',
               value: 'issueSelect',
+              onChange: checkboxHandler,
+              checked: isChecked,
             }}
           />
         </div>

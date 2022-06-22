@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import { Input } from '@UI/Input';
 import styles from './Issue.module.scss';
 import IssuesNav from './IssuesNav';
@@ -27,36 +27,72 @@ type fetchedContentType = {
   issueNumber: number;
   title: string;
   milestoneTitle: string;
-  createAt: string;
+  createdAt: string;
 };
 
 const Issues = () => {
+  const [checkedIssues, setCheckedIssues] = useState<string[]>([]);
   const { status, data, dataUpdatedAt } = useQuery('issues', fetchIssues, {
     refetchOnWindowFocus: false,
     retry: false,
   });
 
+  useEffect(() => {
+    console.log(checkedIssues);
+  }, [checkedIssues]);
+
+  const allCheckboxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = e.target.checked;
+    if (isChecked) {
+      const allChecboxes = data.content.map((v) => String(v.issueNumber));
+      setCheckedIssues(allChecboxes);
+    } else {
+      setCheckedIssues([]);
+    }
+  };
+  const checkboxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const currentBoxId = e.target.id;
+
+    const aleadyChecked = checkedIssues.includes(currentBoxId);
+    if (aleadyChecked) {
+      const newState = checkedIssues.filter((issue) => issue !== currentBoxId);
+      setCheckedIssues(newState);
+    } else {
+      setCheckedIssues((prev) => [...prev, currentBoxId]);
+    }
+  };
+
+  useEffect(() => {
+    console.log(checkedIssues, 'clicked');
+  }, [checkedIssues]);
+
   return (
-    <>
-      <div className={styles.wrapper}>
-        <IssuesNav />
-        {data &&
-          data.content.map(
-            ({ issueNumber, title, milestoneTitle, createdAt, memberDto }) => (
-              <Issue
-                key={issueNumber}
-                id={issueNumber}
-                userId={memberDto.memberId}
-                userImg={memberDto.avatarUrl}
-                title={title}
-                milestoneTitle={milestoneTitle}
-                createdAt={new Date(createdAt).getTime()}
-                fetchedAt={dataUpdatedAt}
-              />
-            ),
-          )}
-      </div>
-    </>
+    <div className={styles.wrapper}>
+      <IssuesNav allCheckboxHandler={allCheckboxHandler} />
+      {data &&
+        data.content.map(
+          ({
+            issueNumber,
+            title,
+            milestoneTitle,
+            createdAt,
+            memberDto,
+          }: fetchedContentType) => (
+            <Issue
+              key={issueNumber}
+              id={issueNumber}
+              userId={memberDto.memberId}
+              userImg={memberDto.avatarUrl}
+              title={title}
+              milestoneTitle={milestoneTitle}
+              createdAt={new Date(createdAt).getTime()}
+              fetchedAt={dataUpdatedAt}
+              checkboxHandler={checkboxHandler}
+              checkedIssues={checkedIssues}
+            />
+          ),
+        )}
+    </div>
   );
 };
 

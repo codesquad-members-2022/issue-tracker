@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './IssuesNav.module.scss';
 import { Input } from '@UI/Input';
 
-const IssuesNav = () => {
+const IssuesNav = ({ allCheckboxHandler }) => {
   return (
     <nav className={styles.navWrapper}>
       <div className={styles.leftWrapper}>
@@ -13,6 +13,7 @@ const IssuesNav = () => {
               id: 'issueAllSelect',
               type: 'checkbox',
               value: 'allSelect',
+              onChange: allCheckboxHandler,
             }}
           />
         </div>
@@ -35,6 +36,7 @@ const IssuesNav = () => {
           <summary>마일스톤</summary>
           <div className={styles.test}>123123123</div>
         </details>
+        ㄴ
         <details>
           <summary>작성자</summary>
           <div className={styles.test}>123123123</div>
