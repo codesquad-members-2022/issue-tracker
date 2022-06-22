@@ -54,8 +54,6 @@ class IssueFragment : Fragment() {
         navigateIssueEditor()
         listenEditModeEvent()
         setSelectedIssueCount()
-        
-        return binding.root
     }
 
     private fun saveFilterConditionFromFilterFragment() {
