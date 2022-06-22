@@ -11,6 +11,7 @@ import dev.kukim.issues.milestone.controller.response.MilestoneResponse;
 import dev.kukim.issues.milestone.controller.response.MilestoneListResponse;
 import dev.kukim.issues.milestone.domain.Milestone;
 import dev.kukim.issues.milestone.domain.repository.MileStoneRepository;
+import dev.kukim.issues.milestone.exception.MilestoneNotFoundException;
 import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -118,7 +119,6 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestoneUpdateRequest.setDescription("내용 수정");
 		milestoneUpdateRequest.setOpen(false);
 
-
 		MilestoneResponse updateMilestone = milestoneService.update(saveMilestone.getId(),
 			milestoneUpdateRequest);
 
@@ -128,4 +128,27 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		assertThat(updateMilestone.isOpen()).isFalse();
 	}
 
+	@Test
+	void 만약_존재하지않는_마일스톤_요청이들어온다면_예외를발생한다() {
+		milestoneUpdateRequest.setTitle("마일스톤 제목수정 1");
+		assertThatThrownBy(() -> milestoneService.update(100000L,
+			milestoneUpdateRequest))
+			.isInstanceOf(MilestoneNotFoundException.class);
+	}
+
+	@Test
+	void 만약_특정_마일스톤_삭제요청이_주어진다면_해당마일스톤을삭제한다() {
+		milestoneCreateRequest.setTitle("마일스톤 저장 1");
+		MilestoneResponse saveMilestone = milestoneService.save(milestoneCreateRequest);
+
+		milestoneService.delete(saveMilestone.getId());
+
+		assertThat(mileStoneRepository.findById(saveMilestone.getId())).isEmpty();
+	}
+
+	@Test
+	void 만약_존재하지않는_마일스톤_삭제요청이_온다면_예외를발생한다() {
+		assertThatThrownBy(() -> milestoneService.delete(1000000L))
+			.isInstanceOf(MilestoneNotFoundException.class);
+	}
 }
