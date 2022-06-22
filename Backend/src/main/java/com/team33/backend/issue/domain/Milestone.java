@@ -1,13 +1,18 @@
 package com.team33.backend.issue.domain;
 
 import com.team33.backend.common.jpa.entity.CommonEntity;
+import com.team33.backend.group.IssueGroup;
 import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -28,6 +33,10 @@ public class Milestone extends CommonEntity {
     private String description;
 
     private LocalDate deadline;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "issue_group_id", nullable = false)
+    private IssueGroup issueGroup;
 
     public Milestone(String title, String description, LocalDate deadline) {
         this.title = title;

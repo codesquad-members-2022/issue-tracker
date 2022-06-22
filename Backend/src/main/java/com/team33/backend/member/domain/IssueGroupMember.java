@@ -21,7 +21,7 @@ public class IssueGroupMember {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id", nullable = false)
+    @JoinColumn(name = "issue_group_id", nullable = false)
     private IssueGroup issueGroup;
 
     @ManyToOne(fetch = FetchType.LAZY)

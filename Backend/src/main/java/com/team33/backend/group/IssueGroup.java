@@ -1,6 +1,7 @@
 package com.team33.backend.group;
 
 import com.team33.backend.common.jpa.entity.CommonEntity;
+import com.team33.backend.issue.domain.Milestone;
 import com.team33.backend.member.domain.IssueGroupMember;
 import lombok.Getter;
 
@@ -29,7 +30,7 @@ public class IssueGroup extends CommonEntity {
     private String name;
 
     @OneToMany(mappedBy = "issueGroup", cascade = CascadeType.REMOVE)
-    private List<IssueGroupMember> issueGroupMembers = new ArrayList<>();
+    private List<Milestone> milestones = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
