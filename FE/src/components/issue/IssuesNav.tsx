@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './IssuesNav.module.scss';
 import { Input } from '../../common/Input';
 
@@ -7,55 +7,48 @@ type IssuesNavPropType = {
   checkedIssues: string[];
   isChecked: boolean;
 };
+
 const IssuesNav = ({
   allCheckboxHandler,
-  checkedIssues,
   isChecked,
+  checkedIssues,
 }: IssuesNavPropType) => {
   return (
-    <nav className={styles.navWrapper}>
-      <div className={styles.leftWrapper}>
-        <div className={styles.checkBoxWrapper}>
-          <Input
-            label="issueAllSelect"
-            info={{
-              id: 'issueAllSelect',
-              type: 'checkbox',
-              value: 'allSelect',
-              onChange: allCheckboxHandler,
-              checked: isChecked,
-            }}
-          />
-        </div>
-        <div className={styles.nav__contentWrapper}>
-          {!isChecked && (
-            <>
-              <span>열린 이슈</span>
-              <span>닫힌 이슈</span>
-            </>
-          )}
-          {isChecked && <span>{checkedIssues.length}개의 이슈가 선택됨</span>}
-        </div>
+    <nav className={styles.nav}>
+      <div className={styles.checkBoxWrapper}>
+        <Input
+          label="issueAllSelect"
+          info={{
+            id: 'issueAllSelect',
+            type: 'checkbox',
+            value: 'allSelect',
+            onChange: allCheckboxHandler,
+            checked: isChecked,
+          }}
+        />
       </div>
 
-      <div className={styles.rightWrapper}>
-        <details>
-          <summary>담당자</summary>
-          <div className={styles.test}>123123123</div>
-        </details>
-        <details>
-          <summary>레이블</summary>
-          <div className={styles.test}>123123123</div>
-        </details>
-        <details>
-          <summary>마일스톤</summary>
-          <div className={styles.test}>123123123</div>
-        </details>
-        ㄴ
-        <details>
-          <summary>작성자</summary>
-          <div className={styles.test}>123123123</div>
-        </details>
+      <div className={styles.nav__contentWrapper}>
+        {!isChecked && (
+          <>
+            <div>
+              <span>열린 이슈</span>
+              <span>닫힌 이슈</span>
+            </div>
+            <div className={styles.right}>
+              <span>담당자</span>
+              <span>담당자</span>
+              <span>담당자</span>
+              <span>담당자</span>
+            </div>
+          </>
+        )}
+        {isChecked && (
+          <>
+            <span>{checkedIssues.length}개의 이슈를 선택했습니다.</span>
+            <button style={{ marginRight: '3rem' }}>상태 수정하기</button>
+          </>
+        )}
       </div>
     </nav>
   );

@@ -30,7 +30,7 @@ const queryClient = new QueryClient();
 
 const fetchAuth = async (code: parsedQueryType) => {
   const response = await fetch(
-    `http://13.125.219.203:8080/auth/github?code=${code}`,
+    `http://3.35.150.211:8080/auth/github?code=${code}`,
     // {
     //   headers: {
     //     Accept: 'application/json',
@@ -59,52 +59,52 @@ const fetchIssues = async () => {
 
 const Callback = () => {
   const navigate = useNavigate();
-  // const { search } = useLocation();
-  // const { code } = qs.parse(search, {
-  //   ignoreQueryPrefix: true,
-  // });
-  useEffect(() => {
-    const getToken = async () => {
-      const { code } = qs.parse(location.search, {
-        ignoreQueryPrefix: true,
-      });
-
-      try {
-        const response = await fetch(
-          `http://13.125.219.203:8080/auth/github?code=${code}`,
-        );
-        const data = await response.json();
-
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getToken();
-  }, []);
-  // const { status, data } = useQuery(['auth', code], () => fetchAuth(code), {
-  //   refetchOnWindowFocus: false,
-  //   retry: false,
-  // });
-
+  const { search } = useLocation();
+  const { code } = qs.parse(search, {
+    ignoreQueryPrefix: true,
+  });
   // useEffect(() => {
-  //   if (status === 'success') {
-  //     // prefetchIssues(data);
-  //     console.log(data);
-  //     // navigate('/issues');
-  //     // useEffect를 사용하지않으면 컴포넌트 렌더링 오류가 발생해서, useEffect 사용
-  //     // 해당 내용에대해 더 알아보기
-  //   }
-  // }, [status]);
+  //   const getToken = async () => {
+  //     const { code } = qs.parse(location.search, {
+  //       ignoreQueryPrefix: true,
+  //     });
 
-  // if (status === 'loading') {
-  //   return <LoginLoading />;
-  // }
+  //     try {
+  //       const response = await fetch(
+  //         `http://3.35.150.211:8080/auth/github?code=${code}`,
+  //       );
+  //       const data = await response.json();
 
-  // if (status === 'error') {
-  //   return <LoginError />;
-  // }
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   getToken();
+  // }, []);
+  const { status, data } = useQuery(['auth', code], () => fetchAuth(code), {
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+
+  useEffect(() => {
+    if (status === 'success') {
+      // prefetchIssues(data);
+      console.log(data);
+      // navigate('/issues');
+      // useEffect를 사용하지않으면 컴포넌트 렌더링 오류가 발생해서, useEffect 사용
+      // 해당 내용에대해 더 알아보기
+    }
+  }, [status]);
+
+  if (status === 'loading') {
+    return <LoginLoading />;
+  }
+
+  if (status === 'error') {
+    return <LoginError />;
+  }
 
   return <></>;
 };

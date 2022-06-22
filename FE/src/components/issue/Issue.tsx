@@ -61,27 +61,46 @@ const Issue = ({
     else setIsChecked(false);
   }, [checkedIssues]);
 
+  // {!isChecked && (
+  //   <div>
+  //     <span>열린 이슈</span>
+  //     <span>닫힌 이슈</span>
+  //   </div>
+  // )}
+  // <div
+  //   style={{
+  //     display: 'flex',
+  //     width: '30%',
+  //     justifyContent: 'space-around',
+  //   }}
+  // >
+  //   <span>담당자</span>
+  //   <span>담당자</span>
+  //   <span>담당자</span>
+  //   <span>담당자</span>
+  // </div>
+
   return (
     <div className={styles.issueWrapper}>
-      <div className={styles.leftWrapper}>
-        <div className={styles.checkBoxWrapper}>
-          <Input
-            label={`issue${id}`}
-            info={{
-              id: `${id}`,
-              type: 'checkbox',
-              value: 'issueSelect',
-              onChange: checkboxHandler,
-              checked: isChecked,
-            }}
-          />
-        </div>
-        <div className={styles.issue__contentWrapper}>
+      <div className={styles.checkBoxWrapper}>
+        <Input
+          label={`issue${id}`}
+          info={{
+            id: `${id}`,
+            type: 'checkbox',
+            value: 'issueSelect',
+            onChange: checkboxHandler,
+            checked: isChecked,
+          }}
+        />
+      </div>
+      <div className={styles.issue__contentWrapper}>
+        <div className={styles.textWrapper}>
           <div className={styles.titleWrapper}>
             <span className={styles.title}>{title}</span>
             <span>badge</span>
           </div>
-          <div className={styles.textWrapper}>
+          <div className={styles.info}>
             <span>#{id}</span>
             <span>
               이 이슈가 {passedTime}, {userId}님에 의해 작성되었습니다.
@@ -89,14 +108,13 @@ const Issue = ({
             <span>{milestoneTitle}</span>
           </div>
         </div>
-      </div>
-
-      <div className={styles.rightWrapper}>
-        <div>무언가</div>
-        <div>무언가</div>
-        <div>무언가</div>
-        <div>
-          <img className={styles.avatar} src={userImg} alt="userAvatarImg" />
+        <div className={styles.right}>
+          <div>무언가</div>
+          <div>무언가</div>
+          <div>무언가</div>
+          <div>
+            <img className={styles.avatar} src={userImg} alt="userAvatarImg" />
+          </div>
         </div>
       </div>
     </div>
