@@ -1,16 +1,15 @@
-import React from 'react';
 import styled from 'styled-components';
 import { GREYSCALE } from '@/constants';
 import Icon from '@/assets/icons/Icon';
 
-type TapProps = {
+type TabProps = {
   isActive: boolean;
   iconName: 'tag' | 'milestone';
   title: string;
   count: number;
 };
 
-const getTapIcon = (iconName: 'tag' | 'milestone', iconColor: string) => {
+const getTabIcon = (iconName: 'tag' | 'milestone', iconColor: string) => {
   switch (iconName) {
     case 'tag':
       return <Icon iconName="tag" stroke={iconColor} />;
@@ -20,13 +19,13 @@ const getTapIcon = (iconName: 'tag' | 'milestone', iconColor: string) => {
   }
 };
 
-function Tap({ isActive, iconName, title, count }: TapProps) {
-  const Box = isActive ? TapBoxActive : TapBoxInitial;
+function Tab({ isActive, iconName, title, count }: TabProps) {
+  const Box = isActive ? TabBoxActive : TabBoxInitial;
   const iconColor = isActive ? GREYSCALE.BODY : GREYSCALE.LABEL;
 
   return (
     <Box>
-      {getTapIcon(iconName, iconColor)}
+      {getTabIcon(iconName, iconColor)}
       <Title>{title}</Title>
       <Count>({count})</Count>
     </Box>
@@ -41,7 +40,7 @@ const Count = styled.p`
   ${({ theme }) => theme.TYPOGRAPHY.TEXT_SMALL}
 `;
 
-const TapBox = styled.button`
+const TabBox = styled.button`
   width: 160px;
   height: 40px;
   color: ${GREYSCALE.LABEL};
@@ -51,15 +50,15 @@ const TapBox = styled.button`
   gap: 8px;
 `;
 
-const TapBoxInitial = styled(TapBox)`
+const TabBoxInitial = styled(TabBox)`
   &:hover {
     background-color: ${GREYSCALE.INPUT_BACKGROUND};
   }
 `;
 
-const TapBoxActive = styled(TapBox)`
+const TabBoxActive = styled(TabBox)`
   background-color: ${GREYSCALE.LINE};
   color: ${GREYSCALE.BODY};
 `;
 
-export default Tap;
+export default Tab;

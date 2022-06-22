@@ -8,10 +8,8 @@ type FilterBarProps = {};
 function FilterBar({}: FilterBarProps) {
   const [value, setValue] = useState('is:issue is:open');
   const [isFocus, setFocus] = useState(false);
-  const inputRef = useRef(null);
 
   const iconColor = isFocus ? GREYSCALE.LABEL : GREYSCALE.PLACEHOLDER;
-  const bgColor = isFocus ? GREYSCALE.OFF_WHITE : GREYSCALE.INPUT_BACKGROUND;
 
   const onChange = (event) => setValue(event.target.value);
 
@@ -27,7 +25,6 @@ function FilterBar({}: FilterBarProps) {
           placeholder="Search all issues"
           value={value}
           onChange={onChange}
-          ref={inputRef}
         />
       </InputBox>
     </FilterBarBox>
