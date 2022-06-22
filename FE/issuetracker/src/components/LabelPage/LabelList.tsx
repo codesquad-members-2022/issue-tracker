@@ -28,7 +28,7 @@ function LabelList() {
         {initialLabelList.map((label, index) => {
           const key = keyMaker();
           const isLastList = index === initialLabelList.length - 1;
-          return <LabelItem label={label} key={key} isLastList={isLastList} />;
+          return <LabelItem label={label} key={key} isLastList={isLastList} isNewLabel={false} />;
         })}
       </S.labelListWrapper>
     </S.labelListLayout>

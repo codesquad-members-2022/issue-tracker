@@ -10,10 +10,9 @@ type LabelListType = {
 
 function NewLabelList({ isNewLabel }: LabelListType) {
   const [newLabel, setNewLabel] = useRecoilState(labelState);
-
   return (
     <S.newLabelListWrapper>
-      <LabelItem label={newLabel} key="key" isLastList={false} />
+      <LabelItem label={newLabel} key="key" isLastList={false} isNewLabel={isNewLabel} />
       <S.labelForm>
         <S.labelName>
           <span>Label name</span>

@@ -14,9 +14,9 @@ const initialState: LabelStateType = {
   key: 'labelState',
   default: {
     id: 1,
-    title: 'documentation',
+    title: '라벨 이름',
     color: '#007AFF',
-    description: '상태 관리',
+    description: '설명',
   },
 };
 export const labelState = atom(initialState);
