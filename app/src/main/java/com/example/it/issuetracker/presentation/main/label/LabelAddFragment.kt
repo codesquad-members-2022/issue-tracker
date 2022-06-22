@@ -26,7 +26,7 @@ class LabelAddFragment : BaseFragment<FragmentLabelAddBinding>(R.layout.fragment
         binding.lifecycleOwner = viewLifecycleOwner
         editLabelInfo = arguments?.getSerializable("label") as? Label
         binding.viewModel = viewModel
-        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+        binding.labelAppbarLayout.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.label_save -> {
                     if (editLabelInfo == null) {
@@ -67,12 +67,15 @@ class LabelAddFragment : BaseFragment<FragmentLabelAddBinding>(R.layout.fragment
     }
 
     override fun initView() {
-        editLabelInfo?.let {
-            viewModel.setData(it)
+        if (editLabelInfo == null) {
+            binding.toolbarTitle = resources.getString(R.string.label_add_string)
+        } else {
+            binding.toolbarTitle = resources.getString(R.string.label_edit_string)
+            viewModel.setData(editLabelInfo!!)
         }
 
-        val saveMenu = binding.toolbar.menu.findItem(R.id.label_save)
-        binding.toolbar.setNavigationOnClickListener { popBackStack() }
+        val saveMenu = binding.labelAppbarLayout.toolbar.menu.findItem(R.id.label_save)
+        binding.labelAppbarLayout.toolbar.setNavigationOnClickListener { popBackStack() }
         binding.editSubject.doAfterTextChanged { input ->
             val text = input.toString()
             saveMenu.isEnabled = text.isNotEmpty()
