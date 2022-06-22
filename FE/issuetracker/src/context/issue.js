@@ -10,7 +10,29 @@ const initialData = {
     name: 'Oni',
     imageUrl: userImageURL,
   },
-  writtenTime: '2022-06-17T16:37:04',
+  writtenTime: '2022-06-22T16:37:04',
+  log: '이 이슈가 23분 전에 Oni님에 의해 열렸습니다',
+  comments: [
+    {
+      writer: {
+        id: 1,
+        name: 'Oni',
+        imageUrl: userImageURL,
+      },
+      log: '23분 전',
+      description:
+        '처음부터 전부 구현하려고 하지 말고 필수적인 기능부터 만든 후, 차근차근 완성도를 높여보세요',
+    },
+    {
+      writer: {
+        id: 2,
+        name: 'Daniel',
+        imageUrl: userImageURL2,
+      },
+      log: '14분 전',
+      description: '마감일은 언제인가요??',
+    },
+  ],
   milestone: '',
   labels: [
     {
