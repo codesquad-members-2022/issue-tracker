@@ -8,19 +8,7 @@
 import UIKit
 
 class IssueViewController: UIViewController {
-
-    private let leftButton: CustomBarButton = {
-        let button = CustomBarButton()
-        button.setConfiguration(title: "filter", imageSystemName: "line.3.horizontal.decrease", imagePlacement: .leading)
-        return button
-    }()
-
-    private let rightButton: CustomBarButton = {
-        let button = CustomBarButton()
-        button.setConfiguration(title: "선택", imageSystemName: "checkmark.circle", imagePlacement: .trailing)
-        return button
-    }()
-
+    private let navigationItems = IssueViewNavigationItems()
     private lazy var issueCollectionView = IssueCollectionView(frame: view.frame)
     private var dataSource = IssueCollectionViewDataSource()
     private var searchController = UISearchController(searchResultsController: nil)
@@ -36,10 +24,8 @@ class IssueViewController: UIViewController {
         issueCollectionView.setCollectionViewDelegate(self)
     }
     private func setNavigationItems() {
-        let leftBarButton = UIBarButtonItem(customView: leftButton)
-        let rightBarButton = UIBarButtonItem(customView: rightButton)
-        navigationItem.leftBarButtonItem = leftBarButton
-        navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationItems.filterButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationItems.selectButton)
         
         navigationItem.title = "이슈"
         navigationController?.navigationBar.prefersLargeTitles = true

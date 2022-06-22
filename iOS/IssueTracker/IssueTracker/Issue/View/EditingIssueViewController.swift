@@ -8,26 +8,8 @@
 import SnapKit
 
 final class EditingIssueViewController: UIViewController {
-    private let selectContentViewSegment: UISegmentedControl = {
-        let segment = UISegmentedControl(items: ["마크다운", "미리보기"])
-        segment.selectedSegmentTintColor = .white
-        segment.selectedSegmentIndex = 0
-        return segment
-    }()
-
-    private let saveButton: CustomBarButton = {
-        let customButton = CustomBarButton()
-        customButton.setConfiguration(title: "저장", imageSystemName: "plus", imagePlacement: .trailing)
-        return customButton
-    }()
-
-    private let cancelButton: CustomBarButton = {
-        let customButton = CustomBarButton()
-        customButton.setConfiguration(title: "취소", imageSystemName: "chevron.backward", imagePlacement: .leading)
-        return customButton
-    }()
-
     private lazy var editingIssueView = EditingIssueView(frame: view.bounds)
+    private let navigationItems = EditingIssueViewNavigationItems()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +20,7 @@ final class EditingIssueViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setNavigationBar()
+        setNavigationItems()
     }
 }
 
@@ -49,22 +31,24 @@ private extension EditingIssueViewController {
         editingIssueView.setTitleTextFieldDelegate(self)
     }
 
-    func setNavigationBar() {
+    func setNavigationItems() {
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.titleView = selectContentViewSegment
-        selectContentViewSegment.addAction(UIAction { [weak self] _ in
+        navigationItem.titleView = navigationItems.selectContentViewSegment
+        navigationItems.selectContentViewSegment.addAction(UIAction { [weak self] _ in
             self?.didSegmentValueChanged()
         }, for: .valueChanged)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationItems.saveButton)
         navigationItem.rightBarButtonItem?.isEnabled = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: cancelButton)
-        cancelButton.addAction(UIAction {_ in
-            self.navigationController?.popViewController(animated: true)
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationItems.cancelButton)
+        navigationItems.cancelButton.addAction(UIAction { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
         }, for: .touchUpInside)
     }
 
     func didSegmentValueChanged() {
-        editingIssueView.changeContentView(to: selectContentViewSegment.selectedSegmentIndex)
+        editingIssueView.changeContentView(to: navigationItems.selectContentViewSegment.selectedSegmentIndex)
     }
 }
 

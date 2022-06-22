@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		022D77C52862A5CB00ACA5FA /* EditingIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D77C42862A5CB00ACA5FA /* EditingIssueView.swift */; };
+		022D77CE2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D77CD2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift */; };
+		022D77D02863878300ACA5FA /* IssueViewNavigationItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D77CF2863878300ACA5FA /* IssueViewNavigationItems.swift */; };
 		024F438B28596ED3008C4235 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F438A28596ED3008C4235 /* SignInView.swift */; };
 		024F438D2859704E008C4235 /* MontserratItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 024F438C2859704E008C4235 /* MontserratItalic.ttf */; };
 		024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F438E285972DB008C4235 /* UIView+Extension.swift */; };
@@ -95,6 +97,8 @@
 
 /* Begin PBXFileReference section */
 		022D77C42862A5CB00ACA5FA /* EditingIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueView.swift; sourceTree = "<group>"; };
+		022D77CD2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueViewNavigationItems.swift; sourceTree = "<group>"; };
+		022D77CF2863878300ACA5FA /* IssueViewNavigationItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewNavigationItems.swift; sourceTree = "<group>"; };
 		024F438A28596ED3008C4235 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		024F438C2859704E008C4235 /* MontserratItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MontserratItalic.ttf; sourceTree = "<group>"; };
 		024F438E285972DB008C4235 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -268,11 +272,12 @@
 			isa = PBXGroup;
 			children = (
 				5B29A0C428573E400088EC11 /* IssueViewController.swift */,
+				022D77CF2863878300ACA5FA /* IssueViewNavigationItems.swift */,
 				5BE928CE285852C100D237AB /* IssueCollectionView.swift */,
 				5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */,
-				5B29A117285ACACE0088EC11 /* CustomBarButton.swift */,
 				028CB80C286191AC00DAFE26 /* EditingIssueViewController.swift */,
 				022D77C42862A5CB00ACA5FA /* EditingIssueView.swift */,
+				022D77CD2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 			children = (
 				5BE928D22858553800D237AB /* TabBarController.swift */,
 				02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */,
+				5B29A117285ACACE0088EC11 /* CustomBarButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -723,6 +729,8 @@
 				02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */,
 				02AEC2FD28600E8500AAE835 /* Observable.swift in Sources */,
 				5BE928D72858568B00D237AB /* MilestoneViewController.swift in Sources */,
+				022D77CE2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift in Sources */,
+				022D77D02863878300ACA5FA /* IssueViewNavigationItems.swift in Sources */,
 				5BE928D92858569C00D237AB /* MyAccountViewController.swift in Sources */,
 				02AEC2F828600B2D00AAE835 /* DummyData.swift in Sources */,
 			);
