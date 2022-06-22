@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func changeScreen(to window: UIWindow?) {
         let rootViewController =
         GithubUserDefaults.getToken() != nil
-            ? UINavigationController(rootViewController: IssueViewController())
-            : LoginViewController()
+        ? UINavigationController(rootViewController: IssueViewController(model: IssueModel(service: GitHubService())))
+        : LoginViewController(service: OAuthService())
         window?.rootViewController = rootViewController
     }
     

@@ -9,7 +9,11 @@ import Foundation
 
 class IssueModel {
 
-    private let githubService = GitHubService()
+    private let githubService: GitHubService
+    
+    init(service: GitHubService) {
+        self.githubService = service
+    }
     
     var updatedIssues: (_ issues: [Issue]) -> Void = { issues in
         

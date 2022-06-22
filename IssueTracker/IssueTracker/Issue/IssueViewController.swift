@@ -13,15 +13,20 @@ final class IssueViewController: UIViewController {
         return collectionView
     }()
     
-    private let model = IssueModel()
+    private var model: IssueModel?
+    
+    convenience init(model: IssueModel?) {
+        self.init()
+        self.model = model
+    }
     
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
-        model.requestIssue()
-        model.updatedIssues = { issues in // 모델과 바인딩
+        model?.requestIssue()
+        model?.updatedIssues = { issues in // 모델과 바인딩
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -77,12 +82,12 @@ final class IssueViewController: UIViewController {
 
 extension IssueViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.model.getIssuesCount()
+        return self.model?.getIssuesCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.identifier, for: indexPath) as? IssueListCell,
-              let data = model.getIssue(at: indexPath.row) else {
+              let data = model?.getIssue(at: indexPath.row) else {
             return UICollectionViewCell()
         }
         cell.updateViews(title: data.title, description: data.body, milestone: data.milestone?.title, labels: data.labels)
