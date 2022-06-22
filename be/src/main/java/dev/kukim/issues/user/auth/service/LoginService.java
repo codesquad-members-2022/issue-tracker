@@ -22,7 +22,7 @@ public class LoginService {
 
 		User user = findOrCreatUser(githubUserResponse);
 
-		String accessToken = loginTokenGenerator.accessToken(user.getId());
+		String accessToken = loginTokenGenerator.createToken(user.getId());
 
 		return LoginResponseMapper.INSTANCE.map(user, accessToken);
 	}
