@@ -86,7 +86,7 @@ class FilterFragment : Fragment() {
 
         repeatOnLifecycleExtension {
             viewModel.milestoneList.collectLatest {
-                val milestone = it.map { milestone -> milestone.name }
+                val milestone = it.map { milestone -> milestone.title }
                 binding.filterMilestone.spinner.adapter =
                     SpinnerAdapter(requireContext(), R.layout.item_spinner, milestone)
                 binding.filterMilestone.spinner.setSelection(viewModel.milestoneIndex.value)
@@ -118,8 +118,10 @@ class FilterFragment : Fragment() {
                     position: Int,
                     id: Long,
                 ) {
-                    viewModel.clickFilterItem(binding.filterState.spinner.selectedItem.toString(),
-                        0, position)
+                    viewModel.clickFilterItem(
+                        binding.filterState.spinner.selectedItem.toString(),
+                        0, position
+                    )
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit
@@ -133,8 +135,10 @@ class FilterFragment : Fragment() {
                     position: Int,
                     id: Long,
                 ) {
-                    viewModel.clickFilterItem(binding.filterWriter.spinner.selectedItem.toString(),
-                        1, position)
+                    viewModel.clickFilterItem(
+                        binding.filterWriter.spinner.selectedItem.toString(),
+                        1, position
+                    )
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit
@@ -148,8 +152,10 @@ class FilterFragment : Fragment() {
                     position: Int,
                     id: Long,
                 ) {
-                    viewModel.clickFilterItem(binding.filterLabel.spinner.selectedItem.toString(),
-                        2, position)
+                    viewModel.clickFilterItem(
+                        binding.filterLabel.spinner.selectedItem.toString(),
+                        2, position
+                    )
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit
@@ -163,8 +169,10 @@ class FilterFragment : Fragment() {
                     position: Int,
                     id: Long,
                 ) {
-                    viewModel.clickFilterItem(binding.filterMilestone.spinner.selectedItem.toString(),
-                        3, position)
+                    viewModel.clickFilterItem(
+                        binding.filterMilestone.spinner.selectedItem.toString(),
+                        3, position
+                    )
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit

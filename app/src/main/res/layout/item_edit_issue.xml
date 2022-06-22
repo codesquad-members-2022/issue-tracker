@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
-            android:text="@{issue.mileStone.name}"
+            android:text="@{issue.mileStone.title}"
             app:layout_constraintBottom_toBottomOf="@id/iv_milestone"
             app:layout_constraintStart_toEndOf="@id/iv_milestone"
             app:layout_constraintTop_toTopOf="@id/iv_milestone"

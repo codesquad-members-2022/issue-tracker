@@ -17,7 +17,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             description = "이슈에 대한 설명(두 줄까지 보여줄 수 있다)",
             state = true,
             label = listOf(LabelFakeDatabase.database[0]),
-            mileStone = MileStone(id = 1, name = "마일스톤", deadLine = "2022-06-14"),
+            mileStone = MileStone(id = 1, title = "마일스톤", deadLine = "2022-06-14"),
             createdTime = "2022-05-21",
             milestoneId = 1,
             memberId = 1
@@ -28,7 +28,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             description = "2022년 6월 13일 월요일 부터 7월 1일 금요일 까지",
             state = true,
             label = listOf(LabelFakeDatabase.database[1]),
-            mileStone = MileStone(id = 2, name = "마스터즈 코스", deadLine = "2022-06-16"),
+            mileStone = MileStone(id = 2, title = "마스터즈 코스", deadLine = "2022-06-16"),
             createdTime = "2022-05-21",
             milestoneId = 1,
             memberId = 1
@@ -39,7 +39,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             description = "테스트 설명",
             state = false,
             label = listOf(LabelFakeDatabase.database[2]),
-            mileStone = MileStone(id = 3, name = "테스트 그룹", deadLine = "2022-06-17"),
+            mileStone = MileStone(id = 3, title = "테스트 그룹", deadLine = "2022-06-17"),
             createdTime = "2022-05-21",
             milestoneId = 1,
             memberId = 1
@@ -50,7 +50,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             description = "123456789",
             state = true,
             label = listOf(LabelFakeDatabase.database[3]),
-            mileStone = MileStone(id = 4, name = "마스터즈 코스 숫자", deadLine = "2022-06-20"),
+            mileStone = MileStone(id = 4, title = "마스터즈 코스 숫자", deadLine = "2022-06-20"),
             createdTime = "2022-05-21",
             milestoneId = 1,
             memberId = 1
@@ -86,26 +86,30 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
     )
 
     private val milestones: List<MilestoneDto> = listOf(
-        MilestoneDto(id = 1,
+        MilestoneDto(
+            id = 1,
             title = "마일스톤",
             deadLine = "2022-06-14",
-            issueId = 1,
-            description = ""),
-        MilestoneDto(id = 2,
+            description = ""
+        ),
+        MilestoneDto(
+            id = 2,
             title = "마스터즈 코스",
             deadLine = "2022-06-16",
-            issueId = 2,
-            description = ""),
-        MilestoneDto(id = 3,
+            description = ""
+        ),
+        MilestoneDto(
+            id = 3,
             title = "테스트 그룹",
             deadLine = "2022-06-17",
-            issueId = 3,
-            description = ""),
-        MilestoneDto(id = 4,
+            description = ""
+        ),
+        MilestoneDto(
+            id = 4,
             title = "마스터즈 코스 숫자",
             deadLine = "2022-06-20",
-            issueId = 4,
-            description = "")
+            description = ""
+        )
     )
 
     override suspend fun getIssue(): Result<List<IssueDto>> {
@@ -131,16 +135,19 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
 
     override suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<IssueDto>> {
         for ((idx, issue) in list) {
-            val issueDto = IssueDto(id = issue.id,
+            val issueDto = IssueDto(
+                id = issue.id,
                 title = issue.title,
                 description = issue.description,
                 state = issue.state,
                 label = issue.label.map {
-                    LabelDto(id = issues.size + 1,
+                    LabelDto(
+                        id = issues.size + 1,
                         title = it.title,
                         description = it.description,
                         color = it.color,
-                        textColor = it.textColor)
+                        textColor = it.textColor
+                    )
                 },
                 mileStone = issue.mileStone,
                 createdTime = "2022-06-21",

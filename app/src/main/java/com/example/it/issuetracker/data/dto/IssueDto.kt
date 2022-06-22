@@ -16,7 +16,8 @@ data class IssueDto(
 )
 
 fun IssueDto.toIssue(): Issue =
-    Issue(id = id,
+    Issue(
+        id = id,
         title = title,
         description = description,
         state = state,

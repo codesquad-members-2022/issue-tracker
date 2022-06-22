@@ -29,12 +29,16 @@ class FilterViewModel(
     private val _eventApply = MutableSharedFlow<Boolean>()
     val eventApply = _eventApply.asSharedFlow()
 
-    private val _state = MutableStateFlow<List<String>>(listOf("선택",
-        "열린 이슈",
-        "내가 작성한 이슈",
-        "나에게 할당한 이슈",
-        "내가 댓글을 남긴 이슈",
-        "닫힌 이슈"))
+    private val _state = MutableStateFlow<List<String>>(
+        listOf(
+            "선택",
+            "열린 이슈",
+            "내가 작성한 이슈",
+            "나에게 할당한 이슈",
+            "내가 댓글을 남긴 이슈",
+            "닫힌 이슈"
+        )
+    )
     val state = _state.asStateFlow()
     private val _stateIndex = MutableStateFlow<Int>(0)
     val stateIndex = _stateIndex.asStateFlow()
@@ -150,7 +154,7 @@ class FilterViewModel(
                 if (item == "선택") {
                     _filtering.value.remove("milestone")
                 } else {
-                    val id = _milestoneList.value.find { it.name == item }?.id ?: return
+                    val id = _milestoneList.value.find { it.title == item }?.id ?: return
                     _filtering.value["milestone"] = id
                 }
             }
