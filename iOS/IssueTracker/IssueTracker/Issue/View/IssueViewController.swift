@@ -8,7 +8,19 @@
 import UIKit
 
 class IssueViewController: UIViewController {
-    
+
+    private let leftButton: CustomBarButton = {
+        let button = CustomBarButton()
+        button.setConfiguration(title: "filter", imageSystemName: "line.3.horizontal.decrease", imagePlacement: .leading)
+        return button
+    }()
+
+    private let rightButton: CustomBarButton = {
+        let button = CustomBarButton()
+        button.setConfiguration(title: "선택", imageSystemName: "checkmark.circle", imagePlacement: .trailing)
+        return button
+    }()
+
     private lazy var issueCollectionView = IssueCollectionView(frame: view.frame)
     private var dataSource = IssueCollectionViewDataSource()
     private var searchController = UISearchController(searchResultsController: nil)
@@ -20,9 +32,9 @@ class IssueViewController: UIViewController {
         view = issueCollectionView
 
         issueCollectionView.setDataSource(dataSource)
+        setButtonAction()
         issueCollectionView.setCollectionViewDelegate(self)
     }
-    
     private func setNavigationItems() {
         let customButton = CustomBarButton()
         let leftBarButton = UIBarButtonItem(customView: customButton.leftButton)
@@ -37,7 +49,6 @@ class IssueViewController: UIViewController {
         let appearance = UINavigationBarAppearance()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
     }
     
     private func setSearchController() {
@@ -46,16 +57,22 @@ class IssueViewController: UIViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
     }
+
+    private func setButtonAction() {
+        issueCollectionView.setNewIssueButtonAction(UIAction { [weak self] _ in
+            let editingIssueViewController = EditingIssueViewController()
+            self?.navigationController?.pushViewController(editingIssueViewController, animated: true)
+        })
 }
 
 extension IssueViewController: UICollectionViewDelegate {
-
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-            guard velocity.y != 0 else { return }
-            if velocity.y < 0 {
-                navigationItem.searchController = searchController
-            } else {
-                navigationItem.searchController = nil
-            }
+        guard velocity.y != 0 else { return }
+
+        if velocity.y < 0 {
+            navigationItem.searchController = searchController
+        } else {
+            navigationItem.searchController = nil
+        }
     }
 }

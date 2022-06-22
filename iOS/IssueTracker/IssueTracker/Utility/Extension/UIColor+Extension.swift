@@ -19,8 +19,8 @@ extension UIColor {
         let rgbValue = Self.scanHex(hexFormat)
 
         self.init(red: Self.getColor(from: rgbValue, colorType: .red),
-                  green: Self.getColor(from: rgbValue, colorType: .blue),
-                  blue: Self.getColor(from: rgbValue, colorType: .green),
+                  green: Self.getColor(from: rgbValue, colorType: .green),
+                  blue: Self.getColor(from: rgbValue, colorType: .blue),
                   alpha: alpha)
         return
     }
@@ -58,4 +58,9 @@ fileprivate extension UIColor {
     enum ColorType {
         case red, green, blue
     }
+}
+
+extension UIColor {
+    static let primary1 = UIColor(hex: "#007AFF")
+    static let gray5 = UIColor(hex: "#E5E5EA")
 }
