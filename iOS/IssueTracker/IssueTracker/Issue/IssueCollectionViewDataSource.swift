@@ -36,8 +36,8 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCollectionViewCell.identifier, for: indexPath) as? IssueCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let items = data[indexPath.item]
-        cell.configure(with: items)
+        let issueEntity = data[indexPath.item]
+        cell.configure(with: issueEntity)
         
         return cell
     }
