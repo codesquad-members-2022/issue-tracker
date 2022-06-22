@@ -11,12 +11,7 @@ function IssueTab({ tabName }: IssueTabProps) {
   return (
     <IssueTabBox>
       <TabName>{tabName}</TabName>
-      <Icon
-        iconName="chevronDown"
-        width={10}
-        height={6}
-        stroke={GREYSCALE.LABEL}
-      />
+      <Icon iconName="chevronDown" stroke={GREYSCALE.LABEL} />
     </IssueTabBox>
   );
 }

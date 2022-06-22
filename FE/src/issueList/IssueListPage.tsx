@@ -30,8 +30,14 @@ function IssueListPage() {
 }
 
 const Wrap = styled.div`
-  ${({ theme }) => theme.LAYOUT.flexLayoutMixin('row')}
-  width:1280px;
+  width: 1280px;
+  ${({ theme }) => theme.LAYOUT.flexLayoutMixin('row', 'space-between')}
+  margin-bottom: 24px;
+
+  div:nth-child(2) {
+    margin-left: auto;
+    margin-right: 16px;
+  }
 `;
 
 export default IssueListPage;

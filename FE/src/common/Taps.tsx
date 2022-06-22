@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { COLORS, GREYSCALE } from '@/constants';
+import { GREYSCALE } from '@/constants';
 import Tap from './Tap';
 
 function Taps() {
