@@ -70,6 +70,7 @@
 		D06BF32228631DB400CBE2AD /* cutsom-env-variable.sh in Resources */ = {isa = PBXBuildFile; fileRef = D06BF32128631DB400CBE2AD /* cutsom-env-variable.sh */; };
 		D06BF3252863292800CBE2AD /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BF3242863292800CBE2AD /* IntroViewController.swift */; };
 		D06BF3262863292A00CBE2AD /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BF3242863292800CBE2AD /* IntroViewController.swift */; };
+		D06BF3272863368700CBE2AD /* cutsom-env-variable.sh in Resources */ = {isa = PBXBuildFile; fileRef = D06BF32128631DB400CBE2AD /* cutsom-env-variable.sh */; };
 		D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
 		D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
 		D0E98CD0285B05000051413E /* LabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CCF285B05000051413E /* LabelView.xib */; };
@@ -483,6 +484,7 @@
 				BC2F5994286153AF0012D18C /* dummyResponseUser.json in Resources */,
 				BC2F5998286162F60012D18C /* dummyResponseIssues.json in Resources */,
 				D0E98CD1285B05000051413E /* LabelView.xib in Resources */,
+				D06BF3272863368700CBE2AD /* cutsom-env-variable.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
