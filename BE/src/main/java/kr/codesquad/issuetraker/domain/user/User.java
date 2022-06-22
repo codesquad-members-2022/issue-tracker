@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Getter
 @Entity
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "user_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "user_id")
     private Long id;
     private String email;
     private String displayName;

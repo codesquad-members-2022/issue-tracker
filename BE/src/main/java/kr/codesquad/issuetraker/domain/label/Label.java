@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Getter
 @Entity
 public class Label {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "label_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "label_id")
     private Long id;
     private String name;
     private String description;

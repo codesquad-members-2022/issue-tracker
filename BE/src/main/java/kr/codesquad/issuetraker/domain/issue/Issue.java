@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +35,34 @@ public class Issue {
     @JoinColumn(name = "assignee_id")
     private User assignee;
     @OneToMany(mappedBy = "issue")
-    private List<Comment> comments = new ArrayList<>();
-    @ManyToOne @JoinColumn(name = "label_id")
+    private final List<Comment> comments = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "label_id")
     private Label label;
     private boolean isOpened = true;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private boolean isDeleted;
+
+
+    public void modifyContentsWith(IssueModificationFields modificationFields) {
+        title = modificationFields.getTitle();
+        description = modificationFields.getDescription();
+        milestone = modificationFields.getMilestone();
+        label = modificationFields.getLabel();
+        author = modificationFields.getAuthor();
+        assignee = modificationFields.getAssignee();
+        modifiedAt = LocalDateTime.now();
+    }
+
+    public void toggleIsOpened() {
+        isOpened = !isOpened;
+        modifiedAt = LocalDateTime.now();
+    }
+
+
+    public void markAsDeleted() {
+        isDeleted = true;
+        modifiedAt = LocalDateTime.now();
+    }
 }

@@ -1,17 +1,13 @@
 package kr.codesquad.issuetraker.sevice;
 
-import kr.codesquad.issuetraker.domain.issue.Issue;
-import kr.codesquad.issuetraker.domain.issue.IssueRepository;
+import kr.codesquad.issuetraker.domain.issue.*;
 import kr.codesquad.issuetraker.domain.label.Label;
 import kr.codesquad.issuetraker.domain.label.LabelRepository;
 import kr.codesquad.issuetraker.domain.milestone.Milestone;
 import kr.codesquad.issuetraker.domain.milestone.MilestoneRepository;
 import kr.codesquad.issuetraker.domain.user.User;
 import kr.codesquad.issuetraker.domain.user.UserRepository;
-import kr.codesquad.issuetraker.dto.NewIssueResponseDto;
-import kr.codesquad.issuetraker.dto.IssueDetailResponseDto;
-import kr.codesquad.issuetraker.dto.IssueListResponseDto;
-import kr.codesquad.issuetraker.dto.NewIssueRequestDto;
+import kr.codesquad.issuetraker.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class IssueService {
     private final IssueRepository issueRepository;
+    private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
@@ -60,4 +57,46 @@ public class IssueService {
         return IssueDetailResponseDto.of(issue);
     }
 
+    public GeneralResponseDto modifyIssueContent(Long issueId, IssueModificationRequestDto requestDto) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+
+        Milestone milestone = milestoneRepository.findById(requestDto.getMileStoneId()).orElseThrow(() -> new RuntimeException());
+        Label label = labelRepository.findById(requestDto.getLabelId()).orElseThrow(() -> new RuntimeException());
+        User author = userRepository.findById(requestDto.getAuthorId()).orElseThrow(() -> new RuntimeException());
+        User assignee = userRepository.findById(requestDto.getAssigneeId()).orElseThrow(() -> new RuntimeException());
+
+        IssueModificationFields modificationFieldsDto = IssueModificationFields.builder()
+                .title(requestDto.getTitle())
+                .description(requestDto.getDescription())
+                .milestone(milestone)
+                .label(label)
+                .author(author)
+                .assignee(assignee)
+                .build();
+
+        issue.modifyContentsWith(modificationFieldsDto);
+        issueRepository.save(issue);
+        return new GeneralResponseDto(200, "이슈 수정이 완료되었습니다.");
+    }
+
+    public GeneralResponseDto changeIssueStatus(Long issueId) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        issue.toggleIsOpened();
+        issueRepository.save(issue);
+        return new GeneralResponseDto(200, "이슈 상태가 변경되었습니다.");
+    }
+
+    public GeneralResponseDto deleteIssue(Long issueId) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        issue.markAsDeleted();
+        issueRepository.save(issue);
+        return new GeneralResponseDto(200, "이슈가 삭제되었습니다.");
+    }
+
+    public List<CommentListResponseDto> getAllComments(Long issueId) {
+        List<Comment> comments = commentRepository.findAll();
+        return comments.stream()
+                .map(CommentListResponseDto::of)
+                .collect(Collectors.toList());
+    }
 }

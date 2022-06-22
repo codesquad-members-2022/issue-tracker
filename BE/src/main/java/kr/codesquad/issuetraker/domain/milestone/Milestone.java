@@ -22,7 +22,7 @@ public class Milestone {
     private String title;
     private String description;
     @OneToMany(mappedBy = "milestone")
-    private List<Issue> issues = new ArrayList<>();
+    private final List<Issue> issues = new ArrayList<>();
     private LocalDate dueDate;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
