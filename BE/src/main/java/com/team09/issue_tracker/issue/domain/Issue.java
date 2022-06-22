@@ -57,10 +57,7 @@ public class Issue extends BaseTimeEntity {
 	private List<IssueAssignee> issueAssignees = new ArrayList<>();
 
 	public boolean isWriter(Long memberId) {
-		if (memberId.equals(this.memberId)) {
-			return true;
-		}
-		return false;
+		return memberId.equals(this.memberId);
 	}
 
 	public void addIssueLabel(List<IssueLabel> issueLabels) {
