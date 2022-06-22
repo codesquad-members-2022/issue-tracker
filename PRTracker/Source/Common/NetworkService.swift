@@ -8,7 +8,14 @@
 import Foundation
 
 protocol NetworkService {
-    func get<T: Codable>(request: URLRequest, then completion: @escaping (T?) -> Void)
+    func request<T: Codable>(_ request: URLRequest, method: HTTPMethod, then completion: @escaping (T?) -> Void)
+}
+
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case patch = "PATCH"
+    case delete = "DELETE"
 }
 
 struct NetworkManger: NetworkService {
@@ -19,10 +26,23 @@ struct NetworkManger: NetworkService {
         self.session = urlSession
     }
     
-    func get<T: Codable>(request: URLRequest, then completion: @escaping (T?) -> Void) {
-        session.dataTask(with: request) { data, _, error in
+    func request<T: Codable>(_ request: URLRequest, method: HTTPMethod, then completion: @escaping (T?) -> Void) {
+        var request = request
+        request.httpMethod = "\(method)"
+        
+        session.dataTask(with: request) { data, response, error in
             if let error = error {
                 Log.error(error.localizedDescription)
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                Log.error("Cannot parse HTTP reponse status code")
+                return
+            }
+            
+            guard (200..<300).contains(statusCode) else {
+                Log.error("Unexpected Status Code: \(statusCode)")
                 return
             }
             

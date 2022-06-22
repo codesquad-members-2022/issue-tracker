@@ -31,7 +31,7 @@ struct IssueManager {
         
         let request = URLRequest(url: url, with: accessToken)
         
-        networkService.get(request: request, then: completion)
+        networkService.request(request, method: .get, then: completion)
     }
 }
 

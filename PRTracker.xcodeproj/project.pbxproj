@@ -34,6 +34,7 @@
 		BC2F59A32861F2620012D18C /* BaseURLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A22861F2620012D18C /* BaseURLString.swift */; };
 		BC2F59A42861F3580012D18C /* BaseURLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A22861F2620012D18C /* BaseURLString.swift */; };
 		BC2F59A62861FD350012D18C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A52861FD350012D18C /* LoginViewController.swift */; };
+		BC2F59A82862F9F00012D18C /* TokenValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A72862F9F00012D18C /* TokenValidationResponse.swift */; };
 		BC97093B2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC97093C2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
@@ -119,6 +120,7 @@
 		BC2F599F28616A940012D18C /* UIApplicationStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationStub.swift; sourceTree = "<group>"; };
 		BC2F59A22861F2620012D18C /* BaseURLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLString.swift; sourceTree = "<group>"; };
 		BC2F59A52861FD350012D18C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BC2F59A72862F9F00012D18C /* TokenValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenValidationResponse.swift; sourceTree = "<group>"; };
 		BC97093A2859B23D00E54F93 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		BC9709412859C88100E54F93 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BC9709442859CACC00E54F93 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				BCF57C05285705130059E61D /* GitHubLoginManager.swift */,
+				BC2F59A72862F9F00012D18C /* TokenValidationResponse.swift */,
 				BC9709442859CACC00E54F93 /* TokenResponse.swift */,
 			);
 			path = Model;
@@ -575,6 +578,7 @@
 				BC9709422859C88100E54F93 /* Logger.swift in Sources */,
 				BC97093B2859B23D00E54F93 /* Issue.swift in Sources */,
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
+				BC2F59A82862F9F00012D18C /* TokenValidationResponse.swift in Sources */,
 				BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */,
 				BC2F5991286098B70012D18C /* URLProtocolStub.swift in Sources */,
 				D0E98CE2285C01530051413E /* MockDataService.swift in Sources */,
