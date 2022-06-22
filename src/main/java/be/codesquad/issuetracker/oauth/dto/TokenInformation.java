@@ -1,5 +1,6 @@
 package be.codesquad.issuetracker.oauth.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,13 +8,16 @@ import lombok.Setter;
 @Setter
 public class TokenInformation {
 
-    private String access_token;
+    @JsonProperty("access_token")
+    private String accessToken;
 
-    private String token_type;
+    @JsonProperty("token_type")
+    private String tokenType;
 
+    @JsonProperty("scope")
     private String scope;
 
     public String getAuthorizationValue() {
-        return this.token_type + " " + this.access_token;
+        return this.tokenType + " " + this.accessToken;
     }
 }
