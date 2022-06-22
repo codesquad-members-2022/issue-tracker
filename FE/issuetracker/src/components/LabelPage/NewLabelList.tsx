@@ -1,22 +1,19 @@
 import * as I from 'design/icons';
 import * as S from 'components/LabelPage/styled.newLabelList';
 import LabelItem from 'components/LabelPage/LabelItem';
+import { useRecoilState } from 'recoil';
+import { labelState } from 'context/label';
 
-interface label {
-  title: string;
-  color: string;
-  description: string;
-}
-
-interface Props {
-  label: label;
+type LabelListType = {
   isNewLabel: boolean;
-}
+};
 
-function NewLabelList({ label, isNewLabel }: Props) {
+function NewLabelList({ isNewLabel }: LabelListType) {
+  const [newLabel, setNewLabel] = useRecoilState(labelState);
+
   return (
     <S.newLabelListWrapper>
-      <LabelItem label={label} key="key" isLastList={false} />
+      <LabelItem label={newLabel} key="key" isLastList={false} />
       <S.labelForm>
         <S.labelName>
           <span>Label name</span>

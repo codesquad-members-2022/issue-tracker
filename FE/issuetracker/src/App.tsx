@@ -5,6 +5,7 @@ import Router from 'Router';
 import GlobalStyles from 'design/GlobalStyles';
 import 'assets/style.css';
 import Header from 'components/header';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Header />
-        <Router />
+        <RecoilRoot>
+          <Router />
+        </RecoilRoot>
       </BrowserRouter>
     </ThemeProvider>
   );

@@ -8,23 +8,24 @@ type LabelType = {
 function Label({ title, color }: LabelType) {
   return <LabelWrap color={color}>{title}</LabelWrap>;
 }
-export const LabelWrap = styled.div<{ color: string }>`
+const LabelWrap = styled.div<{ color: string }>`
   ${mixin.flexbox({ horizontal: 'center', vertical: 'center' })}
   background : ${({ color }) => color};
   height: 28px;
   min-width: 50px;
   border-radius: 999px;
+  padding: 0 16px;
   ${({ theme }) => theme.fontStyles.textXSmall};
   color: ${({ theme }) => theme.fontColors.gray1};
 `;
+
+export default Label;
 
 export const AccountImg = styled.img`
   width: 44px;
   height: 44px;
   border-radius: 100%;
 `;
-export default Label;
-
 export const ProgressBar = styled.div`
   width: 244px;
   height: 8px;
