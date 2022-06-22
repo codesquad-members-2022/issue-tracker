@@ -23,9 +23,6 @@ enum CheckButtonSelected {
 
 class IssueListCell: UICollectionViewCell,
                         ViewBindable {
-    // 셀 선택 시 사용될 ViewBindable.
-    // 이외의 기능에 대해서는 필요하지 않을 것으로 생각되어 extension으로 분리.
-    // 추후 구현 예정입니다.
     
     // MARK: - ViewBindable Implements. Select Multiple Issue List Functionality.
     
