@@ -23,7 +23,7 @@ export default function Loading() {
       navigate('/login', { replace: true });
     }
 
-    localStorage.setItem('currentUserInfo', data);
+    localStorage.setItem('currentUserInfo', JSON.stringify(data));
     navigate('/issue-list', { replace: true });
   };
 

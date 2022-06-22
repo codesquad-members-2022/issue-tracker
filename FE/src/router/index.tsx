@@ -1,3 +1,4 @@
+import IssueList from '@/pages/IssueList';
 import Loading from '@/pages/Loading';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
@@ -8,7 +9,7 @@ export const routes = [
   { path: URL.login, element: <Login /> },
   { path: URL.loading, element: <Loading /> },
   { path: URL.detailIssue, element: <NotFound pageName="Detail Issue" /> },
-  { path: URL.issueList, element: <NotFound pageName="Issue List" /> },
+  { path: URL.issueList, element: <IssueList /> },
   {
     path: URL.list,
     element: <NotFound pageName="List" />,
