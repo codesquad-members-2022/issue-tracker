@@ -18,6 +18,8 @@ struct GitHubLoginManager {
     static let authorizeBaseURL = "https://github.com/login/oauth/authorize"
     static let accessTokenURL = "https://github.com/login/oauth/access_token"
     static let validateTokenURL = "https://github.com/applications/\(Secrets.clientId)/token"
+    static let keyChainAccount = "github"
+    static let keyChainToken = "access-token"
     
     let keyChainService: KeyChainService
     let networkService: NetworkService
@@ -51,12 +53,40 @@ struct GitHubLoginManager {
                 Log.error("Network Request for access token is failed")
                 return
             }
-            keyChainService.save(response.accessToken, service: "access-token", account: "github")
+            keyChainService.save(response.accessToken,
+                                 service: GitHubLoginManager.keyChainToken,
+                                 account: GitHubLoginManager.keyChainAccount)
         }
     }
     
-    func validateToken(_ token: String, completion: @escaping (AccessToken?) -> Void) {
-        // Static하게 저장해둔 URL String이 실패할 경우, error handling보단 runtime crash가 나서 string을 고치는 것이 빠르지 않을까?
+    func hasValidToken(completion: @escaping (Bool) -> Void) {
+        // 1. Keychain에 저장된 토큰이 없을 경우 -> False
+        guard let token = keyChainService.load(service: GitHubLoginManager.keyChainToken,
+                                               account: GitHubLoginManager.keyChainAccount) else {
+            return completion(false)
+        }
+        
+        
+        validateToken(token) { validToken in
+            // 2. 저장된 토큰이 유효하지 않을 경우 -> False
+            guard let validToken = validToken else {
+                return completion(false)
+            }
+            
+            // 3. 토큰이 재발급되었을 경우 -> KeyChain에 업데이트
+            if token != validToken {
+                keyChainService.save(validToken,
+                                     service: GitHubLoginManager.keyChainToken,
+                                     account: GitHubLoginManager.keyChainAccount)
+            }
+            
+            // 4. 토큰이 유효하거나 재발급되었을 경우 -> True
+            return completion(true)
+        }
+    }
+    
+    private func validateToken(_ token: String, completion: @escaping (AccessToken?) -> Void) {
+        // Static하게 저장해둔 URL String이 실패할 경우, error handling보단 강제 언래핑으로 runtime crash가 나도록 해서 string을 고치는 것이 빠르지 않을까?
         let url = URL(string: GitHubLoginManager.validateTokenURL)!
         let request = makeValidateTokenRequest(with: url, token: token)
         
