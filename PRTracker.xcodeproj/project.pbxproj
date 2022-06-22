@@ -35,6 +35,7 @@
 		BC2F59A42861F3580012D18C /* BaseURLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A22861F2620012D18C /* BaseURLString.swift */; };
 		BC2F59A62861FD350012D18C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A52861FD350012D18C /* LoginViewController.swift */; };
 		BC2F59A82862F9F00012D18C /* TokenValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A72862F9F00012D18C /* TokenValidationResponse.swift */; };
+		BC2F59A928630A360012D18C /* TokenValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A72862F9F00012D18C /* TokenValidationResponse.swift */; };
 		BC97093B2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC97093C2859B23D00E54F93 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97093A2859B23D00E54F93 /* Issue.swift */; };
 		BC9709422859C88100E54F93 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9709412859C88100E54F93 /* Logger.swift */; };
@@ -610,6 +611,7 @@
 				BC2F59862860759B0012D18C /* IssueManagerTests.swift in Sources */,
 				D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */,
 				BC2F5970285C26D60012D18C /* UserManager.swift in Sources */,
+				BC2F59A928630A360012D18C /* TokenValidationResponse.swift in Sources */,
 				D04099E12859D91C0008B517 /* Observable.swift in Sources */,
 				BC2F598F2860979D0012D18C /* User.swift in Sources */,
 				D04099E32859D9C30008B517 /* ReplaceRootSegue.swift in Sources */,
