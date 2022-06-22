@@ -12,21 +12,21 @@ import java.time.LocalDateTime;
 @Getter
 public class ErrorResponse {
 
-    private int code;
-    private String message;
-    private HttpStatus httpStatus;
+    private final String errorCode;
+    private final String message;
+    private final HttpStatus httpStatus;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime time;
 
-    public ErrorResponse(int code, String message, HttpStatus httpStatus) {
-        this.code = code;
+    public ErrorResponse(String errorCode, String message, HttpStatus httpStatus) {
+        this.errorCode = errorCode;
         this.message = message;
         this.httpStatus = httpStatus;
         this.time = LocalDateTime.now();
     }
 
-    public static ErrorResponse create(BaseExceptionType baseExceptionType) {
-        return new ErrorResponse(baseExceptionType.getErrorCode(), baseExceptionType.getErrorMessage(), baseExceptionType.getHttpStatus());
+    public static ErrorResponse create(IssueTrackerRuntimeException exception) {
+        return new ErrorResponse(exception.getErrorCode(), exception.getMessage(), exception.getStatus());
     }
 }
