@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as I from 'design/icons';
-import * as S from 'components/LabelPage/styled.labelTop';
+import * as S from 'components/LabelPage/styled/styled.labelTop';
 import NewLabelList from 'components/LabelPage/NewLabelList';
 
 interface Props {

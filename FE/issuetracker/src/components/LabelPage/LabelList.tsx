@@ -1,4 +1,4 @@
-import * as S from 'components/LabelPage/styled.labelList';
+import * as S from 'components/LabelPage/styled/styled.labelList';
 import { keyMaker } from 'utils/util';
 import LabelItem from 'components/LabelPage/LabelItem';
 
