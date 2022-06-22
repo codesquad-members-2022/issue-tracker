@@ -16,9 +16,6 @@ public class MilestoneService {
 		Member member = Member.of(memberId);
 		long countOfMyMilestone = milestoneRepository.countByIdAndWriter(milestoneId, member);
 
-		if (countOfMyMilestone == 1) {
-			return true;
-		}
-		return false;
+		return countOfMyMilestone == 1;
 	}
 }
