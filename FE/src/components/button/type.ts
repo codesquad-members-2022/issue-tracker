@@ -38,7 +38,6 @@ interface I$ButtonType extends IButtonStyleProps {
   hoverStyle?: IButtonStyleProps;
   activeStyle?: IButtonStyleProps;
   disabledStyle?: IButtonStyleProps;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export type { IButtonProps, ButtonStyleType, IButtonStyleProps, ButtonStyle, I$ButtonType };

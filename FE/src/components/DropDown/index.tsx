@@ -7,11 +7,18 @@ import { $DropDown } from '@/components/Dropdown/style';
 
 export default function DropDown({ indicatorName, panelName, ...panelProps }: IDropDown) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState<string>('');
   const panelRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    panelRef?.current?.focus();
-  }, [isOpen]);
+  const updateSelectedValue = (value: string) => {
+    setSelectedValue(value);
+  };
+
+  const focusOnPanel = () => {
+    if (isOpen) panelRef?.current?.focus();
+  };
+
+  useEffect(focusOnPanel, [isOpen]);
 
   return (
     <$DropDown>
@@ -24,7 +31,9 @@ export default function DropDown({ indicatorName, panelName, ...panelProps }: ID
           {...panelProps}
           panelRef={panelRef}
           title={panelName}
-          handlePanelBlur={() => setIsOpen(!isOpen)}
+          selectedValue={selectedValue}
+          updateSelectedValue={updateSelectedValue}
+          hidePanel={() => setIsOpen(false)}
         />
       )}
     </$DropDown>

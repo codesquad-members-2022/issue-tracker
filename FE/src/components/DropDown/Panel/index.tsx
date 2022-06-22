@@ -12,16 +12,20 @@ export default function Panel({
   panelRef,
   title,
   options,
-  selected,
-  handlePanelBlur,
+  selectedValue,
+  updateSelectedValue,
+  hidePanel,
   ...props
 }: IPanelProps) {
-  const [selectedValue, setSelectedValue] = useState<string | undefined>(selected);
+  const handleSelectedItemClick = (value: string) => {
+    updateSelectedValue(value);
+    hidePanel();
+  };
 
   return (
-    <$Panel ref={panelRef} tabIndex={-1} onBlur={handlePanelBlur} {...props}>
+    <$Panel ref={panelRef} tabIndex={-1} onBlur={hidePanel} {...props}>
       <$PanelTitle>{title}</$PanelTitle>
-      <$Select value={selectedValue} onChange={({ target }) => setSelectedValue(target.value)}>
+      <$Select value={selectedValue} onChange={({ target }) => updateSelectedValue(target.value)}>
         {options.map(({ value }) => (
           <option key={value} value={value}></option>
         ))}
@@ -32,7 +36,7 @@ export default function Panel({
             key={value}
             id={value}
             selected={value === selectedValue}
-            onClick={() => setSelectedValue(value)}
+            onClick={() => handleSelectedItemClick(value)}
           >
             {children}
             {value === selectedValue ? radio?.on : radio?.off}

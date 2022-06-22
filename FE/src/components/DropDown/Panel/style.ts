@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { I$PanelProps, I$SelectedItemProps } from '@/components/Dropdown/Panel/type';
 
 const $Panel = styled.div<I$PanelProps>`
-  position: absolute;
-  top: ${({ top }) => `calc(32px + ${top})`};
+  position: relative;
+  top: 0;
   left: ${({ left }) => (left === 'left' ? 0 : 'auto')};
   right: ${({ left }) => (left === 'right' ? 0 : 'auto')};
   min-width: ${({ width }) => (width ? width : '240px')};
