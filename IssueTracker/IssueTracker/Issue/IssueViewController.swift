@@ -14,16 +14,22 @@ final class IssueViewController: UIViewController {
     }()
     
     private lazy var addButton: UIButton = {
-        var configure = UIButton.Configuration.filled()
-        configure.baseBackgroundColor = .systemBlue
-        configure.image = UIImage(systemName: "plus")
-        configure.buttonSize = .large
-        
-        configure.background.cornerRadius = 50
-        return UIButton(configuration: configure, primaryAction: UIAction(handler: { _ in
+        var configuration = UIButton.Configuration.filled()
+//        configuration.image = UIImage(systemName: "plus")
+        configuration.baseBackgroundColor = .systemBlue
+        configuration.baseForegroundColor = .white
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        configuration.background.cornerRadius = 70
+        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { _ in
             self.touchedAddButton()
         }))
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+//        button.layer.cornerRadius = 50 / 2
+        
+        return button
     }()
+    
     
     private var model: IssueModel?
     
@@ -54,7 +60,7 @@ final class IssueViewController: UIViewController {
     }
     
     @objc func touchedAddButton() {
-        print("touchedAddButton")
+        self.navigationController?.pushViewController(Container().getViewController(.newIssue), animated: true)
     }
     
     private func setupNavigationBar() {
