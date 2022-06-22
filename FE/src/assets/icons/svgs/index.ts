@@ -6,7 +6,7 @@ import checkBoxDisable from './checkBoxDisable.svg';
 import checkBoxInitial from './checkBoxInitial.svg';
 import checkOffCircle from './checkOffCircle.svg';
 import checkOnCircle from './checkOnCircle.svg';
-import arrowBottom from './arrowBottom.svg';
+import chevronDown from './chevronDown.svg';
 import edit from './edit.svg';
 import milestone from './milestone.svg';
 import paperclip from './paperclip.svg';
@@ -29,7 +29,7 @@ const icons = {
   checkBoxInitial,
   checkOffCircle,
   checkOnCircle,
-  arrowBottom,
+  chevronDown,
   edit,
   milestone,
   paperclip,

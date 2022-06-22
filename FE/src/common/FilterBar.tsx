@@ -18,7 +18,7 @@ function FilterBar({}: FilterBarProps) {
   return (
     <FilterBarBox>
       <ButtonBox>
-        필터 <Icon iconName="arrowBottom" stroke={iconColor} />
+        필터 <Icon iconName="chevronDown" stroke={iconColor} />
       </ButtonBox>
       <InputBox>
         <Icon iconName="search" stroke={iconColor} />
