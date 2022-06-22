@@ -22,11 +22,11 @@ struct LoginViewModel: CommonViewModel {
         
         switch loginType {
         case .gitHub:
-            githubLoginUseCase.requestFromUseCase { loginURL in
+            githubLoginUseCase.request { loginURL in
                 self.output(loginURL, bindable)
             }
         case .apple:
-            appleLoginUseCase.requestFromUseCase { loginURL in
+            appleLoginUseCase.request { loginURL in
                 self.output(loginURL, bindable)
             }
         }

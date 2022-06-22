@@ -9,7 +9,7 @@ struct GithubLoginUseCase: UseCaseResponsible {
     
     private let model = GitHubLoginModel()
     
-    func requestFromUseCase(_ completionBlock: @escaping (Any?) -> Void) {
+    func request(_ completionBlock: @escaping (Any?) -> Void) {
         guard let url = model.getLoginURL() else { return }
         completionBlock(url)
     }

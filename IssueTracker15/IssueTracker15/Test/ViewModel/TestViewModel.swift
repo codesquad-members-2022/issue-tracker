@@ -15,7 +15,7 @@ class TestViewModel: CommonViewModel {
     
     // Simulation Button request REST-API
     func request(_ bindable: ViewBindable, param: Any?) {
-        TestUseCase().requestFromUseCase { result in
+        TestUseCase().request { result in
             self.output(result, bindable)
         }
     }

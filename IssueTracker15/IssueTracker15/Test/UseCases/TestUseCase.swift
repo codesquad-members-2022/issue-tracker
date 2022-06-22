@@ -10,7 +10,7 @@ class TestUseCase: UseCaseResponsible {
     static let shared = TestUseCase()
     private var cancellables: Set<AnyCancellable> = []
     
-    func requestFromUseCase(_ completionBlock: @escaping (Any?) -> Void) {
+    func request(_ completionBlock: @escaping (Any?) -> Void) {
         RequestModel
             .networkRequest(urgency: .urgent)?
             .result()
