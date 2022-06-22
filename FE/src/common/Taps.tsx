@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GREYSCALE } from '@/constants';
+import { Link } from 'react-router-dom';
 import Tap from './Tap';
 
 function Taps() {
   return (
     <TapsBox>
-      <Tap isActive={false} iconName="tag" title="레이블" count={0} />
-      <span></span>
-      <Tap isActive={false} iconName="milestone" title="마일스톤" count={0} />
+      <Link to="/labelList">
+        <Tap isActive={false} iconName="tag" title="레이블" count={0} />
+      </Link>
+      <span />
+      <Link to="/milestoneList">
+        <Tap isActive={false} iconName="milestone" title="마일스톤" count={0} />
+      </Link>
     </TapsBox>
   );
 }

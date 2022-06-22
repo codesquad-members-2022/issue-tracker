@@ -1,10 +1,11 @@
-import EmptyIssueItem from './EmptyIssueItem';
-import IssueHeader from './IssueHeader';
-import IssueItem from './IssueItem';
 import FilterBar from '@/common/FilterBar';
 import Taps from '@/common/Taps';
 import ButtonSmallStandard from '@/common/ButtonSmallStandard';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import IssueItem from './IssueItem';
+import IssueHeader from './IssueHeader';
+import EmptyIssueItem from './EmptyIssueItem';
 
 function IssueListPage() {
   return (
@@ -12,11 +13,9 @@ function IssueListPage() {
       <Wrap>
         <FilterBar />
         <Taps />
-        <ButtonSmallStandard
-          isDisabled={false}
-          label="이슈 작성"
-          onClick={() => console.log('click 이슈작성버튼')}
-        />
+        <Link to="/addIssue">
+          <ButtonSmallStandard isDisabled={false} label="이슈 작성" />
+        </Link>
       </Wrap>
       <div>
         <IssueHeader />
