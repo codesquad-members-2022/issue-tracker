@@ -33,7 +33,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="custom" identifier="loginSegue" id="dQh-XC-uZa"/>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="loginSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="dQh-XC-uZa"/>
                         <segue destination="sVA-oP-Vgq" kind="custom" identifier="mainSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="Gxo-dv-5ho"/>
                     </connections>
                 </viewController>
