@@ -3,7 +3,6 @@ package com.example.issu_tracker.ui.filter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.FilterCondition
-import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.data.repository.FilterRepository
 import com.example.issu_tracker.ui.common.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -79,10 +78,10 @@ class FilterViewModel @Inject constructor(private val repository: FilterReposito
                 _conditionValueStateFlow.emit(true)
             }
             when (conditionType) {
-                Constants.FILTER_TYPE_STATE_CONDITION -> stateConditionValue = text
-                Constants.FILTER_TYPE_WRITER_CONDITION -> writerConditionValue = text
-                Constants.FILTER_TYPE_LABEL_CONDITION -> labelConditionValue = text
-                Constants.FILTER_TYPE_MILESTONE_CONDITION -> mileStoneConditionValue = text
+                Constants.CONDITION_TYPE_STATE -> stateConditionValue = text
+                Constants.CONDITION_TYPE_WRITER -> writerConditionValue = text
+                Constants.CONDITION_TYPE_LABEL -> labelConditionValue = text
+                Constants.CONDITION_TYPE_ASSIGNEE -> mileStoneConditionValue = text
             }
         }
     }

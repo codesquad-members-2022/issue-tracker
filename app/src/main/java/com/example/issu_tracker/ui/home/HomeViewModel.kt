@@ -36,7 +36,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         repository.updateIssueState(itemId, boolean)
         getIssueList()
     }
-
+    
     suspend fun deleteIssueList(issueList: List<Issue>) {
         repository.deleteIssueList(issueList)
         getIssueList()
@@ -48,7 +48,6 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         getIssueList()
         Log.d("updateDelte", issueList.toString())
     }
-
 
     fun filterIssueList(condition: FilterCondition) {
         val filteredIssueList = _issueList.value
@@ -64,7 +63,8 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                 } else {
                     true
                 }
-            }.filter {
+            }
+            .filter {
                 it.label.any { label ->
                     if (condition.label.isNotEmpty()) {
                         label.content == condition.label

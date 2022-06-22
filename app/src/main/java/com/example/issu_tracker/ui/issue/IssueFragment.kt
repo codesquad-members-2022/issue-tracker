@@ -12,7 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
@@ -29,25 +31,38 @@ import kotlinx.coroutines.launch
 class IssueFragment : Fragment() {
     private lateinit var binding: FragmentIssueBinding
     private lateinit var issueAdapter: IssueAdapter
+    private lateinit var navController: NavController
     private val issueViewModel: IssueViewModel by viewModels()
     private val homeViewModel: HomeViewModel by activityViewModels<HomeViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
+        return binding.root
+    }
 
-        val conditions = arguments?.getParcelable<FilterCondition>("filterCondition")
-        conditions?.let {
-            homeViewModel.filterIssueList(conditions)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(binding.root)
 
+        saveFilterConditionFromFilterFragment()
         settingRecyclerview()
         updateRecyclerview()
         navigateFilterScreen()
+        navigateIssueEditor()
         listenEditModeEvent()
         setSelectedIssueCount()
+        
         return binding.root
+    }
+
+    private fun saveFilterConditionFromFilterFragment() {
+        val conditions = arguments?.getParcelable<FilterCondition>("filterCondition")
+        conditions?.let {
+            homeViewModel.filterIssueList(conditions)
+        }   
     }
 
     private fun setSelectedIssueCount() {
@@ -159,8 +174,13 @@ class IssueFragment : Fragment() {
 
     private fun navigateFilterScreen() {
         binding.ivIssueMenu.setOnClickListener {
-            val navController = Navigation.findNavController(binding.root)
             navController.navigate(R.id.action_issueFragment2_to_filterFragment)
+        }
+    }
+
+    private fun navigateIssueEditor() {
+        binding.fabIssueEdit.setOnClickListener {
+            navController.navigate(R.id.action_issueFragment2_to_issueEditor)
         }
     }
 }
