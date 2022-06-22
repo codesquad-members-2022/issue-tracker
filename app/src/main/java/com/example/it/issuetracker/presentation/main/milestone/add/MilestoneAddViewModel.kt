@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.presentation.main.milestone
+package com.example.it.issuetracker.presentation.main.milestone.add
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

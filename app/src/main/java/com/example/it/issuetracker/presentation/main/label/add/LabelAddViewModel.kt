@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.presentation.main.label
+package com.example.it.issuetracker.presentation.main.label.add
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

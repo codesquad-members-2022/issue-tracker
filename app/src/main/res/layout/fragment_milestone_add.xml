@@ -12,14 +12,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.it.issuetracker.presentation.main.milestone.MilestoneAddViewModel" />
+            type="com.example.it.issuetracker.presentation.main.milestone.add.MilestoneAddViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.main.milestone.MilestoneAddFragment">
+        tools:context=".presentation.main.milestone.add.MilestoneAddFragment">
 
         <include
             android:id="@+id/label_appbarLayout"

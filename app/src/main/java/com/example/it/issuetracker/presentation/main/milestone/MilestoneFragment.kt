@@ -11,6 +11,7 @@ import com.example.it.issuetracker.databinding.FragmentMilestoneBinding
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
+import com.example.it.issuetracker.presentation.main.milestone.add.MilestoneAddFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

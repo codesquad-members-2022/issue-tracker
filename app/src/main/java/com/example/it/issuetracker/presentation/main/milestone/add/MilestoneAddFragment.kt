@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.presentation.main.milestone
+package com.example.it.issuetracker.presentation.main.milestone.add
 
 import android.os.Bundle
 import android.view.View

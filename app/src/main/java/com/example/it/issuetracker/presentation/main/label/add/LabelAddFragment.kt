@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.presentation.main.label
+package com.example.it.issuetracker.presentation.main.label.add
 
 import android.os.Bundle
 import android.view.View

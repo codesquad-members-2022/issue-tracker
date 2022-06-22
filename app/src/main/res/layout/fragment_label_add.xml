@@ -14,14 +14,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.it.issuetracker.presentation.main.label.LabelAddViewModel" />
+            type="com.example.it.issuetracker.presentation.main.label.add.LabelAddViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.main.label.LabelAddFragment">
+        tools:context=".presentation.main.label.add.LabelAddFragment">
 
         <include
             android:id="@+id/label_appbarLayout"
