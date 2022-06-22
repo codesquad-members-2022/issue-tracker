@@ -6,6 +6,9 @@ spring:
     password: ${MYSQL_PASSWORD}
   profiles:
     include: oauth
+  sql:
+    init:
+      mode: always
   jpa:
     hibernate:
       ddl-auto: create
@@ -13,6 +16,7 @@ spring:
       hibernate:
         format_sql: true
     #        show_sql: true
+    defer-datasource-initialization: true
 logging:
   level:
     kr.codesquad.issuetracker: DEBUG
