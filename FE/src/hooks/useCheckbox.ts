@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+// data는 체크박스 리스트가 필요한 데이터들의 집합
+
 export const useCheckbox = (checkboxesData) => {
   const [checkedIssues, setCheckedIssues] = useState<string[]>([]);
+  const [allBoxIsChecked, setAllBoxIsChecked] = useState(false);
 
   const allCheckboxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
@@ -26,8 +29,6 @@ export const useCheckbox = (checkboxesData) => {
       setCheckedIssues((prev) => [...prev, currentBoxId]);
     }
   };
-
-  const [allBoxIsChecked, setAllBoxIsChecked] = useState(false);
 
   useEffect(() => {
     if (checkedIssues.length) setAllBoxIsChecked(true);

@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styles from './IssuesNav.module.scss';
-import { Input } from '@UI/Input';
+import { Input } from '../../common/Input';
 
-const IssuesNav = ({ allCheckboxHandler, checkedIssues, isChecked }) => {
+type IssuesNavPropType = {
+  allCheckboxHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  checkedIssues: string[];
+  isChecked: boolean;
+};
+const IssuesNav = ({
+  allCheckboxHandler,
+  checkedIssues,
+  isChecked,
+}: IssuesNavPropType) => {
   return (
     <nav className={styles.navWrapper}>
       <div className={styles.leftWrapper}>

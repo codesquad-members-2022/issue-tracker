@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Issue.module.scss';
-import { Input } from '@UI/Input';
+import { Input } from '../../common/Input';
 
 // 매개변수 getTime();
 function elapsedText(fetchedTime: number, createdTime: number) {

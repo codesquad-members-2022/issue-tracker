@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { ParsedQs } from 'qs';
 import styles from './AuthForm.module.scss';
-import { Input, InputWithRef } from '../../UI/Input';
+import { Input, InputWithRef } from '../../common/Input';
 import GithubLoginBtn from './GithubLoginBtn';
 import useInput from '../../hooks/useInput';
 
@@ -24,15 +23,12 @@ const AuthForm = () => {
   useEffect(() => {
     idRef.current && idRef.current.focus();
   }, []);
-  
+
   const formIsValid = idIsValid && passWordIsValid;
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
-    () => {
-      console.log(form);
-    };
     resetID();
     resetPassword();
   };

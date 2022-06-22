@@ -41,12 +41,8 @@ const Issues = () => {
     allCheckboxHandler,
     checkboxHandler,
     allBoxIsChecked,
-    chekced,
   } = useCheckbox(data);
 
-  useEffect(() => {
-    console.log(checkedIssues);
-  }, [checkedIssues]);
   return (
     <div className={styles.wrapper}>
       <IssuesNav
@@ -74,7 +70,6 @@ const Issues = () => {
               fetchedAt={dataUpdatedAt}
               checkboxHandler={checkboxHandler}
               checkedIssues={checkedIssues}
-              chekced={chekced}
             />
           ),
         )}
