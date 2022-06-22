@@ -5,24 +5,26 @@
 //  Created by 박진섭 on 2022/06/20.
 //
 
-struct OAuthLoginSource {
-    enum LoginUrlString: String {
-        case github = "https://github.com/login/oauth/authorize"
-        case apple
+// APIPropertyList의 Key값.
+struct OAuthLoginSourceKey {
+    
+    enum GitHub: String {
+        case loginUrlString = "Git_Login_URL"
+        case accessTokenURLString = "Git_Login_Access_Token_URL"
+        case clientID = "Git_Client_ID"
+        case clientSecret = "Git_Client_Secret_key"
+        
+        enum Query: String {
+            case clientID = "client_id"
+            case clientSecret = "client_secret"
+            case code = "code"
+        }
     }
     
-    enum AssessTokenURLString: String {
-        case github = "https://github.com/login/oauth/access_token"
-        case apple
-    }
-    
-    enum ClientID: String {
-        case github = "Iv1.1cb3e4aa4c245fe8"
-        case apple
-    }
-    
-    enum ClientSecret: String {
-        case github = ""
-        case apple
+    enum Apple: String {
+        case loginUrlString
+        case accessTokenURLString
+        case clientID
+        case clientSecret
     }
 }

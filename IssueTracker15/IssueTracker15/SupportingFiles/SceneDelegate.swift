@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import OSLog
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,22 +16,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // open url을 통해 로그인창이 뜬다면, Code를 받아옴.
         let code = URLContexts.first?.url.query?.replacingOccurrences(of: "code=", with: "")
+        let postURL = Bundle.main.gitLoginAccessTokenURL
         
-        let postURL = OAuthLoginSource.AssessTokenURLString.github.rawValue
-        let parameters = ["client_id": OAuthLoginSource.ClientID.github.rawValue,
-                          "client_secret": OAuthLoginSource.ClientSecret.github.rawValue,
-                          "code": code]
+        // code와 함꼐 parameter를 Post
+        // 추후 로직 분리 예정.
+        let parameters = [OAuthLoginSourceKey.GitHub.Query.clientID.rawValue : Bundle.main.gitClientID,
+                          OAuthLoginSourceKey.GitHub.Query.clientSecret.rawValue: Bundle.main.gitClientSecret,
+                          OAuthLoginSourceKey.GitHub.Query.code.rawValue : code]
 
         let headers: HTTPHeaders = ["Accept":"application/json"]
-        
         AF
             .request(postURL, method: .post, parameters: parameters, headers: headers)
             .responseDecodable { (response: DataResponse<AccessInfo, AFError>) in
                 switch response.result {
+                    // 성공시 화면이 넘어간다.
                 case let .success(data):
-                    print(data)
+                    // UserDefault에 저장
+                    UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
+                    
+                    let vc = MainTabBarController()
+                    self.window?.rootViewController = vc
+                    self.window?.makeKeyAndVisible()
+                    
                 case let .failure(error):
-                    print(error)
+                    os_log(.error, "\(error.localizedDescription)")
             }
         }
     }
@@ -38,7 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let rootViewController =  LoginViewController()
+        let rootViewController = LoginViewController()
         rootViewController.view.backgroundColor = .secondarySystemBackground
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
