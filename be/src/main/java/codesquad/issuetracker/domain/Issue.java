@@ -46,7 +46,7 @@ public class Issue extends BaseTimeEntity {
     @OneToMany(mappedBy = "issue")
     private List<Reply> replies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
     private List<Assignee> assignees = new ArrayList<>();
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
@@ -57,4 +57,8 @@ public class Issue extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private IssueStatus status;
+
+    public boolean hasSameStatus(IssueStatus status) {
+        return this.status.equals(status);
+    }
 }

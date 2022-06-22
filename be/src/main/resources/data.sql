@@ -18,7 +18,7 @@ VALUES ('be', '백엔드 라벨', '#333333'),
        ('fe', '프론트엔드 라벨', '#222222'),
        ('bug', '버그 해결', '#444444');
 
-INSERT INTO issue_label (issue_id, label_id) VALUES (1, 1), (2, 2), (1, 3);
+INSERT INTO issue_label (issue_id, label_id) VALUES (1, 1), (2, 1), (1, 3), (2, 2);
 
 INSERT INTO assignee (issue_id, member_id) VALUES(1, 1);
 

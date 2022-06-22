@@ -12,7 +12,7 @@ public class IssueSearchCondition {
     private String writer;
     private String assignee;
     private String replier;
-    private String label;
+    private String labels;
     private String milestone;
     private String exclusions;
 }
