@@ -36,7 +36,7 @@ public class User {
 	private String avatarUrl;
 
 	@Builder
-	public User(Long id, @NonNull Long thirdPartyId, @NonNull String name, String email, String avatarUrl) {
+	private User(Long id, @NonNull Long thirdPartyId, @NonNull String name, String email, String avatarUrl) {
 		this.id = id;
 		this.thirdPartyId = thirdPartyId;
 		this.name = name;
