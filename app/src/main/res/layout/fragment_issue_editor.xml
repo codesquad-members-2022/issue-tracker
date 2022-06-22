@@ -73,6 +73,7 @@
             android:hint="@string/issue_editor_body_hint"
             android:paddingHorizontal="16dp"
             android:textColorHint="@color/label2"
+            android:textIsSelectable="true"
             app:layout_constraintBottom_toTopOf="@+id/cb_issue_editor_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_issue_editor_divider_title" />
@@ -85,8 +86,8 @@
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
             android:gravity="start"
-            android:visibility="gone"
             android:paddingHorizontal="16dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/cb_issue_editor_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_issue_editor_divider_title" />
@@ -110,11 +111,11 @@
             app:conditionBarBackgroundTint="@color/background2"
             app:conditionBarTextAppearance="@style/Body2.grey"
             app:conditionBarTitle="@string/condition_title_mile_stone"
-            app:layout_constraintBottom_toTopOf="@+id/cb_issue_editor_writer"
+            app:layout_constraintBottom_toTopOf="@+id/cb_issue_editor_assignee"
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.example.issu_tracker.ui.common.ConditionBar
-            android:id="@+id/cb_issue_editor_writer"
+            android:id="@+id/cb_issue_editor_assignee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:conditionBarBackground="@color/background2"

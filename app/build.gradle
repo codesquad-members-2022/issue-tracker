@@ -77,4 +77,5 @@ dependencies {
     // Markwon (display markdown)
     implementation "io.noties.markwon:core:$markwon_version"
     implementation "io.noties.markwon:editor:$markwon_version"
+    implementation "io.noties.markwon:image:$markwon_version"
 }

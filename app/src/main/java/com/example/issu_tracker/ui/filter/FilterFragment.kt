@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -19,11 +18,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.issu_tracker.R
 import com.example.issu_tracker.databinding.FragmentFilterBinding
-import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_LABEL_CONDITION
-import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_MILESTONE_CONDITION
-import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_STATE_CONDITION
-import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_WRITER_CONDITION
-import com.example.issu_tracker.ui.home.HomeViewModel
+import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_LABEL
+import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_ASSIGNEE
+import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_STATE
+import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_WRITER
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -55,31 +53,38 @@ class FilterFragment : Fragment() {
                 launch { collectConditionValue() }
             }
         }
+        setNavigationIconEventListener()
         setFirstActionItemClickEvent()
         setSecondActionItemClickEvent()
     }
 
+    private fun setNavigationIconEventListener() {
+        binding.tbFilter.setNavigationOnClickListener {
+            navController.popBackStack()
+        }
+    }
+
     private suspend fun setStateSpinner() {
         viewModel.stateStateFlow.collect {
-            setSpinner(binding.cbFilterState.spinner, it, FILTER_TYPE_STATE_CONDITION)
+            setSpinner(binding.cbFilterState.spinner, it, CONDITION_TYPE_STATE)
         }
     }
 
     private suspend fun setWriterSpinner() {
         viewModel.writerStateFlow.collect {
-            setSpinner(binding.cbFilterWriter.spinner, it, FILTER_TYPE_WRITER_CONDITION)
+            setSpinner(binding.cbFilterWriter.spinner, it, CONDITION_TYPE_WRITER)
         }
     }
 
     private suspend fun setLabelSpinner() {
         viewModel.labelStateFlow.collect {
-            setSpinner(binding.cbFilterLabel.spinner, it, FILTER_TYPE_LABEL_CONDITION)
+            setSpinner(binding.cbFilterLabel.spinner, it, CONDITION_TYPE_LABEL)
         }
     }
 
     private suspend fun setMileStoneSpinner() {
         viewModel.mileStoneStateFlow.collect {
-            setSpinner(binding.cbFilterMilestone.spinner, it, FILTER_TYPE_MILESTONE_CONDITION)
+            setSpinner(binding.cbFilterMilestone.spinner, it, CONDITION_TYPE_ASSIGNEE)
         }
     }
 

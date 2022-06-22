@@ -44,5 +44,9 @@
     <fragment
         android:id="@+id/issueEditor"
         android:name="com.example.issu_tracker.ui.issue.IssueEditor"
-        android:label="IssueEditor" />
+        android:label="IssueEditor" >
+        <action
+            android:id="@+id/action_issueEditor_to_issueFragment2"
+            app:destination="@id/issueFragment2" />
+    </fragment>
 </navigation>
