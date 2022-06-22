@@ -34,7 +34,7 @@ export default function Tabs({ list }: ITabs) {
       {list?.map(({ name, iconType, count }) => (
         <$TabItem key={name}>
           <Button {...buttonPropsValue}>
-            {iconType && <Icon IconType={iconType} />}
+            {iconType && <Icon iconType={iconType} />}
             {createButtonText({ name, count })}
           </Button>
         </$TabItem>
