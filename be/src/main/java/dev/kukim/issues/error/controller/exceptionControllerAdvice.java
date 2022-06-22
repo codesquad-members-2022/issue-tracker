@@ -1,5 +1,6 @@
 package dev.kukim.issues.error.controller;
 
+import dev.kukim.issues.common.exception.ElementNotFoundException;
 import dev.kukim.issues.common.exception.InvalidSearchRequestParamException;
 import dev.kukim.issues.error.controller.response.ErrorResponse;
 import dev.kukim.issues.user.auth.exception.AuthorizationException;
@@ -26,5 +27,14 @@ public class exceptionControllerAdvice {
 		return new ErrorResponse(HttpStatus.BAD_REQUEST,
 			invalidSearchRequestParamException.getMessage());
 	}
+
+	@ExceptionHandler(ElementNotFoundException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorResponse elementNotFoundException(
+		ElementNotFoundException elementNotFoundException) {
+		return new ErrorResponse(HttpStatus.BAD_REQUEST,
+			elementNotFoundException.getMessage());
+	}
+
 
 }

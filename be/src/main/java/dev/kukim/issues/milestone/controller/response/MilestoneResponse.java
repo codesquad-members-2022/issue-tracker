@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
-public class MileStoneResponse {
+public class MilestoneResponse {
 
 	private final Long id;
 	private final String title;
@@ -16,7 +16,7 @@ public class MileStoneResponse {
 	private final LocalDate dueDate;
 	private final boolean isOpen;
 
-	private MileStoneResponse(Long id, String title, String description,
+	private MilestoneResponse(Long id, String title, String description,
 		LocalDateTime createdAt, LocalDateTime updatedAt, LocalDate dueDate,
 		boolean isOpen) {
 		this.id = id;
@@ -28,8 +28,8 @@ public class MileStoneResponse {
 		this.isOpen = isOpen;
 	}
 
-	public static MileStoneResponse createBy(Milestone milestone) {
-		return new MileStoneResponse(milestone.getId(),
+	public static MilestoneResponse createBy(Milestone milestone) {
+		return new MilestoneResponse(milestone.getId(),
 			milestone.getTitle(), milestone.getDescription(), milestone.getCreatedAt(),
 			milestone.getUpdatedAt(),
 			milestone.getDueDate(), milestone.isOpen());
