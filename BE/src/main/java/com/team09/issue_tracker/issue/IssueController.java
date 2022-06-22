@@ -48,29 +48,9 @@ public class IssueController {
 		@RequestBody IssueSaveRequestDto issueCreateRequestDto) {
 
 		validateCreateRequestDto(issueCreateRequestDto);
-
-		//이슈 생성
 		CommonResponseDto response = issueService.create(issueCreateRequestDto, MEMBER_ID);
 
 		return ResponseEntity.ok().body(response);
-	}
-
-	private void validateCreateRequestDto(IssueSaveRequestDto issueCreateRequestDto) {
-		//mileStoneId 검증
-		if (issueCreateRequestDto.getMilestoneId() != null) {
-			issueValidateService.validateMyMilestoneId(
-				issueCreateRequestDto.getMilestoneId(), MEMBER_ID);
-		}
-
-		//labelsIds 검증
-		if (issueCreateRequestDto.getLabelIds() != null) {
-			issueValidateService.validateMyLabelIds(issueCreateRequestDto.getLabelIds(), MEMBER_ID);
-		}
-
-		//assigneeIds 검증
-		if (issueCreateRequestDto.getAssigneeIds() != null) {
-			issueValidateService.validateMember(issueCreateRequestDto.getAssigneeIds());
-		}
 	}
 
 	@DeleteMapping("/{id}")
@@ -100,5 +80,23 @@ public class IssueController {
 	public ResponseEntity<CommonResponseDto> updateAllState(@RequestParam final Boolean isClose,
 		@RequestBody final IssueSaveRequestDto issueUpdateAllRequestDto) {
 		return ResponseEntity.ok(new CommonResponseDto());
+	}
+
+	private void validateCreateRequestDto(IssueSaveRequestDto issueCreateRequestDto) {
+		//mileStoneId 검증
+		if (issueCreateRequestDto.getMilestoneId() != null) {
+			issueValidateService.validateMyMilestoneId(
+				issueCreateRequestDto.getMilestoneId(), MEMBER_ID);
+		}
+
+		//labelsIds 검증
+		if (issueCreateRequestDto.getLabelIds() != null) {
+			issueValidateService.validateMyLabelIds(issueCreateRequestDto.getLabelIds(), MEMBER_ID);
+		}
+
+		//assigneeIds 검증
+		if (issueCreateRequestDto.getAssigneeIds() != null) {
+			issueValidateService.validateMember(issueCreateRequestDto.getAssigneeIds());
+		}
 	}
 }
