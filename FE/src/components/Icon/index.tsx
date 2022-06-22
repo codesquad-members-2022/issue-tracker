@@ -7,9 +7,10 @@ import Milestone from '@/assets/icons/icon_milestone.svg';
 import Label from '@/assets/icons/icon_label.svg';
 import ArrowUp from '@/assets/icons/icon_arrow_up.svg';
 import ArrowDown from '@/assets/icons/icon_arrow_down.svg';
+import RadioOff from '@/assets/icons/icon_radio_off.svg';
+import RadioOn from '@/assets/icons/icon_radio_on.svg';
 
 import styled from 'styled-components';
-import { PALETTE } from '@/styles/common';
 
 type IconTypes =
   | 'search'
@@ -20,7 +21,9 @@ type IconTypes =
   | 'milestone'
   | 'label'
   | 'arrowUp'
-  | 'arrowDown';
+  | 'arrowDown'
+  | 'radioOff'
+  | 'radioOn';
 
 type Icons = Record<IconTypes, any>;
 
@@ -33,7 +36,9 @@ const icons: Icons = {
   milestone: Milestone,
   label: Label,
   arrowUp: ArrowUp,
-  arrowDown: ArrowDown
+  arrowDown: ArrowDown,
+  radioOff: RadioOff,
+  radioOn: RadioOn
 };
 
 interface IconProps {
@@ -45,10 +50,10 @@ function Icon({ iconType, color }: IconProps) {
   const Icon = icons[iconType];
   const $Icon = styled(Icon)`
     path {
-      stroke: ${color || PALETTE.WHITE};
+      stroke: ${color};
     }
   `;
-  return <$Icon />;
+  return color ? <$Icon /> : <Icon />;
 }
 
 export type { IconTypes };
