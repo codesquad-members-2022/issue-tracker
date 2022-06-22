@@ -7,7 +7,7 @@ import CancleAndSaveButtons from 'components/Issue/buttons/CancleAndSaveButtons'
 import EditAndCloseButtons from 'components/Issue/buttons/EditAndCloseButtons';
 import IssueTitleContent from 'components/Issue/IssueTitleContent';
 import IssueTitleInput from 'components/Issue/IssueTitleInput';
-import { issueState } from 'recoil/atoms/issue';
+import { issueState } from 'context/issue';
 
 function IssueTitle() {
   const [issueData, setIssueData] = useRecoilState(issueState);

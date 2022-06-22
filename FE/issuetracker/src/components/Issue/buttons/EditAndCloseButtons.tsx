@@ -4,7 +4,7 @@ import * as I from 'design/icons';
 import * as S from 'components/Issue/styled/issueTitleButton';
 
 import IssueTitleButton from 'components/Issue/buttons/IssueTitleButton';
-import { issueState } from 'recoil/atoms/issue';
+import { issueState } from 'context/issue';
 
 interface Props {
   clickHandler1: () => void;

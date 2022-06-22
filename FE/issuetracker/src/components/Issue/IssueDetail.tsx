@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import * as S from 'components/Issue/styled/issueDetail';
 import IssueLabel from 'components/Issue/IssueLabel';
-import { issueState } from 'recoil/atoms/issue';
+import { issueState } from 'context/issue';
 
 function IssueDetail() {
   const issueData = useRecoilValue(issueState);
