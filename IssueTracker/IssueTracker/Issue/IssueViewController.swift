@@ -65,7 +65,7 @@ final class IssueViewController: UIViewController {
     
     private func setupNavigationBar() {
         self.title = "이슈"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         let filterButton = createButton(title: "필터", image: UIImage(systemName: "scroll"), action: UIAction(handler: { _ in
             self.touchedFilterButton()
