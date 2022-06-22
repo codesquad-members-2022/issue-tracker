@@ -41,7 +41,7 @@
                 android:layout_height="?android:actionBarSize"
                 android:background="@color/white"
                 android:visibility="@{editToolbarVisible? View.GONE : View.VISIBLE}"
-                app:menu="@menu/label_default_menu"
+                app:menu="@menu/only_add_blue_icon_menu"
                 app:title="@{defaultToolbarTitle}"
                 tools:title="타이틀" />
 
@@ -52,7 +52,7 @@
                 android:layout_height="?android:actionBarSize"
                 android:background="@color/main"
                 android:visibility="@{editToolbarVisible? View.VISIBLE : View.GONE}"
-                app:menu="@menu/label_edit_menu"
+                app:menu="@menu/only_delete_white_icon_menu"
                 app:navigationIcon="@drawable/ic_exit"
                 app:title="@{editToolbarTitle}"
                 app:titleTextColor="@color/white"

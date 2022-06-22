@@ -28,7 +28,7 @@ class LabelAddFragment : BaseFragment<FragmentLabelAddBinding>(R.layout.fragment
         binding.viewModel = viewModel
         binding.labelAppbarLayout.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.label_save -> {
+                R.id.save_string -> {
                     if (editLabelInfo == null) {
                         addLabel()
                     } else {
@@ -74,7 +74,7 @@ class LabelAddFragment : BaseFragment<FragmentLabelAddBinding>(R.layout.fragment
             viewModel.setData(editLabelInfo!!)
         }
 
-        val saveMenu = binding.labelAppbarLayout.toolbar.menu.findItem(R.id.label_save)
+        val saveMenu = binding.labelAppbarLayout.toolbar.menu.findItem(R.id.save_string)
         binding.labelAppbarLayout.toolbar.setNavigationOnClickListener { popBackStack() }
         binding.editSubject.doAfterTextChanged { input ->
             val text = input.toString()

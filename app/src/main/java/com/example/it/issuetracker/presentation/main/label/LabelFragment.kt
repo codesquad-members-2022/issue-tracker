@@ -57,7 +57,7 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
         binding.recyclerviewLabelItem.layoutManager = LinearLayoutManager(requireContext())
         binding.toolbarLayout.defaultToolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.add_label -> {
+                R.id.add_blue_icon -> {
                     navigatePage(null)
                     true
                 }
@@ -67,7 +67,7 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
 
         binding.toolbarLayout.editToolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.delete_label -> {
+                R.id.delete_white_icon -> {
                     viewModel.deleteItems()
                     true
                 }

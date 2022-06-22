@@ -12,7 +12,6 @@
     <string name="bottom_navigation_my_page">내 계정</string>
 
     <!--label-->
-    <string name="label_add_menu_string">label add</string>
     <string name="save_string">저장</string>
     <string name="label_subject_string">제목</string>
     <string name="must_input_string">필수 입력</string>
@@ -33,7 +32,7 @@
     <string name="label_add_string">새로운 레이블</string>
     <string name="label_edit_string">레이블 수정</string>
     <string name="label_string">레이블</string>
-    <string name="delete_label">delete label</string>
+    <string name="delete_string">delete</string>
     <string name="select_items_count">선택된 항목 : %d개</string>
     <string name="select_label">레이블 선택</string>
     <string name="not_found_result">검색 결과가 없습니다.</string>
@@ -41,5 +40,10 @@
     <string name="milestone_toolbar_edit_string">마일스톤 선택</string>
     <string name="milestone_toolbar_new_string">새로운 마일스톤</string>
     <string name="calendar_image_content">calendar image</string>
+    <string name="add_string">add</string>
+
+    <!-- milestone -->
+    <string name="milestone_complete_date">완료일</string>
+    <string name="optional_input_date_string">선택 사항(YYYY-MM-DD)</string>
 
 </resources>

@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:actionBarSize"
                 android:background="@color/main"
-                app:menu="@menu/label_add_menu"
+                app:menu="@menu/only_save_string_menu"
                 app:navigationIcon="@drawable/ic_back"
                 app:title="@{title}"
                 app:titleTextColor="@color/white"/>
