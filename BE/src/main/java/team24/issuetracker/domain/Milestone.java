@@ -1,10 +1,12 @@
 package team24.issuetracker.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,4 +25,8 @@ public class Milestone {
     private String title;
     private String description;
     private LocalDate dueDate;
+    private boolean isDeleted;
+
+    @OneToMany(mappedBy = "milestone")
+    private List<Issue> issues;
 }

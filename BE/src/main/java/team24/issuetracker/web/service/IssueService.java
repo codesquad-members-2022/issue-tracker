@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.RequiredArgsConstructor;
-import team24.issuetracker.web.dto.IssueListResponse;
+import team24.issuetracker.web.dto.issuelist.IssueListResponse;
 import team24.issuetracker.web.repository.IssueRepository;
 
 @Service

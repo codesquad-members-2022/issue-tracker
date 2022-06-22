@@ -28,11 +28,10 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     private Issue issue;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private User writer;
     private String content;
     private LocalDateTime dateTime;
