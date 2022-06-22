@@ -21,7 +21,7 @@ final class IssueCollectionView: UIView {
         fatalError()
     }
     
-    var collectionView: UICollectionView = {
+    private var collectionView: UICollectionView = {
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 5
@@ -38,6 +38,10 @@ final class IssueCollectionView: UIView {
     
     func setDataSource(_ dataSource: UICollectionViewDataSource) {
         collectionView.dataSource = dataSource
+    }
+
+    func setCollectionViewDelegate(_ delegate: UICollectionViewDelegate) {
+        collectionView.delegate = delegate
     }
     
     override func layoutSubviews() {

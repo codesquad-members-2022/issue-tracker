@@ -15,53 +15,47 @@ class IssueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createNavigationBarButton()
-        createSearchController()
-        self.view = issueCollectionView
+        setNavigationItems()
+        setSearchController()
+        view = issueCollectionView
+
         issueCollectionView.setDataSource(dataSource)
-        issueCollectionView.collectionView.delegate = self
+        issueCollectionView.setCollectionViewDelegate(self)
     }
     
-    private func createNavigationBarButton() {
+    private func setNavigationItems() {
         let customButton = CustomBarButton()
         let leftBarButton = UIBarButtonItem(customView: customButton.leftButton)
         let rightBarButton = UIBarButtonItem(customView: customButton.rightButton)
-        self.navigationItem.leftBarButtonItem = leftBarButton
-        self.navigationItem.rightBarButtonItem = rightBarButton
-    }
-    
-    private func createSearchController() {
-        searchController.searchBar.placeholder = "Search"
-        searchController.automaticallyShowsCancelButton = false
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.leftBarButtonItem = leftBarButton
+        navigationItem.rightBarButtonItem = rightBarButton
         
+        navigationItem.title = "이슈"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+
         let appearance = UINavigationBarAppearance()
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        self.navigationItem.title = "이슈"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.largeTitleDisplayMode = .always
-        self.navigationController?.hidesBarsOnSwipe = true
-        self.navigationItem.searchController = searchController
     }
     
+    private func setSearchController() {
+        searchController.searchBar.placeholder = "Search"
+        searchController.automaticallyShowsCancelButton = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+    }
 }
 
 extension IssueViewController: UICollectionViewDelegate {
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        UIView.animate(withDuration: 0.5) { [weak self] in
             guard velocity.y != 0 else { return }
             if velocity.y < 0 {
-                let height = self?.searchController.searchBar.frame.height ?? 0.0
-                self?.searchController.searchBar.alpha = 1.0
-                self?.searchController.searchBar.frame.origin = CGPoint(x: 0, y: UIScreen.main.bounds.maxY - height)
+                navigationItem.searchController = searchController
             } else {
-            self?.searchController.searchBar.alpha = 0.0
-                self?.searchController.searchBar.frame.origin = CGPoint(x: 0, y: UIScreen.main.bounds.maxY)
+                navigationItem.searchController = nil
             }
-        }
     }
 }
