@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.issue.IssueEditor">
+
+        <com.example.issu_tracker.ui.common.CustomToolbar
+            android:id="@+id/tb_issue_editor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:theme="@style/ToolbarTheme"
+            app:firstActionText="@string/toolbar_action_preview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:secondActionText="@string/toolbar_action_save"
+            app:toolbarNavigationIcon="@drawable/ic_leading"
+            app:toolbarTitle="@string/toolbar_editor_title" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_issue_editor_title"
+            style="@style/Body2.black"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@id/tv_issue_editor_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_issue_editor_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_issue_editor_title"
+            tools:text="테스트" />
+
+        <TextView
+            android:id="@+id/tv_issue_editor_title"
+            style="@style/Subtitle1.black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="18dp"
+            android:text="@string/issue_editor_title"
+            app:layout_constraintEnd_toStartOf="@+id/et_issue_editor_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tb_issue_editor" />
+
+        <View
+            android:id="@+id/view_issue_editor_divider_title"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/grey05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_issue_editor_title" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_issue_editor_body"
+            style="@style/Body2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="start"
+            android:hint="@string/issue_editor_body_hint"
+            android:paddingHorizontal="16dp"
+            android:textColorHint="@color/label2"
+            android:textIsSelectable="true"
+            app:layout_constraintBottom_toTopOf="@+id/cb_issue_editor_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_issue_editor_divider_title" />
+
+        <TextView
+            android:id="@+id/tv_issue_editor_body"
+            style="@style/Body2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="start"
+            android:paddingHorizontal="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/cb_issue_editor_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_issue_editor_divider_title" />
+
+        <com.example.issu_tracker.ui.common.ConditionBar
+            android:id="@+id/cb_issue_editor_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:conditionBarBackground="@color/background2"
+            app:conditionBarBackgroundTint="@color/background2"
+            app:conditionBarTextAppearance="@style/Body2.grey"
+            app:conditionBarTitle="@string/condition_title_label"
+            app:layout_constraintBottom_toTopOf="@+id/cb_issue_editor_milestone"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.example.issu_tracker.ui.common.ConditionBar
+            android:id="@+id/cb_issue_editor_milestone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:conditionBarBackground="@color/background2"
+            app:conditionBarBackgroundTint="@color/background2"
+            app:conditionBarTextAppearance="@style/Body2.grey"
+            app:conditionBarTitle="@string/condition_title_mile_stone"
+            app:layout_constraintBottom_toTopOf="@+id/cb_issue_editor_assignee"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.example.issu_tracker.ui.common.ConditionBar
+            android:id="@+id/cb_issue_editor_assignee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:conditionBarBackground="@color/background2"
+            app:conditionBarBackgroundTint="@color/background2"
+            app:conditionBarTextAppearance="@style/Body2.grey"
+            app:conditionBarTitle="@string/condition_title_user"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

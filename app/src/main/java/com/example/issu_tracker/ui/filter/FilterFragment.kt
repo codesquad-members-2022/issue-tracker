@@ -1,4 +1,4 @@
-package com.example.issu_tracker.filter
+package com.example.issu_tracker.ui.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,10 +18,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.issu_tracker.R
 import com.example.issu_tracker.databinding.FragmentFilterBinding
-import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_LABEL_CONDITION
-import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_MILESTONE_CONDITION
-import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_STATE_CONDITION
-import com.example.issu_tracker.ui.common.Constants.FILTER_TYPE_WRITER_CONDITION
+import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_LABEL
+import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_ASSIGNEE
+import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_STATE
+import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_WRITER
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -53,31 +53,38 @@ class FilterFragment : Fragment() {
                 launch { collectConditionValue() }
             }
         }
+        setNavigationIconEventListener()
         setFirstActionItemClickEvent()
         setSecondActionItemClickEvent()
     }
 
+    private fun setNavigationIconEventListener() {
+        binding.tbFilter.setNavigationOnClickListener {
+            navController.popBackStack()
+        }
+    }
+
     private suspend fun setStateSpinner() {
         viewModel.stateStateFlow.collect {
-            setSpinner(binding.cbFilterState.spinner, it, FILTER_TYPE_STATE_CONDITION)
+            setSpinner(binding.cbFilterState.spinner, it, CONDITION_TYPE_STATE)
         }
     }
 
     private suspend fun setWriterSpinner() {
         viewModel.writerStateFlow.collect {
-            setSpinner(binding.cbFilterWriter.spinner, it, FILTER_TYPE_WRITER_CONDITION)
+            setSpinner(binding.cbFilterWriter.spinner, it, CONDITION_TYPE_WRITER)
         }
     }
 
     private suspend fun setLabelSpinner() {
         viewModel.labelStateFlow.collect {
-            setSpinner(binding.cbFilterLabel.spinner, it, FILTER_TYPE_LABEL_CONDITION)
+            setSpinner(binding.cbFilterLabel.spinner, it, CONDITION_TYPE_LABEL)
         }
     }
 
     private suspend fun setMileStoneSpinner() {
         viewModel.mileStoneStateFlow.collect {
-            setSpinner(binding.cbFilterMileStone.spinner, it, FILTER_TYPE_MILESTONE_CONDITION)
+            setSpinner(binding.cbFilterMilestone.spinner, it, CONDITION_TYPE_ASSIGNEE)
         }
     }
 
@@ -98,7 +105,7 @@ class FilterFragment : Fragment() {
             binding.cbFilterState.spinner.setSelection(viewModel.stateStateFlow.value.size - SPINNER_DEFAULT_INDEX)
             binding.cbFilterWriter.spinner.setSelection(viewModel.writerStateFlow.value.size - SPINNER_DEFAULT_INDEX)
             binding.cbFilterLabel.spinner.setSelection(viewModel.labelStateFlow.value.size - SPINNER_DEFAULT_INDEX)
-            binding.cbFilterMileStone.spinner.setSelection(viewModel.mileStoneStateFlow.value.size - SPINNER_DEFAULT_INDEX)
+            binding.cbFilterMilestone.spinner.setSelection(viewModel.mileStoneStateFlow.value.size - SPINNER_DEFAULT_INDEX)
             true
         }
     }
@@ -106,7 +113,10 @@ class FilterFragment : Fragment() {
     private fun setSecondActionItemClickEvent() {
         binding.tbFilter.secondActionItem.setOnMenuItemClickListener {
             val savedValues = viewModel.saveConditionValues()
-            navController.navigate(R.id.action_filterFragment_to_issueFragment2, bundleOf("filterCondition" to savedValues))
+            navController.navigate(
+                R.id.action_filterFragment_to_issueFragment2,
+                bundleOf("filterCondition" to savedValues)
+            )
             true
         }
     }

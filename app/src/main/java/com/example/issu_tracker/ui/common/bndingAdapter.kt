@@ -9,12 +9,16 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.issu_tracker.R
 import com.example.issu_tracker.data.Label
+
 
 @SuppressLint("Range")
 @BindingAdapter("labelList")
 fun setLabels(view: LinearLayout, list: List<Label>) {
+
     list.forEach {
         val textView =
             TextView(view.context)
@@ -38,4 +42,15 @@ fun setLabels(view: LinearLayout, list: List<Label>) {
         view.addView(spaceView)
     }
 
+
 }
+
+@BindingAdapter("labelListOnRecyclerview")
+fun setLabelsOnRecyclerview(view: RecyclerView, list: List<Label>) {
+    val adapter = LabelAdapter(list)
+    view.adapter = adapter
+
+    view.layoutManager =
+        LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+}
+
