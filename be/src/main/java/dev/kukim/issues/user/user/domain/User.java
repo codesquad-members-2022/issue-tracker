@@ -11,9 +11,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
+@Getter @Setter
 @Entity
 @Table(indexes = @Index(name = "i_thirdpartyid", columnList = "thirdPartyId"))
 public class User {

@@ -1,0 +1,38 @@
+spring:
+#  datasource:
+#    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+#    url: jdbc:tc:mysql:8://testDB
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    defer-datasource-initialization: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+sql:
+    init:
+      mode: always
+      encoding: UTF-8
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+
+# oauth
+oauth:
+  github:
+    client-id: testid
+    client-secret: testsecret
+    authorization-uri: https://github.com/login/oauth/authorize
+    access-token-uri: https://github.com/login/oauth/access_token
+    user-info-uri: https://api.github.com/user
+
+jwt:
+  secret: testkey1234567891011121314151617181920

@@ -1,8 +1,9 @@
 package dev.kukim.issues.user.auth.controller.response;
 
 import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 public class GithubUserResponse {
 
 	private Long id;
