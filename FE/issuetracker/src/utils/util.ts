@@ -15,3 +15,8 @@ export function calculateInterval(writeTime: string) {
   const interval = Math.floor((now - before) / 1000);
   return interval;
 }
+
+export function calculatePercent(number: number) {
+  const percent = (number * 100).toFixed(2);
+  return Number(percent);
+}
