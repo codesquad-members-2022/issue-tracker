@@ -33,7 +33,7 @@ function MileStone({ idx, title }: MileStoneType) {
       <S.MileStoneBottom>
         <S.Discription>마일스톤 상세 설명</S.Discription>
         <S.MileStoneProgressBar>
-          <ProgressBar />
+          <ProgressBar percent={50} />
           <S.ProgressStatus>
             <S.CompleteRate>50%</S.CompleteRate>
             <S.IssueStatus>열린 이슈 1 닫힌 이슈 1</S.IssueStatus>

@@ -26,7 +26,7 @@ export const AccountImg = styled.img`
   height: 44px;
   border-radius: 100%;
 `;
-export const ProgressBar = styled.div`
+export const ProgressBar = styled.div<{ percent: number }>`
   width: 244px;
   height: 8px;
   border-radius: 10px;
@@ -34,8 +34,8 @@ export const ProgressBar = styled.div`
   background: linear-gradient(
     90deg,
     ${({ theme }) => theme.backgroundColors.blue2} 0%,
-    ${({ theme }) => theme.backgroundColors.blue2} 15.21%,
-    ${({ theme }) => theme.backgroundColors.gray3} 15.22%,
+    ${({ theme }) => theme.backgroundColors.blue2} ${({ percent }) => percent}%,
+    ${({ theme }) => theme.backgroundColors.gray3} ${({ percent }) => percent + 0.01}%,
     ${({ theme }) => theme.backgroundColors.gray3} 100%
   );
 `;
