@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class IssueListViewController: UIViewController {
+final class IssueListViewController: UIViewController {
 
     var viewModel = IssueListViewModel()
 

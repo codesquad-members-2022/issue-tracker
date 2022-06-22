@@ -9,7 +9,7 @@ import XCTest
 
 @testable import IssueTracker
 
-class MockIssueTest: XCTestCase {
+final class MockIssueTest: XCTestCase {
 
     var issueRepository: IssueTrackingRepository!
 

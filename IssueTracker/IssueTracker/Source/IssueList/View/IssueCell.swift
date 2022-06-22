@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class IssueCell: UICollectionViewCell {
+final class IssueCell: UICollectionViewCell {
 
     static let reuseIdentifier = "IssueCell"
     var issueListViewModel = IssueListViewModel()

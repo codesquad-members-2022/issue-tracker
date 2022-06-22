@@ -7,7 +7,7 @@
 
 import Foundation
 
-class IssueListViewModel {
+final class IssueListViewModel {
 
     var issueList: [Issue] = [Issue]()
     var issueRepository = IssueTrackingRepository()

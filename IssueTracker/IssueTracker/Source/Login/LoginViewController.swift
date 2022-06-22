@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
 
     var viewModel: LoginViewModel
 
