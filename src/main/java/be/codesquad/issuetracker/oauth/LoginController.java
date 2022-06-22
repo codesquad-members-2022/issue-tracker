@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +23,7 @@ public class LoginController {
 
     private static final String CLIENT_ID = "ff50ff7342e90de02060";
     private static final String REDIRECT_URI = "https://github.com/login/oauth/authorize";
+    private static final int EXPIRED_SECOND = 24 * 60 * 60;
 
     private final LoginService loginService;
     private final AuthService githubOAuthClient;
@@ -42,23 +42,17 @@ public class LoginController {
     }
 
     @GetMapping("/callback")
-    public ResponseEntity<Void> githubLoginCallback(
+    public ResponseEntity<String> githubLoginCallback(
         @RequestParam(value = "code", required = false) String code
     ) {
         TokenInformation token = githubOAuthClient.getToken(code);
-        GithubUser githubUser = githubOAuthClient.getUser(token.getAccess_token());
+        GithubUser githubUser = githubOAuthClient.getUser(token.getAccessToken());
         User user = loginService.upsertUser(githubUser);
-        String jwtToken = JwtFactory.create(user);
+        String jwtToken = JwtFactory.create(user, EXPIRED_SECOND);
         log.debug("jwtToken: {}", jwtToken);
-//
-//        ResponseCookie cookie = ResponseCookie.from("access_token", accessToken)
-//            .maxAge(EXPIRED_SECOND)
-//            .path("/")
-//            .build();
 
-        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY)
-//            .header(HttpHeaders.SET_COOKIE, cookie.toString())
+        return ResponseEntity.status(HttpStatus.OK)
             .header(HttpHeaders.LOCATION, "/")
-            .build();
+            .body(jwtToken);
     }
 }

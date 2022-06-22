@@ -14,11 +14,10 @@ import org.springframework.stereotype.Component;
 public class JwtFactory {
 
     private static final Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private static final int EXPIRED_SECOND = 24 * 60 * 60;
 
-    public static String create(User user) {
+    public static String create(User user, int expiredSecond) {
         Date now = new Date();
-        Date expiredTime = new Date(now.getTime() + EXPIRED_SECOND);
+        Date expiredTime = new Date(now.getTime() + expiredSecond);
         return Jwts.builder()
             .setHeader(createJwtHeader())
             .setClaims(createJwtClaims(user))
