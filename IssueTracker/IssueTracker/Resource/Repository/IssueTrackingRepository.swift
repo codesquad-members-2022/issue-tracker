@@ -25,7 +25,7 @@ final class IssueTrackingRepository {
             return completion(.success(issueList))
         }
     }
-    
+
     // MARK: - Local에 JSON 파일로 [Issue] 를 로딩
     func getIssuesOnFailure() -> [Issue]? {
         let fileName: String = "Issue"
