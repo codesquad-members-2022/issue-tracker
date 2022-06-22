@@ -13,6 +13,18 @@ final class IssueViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var addButton: UIButton = {
+        var configure = UIButton.Configuration.filled()
+        configure.baseBackgroundColor = .systemBlue
+        configure.image = UIImage(systemName: "plus")
+        configure.buttonSize = .large
+        
+        configure.background.cornerRadius = 50
+        return UIButton(configuration: configure, primaryAction: UIAction(handler: { _ in
+            self.touchedAddButton()
+        }))
+    }()
+    
     private var model: IssueModel?
     
     convenience init(model: IssueModel?) {
@@ -41,6 +53,10 @@ final class IssueViewController: UIViewController {
         print("touchedFilterButton")
     }
     
+    @objc func touchedAddButton() {
+        print("touchedAddButton")
+    }
+    
     private func setupNavigationBar() {
         self.title = "이슈"
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -63,6 +79,12 @@ final class IssueViewController: UIViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(self.view)
         }
+        
+        view.addSubview(addButton)
+        addButton.snp.makeConstraints { make in
+            make.bottom.equalTo(self.view).offset(-50)
+            make.trailing.equalTo(self.view).offset(-50)
+        }
     }
     
     private func createButton(title: String, image: UIImage?, action: UIAction) -> UIButton {
@@ -74,6 +96,17 @@ final class IssueViewController: UIViewController {
         configuration.buttonSize = .small
         configuration.image = image
         configuration.imagePadding = 4
+        let button = UIButton(configuration: configuration, primaryAction: action)
+        return button
+    }
+    
+    private func createButton(title: String, action: UIAction) -> UIButton {
+        var configuration = UIButton.Configuration.plain()
+        var container = AttributeContainer()
+        container.font = UIFont.systemFont(ofSize: 14)
+        configuration.attributedTitle = AttributedString(title, attributes: container)
+        
+        configuration.buttonSize = .small
         let button = UIButton(configuration: configuration, primaryAction: action)
         return button
     }
