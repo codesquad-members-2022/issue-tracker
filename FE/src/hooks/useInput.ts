@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 const useInput = (validateFn: (value: string) => boolean) => {
   const [inputValue, setInputValue] = useState('');

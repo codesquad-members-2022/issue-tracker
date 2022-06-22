@@ -8,8 +8,7 @@ export const handlers = [
   rest.get('http://localhost:3030/jwttoken', (req, res, ctx) => {
     return res(
       ctx.json({
-        access: '1234567891',
-        refresh: '1234567891',
+        jwt: '1234567891',
       }),
     );
   }),

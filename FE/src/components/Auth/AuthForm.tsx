@@ -5,14 +5,6 @@ import { Input, InputWithRef } from '../../UI/Input';
 import GithubLoginBtn from './GithubLoginBtn';
 import useInput from '../../hooks/useInput';
 
-export type parsedQueryType =
-  | string
-  | ParsedQs
-  | string[]
-  | ParsedQs[]
-  | undefined
-  | null;
-
 const AuthForm = () => {
   const idRef = useRef<HTMLInputElement>(null);
   const {

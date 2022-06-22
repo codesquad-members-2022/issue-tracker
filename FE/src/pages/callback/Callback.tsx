@@ -36,7 +36,7 @@ const fetchIssues = async () => {
   return response.json();
 };
 
-const prefetchTodos = async (token: { access: string; refersh: string }) => {
+const prefetchIssues = async (token: { access: string; refersh: string }) => {
   await queryClient.prefetchQuery('issues', () => fetchIssues(token));
 };
 
@@ -54,8 +54,10 @@ const Callback = () => {
 
   useEffect(() => {
     if (status === 'success') {
-      prefetchTodos(data);
+      prefetchIssues(data);
       navigate('/issues');
+      // useEffect를 사용하지않으면 컴포넌트 렌더링 오류가 발생해서, useEffect 사용
+      // 해당 내용에대해 더 알아보기
     }
   }, [status]);
 
