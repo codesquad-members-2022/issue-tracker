@@ -24,6 +24,7 @@ function IssueTab({ tabName }: IssueTabProps) {
 const IssueTabBox = styled.li`
   ${({ theme }) => theme.LAYOUT.flexLayoutMixin('row', 'flex-start', 'center')};
   gap: 8px;
+  cursor: pointer;
 `;
 
 const TabName = styled.p`
