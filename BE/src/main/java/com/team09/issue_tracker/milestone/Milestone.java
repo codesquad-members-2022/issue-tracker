@@ -10,7 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Milestone {
 
@@ -31,5 +38,11 @@ public class Milestone {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public static Milestone of(Long mileStoneId) {
+		return Milestone.builder()
+			.id(mileStoneId)
+			.build();
 	}
 }

@@ -7,12 +7,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Member {
 
@@ -47,5 +51,11 @@ public class Member {
 		this.email = email;
 		this.imgUrl = imgUrl;
 		return this;
+	}
+
+	public static Member of(Long memberId) {
+		return Member.builder()
+			.id(memberId)
+			.build();
 	}
 }
