@@ -34,15 +34,10 @@ final class Provider {
             let requestBody = try? JSONSerialization.data(withJSONObject: param, options: .init())
             request.httpBody = requestBody
         }
-        if let content = target.content {
-            request.addValue(content.value, forHTTPHeaderField: content.forHTTPHeaderField)
-        }
-        if let accept = target.accept {
-            request.addValue(accept.value, forHTTPHeaderField: accept.forHTTPHeaderField)
-        }
-        if let token = target.authorization {
-            request.addValue(token.value, forHTTPHeaderField: token.fotHttpHeaderField)
-        }
+
+        for (key, value) in target.header.header {
+              request.addValue(value, forHTTPHeaderField: key)
+            }
         request.httpMethod = target.method.value
 
         return request

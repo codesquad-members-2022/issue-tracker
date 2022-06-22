@@ -54,30 +54,12 @@ extension IssueTrackerTarget: BaseTarget {
         }
     }
 
-    var content: HTTPContentType? {
+    var header: HTTPHeader {
         switch self {
         case .requestAccessToken:
-            return .json
-        case .requestIssueList:
-            return nil
-        }
-    }
-
-    var accept: HTTPAcceptType? {
-        switch self {
-        case .requestAccessToken:
-            return .loginJson
-        case .requestIssueList:
-            return .issueJson
-        }
-    }
-
-    var authorization: HTTPAuthorization? {
-        switch self {
-        case .requestAccessToken:
-            return nil
+            return .oauth
         case .requestIssueList(let token):
-            return .header(token: token)
+            return .githubAPIRequest(token: token)
         }
     }
 }
