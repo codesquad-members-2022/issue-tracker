@@ -12,6 +12,8 @@ import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.customview.CustomSnackBar
+import com.example.it.issuetracker.presentation.main.issue.filter.FilterFragment
+import com.example.it.issuetracker.presentation.main.issue.register.RegisterIssueFragment
 import com.example.it.issuetracker.presentation.main.issue.search.SearchFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,7 +38,7 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
 
     override fun initView() = with(binding) {
         ivSearch.setOnClickListener { navigateFragment(SearchFragment(), "search_issue") }
-        btnIssue.setOnClickListener { navigateFragment(SearchFragment(), "register_issue") }
+        btnIssue.setOnClickListener { navigateFragment(RegisterIssueFragment(), "register_issue") }
         rvIssue.adapter = adapter
         val dividerItemDecoration =
             DividerItemDecoration(context, LinearLayoutManager(context).orientation)
@@ -46,7 +48,7 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
         ivClose.setOnClickListener { closeIssues() }
         toolbarDefaultIssue.setNavigationOnClickListener {
             navigateFragment(
-                SearchFragment(),
+                FilterFragment(),
                 "filter"
             )
         }
