@@ -17,7 +17,7 @@ protocol SignInManagable {
 struct SignInManager {
     private let clientID = Bundle.main.clientID
     private let clientSecret = Bundle.main.clientSecret
-    var urlSession: URLSessionProtocol
+    private let urlSession: URLSessionProtocol
     
     init(urlSession: URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession

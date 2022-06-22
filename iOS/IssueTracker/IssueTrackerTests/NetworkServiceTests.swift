@@ -23,11 +23,10 @@ class NetworkServiceTests: XCTestCase {
         NetworkService<String>.fetchData(target: TestNetworkTarget.testCase, urlSession: stubURLSession) { result in
             switch result {
             case .success(let dataString):
-                print(dataString)
                 XCTAssertEqual(dataString, "TestString")
                 promise.fulfill()
             case .failure(let error):
-                return print(error)
+                return
             }
         }
 
