@@ -16,6 +16,7 @@ const getTapIcon = (iconName: 'tag' | 'milestone', iconColor: string) => {
       return <Icon iconName="tag" stroke={iconColor} />;
     case 'milestone':
       return <Icon iconName="milestone" fill={iconColor} />;
+    default:
   }
 };
 

@@ -1,6 +1,6 @@
 import Icon from '@/assets/icons/Icon';
 import { COLORS, GREYSCALE } from '@/constants';
-import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
 import Label from './Label';
@@ -21,12 +21,14 @@ function IssueItem({ isLast }: IssueItemProps) {
             stroke={COLORS.BLUE}
             fill={COLORS.LIGHT_BLUE}
           />
-          <TitleText>이슈 제목</TitleText>
+          <Link to="/issueDetail">
+            <TitleText>이슈 제목</TitleText>
+          </Link>
           <Labels>
             <Label
-              labelName={'레이블 이름'}
+              labelName="레이블 이름"
               backgroundColor={GREYSCALE.BACKGROUND}
-              textColor={'어두운 색'}
+              textColor="어두운 색"
             />
           </Labels>
         </IssueTitle>
@@ -34,7 +36,7 @@ function IssueItem({ isLast }: IssueItemProps) {
           <span>#이슈번호</span>
           <span>작성자 및 타임스탬프 정보</span>
           <Milestone>
-            <Icon iconName={'milestone'} fill={GREYSCALE.LABEL} />
+            <Icon iconName="milestone" fill={GREYSCALE.LABEL} />
             마일스톤
           </Milestone>
         </IssueInfo>
