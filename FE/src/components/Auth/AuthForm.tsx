@@ -28,6 +28,7 @@ const AuthForm = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // todo submit handler 테스트 오류 관련 문제 해결하기
     const form = e.target as HTMLFormElement;
     resetID();
     resetPassword();
