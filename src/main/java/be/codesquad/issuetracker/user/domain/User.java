@@ -1,12 +1,12 @@
-package be.codesquad.issuetracker.user;
+package be.codesquad.issuetracker.user.domain;
 
+import be.codesquad.issuetracker.oauth.dto.GithubUser;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Getter
 @Entity
@@ -26,7 +26,7 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public void update(User user) {
+    public void update(GithubUser user) {
         this.authId = user.getAuthId();
         this.username = user.getUsername();
         this.imageUrl = user.getImageUrl();

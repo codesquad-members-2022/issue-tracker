@@ -1,6 +1,6 @@
-package be.codesquad.issuetracker.oauth;
+package be.codesquad.issuetracker.oauth.service;
 
-import be.codesquad.issuetracker.user.User;
+import be.codesquad.issuetracker.user.domain.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

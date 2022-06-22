@@ -1,4 +1,4 @@
-package be.codesquad.issuetracker.oauth;
+package be.codesquad.issuetracker.oauth.service;
 
 import be.codesquad.issuetracker.oauth.dto.TokenInformation;
 import be.codesquad.issuetracker.oauth.dto.GithubUser;

@@ -1,8 +1,11 @@
-package be.codesquad.issuetracker.oauth;
+package be.codesquad.issuetracker.oauth.controller;
 
+import be.codesquad.issuetracker.oauth.service.AuthService;
+import be.codesquad.issuetracker.oauth.service.JwtFactory;
+import be.codesquad.issuetracker.oauth.service.LoginService;
 import be.codesquad.issuetracker.oauth.dto.GithubUser;
 import be.codesquad.issuetracker.oauth.dto.TokenInformation;
-import be.codesquad.issuetracker.user.User;
+import be.codesquad.issuetracker.user.domain.User;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
