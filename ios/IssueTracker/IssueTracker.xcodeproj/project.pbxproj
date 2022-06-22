@@ -10,6 +10,7 @@
 		738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C4AAE285AD38C0050990E /* LoginButton.swift */; };
 		73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC52859697600191F99 /* Extension+UIColor.swift */; };
 		73A7EDC92859A68800191F99 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC82859A68800191F99 /* LoginView.swift */; };
+		73B0A3AB2862EC59005D36F2 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B0A3AA2862EC59005D36F2 /* LoginRepository.swift */; };
 		E43D17862859C7B50091DDF1 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */; };
 		E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D17892859C8590091DDF1 /* LoginViewModel.swift */; };
 		E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44DF6AB2859A71700FAC8FB /* Observable.swift */; };
@@ -30,6 +31,7 @@
 		738C4AAE285AD38C0050990E /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		73A7EDC52859697600191F99 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		73A7EDC82859A68800191F99 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		73B0A3AA2862EC59005D36F2 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
 		C1D71F4808639204766E3B8B /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43D17892859C8590091DDF1 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -107,6 +109,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		73B0A3AC2862FBD8005D36F2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				73B0A3AD2862FBF8005D36F2 /* Repository */,
+			);
+			name = Data;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		73B0A3AD2862FBF8005D36F2 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				73B0A3AA2862EC59005D36F2 /* LoginRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		9440FD2DC72618AE4A2F7FCA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +195,7 @@
 		E4D87380285884AE00AFCE4D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				73B0A3AC2862FBD8005D36F2 /* Data */,
 				E4D87395285884B500AFCE4D /* Application */,
 				E4D87397285884BF00AFCE4D /* Presentation */,
 				E4D87396285884BB00AFCE4D /* Resources */,
@@ -368,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4F44CEE285C26C900D3A3E6 /* LoginFlowDIContainer.swift in Sources */,
+				73B0A3AB2862EC59005D36F2 /* LoginRepository.swift in Sources */,
 				E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */,
 				E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */,
 				E4D87386285884AE00AFCE4D /* LoginViewController.swift in Sources */,
