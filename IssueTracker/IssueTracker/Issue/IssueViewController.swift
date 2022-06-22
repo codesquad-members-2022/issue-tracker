@@ -21,10 +21,8 @@ final class IssueViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         model.requestIssue()
-        model.updatedIssues = { issues in
+        model.updatedIssues = { issues in // 모델과 바인딩
             DispatchQueue.main.async {
-                print("count: \(issues.count)")
-                
                 self.collectionView.reloadData()
             }
         }
@@ -79,7 +77,6 @@ final class IssueViewController: UIViewController {
 
 extension IssueViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("cellCount: \(self.model.getIssuesCount())")
         return self.model.getIssuesCount()
     }
     

@@ -1,14 +1,13 @@
-//
-//  IssueService.swift
-//  IssueTracker
-//
-//  Created by Bibi on 2022/06/21.
-//
-
 import Foundation
 import Alamofire
 
-class IssueService {
+typealias UserToken = String
+
+enum GitHubError: Error {
+    case issueNotFound
+}
+
+struct GitHubService {
     
     func requestIssues(accessToken: String, completion: @escaping (Result<[Issue], GitHubError>) -> Void) {
         let urlString = RequestURL.issues.description

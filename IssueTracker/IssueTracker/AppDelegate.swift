@@ -30,12 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootViewController =
         GithubUserDefaults.getToken() != nil
             ? UINavigationController(rootViewController: IssueViewController())
-            : ViewController()
+            : LoginViewController()
         window?.rootViewController = rootViewController
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        OAuthManager().fetchToken(from: url) { accessToken in
+        OAuthService().fetchToken(from: url) { accessToken in
             guard let token = accessToken else {
                 // TODO: 로그인 실패 얼럿띄우기
                 return

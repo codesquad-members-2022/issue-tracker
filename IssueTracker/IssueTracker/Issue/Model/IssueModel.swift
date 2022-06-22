@@ -9,6 +9,8 @@ import Foundation
 
 class IssueModel {
 
+    private let githubService = GitHubService()
+    
     var updatedIssues: (_ issues: [Issue]) -> Void = { issues in
         
     }
@@ -34,7 +36,7 @@ class IssueModel {
         guard let token = GithubUserDefaults.getToken() else {
             return
         }
-        NetworkManager.shared.requestIssues(accessToken: token) { result in
+        githubService.requestIssues(accessToken: token) { result in
             switch result {
             case .success(let issues):
                 self.issues = issues
