@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import { FilterStyle } from '../../common/Filter/FilterBar.styled';
+=======
+>>>>>>> 27f3356b ([FE] 이슈리스트 UI (#37))
 import { CustomBtn } from '../../common/button.styled';
 
 export const Container = styled.div`
@@ -214,6 +217,7 @@ export const LabelTitle = styled.div`
 `;
 
 export const IssuesContent = styled.div``;
+<<<<<<< HEAD
 
 export const DetailWrapper = styled.summary`
   display: flex;
@@ -259,3 +263,5 @@ export const FilterTest = styled.div`
     padding: 10px;
   }
 `;
+=======
+>>>>>>> 27f3356b ([FE] 이슈리스트 UI (#37))
