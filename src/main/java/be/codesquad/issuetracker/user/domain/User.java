@@ -25,10 +25,4 @@ public class User {
         this.username = username;
         this.imageUrl = imageUrl;
     }
-
-    public void update(GithubUser user) {
-        this.authId = user.getAuthId();
-        this.username = user.getUsername();
-        this.imageUrl = user.getImageUrl();
-    }
 }
