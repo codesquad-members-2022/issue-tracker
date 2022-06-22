@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HEn-lG-uUf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,6 +10,37 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Intro View Controller-->
+        <scene sceneID="gOo-ch-unv">
+            <objects>
+                <viewController id="HEn-lG-uUf" customClass="IntroViewController" customModule="PRTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oJ9-lQ-nZP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRTracker ✏️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WH8-0O-UPF">
+                                <rect key="frame" x="154" y="437.5" width="106" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DbY-DE-2Y7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WH8-0O-UPF" firstAttribute="centerY" secondItem="oJ9-lQ-nZP" secondAttribute="centerY" id="f1Q-yN-cVC"/>
+                            <constraint firstItem="WH8-0O-UPF" firstAttribute="centerX" secondItem="oJ9-lQ-nZP" secondAttribute="centerX" id="vqQ-8r-8J5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="loginSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="dQh-XC-uZa"/>
+                        <segue destination="sVA-oP-Vgq" kind="custom" identifier="mainSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="Gxo-dv-5ho"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hf2-PS-XgN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="465" y="-688"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -184,7 +215,7 @@
                     </view>
                     <connections>
                         <outlet property="githubLoginButton" destination="ze4-gF-XCp" id="v0Q-Sb-XDu"/>
-                        <segue destination="sVA-oP-Vgq" kind="custom" identifier="loginSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="toQ-Cc-Ot1"/>
+                        <segue destination="sVA-oP-Vgq" kind="custom" identifier="mainSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="toQ-Cc-Ot1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -289,11 +320,16 @@
                                     <outlet property="delegate" destination="sMc-eT-kPZ" id="fzt-sQ-is7"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="frq-eT-w8c">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qvJ-dd-HOE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="frq-eT-w8c" firstAttribute="centerX" secondItem="KVC-CU-bgK" secondAttribute="centerX" id="7oU-eV-3et"/>
                             <constraint firstItem="9vs-JS-hKo" firstAttribute="leading" secondItem="qvJ-dd-HOE" secondAttribute="leading" id="She-gZ-tKJ"/>
+                            <constraint firstItem="frq-eT-w8c" firstAttribute="centerY" secondItem="KVC-CU-bgK" secondAttribute="centerY" id="Yql-mj-GvE"/>
                             <constraint firstItem="qvJ-dd-HOE" firstAttribute="bottom" secondItem="9vs-JS-hKo" secondAttribute="bottom" id="cOi-3X-v1d"/>
                             <constraint firstItem="9vs-JS-hKo" firstAttribute="top" secondItem="qvJ-dd-HOE" secondAttribute="top" id="fd7-Lq-g0p"/>
                             <constraint firstItem="qvJ-dd-HOE" firstAttribute="trailing" secondItem="9vs-JS-hKo" secondAttribute="trailing" id="g3f-6k-w4t"/>
@@ -304,6 +340,7 @@
                         <barButtonItem key="rightBarButtonItem" title="선택" id="YVr-tx-F8w"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="loaderView" destination="frq-eT-w8c" id="XXN-F2-Qv9"/>
                         <outlet property="tableView" destination="9vs-JS-hKo" id="Hgh-Jn-XPg"/>
                     </connections>
                 </viewController>
@@ -349,6 +386,9 @@
             <point key="canvasLocation" x="1921.7391304347827" y="-194.19642857142856"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Gxo-dv-5ho"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="CustomBlack">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

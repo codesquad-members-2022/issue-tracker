@@ -9,27 +9,33 @@ import UIKit
 
 class PullListViewController: UIViewController {
     
+    @IBOutlet weak var loaderView: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
     private let viewModel = IssueListViewModel()
     private var isSearchControllerConfigured = false
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureBind()
         configureNavigationBar()
+        configureRefreshControl()
         requestData()
     }
     
     private func configureBind() {
         viewModel.issueViewModels.bind { _ in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.loaderView.isHidden = true
+            }
         }
     }
     
     private func requestData() {
-        viewModel.requestPullListData()
+        viewModel.requestData()
     }
     
     private func configureSearchController() {
@@ -52,6 +58,19 @@ class PullListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         self.navigationItem.hidesSearchBarWhenScrolling = true
         self.navigationItem.title = "PR"
+    }
+    
+    private func configureRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func didPullToRefresh() {
+        DispatchQueue.main.async {
+            self.requestData()
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
