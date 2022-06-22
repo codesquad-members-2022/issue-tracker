@@ -1,10 +1,10 @@
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 
-import * as S from 'components/Issue/styled.issueTitle';
+import * as S from 'components/Issue/styled/issueTitle';
 
-import CancleAndSaveButtons from 'components/Issue/CancleAndSaveButtons';
-import EditAndCloseButtons from 'components/Issue/EditAndCloseButtons';
+import CancleAndSaveButtons from 'components/Issue/buttons/CancleAndSaveButtons';
+import EditAndCloseButtons from 'components/Issue/buttons/EditAndCloseButtons';
 import IssueTitleContent from 'components/Issue/IssueTitleContent';
 import IssueTitleInput from 'components/Issue/IssueTitleInput';
 import { issueState } from 'recoil/atoms/issue';

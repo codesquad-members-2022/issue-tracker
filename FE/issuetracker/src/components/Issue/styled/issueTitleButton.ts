@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 
+export const buttonWrapper = styled.div`
+  display: inline-flex;
+  position: absolute;
+  right: 0;
+`;
+
 export const issueButton = styled.button.attrs(() => ({ type: 'button' }))<{
   buttonState: string;
 }>`

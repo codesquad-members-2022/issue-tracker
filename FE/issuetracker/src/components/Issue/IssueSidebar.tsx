@@ -1,5 +1,5 @@
 import * as I from 'design/icons';
-import * as S from 'components/Issue/styled.issueSidebar';
+import * as S from 'components/Issue/styled/issueSidebar';
 import userImageURL from 'assets/images/UserImageLarge.svg';
 import userImageURL2 from 'assets/images/UserImageLarge2.svg';
 import { ProgressBar } from 'components/common/Common';

@@ -1,5 +1,5 @@
 import * as I from 'design/icons';
-import * as S from 'components/Issue/styled.issueLabel';
+import * as S from 'components/Issue/styled/issueLabel';
 
 interface Props {
   isIssueClosed: boolean;

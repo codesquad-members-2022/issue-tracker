@@ -1,4 +1,4 @@
-import * as S from 'components/Issue/styled.issueCommentSection';
+import * as S from 'components/Issue/styled/issueCommentSection';
 import IssueComment from 'components/Issue/IssueComment';
 import InputComment from 'components/Issue/InputComment';
 import userImageURL from 'assets/images/UserImageLarge.svg';

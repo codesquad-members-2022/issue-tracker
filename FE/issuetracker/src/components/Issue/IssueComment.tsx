@@ -1,5 +1,5 @@
 import * as I from 'design/icons';
-import * as S from 'components/Issue/styled.issueComment';
+import * as S from 'components/Issue/styled/issueComment';
 
 interface Props {
   imageURL: string;

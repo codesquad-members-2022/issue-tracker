@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as I from 'design/icons';
-import * as S from 'components/Issue/styled.inputComment';
+import * as S from 'components/Issue/styled/inputComment';
 import userImageURL from 'assets/images/UserImageLarge.svg';
 
 function InputComment() {

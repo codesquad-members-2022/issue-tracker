@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import * as S from 'components/Issue/styled.issueTitleContent';
+import * as S from 'components/Issue/styled/issueTitleContent';
 import { issueState } from 'recoil/atoms/issue';
 
 function IssueTitleContent() {

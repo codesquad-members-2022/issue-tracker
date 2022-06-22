@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from 'components/Issue/styled.issueTitleInput';
+import * as S from 'components/Issue/styled/issueTitleInput';
 
 interface Props {
   inputValue: string;
