@@ -12,7 +12,6 @@ import XCTest
 class MockIssueTest: XCTestCase {
 
     var issueRepository: IssueTrackingRepository!
-    var loginRepository: LoginRepository!
 
     func testLocalMockIssues() throws {
         issueRepository = IssueTrackingRepository()
@@ -40,15 +39,15 @@ class MockIssueTest: XCTestCase {
     }
 
     func testHasQueryIdAndScope() throws {
-        // when
+        //when
         let authrizeRequestTarget = IssueTrackerTarget.requestAuthorizeCode
-
-        // given
+        
+        //given
         guard let request = Provider
                 .makeURLRequest(with: authrizeRequestTarget),
               let query = request.url?.query else { return }
-
-        // then
+        
+        //then
         XCTAssertTrue(query.contains("client_id"), "query doesn't have CLIENT_ID, \(query)")
         XCTAssertTrue(query.contains("scope"), "query doesn't have SCOPE, \(query)")
     }
