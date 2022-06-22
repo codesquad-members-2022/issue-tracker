@@ -24,19 +24,19 @@ const IssuesNav = () => {
 
       <div className={styles.rightWrapper}>
         <details>
-          <summary>Author</summary>
+          <summary>담당자</summary>
           <div className={styles.test}>123123123</div>
         </details>
         <details>
-          <summary>Author</summary>
+          <summary>레이블</summary>
           <div className={styles.test}>123123123</div>
         </details>
         <details>
-          <summary>Author</summary>
+          <summary>마일스톤</summary>
           <div className={styles.test}>123123123</div>
         </details>
         <details>
-          <summary>Author</summary>
+          <summary>작성자</summary>
           <div className={styles.test}>123123123</div>
         </details>
       </div>

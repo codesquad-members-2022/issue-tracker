@@ -18,8 +18,25 @@ export type parsedQueryType =
 
 const queryClient = new QueryClient();
 
+// for test
+// const fetchAuth = async (code: parsedQueryType) => {
+//   const response = await fetch(`http://localhost:3030/jwttoken`);
+//   if (!response.ok) {
+//     throw new Error('response not ok');
+//   }
+
+//   return response.json();
+// };
+
 const fetchAuth = async (code: parsedQueryType) => {
-  const response = await fetch(`http://localhost:3030/jwttoken`);
+  const response = await fetch(
+    `http://13.125.219.203:8080/auth/github?code=${code}`,
+    {
+      headers: {
+        Accept: 'application/json',
+      },
+    },
+  );
   if (!response.ok) {
     throw new Error('response not ok');
   }
@@ -28,7 +45,7 @@ const fetchAuth = async (code: parsedQueryType) => {
 };
 
 const fetchIssues = async () => {
-  const response = await fetch(`http://localhost:3030/issues`);
+  const response = await fetch(`http://localhost:3030:/issues`);
   if (!response.ok) {
     throw new Error('response not ok');
   }
@@ -36,9 +53,9 @@ const fetchIssues = async () => {
   return response.json();
 };
 
-const prefetchIssues = async (token: { access: string; refersh: string }) => {
-  await queryClient.prefetchQuery('issues', () => fetchIssues(token));
-};
+// const prefetchIssues = async (token: { access: string; refersh: string }) => {
+//   await queryClient.prefetchQuery('issues', () => fetchIssues(token));
+// };
 
 const Callback = () => {
   const navigate = useNavigate();
@@ -54,8 +71,9 @@ const Callback = () => {
 
   useEffect(() => {
     if (status === 'success') {
-      prefetchIssues(data);
-      navigate('/issues');
+      // prefetchIssues(data);
+      console.log(data);
+      // navigate('/issues');
       // useEffect를 사용하지않으면 컴포넌트 렌더링 오류가 발생해서, useEffect 사용
       // 해당 내용에대해 더 알아보기
     }

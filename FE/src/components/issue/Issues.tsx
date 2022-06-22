@@ -14,21 +14,47 @@ const fetchIssues = async () => {
   return response.json();
 };
 
-const queryClient = new QueryClient();
+type fetchedDataType = {
+  content: fetchedContentType[];
+  // 여기에 추가 되는 타입들이 있을 것 같아서, 일단 이렇게 작성했습니다.
+};
+
+type fetchedContentType = {
+  memberDto: {
+    memberId: string;
+    avatarUrl: string;
+  };
+  issueNumber: number;
+  title: string;
+  milestoneTitle: string;
+  createAt: string;
+};
 
 const Issues = () => {
-  const { data } = useQuery('issues', fetchIssues);
-  console.log(data);
+  const { status, data, dataUpdatedAt } = useQuery('issues', fetchIssues, {
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
 
-  // if (status === 'loading') {
-  //   console.log('loading');
-  // }
   return (
     <>
       <div className={styles.wrapper}>
         <IssuesNav />
-        <Issue />
-        <Issue />
+        {data &&
+          data.content.map(
+            ({ issueNumber, title, milestoneTitle, createdAt, memberDto }) => (
+              <Issue
+                key={issueNumber}
+                id={issueNumber}
+                userId={memberDto.memberId}
+                userImg={memberDto.avatarUrl}
+                title={title}
+                milestoneTitle={milestoneTitle}
+                createdAt={new Date(createdAt).getTime()}
+                fetchedAt={dataUpdatedAt}
+              />
+            ),
+          )}
       </div>
     </>
   );
