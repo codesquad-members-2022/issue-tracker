@@ -10,9 +10,11 @@ import Foundation
 class IssueModel {
 
     private let githubService: GitHubService
+    private let accessToken: String
     
-    init(service: GitHubService) {
+    init(service: GitHubService, token: String) {
         self.githubService = service
+        self.accessToken = token
     }
     
     var updatedIssues: (_ issues: [Issue]) -> Void = { issues in
@@ -37,10 +39,7 @@ class IssueModel {
     }
     
     func requestIssue() {
-        guard let token = GithubUserDefaults.getToken() else {
-            return
-        }
-        githubService.requestIssues(accessToken: token) { result in
+        githubService.requestIssues(accessToken: self.accessToken) { result in
             switch result {
             case .success(let issues):
                 self.issues = issues
