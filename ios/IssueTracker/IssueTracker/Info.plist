@@ -11,7 +11,7 @@
 			<string>DeepLink</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>co.issue-tracker</string>
+				<string>it</string>
 			</array>
 		</dict>
 	</array>

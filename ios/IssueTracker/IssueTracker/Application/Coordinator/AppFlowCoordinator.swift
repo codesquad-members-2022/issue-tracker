@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol Coordinator: AnyObject {
-    func start()
-}
-
 protocol AppFlowCoordinatorDependencies {
     func makeLoginFlowDIContainer() -> DIContainer
 }
@@ -28,13 +24,28 @@ final class AppFlowCoordinator: Coordinator {
         print("Deinit: \(#fileID)")
     }
 
-    func start() {
-        runLoginFlow()
+    func start(with deepLink: DeepLink? = nil) {
+        guard let deepLink = deepLink else {
+            runLoginFlow() // or run default flow
+            return
+        }
+
+        switch deepLink {
+        case .home:
+            // run home flow with deepLink
+            return
+        case .login:
+            runLoginFlow(with: deepLink)
+            return
+        @unknown case _:
+            // run default flow
+            return
+        }
     }
 
-    func runLoginFlow() {
+    func runLoginFlow(with deepLink: DeepLink? = nil) {
         let container = appDIContainer.makeLoginFlowDIContainer()
         let flow = container.makeCoordinator(navigationController: navigationController)
-        flow.start()
+        flow.start(with: deepLink)
     }
 }

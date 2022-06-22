@@ -24,7 +24,9 @@ final class LoginFlowCoordinator: Coordinator {
         print("Deinit: \(#fileID)")
     }
 
-    func start() {
+    func start(with deepLink: DeepLink? = nil) {
+        if case let .login(code) = deepLink, let code = code {}
+
         let action = LoginViewModelAction(
             showMainScene: showMainTabBar,
             showGithubLoginScene: showGithubLogin,
@@ -44,9 +46,7 @@ final class LoginFlowCoordinator: Coordinator {
             return
         }
 
-        UIApplication.shared.open(url) { _ in
-            print("Trigger")
-        }
+        UIApplication.shared.open(url)
     }
 
     private func showAppleLogin() {}

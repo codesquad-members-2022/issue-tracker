@@ -30,48 +30,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // MARK: - URL Scheme
     func scene(_: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        // Determine who sent the URL.
-        if let urlContext = URLContexts.first {
-            let sendingAppID = urlContext.options.sourceApplication
-            let url = urlContext.url
-            print("source application = \(sendingAppID ?? "Unknown")")
-            print("url = \(url)")
-
-            // Process the URL similarly to the UIApplicationDelegate example.
-            guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true), let path = components.path, let params = components.queryItems else {
-                return
-            }
-
-            print("path = \(path)")
-            print("params = \(params)")
-
-            if let code = params.first(where: { $0.name == "code" })?.value {
-                print("Code = \(code)")
-            } else {
-                print("Code missing")
-            }
+        guard let url = URLContexts.first?.url else {
+            return
         }
+
+        let deepLink = DeepLink.build(with: url)
+        appCoordinator?.start(with: deepLink)
     }
 
     // MARK: - Universal Links
     func scene(_: UIScene, continue userActivity: NSUserActivity) {
-        // Get URL components from the incoming user activity.
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb, let incomingURL = userActivity.webpageURL, let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let incomingURL = userActivity.webpageURL else
+        {
             return
         }
 
-        // Check for specific URL components that you need.
-        guard let path = components.path, let params = components.queryItems else {
-            return
-        }
-
-        print("path = \(path)")
-        print("params = \(params)")
-
-        if let code = params.first(where: { $0.name == "code" })?.value {
-            print("Code = \(code)")
-        } else {
-            print("Code missing")
-        }
+        let deepLink = DeepLink.build(with: incomingURL)
+        appCoordinator?.start(with: deepLink)
     }
 }
