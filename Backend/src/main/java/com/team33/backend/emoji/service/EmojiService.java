@@ -14,13 +14,10 @@ public class EmojiService {
 
     private final EmotionRepository emotionRepository;
 
-    @Transactional
-    @Cacheable(value = "getEmotions", key = "#emotion", condition = "#emotion!=null")
-    public List<Emotion> getEmotions(){
+    @Transactional(readOnly = true)
+    @Cacheable(value = "findEmotions", key = "#emotion", condition = "#emotion!=null")
+    public List<Emotion> findEmotions(){
         return emotionRepository.findAll();
     }
 
-    public Emotion getEmotionById(Long id) {
-        return emotionRepository.findById(id).orElseThrow();
-    }
 }

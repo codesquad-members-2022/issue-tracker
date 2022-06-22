@@ -1,8 +1,8 @@
 package com.team33.backend.comment.service;
 
-import com.team33.backend.comment.domain.Comment;
 import com.team33.backend.comment.controller.dto.CommentEditRequest;
 import com.team33.backend.comment.controller.dto.CommentWriteRequest;
+import com.team33.backend.comment.domain.Comment;
 import com.team33.backend.comment.repository.CommentRepository;
 import com.team33.backend.emoji.controller.dto.cache.CommentCache;
 import com.team33.backend.issue.domain.Issue;
@@ -12,9 +12,7 @@ import com.team33.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -27,10 +25,10 @@ public class CommentService {
     private final CacheService cacheService;
 
     @Transactional
-    public Comment writeComment(String githubId, CommentWriteRequest request) {
+    public Comment writeComment(Long issuegroupId, Long issueId, String githubId, CommentWriteRequest request) {
         // 임시 예외처리
         Member findMember = memberRepository.findByGithubId(githubId).orElseThrow();
-        Issue findIssue = issueRepository.findById(request.getIssueId()).orElseThrow();
+        Issue findIssue = issueRepository.findById(issueId).orElseThrow();
 
         // 이미지는 일단 없다고 가정
         Comment newComment = new Comment(request.getContent(), findMember, findIssue);

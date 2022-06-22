@@ -1,10 +1,12 @@
 package com.team33.backend.data;
 
 import com.team33.backend.emoji.domain.Emotion;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class EmotionData {
 
     private List<Emotion> emotions;

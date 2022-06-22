@@ -1,4 +1,4 @@
-package com.team33.backend.image;
+package com.team33.backend.image.domain;
 
 import com.team33.backend.comment.domain.Comment;
 import com.team33.backend.issue.domain.Issue;

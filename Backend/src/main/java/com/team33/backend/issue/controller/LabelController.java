@@ -14,18 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/labels")
+@RequestMapping("/api/issuegroup")
 public class LabelController {
 
     private final LabelService labelService;
 
-    @PutMapping("{labelId}")
-    public LabelEditResponse editLabel(@PathVariable Long labelId, @RequestBody LabelEditRequest request){
+    @PutMapping("/{issuegroupId}/labels/{labelId}")
+    public LabelEditResponse editLabel(@PathVariable Long issuegroupId, @PathVariable Long labelId,
+                                       @RequestBody LabelEditRequest request){
         return new LabelEditResponse(labelService.editLabel(labelId, request));
     }
 
-    @DeleteMapping("{labelId}")
-    public LabelDeleteResponse editLabel(@PathVariable Long labelId){
+    @DeleteMapping("/{issuegroupId}/labels/{labelId}")
+    public LabelDeleteResponse editLabel(@PathVariable Long issuegroupId, @PathVariable Long labelId){
         return new LabelDeleteResponse(labelService.deleteLabelById(labelId));
     }
 }

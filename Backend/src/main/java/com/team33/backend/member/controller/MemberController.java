@@ -12,13 +12,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/members")
+@RequestMapping("/api/issuegroup")
 public class MemberController {
 
     private final MemberQueryService memberQueryService;
 
-    @GetMapping("{groupId}")
-    public List<MemberQueryResponse> findIssueGroupMembers(@PathVariable Long groupId){
-        return memberQueryService.findGroupMembers(groupId);
+    @GetMapping("/{issuegroupId}/members")
+    public List<MemberQueryResponse> findIssueGroupMembers(@PathVariable Long issuegroupId) {
+        return memberQueryService.findGroupMembers(issuegroupId);
     }
 }

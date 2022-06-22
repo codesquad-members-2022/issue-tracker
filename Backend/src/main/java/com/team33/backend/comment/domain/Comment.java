@@ -3,7 +3,7 @@ package com.team33.backend.comment.domain;
 import com.team33.backend.common.jpa.entity.CommonEntity;
 import com.team33.backend.common.jpa.entity.Deleted;
 import com.team33.backend.emoji.domain.Emoji;
-import com.team33.backend.image.Image;
+import com.team33.backend.image.domain.Image;
 import com.team33.backend.issue.domain.Issue;
 import com.team33.backend.member.domain.Member;
 import lombok.Getter;

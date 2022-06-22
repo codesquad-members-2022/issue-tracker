@@ -1,8 +1,7 @@
-package com.team33.backend.group;
+package com.team33.backend.issuegroup.domain;
 
 import com.team33.backend.common.jpa.entity.CommonEntity;
 import com.team33.backend.issue.domain.Milestone;
-import com.team33.backend.member.domain.IssueGroupMember;
 import lombok.Getter;
 
 import javax.persistence.CascadeType;

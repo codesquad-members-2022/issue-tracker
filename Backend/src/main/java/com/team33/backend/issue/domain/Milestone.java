@@ -1,7 +1,7 @@
 package com.team33.backend.issue.domain;
 
 import com.team33.backend.common.jpa.entity.CommonEntity;
-import com.team33.backend.group.IssueGroup;
+import com.team33.backend.issuegroup.domain.IssueGroup;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.Objects;

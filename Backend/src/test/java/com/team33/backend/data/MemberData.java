@@ -1,7 +1,9 @@
 package com.team33.backend.data;
 
 import com.team33.backend.member.domain.Member;
+import lombok.Getter;
 
+@Getter
 public class MemberData {
 
     private Member member;

@@ -24,8 +24,8 @@ public class CacheService {
     private final CommentCaches commentCaches;
 
     @Transactional
-    public List<CommentCache> findCommentCacheByIssueId(Long issueId) {
-        List<CommentCache> findCommentCaches = commentQueryRepository.findCommentsByIssueId(issueId);
+    public List<CommentCache> findCommentCacheByIssueId(Long issuegroupId) {
+        List<CommentCache> findCommentCaches = commentQueryRepository.findCommentsByIssueId(issuegroupId);
         List<Long> commentIds = findCommentCaches.stream()
                 .map(CommentCache::getId)
                 .collect(Collectors.toList());

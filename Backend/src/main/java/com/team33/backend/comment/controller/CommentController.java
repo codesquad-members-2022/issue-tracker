@@ -23,29 +23,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/comments")
+@RequestMapping("/api/issuegroup")
 public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping
-    public CommentWriteResponse writeComment(HttpServletRequest servletRequest, @Valid @RequestBody CommentWriteRequest request) {
-        String memberId = (String) servletRequest.getAttribute("memberId");
-        return new CommentWriteResponse(commentService.writeComment(memberId, request));
+    @PostMapping("/{issuegroupId}/issues/{issueId}/comments")
+    public CommentWriteResponse writeComment(HttpServletRequest servletRequest, @PathVariable Long issuegroupId,
+                                             @PathVariable Long issueId, @Valid @RequestBody CommentWriteRequest request) {
+        String githubId = (String) servletRequest.getAttribute("memberId");
+        return new CommentWriteResponse(commentService.writeComment(issuegroupId, issueId, githubId, request));
     }
 
-    @PutMapping("/{commentId}")
-    public CommentEditResponse edieComment(@PathVariable Long commentId, @Valid @RequestBody CommentEditRequest request) {
+    @PutMapping("/{issuegroupId}/issues/{issueId}/comments/{commentId}")
+    public CommentEditResponse edieComment(@PathVariable Long issuegroupId, @PathVariable Long issueId,
+                                           @PathVariable Long commentId, @Valid @RequestBody CommentEditRequest request) {
         return new CommentEditResponse(commentService.editComment(commentId, request));
     }
 
-//    @DeleteMapping("{commentId}")
-    public CommentDeleteResponse deleteComment(@PathVariable Long commentId) {
+    @DeleteMapping("/{issuegroupId}/issues/{issueId}/comments/{commentId}")
+    public CommentDeleteResponse deleteComment(@PathVariable Long issuegroupId, @PathVariable Long issueId,
+                                               @PathVariable Long commentId) {
         return new CommentDeleteResponse(commentService.deleteComment(commentId));
     }
 
-    @GetMapping("{issueId}")
-    public List<CommentCache> findCommentDetail(@PathVariable Long issueId) {
+    @GetMapping("/{issuegroupId}/issues/{issueId}/comments")
+    public List<CommentCache> findComments(@PathVariable Long issuegroupId, @PathVariable Long issueId) {
         return commentService.findCommentsByIssueId(issueId);
     }
 }
