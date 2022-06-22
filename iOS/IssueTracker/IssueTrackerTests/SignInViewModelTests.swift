@@ -11,16 +11,9 @@ import XCTest
 class SignInViewModelTests: XCTestCase {
 
     var sut: SignInViewModel!
-    var testString = ""
 
     override func setUpWithError() throws {
-        let openURL: (URL) -> Void = { (url) in
-            self.testString = url.description
-        }
-        sut = SignInViewModel(useCase: MockSignInManager(),
-                              actions: SignInViewModelActions(
-                                openURL: openURL,
-                                presentTabBarController: { }))
+        sut = SignInViewModel(useCase: MockSignInManager())
     }
 
     override func tearDownWithError() throws {
@@ -28,19 +21,26 @@ class SignInViewModelTests: XCTestCase {
     }
 
     func test_didSelect호출시_설정된URL이_잘호출되는지() {
+        var testString = ""
+
+        sut.setOpenURLAction { url in
+            testString = url.description
+        }
+
         sut.didSelect()
-        XCTAssertEqual(self.testString, "https://example.com")
+
+        XCTAssertEqual(testString, "https://example.com")
     }
 
-    func test_setPresentAction로_presentAction설정시_잘설정되는지() {
+    func test_setOpenURLAction로_openURLAction설정시_잘설정되는지() {
         var testString2 = ""
         let confirmationString = "Test Completed"
 
-        sut.setPresentAction {
+        sut.setOpenURLAction({ _ in
             testString2 = confirmationString
-        }
+        })
 
-        NotificationCenter.default.post(name: SceneDelegate.NotificationNames.didSignIn, object: self)
+        sut.didSelect()
 
         XCTAssertEqual(testString2, confirmationString)
     }
