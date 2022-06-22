@@ -1,6 +1,6 @@
 import * as I from 'design/icons';
-import * as S from 'components/Issue/styled.issueTitle';
-import IssueTitleButton from 'components/Issue/IssueTitleButton';
+import * as S from 'components/Issue/styled/issueTitleButton';
+import IssueTitleButton from 'components/Issue/buttons/IssueTitleButton';
 
 interface Props {
   clickHandler1: () => void;

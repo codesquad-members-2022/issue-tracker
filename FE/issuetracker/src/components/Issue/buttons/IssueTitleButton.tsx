@@ -1,4 +1,4 @@
-import * as S from 'components/Issue/styled.issueTitleButton';
+import * as S from 'components/Issue/styled/issueTitleButton';
 
 interface Props {
   buttonIcon: React.ReactNode;

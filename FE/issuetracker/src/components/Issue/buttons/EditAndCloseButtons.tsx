@@ -1,9 +1,9 @@
 import { useRecoilValue } from 'recoil';
 
 import * as I from 'design/icons';
-import * as S from 'components/Issue/styled.issueTitle';
+import * as S from 'components/Issue/styled/issueTitleButton';
 
-import IssueTitleButton from 'components/Issue/IssueTitleButton';
+import IssueTitleButton from 'components/Issue/buttons/IssueTitleButton';
 import { issueState } from 'recoil/atoms/issue';
 
 interface Props {
