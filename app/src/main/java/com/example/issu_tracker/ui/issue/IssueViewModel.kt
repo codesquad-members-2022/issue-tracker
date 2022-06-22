@@ -1,6 +1,5 @@
 package com.example.issu_tracker.ui.issue
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.issu_tracker.data.Issue
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -31,9 +31,6 @@ class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFire
     }
 
     override suspend fun updateIssueState(itemId: String, boolean: Boolean) {
-//delete 문
-//        fireStore.collection(FIREBASE_COLLECTION_PATH).document(itemId)
-//            .delete().await()
 
         fireStore.collection(FIREBASE_COLLECTION_PATH).document(itemId)
             .update("state", false).await()
