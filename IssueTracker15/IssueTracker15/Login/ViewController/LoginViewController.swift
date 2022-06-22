@@ -67,6 +67,11 @@ final class LoginViewController: UIViewController, ViewBinding {
         self.vm?.request(target, param: param)
     }
     
+    func presentIssueList(accessToken: String) {
+        let issueListVC = MainTabBarController()
+        self.navigationController?.pushViewController(issueListVC, animated: true)
+    }
+    
     private func addViews() {
         [titleLabel, userInfoInputStackView, loginButton, makeIDButton, oAuthLoginStackView].forEach {
             self.view.addSubview($0)
