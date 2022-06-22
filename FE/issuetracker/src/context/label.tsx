@@ -1,18 +1,22 @@
 import { atom } from 'recoil';
-type LabelType = {
-  key: string;
+
+export type LabelType = {
   id: number;
   title: string;
   color: string;
   description: string;
-  deleted: boolean;
 };
-const initialState: LabelType = {
+type LabelStateType = {
+  key: string;
+  default: LabelType;
+};
+const initialState: LabelStateType = {
   key: 'labelState',
-  id: 1,
-  title: 'documentation',
-  color: 'blue',
-  description: '서비스에 대한 개선 사항 혹은 추가 사항',
-  deleted: false,
+  default: {
+    id: 1,
+    title: 'documentation',
+    color: '#007AFF',
+    description: '상태 관리',
+  },
 };
-export const LabelState = atom(initialState);
+export const labelState = atom(initialState);

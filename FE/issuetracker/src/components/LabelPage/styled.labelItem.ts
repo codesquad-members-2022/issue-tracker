@@ -7,12 +7,14 @@ export const labelList = styled.li<{ isLastList: boolean }>`
   height: 100px;
   padding: 0 32px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
+  border-bottom: none;
   border-radius: ${({ isLastList }) => (isLastList ? '0 0 16px 16px' : '')};
   margin-bottom: 1px;
   background: ${({ theme }) => theme.backgroundColors.gray1};
 `;
 
-export const labelImageWrapper = styled.figure`
+export const labelImageWrapper = styled.div`
+  ${mixin.flexbox({ horizontal: 'flex-start', vertical: 'center' })}
   width: 184px;
   margin-right: 24px;
 `;
