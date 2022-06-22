@@ -1,5 +1,6 @@
 package com.example.issu_tracker.ui.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.FilterCondition
@@ -8,7 +9,6 @@ import com.example.issu_tracker.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,11 +32,23 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         _issueList.value = issueDummyData
     }
 
-    suspend fun deleteIssue(itemId: String) {
-        repository.deleteIssue(itemId)
+    suspend fun updateIssueSate(itemId: String, boolean: Boolean) {
+        repository.updateIssueState(itemId, boolean)
         getIssueList()
     }
-}
+
+    suspend fun deleteIssueList(issueList: List<Issue>) {
+        repository.deleteIssueList(issueList)
+        getIssueList()
+        Log.d("updateDelte", issueList.toString())
+    }
+
+    suspend fun updateIssueList(issueList: List<Issue>, boolean: Boolean) {
+        repository.updateIssueListState(issueList, boolean)
+        getIssueList()
+        Log.d("updateDelte", issueList.toString())
+    }
+
 
     fun filterIssueList(condition: FilterCondition) {
         val filteredIssueList = _issueList.value
@@ -65,4 +77,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         _filteredIssueList.value = filteredIssueList
     }
 }
+
+
+
 

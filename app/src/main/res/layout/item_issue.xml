@@ -10,7 +10,7 @@
             type="com.example.issu_tracker.data.Issue" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:padding="15dp">
@@ -28,18 +28,32 @@
                 android:layout_margin="5dp"
                 android:background="@color/issue_tracker_blue"
                 android:gravity="center"
-                android:text="닫기"
+                android:text="@string/issue_close"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.3" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <CheckBox
+            android:theme="@style/checkBoxStyle"
+            android:id="@+id/cb_issue_selector"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/cl_swipe_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.2" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_swipe_container"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/white">
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cb_issue_selector">
 
             <ImageView
                 android:id="@+id/iv_mile_stone"
@@ -104,5 +118,5 @@
                 android:background="@color/background2"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

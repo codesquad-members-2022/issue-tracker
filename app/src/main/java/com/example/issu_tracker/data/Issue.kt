@@ -1,7 +1,7 @@
 package com.example.issu_tracker.data
-import java.lang.Exception
 
-data class Label(val color: String = "", val content: String = "")
+import java.io.Serializable
+import java.lang.Exception
 
 data class IssueDto(
     var id: String = "",
@@ -22,8 +22,8 @@ data class Issue(
     val mileStone: String,
     val state: Boolean,
     val title: String,
-    val user: User
-)
+    val user: User,
+) : Serializable
 
 fun IssueDto.toIssue(): Issue? {
     return try {
