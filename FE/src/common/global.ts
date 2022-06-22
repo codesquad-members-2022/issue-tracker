@@ -9,6 +9,14 @@ const GlobalStyles = createGlobalStyle`
     font-size: 10px;
   }
 
+  textarea {
+    font-family: Noto Sans KR;
+  }
+
+  input {
+    font-family: Noto Sans KR;
+  }
+
   a {
     text-decoration:none;
   }

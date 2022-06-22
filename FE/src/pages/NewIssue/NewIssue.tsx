@@ -1,6 +1,5 @@
-import React from 'react';
+import { NewIssueForm } from 'common/NewIssueForm/NewIssueForm';
 
-function NewIssue(): JSX.Element {
-  return <div />;
+export function NewIssue() {
+  return <NewIssueForm isTitle={false} isActive={false} />;
 }
-export default NewIssue;
