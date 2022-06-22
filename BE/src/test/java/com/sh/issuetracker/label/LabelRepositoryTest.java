@@ -2,7 +2,6 @@ package com.sh.issuetracker.label;
 
 import static com.sh.issuetracker.milestone.MilestoneRepositoryTest.TEXT_PROJECT_ID;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.sh.issuetracker.project.Project;
 import com.sh.issuetracker.project.ProjectRepository;
@@ -37,7 +36,7 @@ class LabelRepositoryTest {
 	@BeforeEach
 	void beforeEach() {
 		project = projectRepository.findById(TEXT_PROJECT_ID)
-			.orElseThrow(()-> new RuntimeException("해당 프로젝트는 존재하지 않습니다."));
+			.orElseThrow(() -> new RuntimeException("해당 프로젝트는 존재하지 않습니다."));
 		labelRepository.save(getLabel(TEST_FOR_LABEL_NAME, "#28E7FF"));
 	}
 
@@ -64,6 +63,6 @@ class LabelRepositoryTest {
 	}
 
 	private Label getLabel(String name, String backgroundColor) {
-		return new Label(name, "테스트-라벨설명", backgroundColor, Label.TextColor.DARK, project);
+		return new Label(name, "테스트-라벨설명", backgroundColor, TextColor.DARK, project);
 	}
 }
