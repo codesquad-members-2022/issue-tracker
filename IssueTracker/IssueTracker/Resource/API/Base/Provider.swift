@@ -42,7 +42,7 @@ final class Provider {
             ]
             guard let resultUrl = components.url else { return nil }
             return URLRequest(url: resultUrl)
-        case .requestAccessToken, .requestIssueList:
+        default:
             var request = URLRequest(url: url)
 
             if let param = target.parameter {
