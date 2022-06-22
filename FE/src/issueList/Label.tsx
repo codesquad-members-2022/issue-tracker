@@ -30,6 +30,7 @@ const LabelBox = styled.li<LabelBoxProps>`
   border-radius: 30px;
   color: ${({ color }) => color};
   ${({ theme }) => theme.TYPOGRAPHY.TEXT_X_SMALL}
+  cursor: pointer;
 `;
 
 export default Label;

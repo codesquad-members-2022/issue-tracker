@@ -75,6 +75,7 @@ const IssueTitle = styled.div`
 const TitleText = styled.h2`
   ${({ theme }) => theme.TYPOGRAPHY.LINK_MEDIUM}
   color: ${GREYSCALE.TITLE_ACTION};
+  cursor: pointer;
 `;
 
 const Labels = styled.ul`

@@ -28,6 +28,7 @@ function IssueMenu({ icon, menuName, count, isCurrent }: IssueMenuProps) {
 const IssueMenuBox = styled.li`
   ${({ theme }) => theme.LAYOUT.flexLayoutMixin('row', 'flex-start', 'center')}
   gap: 5px;
+  cursor: pointer;
 `;
 
 const DefaultMenu = styled.p`
