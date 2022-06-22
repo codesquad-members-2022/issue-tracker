@@ -51,5 +51,5 @@ struct MockSignInManager: SignInManagable {
         completion(.success(URL(string: "https://example.com")!))
     }
 
-    func requestJWTToken(codeURL: URL, completion: @escaping (Result<[String: String], NetworkError>) -> Void) { }
+    func requestJWTToken(codeURL: URL, completion: @escaping (Result<StringDictionary, NetworkError>) -> Void) { }
 }

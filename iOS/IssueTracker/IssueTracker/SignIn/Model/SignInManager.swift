@@ -8,8 +8,10 @@
 import Foundation
 
 protocol SignInManagable {
+    typealias StringDictionary = [String: String]
+
     func requestCode(completion: @escaping (Result<URL, Error>) -> Void)
-    func requestJWTToken(codeURL: URL, completion: @escaping (Result<[String: String], NetworkError>) -> Void)
+    func requestJWTToken(codeURL: URL, completion: @escaping (Result<StringDictionary, NetworkError>) -> Void)
 }
 
 struct SignInManager {
@@ -35,12 +37,12 @@ extension SignInManager: SignInManagable {
         completion(.success(url))
     }
 
-    func requestJWTToken(codeURL: URL, completion: @escaping (Result<[String: String], NetworkError>) -> Void) {
+    func requestJWTToken(codeURL: URL, completion: @escaping (Result<StringDictionary, NetworkError>) -> Void) {
         if let code = URLComponents(string: codeURL.absoluteString)?
             .queryItems?
             .filter({ $0.name == "code" })
             .first?.value {
-            NetworkService<[String: String]>.fetchData(
+            NetworkService<StringDictionary>.fetchData(
                 target: SignInNetworkTarget.requestJWTTokenFromGitHub(code: code),
                 urlSession: urlSession,
                 completion: completion)
