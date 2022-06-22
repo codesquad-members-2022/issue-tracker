@@ -32,6 +32,6 @@ struct UserManager {
         
         let request = URLRequest(url: url, with: accessToken)
         
-        networkService.get(request: request, then: completion)
+        networkService.request(request, then: completion)
     }
 }
