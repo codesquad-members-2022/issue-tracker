@@ -44,10 +44,7 @@ const requestApi = async ({ method, url, data, config }: AxiosType) => {
   const response = data
     ? await instance[method](url, data, config)
     : await instance[method](url, config)
-        .then(response => {
-          console.log('response success + ', response);
-          return response;
-        })
+        .then(response => response)
         .catch(handleError);
   return response;
 };
