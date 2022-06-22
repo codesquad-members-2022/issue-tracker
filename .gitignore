@@ -11,6 +11,9 @@
 Pods/
 Podfile.lock
 
+## APIKey
+APIPropertyList.plist
+
 ### Swift ###
 # Xcode
 #

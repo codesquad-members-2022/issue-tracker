@@ -72,6 +72,8 @@
 		8DF770B82861A00F00C02D1F /* AccessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770B72861A00F00C02D1F /* AccessInfo.swift */; };
 		8DF770BC2861A26200C02D1F /* AppleLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770BA2861A26200C02D1F /* AppleLoginModel.swift */; };
 		8DF770BD2861A26200C02D1F /* GitHubLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770BB2861A26200C02D1F /* GitHubLoginModel.swift */; };
+		8DF9BA332861DD6500BF6CF4 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF9BA322861DD6500BF6CF4 /* Bundle.swift */; };
+		8DF9BA3C2862A6F300BF6CF4 /* APIPropertyList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DF9BA3B2862A6F300BF6CF4 /* APIPropertyList.plist */; };
 		8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +168,8 @@
 		8DF770B72861A00F00C02D1F /* AccessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessInfo.swift; sourceTree = "<group>"; };
 		8DF770BA2861A26200C02D1F /* AppleLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleLoginModel.swift; sourceTree = "<group>"; };
 		8DF770BB2861A26200C02D1F /* GitHubLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubLoginModel.swift; sourceTree = "<group>"; };
+		8DF9BA322861DD6500BF6CF4 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		8DF9BA3B2862A6F300BF6CF4 /* APIPropertyList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = APIPropertyList.plist; sourceTree = "<group>"; };
 		8DFDB6E32859B906008E7E59 /* ContainerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerWrapper.swift; sourceTree = "<group>"; };
 		978ACBA6F4626FB73B12E9D4 /* Pods-IssueTracker15.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +212,7 @@
 			children = (
 				1B1A81812860891A003C135A /* TestIssueList.json */,
 				1B1A818328608C2B003C135A /* TestLabels.json */,
+				8DF9BA3B2862A6F300BF6CF4 /* APIPropertyList.plist */,
 				8D211394285AE5C100B65676 /* .swiftlint.yml */,
 				1B17481F285885180028E037 /* IssueTracker15 */,
 				1BD7504D2858867E0025DDC8 /* RegularExpressionCheckerUnitTest */,
@@ -419,6 +424,7 @@
 		8D2113BB285B1C7A00B65676 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				8DF9BA322861DD6500BF6CF4 /* Bundle.swift */,
 				8D2113B9285B1C6700B65676 /* UIView.swift */,
 			);
 			path = Extension;
@@ -486,8 +492,8 @@
 		8DF770B92861A26200C02D1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8DF770BA2861A26200C02D1F /* AppleLoginModel.swift */,
 				8DF770BB2861A26200C02D1F /* GitHubLoginModel.swift */,
+				8DF770BA2861A26200C02D1F /* AppleLoginModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -640,6 +646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1A81822860891A003C135A /* TestIssueList.json in Resources */,
+				8DF9BA3C2862A6F300BF6CF4 /* APIPropertyList.plist in Resources */,
 				8D211395285AE5C100B65676 /* .swiftlint.yml in Resources */,
 				1B17482A285885190028E037 /* Assets.xcassets in Resources */,
 			);
@@ -733,6 +740,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B1A818A28608DE5003C135A /* MilestoneDTO.swift in Sources */,
+				8DF9BA332861DD6500BF6CF4 /* Bundle.swift in Sources */,
 				1B174849285885710028E037 /* TestViewModel.swift in Sources */,
 				1B1A819A2860A73C003C135A /* MainTabBarController.swift in Sources */,
 				1B1A8193286090A1003C135A /* IssueListViewController.swift in Sources */,
@@ -841,6 +849,7 @@
 /* Begin XCBuildConfiguration section */
 		1B17482F285885190028E037 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 978ACBA6F4626FB73B12E9D4 /* Pods-IssueTracker15.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -955,7 +964,6 @@
 		};
 		1B174832285885190028E037 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 978ACBA6F4626FB73B12E9D4 /* Pods-IssueTracker15.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
