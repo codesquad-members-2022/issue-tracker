@@ -1,16 +1,39 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 
 import GripIcon from "../Icons/Grip";
 import PaperClipIcon from "../Icons/PaperClip";
+import { STYLE, customStyle, typeStyle } from "../../constants/textAreaStyle";
 
 interface InputProps {
-  size: string;
+  type: string;
 }
 
-function TextArea() {
+interface Styles {
+  styles?: any;
+  type?: string;
+}
+
+function TextArea({ type }: InputProps) {
+  // const [styles, setStyles] = useState({});
+  const styles = {};
+  function makeStyle() {
+    let styles = {};
+    ({ theme: { fontSize, fontWeight, colors }, type }) => {
+      const border = type === "initial" || type === "filled" ? "" : `1px solid ${colors.titleActive}`;
+      const bgColor = type === "initial" || type === "filled" ? `${colors.inputBackground}` : `${colors.offWhite}`;
+      //  setStyles((prev) => {
+      //   return { ...prev, border, bgColor, ...typeStyle[STYLE[type]], ...customStyle[type] };
+      // });
+      styles = { border, bgColor, ...typeStyle[STYLE[type]], ...customStyle[type] };
+    };
+    console.log(styles);
+    return styles;
+  }
+  makeStyle();
+
   return (
-    <TextAreaWrapper>
+    <TextAreaWrapper styles={styles}>
       <InputWrapper>
         <PlaceHoler>코멘트를 입력하세요</PlaceHoler>
         <TextInput />
@@ -63,14 +86,15 @@ const Line = styled.div`
   bottom: 26%;
 `;
 
-const TextAreaWrapper = styled.div`
+const TextAreaWrapper = styled.div<Styles>`
   width: 340px;
   height: 200px;
-  background: #eff0f6;
+  background: ${({ styles }) => styles.bgColor};
   border-radius: 16px;
   padding: 16px 24px;
   position: relative;
   margin-top: 100px;
+  border: ${({ styles }) => styles.border};
 `;
 
 const IconWrapper = styled.div`
@@ -81,7 +105,12 @@ const IconWrapper = styled.div`
   bottom: 31%;
 `;
 
-const InputWrapper = styled.div`
+const PlaceHoler = styled.div`
+  width: 292px;
+  height: 28px;
+`;
+
+const InputWrapper = styled(PlaceHoler)`
   width: 292px;
   height: 28px;
   display: flex;
@@ -89,11 +118,6 @@ const InputWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   gap: 8px;
-`;
-
-const PlaceHoler = styled.div`
-  width: 292px;
-  height: 28px;
 `;
 
 const TextInput = styled.input`

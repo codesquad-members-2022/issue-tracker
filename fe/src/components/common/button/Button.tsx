@@ -1,7 +1,9 @@
+import React from "react";
 import styled, { css } from "styled-components";
+
 import { IconBox } from "styles/boxes";
 import { LayoutButton } from "styles/layoutTags";
-import { buttonStyle as style } from "./buttonStyles";
+import { buttonStyle as style } from "../../../constants/buttonStyle";
 
 interface ButtonProps {
   size?: "large" | "medium" | "small";
@@ -12,8 +14,8 @@ interface ButtonProps {
 }
 
 interface StyledButtonProps {
-  size?: "large" | "medium" | "small";
-  set?: "standard" | "secondary";
+  size: "large" | "medium" | "small";
+  set: "standard" | "secondary";
   gap?: number;
   disabled?: boolean;
 }
@@ -61,7 +63,7 @@ const StyledButton = styled(LayoutButton)<StyledButtonProps>`
       }
 
       &:focus {
-        border: 4px solid ${colors["primaryLight"]};
+        border: 4px solid ${colors[style.focus.borderColor]};
       }
 
       &[disabled] {

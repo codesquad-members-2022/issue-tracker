@@ -1,7 +1,9 @@
+import React from "react";
 import styled, { css } from "styled-components";
+
 import { IconBox } from "styles/boxes";
 import { LayoutButton } from "styles/layoutTags";
-import { textButtonStyle as style } from "./buttonStyles";
+import { textButtonStyle as style } from "../../../constants/buttonStyle";
 
 interface TextButtonProps {
   size?: "medium" | "small";
@@ -11,7 +13,7 @@ interface TextButtonProps {
 }
 
 interface StyledTextButtonProps {
-  size?: "large" | "medium" | "small";
+  size: "large" | "medium" | "small";
   gap?: number;
   disabled?: boolean;
 }
