@@ -6,6 +6,7 @@ import checkBoxDisable from './checkBoxDisable.svg';
 import checkBoxInitial from './checkBoxInitial.svg';
 import checkOffCircle from './checkOffCircle.svg';
 import checkOnCircle from './checkOnCircle.svg';
+import arrowBottom from './arrowBottom.svg';
 import edit from './edit.svg';
 import milestone from './milestone.svg';
 import paperclip from './paperclip.svg';
@@ -13,6 +14,7 @@ import plus from './plus.svg';
 import refresh from './refresh.svg';
 import search from './search.svg';
 import smile from './smile.svg';
+import tag from './tag.svg';
 import trash from './trash.svg';
 import userImageLarge from './userImageLarge.svg';
 import userImageSmall from './userImageSmall.svg';
@@ -27,6 +29,7 @@ const icons = {
   checkBoxInitial,
   checkOffCircle,
   checkOnCircle,
+  arrowBottom,
   edit,
   milestone,
   paperclip,
@@ -34,6 +37,7 @@ const icons = {
   refresh,
   search,
   smile,
+  tag,
   trash,
   userImageLarge,
   userImageSmall,
