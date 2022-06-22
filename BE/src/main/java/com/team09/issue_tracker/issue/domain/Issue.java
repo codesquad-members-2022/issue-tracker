@@ -3,8 +3,8 @@ package com.team09.issue_tracker.issue.domain;
 import com.team09.issue_tracker.common.BaseTimeEntity;
 import com.team09.issue_tracker.common.CommonResponseDto;
 import com.team09.issue_tracker.issue.dto.IssueDetailResponseDto;
-import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
 import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
+import com.team09.issue_tracker.issue.dto.IssueSaveServiceDto;
 import com.team09.issue_tracker.label.Label;
 import com.team09.issue_tracker.milestone.Milestone;
 import java.util.ArrayList;
@@ -23,8 +23,10 @@ import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -51,6 +53,9 @@ public class Issue extends BaseTimeEntity {
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
 	private List<IssueLabel> issueLabels = new ArrayList<>();
 
+	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
+	private List<IssueAssignee> issueAssignees = new ArrayList<>();
+
 	public boolean isWriter(Long memberId) {
 		if (memberId.equals(this.memberId)) {
 			return true;
@@ -58,25 +63,28 @@ public class Issue extends BaseTimeEntity {
 		return false;
 	}
 
-	public Long getId() {
-		return id;
+	public void addIssueLabel(List<IssueLabel> issueLabels) {
+		this.issueLabels = issueLabels;
 	}
 
-	public String getTitle() {
-		return title;
+	public void addIssueAssignee(List<IssueAssignee> issueAssignees) {
+		this.issueAssignees = issueAssignees;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public static Issue fromForMandatory(IssueSaveRequestDto issueSaveRequestDto,
-		boolean isOpened, Long memberId) {
+	public static Issue of(Long issueId) {
 		return Issue.builder()
-			.title(issueSaveRequestDto.getTitle())
-			.content(issueSaveRequestDto.getContent())
-			.isOpened(isOpened)
-			.memberId(memberId)
+			.id(issueId)
+			.build();
+	}
+
+	public static Issue from(IssueSaveServiceDto issueSaveServiceDto) {
+		return Issue.builder()
+			.title(issueSaveServiceDto.getTitle())
+			.content(issueSaveServiceDto.getContent())
+			.milestone(issueSaveServiceDto.getMilestone())
+			.issueLabels(issueSaveServiceDto.getIssueLabels())
+			.isOpened(issueSaveServiceDto.isOpened())
+			.memberId(issueSaveServiceDto.getMemberId())
 			.build();
 	}
 
