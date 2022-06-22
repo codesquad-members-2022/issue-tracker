@@ -1,5 +1,6 @@
 package codesquad.issuetracker.jwt;
 
+import codesquad.issuetracker.exception.InvalidTokenException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -56,7 +57,7 @@ public class RefreshToken extends Token {
         } catch (ExpiredJwtException e) {
             return e.getClaims().getSubject();
         } catch (JwtException e) {
-            throw new IllegalArgumentException("유효하지 않은 토큰입니다.");
+            throw new InvalidTokenException("유효하지 않은 토큰입니다.");
         }
     }
 
@@ -69,7 +70,7 @@ public class RefreshToken extends Token {
         } catch (ExpiredJwtException e) {
             return 0;
         } catch (JwtException e) {
-            throw new IllegalArgumentException("유효하지 않은 토큰입니다.");
+            throw new InvalidTokenException("유효하지 않은 토큰입니다.");
         }
     }
 }

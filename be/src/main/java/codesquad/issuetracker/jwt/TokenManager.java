@@ -1,5 +1,6 @@
 package codesquad.issuetracker.jwt;
 
+import codesquad.issuetracker.exception.InvalidTokenException;
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,7 +23,7 @@ public class TokenManager {
     public void validateDurationOfRefreshToken(String memberId) {
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         if (valueOperations.get(memberId) == null) {
-            throw new IllegalArgumentException("refresh 토큰의 만료기한이 지났습니다. 다시 로그인 해주세요.");
+            throw new InvalidTokenException("refresh 토큰의 만료기한이 지났습니다. 다시 로그인 해주세요.");
         }
     }
 

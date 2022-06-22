@@ -1,5 +1,6 @@
 package codesquad.issuetracker.jwt;
 
+import codesquad.issuetracker.exception.InvalidTokenException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +16,7 @@ public class TokenUtils {
         String valueOfAuthorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (valueOfAuthorizationHeader == null || !valueOfAuthorizationHeader.startsWith(ACCESS_TOKEN_TYPE)) {
-            throw new IllegalArgumentException("access 토큰이 존재하지 않습니다.");
+            throw new InvalidTokenException("access 토큰이 존재하지 않습니다.");
         }
 
         return valueOfAuthorizationHeader.substring(ACCESS_TOKEN_TYPE.length());
@@ -32,7 +33,7 @@ public class TokenUtils {
         }
 
         if (refreshToken == null) {
-            throw new IllegalArgumentException("refresh 토큰이 존재하지 않습니다.");
+            throw new InvalidTokenException("refresh 토큰이 존재하지 않습니다.");
         }
 
         return refreshToken;
