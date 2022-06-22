@@ -13,9 +13,6 @@ public class LabelService {
 	public boolean isMyLabels(List<Long> labelIds, Long memberId) {
 		long countOfLabelFromDb = labelRepository.countByIdInAndMemberId(labelIds, memberId);
 
-		if(countOfLabelFromDb == labelIds.size()){
-			return true;
-		}
-		return false;
+		return countOfLabelFromDb == labelIds.size();
 	}
 }
