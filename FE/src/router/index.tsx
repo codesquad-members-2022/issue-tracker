@@ -1,3 +1,4 @@
+import Loading from '@/pages/Loading';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import URL from '@/router/routeUrl';
@@ -5,6 +6,7 @@ import URL from '@/router/routeUrl';
 export const routes = [
   { path: URL.base, element: <Login /> },
   { path: URL.login, element: <Login /> },
+  { path: URL.loading, element: <Loading /> },
   { path: URL.detailIssue, element: <NotFound pageName="Detail Issue" /> },
   { path: URL.issueList, element: <NotFound pageName="Issue List" /> },
   {

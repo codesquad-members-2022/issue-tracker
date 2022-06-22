@@ -7,7 +7,8 @@ type PageType =
   | 'detailIssue'
   | 'list'
   | 'label'
-  | 'milestone';
+  | 'milestone'
+  | 'loading';
 
 type URLType = Record<PageType, string>;
 
@@ -20,7 +21,8 @@ const URL: URLType = {
   detailIssue: 'detail-issue',
   list: 'list',
   label: 'label',
-  milestone: 'milestone'
+  milestone: 'milestone',
+  loading: 'github-callback'
 };
 
 export default URL;
