@@ -46,6 +46,8 @@
 		1B87F70F285C221D002B47B7 /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F70E285C221D002B47B7 /* Transferable.swift */; };
 		1B87F711285C246F002B47B7 /* UseCaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F710285C246F002B47B7 /* UseCaseModel.swift */; };
 		1B87F71D285C38FD002B47B7 /* ViewModelUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F71C285C38FD002B47B7 /* ViewModelUnitTest.swift */; };
+		1BC7F8AC2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7F8AB2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift */; };
+		1BC7F8AF2862B15D007415A8 /* UIImage+SFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7F8AE2862B15D007415A8 /* UIImage+SFSymbol.swift */; };
 		1BD7504F2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */; };
 		1BD75055285886C40025DDC8 /* IDChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174835285885640028E037 /* IDChecker.swift */; };
 		1BD75056285886C70025DDC8 /* PasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174836285885640028E037 /* PasswordChecker.swift */; };
@@ -143,6 +145,8 @@
 		1B87F710285C246F002B47B7 /* UseCaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseModel.swift; sourceTree = "<group>"; };
 		1B87F71A285C38FD002B47B7 /* ViewModelUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewModelUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B87F71C285C38FD002B47B7 /* ViewModelUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelUnitTest.swift; sourceTree = "<group>"; };
+		1BC7F8AB2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterItemSelectViewController.swift; sourceTree = "<group>"; };
+		1BC7F8AE2862B15D007415A8 /* UIImage+SFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+SFSymbol.swift"; sourceTree = "<group>"; };
 		1BD7504C2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RegularExpressionCheckerUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionCheckerUnitTest.swift; sourceTree = "<group>"; };
 		6E5A22FB498819D6DAD72D75 /* Pods-IssueTracker15.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.release.xcconfig"; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 				1B1A819D2860A828003C135A /* MilestoneNavigationController.swift */,
 				1B174824285885180028E037 /* ViewController.swift */,
 				1B1A818428608CDA003C135A /* IssueList */,
+				1BC7F8AD2862ACCF007415A8 /* Filter */,
 				1B87F6FC285B6C7A002B47B7 /* Repository */,
 				8DDEBAE9285B3F0D00A4E4DC /* Login */,
 				8D2113BB285B1C7A00B65676 /* Extension */,
@@ -317,6 +322,7 @@
 				1B174820285885180028E037 /* AppDelegate.swift */,
 				1B174822285885180028E037 /* SceneDelegate.swift */,
 				1B174829285885190028E037 /* Assets.xcassets */,
+				1BC7F8AE2862B15D007415A8 /* UIImage+SFSymbol.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -396,6 +402,14 @@
 				1B87F71C285C38FD002B47B7 /* ViewModelUnitTest.swift */,
 			);
 			path = ViewModelUnitTest;
+			sourceTree = "<group>";
+		};
+		1BC7F8AD2862ACCF007415A8 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				1BC7F8AB2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		1BD7504D2858867E0025DDC8 /* RegularExpressionCheckerUnitTest */ = {
@@ -756,11 +770,13 @@
 				8D2113B8285B0D0500B65676 /* UserInfoInputStackView.swift in Sources */,
 				1B1A81952860A0F6003C135A /* IssueListCell.swift in Sources */,
 				1B17484E285885710028E037 /* TestLabel.swift in Sources */,
+				1BC7F8AF2862B15D007415A8 /* UIImage+SFSymbol.swift in Sources */,
 				1B174837285885640028E037 /* IDChecker.swift in Sources */,
 				8DF770B82861A00F00C02D1F /* AccessInfo.swift in Sources */,
 				8D21138C285AC4F800B65676 /* LoginViewController.swift in Sources */,
 				1B1A818628608CEE003C135A /* UserDTO.swift in Sources */,
 				8DDEBAEB285B57B000A4E4DC /* LoginViewModel.swift in Sources */,
+				1BC7F8AC2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift in Sources */,
 				1B174853285885710028E037 /* RequestModel.swift in Sources */,
 				1B87F704285B6C7A002B47B7 /* ServiceContainer.swift in Sources */,
 				1B87F711285C246F002B47B7 /* UseCaseModel.swift in Sources */,

@@ -45,6 +45,6 @@ struct IssueDTO: Codable, Hashable {
     }
     
     static var empty: IssueDTO {
-        IssueDTO(id: 0, node_id: "", url: "", repository_url: "", labels_url: "", comments_url: "", events_url: "", html_url: "", number: 1, state: "", title: "Test입니다.", body: "테스트 중입니다.", user: UserDTO.empty, labels: LabelDTO.empty, assignee: UserDTO.empty, assignees: [UserDTO.empty], milestone: MilestoneDTO.empty, locked: false, active_lock_reason: "", comments: 0, pull_request: PullRequestDTO.empty, created_at: "", updated_at: "", closed_by: UserDTO.empty, author_association: "")
+        IssueDTO(id: 0, node_id: "", url: "", repository_url: "", labels_url: "", comments_url: "", events_url: "", html_url: "", number: 1, state: "", title: "Test입니다.Test입니다.Test입니다.Test입니다.Test입니다.Test입니다.Test입니다.Test입니다.Test입니다.", body: "테스트 중입니다.테스트 중입니다.테스트 중입니다.테스트 중입니다.테스트 중입니다.테스트 중입니다.테스트 중입니다.테스트 중입니다.테스트 중입니다.테스트 중입니다.테스트 중입니다.", user: UserDTO.empty, labels: LabelDTO.empty, assignee: UserDTO.empty, assignees: [UserDTO.empty], milestone: MilestoneDTO.empty, locked: false, active_lock_reason: "", comments: 0, pull_request: PullRequestDTO.empty, created_at: "", updated_at: "", closed_by: UserDTO.empty, author_association: "")
     }
 }
