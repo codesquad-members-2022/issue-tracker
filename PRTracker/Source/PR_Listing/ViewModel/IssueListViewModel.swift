@@ -8,7 +8,8 @@
 import Foundation
 
 final class IssueListViewModel {
-    private var mockDataService = MockDataService()
+    private let mockDataService = MockDataService()
+    private let issueManager = IssueManager()
     
     var issueViewModels: Observable<[IssueTableCellViewModel]?> = Observable(nil)
 
@@ -20,7 +21,17 @@ final class IssueListViewModel {
         // TODO: SearchBarText가 바뀌면 호출되는 부분 구현
     }
     
-    func requestPullListData() {
+    func requestData() {
+        issueManager.getIssues { issues in
+            guard let issues = issues else {
+                return
+            }
+            
+            self.issueViewModels.value = self.convertModelToViewModel(issues)
+        }
+    }
+    
+    func requestMockData() {
         mockDataService.getMockIssues { issues in
             guard let issues = issues else {
                 return

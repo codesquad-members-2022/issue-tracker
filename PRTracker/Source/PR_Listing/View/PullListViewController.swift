@@ -24,12 +24,14 @@ class PullListViewController: UIViewController {
     
     private func configureBind() {
         viewModel.issueViewModels.bind { _ in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
     private func requestData() {
-        viewModel.requestPullListData()
+        viewModel.requestData()
     }
     
     private func configureSearchController() {
