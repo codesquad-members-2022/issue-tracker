@@ -9,6 +9,7 @@ import UIKit
 
 class PullListViewController: UIViewController {
     
+    @IBOutlet weak var loaderView: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
     private let viewModel = IssueListViewModel()
@@ -26,6 +27,7 @@ class PullListViewController: UIViewController {
         viewModel.issueViewModels.bind { _ in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.loaderView.isHidden = true
             }
         }
     }

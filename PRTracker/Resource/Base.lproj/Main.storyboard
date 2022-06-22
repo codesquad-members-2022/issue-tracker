@@ -320,11 +320,16 @@
                                     <outlet property="delegate" destination="sMc-eT-kPZ" id="fzt-sQ-is7"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="frq-eT-w8c">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qvJ-dd-HOE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="frq-eT-w8c" firstAttribute="centerX" secondItem="KVC-CU-bgK" secondAttribute="centerX" id="7oU-eV-3et"/>
                             <constraint firstItem="9vs-JS-hKo" firstAttribute="leading" secondItem="qvJ-dd-HOE" secondAttribute="leading" id="She-gZ-tKJ"/>
+                            <constraint firstItem="frq-eT-w8c" firstAttribute="centerY" secondItem="KVC-CU-bgK" secondAttribute="centerY" id="Yql-mj-GvE"/>
                             <constraint firstItem="qvJ-dd-HOE" firstAttribute="bottom" secondItem="9vs-JS-hKo" secondAttribute="bottom" id="cOi-3X-v1d"/>
                             <constraint firstItem="9vs-JS-hKo" firstAttribute="top" secondItem="qvJ-dd-HOE" secondAttribute="top" id="fd7-Lq-g0p"/>
                             <constraint firstItem="qvJ-dd-HOE" firstAttribute="trailing" secondItem="9vs-JS-hKo" secondAttribute="trailing" id="g3f-6k-w4t"/>
@@ -335,6 +340,7 @@
                         <barButtonItem key="rightBarButtonItem" title="선택" id="YVr-tx-F8w"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="loaderView" destination="frq-eT-w8c" id="XXN-F2-Qv9"/>
                         <outlet property="tableView" destination="9vs-JS-hKo" id="Hgh-Jn-XPg"/>
                     </connections>
                 </viewController>
@@ -381,7 +387,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="toQ-Cc-Ot1"/>
+        <segue reference="Gxo-dv-5ho"/>
     </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="CustomBlack">
