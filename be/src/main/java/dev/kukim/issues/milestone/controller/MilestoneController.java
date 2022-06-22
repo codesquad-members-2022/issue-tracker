@@ -7,6 +7,7 @@ import dev.kukim.issues.milestone.controller.response.MilestoneListResponse;
 import dev.kukim.issues.milestone.service.MilestoneService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,5 +38,10 @@ public class MilestoneController {
 	public MilestoneResponse update(@PathVariable Long milestoneId,
 		@RequestBody MilestoneUpdateRequest milestoneUpdateRequest) {
 		return milestoneService.update(milestoneId, milestoneUpdateRequest);
+	}
+
+	@DeleteMapping("/{milestoneId}")
+	public void delete(@PathVariable Long milestoneId) {
+		milestoneService.delete(milestoneId);
 	}
 }
