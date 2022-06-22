@@ -20,14 +20,17 @@ const handleError = (err: AxiosError) => {
     if (status === 500) {
       console.log(`Server error`);
     }
-  } else if (err.request) {
+    return err.response;
+  }
+
+  if (err.request) {
     // 요청이 전송되었지만, 응답이 수신되지 않았습니다.
     console.log('Error', err.message);
   } else {
     console.log('Error', err.message);
   }
 
-  return err.response;
+  return { data: null, status: null };
 };
 
 type AxiosType = {

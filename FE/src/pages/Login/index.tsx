@@ -75,7 +75,8 @@ export default function Login() {
 
   const getGithubLoginURL = async () => {
     const urlResult = await getLoginURL();
-    if (urlResult?.data?.login_url) setURL(urlResult.data.login_url);
+    const { data, status } = urlResult;
+    if (data?.login_url) setURL(urlResult.data.login_url);
   };
 
   useEffect(() => {
