@@ -28,18 +28,29 @@ final class Provider {
         if let path = target.path {
             url = url.appendingPathComponent(path)
         }
-        var request = URLRequest(url: url)
-
-        if let param = target.parameter {
-            let requestBody = try? JSONSerialization.data(withJSONObject: param, options: .init())
-            request.httpBody = requestBody
-        }
-
-        for (key, value) in target.header.header {
-              request.addValue(value, forHTTPHeaderField: key)
+        switch target {
+        case .requestAuthorizeCode:
+            guard var components = URLComponents(string: url.absoluteString),
+                  let params = target.parameter else { return nil }
+            components.queryItems = [
+                URLQueryItem(name: "client_id", value: params["client_id"]),
+                URLQueryItem(name: "scope", value: params["scope"])
+            ]
+            guard let resultUrl = components.url else { return nil }
+            return URLRequest(url: resultUrl)
+        default:
+            var request = URLRequest(url: url)
+            if let param = target.parameter {
+                let requestBody = try? JSONSerialization.data(withJSONObject: param, options: .init())
+                request.httpBody = requestBody
             }
-        request.httpMethod = target.method.value
 
-        return request
+            for (key, value) in target.header.header {
+                  request.addValue(value, forHTTPHeaderField: key)
+            }
+            request.httpMethod = target.method.value
+
+            return request
+        }
     }
 }

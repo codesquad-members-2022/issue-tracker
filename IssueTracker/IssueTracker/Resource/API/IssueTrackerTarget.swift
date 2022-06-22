@@ -8,6 +8,7 @@
 import Foundation
 
 enum IssueTrackerTarget {
+    case requestAuthorizeCode
     case requestAccessToken(code: String)
     case requestIssueList(token: String)
 }
@@ -15,8 +16,8 @@ enum IssueTrackerTarget {
 extension IssueTrackerTarget: BaseTarget {
     var baseURL: URL? {
         switch self {
-        case .requestAccessToken:
-            return URL(string: "https://github.com")
+        case .requestAccessToken, .requestAuthorizeCode:
+            return URL(string: "https://github.com/login/oauth")
         case .requestIssueList:
             return URL(string: "https://api.github.com")
         }
@@ -25,7 +26,9 @@ extension IssueTrackerTarget: BaseTarget {
     var path: String? {
         switch self {
         case .requestAccessToken:
-            return "/login/oauth/access_token"
+            return "/access_token"
+        case .requestAuthorizeCode:
+            return "/authorize"
         case .requestIssueList:
             return "/repos/asqw887/issue-tracker/issues"
         }
@@ -40,6 +43,11 @@ extension IssueTrackerTarget: BaseTarget {
                 "client_secret": Environment.clientSecret,
                 "code": code
             ]
+        case .requestAuthorizeCode:
+            return [
+                "client_id": Environment.clientId,
+                "scope": Environment.scope
+            ]
         case .requestIssueList:
             return nil
         }
@@ -49,7 +57,7 @@ extension IssueTrackerTarget: BaseTarget {
         switch self {
         case .requestAccessToken:
             return .post
-        case .requestIssueList:
+        case .requestIssueList, .requestAuthorizeCode:
             return .get
         }
     }
