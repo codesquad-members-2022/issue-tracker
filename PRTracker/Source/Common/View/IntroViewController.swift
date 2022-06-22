@@ -24,7 +24,7 @@ class IntroViewController: UIViewController {
     }
     
     private func validateToken() {
-        viewModel.isTokenSaved() ? gotoLogin() : gotoHome()
+        viewModel.isTokenSaved() ? gotoHome() : gotoLogin()
     }
     
     override func viewDidLoad() {
