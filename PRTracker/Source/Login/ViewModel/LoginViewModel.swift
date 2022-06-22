@@ -8,8 +8,18 @@
 import Foundation
 
 final class LoginViewModel {
+    
     func requestGithubLogin() {
         let githubLoginManager = GitHubLoginManager()
         githubLoginManager.requestAuthorization()
+    }
+    
+    func isTokenSaved() -> Bool {
+        var tokenIsSaved = false
+        
+        GitHubLoginManager.shared.hasValidToken { isValid in
+            tokenIsSaved = isValid
+        }
+        return tokenIsSaved
     }
 }

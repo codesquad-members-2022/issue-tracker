@@ -11,12 +11,11 @@ import AuthenticationServices
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var githubLoginButton: UIButton!
-    @IBOutlet weak var appleLoginButton: UIButton!
     
     @IBAction func emaliLoginButtonTapped(_ sender: Any) {
         // 임시적으로 이메일 로그인 버튼 클릭 시 메인 화면으로 이동하도록 구현
         DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            self.performSegue(withIdentifier: "mainSegue", sender: nil)
         }
     }
     
