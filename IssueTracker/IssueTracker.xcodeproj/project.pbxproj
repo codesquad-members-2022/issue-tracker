@@ -25,7 +25,7 @@
 		B3773F282858518A008C4AAF /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F272858518A008C4AAF /* Issue.swift */; };
 		B3773F2A28585216008C4AAF /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F2928585216008C4AAF /* Milestone.swift */; };
 		B3773F2E28585237008C4AAF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F2D28585237008C4AAF /* Tag.swift */; };
-		B3773F30285853AC008C4AAF /* IssueState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F2F285853AC008C4AAF /* IssueState.swift */; };
+		B3773F30285853AC008C4AAF /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F2F285853AC008C4AAF /* State.swift */; };
 		B3773F352858648E008C4AAF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F342858648E008C4AAF /* TabBarViewController.swift */; };
 		B3773F37285864E2008C4AAF /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F36285864E2008C4AAF /* IssueListViewController.swift */; };
 		B3773F3928586D97008C4AAF /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F3828586D97008C4AAF /* IssueCell.swift */; };
@@ -35,6 +35,8 @@
 		B3BFBD3A28572E5400D69A34 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBD3928572E5400D69A34 /* LoginViewController.swift */; };
 		B3BFBD3F28572E6C00D69A34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3BFBD3E28572E6C00D69A34 /* Assets.xcassets */; };
 		B3D736E9286008440053E887 /* Extension+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D736E8286008440053E887 /* Extension+.swift */; };
+		B3D736ED2860C91D0053E887 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D736EC2860C91D0053E887 /* HTTPHeader.swift */; };
+		B3D736F02861893D0053E887 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D736EF2861893D0053E887 /* IssueListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +82,7 @@
 		B3773F272858518A008C4AAF /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		B3773F2928585216008C4AAF /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
 		B3773F2D28585237008C4AAF /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
-		B3773F2F285853AC008C4AAF /* IssueState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueState.swift; sourceTree = "<group>"; };
+		B3773F2F285853AC008C4AAF /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		B3773F342858648E008C4AAF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B3773F36285864E2008C4AAF /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		B3773F3828586D97008C4AAF /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
@@ -92,6 +94,8 @@
 		B3BFBD3E28572E6C00D69A34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3BFBD4328572E6C00D69A34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3D736E8286008440053E887 /* Extension+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+.swift"; sourceTree = "<group>"; };
+		B3D736EC2860C91D0053E887 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
+		B3D736EF2861893D0053E887 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
 		C0F9D2A98896B0988903BE82 /* Pods-IssueTracker.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.dev.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +131,7 @@
 				B3419D34285C205600F1273C /* Provider.swift */,
 				000651C0285A0A9C00A6426A /* NetworkError.swift */,
 				000651C2285A0AD100A6426A /* HTTPMethod.swift */,
+				B3D736EC2860C91D0053E887 /* HTTPHeader.swift */,
 				000651C4285A0B7500A6426A /* HTTPContentType.swift */,
 				008721922860918A00E81B2D /* HTTPAuthorization.swift */,
 				B3773F74285B198F008C4AAF /* HTTPAcceptType.swift */,
@@ -216,6 +221,7 @@
 		B3773F252858515C008C4AAF /* IssueList */ = {
 			isa = PBXGroup;
 			children = (
+				B3D736EE2861891F0053E887 /* ViewModel */,
 				00DBECB92859C36B004BD0CA /* View */,
 				B3773F262858517B008C4AAF /* Model */,
 			);
@@ -229,7 +235,7 @@
 				B3773F272858518A008C4AAF /* Issue.swift */,
 				B3773F2928585216008C4AAF /* Milestone.swift */,
 				B3773F2D28585237008C4AAF /* Tag.swift */,
-				B3773F2F285853AC008C4AAF /* IssueState.swift */,
+				B3773F2F285853AC008C4AAF /* State.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,6 +281,14 @@
 				B3BFBD4328572E6C00D69A34 /* Info.plist */,
 			);
 			path = IssueTracker;
+			sourceTree = "<group>";
+		};
+		B3D736EE2861891F0053E887 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B3D736EF2861893D0053E887 /* IssueListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D4ED0A569A6551F7DF8A5460 /* Frameworks */ = {
@@ -498,6 +512,7 @@
 				B3773F37285864E2008C4AAF /* IssueListViewController.swift in Sources */,
 				B3BFBD3628572E5400D69A34 /* AppDelegate.swift in Sources */,
 				B3773F2E28585237008C4AAF /* Tag.swift in Sources */,
+				B3D736F02861893D0053E887 /* IssueListViewModel.swift in Sources */,
 				B3419D33285C1EC800F1273C /* LoginRepository.swift in Sources */,
 				00B2A267285867A400D201D3 /* IssueResponse.swift in Sources */,
 				000651BE285A09DE00A6426A /* IssueTrackerTarget.swift in Sources */,
@@ -509,12 +524,13 @@
 				B3419D37285C30EB00F1273C /* IssueTrackingRepository.swift in Sources */,
 				B3773F3928586D97008C4AAF /* IssueCell.swift in Sources */,
 				B3773F2A28585216008C4AAF /* Milestone.swift in Sources */,
+				B3D736ED2860C91D0053E887 /* HTTPHeader.swift in Sources */,
 				000651C5285A0B7500A6426A /* HTTPContentType.swift in Sources */,
 				000651C3285A0AD100A6426A /* HTTPMethod.swift in Sources */,
 				008721932860918A00E81B2D /* HTTPAuthorization.swift in Sources */,
 				00E87234285C3C3600C527B5 /* Eevironment.swift in Sources */,
 				B3773F282858518A008C4AAF /* Issue.swift in Sources */,
-				B3773F30285853AC008C4AAF /* IssueState.swift in Sources */,
+				B3773F30285853AC008C4AAF /* State.swift in Sources */,
 				00B2A26428585CD700D201D3 /* DecodeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
