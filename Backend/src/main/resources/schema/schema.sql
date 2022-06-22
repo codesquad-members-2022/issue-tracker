@@ -153,9 +153,9 @@ create table issue_group
 
 create table issue_group_member
 (
-    id        bigint not null auto_increment,
-    group_id  bigint not null,
-    member_id bigint not null,
+    id             bigint not null auto_increment,
+    issue_group_id bigint not null,
+    member_id      bigint not null,
     primary key (id)
 ) engine = InnoDB;
 
@@ -194,6 +194,7 @@ create table milestone
     deadline         date,
     description      varchar(8192),
     title            varchar(255),
+    issue_group_id   bigint,
     primary key (id)
 ) engine = InnoDB;
 
@@ -254,7 +255,7 @@ alter table issue
 
 alter table issue_group_member
     add constraint fk_issue_group_group
-        foreign key (group_id)
+        foreign key (issue_group_id)
             references issue_group (id);
 
 alter table issue_group_member
@@ -270,5 +271,9 @@ alter table issue_label
 alter table issue_label
     add constraint fk_issue_label_label
         foreign key (label_id)
-            references label (id)
+            references label (id);
 
+alter table milestone
+    add constraint fk_milestone_issue_group
+        foreign key (issue_group_id)
+            references issue_group (id);
