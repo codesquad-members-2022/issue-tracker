@@ -2,10 +2,12 @@ package team24.issuetracker.web.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import team24.issuetracker.domain.Issue;
 import team24.issuetracker.domain.Milestone;
 import team24.issuetracker.web.dto.milestonelist.MilestoneListResponse;
 import team24.issuetracker.web.repository.MilestoneRepository;
@@ -28,6 +30,8 @@ public class MilestoneService {
 	}
 
 	private Long countOpenedIssue(Milestone milestone) {
-		return milestone.getIssues().stream().filter(issue -> !issue.isClosed()).count();
+		return milestone.getIssues().stream()
+			.filter(Predicate.not(Issue::isClosed))
+			.count();
 	}
 }
