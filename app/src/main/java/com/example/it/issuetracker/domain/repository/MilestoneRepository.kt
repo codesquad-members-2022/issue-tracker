@@ -7,7 +7,7 @@ interface MilestoneRepository {
 
     fun getMilestoneInfoList(): Flow<List<MilestoneDto>>
 
-    suspend fun addMilestone(milestoneDto: MilestoneDto)
+    suspend fun addMilestone(title: String, description: String, deadline: String)
 
     suspend fun editMilestone(milestoneDto: MilestoneDto)
 

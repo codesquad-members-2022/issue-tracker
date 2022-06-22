@@ -36,8 +36,8 @@ object MilestoneFakeDatabase {
         )
     )
 
-    val size: Int
-        get() = database.size
+    val size: Long
+        get() = database.size.toLong()
 
     suspend fun add(milestoneDto: MilestoneDto) {
         delay(1000)

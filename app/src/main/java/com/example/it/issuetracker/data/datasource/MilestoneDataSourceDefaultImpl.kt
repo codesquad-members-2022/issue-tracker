@@ -13,8 +13,18 @@ class MilestoneDataSourceDefaultImpl(
         emit(MilestoneFakeDatabase.getAll())
     }
 
-    override suspend fun addMilestone(milestoneDto: MilestoneDto) {
-        MilestoneFakeDatabase.add(milestoneDto)
+    override suspend fun addMilestone(title: String, description: String, deadline: String) {
+        MilestoneFakeDatabase.add(
+            MilestoneDto(
+                MilestoneFakeDatabase.size + 1,
+                title,
+                description,
+                "",
+                deadline,
+                null,
+                null
+            )
+        )
     }
 
     override suspend fun editMilestone(milestoneDto: MilestoneDto) {
