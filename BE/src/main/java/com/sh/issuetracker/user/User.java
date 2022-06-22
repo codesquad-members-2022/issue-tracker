@@ -1,5 +1,6 @@
 package com.sh.issuetracker.user;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
@@ -25,7 +26,9 @@ public class User {
 	private String email;
 	private String password;
 	private String image;
-	private boolean isDeleted;
+
+	@ColumnDefault("0")
+	private boolean isDeleted = false;
 
 	public String nickName() {
 		return nickName;

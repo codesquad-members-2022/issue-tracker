@@ -1,8 +1,8 @@
 package com.sh.issuetracker.milestone;
 
-import com.sh.issuetracker.milestone.dto.MilestoneResponse;
 import com.sh.issuetracker.project.Project;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
@@ -21,7 +21,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -37,7 +36,9 @@ public class Milestone {
 	private String milestoneTitle;
 	private String description;
 	private LocalDateTime completionDate;
-	private boolean isDeleted;
+
+	@ColumnDefault("0")
+	private boolean isDeleted = false;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_id")

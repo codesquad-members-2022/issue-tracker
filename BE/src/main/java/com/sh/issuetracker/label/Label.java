@@ -5,8 +5,6 @@ import com.sh.issuetracker.project.Project;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Where;
 
-import java.util.Arrays;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +20,6 @@ import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "id")
@@ -43,22 +40,11 @@ public class Label {
 	@Enumerated(EnumType.STRING)
 	private TextColor fontColor;
 	@ColumnDefault("0")
-	private boolean isDeleted;
+	private boolean isDeleted = false;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "project_id")
 	private Project project;
-
-	public enum TextColor {
-		BRIGHT, DARK;
-
-		public static TextColor from(String colorName) {
-			return Arrays.stream(values())
-				.map(textColor -> textColor.valueOf(colorName))
-				.findFirst()
-				.orElseThrow(() -> new RuntimeException("no matched TextColor"));
-		}
-	}
 
 	public Label(
 		String name,
