@@ -20,9 +20,8 @@ public class LabelService {
 	private final LabelRepository labelRepository;
 
 	public LabelResponse create(LabelRequest.Creation request, AuthUser authUser) {
-		Project projectInfo = projectService.get(authUser.getProjectId());
-		Label label = request.toLabel(projectInfo);
-		Label labelInfo = labelRepository.save(label);
+		Project project = projectService.get(authUser.getProjectId());
+		Label labelInfo = labelRepository.save(request.toLabel(project));
 		return LabelResponse.from(labelInfo);
 	}
 

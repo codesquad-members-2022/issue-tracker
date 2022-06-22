@@ -26,7 +26,7 @@ public class IssueService {
 	}
 
 	public List<IssueResponse.Row> readAllOfAuthor(AuthUser authUser, IssueStatus issueStatus) {
-		List<Issue> issues = issueRepository.findAllByProjectIdAndUserIdAndStatus(
+		List<Issue> issues = issueRepository.findAllByProjectIdAndAuthorIdAndStatus(
 			authUser.getProjectId(),
 			authUser.getUserId(),
 			issueStatus);
