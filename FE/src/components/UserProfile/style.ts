@@ -13,7 +13,7 @@ const $ProfileWrapper = styled.div`
 
 const $ProfileImg = styled.img`
   width: 100%;
-  height: 100%;
+  max-width: 100%;
 `;
 
 export { $ProfileWrapper, $ProfileImg };

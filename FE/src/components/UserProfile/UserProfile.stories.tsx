@@ -6,8 +6,7 @@ export default {
   component: UserProfile,
   argTypes: {
     src: {
-      options: [
-        undefined,
+      Design: Header 컴포넌트 스타일 수정      options: [
         'https://images.unsplash.com/profile-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128',
         'https://avatars.githubusercontent.com/u/17706346?v=4',
         'https://avatars.githubusercontent.com/u/34249911?v=4'
