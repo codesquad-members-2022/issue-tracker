@@ -9,6 +9,7 @@ import ArrowUp from '@/assets/icons/icon_arrow_up.svg';
 import ArrowDown from '@/assets/icons/icon_arrow_down.svg';
 import RadioOff from '@/assets/icons/icon_radio_off.svg';
 import RadioOn from '@/assets/icons/icon_radio_on.svg';
+import Github from '@/assets/icons/icon_github.svg';
 
 import styled from 'styled-components';
 
@@ -23,7 +24,8 @@ type IconTypes =
   | 'arrowUp'
   | 'arrowDown'
   | 'radioOff'
-  | 'radioOn';
+  | 'radioOn'
+  | 'github';
 
 type Icons = Record<IconTypes, any>;
 
@@ -38,7 +40,8 @@ const icons: Icons = {
   arrowUp: ArrowUp,
   arrowDown: ArrowDown,
   radioOff: RadioOff,
-  radioOn: RadioOn
+  radioOn: RadioOn,
+  github: Github
 };
 
 interface IconProps {
