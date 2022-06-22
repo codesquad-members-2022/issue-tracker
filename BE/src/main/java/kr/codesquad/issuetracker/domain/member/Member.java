@@ -56,4 +56,12 @@ public class Member {
 		);
 	}
 
+	public Member update(UserProfile userInfo, String token) {
+		return new Member(
+			userInfo.getLogin(),
+			userInfo.getEmail(),
+			userInfo.getAvatarUrl(),
+			token
+		);
+	}
 }
