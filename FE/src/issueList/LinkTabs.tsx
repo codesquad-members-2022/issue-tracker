@@ -1,24 +1,23 @@
-import React from 'react';
 import styled from 'styled-components';
 import { GREYSCALE } from '@/constants';
 import { Link } from 'react-router-dom';
-import Tap from './Tap';
+import Tab from '../common/Tab';
 
-function Taps() {
+function LinkTabs() {
   return (
-    <TapsBox>
+    <TabsBox>
       <Link to="/labelList">
-        <Tap isActive={false} iconName="tag" title="레이블" count={0} />
+        <Tab isActive={false} iconName="tag" title="레이블" count={0} />
       </Link>
       <span />
       <Link to="/milestoneList">
-        <Tap isActive={false} iconName="milestone" title="마일스톤" count={0} />
+        <Tab isActive={false} iconName="milestone" title="마일스톤" count={0} />
       </Link>
-    </TapsBox>
+    </TabsBox>
   );
 }
 
-const TapsBox = styled.div`
+const TabsBox = styled.div`
   ${({ theme }) => theme.LAYOUT.flexLayoutMixin('row')}
   border-radius: 12px;
   border: 1px solid ${GREYSCALE.LINE};
@@ -30,4 +29,4 @@ const TapsBox = styled.div`
   }
 `;
 
-export default Taps;
+export default LinkTabs;

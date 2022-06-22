@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { COLORS, GREYSCALE } from '@/constants';
 import Icon from '@/assets/icons/Icon';

@@ -1,8 +1,8 @@
-import FilterBar from '@/common/FilterBar';
-import Taps from '@/common/Taps';
+import FilterBar from '@/issueList/FilterBar';
 import ButtonSmallStandard from '@/common/ButtonSmallStandard';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import LinkTabs from '@/issueList/LinkTabs';
 import IssueItem from './IssueItem';
 import IssueHeader from './IssueHeader';
 import EmptyIssueItem from './EmptyIssueItem';
@@ -12,7 +12,7 @@ function IssueListPage() {
     <>
       <Wrap>
         <FilterBar />
-        <Taps />
+        <LinkTabs />
         <Link to="/addIssue">
           <ButtonSmallStandard isDisabled={false} label="이슈 작성" />
         </Link>
@@ -33,7 +33,7 @@ const Wrap = styled.div`
   ${({ theme }) => theme.LAYOUT.flexLayoutMixin('row', 'space-between')}
   margin-bottom: 24px;
 
-  div:nth-child(2) {
+  & > div:nth-child(2) {
     margin-left: auto;
     margin-right: 16px;
   }
