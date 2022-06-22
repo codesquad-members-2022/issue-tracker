@@ -12,7 +12,7 @@ function IssueComment({ imageURL, writerName, log, description }: Props) {
   return (
     <S.commentArticle>
       <S.commentUserImage>
-        <img src={imageURL} alt="user-icon-img" />
+        <img src={imageURL} alt="writer-icon-img" />
       </S.commentUserImage>
       <S.comment>
         <S.commentHeader>

@@ -43,7 +43,7 @@ function InputComment() {
     <S.inputComment>
       <S.commentWrapper>
         <S.commentUserImage>
-          <img src={userImageURL} alt={userImageURL} />
+          <img src={userImageURL} alt="user-icon-img" />
         </S.commentUserImage>
         <S.comment isInputActive={isInputActive} onFocus={focusInput} onBlur={blurInput}>
           <S.textArea placeholder="코멘트를 입력하세요" value={inputValue} onChange={changeInput} />
