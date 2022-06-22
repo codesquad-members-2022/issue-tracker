@@ -11,6 +11,5 @@ class DetailIssueActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_issue)
         val issue = intent.getSerializableExtra("issue") as Issue
-        Log.d("issue", issue.title)
     }
 }

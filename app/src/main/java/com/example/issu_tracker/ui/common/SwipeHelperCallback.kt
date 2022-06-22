@@ -1,7 +1,6 @@
 package com.example.issu_tracker.ui.common
 
 import android.graphics.Canvas
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.LEFT
@@ -11,10 +10,11 @@ import com.example.issu_tracker.R
 import com.example.issu_tracker.ui.issue.IssueAdapter
 import java.lang.Math.max
 
-class SwipeHelperCallback : ItemTouchHelper.Callback() {
+class SwipeHelperCallback() : ItemTouchHelper.Callback() {
 
     private var clamp = 0f
     private var currentDx = 0f
+
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,
@@ -23,7 +23,6 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
 
         val view = getView(viewHolder)
         clamp = view.width.toFloat() * (0.3f)
-
         return makeMovementFlags(0, LEFT or RIGHT)
     }
 
@@ -46,21 +45,23 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
 
     override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
         // 현재 위치가 clamp 이상 갔을 때 스와이프 상태로 판단한다.
-        (viewHolder as IssueAdapter.IssueViewHolder).isSwiped = currentDx <= -clamp
-
         // 스와이프 위치적으로 없어지는 기준 설정
+        (viewHolder as IssueAdapter.IssueViewHolder).issue?.let {
+            if (currentDx <= -clamp) {
+                viewHolder.addSwipedIssue(it)
+            } else {
+                viewHolder.deleteSwipedIssue(it)
+            }
+        }
         return 2f
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-        //super.clearView(recyclerView, viewHolder)
-
         getDefaultUIUtil().clearView(getView(viewHolder))
     }
 
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        //super.onSelectedChanged(viewHolder, actionState)
         viewHolder?.let {
             getDefaultUIUtil().onSelected(getView(it))
         }
@@ -75,10 +76,10 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
-        Log.d("eventEvent", "drag")
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             val view = getView(viewHolder)
-            val isSwiped = (viewHolder as IssueAdapter.IssueViewHolder).isSwiped
+            var isSwiped = (viewHolder as IssueAdapter.IssueViewHolder).getSwipedIssueList()
+                .contains(viewHolder.issue)
             val x = getClampHorizontalPosition(view, dX, isSwiped, isCurrentlyActive)
 
             currentDx = x
