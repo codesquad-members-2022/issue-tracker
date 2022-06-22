@@ -13,6 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private let loginVC = LoginViewController()
+    
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // open url을 통해 로그인창이 뜬다면, Code를 받아옴.
         let code = URLContexts.first?.url.query?.replacingOccurrences(of: "code=", with: "")
@@ -25,18 +27,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                           OAuthLoginSourceKey.GitHub.Query.code.rawValue : code]
 
         let headers: HTTPHeaders = ["Accept":"application/json"]
+        
+        
+        
         AF
             .request(postURL, method: .post, parameters: parameters, headers: headers)
-            .responseDecodable { (response: DataResponse<AccessInfo, AFError>) in
+            .responseDecodable { [weak self] (response: DataResponse<AccessInfo, AFError>) in
                 switch response.result {
                     // 성공시 화면이 넘어간다.
-                case let .success(data):
+                case let .success(accessInfo):
                     // UserDefault에 저장
-                    UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
-                    
-                    let vc = MainTabBarController()
-                    self.window?.rootViewController = vc
-                    self.window?.makeKeyAndVisible()
+                    UserDefaults.standard.set(accessInfo.accessToken, forKey: "accessToken")
+                    self?.loginVC.presentIssueList(accessToken: accessInfo.accessToken)
                     
                 case let .failure(error):
                     os_log(.error, "\(error.localizedDescription)")
@@ -47,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let rootViewController = LoginViewController()
+        let rootViewController = UINavigationController(rootViewController: loginVC)
         rootViewController.view.backgroundColor = .secondarySystemBackground
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
