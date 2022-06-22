@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
+import dev.kukim.issues.MysqlTestContainer;
 import dev.kukim.issues.user.auth.controller.response.GithubUserResponse;
 import dev.kukim.issues.user.auth.controller.response.LoginResponse;
 import dev.kukim.issues.user.user.domain.User;
@@ -21,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @DisplayName("LoginServiceTest 클래스")
 @ExtendWith(MockitoExtension.class)
-class LoginServiceTest {
+class LoginServiceTest extends MysqlTestContainer {
 
 	LoginService loginService;
 

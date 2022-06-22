@@ -1,10 +1,9 @@
 package dev.kukim.issues.user.auth.controller;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
 
+import dev.kukim.issues.MysqlTestContainer;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +17,7 @@ import org.springframework.http.MediaType;
 
 @DisplayName("LoginAcceptanceTest 클래스")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class LoginAcceptanceTest {
+class LoginAcceptanceTest extends MysqlTestContainer {
 
 	@LocalServerPort
 	int port;
