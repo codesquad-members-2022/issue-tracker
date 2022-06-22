@@ -24,15 +24,21 @@ _코드스쿼드 6월 2-4주차 프로젝트 과제_
 
 |Week| 주간 목표 | 주요 성과 |
 |---|:--|:--|
-|1|앱 구조 구체화 및 페어 프로그래밍||
-|2|||
+|1|앱 구조 구체화 및 페어 프로그래밍|앱 구조 잡은 후 테스트로 직접 구현해 봄|
+|2|<li>OAuth, Issue CRUD/Query 구현</li><li>프로젝트 민감 정보 관리</li>||
 |3|||
 
 ## Architecture Diagram
 
-그림(PNG) 들어갈 예정
+<figure>
+    <div style="flow:left">
+        <img alt="Architecture_All" src="https://user-images.githubusercontent.com/65931336/173571707-1b07c6fd-708f-4ac0-8028-a2eb370fff5e.png" width=64%>
+        <img alt="Response Manner" src="https://user-images.githubusercontent.com/65931336/173573770-f0764e01-f5bf-4eb3-9bc7-9cc99ebde165.png" width=35%>
+    </div>
+    <figcaption>앱 전체 흐름 및 응답 방식</figcaption>
+</figure>
 
-[위키 URL]()
+[위키 URL](https://github.com/SangHwi-Back/issue-tracker/wiki/Architecture-%ED%98%91%EC%9D%98)
 
 ## Team Workflow
 

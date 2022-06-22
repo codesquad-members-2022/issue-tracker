@@ -5,5 +5,5 @@
 import Foundation
 
 protocol UseCaseResponsible {
-    func requestFromUseCase(_ completionBlock: @escaping (Any?)->Void)
+    func request(_ completionBlock: @escaping (Any?) -> Void)
 }

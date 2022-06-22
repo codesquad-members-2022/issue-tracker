@@ -8,16 +8,21 @@ import Combine
 class TestUseCase: UseCaseResponsible {
     
     static let shared = TestUseCase()
-    private var storeCancellable: Set<AnyCancellable> = []
+    private var cancellables: Set<AnyCancellable> = []
     
-    func requestFromUseCase(_ completionBlock: @escaping (Any?)->Void) {
-        RequestModel.request(self).result().sink { result in
-            switch result {
-            case .success(let data):
-                completionBlock(data)
-            case .failure:
-                print("Failure")
-            }
-        }.store(in: &storeCancellable)
+    func request(_ completionBlock: @escaping (Any?) -> Void) {
+        RequestModel
+            .networkRequest(urgency: .urgent)?
+            .result()
+            .subscribe(on: DispatchQueue.global())
+            .sink(receiveValue: { result in
+                switch result {
+                case .success(let data):
+                    completionBlock(data)
+                case .failure(let error):
+                    completionBlock(error)
+                }
+            })
+            .store(in: &cancellables)
     }
 }
