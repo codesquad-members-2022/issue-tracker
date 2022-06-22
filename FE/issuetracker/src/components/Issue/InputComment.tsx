@@ -1,16 +1,27 @@
+import { useState } from 'react';
 import * as I from 'design/icons';
 import * as S from 'components/Issue/styled.inputComment';
 import userImageURL from 'assets/images/UserImageLarge.svg';
 
 function InputComment() {
+  const [isInputActive, setIsInputActive] = useState(false);
+
+  const activateInput = () => {
+    setIsInputActive(true);
+  };
+
+  const deactivateInput = () => {
+    setIsInputActive(false);
+  };
+
   return (
     <S.inputComment>
       <S.commentWrapper>
         <S.commentUserImage>
           <img src={userImageURL} alt={userImageURL} />
         </S.commentUserImage>
-        <S.comment>
-          <S.textArea>코멘트를 입력하세요</S.textArea>
+        <S.comment isInputActive={isInputActive} onFocus={activateInput} onBlur={deactivateInput}>
+          <S.textArea placeholder="코멘트를 입력하세요" />
           <S.attachFileButtonWrapper>
             <S.attachFileButton>
               <I.paperclip />
