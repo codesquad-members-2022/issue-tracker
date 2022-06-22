@@ -10,12 +10,12 @@ import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentLabelAddBinding
 import com.example.it.issuetracker.domain.model.Label
+import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LabelAddFragment : Fragment() {
+class LabelAddFragment : BaseFragment<FragmentLabelAddBinding>(R.layout.fragment_label_add) {
 
-    private lateinit var binding: FragmentLabelAddBinding
     private val viewModel by viewModel<LabelAddViewModel>()
     private var editLabelInfo: Label? = null
     private var clickSaveListener: (() -> Unit)? = null
@@ -24,20 +24,10 @@ class LabelAddFragment : Fragment() {
         clickSaveListener = listener
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentLabelAddBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        editLabelInfo = arguments?.getSerializable("label") as? Label
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        editLabelInfo = arguments?.getSerializable("label") as? Label
         binding.viewModel = viewModel
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -79,7 +69,7 @@ class LabelAddFragment : Fragment() {
         }
     }
 
-    private fun initView() {
+    override fun initView() {
         editLabelInfo?.let {
             viewModel.setData(it)
         }
@@ -93,7 +83,7 @@ class LabelAddFragment : Fragment() {
         }
     }
 
-    private fun observerData() {
+    override fun observerData() {
         repeatOnLifecycleExtension {
             viewModel.completeSaveLabel.collect { complete ->
                 if (complete) {

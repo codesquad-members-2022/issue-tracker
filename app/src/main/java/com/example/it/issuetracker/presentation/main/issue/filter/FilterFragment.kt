@@ -10,31 +10,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentFilterBinding
+import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.issue.list.IssueFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.Serializable
 
-class FilterFragment : Fragment() {
+class FilterFragment : BaseFragment<FragmentFilterBinding>(R.layout.fragment_filter) {
 
-    private lateinit var binding: FragmentFilterBinding
     private val viewModel by sharedViewModel<FilterViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentFilterBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
     }
 
-    private fun initView() {
+    override fun initView() {
         setupSpinner()
         setupSpinnerHandler()
         setEvent()
@@ -178,4 +170,6 @@ class FilterFragment : Fragment() {
                 override fun onNothingSelected(p0: AdapterView<*>?) = Unit
             }
     }
+
+    override fun observerData() = Unit
 }

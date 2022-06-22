@@ -11,27 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentLabelBinding
 import com.example.it.issuetracker.domain.model.Label
+import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LabelFragment : Fragment() {
+class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label) {
 
-    private lateinit var binding: FragmentLabelBinding
     private val viewModel by viewModel<LabelViewModel>()
     private val adapter = LabelListAdapter({ viewModel.changeEditMode(it) }, { navigatePage(it) })
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentLabelBinding.inflate(inflater)
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         setupToolbar()
@@ -40,7 +32,7 @@ class LabelFragment : Fragment() {
         observerData()
     }
 
-    private fun observerData() {
+    override fun observerData() {
         repeatOnLifecycleExtension {
             viewModel.labelList.collectLatest {
                 adapter.submitList(it)
@@ -57,7 +49,7 @@ class LabelFragment : Fragment() {
         }
     }
 
-    private fun initView() {
+    override fun initView() {
         binding.recyclerviewLabelItem.adapter = adapter
         setupToolbar()
         viewModel.start()

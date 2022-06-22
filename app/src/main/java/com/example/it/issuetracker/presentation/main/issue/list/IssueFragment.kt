@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentIssueBinding
 import com.example.it.issuetracker.domain.model.Issue
+import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.customview.CustomSnackBar
 import com.example.it.issuetracker.presentation.main.issue.register.RegisterIssueFragment
@@ -20,20 +21,10 @@ import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IssueFragment : Fragment() {
+class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue) {
 
-    private lateinit var binding: FragmentIssueBinding
     private val viewModel by viewModel<IssueViewModel>()
-    private val filterViewModel by sharedViewModel<FilterViewModel>()
     private val adapter = IssueAdapter { toggleMode() }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentIssueBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +39,7 @@ class IssueFragment : Fragment() {
         observerData()
     }
 
-    private fun initView() = with(binding) {
+    override fun initView() = with(binding) {
         btnIssue.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.container_main, RegisterIssueFragment())
@@ -82,7 +73,7 @@ class IssueFragment : Fragment() {
         binding.toolbarEditIssue.isVisible = false
     }
 
-    private fun observerData() {
+    override fun observerData() {
         repeatOnLifecycleExtension {
             viewModel.uiState.collectLatest { state ->
                 when (state) {
