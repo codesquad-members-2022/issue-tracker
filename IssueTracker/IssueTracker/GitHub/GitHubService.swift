@@ -5,6 +5,7 @@ typealias UserToken = String
 
 enum GitHubError: Error {
     case issueNotFound
+    case cannotCreateIssue
 }
 
 struct GitHubService {
