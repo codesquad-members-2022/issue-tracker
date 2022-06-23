@@ -45,7 +45,8 @@ class IssueViewController: UIViewController {
 
     private func setButtonAction() {
         issueCollectionView.setNewIssueButtonAction(UIAction { [weak self] _ in
-            let editingIssueViewModel = EditingIssueViewModel()
+            let editingIssueManager = EditingIssueManager()
+            let editingIssueViewModel = EditingIssueViewModel(useCase: editingIssueManager)
             let editingIssueViewController = EditingIssueViewController(viewModel: editingIssueViewModel)
             self?.navigationController?.pushViewController(editingIssueViewController, animated: true)
         })
