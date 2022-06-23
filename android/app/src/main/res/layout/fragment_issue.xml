@@ -24,7 +24,8 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/tb_issue_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
+                android:layout_height="56dp"
+                android:visibility="visible">
 
                 <ImageButton
                     android:id="@+id/btn_issue_filter"
@@ -56,6 +57,56 @@
                     android:contentDescription="@string/label_issue_search"
                     android:src="@drawable/ic_baseline_search_30"
                     app:tint="@color/primary_blue" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb_issue_fragment_long_click"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/primary_blue"
+                android:visibility="gone">
+
+                <ImageButton
+                    android:id="@+id/btn_close_long_click"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="start"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_delete_longclick"
+                    android:src="@drawable/ic_baseline_clear_26"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_checked_quantity"
+                    style="@style/Subtitle1.white.bold.20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="40dp"
+                    tools:text="1" />
+
+                <ImageButton
+                    android:id="@+id/btn_app_bar_close_issue"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_close_issue"
+                    android:src="@drawable/ic_baseline_inbox_30"
+                    app:tint="@color/white" />
+
+                <ImageButton
+                    android:id="@+id/btn_delete_issue"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="20dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_delete_issue"
+                    android:src="@drawable/ic_baseline_delete_outline_30"
+                    app:tint="@color/white" />
 
             </com.google.android.material.appbar.MaterialToolbar>
 

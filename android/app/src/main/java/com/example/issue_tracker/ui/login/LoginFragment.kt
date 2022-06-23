@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.FragmentLoginBinding
-import com.example.issue_tracker.ui.IssueActivity
+import com.example.issue_tracker.ui.HomeActivity
 
 class LoginFragment : Fragment() {
 
@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
             navigationControl.navigate(R.id.action_loginFragment_to_signUpFragment)
         }
         binding.btnSingIn.setOnClickListener {
-            val intent = Intent(context, IssueActivity::class.java)
+            val intent = Intent(context, HomeActivity::class.java)
             startActivity(intent)
         }
     }

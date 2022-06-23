@@ -14,4 +14,7 @@
     <color name="gray02">#BDBDBD</color>
     <color name="gray03">#828282</color>
     <color name="gray05">#E5E5EA</color>
+    <color name="primary_green">#00A028</color>
+    <color name="primary_blueish">#C7EBFF</color>
+    <color name="primary_purple">#CCD4FF</color>
 </resources>

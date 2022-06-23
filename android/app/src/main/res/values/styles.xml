@@ -67,6 +67,15 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="Subtitle1.white.bold">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Subtitle1.white.bold.20">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
     <style name="Subtitle1.bold">
         <item name="android:textStyle">bold</item>
     </style>

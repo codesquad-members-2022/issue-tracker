@@ -40,4 +40,16 @@
     <string name="go_back">뒤로가기</string>
     <string name="change_random_color">색상변경</string>
     <string name="label_save">저장</string>
+    <string name="label_filter_title">필터</string>
+    <string name="label_filter_button">filter_button</string>
+    <string name="label_filter_apply">적용</string>
+    <string name="add_new_mile_stone">새로운 마일스톤</string>
+    <string name="pick_date">선택 사항(YYYY-MM-DD)</string>
+    <string name="mile_stone_title">마일스톤</string>
+    <string name="select_date">날짜</string>
+    <string name="open_issue_count">열린 이슈 %d개</string>
+    <string name="closed_issue_count">닫힌 이슈 %d개</string>
+    <string name="label_delete_longclick">delete longClick</string>
+    <string name="label_delete_issue">delete_issue</string>
+    <string name="label_close_issue">close_issue</string>
 </resources>

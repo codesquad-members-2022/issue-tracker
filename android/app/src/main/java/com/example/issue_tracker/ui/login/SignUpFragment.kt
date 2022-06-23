@@ -91,6 +91,9 @@ class SignUpFragment : Fragment() {
                                 passwordCheckFlag = false
                                 passwordFlag = true
                             }
+                            binding.passwordRecheckTextInputLayout.editText?.text.toString() == "" -> {
+                                passwordCheckFlag = false
+                            }
                             else -> {
                                 binding.passwordRecheckTextInputLayout.error = null
                                 passwordCheckFlag = true

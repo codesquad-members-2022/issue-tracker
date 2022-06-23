@@ -17,6 +17,9 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _issue = MutableStateFlow<MutableList<Issue>>(mutableListOf())
     val issue: StateFlow<MutableList<Issue>> = _issue
 
+    private val _longClick = MutableStateFlow(false)
+    val longClick: StateFlow<Boolean> = _longClick
+
     // 이슈 리스트를 가져오는 함수
     // API 로 가져와 처리하는 로직으로 변경 예정
     fun getIssue() {
@@ -24,6 +27,24 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
             issueRepository.getIssue().collect { issue ->
                 _issue.value = issue
             }
+        }
+    }
+
+    fun changeIssueSwiped(index: Int, isSwiped: Boolean) {
+        _issue.value[index].isSwiped = isSwiped
+    }
+
+    fun getIssueSwiped(index: Int): Boolean {
+        return _issue.value[index].isSwiped
+    }
+
+    fun changeClickedState() {
+        val longClickValue = longClick.value
+        _longClick.value = !longClickValue
+
+        _issue.value.forEach { issue ->
+            val value = issue.isLongClicked
+            issue.isLongClicked = !value
         }
     }
 }

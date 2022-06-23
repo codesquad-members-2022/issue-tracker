@@ -6,22 +6,18 @@
     <data>
 
         <variable
-            name="label"
-            type="com.example.issue_tracker.model.Label" />
-
-        <variable
             name="viewModel"
-            type="com.example.issue_tracker.ui.label.LabelAddViewModel" />
+            type="com.example.issue_tracker.ui.milestone.MileStoneAddViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.label.LabelAddFragment">
+        tools:context=".ui.milestone.MileStoneAddFragment">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/add_label_app_bar_layout"
+            android:id="@+id/add_mile_stone_app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary_blue"
@@ -45,23 +41,23 @@
                     app:tint="@color/white" />
 
                 <TextView
-                    android:id="@+id/tv_add_new_label"
+                    android:id="@+id/tv_add_new_mile_stone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/add_new_label_title"
+                    android:text="@string/add_new_mile_stone"
                     android:textColor="@color/white"
                     android:textSize="24sp" />
 
                 <Button
-                    android:id="@+id/btn_label_save"
+                    android:id="@+id/btn_mile_stone_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:backgroundTint="@android:color/transparent"
-                    android:outlineProvider="none"
                     android:enabled="false"
+                    android:outlineProvider="none"
                     android:text="@string/label_save" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -69,7 +65,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <TextView
-            android:id="@+id/tv_label_title"
+            android:id="@+id/tv_mile_stone_title"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -77,22 +73,21 @@
             android:text="@string/label_title"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_label_app_bar_layout" />
+            app:layout_constraintTop_toBottomOf="@id/add_mile_stone_app_bar_layout" />
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_label_title"
+            android:id="@+id/et_mile_stone_title"
             android:layout_width="314dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
             android:layout_marginTop="26dp"
+            android:background="@android:color/transparent"
             android:hint="@string/label_title_required"
             android:maxLines="1"
-            android:text="@={viewModel.labelTitle}"
+            android:text="@={viewModel.mileStoneTitle}"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/tv_label_title"
-            app:layout_constraintTop_toBottomOf="@id/add_label_app_bar_layout" />
-
+            app:layout_constraintStart_toEndOf="@id/tv_mile_stone_title"
+            app:layout_constraintTop_toBottomOf="@id/add_mile_stone_app_bar_layout" />
 
         <TextView
             android:id="@+id/tv_mile_stone_description"
@@ -103,75 +98,42 @@
             android:text="@string/label_description"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_label_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_title" />
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_label_description"
+            android:id="@+id/et_mile_stone_description"
             android:layout_width="314dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
             android:background="@android:color/transparent"
             android:hint="@string/label_optional_description"
             android:maxLines="1"
-            android:text="@={viewModel.labelDescription}"
+            android:text="@={viewModel.mileStoneDescription}"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/tv_mile_stone_description"
-            app:layout_constraintTop_toBottomOf="@id/et_label_title" />
+            app:layout_constraintTop_toBottomOf="@id/et_mile_stone_title" />
 
         <TextView
-            android:id="@+id/tv_background_color"
+            android:id="@+id/tv_mile_stone_date"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="26dp"
-            android:text="@string/label_background_color"
+            android:text="@string/select_date"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_description" />
 
         <TextView
-            android:id="@+id/tv_background_color_number"
+            android:id="@+id/tv_mile_stone_date_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            android:text="@{label.labelColor}"
-            app:layout_constraintStart_toEndOf="@id/tv_background_color"
-            app:layout_constraintTop_toBottomOf="@id/et_label_description"
-            tools:text="#3ddd" />
-
-        <ImageButton
-            android:id="@+id/ib_random_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/change_random_color"
-            android:onClick="@{()->viewModel.randomColor()}"
-            android:src="@drawable/ic_rotate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_label_description" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/label_preview_background"
-            app:layout_constraintTop_toBottomOf="@id/tv_background_color_number" />
-
-        <com.example.issue_tracker.ui.label.CustomLabel
-            android:id="@+id/custom_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
-            app:labelColor="@{label.labelColor}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_background_color_number" />
-
+            android:text="@string/pick_date"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_mile_stone_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

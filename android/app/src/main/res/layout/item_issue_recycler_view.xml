@@ -9,10 +9,10 @@
             name="issue"
             type="com.example.issue_tracker.model.Issue" />
     </data>
-    
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp" >
+        android:layout_height="150dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,26 +23,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/close_blue"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@color/close_blue" />
 
             <TextView
                 android:id="@+id/tv_close_issue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:background="@color/close_blue"
-                android:text="닫기"
-                android:textColor="@color/close_text"
                 android:gravity="center"
-                android:layout_weight="3" />
+                android:text="닫기"
+                android:textColor="@color/close_text" />
 
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cv_swipe_view"
             android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_height="150dp">
+            android:layout_height="150dp"
+            android:background="@color/white">
+
+            <CheckBox
+                android:id="@+id/issue_check_box"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:buttonTint="@color/primary_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_item_issue_mile_stone"
@@ -55,7 +65,7 @@
                 android:textSize="12sp"
                 app:drawableStartCompat="@drawable/ic_baseline_outlined_flag_20"
                 app:drawableTint="@color/gray02"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/issue_check_box"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="마일스톤" />
 
@@ -64,9 +74,10 @@
                 style="@style/Subtitle1.bold.18.black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
                 android:text="@{issue.title}"
-                app:layout_constraintStart_toStartOf="@+id/tv_item_issue_mile_stone"
+                app:layout_constraintStart_toEndOf="@id/issue_check_box"
                 app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_mile_stone"
                 tools:text="제목" />
 
@@ -74,12 +85,13 @@
                 android:id="@+id/tv_item_issue_contents"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
                 android:maxLines="2"
                 android:paddingStart="0dp"
                 android:paddingEnd="10dp"
                 android:text="@{issue.contents}"
-                app:layout_constraintStart_toStartOf="@+id/tv_item_issue_title"
+                app:layout_constraintStart_toEndOf="@id/issue_check_box"
                 app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_title"
                 tools:text="이슈에 대한 설명" />
 
@@ -87,6 +99,7 @@
                 android:id="@+id/tv_item_issue_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/shape_issue_label"
                 android:paddingStart="10dp"
@@ -94,7 +107,7 @@
                 android:paddingEnd="10dp"
                 android:paddingBottom="4dp"
                 android:text="@{issue.label.labelContents}"
-                app:layout_constraintStart_toStartOf="@+id/tv_item_issue_contents"
+                app:layout_constraintStart_toEndOf="@id/issue_check_box"
                 app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_contents"
                 tools:text="Label" />
 
@@ -111,7 +124,7 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        
+
     </FrameLayout>
-    
+
 </layout>

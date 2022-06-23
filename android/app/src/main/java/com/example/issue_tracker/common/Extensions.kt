@@ -9,14 +9,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 
-fun LifecycleOwner.repeatOnLifecycleExtension(block: suspend CoroutineScope.() -> Unit) {
+fun LifecycleOwner.repeatOnLifecycleExtension(
+    state: Lifecycle.State,
+    block: suspend CoroutineScope.() -> Unit,
+) {
     lifecycleScope.launch {
-        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED, block)
+        lifecycle.repeatOnLifecycle(state, block)
     }
 }
 
-fun <E> MutableStateFlow<MutableList<E>>.setList(element: E) {
-    if(element == null) {
+fun <E> MutableStateFlow<MutableList<E>>.addElement(element: E) {
+    if (element == null) {
         return
     }
     val tempMutableList = mutableListOf<E>()

@@ -15,4 +15,16 @@ abstract class RepositoryModule {
     abstract fun bindLabelRepository(
         labelRepositoryImpl: LabelRepositoryImpl
     ): LabelRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindIssueRepository(
+        issueRepositoryImpl: IssueRepositoryImpl
+    ): IssueRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindMileStoneRepository(
+        mileStoneRepositoryImpl: MileStoneRepositoryImpl
+    ): MileStoneRepository
 }

@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Issuetracker">
         <activity
-            android:name=".ui.IssueActivity"
+            android:name=".ui.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.LoginActivity"

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface LabelRepository {
 
-    fun setLabelList(labelList: Label)
+    fun addLabelList(labelList: Label)
 
     fun getLabelList(): Flow<List<Label>>
 }

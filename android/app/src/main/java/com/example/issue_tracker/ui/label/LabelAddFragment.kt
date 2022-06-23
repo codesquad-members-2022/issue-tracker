@@ -1,12 +1,15 @@
 package com.example.issue_tracker.ui.label
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
@@ -37,11 +40,13 @@ class LabelAddFragment : Fragment() {
 
         labelColorChange()
         labelTextChange()
+        setUpTextLabelError()
         setClickListener(findNavController)
+
     }
 
     private fun labelColorChange() {
-        viewLifecycleOwner.repeatOnLifecycleExtension {
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.label.collect {
                 binding.label = it
             }
@@ -49,7 +54,7 @@ class LabelAddFragment : Fragment() {
     }
 
     private fun labelTextChange() {
-        viewLifecycleOwner.repeatOnLifecycleExtension {
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.labelTitle.collect {
                 binding.customLabel.setLabelTitle(it)
             }
@@ -60,6 +65,12 @@ class LabelAddFragment : Fragment() {
         binding.btnLabelSave.setOnClickListener {
             viewModel.saveLabel()
             findNavController.navigate(R.id.action_labelAddFragment_to_labelFragment)
+        }
+    }
+
+    private fun setUpTextLabelError() {
+        binding.etLabelTitle.addTextChangedListener { text: Editable? ->
+            binding.btnLabelSave.isEnabled = !(text == null || text.isEmpty())
         }
     }
 }

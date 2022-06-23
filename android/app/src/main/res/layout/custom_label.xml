@@ -10,9 +10,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/custom_label_layout"
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp">
+        android:layout_height="26dp" >
+
+        <ImageView
+            android:id="@+id/iv_label"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:visibility="gone"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/tv_custom_label_title"
@@ -20,8 +28,11 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_label"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="label" />
 

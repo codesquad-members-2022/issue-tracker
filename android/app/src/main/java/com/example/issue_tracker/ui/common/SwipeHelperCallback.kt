@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.R
 import com.example.issue_tracker.ui.issue.IssueAdapter
+import com.example.issue_tracker.ui.issue.IssueViewModel
 import kotlin.math.min
 
 
-class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHelper.Callback() {
+class SwipeHelperCallback(private val issueAdapter: IssueAdapter, private val viewModel: IssueViewModel) : ItemTouchHelper.Callback() {
 
     // swipe_view 를 swipe 했을 때 <닫기> 화면이 보이도록 고정하기 위한 변수들
     private var currentPosition: Int? = null    // 현재 선택된 recycler view 의 position
@@ -40,8 +41,10 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
     private fun getView(viewHolder: RecyclerView.ViewHolder) : View = viewHolder.itemView.findViewById(
         R.id.cv_swipe_view
     )
-    private fun getTag(viewHolder: RecyclerView.ViewHolder) : Boolean =  viewHolder.itemView.tag as? Boolean ?: false
-    private fun setTag(viewHolder: RecyclerView.ViewHolder, isClamped: Boolean) { viewHolder.itemView.tag = isClamped }
+    private fun getTag(viewHolder: RecyclerView.ViewHolder) : Boolean =  viewModel.getIssueSwiped(viewHolder.adapterPosition)
+    private fun setTag(viewHolder: RecyclerView.ViewHolder, isClamped: Boolean) {
+        viewModel.changeIssueSwiped(viewHolder.adapterPosition, isClamped)
+    }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         // 스와이프 후 <닫기> 버튼 눌러야 삭제 되도록 해야하므로 이 부분은 건드리지 않는다.

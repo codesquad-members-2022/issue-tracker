@@ -9,7 +9,11 @@
         android:id="@+id/issueFragment"
         android:name="com.example.issue_tracker.ui.issue.IssueFragment"
         android:label="fragment_issue"
-        tools:layout="@layout/fragment_issue" />
+        tools:layout="@layout/fragment_issue" >
+        <action
+            android:id="@+id/action_issueFragment_to_issueFilterFragment"
+            app:destination="@id/issueFilterFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.issue_tracker.ui.account.AccountFragment"
@@ -28,7 +32,11 @@
         android:id="@+id/mileStoneFragment"
         android:name="com.example.issue_tracker.ui.milestone.MileStoneFragment"
         android:label="fragment_mile_stone"
-        tools:layout="@layout/fragment_mile_stone" />
+        tools:layout="@layout/fragment_mile_stone" >
+        <action
+            android:id="@+id/action_mileStoneFragment_to_mileStoneAddFragment"
+            app:destination="@id/mileStoneAddFragment" />
+    </fragment>
     <fragment
         android:id="@+id/labelAddFragment"
         android:name="com.example.issue_tracker.ui.label.LabelAddFragment"
@@ -37,5 +45,23 @@
         <action
             android:id="@+id/action_labelAddFragment_to_labelFragment"
             app:destination="@id/labelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/issueFilterFragment"
+        android:name="com.example.issue_tracker.ui.issue.IssueFilterFragment"
+        android:label="IssueFilterFragment"
+        tools:layout="@layout/fragment_issue_filter" >
+        <action
+            android:id="@+id/action_issueFilterFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mileStoneAddFragment"
+        android:name="com.example.issue_tracker.ui.milestone.MileStoneAddFragment"
+        android:label="MileStoneAddFragment"
+        tools:layout="@layout/fragment_mile_stone_add" >
+        <action
+            android:id="@+id/action_mileStoneAddFragment_to_mileStoneFragment"
+            app:destination="@id/mileStoneFragment" />
     </fragment>
 </navigation>

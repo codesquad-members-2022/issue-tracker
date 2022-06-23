@@ -7,4 +7,9 @@
     <declare-styleable name="CustomLabel">
         <attr name="title" format="reference|string" />
     </declare-styleable>
+
+    <declare-styleable name="CustomIssue">
+        <attr name="issueTitle" format="reference|string" />
+        <attr name="issueChoose" format="reference|string" />
+    </declare-styleable>
 </resources>
