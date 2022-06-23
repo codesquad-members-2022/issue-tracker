@@ -1,25 +1,11 @@
 //
-//  LoginRepository.swift
+//  Repository.swift
 //  IssueTracker
 //
-//  Created by Jihee hwang on 2022/06/22.
+//  Created by Jihee hwang on 2022/06/23.
 //
 
 import Foundation
-
-struct TokenBag: Decodable {
-    let accessToken: String
-}
-
-struct TokenParams: Encodable {
-    let clientId: String
-    let clientSecret: String
-    let code: String
-}
-
-protocol OAuthClient {
-    func exchangeCodeForToken(code: String, completion: @escaping (Result<TokenBag, NetworkError>) -> Void)
-}
 
 enum NetworkError: Error {
     case responseError
@@ -32,26 +18,32 @@ enum HTTPMethod: String {
     case post = "POST"
 }
 
-class OAuth: OAuthClient {
-    let session: URLSession
+class Repository {
+    struct TokenBag: Decodable {
+        let accessToken: String
+    }
+
+    private let userDefaults = UserDefaults.standard
+    private let session: URLSession
+
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
 
-    func exchangeCodeForToken(code: String, completion: @escaping (Result<TokenBag, NetworkError>) -> Void) {
-        let params = TokenParams(clientId: "", clientSecret: "", code: "")
+    private func getCode() -> String? {
+        let code = UserDefaults.standard.string(forKey: "AuthorizationCode")
+        return code
+    }
 
-        guard let url = makeTokenURL(with: code) else {
+    func getToken(completion: @escaping (Result<TokenBag, NetworkError>) -> Void) {
+        // 코드 주고 토큰 받아와
+        guard let url = makeTokenURL() else {
             return
         }
+
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-
-        guard let body = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted) else {
-            return
-        }
-        request.httpBody = body
 
         session.dataTask(with: request) { data, response, error in
             if let error = self.getError(data: data, response: response, error: error) {
@@ -68,33 +60,35 @@ class OAuth: OAuthClient {
                 completion(.failure((.decodeFailedError)))
             }
         }.resume()
-        session.finishTasksAndInvalidate()
     }
 
-    func makeTokenURL(with code: String) -> URL? {
+    func setToken(token: TokenBag, completion: @escaping (Bool) -> Void) {
+        userDefaults.setValue(token, forKey: "AuthToken")
+        completion(true)
+    }
+
+    private func makeTokenURL() -> URL? {
+        let code = getCode()
         let url = "https://github.com/login/oauth/access_token"
 
         guard var components = URLComponents(string: url) else {
             return nil
         }
         components.queryItems = [
-            URLQueryItem(name: "client_id", value: ""),
-            URLQueryItem(name: "client_secret", value: ""),
+            URLQueryItem(name: "client_id", value: "1f7a746c1d01cc6de0bf"),
             URLQueryItem(name: "code", value: code)
         ]
         return components.url
     }
 
-    func getError(data: Data?, response: URLResponse?, error: Error?) -> NetworkError? {
+    private func getError(data: Data?, response: URLResponse?, error: Error?) -> NetworkError? {
         guard let httpResponse = response as? HTTPURLResponse, (200 ... 299) ~= httpResponse.statusCode else {
             return .responseError
         }
-
-        if data == nil {
+        guard data != nil else {
             return .responseDataEmptyError
         }
-
-        if error != nil {
+        guard error != nil else {
             return .requestFailedError
         }
 
