@@ -1,8 +1,8 @@
 package kr.codesquad.issuetracker.domain;
 
+import kr.codesquad.issuetracker.dto.MilestoneRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Milestone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +26,9 @@ public class Milestone {
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issueList = new ArrayList<>();
 
+    public Milestone(MilestoneRequest milestoneRequest) {
+        this.title = milestoneRequest.getTitle();
+        this.content = milestoneRequest.getDescription();
+        this.deadline = milestoneRequest.getDeadline();
+    }
 }

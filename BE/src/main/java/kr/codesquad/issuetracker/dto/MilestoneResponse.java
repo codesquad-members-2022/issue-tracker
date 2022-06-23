@@ -15,7 +15,7 @@ public class MilestoneResponse {
 
     private Long id;
     private String title;
-    private String content;
+    private String description;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
@@ -25,7 +25,7 @@ public class MilestoneResponse {
     public MilestoneResponse(Milestone milestone) {
         this.id = milestone.getId();
         this.title = milestone.getTitle();
-        this.content = milestone.getContent();
+        this.description = milestone.getContent();
         this.deadline = milestone.getDeadline();
         this.issueList = milestone.getIssueList();
     }

@@ -1,5 +1,7 @@
 package kr.codesquad.issuetracker.service;
 
+import kr.codesquad.issuetracker.domain.Milestone;
+import kr.codesquad.issuetracker.dto.MilestoneRequest;
 import kr.codesquad.issuetracker.dto.MilestoneResponse;
 import kr.codesquad.issuetracker.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +22,10 @@ public class MilestoneService {
     public List<MilestoneResponse> getMilestoneList() {
         return milestoneRepository.findAll().stream()
                 .map(MilestoneResponse::new).collect(Collectors.toList());
+    }
+
+    public void createMilestone(MilestoneRequest milestoneRequest){
+        Milestone milestone = new Milestone(milestoneRequest);
+        milestoneRepository.save(milestone);
     }
 }
