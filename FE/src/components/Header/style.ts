@@ -5,6 +5,7 @@ const $Header = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-width: 1280px;
   height: 95px;
   padding: 25px 80px;
   background-color: ${({ theme }) => theme.COLOR.background};
