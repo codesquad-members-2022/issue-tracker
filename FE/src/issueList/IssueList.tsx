@@ -125,22 +125,7 @@ const issueList = {
       title: '제목2',
       createdTime: '2022-06-22 12:12:13',
       writer: '글쓴이2',
-      labels: [
-        {
-          name: '라벨네임',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        },
-        {
-          name: '라벨네임1',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        }
-      ],
+      labels: [],
       milestoneName: '마일스톤2'
     },
     {
@@ -164,7 +149,7 @@ const issueList = {
           }
         }
       ],
-      milestoneName: '마일스톤3'
+      milestoneName: ''
     }
   ]
 };

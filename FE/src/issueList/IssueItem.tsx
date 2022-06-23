@@ -1,5 +1,6 @@
 import Icon from '@/assets/icons/Icon';
 import { COLORS, GREYSCALE } from '@/constants';
+import { getRandomKey } from '@/utils';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
@@ -99,11 +100,15 @@ function IssueItem({
             <TitleText>{title}</TitleText>
           </Link>
           <Labels>
-            <Label
-              labelName="레이블 이름"
-              backgroundColor={GREYSCALE.BACKGROUND}
-              textColor="어두운 색"
-            />
+            {!!labels.length &&
+              labels.map(({ name, color }) => (
+                <Label
+                  key={getRandomKey()}
+                  labelName={name}
+                  backgroundColor={color.backgroundColor}
+                  textColor={color.textColor}
+                />
+              ))}
           </Labels>
         </IssueTitle>
         <IssueInfo>
@@ -111,7 +116,7 @@ function IssueItem({
           <span>
             이 이슈가 {timeStamp}에, {writer}에 의해 작성되었습니다
           </span>
-          {milestoneName && (
+          {!!milestoneName && (
             <Milestone>
               <Icon iconName="milestone" fill={GREYSCALE.LABEL} />
               {milestoneName}
