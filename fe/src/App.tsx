@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/issues" element={<IssueListPage />} />
+        <Route path="/addIssue" element={<div>이슈추가</div>} />
         <Route path="/label" element={<div>레이블</div>} />
         <Route path="/milestone" element={<div>마일스톤</div>} />
       </Routes>
