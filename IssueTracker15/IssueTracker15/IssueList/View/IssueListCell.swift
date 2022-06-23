@@ -10,8 +10,6 @@ import UIKit
 class IssueListCell: UICollectionViewCell,
                         ViewBindable {
     
-    var indexPath: IndexPath?
-    
     // MARK: - ViewBindable Implements. Select Multiple Issue List Functionality.
     
     var vc: ViewBinding?
@@ -145,7 +143,6 @@ class IssueListCell: UICollectionViewCell,
         sendAction(nil)
     }
         
-    // 공통으로 사용할 체크버튼인지 아직 알 수는 없기 때문에 Nested Type 같이 사용합니다.
     // MARK: - CheckButton inherited from UIButton
     class CheckSelectButton: UIButton {
         override var isSelected: Bool {

@@ -16,21 +16,19 @@ class IssueListViewModel: CommonViewModel {
     init(_ output: @escaping (Any?, ViewBindable) -> Void) {
         self.output = output
         
-        for i in issueList.indices { // issueList items are Hashable with id property.
+        for i in issueList.indices {
             issueList[i].id = i
         }
-    }
-
-    func request(_ bindable: ViewBindable, param: Any?) {
 
     }
+
+    func request(_ bindable: ViewBindable, param: Any?) { }
     
-    func getIssues() {
-
-    }
+    func getIssues() { }
     
     @discardableResult
     func selectList(_ cell: IssueListCell) -> Bool {
+        
         guard
             let issueId = cell.issueDTO?.id,
             let inx = self.issueList.firstIndex(where: { $0.id == issueId })

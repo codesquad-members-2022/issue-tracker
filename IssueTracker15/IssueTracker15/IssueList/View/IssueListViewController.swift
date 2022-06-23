@@ -89,7 +89,6 @@ class IssueListViewController: UIViewController {
             collectionView: issueListCollectionView,
             cellProvider: { (collectionView, indexPath, issue) -> UICollectionViewCell? in
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.reuseIdentifier, for: indexPath) as? IssueListCell
-                cell?.indexPath = indexPath
                 cell?.issueDTO = issue
                 cell?.setVC(self)
                 return cell
@@ -105,8 +104,8 @@ class IssueListViewController: UIViewController {
             navigationBinding.setVC(self)
         }
         
-        vm = IssueListViewModel { param, bindable in
-            self.applySnapshot()
+        vm = IssueListViewModel { [weak self] _, _ in
+            self?.applySnapshot()
         }
         
         view.addSubview(issueListCollectionView)
@@ -125,6 +124,7 @@ class IssueListViewController: UIViewController {
         
         issueSnapshot.appendSections([Section.main])
         issueSnapshot.appendItems(items)
+        
         issueDataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
@@ -141,6 +141,7 @@ class IssueListViewController: UIViewController {
                 return nil
             }
         }
+        
         issueDataSource.apply(issueSnapshot, animatingDifferences: animatingDifferences)
     }
 }
@@ -153,7 +154,6 @@ extension IssueListViewController: ViewBinding {
             
             let isSelected = vm?.selectList(cell) ?? false
             target.receive(isSelected)
-            print("IssueListCell Selected")
             
         } else if (target as? IssueFilterItemSelectViewController) != nil {
             
