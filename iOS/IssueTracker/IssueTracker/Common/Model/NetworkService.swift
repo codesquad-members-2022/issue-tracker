@@ -46,6 +46,11 @@ private extension NetworkService {
         if let url = components.url {
             var request = URLRequest(url: url)
             request.httpMethod = target.method
+            
+            if let target = target as? EditingIssueNetworkTarget {
+                request.httpBody = target.body
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
 
             return request
         }
