@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Icon from '@/assets/icons/Icon';
 import { GREYSCALE } from '@/constants';
 import styled from 'styled-components';

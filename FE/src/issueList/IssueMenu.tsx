@@ -1,8 +1,7 @@
 import Icon from '@/assets/icons/Icon';
 import { GREYSCALE } from '@/constants';
-import React from 'react';
 import styled from 'styled-components';
-import { icons } from '@/assets/icons/svgs';
+import icons from '@/assets/icons/svgs';
 
 type IssueMenuProps = {
   icon: keyof typeof icons;

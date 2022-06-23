@@ -1,7 +1,6 @@
 import Icon from '@/assets/icons/Icon';
-import { icons } from '@/assets/icons/svgs';
+import icons from '@/assets/icons/svgs';
 import { COLORS, GREYSCALE } from '@/constants';
-import React from 'react';
 
 type CheckBoxProps = {
   checkBoxType: 'initial' | 'active' | 'disable';

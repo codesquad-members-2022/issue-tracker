@@ -1,5 +1,4 @@
 import { GREYSCALE } from '@/constants';
-import React from 'react';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
 import IssueMenu from './IssueMenu';
@@ -8,26 +7,26 @@ import IssueTab from './IssueTab';
 function IssueHeader() {
   return (
     <IssueHeaderBox>
-      <CheckBox checkBoxType={'initial'} />
+      <CheckBox checkBoxType="initial" />
       <IssueMenus>
         <IssueMenu
-          icon={'alertCircle'}
-          menuName={'열린 이슈'}
+          icon="alertCircle"
+          menuName="열린 이슈"
           count={2}
           isCurrent
         />
         <IssueMenu
-          icon={'archive'}
-          menuName={'닫힌 이슈'}
+          icon="archive"
+          menuName="닫힌 이슈"
           count={0}
           isCurrent={false}
         />
       </IssueMenus>
       <IssueTabs>
-        <IssueTab tabName={'담당자'} />
-        <IssueTab tabName={'레이블'} />
-        <IssueTab tabName={'마일스톤'} />
-        <IssueTab tabName={'작성자'} />
+        <IssueTab tabName="담당자" />
+        <IssueTab tabName="레이블" />
+        <IssueTab tabName="마일스톤" />
+        <IssueTab tabName="작성자" />
       </IssueTabs>
     </IssueHeaderBox>
   );
