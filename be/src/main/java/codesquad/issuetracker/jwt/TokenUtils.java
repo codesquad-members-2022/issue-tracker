@@ -24,18 +24,12 @@ public class TokenUtils {
 
     public static String getRefreshToken(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
-        String refreshToken = null;
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(REFRESH_TOKEN_COOKIE_NAME)) {
-                refreshToken = cookie.getValue();
-                break;
+                return cookie.getValue();
             }
         }
 
-        if (refreshToken == null) {
-            throw new InvalidTokenException("refresh 토큰이 존재하지 않습니다.");
-        }
-
-        return refreshToken;
+        throw new InvalidTokenException("refresh 토큰이 존재하지 않습니다.");
     }
 }
