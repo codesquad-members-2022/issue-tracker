@@ -7,14 +7,12 @@ interface Props {
   activeLabel: boolean;
 }
 
-const initialLabel = {
-  title: '레이블 이름',
-  color: '',
-  description: '레이블에 대한 설명',
-};
-
 function LabelTop({ activeLabel }: Props) {
   const [isClicked, setIsClicked] = useState(false);
+  const isNewLabel = true;
+  function showLabel() {
+    setIsClicked(!isClicked);
+  }
   return (
     <>
       <S.labelTop>
@@ -30,12 +28,16 @@ function LabelTop({ activeLabel }: Props) {
             <S.numberText>(2)</S.numberText>
           </S.rightBar>
         </S.tabBar>
-        <S.addButton onClick={() => setIsClicked(true)}>
+        <S.addButton
+          onClick={() => {
+            showLabel();
+          }}
+        >
           <I.plus />
           <S.addButtonText>추가</S.addButtonText>
         </S.addButton>
       </S.labelTop>
-      {isClicked && <NewLabelList label={initialLabel} isNewLabel />}
+      {isClicked && <NewLabelList isNewLabel={isNewLabel} />}
     </>
   );
 }
