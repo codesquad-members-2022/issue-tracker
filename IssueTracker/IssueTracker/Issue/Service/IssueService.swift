@@ -8,9 +8,15 @@
 import Foundation
 import Alamofire
 
-class IssueService {
+
+enum IssueError: Error {
+    case issueNotFound
+    case cannotCreateIssue
+}
+
+struct IssueService {
     
-    func requestIssues(accessToken: String, completion: @escaping (Result<[Issue], GitHubError>) -> Void) {
+    func requestIssues(accessToken: String, completion: @escaping (Result<[Issue], IssueError>) -> Void) {
         let urlString = RequestURL.issues.description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
@@ -31,8 +37,7 @@ class IssueService {
         }
     }
     
-    // 생성되었다면, statusCode: 201, body 에 생성된 Issue 정보를 객체로 보내준다
-    func createIssue(title: String, accessToken: String, completion: @escaping (Result<Issue, GitHubError>) -> Void) {
+    func createIssue(title: String, accessToken: String, completion: @escaping (Result<Issue, IssueError>) -> Void) {
         let urlString = RequestURL.createIssue(owner: "Jinsujin", repo: "issue-tracker").description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
