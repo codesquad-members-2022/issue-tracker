@@ -8,27 +8,47 @@
 import SnapKit
 
 final class EditingIssueViewController: UIViewController {
-    private lazy var editingIssueView = EditingIssueView(frame: view.bounds)
+    private let titleViewComponents = EditingIssueTitleViewComponents()
+    private let contentViewComponents = EditingIssueContentViewComponents()
     private let navigationItems = EditingIssueViewNavigationItems()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = editingIssueView
+        view.addSubviews(titleViewComponents, contentViewComponents)
         setDelegate()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        view.backgroundColor = .white
         setNavigationItems()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let screenSize = UIScreen.main.bounds.size
+
+        titleViewComponents.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(43.5/812 * screenSize.height)
+            make.leading.equalTo(view).offset(16/375 * screenSize.width)
+            make.trailing.equalTo(view).inset(16/375 * screenSize.width)
+        }
+
+        contentViewComponents.snp.makeConstraints { make in
+            make.top.equalTo(titleViewComponents.snp.bottom)
+            make.leading.trailing.equalTo(titleViewComponents)
+            make.height.equalTo(411/812 * screenSize.height)
+        }
+        
     }
 }
 
 // MARK: - private methods
 private extension EditingIssueViewController {
     func setDelegate() {
-        editingIssueView.setContentTextViewDelegate(self)
-        editingIssueView.setTitleTextFieldDelegate(self)
+        titleViewComponents.titleTextField.delegate = self
+        contentViewComponents.editableContentTextView.delegate = self
     }
 
     func setNavigationItems() {
@@ -48,7 +68,10 @@ private extension EditingIssueViewController {
     }
 
     func didSegmentValueChanged() {
-        editingIssueView.changeContentView(to: navigationItems.selectContentViewSegment.selectedSegmentIndex)
+        let selectedIndex = navigationItems.selectContentViewSegment.selectedSegmentIndex
+
+        selectedIndex == 0 ?
+        contentViewComponents.showEditableContentTextView() : contentViewComponents.showPreviewTextView()
     }
 }
 
@@ -70,7 +93,7 @@ extension EditingIssueViewController: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
         if !textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-            !editingIssueView.isTitleTextFieldEmpty {
+            !(titleViewComponents.titleTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true) {
             navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
             navigationItem.rightBarButtonItem?.isEnabled = false
@@ -88,7 +111,7 @@ extension EditingIssueViewController: UITextViewDelegate {
 // MARK: - UITextFieldDelegate for enabling Save Button
 extension EditingIssueViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if !editingIssueView.isContentTextEmpty &&
+        if !contentViewComponents.editableContentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
             !textField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             navigationItem.rightBarButtonItem?.isEnabled = true
         } else {

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		022D77C52862A5CB00ACA5FA /* EditingIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D77C42862A5CB00ACA5FA /* EditingIssueView.swift */; };
 		022D77CE2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D77CD2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift */; };
 		022D77D02863878300ACA5FA /* IssueViewNavigationItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022D77CF2863878300ACA5FA /* IssueViewNavigationItems.swift */; };
 		024F438B28596ED3008C4235 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F438A28596ED3008C4235 /* SignInView.swift */; };
@@ -34,6 +33,9 @@
 		027C7E96285B14F600A5175B /* NetworkTargetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E95285B14F600A5175B /* NetworkTargetProtocol.swift */; };
 		027C7E9D285B954700A5175B /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E9C285B954700A5175B /* SignInViewModel.swift */; };
 		028CB80D286191AC00DAFE26 /* EditingIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028CB80C286191AC00DAFE26 /* EditingIssueViewController.swift */; };
+		0290D0E72863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0E62863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift */; };
+		0290D0E92863F75600A4E3A7 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0E82863F75600A4E3A7 /* UIStackView+Extension.swift */; };
+		0290D0EB2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0EA2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift */; };
 		02AEC2EE285C1AF500AAE835 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */; };
 		02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */; };
 		02AEC2F428600ACF00AAE835 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */; };
@@ -96,7 +98,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		022D77C42862A5CB00ACA5FA /* EditingIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueView.swift; sourceTree = "<group>"; };
 		022D77CD2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueViewNavigationItems.swift; sourceTree = "<group>"; };
 		022D77CF2863878300ACA5FA /* IssueViewNavigationItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewNavigationItems.swift; sourceTree = "<group>"; };
 		024F438A28596ED3008C4235 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -123,6 +124,9 @@
 		027C7E95285B14F600A5175B /* NetworkTargetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTargetProtocol.swift; sourceTree = "<group>"; };
 		027C7E9C285B954700A5175B /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		028CB80C286191AC00DAFE26 /* EditingIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueViewController.swift; sourceTree = "<group>"; };
+		0290D0E62863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueTitleViewComponents.swift; sourceTree = "<group>"; };
+		0290D0E82863F75600A4E3A7 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		0290D0EA2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueContentViewComponents.swift; sourceTree = "<group>"; };
 		02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 				024F43BC2859B857008C4235 /* Bundle+Extension.swift */,
 				02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */,
 				02AEC2F528600AF500AAE835 /* URLSession+Extension.swift */,
+				0290D0E82863F75600A4E3A7 /* UIStackView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -276,8 +281,7 @@
 				5BE928CE285852C100D237AB /* IssueCollectionView.swift */,
 				5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */,
 				028CB80C286191AC00DAFE26 /* EditingIssueViewController.swift */,
-				022D77C42862A5CB00ACA5FA /* EditingIssueView.swift */,
-				022D77CD2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift */,
+				0290D0EC2863FBAB00A4E3A7 /* EditingViewComponents */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,6 +355,16 @@
 				027C7E9C285B954700A5175B /* SignInViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0290D0EC2863FBAB00A4E3A7 /* EditingViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				022D77CD2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift */,
+				0290D0E62863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift */,
+				0290D0EA2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift */,
+			);
+			path = EditingViewComponents;
 			sourceTree = "<group>";
 		};
 		02AEC2F928600B6A00AAE835 /* Mock */ = {
@@ -700,9 +714,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				02AEC2F428600ACF00AAE835 /* URLSessionProtocol.swift in Sources */,
+				0290D0E72863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift in Sources */,
 				5BE928CF285852C100D237AB /* IssueCollectionView.swift in Sources */,
 				5B29A0C528573E400088EC11 /* IssueViewController.swift in Sources */,
 				027C7E86285A42B900A5175B /* SignInNetworkTarget.swift in Sources */,
+				0290D0E92863F75600A4E3A7 /* UIStackView+Extension.swift in Sources */,
 				5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */,
 				027C7E9D285B954700A5175B /* SignInViewModel.swift in Sources */,
 				5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */,
@@ -724,11 +740,11 @@
 				027C7E88285ABF1200A5175B /* StubURLSession.swift in Sources */,
 				024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */,
 				5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */,
-				022D77C52862A5CB00ACA5FA /* EditingIssueView.swift in Sources */,
 				5BE928DB2859B94A00D237AB /* IssueCollectionViewDataSource.swift in Sources */,
 				02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */,
 				02AEC2FD28600E8500AAE835 /* Observable.swift in Sources */,
 				5BE928D72858568B00D237AB /* MilestoneViewController.swift in Sources */,
+				0290D0EB2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift in Sources */,
 				022D77CE2863856B00ACA5FA /* EditingIssueViewNavigationItems.swift in Sources */,
 				022D77D02863878300ACA5FA /* IssueViewNavigationItems.swift in Sources */,
 				5BE928D92858569C00D237AB /* MyAccountViewController.swift in Sources */,
