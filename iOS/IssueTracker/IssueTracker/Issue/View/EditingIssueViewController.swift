@@ -12,6 +12,22 @@ final class EditingIssueViewController: UIViewController {
     private let contentViewComponents = EditingIssueContentViewComponents()
     private let navigationItems = EditingIssueViewNavigationItems()
 
+    private let textViewDelegate = EditingIssueTextViewDelegate()
+    private let textFieldDelegate = EditingIssueTextFieldDelegate()
+
+    private var viewModel: EditingIssueViewModelProtocol
+
+    init(viewModel: EditingIssueViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        setObserver()
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubviews(titleViewComponents, contentViewComponents)
@@ -22,6 +38,7 @@ final class EditingIssueViewController: UIViewController {
         super.viewWillAppear(animated)
         view.backgroundColor = .white
         setNavigationItems()
+        bind(to: viewModel)
     }
 
     override func viewDidLayoutSubviews() {
@@ -46,76 +63,77 @@ final class EditingIssueViewController: UIViewController {
 
 // MARK: - private methods
 private extension EditingIssueViewController {
+    func bind(to viewModel: EditingIssueViewModelProtocol) {
+        viewModel.titleText.bind(on: self) { [weak self] _ in
+            self?.updateSaveButtonState()
+        }
+        viewModel.contentText.bind(on: self) { [weak self] _ in
+            self?.updateSaveButtonState()
+        }
+        viewModel.cancelButtonState.bind(on: self) { [weak self] _ in
+            self?.popViewController()
+        }
+        viewModel.segmentIndex.bind(on: self) { [weak self] selectedIndex in
+            self?.didSegmentValueChanged(selectedIndex)
+        }
+
+        navigationItems.selectContentViewSegment.addAction(UIAction { [weak self] _ in
+            guard let self = self else { return }
+
+            let selectedIndex = self.navigationItems.selectContentViewSegment.selectedSegmentIndex
+            self.viewModel.didChangeSegmentValue(index: selectedIndex)
+        }, for: .valueChanged)
+
+        navigationItems.cancelButton.addAction(UIAction { [weak self] _ in
+            self?.viewModel.didTouchCancel()
+        }, for: .touchUpInside)
+    }
+
     func setDelegate() {
-        titleViewComponents.titleTextField.delegate = self
-        contentViewComponents.editableContentTextView.delegate = self
+        titleViewComponents.titleTextField.delegate = textFieldDelegate
+        contentViewComponents.editableContentTextView.delegate = textViewDelegate
     }
 
     func setNavigationItems() {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.titleView = navigationItems.selectContentViewSegment
-        navigationItems.selectContentViewSegment.addAction(UIAction { [weak self] _ in
-            self?.didSegmentValueChanged()
-        }, for: .valueChanged)
-
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationItems.saveButton)
         navigationItem.rightBarButtonItem?.isEnabled = false
-
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationItems.cancelButton)
-        navigationItems.cancelButton.addAction(UIAction { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
-        }, for: .touchUpInside)
     }
 
-    func didSegmentValueChanged() {
-        let selectedIndex = navigationItems.selectContentViewSegment.selectedSegmentIndex
-
+    func didSegmentValueChanged(_ selectedIndex: Int) {
         selectedIndex == 0 ?
         contentViewComponents.showEditableContentTextView() : contentViewComponents.showPreviewTextView()
     }
-}
 
-// MARK: - UITextViewDelegate for placeholder
-extension EditingIssueViewController: UITextViewDelegate {
-    private var placeholder: String {
-        return "코멘트는 여기에 작성하세요."
-    }
+    func updateSaveButtonState() {
+        let isTitleTextEmpty = viewModel.titleText.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        let isContentTextEmpty = viewModel.contentText.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
 
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.textColor = .gray
-            textView.text = placeholder
-        } else if textView.text == placeholder {
-            textView.textColor = .black
-            textView.text = nil
-        }
-    }
-
-    func textViewDidChange(_ textView: UITextView) {
-        if !textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-            !(titleViewComponents.titleTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true) {
+        if !isTitleTextEmpty && !isContentTextEmpty {
             navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
             navigationItem.rightBarButtonItem?.isEnabled = false
         }
     }
 
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.textColor = .gray
-            textView.text = placeholder
-        }
+    func popViewController() {
+        self.navigationController?.popViewController(animated: true)
     }
-}
 
-// MARK: - UITextFieldDelegate for enabling Save Button
-extension EditingIssueViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if !contentViewComponents.editableContentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-            !textField.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            navigationItem.rightBarButtonItem?.isEnabled = true
-        } else {
-            navigationItem.rightBarButtonItem?.isEnabled = false
+    func setObserver() {
+        NotificationCenter.default.addObserver(forName: EditingIssueTextViewDelegate.NotificationNames.textViewDidChanged,
+                                               object: nil, queue: nil) { [weak self] (notification) in
+            guard let newText = notification.userInfo?["text"] as? String else { return }
+            self?.viewModel.contentText.value = newText
+        }
+
+        NotificationCenter.default.addObserver(forName: EditingIssueTextFieldDelegate.NotificationNames.textFieldDidBeginEditing,
+                                               object: nil, queue: nil) { [weak self] (notification) in
+            guard let newText = notification.userInfo?["text"] as? String else { return }
+
+            self?.viewModel.titleText.value = newText
         }
     }
 }

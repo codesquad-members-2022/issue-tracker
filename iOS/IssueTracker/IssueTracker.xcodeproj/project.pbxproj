@@ -36,6 +36,9 @@
 		0290D0E72863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0E62863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift */; };
 		0290D0E92863F75600A4E3A7 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0E82863F75600A4E3A7 /* UIStackView+Extension.swift */; };
 		0290D0EB2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0EA2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift */; };
+		0290D0EE28640AC800A4E3A7 /* EditingIssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0ED28640AC800A4E3A7 /* EditingIssueViewModel.swift */; };
+		0290D0F1286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F0286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift */; };
+		0290D0F3286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F2286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift */; };
 		02AEC2EE285C1AF500AAE835 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */; };
 		02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */; };
 		02AEC2F428600ACF00AAE835 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */; };
@@ -127,6 +130,9 @@
 		0290D0E62863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueTitleViewComponents.swift; sourceTree = "<group>"; };
 		0290D0E82863F75600A4E3A7 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		0290D0EA2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueContentViewComponents.swift; sourceTree = "<group>"; };
+		0290D0ED28640AC800A4E3A7 /* EditingIssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueViewModel.swift; sourceTree = "<group>"; };
+		0290D0F0286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueTextViewDelegate.swift; sourceTree = "<group>"; };
+		0290D0F2286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueTextFieldDelegate.swift; sourceTree = "<group>"; };
 		02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
@@ -269,6 +275,7 @@
 				5BE928DA2859B94A00D237AB /* IssueCollectionViewDataSource.swift */,
 				024F43C62859C986008C4235 /* View */,
 				5B29A114285ABF070088EC11 /* Model */,
+				0290D0EF28640ACD00A4E3A7 /* ViewModel */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -282,6 +289,7 @@
 				5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */,
 				028CB80C286191AC00DAFE26 /* EditingIssueViewController.swift */,
 				0290D0EC2863FBAB00A4E3A7 /* EditingViewComponents */,
+				0290D0F428641A8600A4E3A7 /* Delegate */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -365,6 +373,23 @@
 				0290D0EA2863FB1C00A4E3A7 /* EditingIssueContentViewComponents.swift */,
 			);
 			path = EditingViewComponents;
+			sourceTree = "<group>";
+		};
+		0290D0EF28640ACD00A4E3A7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0290D0ED28640AC800A4E3A7 /* EditingIssueViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0290D0F428641A8600A4E3A7 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				0290D0F0286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift */,
+				0290D0F2286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		02AEC2F928600B6A00AAE835 /* Mock */ = {
@@ -721,6 +746,7 @@
 				0290D0E92863F75600A4E3A7 /* UIStackView+Extension.swift in Sources */,
 				5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */,
 				027C7E9D285B954700A5175B /* SignInViewModel.swift in Sources */,
+				0290D0EE28640AC800A4E3A7 /* EditingIssueViewModel.swift in Sources */,
 				5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */,
 				027C7E96285B14F600A5175B /* NetworkTargetProtocol.swift in Sources */,
 				5BE928D32858553800D237AB /* TabBarController.swift in Sources */,
@@ -731,6 +757,7 @@
 				024F4391285976C8008C4235 /* SignInViewController.swift in Sources */,
 				028CB80D286191AC00DAFE26 /* EditingIssueViewController.swift in Sources */,
 				02AEC2FB28600B8200AAE835 /* SignInStubURLSessionDataTask.swift in Sources */,
+				0290D0F3286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift in Sources */,
 				024F43BD2859B857008C4235 /* Bundle+Extension.swift in Sources */,
 				02AEC2F628600AF500AAE835 /* URLSession+Extension.swift in Sources */,
 				5B29A118285ACACE0088EC11 /* CustomBarButton.swift in Sources */,
@@ -739,6 +766,7 @@
 				027C7E91285AF9F500A5175B /* UserDefaultManager.swift in Sources */,
 				027C7E88285ABF1200A5175B /* StubURLSession.swift in Sources */,
 				024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */,
+				0290D0F1286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift in Sources */,
 				5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */,
 				5BE928DB2859B94A00D237AB /* IssueCollectionViewDataSource.swift in Sources */,
 				02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */,
