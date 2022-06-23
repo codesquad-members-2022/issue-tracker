@@ -16,7 +16,7 @@ class IssueListViewModel {
     var allIssueViewModel: [IssueViewModel]
     
     init() {
-        self.allIssueViewModel = [allIssueViewModel]()
+        self.allIssueViewModel = [IssueViewModel]()
     }
     
     func issueListViewModel(at index: Int) -> IssueViewModel {

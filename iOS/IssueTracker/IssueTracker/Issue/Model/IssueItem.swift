@@ -7,39 +7,37 @@
 
 import Foundation
 
+// MARK: - WelcomeElement
 struct IssueItem: Codable {
     let id: Int
-    let title, content: String
-    let milestoneName: String
+    let title, content, milestoneName: String
     let labels: [Label]
     
-    enum CodingKeys: String, CodingKeys {
+    enum CodingKeys: String, CodingKey {
         case id
         case title, content
         case milestoneName = "milestoneTitle"
-        case label
+        case labels = "label"
     }
 }
 
-struct Label {
-    let title: String
-    let backgroundColor: String
+// MARK: - Label
+struct Label: Codable {
+    let title, backgroundColor: String
     let isDarkMode: Bool
 }
 
-extension IssueItem {
-    
-    init?(_ issueVM: IssueViewModel) {
-        guard let id = issueVM.id, let title = issueVM.title,
-              let content = issueVM.content,let milestoneName = issueVM.milestoneName,
-              let labels = issueVM.labels else {
-            return nil
-        }
-        self.id = id
-        self.title = title
-        self.content = content
-        self.milestoneName = milestoneName
-        self.labels = labels
-    }
-    
-}
+//extension IssueItem{
+//    init?(_ issueVM: IssueViewModel) {
+//        guard let id = issueVM.id, let title = issueVM.title,
+//              let content = issueVM.content,let milestoneName = issueVM.milestoneName,
+//              let labels = issueVM.labels else {
+//            return nil
+//        }
+//        self.id = id
+//        self.title = title
+//        self.content = content
+//        self.milestoneName = milestoneName
+//        self.labels = labels
+//    }
+//}
