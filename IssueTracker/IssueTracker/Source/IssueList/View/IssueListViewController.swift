@@ -53,12 +53,21 @@ final class IssueListViewController: UIViewController {
         self.view.addSubview(collectionView)
         setLayout()
         setNavigationController()
+        bind()
 
     }
 
     private func setLayout() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+
+    private func bind() {
+        viewModel.loadedIssues = {
+            DispatchQueue.main.async { [weak self]  in
+                self?.collectionView.reloadData()
+            }
         }
     }
 

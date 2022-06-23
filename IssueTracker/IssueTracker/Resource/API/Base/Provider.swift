@@ -9,18 +9,23 @@ import Foundation
 
 final class Provider {
 
-    static func request(with request: URLRequest, _ completion: @escaping (Data?) -> Void) {
+    static func request(with request: URLRequest, completion: @escaping (Result<Data?,
+                                                                        NetworkError>) -> Void) {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let _ = error {
-                completion(nil)
+                completion(.failure(.transportError))
                 return
             }
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode.isSuccess else {
-                completion(nil)
+            guard let httpResponse = response as? HTTPURLResponse else { completion(.failure(.transportError))
+                return }
+
+            guard httpResponse.statusCode.isSuccess else {
+                completion(.failure(.serverError(code: httpResponse.statusCode)))
                 return
             }
             guard let data = data else { return }
-            completion(data)
+            completion(.success(data))
+
         }.resume()
     }
 

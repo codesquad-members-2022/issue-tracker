@@ -34,6 +34,8 @@
 		B3D736E9286008440053E887 /* Extension+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D736E8286008440053E887 /* Extension+.swift */; };
 		B3D736ED2860C91D0053E887 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D736EC2860C91D0053E887 /* HTTPHeader.swift */; };
 		B3D736F02861893D0053E887 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D736EF2861893D0053E887 /* IssueListViewModel.swift */; };
+		B3D73712286432230053E887 /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D73711286432230053E887 /* RootWindow.swift */; };
+		B3D737142864330B0053E887 /* RootWindowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D737132864330B0053E887 /* RootWindowViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 		B3D736E8286008440053E887 /* Extension+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+.swift"; sourceTree = "<group>"; };
 		B3D736EC2860C91D0053E887 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		B3D736EF2861893D0053E887 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
+		B3D73711286432230053E887 /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
+		B3D737132864330B0053E887 /* RootWindowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindowViewModel.swift; sourceTree = "<group>"; };
 		C0F9D2A98896B0988903BE82 /* Pods-IssueTracker.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.dev.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +179,8 @@
 				B3BFBD3728572E5400D69A34 /* SceneDelegate.swift */,
 				00E87233285C3C3600C527B5 /* Eevironment.swift */,
 				B3D736E8286008440053E887 /* Extension+.swift */,
+				B3D73711286432230053E887 /* RootWindow.swift */,
+				B3D737132864330B0053E887 /* RootWindowViewModel.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -519,7 +525,9 @@
 				000651C7285A0C0700A6426A /* BaseTarget.swift in Sources */,
 				000651C1285A0A9C00A6426A /* NetworkError.swift in Sources */,
 				002422022862BDF100F97984 /* LoginViewModel.swift in Sources */,
+				B3D737142864330B0053E887 /* RootWindowViewModel.swift in Sources */,
 				B3419D35285C205600F1273C /* Provider.swift in Sources */,
+				B3D73712286432230053E887 /* RootWindow.swift in Sources */,
 				B3419D37285C30EB00F1273C /* IssueTrackingRepository.swift in Sources */,
 				B3773F3928586D97008C4AAF /* IssueCell.swift in Sources */,
 				B3773F2A28585216008C4AAF /* Milestone.swift in Sources */,
