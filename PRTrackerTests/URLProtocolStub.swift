@@ -5,7 +5,7 @@
 //  Created by Bumgeun Song on 2022/06/20.
 //
 
-import Foundation
+import XCTest
 
 final class URLProtocolStub: URLProtocol {
     override class func canInit(with request: URLRequest) -> Bool {
@@ -16,10 +16,18 @@ final class URLProtocolStub: URLProtocol {
         return request
     }
     
-    static var testURLs = [URL?: Data]()
+    static var completionHandler: ((URLRequest) -> (HTTPURLResponse, Data?))?
     
     override func startLoading() {
-        if let url = request.url, let data = URLProtocolStub.testURLs[url] {
+        guard let handler = URLProtocolStub.completionHandler else {
+            XCTFail("Handler is not set.")
+            return
+        }
+        
+        let (response, data) = handler(request)
+        
+        if let data = data {
+            self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             self.client?.urlProtocol(self, didLoad: data)
         }
         self.client?.urlProtocolDidFinishLoading(self)

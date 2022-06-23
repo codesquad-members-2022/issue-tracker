@@ -49,27 +49,27 @@ struct NetworkManger: NetworkService {
         session.dataTask(with: request) { data, response, error in
             if let error = error {
                 Log.error(error.localizedDescription)
-                return
+                return completion(nil)
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                Log.error("Cannot parse HTTP reponse status code")
-                return
+                Log.error("Cannot parse HTTP response status code")
+                return completion(nil)
             }
             
             guard (200..<300).contains(statusCode) else {
                 Log.error("Unexpected Status Code: \(statusCode)")
-                return
+                return completion(nil)
             }
             
             guard let data = data else {
                 Log.error("Missing data")
-                return
+                return completion(nil)
             }
             
             guard let decoded = try? JSONDecoder().decode(T.self, from: data) else {
                 Log.error("Decoding failed")
-                return
+                return completion(nil)
             }
             
             completion(decoded)

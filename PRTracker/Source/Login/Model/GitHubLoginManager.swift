@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 
+enum AuthorizationStatus {
+    case authorized
+    case failed
+    case none
+}
+
 struct GitHubLoginManager {
     typealias AccessToken = String
     
@@ -34,6 +40,8 @@ struct GitHubLoginManager {
         self.uiApplication = uiApplication
     }
     
+    
+    
     func requestAuthorization() {
         guard var components = URLComponents(string: GitHubLoginManager.authorizeBaseURL) else { return }
         components.queryItems = [
@@ -44,81 +52,32 @@ struct GitHubLoginManager {
         uiApplication.open(url)
     }
     
+    let authorization: Observable<AuthorizationStatus> = Observable(.none)
+    
     func getAccessToken(with code: String) {
         guard let url = makeAccessTokenURL(with: code) else { return }
         let request = makeAccessTokenRequest(with: url)
         
         networkService.request(request) { (response: TokenResponse?) -> Void in
             guard let response = response else {
-                Log.error("Network Request for access token is failed")
+                Log.error("Request for access token is failed. Code: \(code)")
+                authorization.value = .failed
                 return
             }
+            
             keyChainService.save(response.accessToken,
                                  service: GitHubLoginManager.keyChainToken,
                                  account: GitHubLoginManager.keyChainAccount)
+            authorization.value = .authorized
         }
     }
     
-    func hasValidToken(completion: @escaping (Bool) -> Void) {
-        // 1. Keychain에 저장된 토큰이 없을 경우 -> False
-        guard let token = keyChainService.load(service: GitHubLoginManager.keyChainToken,
-                                               account: GitHubLoginManager.keyChainAccount) else {
-            return completion(false)
-        }
-        
-        
-        validateToken(token) { validToken in
-            // 2. 저장된 토큰이 유효하지 않을 경우 -> False
-            guard let validToken = validToken else {
-                return completion(false)
-            }
-            
-            // 3. 토큰이 재발급되었을 경우 -> KeyChain에 업데이트
-            if token != validToken {
-                keyChainService.save(validToken,
-                                     service: GitHubLoginManager.keyChainToken,
-                                     account: GitHubLoginManager.keyChainAccount)
-            }
-            
-            // 4. 토큰이 유효하거나 재발급되었을 경우 -> True
+    func checkAuthorization(completion: @escaping (Bool) -> Void) {
+        // User 요청이 성공하면 유효한 것으로 판단
+        UserManager().getCurrentUser { user in
+            if user == nil { return completion(false) }
             return completion(true)
         }
-    }
-    
-    private func validateToken(_ token: String, completion: @escaping (AccessToken?) -> Void) {
-        // Static하게 저장해둔 URL String이 실패할 경우, error handling보단 강제 언래핑으로 runtime crash가 나도록 해서 string을 고치는 것이 빠르지 않을까?
-        let url = URL(string: GitHubLoginManager.validateTokenURL)!
-        let request = makeValidateTokenRequest(with: url, token: token)
-        
-        // 포스트 요청을 보내고 나서 response가 nil이면 유효하지 않은 토큰으로 판단한다.
-        networkService.request(request, method: .post) { (response: TokenValidatationResponse?) -> Void in
-            guard let response = response else {
-                return completion(nil)
-            }
-            
-            // 유효 기간 만료 시간이 10분 이하로 남았을 때는 사용 흐름을 방해할 수 있으므로 false로 return해서 재발급.
-            guard response.expiresAt.timeIntervalSinceNow <= 600 else {
-                resetToken(request: request, completion: completion)
-                return
-            }
-            
-            return completion(token)
-        }
-    }
-    
-    private func resetToken(request: URLRequest, completion: @escaping (AccessToken?) -> Void) {
-        networkService.request(request, method: .patch) { (response: TokenValidatationResponse?) -> Void in
-            guard let response = response else {
-                return completion(nil)
-            }
-            return completion(response.accessToken)
-        }
-    }
-    
-    private func makeValidateTokenRequest(with url: URL, token: String) -> URLRequest {
-        var request = URLRequest(url: url, with: token)
-        request.httpBody = try? JSONSerialization.data(withJSONObject: ["access_token": token], options: .prettyPrinted)
-        return request
     }
     
     private func makeAccessTokenURL(with code: String) -> URL? {

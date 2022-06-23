@@ -7,8 +7,9 @@
 
 import UIKit
 
-class IntroViewController: UIViewController {
 
+class IntroViewController: UIViewController {
+    
     private let viewModel: LoginViewModel = LoginViewModel()
     
     private func gotoLogin() {
@@ -24,12 +25,18 @@ class IntroViewController: UIViewController {
     }
     
     private func validateToken() {
-        viewModel.isTokenSaved() ? gotoHome() : gotoLogin()
+        viewModel.checkAuthorization { [weak self] authorized in
+            if authorized {
+                // TODO: 'home', 'main' 용어 통일 필요
+                self?.gotoHome()
+            } else {
+                self?.gotoLogin()
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         validateToken()
     }
 }

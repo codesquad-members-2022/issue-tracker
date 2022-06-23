@@ -8,24 +8,24 @@
 import XCTest
 
 
-
 class IssueManagerTests: XCTestCase {
     
-    var sut: IssueManager!
+
+    let mockSession: URLSession = {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [URLProtocolStub.self]
+        return URLSession(configuration: config)
+    }()
     
     override func setUpWithError() throws {
         super.setUp()
-        
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [URLProtocolStub.self]
-        let session = URLSession(configuration: config)
-        
-        sut = IssueManager(keyChainService: KeyChainSuccessStub(),
-                           networkService: NetworkManger(urlSession: session))
     }
     
     func test_IssueManager_should_return_Issue_when_token_is_stored() throws {
         // Given - keyChain에 token이 저장돼 있을 때
+        let sut = IssueManager(keyChainService: KeyChainSuccessStub(),
+                           networkService: NetworkManger(urlSession: mockSession))
+        
         guard let url = URL(string: BaseURL.issues) else {
             Log.error("Wrong Base URL: \(BaseURL.issues)")
             return 
@@ -37,7 +37,10 @@ class IssueManagerTests: XCTestCase {
         }
         
         // URLSession에 dummy Reponse 주입
-        URLProtocolStub.testURLs = [url: dummyData]
+        URLProtocolStub.completionHandler = { _ in
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (response, dummyData)
+        }
         
         // When - Issue 정보를 요청하면
         sut.getIssues { issues in
@@ -53,7 +56,8 @@ class IssueManagerTests: XCTestCase {
     
     func test_IssueManager_should_return_nil_when_token_is_not_stored() throws {
         // Given - keyChain에 token이 안 저장돼 있을 때
-        sut = IssueManager(keyChainService: KeyChainFailureStub())
+        let sut = IssueManager(keyChainService: KeyChainFailureStub(),
+                           networkService: NetworkManger(urlSession: mockSession))
         
         // When - Issue 정보를 요청하면
         // Then - nil을 return한다.

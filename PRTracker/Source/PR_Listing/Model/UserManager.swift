@@ -9,7 +9,6 @@ import Foundation
 
 struct UserManager {
     
-    
     let keyChainService: KeyChainService
     let networkService: NetworkService
     
