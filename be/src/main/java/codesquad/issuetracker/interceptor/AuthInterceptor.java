@@ -3,7 +3,7 @@ package codesquad.issuetracker.interceptor;
 import codesquad.issuetracker.dto.ResponseMessage;
 import codesquad.issuetracker.jwt.AccessTokenProvider;
 import codesquad.issuetracker.jwt.Token;
-import codesquad.issuetracker.jwt.TokenManager;
+import codesquad.issuetracker.service.RedisService;
 import codesquad.issuetracker.jwt.TokenUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class AuthInterceptor implements HandlerInterceptor {
 
     private final AccessTokenProvider accessTokenProvider;
-    private final TokenManager tokenManager;
+    private final RedisService redisService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -30,7 +30,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         Token accessToken = accessTokenProvider.convertToObject(accessTokenString);
 
         if (accessToken.validateExpirationOfToken() &&
-            tokenManager.validateLogInStatusOfAccessToken(accessTokenString)) {
+            redisService.validateLogInStatusOfAccessToken(accessTokenString)) {
             return true;
         }
 

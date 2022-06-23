@@ -5,7 +5,7 @@ import codesquad.issuetracker.jwt.AccessToken;
 import codesquad.issuetracker.jwt.AccessTokenProvider;
 import codesquad.issuetracker.jwt.RefreshTokenProvider;
 import codesquad.issuetracker.jwt.Token;
-import codesquad.issuetracker.jwt.TokenManager;
+import codesquad.issuetracker.service.RedisService;
 import codesquad.issuetracker.jwt.TokenUtils;
 import codesquad.issuetracker.service.GithubOAuthClient;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class AuthController {
     private final GithubOAuthClient githubOAuthClient;
     private final AccessTokenProvider accessTokenProvider;
     private final RefreshTokenProvider refreshTokenProvider;
-    private final TokenManager tokenManager;
+    private final RedisService redisService;
 
     @GetMapping("/api/login")
     public ResponseMessage login(HttpServletResponse response, @RequestParam String code) {
@@ -33,7 +33,7 @@ public class AuthController {
         Token accessToken = accessTokenProvider.createToken(String.valueOf(memberId));
         Token refreshToken = refreshTokenProvider.createToken(String.valueOf(memberId));
 
-        tokenManager.saveRefreshTokenByMemberId(String.valueOf(memberId), refreshToken.getToken());
+        redisService.saveRefreshTokenByMemberId(String.valueOf(memberId), refreshToken.getToken());
 
         response.addHeader("access-token", accessToken.getToken());
         response.setHeader("Set-Cookie", ResponseCookie
@@ -49,7 +49,7 @@ public class AuthController {
     @PostMapping("/api/access-token/reissue")
     public ResponseMessage reissue(HttpServletRequest request, HttpServletResponse response) {
         Token refreshToken = refreshTokenProvider.convertToObject(TokenUtils.getRefreshToken(request));
-        tokenManager.validateDurationOfRefreshToken(refreshToken.getMemberId());
+        redisService.validateDurationOfRefreshToken(refreshToken.getMemberId());
         AccessToken renewedAccessToken = accessTokenProvider.createToken(refreshToken.getMemberId());
         response.addHeader("access-token", renewedAccessToken.getToken());
 
@@ -61,7 +61,7 @@ public class AuthController {
         Token accessToken = accessTokenProvider.convertToObject(TokenUtils.getAccessToken(request));
         Token refreshToken = refreshTokenProvider.convertToObject(TokenUtils.getRefreshToken(request));
 
-        tokenManager.invalidateToken(accessToken, refreshToken);
+        redisService.invalidateToken(accessToken, refreshToken);
 
         return new ResponseMessage(HttpStatus.OK, "로그아웃이 처리되었습니다.");
     }
