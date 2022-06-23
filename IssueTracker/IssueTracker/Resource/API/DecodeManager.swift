@@ -8,12 +8,12 @@
 import Foundation
 
 protocol DecodeManager {
-    static func decodeJson<T: Codable>(data: Data) -> T?
+    static func decodeJson<T: Codable>(data: Data, type: T.Type) -> T?
 }
 
 final class DecodeManagerImplement: DecodeManager {
 
-    static func decodeJson<T: Codable>(data: Data) -> T? {
+    static func decodeJson<T: Codable>(data: Data, type: T.Type) -> T? {
         do {
             let result = try JSONDecoder().decode(T.self, from: data)
             return result
@@ -29,5 +29,4 @@ final class DecodeManagerImplement: DecodeManager {
             }
         }
     }
-
 }

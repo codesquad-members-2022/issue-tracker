@@ -10,5 +10,7 @@ import Foundation
 enum NetworkError: Error {
     case invalidJsonError
     case invalidUrlError
+    case invalidTarget
     case cantReachedServerError
+    case decodingError
 }

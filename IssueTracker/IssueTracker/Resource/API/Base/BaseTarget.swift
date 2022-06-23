@@ -13,12 +13,5 @@ protocol BaseTarget {
     var path: String? { get }
     var parameter: [String: String]? { get }
     var method: HTTPMethod { get }
-    var content: HTTPContentType { get }
-    var accept: HTTPAcceptType? { get }
+    var header: HTTPHeader? { get }
 }
-
- extension BaseTarget {
-    var header: [String: String]? {
-        ["Content-Type": content.value]
-    }
- }

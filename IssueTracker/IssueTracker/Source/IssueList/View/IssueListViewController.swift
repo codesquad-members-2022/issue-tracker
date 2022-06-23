@@ -8,7 +8,9 @@
 import UIKit
 import SnapKit
 
-class IssueListViewController: UIViewController {
+final class IssueListViewController: UIViewController {
+
+    var viewModel = IssueListViewModel()
 
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -76,11 +78,12 @@ class IssueListViewController: UIViewController {
 
 extension IssueListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return viewModel.numberOfItemsInSection
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as? IssueCell else { return UICollectionViewCell() }
+        cell.titleLabel.text = viewModel.issueList[indexPath.item].title
         return cell
     }
 

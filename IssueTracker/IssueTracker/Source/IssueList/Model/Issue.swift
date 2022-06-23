@@ -8,9 +8,17 @@
 import Foundation
 
 struct Issue: Codable {
+    enum State: String, Codable {
+        case open
+        case written
+        case assign
+        case comment
+        case closed
+    }
+
     let title: String
-    let description: String
-    let milestone: Milestone?
-    let tag: Tag?
-    let state: IssueState?
+//    let description: String
+//    let milestone: Milestone?
+//    let tag: Tag?
+//    let state: IssueState?
 }

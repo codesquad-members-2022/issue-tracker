@@ -8,9 +8,10 @@
 import UIKit
 import SnapKit
 
-class IssueCell: UICollectionViewCell {
+final class IssueCell: UICollectionViewCell {
 
     static let reuseIdentifier = "IssueCell"
+    var issueListViewModel = IssueListViewModel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +23,7 @@ class IssueCell: UICollectionViewCell {
         fatalError("\(#function) has not been implemented")
     }
 
-    private var titleLabel: UILabel = {
+    var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "제목"
         label.font = .boldSystemFont(ofSize: 22)
