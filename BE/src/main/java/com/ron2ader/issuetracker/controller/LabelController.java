@@ -21,7 +21,7 @@ public class LabelController {
 
     @PostMapping("/labels")
     public LabelResponse register(LabelRequest labelRequest) {
-        return labelService.save(labelRequest);
+        return labelService.save(labelRequest.getTitle(), labelRequest.getColor(), labelRequest.getDescription());
     }
 
     @GetMapping("/labels")
@@ -31,7 +31,12 @@ public class LabelController {
 
     @PostMapping("/labels/{id}")
     public ResponseEntity<LabelResponse> update(@PathVariable Long id, LabelRequest labelRequest) {
-        LabelResponse updateLabel = labelService.update(id, labelRequest);
+        LabelResponse updateLabel = labelService.update(
+                id,
+                labelRequest.getTitle(),
+                labelRequest.getColor(),
+                labelRequest.getDescription()
+                );
 
         return ResponseEntity.ok(updateLabel);
     }

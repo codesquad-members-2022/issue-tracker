@@ -4,11 +4,8 @@ import com.ron2ader.issuetracker.domain.issue.Issue;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +24,7 @@ public class Milestone {
     private String description;
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "milestone")
+    @OneToMany(mappedBy = "milestone", cascade = CascadeType.MERGE)
     private List<Issue> issues = new ArrayList<>();
 
     public static Milestone of(String title, String description, LocalDate endDate) {

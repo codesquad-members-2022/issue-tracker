@@ -4,6 +4,8 @@ import com.ron2ader.issuetracker.controller.milestonedto.MilestoneRequest;
 import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
 import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import com.ron2ader.issuetracker.domain.milestone.MilestoneRepository;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -35,21 +37,20 @@ public class MilestoneService {
     }
 
     @Transactional
-    public MilestoneResponse save(MilestoneRequest milestoneRequest) {
+    public MilestoneResponse save(String title, String description, LocalDate endDate) {
         Milestone saveMilestone = milestoneRepository.save(
-            Milestone.of(milestoneRequest.getTitle(), milestoneRequest.getDescription(),
-                milestoneRequest.getEndDate()));
+            Milestone.of(title, description, endDate));
 
         return MilestoneResponse.fromForRegister(saveMilestone);
     }
 
     @Transactional
-    public MilestoneResponse update(Long id, MilestoneRequest milestoneRequest) {
+    public MilestoneResponse update(Long id, String title, String description, LocalDate endDate) {
         Milestone findMilestone = milestoneRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
-        findMilestone.updateTitle(milestoneRequest.getTitle());
-        findMilestone.updateDescription(milestoneRequest.getDescription());
-        findMilestone.updateEndDate(milestoneRequest.getEndDate());
+        findMilestone.updateTitle(title);
+        findMilestone.updateDescription(description);
+        findMilestone.updateEndDate(endDate);
 
         return MilestoneResponse.of(findMilestone.getId(), findMilestone.getTitle(), findMilestone.getDescription(),
             findMilestone.getEndDate(), findMilestone.issueCountByOpenStatus(true),

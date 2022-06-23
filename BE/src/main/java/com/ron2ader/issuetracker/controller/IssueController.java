@@ -22,19 +22,25 @@ public class IssueController {
 
     private final IssueService issueService;
 
+    /*
+    * id만 반환?
+    * */
     @PostMapping("/issues")
-    public ResponseEntity<IssueDetailResponse> register(@Login MemberDto memberDto, IssueCreateRequest issueCreateRequest) {
+    public Long register(@Login String issuerId, IssueCreateRequest issueCreateRequest) {
 
-        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest.getTitle(), issueCreateRequest.getContents(), memberDto.getMemberId()); // 임시 아이디
-
-        return ResponseEntity.ok(issueDetailResponse);
+        return issueService.registerIssue(issuerId,
+                issueCreateRequest.getTitle(),
+                issueCreateRequest.getContents(),
+                issueCreateRequest.getAssigneeIds(),
+                issueCreateRequest.getLabelIds(),
+                issueCreateRequest.getMilestoneId());
     }
 
     @GetMapping("/issues/{issueNumber}")
-    public ResponseEntity<IssueDetailResponse> showIssue(@PathVariable Long issueNumber) {
+    public IssueDetailResponse showIssue(@PathVariable Long issueNumber) {
         IssueDetailResponse issueDetailResponse = issueService.findById(issueNumber);
 
-        return ResponseEntity.ok(issueDetailResponse);
+        return issueDetailResponse;
     }
 
     @GetMapping("/issues")

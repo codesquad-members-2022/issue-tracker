@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class LoginResponse {
 
-    private final MemberDto memberDto;
+    private final MemberDto loginMember;
     private final Tokens tokens;
 
 }

@@ -19,9 +19,9 @@ public class LabelService {
     private final LabelRepository labelRepository;
 
     @Transactional
-    public LabelResponse save(LabelRequest labelRequest) {
+    public LabelResponse save(String title, String color, String description) {
         Label savedLabel = labelRepository.save(
-            Label.of(labelRequest.getTitle(), labelRequest.getColor(), labelRequest.getDescription()));
+            Label.of(title, color, description));
 
         return LabelResponse.from(savedLabel);
     }
@@ -36,11 +36,11 @@ public class LabelService {
     }
 
     @Transactional
-    public LabelResponse update(Long id, LabelRequest labelRequest) {
+    public LabelResponse update(Long id, String title, String color, String description) {
         Label findLabel = labelRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        findLabel.updateTitle(labelRequest.getTitle());
-        findLabel.updateColor(labelRequest.getColor());
-        findLabel.updateDescription(labelRequest.getDescription());
+        findLabel.updateTitle(title);
+        findLabel.updateColor(color);
+        findLabel.updateDescription(description);
 
         return LabelResponse.from(findLabel);
     }
