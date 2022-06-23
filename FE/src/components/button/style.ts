@@ -168,6 +168,7 @@ const createCustomStyle = (props: IButtonStyleProps, styleType?: ButtonStyleType
   ${styleType && buttonStyle[styleType]}
   ${props.width && { 'min-width': props.width }}
   ${props.height && { 'min-height': props.height }}
+  ${props.padding && { padding: props.padding }}
   ${props.background && { background: props.background }}
   ${props.border && { border: props.border }}
   ${props.borderRadius && { 'border-radius': props.borderRadius }}
@@ -203,6 +204,7 @@ const $Button = styled.button<I$ButtonType>`
   justify-content: center;
   align-items: center;
   gap: ${({ gap }) => (!gap ? '8px' : gap)};
+  padding: 0 15px;
   ${({ styleType = 'large', ...props }) => createCustomStyle(props, styleType)}
   ${({ hoverStyle, activeStyle, disabledStyle }) =>
     createCustomEventStyle(hoverStyle, activeStyle, disabledStyle)};

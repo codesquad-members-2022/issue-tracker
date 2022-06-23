@@ -13,6 +13,8 @@ type ButtonStyle = Record<ButtonStyleType, FlattenInterpolation<ThemeProps<any>>
 interface IButtonStyleProps {
   width?: string;
   height?: string;
+  gap?: string;
+  padding?: string;
   color?: string;
   background?: string;
   border?: string;
@@ -22,7 +24,6 @@ interface IButtonStyleProps {
 }
 
 interface IButtonProps extends IButtonStyleProps {
-  gap?: string;
   styleType?: ButtonStyleType;
   children?: React.ReactNode;
   disabled?: boolean;
