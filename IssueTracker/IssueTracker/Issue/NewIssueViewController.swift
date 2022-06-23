@@ -38,6 +38,24 @@ class NewIssueViewController: UIViewController {
         return devider
     }()
     
+    private let optionList = ["저장소", "레이블", "마일스톤", "담당자"]
+    
+    private lazy var optionTable: UITableView = {
+        var tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aa")
+        return tableView
+    }()
+    
+//    private lazy var optionTableHeader: UILabel = {
+//        var label = UILabel()
+//        label.text = "추가옵션"
+//        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+//        label.textAlignment = .left
+//        return label
+//    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -72,10 +90,20 @@ class NewIssueViewController: UIViewController {
             make.height.equalTo(1)
         }
         
+        // FIXME: Header설정
+        optionTable.tableHeaderView = UILabel()
+        
+        self.view.addSubview(optionTable)
+        optionTable.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(optionTable.contentSize.height) // 자신의 컨텐츠 사이즈만큼 높이를 잡아준다
+        }
+        
         self.view.addSubview(contentField)
         contentField.snp.makeConstraints { make in
             make.top.equalTo(horizontalDevider.snp.bottom)
-            make.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalTo(optionTable.snp.top)
             
         }
     }
@@ -102,6 +130,31 @@ class NewIssueViewController: UIViewController {
             //2-2. 이슈 목록 조회 다시해서 보여주기
         //3. api 가 실패했다면 => issue 생성실패 얼럿띄우기
         
+    }
+}
+
+extension NewIssueViewController: UITableViewDelegate {
+    
+}
+
+extension NewIssueViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return optionList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "aa", for: indexPath)
+        var sidebarCell = UIListContentConfiguration.sidebarCell() // 짱이다!!
+        sidebarCell.text = optionList[indexPath.item]
+        sidebarCell.secondaryText = "선택내용"
+        sidebarCell.prefersSideBySideTextAndSecondaryText = true
         
+        cell.contentConfiguration = sidebarCell
+        cell.accessoryType = .disclosureIndicator // > 표시 보이기
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "추가옵션"
     }
 }
