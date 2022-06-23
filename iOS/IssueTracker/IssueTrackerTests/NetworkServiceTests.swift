@@ -25,7 +25,7 @@ class NetworkServiceTests: XCTestCase {
             case .success(let dataString):
                 XCTAssertEqual(dataString, "TestString")
                 promise.fulfill()
-            case .failure(let error):
+            case .failure:
                 return
             }
         }

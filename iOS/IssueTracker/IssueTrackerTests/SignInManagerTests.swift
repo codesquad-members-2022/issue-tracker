@@ -31,7 +31,7 @@ class SignInManagerTests: XCTestCase {
 
         let stubURLSession = StubURLSession(dummy: dummy)
 
-        sut.urlSession = stubURLSession
+        sut.setURLSession(stubURLSession)
 
         sut.requestCode { result in
             switch result {
@@ -57,9 +57,9 @@ class SignInManagerTests: XCTestCase {
 
         let stubURLSession = StubURLSession(dummy: dummy)
 
-        sut.urlSession = stubURLSession
+        sut.setURLSession(stubURLSession)
 
-        let codeURL = URL(string: "issuetrackerapp://code=a1b2c3d4")!
+        let codeURL = URL(string: "issuetrackerapp://?code=a1b2c3d4")!
         sut.requestJWTToken(codeURL: codeURL) { result in
             switch result {
             case let .success(jwtToken):
