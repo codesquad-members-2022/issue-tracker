@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
-public class GithubClient {
+public class GithubOAuthClient {
 
     private static final String GITHUB_AUTHORIZATION_SERVER_URL = "https://github.com/login/oauth/access_token";
     private static final String GITHUB_API_ACCEPT_HEADER = "application/vnd.github.v3+json";
@@ -78,11 +78,8 @@ public class GithubClient {
     }
 
     private Long saveMember(AuthMemberInformation authMemberInformation) {
-        Member member = memberRepository.findByIdentity(authMemberInformation.getIdentity());
-
-        if (member == null) {
-            return memberRepository.save(authMemberInformation);
-        }
+        Member member = memberRepository.findByIdentity(authMemberInformation.getIdentity())
+            .orElseGet(() -> memberRepository.save(authMemberInformation));
 
         return member.getId();
     }

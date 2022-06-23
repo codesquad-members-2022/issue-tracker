@@ -4,11 +4,13 @@ import static codesquad.issuetracker.domain.QMember.*;
 
 import codesquad.issuetracker.domain.Member;
 import codesquad.issuetracker.domain.MemberType;
+import codesquad.issuetracker.domain.QMember;
 import codesquad.issuetracker.dto.auth.AuthMemberInformation;
 import codesquad.issuetracker.dto.member.MemberDto;
 import codesquad.issuetracker.dto.member.QMemberDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -45,16 +47,18 @@ public class MemberRepository {
             .fetchOne();
     }
 
-    public Member findByIdentity(String identity) {
-        return queryFactory
-            .selectFrom(member)
+    public Optional<Member> findByIdentity(String identity) {
+        Member member = queryFactory
+            .selectFrom(QMember.member)
             .where(
-                member.type.eq(MemberType.GITHUB),
-                member.identity.eq(identity))
+                QMember.member.type.eq(MemberType.GITHUB),
+                QMember.member.identity.eq(identity))
             .fetchOne();
+
+        return Optional.ofNullable(member);
     }
 
-    public Long save(AuthMemberInformation m) {
+    public Member save(AuthMemberInformation m) {
         Member member = Member.builder()
             .type(MemberType.GITHUB)
             .identity(m.getIdentity())
@@ -64,8 +68,7 @@ public class MemberRepository {
             .build();
 
         em.persist(member);
-        em.flush();
 
-        return member.getId();
+        return member;
     }
 }

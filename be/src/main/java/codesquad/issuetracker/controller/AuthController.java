@@ -7,7 +7,7 @@ import codesquad.issuetracker.jwt.RefreshTokenProvider;
 import codesquad.issuetracker.jwt.Token;
 import codesquad.issuetracker.jwt.TokenManager;
 import codesquad.issuetracker.jwt.TokenUtils;
-import codesquad.issuetracker.service.GithubClient;
+import codesquad.issuetracker.service.GithubOAuthClient;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final GithubClient githubClient;
+    private final GithubOAuthClient githubOAuthClient;
     private final AccessTokenProvider accessTokenProvider;
     private final RefreshTokenProvider refreshTokenProvider;
     private final TokenManager tokenManager;
 
     @GetMapping("/api/login")
     public ResponseMessage login(HttpServletResponse response, @RequestParam String code) {
-        Long memberId = githubClient.authorizeForThirdParty(code);
+        Long memberId = githubOAuthClient.authorizeForThirdParty(code);
         Token accessToken = accessTokenProvider.createToken(String.valueOf(memberId));
         Token refreshToken = refreshTokenProvider.createToken(String.valueOf(memberId));
 
