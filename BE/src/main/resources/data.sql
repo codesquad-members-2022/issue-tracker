@@ -1,5 +1,5 @@
 insert into label(background_color, text_color, description, title)
-values ('#000000', '#FFFFFF', '"bug fix', 'bug'),
+values ('#000000', '#FFFFFF', 'bug fix', 'bug'),
        ('#00008b', '#FFFFFF', 'new feature', 'feature'),
        ('#a9a9a9', '#FFFFFF', 'new documentation', 'documentation');
 

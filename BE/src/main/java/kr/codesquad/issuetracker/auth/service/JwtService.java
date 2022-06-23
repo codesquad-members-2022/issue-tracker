@@ -1,8 +1,5 @@
 package kr.codesquad.issuetracker.auth.service;
 
-import static kr.codesquad.issuetracker.auth.utils.Utils.EXPIRATION_TIME;
-import static kr.codesquad.issuetracker.auth.utils.Utils.MEMBER_ID;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -14,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtService {
+
+	private static final String MEMBER_ID = "memberId";
+
+	private static final int EXPIRATION_TIME = 60 * 144 * 10000;
+
 	private final String ISSUER;
 	private final String SECRET_KEY;
 

@@ -1,6 +1,6 @@
 package kr.codesquad.issuetracker.web.controller;
 
-import kr.codesquad.issuetracker.auth.annotation.LoginVerify;
+import kr.codesquad.issuetracker.auth.annotation.LoginRequired;
 import kr.codesquad.issuetracker.service.LabelService;
 import kr.codesquad.issuetracker.web.dto.label.LabelRequestDto;
 import kr.codesquad.issuetracker.web.dto.label.LabelResponseDto;
@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,21 +28,21 @@ public class LabelController {
 		return labelService.list();
 	}
 
-	@LoginVerify
+	@LoginRequired
 	@PostMapping
 	public void labelAdd(@RequestBody LabelRequestDto dto) {
 		log.debug("라벨 추가");
 		labelService.add(dto);
 	}
 
-	@LoginVerify
+	@LoginRequired
 	@DeleteMapping("{id}")
 	public void labelDelete(@PathVariable Long id) {
 		log.debug("라벨 삭제");
 		labelService.delete(id);
 	}
 
-	@LoginVerify
+	@LoginRequired
 	@PostMapping("{id}")
 	public void labelEdit(@PathVariable Long id, @RequestBody LabelRequestDto dto) {
 		log.debug("라벨 수정");

@@ -18,6 +18,7 @@ public enum ErrorMessage {
 
 	//500
 	UNIQUE_CONSTRAINT_VIOLATED(HttpStatus.INTERNAL_SERVER_ERROR, "해당 라벨이 다른 이슈에 사용되고있어서 삭제할수 없습니다."),
+	NOT_MATCH_HTTP_HEADER_FORMAT(HttpStatus.INTERNAL_SERVER_ERROR, "해당 헤더의 형식이 맞지 않습니다."),
 
 	//501
 	LABEL_NOT_SAVE(HttpStatus.NOT_IMPLEMENTED, "라벨을 저장할 수 없습니다.");
