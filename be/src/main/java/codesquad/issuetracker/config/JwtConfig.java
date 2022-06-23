@@ -13,7 +13,7 @@ public class JwtConfig {
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
     private static final long MINUTE = 60 * 1000;
     private static final long ACCESS_TOKEN_DURATION = 2 * MINUTE; // access token 유효시간 : 1분
-    private static final long REFRESH_TOKEN_DURATION = 3 * MINUTE; // refresh token 유효시간 : 2분
+    private static final long REFRESH_TOKEN_DURATION = 10 * MINUTE; // refresh token 유효시간 : 2분
 
     @Bean
     public AccessTokenProvider accessTokenProvider() {

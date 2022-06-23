@@ -13,13 +13,13 @@ import java.util.Map;
 public class AccessToken extends Token {
 
     public AccessToken(String token, Key secretKey) {
-        super.secretKey = secretKey;
         super.token = token;
+        super.secretKey = secretKey;
     }
 
-    AccessToken(String memberId, Key secretKey, SignatureAlgorithm signatureAlgorithm, long expiration) {
+    AccessToken(String memberId, Key secretKey, SignatureAlgorithm signatureAlgorithm, long duration) {
         super.secretKey = secretKey;
-        super.token = compactToken(memberId, signatureAlgorithm, new Date(System.currentTimeMillis() + expiration));
+        super.token = compactToken(memberId, signatureAlgorithm, new Date(System.currentTimeMillis() + duration));
     }
 
     private String compactToken(String memberId, SignatureAlgorithm signatureAlgorithm, Date expiration) {
