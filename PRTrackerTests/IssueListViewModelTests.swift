@@ -29,6 +29,8 @@ class IssueListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.issueViewModels.value?.count, 2)
         XCTAssertEqual(sut.issueViewModels.value?[0].title.value, "PR 제목입니당")
         XCTAssertEqual(sut.issueViewModels.value?[0].content.value, "작업 내용은 다음과 같습니다,,\n클릭해서 봐주세요..")
+        XCTAssertEqual(sut.issueViewModels.value?[1].title.value, "PR 제목입니당2")
+        XCTAssertEqual(sut.issueViewModels.value?[1].content.value, "작업 내용은 다음과 같습니다,,\n클릭해서 봐주세욤")
     }
     
     func test_viewModel_should_get_no_data_when_issueManager_get_issues() {
