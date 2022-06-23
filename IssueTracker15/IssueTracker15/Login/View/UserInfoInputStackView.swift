@@ -5,8 +5,12 @@
 //  Created by 박진섭 on 2022/06/16.
 //
 
-import Foundation
 import UIKit
+
+enum UserInputType {
+    case ID
+    case password
+}
 
 final class UserInfoInputStackView: UIStackView {
     
@@ -16,9 +20,10 @@ final class UserInfoInputStackView: UIStackView {
         return label
     }()
     
-    private let IDTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "아이디를 입력해주세요"
+    private let IDTextField: UserInfoTextField = {
+        let textField = UserInfoTextField()
+        textField.setPlaceHolder("아이디를 입력해주세요")
+        textField.setType(.ID)
         return textField
     }()
     
@@ -38,9 +43,10 @@ final class UserInfoInputStackView: UIStackView {
         return label
     }()
     
-    private let PasswordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "비밀번호를 입력해주세요"
+    private let PasswordTextField: UserInfoTextField = {
+        let textField = UserInfoTextField()
+        textField.setPlaceHolder("비밀번호를 입력해주세요")
+        textField.setType(.password)
         return textField
     }()
     
