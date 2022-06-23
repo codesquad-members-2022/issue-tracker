@@ -1,5 +1,4 @@
 import { Status } from '@/components/InputMessage/type';
-import { StyledComponent } from 'styled-components';
 
 type StyleType = 'large' | 'medium' | 'small';
 
@@ -22,6 +21,8 @@ interface I$Label {
 interface I$TextInput extends IStyleProps {
   styleType?: StyleType;
   visibleLabel: boolean;
+  hoverStyle?: IStyleProps;
+  focusStyle?: IStyleProps;
 }
 
 interface ITextInputProps<T> extends IStyleProps {
@@ -30,8 +31,11 @@ interface ITextInputProps<T> extends IStyleProps {
   label?: string;
   type?: string;
   name: T;
-  as?: StyledComponent<'div', any, I$TextInput, never>;
   handleChange?: Function;
+  hoverStyle?: IStyleProps;
+  focusStyle?: IStyleProps;
+  disabledStyle?: IStyleProps;
+  defaultValue?: string;
 }
 
 export type { StyleType, IStyleProps, I$Label, I$TextInput, ITextInputProps };

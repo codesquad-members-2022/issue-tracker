@@ -92,14 +92,26 @@ const createCustomLabelStyle = (styleType: StyleType) => css`
   ${getStyleTypes(styleType).label}
 `;
 
-const createCustomTextInputStyle = (styleType: StyleType, props: IStyleProps) => css`
-  ${getStyleTypes(styleType).textInput}
+const createCustomTextInputStyle = (props: IStyleProps, styleType?: StyleType) => css`
+  ${styleType && getStyleTypes(styleType).textInput}
   ${props.width && { width: props.width }}
   ${props.height && { height: props.height }}
   ${props.color && { color: props.color }}
   ${props.background && { background: props.background }}
   ${props.border && { border: props.border }}
   ${props.borderRadius && { 'border-radius': props.borderRadius }}
+`;
+
+const createCustomEventStyle = (
+  hoverStyle: IStyleProps | undefined,
+  focusStyle: IStyleProps | undefined
+) => css`
+  :hover {
+    ${hoverStyle && createCustomTextInputStyle(hoverStyle)}
+  }
+  :focus {
+    ${focusStyle && createCustomTextInputStyle(focusStyle)}
+  }
 `;
 
 const $TextInputWrap = styled.div`
@@ -122,7 +134,8 @@ const $TextInput = styled.input<I$TextInput>`
   :focus {
     transition: ${({ visibleLabel }) => (visibleLabel ? 'padding 0.15s ease-in' : 'none')};
   }
-  ${({ styleType = 'large', ...props }) => createCustomTextInputStyle(styleType, props)}
+  ${({ styleType = 'large', ...props }) => createCustomTextInputStyle(props, styleType)}
+  ${({ hoverStyle, focusStyle }) => createCustomEventStyle(hoverStyle, focusStyle)};
 `;
 
 export { $TextInputWrap, $Label, $TextInput };

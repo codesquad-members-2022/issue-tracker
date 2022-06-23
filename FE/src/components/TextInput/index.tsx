@@ -9,12 +9,10 @@ export default function TextInput<T extends string>({
   label,
   type = 'text',
   name,
-  as,
   handleChange,
   ...props
 }: ITextInputProps<T>) {
   const [visibleLabel, setVisibleLabel] = useState(false);
-  const TextInputWrap = as || $TextInputWrap;
 
   const showLabel = (target: HTMLInputElement) => {
     const hasValue = target.value.length >= MIN_INPUT_VALUE_LENGTH;
@@ -23,11 +21,11 @@ export default function TextInput<T extends string>({
 
   const handleInputChange = (target: HTMLInputElement) => {
     if (handleChange) handleChange(target);
-    showLabel(target);
+    if (label) showLabel(target);
   };
 
   return (
-    <TextInputWrap>
+    <$TextInputWrap>
       {label && (
         <$Label styleType={props.styleType} visible={visibleLabel}>
           {label}
@@ -41,6 +39,6 @@ export default function TextInput<T extends string>({
         visibleLabel={visibleLabel}
         onChange={({ target }: { target: HTMLInputElement }) => handleInputChange(target)}
       />
-    </TextInputWrap>
+    </$TextInputWrap>
   );
 }
