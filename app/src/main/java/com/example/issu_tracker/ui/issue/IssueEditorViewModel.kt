@@ -2,13 +2,8 @@ package com.example.issu_tracker.ui.issue
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.issu_tracker.data.Comment
-import com.example.issu_tracker.data.Label
-import com.example.issu_tracker.data.NewIssue
-import com.example.issu_tracker.data.User
-import com.example.issu_tracker.data.repository.FilterRepository
+import com.example.issu_tracker.data.repository.IssueEditorRepository
 import com.example.issu_tracker.ui.common.Constants
-import com.example.issu_tracker.ui.filter.FilterViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +11,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class IssueEditorViewModel @Inject constructor(val repository: FilterRepository) : ViewModel() {
+class IssueEditorViewModel @Inject constructor(val repository: IssueEditorRepository) :
+    ViewModel() {
 
     private val _issueTitleStateFlow = MutableStateFlow<String>("")
     val issueTitleStateFlow = _issueTitleStateFlow.asStateFlow()
@@ -32,6 +28,9 @@ class IssueEditorViewModel @Inject constructor(val repository: FilterRepository)
 
     private val _mileStoneStateFlow = MutableStateFlow<List<String>>(mutableListOf(""))
     val mileStoneStateFlow = _mileStoneStateFlow.asStateFlow()
+
+    private val _imageUrlFromFireBaseStateFlow = MutableStateFlow<String>("")
+    val imageUrlFromFireBaseStateFlow  = _imageUrlFromFireBaseStateFlow.asStateFlow()
 
     private var assigneeConditionValue = ""
     private var labelConditionValue = ""
@@ -72,7 +71,7 @@ class IssueEditorViewModel @Inject constructor(val repository: FilterRepository)
     }
 
     private suspend fun setAssigneeList() {
-        val assigneeList = repository.loadUsers().toMutableList()
+        val assigneeList = repository.loadAssignee().toMutableList()
         assigneeList.add("")
         _assigneeStateFlow.emit(assigneeList)
     }
@@ -82,6 +81,13 @@ class IssueEditorViewModel @Inject constructor(val repository: FilterRepository)
             Constants.CONDITION_TYPE_ASSIGNEE -> assigneeConditionValue = text
             Constants.CONDITION_TYPE_LABEL -> labelConditionValue = text
 //            Constants.CONDITION_TYPE_ASSIGNEE -> mileStoneConditionValue = text
+        }
+    }
+
+    fun uploadImageInFireBase(imageUriFromLocal: String) {
+        viewModelScope.launch {
+            val imageUrl = repository.uploadImageAndGetImageUriFromFireBase(imageUriFromLocal)
+            _imageUrlFromFireBaseStateFlow.value = imageUrl
         }
     }
 }
