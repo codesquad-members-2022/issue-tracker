@@ -14,7 +14,6 @@ public class Issue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "issues_id")
     private Long id;
 
     private String title;

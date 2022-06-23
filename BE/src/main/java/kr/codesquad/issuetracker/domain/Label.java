@@ -9,7 +9,6 @@ public class Label {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "label_id")
     private Long id;
 
     private String title;
