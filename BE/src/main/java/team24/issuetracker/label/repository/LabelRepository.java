@@ -9,6 +9,8 @@ import team24.issuetracker.label.domain.Label;
 @Repository
 public interface LabelRepository extends JpaRepository<Label, Long> {
 
-	@Query("select l from Label l where l.isDeleted = false")
+	@Query("select l "
+		+ "from Label l "
+		+ "where l.isDeleted = false")
 	List<Label> findAll();
 }
