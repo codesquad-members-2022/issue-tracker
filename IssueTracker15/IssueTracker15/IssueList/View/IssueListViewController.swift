@@ -41,47 +41,8 @@ class IssueListViewController: UIViewController {
         }
     }
     
-    private var currentViewState: IssueListStatus = .list {
-        willSet {
-            switch currentViewState {
-            case .list:
-                print("이슈 리스트 기본화면을 보여주세요.")
-            case .selection:
-                print("이슈 리스트 선택화면을 보여주세요.")
-            }
-        }
-    }
-    
-    // MARK: - Navigation Bar Actions
-    
-    private var filterBarButtonAction: UIAction {
-        UIAction(
-            title: "필터",
-            image: UIImage.filterButtonImage,
-            identifier: nil,
-            discoverabilityTitle: "Filter Issue List",
-            attributes: [],
-            state: .on,
-            handler: { _ in
-                let filterVC = IssueFilterItemSelectViewController()
-                filterVC.setVC(self)
-                self.show(filterVC, sender: nil)
-            }
-        )
-    }
-    
-    private var selectIssueBarButtonAction: UIAction {
-        UIAction(
-            title: "선택",
-            image: UIImage.checkButtonImage,
-            identifier: nil,
-            discoverabilityTitle: "Select Issue List",
-            attributes: [],
-            state: .on,
-            handler: { _ in
-                self.currentViewState.toggle()
-            }
-        )
+    private var issueNavigationController: IssueNavigationController? {
+        return navigationController as? IssueNavigationController
     }
     
     // MARK: - Initialize IssueCollectionView
@@ -145,8 +106,9 @@ class IssueListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIButton(type: .system, primaryAction: filterBarButtonAction))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: UIButton(type: .system, primaryAction: selectIssueBarButtonAction))
+        if let navigationBinding = navigationController as? ViewBindable {
+            navigationBinding.setVC(self)
+        }
         
         vm = IssueListViewModel { param, bindable in
             print("Actions move to Issue Detail ViewController using \(String(describing: param)), \(bindable)")
@@ -194,7 +156,7 @@ class IssueListViewController: UIViewController {
 extension IssueListViewController: ViewBinding {
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
         if (target as? IssueListCell) != nil {
-            if currentViewState == .selection, let state = param as? CheckButtonSelected {
+            if issueNavigationController?.currentViewState == .selection, let state = param as? CheckButtonSelected {
                 var mutateState = state
                 mutateState.toggle()
                 target.receive(mutateState)
@@ -203,6 +165,10 @@ extension IssueListViewController: ViewBinding {
             }
         } else if (target as? IssueFilterItemSelectViewController) != nil {
             print("IssueFilterItemSelectViewController Showed")
+        } else if (target as? IssueNavigationController) != nil {
+            let filterVC = IssueFilterItemSelectViewController()
+            filterVC.setVC(self)
+            show(filterVC, sender: target)
         }
     }
 }
