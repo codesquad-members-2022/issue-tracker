@@ -35,12 +35,6 @@ class IssueListViewController: UIViewController {
     private var vm: IssueListViewModel?
     
     // MARK: - IssueCollectionView Properties
-    private var issueList = Array(repeating: IssueDTO.empty, count: 25) {
-        didSet {
-            self.applySnapshot()
-        }
-    }
-    
     private var issueNavigationController: IssueNavigationController? {
         return navigationController as? IssueNavigationController
     }
@@ -95,6 +89,7 @@ class IssueListViewController: UIViewController {
             collectionView: issueListCollectionView,
             cellProvider: { (collectionView, indexPath, issue) -> UICollectionViewCell? in
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.reuseIdentifier, for: indexPath) as? IssueListCell
+                cell?.indexPath = indexPath
                 cell?.issueDTO = issue
                 cell?.setVC(self)
                 return cell
@@ -111,7 +106,7 @@ class IssueListViewController: UIViewController {
         }
         
         vm = IssueListViewModel { param, bindable in
-            print("Actions move to Issue Detail ViewController using \(String(describing: param)), \(bindable)")
+            self.applySnapshot()
         }
         
         view.addSubview(issueListCollectionView)
@@ -124,12 +119,9 @@ class IssueListViewController: UIViewController {
     
     // MARK: - IssueViewController Apply/Reload
     private func applySnapshot(animatingDifferences: Bool = true) {
-        var issueSnapshot = IssueSnapshot()
-        var items = issueList
+        guard let items = vm?.issueList else { return }
         
-        for i in items.indices { // issueList items are Hashable with id property.
-            items[i].id = i
-        }
+        var issueSnapshot = IssueSnapshot()
         
         issueSnapshot.appendSections([Section.main])
         issueSnapshot.appendItems(items)
@@ -154,18 +146,21 @@ class IssueListViewController: UIViewController {
 }
 
 extension IssueListViewController: ViewBinding {
+    
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
-        if (target as? IssueListCell) != nil {
-            if issueNavigationController?.currentViewState == .selection, let state = param as? CheckButtonSelected {
-                var mutateState = state
-                mutateState.toggle()
-                target.receive(mutateState)
-            } else {
-                print("IssueListCell Selected")
-            }
+        
+        if let cell = target as? IssueListCell {
+            
+            let isSelected = vm?.selectList(cell) ?? false
+            target.receive(isSelected)
+            print("IssueListCell Selected")
+            
         } else if (target as? IssueFilterItemSelectViewController) != nil {
+            
             print("IssueFilterItemSelectViewController Showed")
+            
         } else if (target as? IssueNavigationController) != nil {
+            
             let filterVC = IssueFilterItemSelectViewController()
             filterVC.setVC(self)
             present(filterVC, animated: true)

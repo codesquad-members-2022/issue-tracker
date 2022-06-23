@@ -7,22 +7,10 @@
 
 import UIKit
 
-enum CheckButtonSelected {
-    case selected
-    case deselected
-    
-    mutating func toggle() {
-        switch self {
-        case .selected:
-            self = .deselected
-        case .deselected:
-            self = .selected
-        }
-    }
-}
-
 class IssueListCell: UICollectionViewCell,
                         ViewBindable {
+    
+    var indexPath: IndexPath?
     
     // MARK: - ViewBindable Implements. Select Multiple Issue List Functionality.
     
@@ -33,9 +21,9 @@ class IssueListCell: UICollectionViewCell,
     }
     
     func receive(_ responseData: Any) {
-        if let currentState = responseData as? CheckButtonSelected {
+        if let currentState = responseData as? Bool {
             print(currentState)
-            self.checkSelectButton.currentState = currentState
+            self.checkSelectButton.isSelected = currentState
         }
     }
     
@@ -46,7 +34,7 @@ class IssueListCell: UICollectionViewCell,
     var issueDTO: IssueDTO? {
         didSet {
             titleLabel.text = issueDTO?.title
-            checkSelectButton.currentState = .deselected
+            checkSelectButton.isSelected = issueDTO?.isSelected ?? false
             bodyLabel.text = issueDTO?.body
             mileStoneTitleLabel.text = "MileStoneMileStoneMileStoneMileStoneMileStoneMileStoneMileStoneMileStone"
             testLabels.text = "Documentation"
@@ -154,20 +142,16 @@ class IssueListCell: UICollectionViewCell,
     }
     
     @objc func checkSelectButtonTouchUpInsdie(_ sender: CheckSelectButton) {
-        sendAction(sender.currentState)
+        sendAction(nil)
     }
         
     // 공통으로 사용할 체크버튼인지 아직 알 수는 없기 때문에 Nested Type 같이 사용합니다.
     // MARK: - CheckButton inherited from UIButton
     class CheckSelectButton: UIButton {
-        var currentState: CheckButtonSelected = .deselected {
+        override var isSelected: Bool {
             didSet {
-                switch currentState {
-                case .selected:
-                    setImage(UIImage.checkButtonImageFilled, for: .normal)
-                case .deselected:
-                    setImage(UIImage.checkButtonImage, for: .normal)
-                }
+                setImage(isSelected ? .checkButtonImageFilled : .checkButtonImage, for: .normal)
+                setNeedsDisplay()
             }
         }
     }
