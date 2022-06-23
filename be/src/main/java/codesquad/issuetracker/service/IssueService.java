@@ -27,37 +27,42 @@ public class IssueService {
     public IssueDtos getIssuesByCriteria(IssueSearchCondition condition) {
         Set<String> labelConditions = condition.parseLabelConditions();
         Set<String> exclusionConditions = condition.parseExclusionConditions();
-        Map<IssueStatus, Long> countOfIssuesByStatus = new HashMap<>();
         List<Issue> issues = issueRepository.search(condition, labelConditions, exclusionConditions)
             .stream()
             .filter(issue -> containsAllLabels(issue.getIssueLabels(), labelConditions))
             .collect(Collectors.toList());
 
+        List<IssueDto> selectedIssues = issues.stream()
+            .filter(issue -> issue.hasSameStatus(condition.getStatus()))
+            .map(issue -> IssueDto.of(issue))
+            .collect(Collectors.toList());
 
-        return new IssueDtos(
-            countOfIssuesByStatus.getOrDefault(IssueStatus.OPEN, 0L),
-            countOfIssuesByStatus.getOrDefault(IssueStatus.CLOSED, 0L),
-            issues.stream()
-                .filter(issue -> issue.hasSameStatus(condition.getStatus()))
-                .map(issue -> IssueDto.of(issue))
-                .collect(Collectors.toList())
-        );
-    }
+        long[] countOfIssuesByStatus = calculateCountOfIssuesByStatus(issues.size(), selectedIssues.size(), condition.isOpenStatus());
 
-    private Map<IssueStatus, Long> getCountOfIssuesByStatus(List<Issue> issues) {
-        Map<IssueStatus, Long> countOfIssuesByStatus = new HashMap<>();
-        for (Issue issue : issues) {
-            countOfIssuesByStatus.put(issue.getStatus(),
-                countOfIssuesByStatus.getOrDefault(issue.getStatus(), 0L) + 1);
-        }
-        return countOfIssuesByStatus;
+        return new IssueDtos(countOfIssuesByStatus[0], countOfIssuesByStatus[1], selectedIssues);
     }
 
     private boolean containsAllLabels(List<IssueLabel> issueLabels, Set<String> labelConditions) {
-        Set<String> labelsOfIssue = issueLabels.stream()
-            .map(issueLabel -> issueLabel.getLabel().getName()).collect(Collectors.toSet());
+        Set<String> labelsOfIssue = issueLabels
+            .stream()
+            .map(issueLabel -> issueLabel.getLabelName())
+            .collect(Collectors.toSet());
 
         return labelsOfIssue.containsAll(labelConditions);
+    }
+
+    private long[] calculateCountOfIssuesByStatus(long totalCount, long countOfSelectedIssues, boolean isOpenStatus) {
+        long countOfOpenIssues, countOfClosedIssues;
+
+        if (isOpenStatus) {
+            countOfOpenIssues = countOfSelectedIssues;
+            countOfClosedIssues = totalCount - countOfSelectedIssues;
+        } else {
+            countOfOpenIssues = totalCount - countOfSelectedIssues;
+            countOfClosedIssues = countOfSelectedIssues;
+        }
+
+        return new long[]{countOfOpenIssues, countOfClosedIssues};
     }
 
     @Transactional

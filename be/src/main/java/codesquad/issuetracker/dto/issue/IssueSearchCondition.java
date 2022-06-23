@@ -33,11 +33,15 @@ public class IssueSearchCondition {
             return exclusionConditions;
         }
 
-        String[] params = labels.split(",");
+        String[] params = conditions.split(",");
         for (String param : params) {
             exclusionConditions.add(param.replaceAll(" ", ""));
         }
 
         return exclusionConditions;
+    }
+
+    public boolean isOpenStatus() {
+        return status.equals(IssueStatus.OPEN);
     }
 }
