@@ -1,4 +1,4 @@
-package com.team33.backend.emoji.service;
+package com.team33.backend.emoji.repository;
 
 import com.team33.backend.emoji.domain.Emotion;
 import org.springframework.data.jpa.repository.JpaRepository;

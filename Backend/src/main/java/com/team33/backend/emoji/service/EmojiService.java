@@ -1,6 +1,7 @@
 package com.team33.backend.emoji.service;
 
 import com.team33.backend.emoji.domain.Emotion;
+import com.team33.backend.emoji.repository.EmotionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

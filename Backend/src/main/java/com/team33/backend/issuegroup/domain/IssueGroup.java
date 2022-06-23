@@ -31,6 +31,13 @@ public class IssueGroup extends CommonEntity {
     @OneToMany(mappedBy = "issueGroup", cascade = CascadeType.REMOVE)
     private List<Milestone> milestones = new ArrayList<>();
 
+    protected IssueGroup() {
+    }
+
+    public IssueGroup(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

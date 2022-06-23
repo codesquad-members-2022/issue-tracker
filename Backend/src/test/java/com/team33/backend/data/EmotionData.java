@@ -21,7 +21,8 @@ public class EmotionData {
     private List<Emotion> createEmotions() {
         List<Emotion> emotions = new ArrayList<>();
         emotions.add(createSmileEmotion());
-        emotions.add(createThumb());
+        emotions.add(createThumbEmotion());
+        emotions.add(createLoveEmotion());
         return emotions;
     }
 
@@ -29,7 +30,11 @@ public class EmotionData {
         return new Emotion("smile");
     }
 
-    private Emotion createThumb() {
+    private Emotion createThumbEmotion() {
         return new Emotion("thumb");
+    }
+
+    private Emotion createLoveEmotion() {
+        return new Emotion("love");
     }
 }

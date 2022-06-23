@@ -39,6 +39,27 @@ public class Member {
     @OneToMany(mappedBy = "author")
     private List<Issue> issues = new ArrayList<>();
 
+    public Member(String name) {
+        this.name = name;
+        this.deleted = new Deleted();
+    }
+
+    public Member(String githubId, String profileImageUrl) {
+        this.githubId = githubId;
+        this.profileImageUrl = profileImageUrl;
+        this.deleted = new Deleted();
+    }
+
+    public Member(String name, String githubId, String profileImageUrl) {
+        this.name = name;
+        this.githubId = githubId;
+        this.profileImageUrl = profileImageUrl;
+        this.deleted = new Deleted();
+    }
+
+    public Member() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

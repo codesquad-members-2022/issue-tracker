@@ -1,8 +1,8 @@
 package com.team33.backend.issue.domain;
 
 import com.team33.backend.comment.domain.Comment;
-import com.team33.backend.common.jpa.entity.Deleted;
 import com.team33.backend.common.jpa.entity.CommonEntity;
+import com.team33.backend.common.jpa.entity.Deleted;
 import com.team33.backend.emoji.domain.Emoji;
 import com.team33.backend.issuegroup.domain.IssueGroup;
 import com.team33.backend.member.domain.Member;
@@ -65,6 +65,39 @@ public class Issue extends CommonEntity {
 
     @OneToMany(mappedBy = "issue", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Emoji> emojis = new ArrayList<>();
+
+    public Issue(String title, Member author, IssueGroup issueGroup) {
+        this.title = title;
+        this.author = author;
+        this.issueStatus = initIssueStatus();
+        this.issueGroup = issueGroup;
+    }
+
+    public Issue(String title) {
+        this.title = title;
+        this.issueStatus = initIssueStatus();
+        this.deleted = initDeleted();
+    }
+
+    private Deleted initDeleted() {
+        return new Deleted();
+    }
+
+    public void registAuthor(Member author) {
+        this.author = author;
+    }
+
+    public void registIssueGroup(IssueGroup issueGroup) {
+        this.issueGroup = issueGroup;
+    }
+
+    protected Issue() {
+
+    }
+
+    private IssueStatus initIssueStatus() {
+        return IssueStatus.OPEN;
+    }
 
     @Override
     public boolean equals(Object o) {

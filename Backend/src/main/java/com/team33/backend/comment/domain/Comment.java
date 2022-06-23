@@ -38,10 +38,11 @@ public class Comment extends CommonEntity {
     @NotBlank
     private String content;
 
+
     @Embedded
     private Deleted deleted;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "comment", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Image> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,6 +56,11 @@ public class Comment extends CommonEntity {
     @OneToMany(mappedBy = "comment", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Set<Emoji> emojis = new HashSet<>();
 
+    public Comment(String content) {
+        this.content = content;
+        this.deleted = initDeleted();
+    }
+
     public Comment(String content, Member member, Issue issue) {
         validateContent(content);
         this.content = content;
@@ -62,9 +68,22 @@ public class Comment extends CommonEntity {
         this.member = member;
         validateIssue(issue);
         this.issue = issue;
+        this.deleted = initDeleted();
     }
 
     protected Comment() {
+    }
+
+    private Deleted initDeleted() {
+        return new Deleted();
+    }
+
+    public void registMember(Member member){
+        this.member = member;
+    }
+
+    public void registIssue(Issue issue){
+        this.issue = issue;
     }
 
     private void validateContent(String content) {

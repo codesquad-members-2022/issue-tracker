@@ -16,6 +16,6 @@ public class MemberData {
     }
 
     private Member createMember() {
-        return new Member();
+        return new Member("Jun", "devjun10", "www.github.com");
     }
 }

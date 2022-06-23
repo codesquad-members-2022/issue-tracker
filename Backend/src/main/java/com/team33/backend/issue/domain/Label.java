@@ -29,6 +29,17 @@ public class Label {
     @NotBlank
     private String color;
 
+    protected Label() {
+    }
+
+    ;
+
+    public Label(String name, String description, String color) {
+        this.name = name;
+        this.description = description;
+        this.color = color;
+    }
+
     public void editLabel(String name, String description, String color) {
         this.name = name;
         this.description = description;
@@ -37,10 +48,10 @@ public class Label {
     }
 
     private void validateColor(String color) {
-        if (color != null && color.length() == 6) {
-            this.color = color;
+        if (color == null || color.length() != 6) {
+            throw new IllegalArgumentException("Label 색상을 선택해주세요.");
         }
-        throw new IllegalArgumentException("Label 색상을 선택해주세요.");
+        this.color = color;
     }
 
     @Override
