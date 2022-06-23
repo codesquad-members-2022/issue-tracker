@@ -75,3 +75,27 @@
 #### 도메인 및 테이블 설계
 + ERD
 > ![image](https://user-images.githubusercontent.com/82401504/174830795-b4674c2b-1faa-4f00-b189-64d9805d64d8.png)
+
+## 2주차 금요일 리뷰 요청
+
+### 진행 내용
+#### 애플리케이션
+##### 완료
++ JWT 활용 로그인 검증 관련 로직 오류 개선 및 리팩토링
++ 이슈 목록 검색(동적 검색) 관련 서비스 로직 리팩토링
++ API 명세서
+  + <a href="https://near-snipe-0de.notion.site/API-Description-be8af8c4d6b44f668f3a8f03368ea978">API 명세서 확인하기(클릭)</a><br/>
+
+##### 진행 예정
++ S3 이미지 업로드 기능 구현
+
+#### 인프라
+##### 완료
++ (없음)
+
+##### 진행 예정
++ 깃허브 액션 및 도커 활용 리액트 웹 앱 배포
+
+#### 도메인 및 테이블 설계
++ ERD
+> ![image](https://user-images.githubusercontent.com/82401504/175385258-7085046f-a541-48c2-9dbe-e0b8e1b700d1.png)
