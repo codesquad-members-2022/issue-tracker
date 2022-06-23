@@ -139,6 +139,7 @@ create table issue
     author_id        bigint       not null,
     issue_group_id   bigint       not null,
     milestone_id     bigint,
+    content          longtext     null,
     primary key (id)
 ) engine = InnoDB;
 
