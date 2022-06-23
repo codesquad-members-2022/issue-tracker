@@ -15,13 +15,16 @@ protocol IssueTracking {
 final class IssueTrackingRepository {
 
     func requestIssues(with target: IssueTrackerTarget,
-                       completion: @escaping (Result<[Issue]?, NetworkError>) -> Void) {
+                       completion: @escaping (Result<[Issue]?,
+                                              NetworkError>) -> Void) {
         guard let request = Provider.makeURLRequest(with: target)
         else { return completion(.failure(.invalidTarget)) }
 
         Provider.request(with: request) { data in
-            guard let issueList = DecodeManagerImplement
-                    .decodeJson(data: data, type: [Issue].self) else { return  completion(.failure(.decodingError) }
+            guard let data = data,
+                  let issueList = DecodeManagerImplement
+                    .decodeJson(data: data, type: [Issue].self)
+            else { return completion(.failure(.decodingError)) }
             return completion(.success(issueList))
         }
     }
