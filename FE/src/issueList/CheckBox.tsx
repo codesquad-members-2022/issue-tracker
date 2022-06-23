@@ -5,6 +5,7 @@ import React from 'react';
 
 type CheckBoxProps = {
   checkBoxType: 'initial' | 'active' | 'disable';
+  onClick: () => void;
 };
 
 type CheckBoxIconProps = {
@@ -13,7 +14,7 @@ type CheckBoxIconProps = {
   fill: string;
 };
 
-function CheckBox({ checkBoxType }: CheckBoxProps) {
+function CheckBox({ checkBoxType, onClick }: CheckBoxProps) {
   const initialCheckBox: CheckBoxIconProps = {
     iconName: 'checkBoxInitial',
     stroke: GREYSCALE.LINE,
@@ -46,6 +47,7 @@ function CheckBox({ checkBoxType }: CheckBoxProps) {
       iconName={checkBox.iconName}
       stroke={checkBox.stroke}
       fill={checkBox.fill}
+      onClick={onClick}
     />
   );
 }

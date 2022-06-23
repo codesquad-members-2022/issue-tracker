@@ -2,13 +2,31 @@ import { GREYSCALE } from '@/constants';
 import React from 'react';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
+import { SelectedIssueType } from './IssueList';
 import IssueMenu from './IssueMenu';
 import IssueTab from './IssueTab';
 
-function IssueHeader() {
+type IssueHeaderProps = {
+  selectedIssues: SelectedIssueType;
+};
+
+function IssueHeader({ selectedIssues }: IssueHeaderProps) {
+  const checkBoxType = (() => {
+    const selectedIssuesList = Object.values(selectedIssues);
+    if (selectedIssuesList.every((selected) => selected === true)) {
+      return 'active';
+    }
+
+    if (selectedIssuesList.some((selected) => selected === true)) {
+      return 'disable';
+    }
+
+    return 'initial';
+  })();
+
   return (
     <IssueHeaderBox>
-      <CheckBox checkBoxType={'initial'} />
+      <CheckBox checkBoxType={checkBoxType} />
       <IssueMenus>
         <IssueMenu
           icon={'alertCircle'}

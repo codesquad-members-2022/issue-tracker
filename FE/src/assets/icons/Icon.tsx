@@ -1,4 +1,5 @@
 import icons from '@/assets/icons/svgs';
+import React from 'react';
 
 type IconProps = {
   iconName: keyof typeof icons;
@@ -6,6 +7,7 @@ type IconProps = {
   height?: number;
   stroke?: string;
   fill?: string;
+  onClick?: (() => void) | null;
 };
 
 function Icon({
@@ -14,9 +16,18 @@ function Icon({
   height = 16,
   stroke = 'none',
   fill = 'none',
+  onClick = null,
 }: IconProps) {
   const IconSvg = icons[iconName];
-  return <IconSvg width={width} height={height} stroke={stroke} fill={fill} />;
+  return (
+    <IconSvg
+      width={width}
+      height={height}
+      stroke={stroke}
+      fill={fill}
+      onClick={onClick}
+    />
+  );
 }
 
 export default Icon;
