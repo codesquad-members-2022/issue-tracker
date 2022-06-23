@@ -71,19 +71,6 @@ class IssueNavigationController: UINavigationController, ViewBindable {
         navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: UIButton(type: .system, primaryAction: selectIssueBarButtonAction))
     }
     
-    @objc func filterButtonTouchUpInside(_ sender: UIBarButtonItem) {
-        guard let binding = vc else { return }
-        
-        let filterVC = IssueFilterItemSelectViewController()
-        filterVC.setVC(binding)
-        binding.inputViewEvent(self, filterVC)
-    }
-    
-    @objc func selectButtonTochupInside(_ sender: UIBarButtonItem) {
-        currentViewState.toggle()
-        vc?.inputViewEvent(self, self.currentViewState)
-    }
-    
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         let isIssueList = viewController is IssueListViewController
         navigationItem.hidesBackButton = isIssueList

@@ -168,7 +168,7 @@ extension IssueListViewController: ViewBinding {
         } else if (target as? IssueNavigationController) != nil {
             let filterVC = IssueFilterItemSelectViewController()
             filterVC.setVC(self)
-            show(filterVC, sender: target)
+            present(filterVC, animated: true)
         }
     }
 }

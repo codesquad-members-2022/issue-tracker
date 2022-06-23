@@ -7,8 +7,7 @@
 
 import UIKit
 
-class IssueFilterItemSelectViewController: UIViewController,
-                                            ViewBindable{
+class IssueFilterItemSelectViewController: UIViewController {
     // IssueFilterItemSelectViewController은 IssueListViewController에 의해 binding 되므로 ViewBindable 을 구현하는 ViewController 가 되었습니다.
     
     // MARK: - ViewBindable Implements. Select Multiple Issue List Functionality.
@@ -29,7 +28,7 @@ class IssueFilterItemSelectViewController: UIViewController,
     
     // MARK: - ViewController Functionality
     override func viewDidLoad() {
-        self.viewDidLoad()
+        super.viewDidLoad()
         self.view.backgroundColor = .red
     }
 }
