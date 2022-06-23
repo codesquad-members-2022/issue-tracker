@@ -45,8 +45,12 @@ class MilestoneAddViewModel(
 
     fun setData(milestone: MileStone) {
         this.title.value = milestone.title
-        this.description.value = milestone.description!!
-        this.deadline.value = milestone.deadLine!!
+        if (milestone.description != null) {
+            this.description.value = milestone.description
+        }
+        if (milestone.deadLine != null) {
+            this.deadline.value = milestone.deadLine
+        }
     }
 
     fun clearDeadline() {
