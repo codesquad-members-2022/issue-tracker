@@ -26,7 +26,8 @@ public class MemberController {
     @GetMapping("/api/mine")
     public MemberDto mine(HttpServletRequest request) {
         String accessToken = TokenUtils.getAccessToken(request);
-        AccessToken token = accessTokenProvider.createToken(accessToken);
+        AccessToken token = accessTokenProvider.convertToObject(accessToken);
+        System.out.println(token.getMemberId());
         return memberService.getMemberById(Long.parseLong(token.getMemberId()));
     }
 }
