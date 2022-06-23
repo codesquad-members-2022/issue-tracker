@@ -41,7 +41,6 @@
 		0290D0F3286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F2286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift */; };
 		0290D0F628645BD100A4E3A7 /* EditingIssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F528645BD100A4E3A7 /* EditingIssueManager.swift */; };
 		0290D0F828645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F728645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift */; };
-		0290D0FA286497B400A4E3A7 /* EditingIssueManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F9286497B400A4E3A7 /* EditingIssueManagerTests.swift */; };
 		02AEC2EE285C1AF500AAE835 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */; };
 		02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */; };
 		02AEC2F428600ACF00AAE835 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */; };
@@ -138,7 +137,6 @@
 		0290D0F2286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueTextFieldDelegate.swift; sourceTree = "<group>"; };
 		0290D0F528645BD100A4E3A7 /* EditingIssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueManager.swift; sourceTree = "<group>"; };
 		0290D0F728645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueNetworkTarget.swift; sourceTree = "<group>"; };
-		0290D0F9286497B400A4E3A7 /* EditingIssueManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueManagerTests.swift; sourceTree = "<group>"; };
 		02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
@@ -455,7 +453,6 @@
 				02AEC2FE28603A2600AAE835 /* SignInManagerTests.swift */,
 				02B5A55A286068670087C6C1 /* NetworkServiceTests.swift */,
 				02B5A55E2860810E0087C6C1 /* SignInViewModelTests.swift */,
-				0290D0F9286497B400A4E3A7 /* EditingIssueManagerTests.swift */,
 			);
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
@@ -798,7 +795,6 @@
 				02B5A55F2860810E0087C6C1 /* SignInViewModelTests.swift in Sources */,
 				5B29A0D828573E410088EC11 /* IssueTrackerTests.swift in Sources */,
 				02B5A55B286068670087C6C1 /* NetworkServiceTests.swift in Sources */,
-				0290D0FA286497B400A4E3A7 /* EditingIssueManagerTests.swift in Sources */,
 				02AEC2FF28603A2600AAE835 /* SignInManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
