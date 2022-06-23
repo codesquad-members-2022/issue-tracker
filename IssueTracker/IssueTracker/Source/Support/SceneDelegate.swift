@@ -20,7 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // TODO: - 로그인 흐름 하면서 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = RootWindow(scene: windowScene)
+        self.rootWindow = RootWindow(scene: windowScene)
+        self.rootWindow?.setRootViewController()
+        window = self.rootWindow
         window?.makeKeyAndVisible()
     }
 
@@ -36,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // RootVM 한테 요청
         let issueListViewModel = IssueListViewModel()
 
-        issueListViewModel.loginSuccess = {
+        issueListViewModel.loadedIssues = {
             DispatchQueue.main.async {
                 let issueListVC = IssueListViewController()
                 issueListVC.viewModel = issueListViewModel
@@ -47,9 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         loginViewModel.repository.getGithubAccessToken(urlRequest) { tokenValue in
             UserDefaults.standard.set(tokenValue, forKey: Environment.token)
             issueListViewModel.loadIssueList()
-            //  여기가 호출 되는 시점은 토큰을 받아오기 전 시점임, 즉 토큰을 받아온 뒤로 시점을 정해줄 수 있다면?! 가능
-//            self.rootWindow.setRootViewController()
-            self.rootWindow.setIssueListVC()
+            self.rootWindow?.setIssueListVC()
         }
 
     }

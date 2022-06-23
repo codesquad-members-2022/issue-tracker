@@ -14,9 +14,16 @@ enum HTTPHeader {
     var dictionary: [String: String] {
         switch self {
         case .oauth:
-            return ["Content-Type": "application/json", "Accept": "application/json"]
+            return [
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            ]
         case .githubAPIRequest(let token):
-            return ["Content-Type": "application/json", "Accept": "application/vnd.github.v3+json", "Authorization": "token \(token)"]
+            return [
+                "Content-Type": "application/json",
+                "Accept": "application/vnd.github.v3+json",
+                "Authorization": "token \(token)"
+            ]
         }
     }
 

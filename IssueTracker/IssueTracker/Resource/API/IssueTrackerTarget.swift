@@ -22,7 +22,7 @@ extension IssueTrackerTarget: BaseTarget {
         case .requestIssueList:
             return URL(string: "https://api.github.com")
         case .requestLoginStatus:
-            return URL(string: "https://github.com/login")
+            return URL(string: "https://api.github.com/user")
         }
     }
     // MARK: - End Point

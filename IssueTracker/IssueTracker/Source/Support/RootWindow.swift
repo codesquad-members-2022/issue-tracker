@@ -15,20 +15,22 @@ final class RootWindow: UIWindow {
     init(scene: UIWindowScene) {
         super.init(windowScene: scene)
         overrideUserInterfaceStyle = .light
-        setRootViewController()
+//        setRootViewController()
     }
 
     func setRootViewController() {
         rootWindowViewModel.onUpdateLoginSatus = { answer in
             if answer {
                 DispatchQueue.main.async {
-                    self.rootViewController = IssueListViewController()
+                    let issueListVC = IssueListViewController()
+                    issueListVC.viewModel.loadIssueList()
+                    self.rootViewController = issueListVC
                     return
                 }
-
             } else {
                 DispatchQueue.main.async {
                     self.rootViewController = LoginViewController(viewModel: LoginViewModel(repository: LoginRepository()))
+//                    self.rootViewController = IssueListViewController()
                     return
                 }
             }

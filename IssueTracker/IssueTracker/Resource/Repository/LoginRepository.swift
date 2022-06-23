@@ -20,8 +20,6 @@ final class LoginRepository {
                 completion(false)
             }
         }
-
-        completion(true)
     }
 
     func requestGithubAuthorize() {
