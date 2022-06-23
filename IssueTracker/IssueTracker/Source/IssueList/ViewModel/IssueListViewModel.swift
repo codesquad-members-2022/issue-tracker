@@ -22,6 +22,9 @@ final class IssueListViewModel {
     func loadIssueList() {
         guard let token = UserDefaults
                 .standard.object(forKey: Environment.token) as? String else {
+                    // MAKR: 로그인하고 보여지는 화면은 무조건 LoginVC가 나옴
+                    /// 1. 앱 처음 구동 -> self.loginFailure?()
+                    /// 2.
                     self.loginFailure?()
                     return
                 }

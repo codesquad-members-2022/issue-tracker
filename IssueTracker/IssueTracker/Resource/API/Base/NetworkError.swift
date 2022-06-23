@@ -12,4 +12,5 @@ enum NetworkError: Error {
     case invalidUrlError
     case invalidTarget
     case cantReachedServerError
+    case decodingError
 }

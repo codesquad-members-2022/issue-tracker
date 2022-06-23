@@ -29,6 +29,7 @@ final class MockIssueTest: XCTestCase {
             switch response {
             case .success(let issues):
                 container = issues
+                dump(issues)
             case .failure(let error):
                 dump(error.localizedDescription)
             }
@@ -52,4 +53,15 @@ final class MockIssueTest: XCTestCase {
         XCTAssertTrue(query.contains("scope"), "query doesn't have SCOPE, \(query)")
     }
 
+    /// 체크하고 싶은 부분
+    /// authorization code 를 받아오면 access token 을 요청하는지 체크
+    /// 1. UserDefault 에 값을 없앤다.(앱초기화)
+    /// 2. accessCode 를 받아오는 요청을 실행한다.
+    /// 3. SceneDelegatge 에 응답이 오면 UserDefault에 토큰을 저장한다.
+    /// 4. viewmodel에서 issueListRequest가 정상적으로 되는지 확인한다.
+    ///
+    /// 이거는 유닛테스틑 새로 파는게 좋겠는데? 아니면 다 한 테스트에 넣는게 좋으려나? 여기에 대한 명확한 기준이 필요하겠다
+    func testSequiencialRequest() throws {
+
+    }
 }

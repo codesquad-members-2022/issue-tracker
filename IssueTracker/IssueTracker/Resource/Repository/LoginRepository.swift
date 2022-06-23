@@ -19,7 +19,8 @@ final class LoginRepository {
     func getGithubAccessToken(_ target: IssueTrackerTarget, _ completion: @escaping (String) -> Void) {
         guard let request = Provider.makeURLRequest(with: target) else { return }
         Provider.request(with: request) { data in
-            guard let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+            guard let data = data,
+                  let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                   let accessToken = jsonData["access_token"] as? String else { return }
             completion(accessToken)
         }
