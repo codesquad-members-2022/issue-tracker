@@ -96,6 +96,7 @@ const createCustomTextInputStyle = (props: IStyleProps, styleType?: StyleType) =
   ${styleType && getStyleTypes(styleType).textInput}
   ${props.width && { width: props.width }}
   ${props.height && { height: props.height }}
+  ${props.padding && { padding: props.padding }}
   ${props.color && { color: props.color }}
   ${props.background && { background: props.background }}
   ${props.border && { border: props.border }}

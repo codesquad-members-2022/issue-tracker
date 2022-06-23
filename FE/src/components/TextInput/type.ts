@@ -6,6 +6,7 @@ interface IStyleProps {
   status: Status;
   width?: string;
   height?: string;
+  padding?: string;
   color?: string;
   background?: string;
   border?: string;
@@ -23,6 +24,7 @@ interface I$TextInput extends IStyleProps {
   visibleLabel: boolean;
   hoverStyle?: IStyleProps;
   focusStyle?: IStyleProps;
+  disabledStyle?: IStyleProps;
 }
 
 interface ITextInputProps<T> extends IStyleProps {
