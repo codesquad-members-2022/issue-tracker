@@ -16,7 +16,7 @@ interface TabProps {
 
 function Tab({ counts }: TabProps) {
   const theme = useTheme();
-  const iconColor = theme.colors[tabStyle.font.fontColor];
+  const { [tabStyle.font.fontColor]: iconColor } = theme.colors;
 
   return (
     <StyledTab as="ul">
@@ -42,7 +42,7 @@ function Tab({ counts }: TabProps) {
 
 const StyledTab = styled(FlexCenterBox)`
   ${({ theme: { colors } }) => {
-    const borderColor = tabStyle.borderColor;
+    const { borderColor } = tabStyle;
 
     return css`
       display: inline-flex;

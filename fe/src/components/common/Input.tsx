@@ -7,6 +7,7 @@ import { sizeStyle, STYLE, specificStyle, commonStyle } from "../../constants/te
 interface InputProps {
   size: string;
   type: string;
+  text?: string;
 }
 
 interface StylesProps {
@@ -34,12 +35,12 @@ interface StylesProps {
   };
 }
 
-function Input({ size, type }: InputProps) {
+function Input({ size, type, text }: InputProps) {
   const style = { ...sizeStyle[STYLE[type]][size], ...commonStyle[STYLE[type]], ...specificStyle[type] };
 
   return (
     <InputWrapper customStyle={style} size={size}>
-      <Title customStyle={style}>아이디</Title>
+      <Title customStyle={style}>{text}</Title>
       <TextInput customStyle={style} />
     </InputWrapper>
   );
@@ -56,7 +57,6 @@ const InputWrapper = styled.div<StylesProps>`
   justify-content: center;
   align-items: flex-start;
   padding: 0px 24px;
-  margin-top: 100px;
   opacity: ${({ customStyle }) => customStyle.opacity};
 `;
 
