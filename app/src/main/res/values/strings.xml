@@ -23,4 +23,8 @@
     <string name="condition_title_user">담당자</string>
     <string name="issue_editor_body_hint">코멘트는 여기에 작성하세요. 반드시 먼저 제목을 작성하고 코멘트를 작성하세요.</string>
     <string name="issue_close">닫기</string>
+    <string name="friend_title">친구목록</string>
+    <string name="add_friend">친구추가</string>
+    <string name="my_account">내 계정</string>
+    <string name="send_msg">쪽지 보내기</string>
 </resources>
