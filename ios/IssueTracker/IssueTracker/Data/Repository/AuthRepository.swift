@@ -1,5 +1,5 @@
 //
-//  Repository.swift
+//  AuthRepository.swift
 //  IssueTracker
 //
 //  Created by Jihee hwang on 2022/06/23.
@@ -12,15 +12,22 @@ enum NetworkError: Error {
     case responseDataEmptyError
     case requestFailedError
     case decodeFailedError
+    case invalidAuthCode
+    case invalidURL
+    case encodingError
 }
 
 enum HTTPMethod: String {
     case post = "POST"
 }
 
-class Repository {
+class AuthRepository {
+    struct TokenDTO: Encodable {
+        let code: String
+    }
+
     struct TokenBag: Decodable {
-        let accessToken: String
+        let token: String
     }
 
     private let userDefaults = UserDefaults.standard
@@ -31,30 +38,53 @@ class Repository {
     }
 
     private func getCode() -> String? {
-        let code = UserDefaults.standard.string(forKey: "AuthorizationCode")
+        let code = UserDefaults.standard.string(forKey: LocalStorageConstants.AuthCode)
         return code
     }
 
     func getToken(completion: @escaping (Result<TokenBag, NetworkError>) -> Void) {
-        // 코드 주고 토큰 받아와
         guard let url = makeTokenURL() else {
+            completion(.failure(.invalidURL))
+            return
+        }
+
+        guard let code = getCode() else {
+            completion(.failure(.invalidAuthCode))
+            return
+        }
+
+        guard let body = try? JSONEncoder().encode(TokenDTO(code: code)) else {
+            completion(.failure(.encodingError))
             return
         }
 
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = body
 
         session.dataTask(with: request) { data, response, error in
-            if let error = self.getError(data: data, response: response, error: error) {
+            self.deleteCode()
+
+            if let error = self.getError(
+                data: data,
+                response: response,
+                error: error
+            ) {
                 completion(.failure(error))
                 return
             }
 
+            guard let data = data else {
+                return
+            }
+
             do {
-                guard let decodedResponse = try? JSONDecoder().decode(TokenBag.self, from: data!) else {
+                guard let decodedResponse = try? JSONDecoder().decode(TokenBag.self, from: data) else {
                     return
                 }
+
                 completion(.success(decodedResponse))
             } catch {
                 completion(.failure((.decodeFailedError)))
@@ -62,36 +92,32 @@ class Repository {
         }.resume()
     }
 
-    func setToken(token: TokenBag, completion: @escaping (Bool) -> Void) {
-        userDefaults.setValue(token, forKey: "AuthToken")
-        completion(true)
+    func setToken(token: String) {
+        userDefaults.setValue(token, forKey: LocalStorageConstants.AuthToken)
     }
 
     private func makeTokenURL() -> URL? {
-        let code = getCode()
-        let url = "https://github.com/login/oauth/access_token"
-
-        guard var components = URLComponents(string: url) else {
-            return nil
-        }
-        components.queryItems = [
-            URLQueryItem(name: "client_id", value: "1f7a746c1d01cc6de0bf"),
-            URLQueryItem(name: "code", value: code)
-        ]
-        return components.url
+        let url = "https://us-central1-onboarding-5054d.cloudfunctions.net/github/auth"
+        return URL(string: url)
     }
 
     private func getError(data: Data?, response: URLResponse?, error: Error?) -> NetworkError? {
         guard let httpResponse = response as? HTTPURLResponse, (200 ... 299) ~= httpResponse.statusCode else {
             return .responseError
         }
+
         guard data != nil else {
             return .responseDataEmptyError
         }
-        guard error != nil else {
+
+        guard error == nil else {
             return .requestFailedError
         }
 
         return nil
+    }
+
+    private func deleteCode() {
+        userDefaults.removeObject(forKey: LocalStorageConstants.AuthCode)
     }
 }

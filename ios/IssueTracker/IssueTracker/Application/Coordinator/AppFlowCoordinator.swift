@@ -25,8 +25,6 @@ final class AppFlowCoordinator: Coordinator {
         print("Deinit: \(#fileID)")
     }
 
-    func start() {}
-
     func start(with deepLink: DeepLink? = nil) {
         guard let deepLink = deepLink else {
             runLoginFlow() // or run default flow

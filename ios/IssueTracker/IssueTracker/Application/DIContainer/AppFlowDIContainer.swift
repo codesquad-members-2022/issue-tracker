@@ -9,6 +9,7 @@ import Foundation
 
 enum LocalStorageConstants {
     static let AuthCode = "AuthorizationCode"
+    static let AuthToken = "AccessToken"
 }
 
 final class AppFlowDIContainer {

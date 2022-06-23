@@ -19,7 +19,6 @@ protocol LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
     var input: LoginViewModelInput { get }
     var output: LoginViewModelOutput { get }
 
-    func getURL() -> URL?
     func showMainScene()
     func showLoginScene(type: LoginType)
     func fetchToken()
@@ -47,8 +46,7 @@ struct DefaultLoginViewModel: LoginViewModel {
     var input: LoginViewModelInput { self }
     var output: LoginViewModelOutput { self }
 
-    private let gitHubURL = URL(string: "https://")
-    private let useCase = Usecase(loginRepository: Repository())
+    private let useCase = UseCase(loginRepository: AuthRepository())
 
     var isAuthenticated = Observable(false)
 
@@ -56,10 +54,6 @@ struct DefaultLoginViewModel: LoginViewModel {
 
     init(navigationAction: LoginFlowAction) {
         self.navigationAction = navigationAction
-    }
-
-    func getURL() -> URL? {
-        gitHubURL
     }
 }
 
@@ -81,10 +75,13 @@ extension DefaultLoginViewModel {
     }
 
     func fetchToken() {
-        useCase.start { result in
-            if result {
+        useCase.start { error in
+            if error == nil {
+                print("done")
                 navigationAction.showMainScene()
             }
+
+            // TODO: Error handling
         }
     }
 }
