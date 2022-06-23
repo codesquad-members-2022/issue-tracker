@@ -20,7 +20,7 @@ struct Container {
         case .login:
             return LoginViewController(service: OAuthService())
         case .issue(let token):
-            return UINavigationController(rootViewController: IssueViewController(model: IssueModel(service: GitHubService(), token: token)))
+            return UINavigationController(rootViewController: IssueViewController(model: IssueModel(service: IssueService(), token: token)))
         case .newIssue:
             return NewIssueViewController()
         }

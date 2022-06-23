@@ -9,11 +9,11 @@ import Foundation
 
 class IssueModel {
 
-    private let githubService: GitHubService
+    private let service: IssueService
     private let accessToken: String
     
-    init(service: GitHubService, token: String) {
-        self.githubService = service
+    init(service: IssueService, token: String) {
+        self.service = service
         self.accessToken = token
     }
     
@@ -39,7 +39,7 @@ class IssueModel {
     }
     
     func requestIssue() {
-        githubService.requestIssues(accessToken: self.accessToken) { result in
+        service.requestIssues(accessToken: self.accessToken) { result in
             switch result {
             case .success(let issues):
                 self.issues = issues
