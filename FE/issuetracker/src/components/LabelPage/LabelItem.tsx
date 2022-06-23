@@ -1,9 +1,5 @@
 import * as I from 'design/icons';
-<<<<<<< HEAD
-import * as S from 'components/LabelPage/styled.labelItem';
-=======
 import * as S from 'components/LabelPage/styled/styled.labelItem';
->>>>>>> origin/21-featfe-라벨-상태-구현
 import { LabelType } from 'context/label';
 import Label from 'components/common/Common';
 

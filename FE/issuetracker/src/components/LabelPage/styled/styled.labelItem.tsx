@@ -12,13 +12,9 @@ export const labelList = styled.li<{ isLastList: boolean }>`
   margin-bottom: 1px;
   background: ${({ theme }) => theme.backgroundColors.gray1};
 `;
-<<<<<<< HEAD:FE/issuetracker/src/components/LabelPage/styled.labelItem.ts
-
-=======
 export const LabelListLeft = styled.div`
   ${mixin.flexbox({ vertical: 'center' })};
 `;
->>>>>>> origin/21-featfe-라벨-상태-구현:FE/issuetracker/src/components/LabelPage/styled/styled.labelItem.tsx
 export const labelImageWrapper = styled.div`
   ${mixin.flexbox({ horizontal: 'flex-start', vertical: 'center' })}
   width: 184px;

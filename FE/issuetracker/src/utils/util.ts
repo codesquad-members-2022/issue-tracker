@@ -1,7 +1,6 @@
 export function keyMaker() {
   return Math.random().toString(36).substring(2, 11);
 }
-<<<<<<< HEAD
 
 export function getNowISOString() {
   const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
@@ -21,5 +20,3 @@ export function calculatePercent(number: number) {
   const percent = (number * 100).toFixed(2);
   return Number(percent);
 }
-=======
->>>>>>> origin/21-featfe-라벨-상태-구현
