@@ -10,13 +10,14 @@ type LabelStateType = {
   key: string;
   default: LabelType;
 };
+export const initialLabelState = {
+  id: 1,
+  title: '라벨 이름',
+  color: '#007AFF',
+  description: '설명',
+};
 const initialState: LabelStateType = {
   key: 'labelState',
-  default: {
-    id: 1,
-    title: '라벨 이름',
-    color: '#007AFF',
-    description: '설명',
-  },
+  default: initialLabelState,
 };
 export const labelState = atom(initialState);
