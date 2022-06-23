@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MyAccountFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".MyAccountFragment">
 
-</FrameLayout>
+
+        <com.example.issu_tracker.ui.common.CustomToolbar
+            android:id="@+id/tb_account_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/issue_tracker_blue"
+            android:theme="@style/ToolbarTheme"
+            app:firstActionText="@string/add_friend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:toolbarTitle="@string/my_account" />
+
+        <TextView
+            android:layout_marginStart="10dp"
+            android:id="@+id/tv_friend_title"
+            style="@style/HeadLine6.20.bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/friend_title"
+            app:layout_constraintTop_toBottomOf="@id/tb_account_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_friend_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_friend_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
