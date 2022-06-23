@@ -45,9 +45,8 @@ final class IssueViewController: UIViewController {
         setupViews()
         model?.requestIssue()
         model?.updatedIssues = { issues in // 모델과 바인딩
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            print(issues)
+            self.collectionView.reloadData()
         }
     }
     

@@ -13,8 +13,14 @@ struct Issue: Codable {
     let state: String
     let labels: [Label]
     let milestone: Milestone?
-    
-    enum CodingKeys: String, CodingKey {
-        case title, body, state, labels, milestone
-    }
+    let repository: Repository
+}
+
+struct Repository: Codable {
+    let name: String
+    let owner: Owner
+}
+
+struct Owner: Codable {
+    let login: String
 }
