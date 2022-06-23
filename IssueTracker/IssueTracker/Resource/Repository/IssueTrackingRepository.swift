@@ -21,7 +21,7 @@ final class IssueTrackingRepository {
 
         Provider.request(with: request) { data in
             guard let issueList = DecodeManagerImplement
-                    .decodeJson(data: data, type: [Issue].self) else { return }
+                    .decodeJson(data: data, type: [Issue].self) else { return  completion(.failure(.decodingError) }
             return completion(.success(issueList))
         }
     }
