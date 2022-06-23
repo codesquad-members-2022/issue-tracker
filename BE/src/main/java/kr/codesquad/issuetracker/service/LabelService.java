@@ -20,4 +20,8 @@ public class LabelService {
         return labelRepository.findAll().stream()
                 .map(LabelResponse::new).collect(Collectors.toList());
     }
+
+    public void deleteLabel(Long id){
+        labelRepository.deleteById(id);
+    }
 }
