@@ -12,6 +12,7 @@ export const labelForm = styled.div`
   height: 100px;
   padding: 16px 24px 24px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
+  gap: 15px;
 `;
 
 const labelContent = styled.div`
@@ -56,7 +57,8 @@ export const labelColorController = styled.div`
 `;
 
 export const labelColorButton = styled.button.attrs(() => ({ type: 'button' }))`
-  margin-right: 4px;
+  ${mixin.flexbox({ vertical: 'center' })};
+  gap: 10px;
 `;
 
 export const buttonsWrapper = styled.div`

@@ -1,8 +1,9 @@
 import * as I from 'design/icons';
 import * as S from 'components/LabelPage/styled/styled.newLabelList';
 import LabelItem from 'components/LabelPage/LabelItem';
-import { useRecoilState } from 'recoil';
-import { labelState } from 'context/label';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+import { initialLabelState, labelState } from 'context/label';
+import { useState } from 'react';
 
 type LabelListType = {
   isNewLabel: boolean;
@@ -10,6 +11,27 @@ type LabelListType = {
 
 function NewLabelList({ isNewLabel }: LabelListType) {
   const [newLabel, setNewLabel] = useRecoilState(labelState);
+
+  const [text, setText] = useState({
+    title: '',
+    description: '',
+    color: '',
+  });
+  const { title, description, color } = text;
+  const changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setText({
+      ...text,
+      [name]: value,
+    });
+  };
+  function resetText() {
+    setText({
+      title: '',
+      description: '',
+      color: '',
+    });
+  }
   function makeNewLabelInfo(e: React.FocusEvent<HTMLInputElement, Element>) {
     const { value, name } = e.target;
     setNewLabel({
@@ -17,6 +39,11 @@ function NewLabelList({ isNewLabel }: LabelListType) {
       [name]: value,
     });
   }
+
+  const useResetNewLabelValue = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setNewLabel(initialLabelState);
+    resetText();
+  };
   return (
     <S.newLabelListWrapper>
       <LabelItem label={newLabel} key="key" isLastList={false} isNewLabel={isNewLabel} />
@@ -25,6 +52,10 @@ function NewLabelList({ isNewLabel }: LabelListType) {
           <span>Label name</span>
           <S.labelInput
             name="title"
+            value={title}
+            onChange={(e) => {
+              changeText(e);
+            }}
             onBlur={(e) => {
               makeNewLabelInfo(e);
             }}
@@ -33,9 +64,13 @@ function NewLabelList({ isNewLabel }: LabelListType) {
         <S.labelDescription>
           <span>Description</span>
           <S.labelInput
+            value={description}
             name="description"
             onBlur={(e) => {
               makeNewLabelInfo(e);
+            }}
+            onChange={(e) => {
+              changeText(e);
             }}
           />
         </S.labelDescription>
@@ -45,9 +80,13 @@ function NewLabelList({ isNewLabel }: LabelListType) {
             <S.labelColorButton>
               <I.refresh />
               <S.labelInput
+                value={color}
                 name="color"
                 onBlur={(e) => {
                   makeNewLabelInfo(e);
+                }}
+                onChange={(e) => {
+                  changeText(e);
                 }}
               />
             </S.labelColorButton>
@@ -61,7 +100,7 @@ function NewLabelList({ isNewLabel }: LabelListType) {
             </S.deleteButton>
           </S.buttonWrapperTop>
           <S.buttonWrapperBottom>
-            <S.cancleButton>
+            <S.cancleButton onClick={useResetNewLabelValue}>
               <I.cross />
               취소
             </S.cancleButton>
