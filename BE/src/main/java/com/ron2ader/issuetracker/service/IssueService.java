@@ -47,7 +47,7 @@ public class IssueService {
 
     @Transactional(readOnly = true)
     public Page<IssueSimpleResponse> findByOpenStatus(Pageable pageable, Boolean openStatus) {
-        Page<Issue> issues = issueRepository.findByCondition(pageable, IssueCondition.of(openStatus, null, null, null));
+        Page<Issue> issues = issueRepository.findByCondition(pageable, IssueCondition.ofForFindOpenStatus(openStatus));
         return issues.map(IssueSimpleResponse::from);
     }
 
