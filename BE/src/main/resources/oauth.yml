@@ -1,0 +1,12 @@
+oauth:
+  callback_url: http://louie-03/login/callback
+  client_id: 2a6bd51e5e7714959341
+  client_secret: ${OAUTH_CLIENT_SECRET}
+  access_scope: ${OAUTH_ACCESS_SCOPE}
+  access_token_api_url: https://github.com/login/oauth/access_token
+  login_form_url: ${OAUTH_LOGIN_FORM_URL}
+  user_api_url: https://api.github.com/user
+
+jwt:
+  issuer: ${JWT_ISSUER}
+  secret-key: ${JWT_SECRET_KEY}
