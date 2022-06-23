@@ -52,7 +52,7 @@ struct GitHubLoginManager {
         uiApplication.open(url)
     }
     
-    let loginStatus: Observable<AuthorizationStatus> = Observable(.none)
+    let authorization: Observable<AuthorizationStatus> = Observable(.none)
     
     func getAccessToken(with code: String) {
         guard let url = makeAccessTokenURL(with: code) else { return }
@@ -61,18 +61,18 @@ struct GitHubLoginManager {
         networkService.request(request) { (response: TokenResponse?) -> Void in
             guard let response = response else {
                 Log.error("Request for access token is failed. Code: \(code)")
-                loginStatus.value = .failed
+                authorization.value = .failed
                 return
             }
             
             keyChainService.save(response.accessToken,
                                  service: GitHubLoginManager.keyChainToken,
                                  account: GitHubLoginManager.keyChainAccount)
-            loginStatus.value = .authorized
+            authorization.value = .authorized
         }
     }
     
-    func hasValidToken(completion: @escaping (Bool) -> Void) {
+    func checkAuthorization(completion: @escaping (Bool) -> Void) {
         // User 요청이 성공하면 유효한 것으로 판단
         UserManager().getCurrentUser { user in
             if user == nil { return completion(false) }

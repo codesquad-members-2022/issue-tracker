@@ -14,7 +14,7 @@ final class LoginViewModel {
     let authorizationStatus: Observable<AuthorizationStatus> = Observable(.none)
     
     init(githubLoginManager: GitHubLoginManager = GitHubLoginManager.shared, initalStatus: AuthorizationStatus = .none) {
-        githubLoginManager.loginStatus.bind { [weak self] status in
+        githubLoginManager.authorization.bind { [weak self] status in
             self?.authorizationStatus.value = status
         }
     }
@@ -23,8 +23,8 @@ final class LoginViewModel {
         githubLoginManager.requestAuthorization()
     }
     
-    func hasValidToken(completion: @escaping (Bool) -> Void) {
-        githubLoginManager.hasValidToken { isValid in
+    func checkAuthorization(completion: @escaping (Bool) -> Void) {
+        githubLoginManager.checkAuthorization { isValid in
             completion(isValid)
         }
     }

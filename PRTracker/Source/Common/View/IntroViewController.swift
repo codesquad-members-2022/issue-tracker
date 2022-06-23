@@ -25,8 +25,8 @@ class IntroViewController: UIViewController {
     }
     
     private func validateToken() {
-        viewModel.hasValidToken { [weak self] hasValidToken in
-            if hasValidToken {
+        viewModel.checkAuthorization { [weak self] authorized in
+            if authorized {
                 // TODO: 'home', 'main' 용어 통일 필요
                 self?.gotoHome()
             } else {
