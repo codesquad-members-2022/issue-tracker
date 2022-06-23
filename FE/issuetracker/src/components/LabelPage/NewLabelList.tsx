@@ -1,7 +1,7 @@
 import * as I from 'design/icons';
 import * as S from 'components/LabelPage/styled/styled.newLabelList';
 import LabelItem from 'components/LabelPage/LabelItem';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { labelState } from 'context/label';
 import React from 'react';
 
@@ -18,6 +18,7 @@ function NewLabelList({ isNewLabel }: LabelListType) {
       [name]: value,
     });
   }
+
   return (
     <S.newLabelListWrapper>
       <LabelItem label={newLabel} key="key" isLastList={false} isNewLabel={isNewLabel} />
@@ -62,7 +63,7 @@ function NewLabelList({ isNewLabel }: LabelListType) {
             </S.deleteButton>
           </S.buttonWrapperTop>
           <S.buttonWrapperBottom>
-            <S.cancleButton>
+            <S.cancleButton onClick={useResetRecoilState(labelState)}>
               <I.cross />
               취소
             </S.cancleButton>
