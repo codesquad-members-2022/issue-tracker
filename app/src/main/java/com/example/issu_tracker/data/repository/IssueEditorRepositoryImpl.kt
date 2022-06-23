@@ -2,6 +2,7 @@ package com.example.issu_tracker.data.repository
 
 import android.util.Log
 import androidx.core.net.toUri
+import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.data.Label
 import com.example.issu_tracker.data.User
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,30 +14,37 @@ import javax.inject.Inject
 class IssueEditorRepositoryImpl @Inject constructor(private val fireStore: FirebaseFirestore) :
     IssueEditorRepository {
 
-    override suspend fun loadLabel(): List<String> {
-        val labelList = mutableListOf<String>()
-        val collectionData = fireStore.collection("Label").get().await()
+    override suspend fun loadLabel(): List<Label> {
+        val labelList = mutableListOf<Label>()
+        val collectionData = fireStore.collection(FIREBASE_COLLECTION_LABEL_PATH).get().await()
 
         collectionData.documents.forEach { it ->
             val labelObj = it.toObject(Label::class.java)
             labelObj?.let { label ->
-                labelList.add(label.content)
+                labelList.add(label)
             }
         }
         return labelList
     }
 
-    override suspend fun loadAssignee(): List<String> {
-        val assigneeList = mutableListOf<String>()
-        val collectionData = fireStore.collection("User").get().await()
+    override suspend fun loadAssignee(): List<User> {
+        val assigneeList = mutableListOf<User>()
+        val collectionData = fireStore.collection(FIREBASE_COLLECTION_USER_PATH).get().await()
 
         collectionData.documents.forEach {
             val assigneeObj = it.toObject(User::class.java)
             assigneeObj?.let { user ->
-                assigneeList.add(user.name)
+                assigneeList.add(user)
             }
         }
         return assigneeList
+    }
+
+    override fun createNewIssue(newIssue: Issue) {
+        fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(newIssue)
+            .addOnSuccessListener {
+                println("성공")
+            }
     }
 
     override suspend fun uploadImageAndGetImageUriFromFireBase(imageUriFromLocal: String): String {
@@ -72,6 +80,10 @@ class IssueEditorRepositoryImpl @Inject constructor(private val fireStore: Fireb
         private const val NEW_STRING_FOR_IMAGE_URL_CONVERSION = "/"
         private const val SUBSTRING_FOR_IMAGE_URL_CONVERSION = "&uploadType"
         private const val MEDIA_FORMAT = "?alt=media"
+
+        const val FIREBASE_COLLECTION_USER_PATH = "User"
+        const val FIREBASE_COLLECTION_LABEL_PATH = "Label"
+        const val FIREBASE_COLLECTION_ISSUE_PATH = "Issue"
     }
 
 }

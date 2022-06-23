@@ -110,7 +110,7 @@ class IssueEditor : Fragment() {
     private fun setOnSaveEventListener(it: String) {
         binding.tbIssueEditor.secondActionItem.isEnabled = it.isNotEmpty()
         binding.tbIssueEditor.secondActionItem.setOnMenuItemClickListener {
-//            viewModel.createIssue()
+            viewModel.createIssue()
             navController.navigate(R.id.action_issueEditor_to_issueFragment2)
             true
         }
