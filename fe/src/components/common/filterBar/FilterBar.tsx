@@ -92,4 +92,4 @@ const Filter = styled(FlexCenterBox)<StyledFilterBarProps>`
   }}
 `;
 
-export default FilterBar;
+export { FilterBar };
