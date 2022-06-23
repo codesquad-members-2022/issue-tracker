@@ -1,14 +1,15 @@
 package codesquad.issuetracker.dto.auth;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Data;
 
+@Data
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class OAuthAccessToken {
 
-    @JsonProperty("access_token")
     private String accessToken;
-    @JsonProperty
     private String scope;
-    @JsonProperty("token_type")
     private String tokenType;
 
     public String getAuthorizationValue() {
