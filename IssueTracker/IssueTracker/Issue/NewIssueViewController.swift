@@ -46,7 +46,7 @@ class NewIssueViewController: UIViewController {
 
     private func setupNavigationBar() {
         self.navigationItem.titleView = navSegmentedControl
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createButton)
     }
     
     private func setUpViews() {
@@ -56,14 +56,12 @@ class NewIssueViewController: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(self.view.safeAreaLayoutGuide).offset(10)
             make.width.equalTo(50)
-//            make.bottom.equalTo(contentField.snp.top)
         }
         
         self.view.addSubview(titleField)
         titleField.snp.makeConstraints { make in
             make.top.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(10)
             make.leading.equalTo(titleLabel.snp.trailing)
-//            make.bottom.equalTo(contentField.snp.top)
         }
         
         self.view.addSubview(horizontalDevider)
@@ -82,4 +80,28 @@ class NewIssueViewController: UIViewController {
         }
     }
 
+    private lazy var createButton: UIButton = {
+        var configuration = UIButton.Configuration.plain()
+        var container = AttributeContainer()
+        container.font = UIFont.systemFont(ofSize: 14)
+        configuration.attributedTitle = AttributedString("저장", attributes: container)
+        
+        configuration.buttonSize = .small
+        configuration.image = UIImage(systemName: "folder.badge.plus")
+        configuration.imagePadding = 4
+        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { action in
+            self.touchedCreateButton()
+        }))
+        return button
+    }()
+    
+    private func touchedCreateButton() {
+        //1. api 호출
+        //2. api 가 성공적으로 응답을 보내줬다면 =>
+            //2-1. 이전 화면으로 돌아가고
+            //2-2. 이슈 목록 조회 다시해서 보여주기
+        //3. api 가 실패했다면 => issue 생성실패 얼럿띄우기
+        
+        
+    }
 }
