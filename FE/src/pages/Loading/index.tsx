@@ -23,7 +23,8 @@ export default function Loading() {
       navigate('/login', { replace: true });
     }
 
-    localStorage.setItem('currentUserInfo', JSON.stringify(data));
+    const { current_user, login_token } = data;
+    localStorage.setItem('currentUserInfo', JSON.stringify(current_user));
     navigate('/issue-list', { replace: true });
   };
 

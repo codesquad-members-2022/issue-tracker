@@ -28,11 +28,11 @@ const ERROR_MESSAGE = {
   id: {
     success: '사용 가능한 아이디 입니다.',
     error: '이미 사용하고 있는 아이디 입니다.',
-    lengthCheck: `최소 ${LIMIT_LENGTH.id.min}자리에서 ${LIMIT_LENGTH.id.max}까지 입력하세요.`
+    lengthCheck: `최소 ${LIMIT_LENGTH.id.min}자리에서 ${LIMIT_LENGTH.id.max}자리까지 입력하세요.`
   },
   pw: {
     success: '사용 가능한 비밀번호 입니다.',
-    lengthCheck: `최소 ${LIMIT_LENGTH.pw.min}자리에서 ${LIMIT_LENGTH.pw.max}까지 입력하세요.`
+    lengthCheck: `최소 ${LIMIT_LENGTH.pw.min}자리에서 ${LIMIT_LENGTH.pw.max}자리까지 입력하세요.`
   }
 };
 
