@@ -7,8 +7,9 @@
 
 import UIKit
 
-class IntroViewController: UIViewController {
 
+class IntroViewController: UIViewController {
+    
     private let viewModel: LoginViewModel = LoginViewModel()
     
     private func gotoLogin() {
@@ -36,7 +37,6 @@ class IntroViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         validateToken()
     }
 }

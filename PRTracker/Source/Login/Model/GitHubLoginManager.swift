@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 
+enum AuthorizationStatus {
+    case authorized
+    case failed
+    case none
+}
+
 struct GitHubLoginManager {
     typealias AccessToken = String
     
@@ -34,6 +40,8 @@ struct GitHubLoginManager {
         self.uiApplication = uiApplication
     }
     
+    
+    
     func requestAuthorization() {
         guard var components = URLComponents(string: GitHubLoginManager.authorizeBaseURL) else { return }
         components.queryItems = [
@@ -44,20 +52,23 @@ struct GitHubLoginManager {
         uiApplication.open(url)
     }
     
-    func getAccessToken(with code: String, completion: @escaping (Bool) -> Void) {
+    let loginStatus: Observable<AuthorizationStatus> = Observable(.none)
+    
+    func getAccessToken(with code: String) {
         guard let url = makeAccessTokenURL(with: code) else { return }
         let request = makeAccessTokenRequest(with: url)
         
         networkService.request(request) { (response: TokenResponse?) -> Void in
             guard let response = response else {
                 Log.error("Request for access token is failed. Code: \(code)")
-                return completion(false)
+                loginStatus.value = .failed
+                return
             }
             
             keyChainService.save(response.accessToken,
                                  service: GitHubLoginManager.keyChainToken,
                                  account: GitHubLoginManager.keyChainAccount)
-            completion(true)
+            loginStatus.value = .authorized
         }
     }
     

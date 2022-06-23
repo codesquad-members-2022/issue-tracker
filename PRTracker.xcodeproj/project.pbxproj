@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DE61695C83CB1A5484B159C /* Pods_PRTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 041F85B983D296BEA49342F0 /* Pods_PRTrackerTests.framework */; };
+		BC0DAF8528643FA300FAA8E5 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0DAF8428643FA300FAA8E5 /* UIViewController+Alert.swift */; };
 		BC2F596A285C1AC10012D18C /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5969285C1AC10012D18C /* IssueManager.swift */; };
 		BC2F596F285C26D60012D18C /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManager.swift */; };
 		BC2F5970285C26D60012D18C /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F596E285C26D60012D18C /* UserManager.swift */; };
@@ -105,6 +106,7 @@
 		79EDD15A918B4109D48FA1B6 /* Pods-PRTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTracker.debug.xcconfig"; path = "Target Support Files/Pods-PRTracker/Pods-PRTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		A6AE00453ECCCA10D6CD0525 /* Pods-PRTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B82F1307FAF9E5A90C63CAFE /* Pods-PRTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PRTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-PRTrackerTests/Pods-PRTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		BC0DAF8428643FA300FAA8E5 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		BC2F5965285B6FBB0012D18C /* PRTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PRTracker.entitlements; sourceTree = "<group>"; };
 		BC2F5969285C1AC10012D18C /* IssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueManager.swift; sourceTree = "<group>"; };
 		BC2F596E285C26D60012D18C /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				D04099DB2859C6930008B517 /* Observable.swift */,
 				D04099D92859C34A0008B517 /* ReplaceRootSegue.swift */,
 				BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */,
+				BC0DAF8428643FA300FAA8E5 /* UIViewController+Alert.swift */,
 				BC2F59A22861F2620012D18C /* BaseURLString.swift */,
 			);
 			path = Common;
@@ -586,6 +589,7 @@
 				BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */,
 				BC2F59A62861FD350012D18C /* LoginViewController.swift in Sources */,
 				D04099DA2859C34A0008B517 /* ReplaceRootSegue.swift in Sources */,
+				BC0DAF8528643FA300FAA8E5 /* UIViewController+Alert.swift in Sources */,
 				BC2F596F285C26D60012D18C /* UserManager.swift in Sources */,
 				BC9709422859C88100E54F93 /* Logger.swift in Sources */,
 				BC97093B2859B23D00E54F93 /* Issue.swift in Sources */,

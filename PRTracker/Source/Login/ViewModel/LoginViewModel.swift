@@ -9,13 +9,22 @@ import Foundation
 
 final class LoginViewModel {
     
+    let githubLoginManager = GitHubLoginManager()
+    
+    let authorizationStatus: Observable<AuthorizationStatus> = Observable(.none)
+    
+    init(githubLoginManager: GitHubLoginManager = GitHubLoginManager.shared, initalStatus: AuthorizationStatus = .none) {
+        githubLoginManager.loginStatus.bind { [weak self] status in
+            self?.authorizationStatus.value = status
+        }
+    }
+    
     func requestGithubLogin() {
-        let githubLoginManager = GitHubLoginManager()
         githubLoginManager.requestAuthorization()
     }
     
     func hasValidToken(completion: @escaping (Bool) -> Void) {
-        GitHubLoginManager.shared.hasValidToken { isValid in
+        githubLoginManager.hasValidToken { isValid in
             completion(isValid)
         }
     }
