@@ -28,4 +28,8 @@ public class MilestoneService {
         Milestone milestone = new Milestone(milestoneRequest);
         milestoneRepository.save(milestone);
     }
+
+    public void deleteMilestone(Long id){
+        milestoneRepository.deleteById(id);
+    }
 }
