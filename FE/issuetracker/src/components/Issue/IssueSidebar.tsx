@@ -15,10 +15,10 @@ function IssueSidebar() {
             <S.barHeaderText>작성자</S.barHeaderText>
             <I.plus />
           </S.barHeader>
-          {issueData.assignees.map((assignee) => (
-            <S.userUnit key={assignee.id}>
-              <img src={assignee.imageUrl} alt="assignee-icon-img" />
-              <S.userName>{assignee.name}</S.userName>
+          {issueData.assignees.map(({ id, imageUrl, name }) => (
+            <S.userUnit key={id}>
+              <img src={imageUrl} alt="assignee-icon-img" />
+              <S.userName>{name}</S.userName>
             </S.userUnit>
           ))}
         </S.userBar>

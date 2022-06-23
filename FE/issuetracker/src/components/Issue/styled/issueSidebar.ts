@@ -60,8 +60,8 @@ export const label = styled.label<{ color: string; backgroundColor: string }>`
   padding: 0 16px;
   border-radius: 30px;
   margin: 16px 0;
-  background: ${({ theme }) => theme.backgroundColors.purple1};
-  color: ${({ theme }) => theme.fontColors.gray1};
+  background: ${({ backgroundColor, theme }) => theme.backgroundColors[backgroundColor]};
+  color: ${({ color, theme }) => theme.fontColors[color]};
 `;
 
 export const milstoneContent = styled.div`
