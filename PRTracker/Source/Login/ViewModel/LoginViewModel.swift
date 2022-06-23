@@ -14,12 +14,9 @@ final class LoginViewModel {
         githubLoginManager.requestAuthorization()
     }
     
-    func isTokenSaved() -> Bool {
-        var tokenIsSaved = false
-        
+    func hasValidToken(completion: @escaping (Bool) -> Void) {
         GitHubLoginManager.shared.hasValidToken { isValid in
-            tokenIsSaved = isValid
+            completion(isValid)
         }
-        return tokenIsSaved
     }
 }
