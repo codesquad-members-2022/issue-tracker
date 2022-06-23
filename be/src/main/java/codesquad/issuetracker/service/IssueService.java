@@ -1,6 +1,5 @@
 package codesquad.issuetracker.service;
 
-import codesquad.issuetracker.domain.Assignee;
 import codesquad.issuetracker.domain.Issue;
 import codesquad.issuetracker.domain.IssueLabel;
 import codesquad.issuetracker.domain.IssueStatus;
@@ -10,7 +9,6 @@ import codesquad.issuetracker.dto.issue.IssueSearchCondition;
 import codesquad.issuetracker.dto.issue.IssueStatusUpdateForm;
 import codesquad.issuetracker.repository.IssueRepository;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,12 +25,14 @@ public class IssueService {
     private final IssueRepository issueRepository;
 
     public IssueDtos getIssuesByCriteria(IssueSearchCondition condition) {
-        Set<String> labelConditions = parseConditions(condition.getLabels());
-        Set<String> exclusionConditions = parseConditions(condition.getExclusions());
-        List<Issue> issues = issueRepository.search(condition, labelConditions, exclusionConditions).stream()
+        Set<String> labelConditions = condition.parseLabelConditions();
+        Set<String> exclusionConditions = condition.parseExclusionConditions();
+        Map<IssueStatus, Long> countOfIssuesByStatus = new HashMap<>();
+        List<Issue> issues = issueRepository.search(condition, labelConditions, exclusionConditions)
+            .stream()
             .filter(issue -> containsAllLabels(issue.getIssueLabels(), labelConditions))
             .collect(Collectors.toList());
-        Map<IssueStatus, Long> countOfIssuesByStatus = getCountOfIssuesByStatus(issues);
+
 
         return new IssueDtos(
             countOfIssuesByStatus.getOrDefault(IssueStatus.OPEN, 0L),
@@ -42,20 +42,6 @@ public class IssueService {
                 .map(issue -> IssueDto.of(issue))
                 .collect(Collectors.toList())
         );
-    }
-
-    private Set<String> parseConditions(String conditions) {
-        Set<String> exclusionConditions = new HashSet<>();
-        if (conditions == null) {
-            return exclusionConditions;
-        }
-
-        String[] params = conditions.split(",");
-        for (String param : params) {
-            exclusionConditions.add(param.replaceAll(" ", ""));
-        }
-
-        return exclusionConditions;
     }
 
     private Map<IssueStatus, Long> getCountOfIssuesByStatus(List<Issue> issues) {
