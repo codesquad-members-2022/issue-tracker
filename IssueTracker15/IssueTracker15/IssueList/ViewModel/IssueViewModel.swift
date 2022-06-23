@@ -9,17 +9,35 @@ import Foundation
 
 class IssueListViewModel: CommonViewModel {
     
+    private(set) var issueList = Array(repeating: IssueDTO.empty, count: 25)
+    
     var output: (Any?, ViewBindable) -> Void
 
     init(_ output: @escaping (Any?, ViewBindable) -> Void) {
         self.output = output
+        
+        for i in issueList.indices {
+            issueList[i].id = i
+        }
+
     }
 
-    func request(_ bindable: ViewBindable, param: Any?) {
-
-    }
+    func request(_ bindable: ViewBindable, param: Any?) { }
     
-    func getIssues() {
-
+    func getIssues() { }
+    
+    @discardableResult
+    func selectList(_ cell: IssueListCell) -> Bool {
+        
+        guard
+            let issueId = cell.issueDTO?.id,
+            let inx = self.issueList.firstIndex(where: { $0.id == issueId })
+        else {
+            return false
+        }
+        
+        issueList[inx].isSelected.toggle()
+        output(nil, cell)
+        return true
     }
 }

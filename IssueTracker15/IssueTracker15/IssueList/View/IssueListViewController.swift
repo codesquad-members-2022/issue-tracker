@@ -35,53 +35,8 @@ class IssueListViewController: UIViewController {
     private var vm: IssueListViewModel?
     
     // MARK: - IssueCollectionView Properties
-    private var issueList = Array(repeating: IssueDTO.empty, count: 25) {
-        didSet {
-            self.applySnapshot()
-        }
-    }
-    
-    private var currentViewState: IssueListStatus = .list {
-        willSet {
-            switch currentViewState {
-            case .list:
-                print("이슈 리스트 기본화면을 보여주세요.")
-            case .selection:
-                print("이슈 리스트 선택화면을 보여주세요.")
-            }
-        }
-    }
-    
-    // MARK: - Navigation Bar Actions
-    
-    private var filterBarButtonAction: UIAction {
-        UIAction(
-            title: "필터",
-            image: UIImage.filterButtonImage,
-            identifier: nil,
-            discoverabilityTitle: "Filter Issue List",
-            attributes: [],
-            state: .on,
-            handler: { _ in
-                let filterVC = IssueFilterItemSelectViewController()
-                filterVC.setVC(self)
-                self.show(filterVC, sender: nil)
-            }
-        )
-    }
-    
-    private var selectIssueBarButtonAction: UIAction {
-        UIAction(
-            title: "선택",
-            image: UIImage.checkButtonImage,
-            identifier: nil,
-            discoverabilityTitle: "Select Issue List",
-            attributes: [],
-            state: .on,
-            handler: { _ in
-                self.currentViewState.toggle()
-            }
-        )
+    private var issueNavigationController: IssueNavigationController? {
+        return navigationController as? IssueNavigationController
     }
     
     // MARK: - Initialize IssueCollectionView
@@ -145,11 +100,12 @@ class IssueListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIButton(type: .system, primaryAction: filterBarButtonAction))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: UIButton(type: .system, primaryAction: selectIssueBarButtonAction))
+        if let navigationBinding = navigationController as? ViewBindable {
+            navigationBinding.setVC(self)
+        }
         
-        vm = IssueListViewModel { param, bindable in
-            print("Actions move to Issue Detail ViewController using \(String(describing: param)), \(bindable)")
+        vm = IssueListViewModel { [weak self] _, _ in
+            self?.applySnapshot()
         }
         
         view.addSubview(issueListCollectionView)
@@ -162,15 +118,13 @@ class IssueListViewController: UIViewController {
     
     // MARK: - IssueViewController Apply/Reload
     private func applySnapshot(animatingDifferences: Bool = true) {
-        var issueSnapshot = IssueSnapshot()
-        var items = issueList
+        guard let items = vm?.issueList else { return }
         
-        for i in items.indices { // issueList items are Hashable with id property.
-            items[i].id = i
-        }
+        var issueSnapshot = IssueSnapshot()
         
         issueSnapshot.appendSections([Section.main])
         issueSnapshot.appendItems(items)
+        
         issueDataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
@@ -187,22 +141,29 @@ class IssueListViewController: UIViewController {
                 return nil
             }
         }
+        
         issueDataSource.apply(issueSnapshot, animatingDifferences: animatingDifferences)
     }
 }
 
 extension IssueListViewController: ViewBinding {
+    
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
-        if (target as? IssueListCell) != nil {
-            if currentViewState == .selection, let state = param as? CheckButtonSelected {
-                var mutateState = state
-                mutateState.toggle()
-                target.receive(mutateState)
-            } else {
-                print("IssueListCell Selected")
-            }
+        
+        if let cell = target as? IssueListCell {
+            
+            let isSelected = vm?.selectList(cell) ?? false
+            target.receive(isSelected)
+            
         } else if (target as? IssueFilterItemSelectViewController) != nil {
+            
             print("IssueFilterItemSelectViewController Showed")
+            
+        } else if (target as? IssueNavigationController) != nil {
+            
+            let filterVC = IssueFilterItemSelectViewController()
+            filterVC.setVC(self)
+            present(filterVC, animated: true)
         }
     }
 }
