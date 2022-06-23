@@ -5,12 +5,11 @@ import Label from 'components/common/Common';
 
 type LabelItemType = {
   label: LabelType;
-  key: string;
   isLastList: boolean;
   isNewLabel: boolean;
 };
 
-function LabelItem({ label, key, isLastList, isNewLabel }: LabelItemType) {
+function LabelItem({ label, isLastList, isNewLabel }: LabelItemType) {
   const labelListButton = !isNewLabel ? (
     <S.labelListButtonWrapper>
       <S.labelEditButton>
@@ -26,7 +25,7 @@ function LabelItem({ label, key, isLastList, isNewLabel }: LabelItemType) {
     ''
   );
   return (
-    <S.labelList key={key} isLastList={isLastList}>
+    <S.labelList isLastList={isLastList}>
       <S.LabelListLeft>
         <S.labelImageWrapper>
           <Label color={label.color} title={label.title} />
