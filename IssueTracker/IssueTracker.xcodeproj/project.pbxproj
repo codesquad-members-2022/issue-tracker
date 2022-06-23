@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0009805E28640575003F7806 /* NewIssueOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0009805D28640575003F7806 /* NewIssueOptionCell.swift */; };
 		0053D7552859B162006614EC /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0053D7542859B162006614EC /* Config.plist */; };
 		0053D7572859B4CA006614EC /* PrivateStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053D7562859B4CA006614EC /* PrivateStorage.swift */; };
 		00567EE8286194DB00F3E8EC /* IssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00567EE7286194DB00F3E8EC /* IssueService.swift */; };
@@ -61,7 +60,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0009805D28640575003F7806 /* NewIssueOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueOptionCell.swift; sourceTree = "<group>"; };
 		0053D7542859B162006614EC /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		0053D7562859B4CA006614EC /* PrivateStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateStorage.swift; sourceTree = "<group>"; };
 		00567EE7286194DB00F3E8EC /* IssueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueService.swift; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 				981BD43C285B12AC00DDDE64 /* IssueListCell.swift */,
 				981BD43E285B12F200DDDE64 /* Margins.swift */,
 				005E48D928636064004BD5F6 /* Devider.swift */,
-				0009805D28640575003F7806 /* NewIssueOptionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -422,7 +419,6 @@
 				985CAB53286068A4005E709D /* OAuthService.swift in Sources */,
 				985CAB5528607052005E709D /* UIView+Extension.swift in Sources */,
 				98130E1B285AC8A5001B6DA1 /* IssueViewController.swift in Sources */,
-				0009805E28640575003F7806 /* NewIssueOptionCell.swift in Sources */,
 				988510DA28572B8700CC2DA9 /* LoginViewController.swift in Sources */,
 				00567EE8286194DB00F3E8EC /* IssueService.swift in Sources */,
 				981BD43D285B12AC00DDDE64 /* IssueListCell.swift in Sources */,

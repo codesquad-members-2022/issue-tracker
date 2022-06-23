@@ -44,17 +44,17 @@ class NewIssueViewController: UIViewController {
         var tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(NewIssueOptionCell.self, forCellReuseIdentifier: NewIssueOptionCell.identifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aa")
         return tableView
     }()
     
-    private lazy var optionTableHeader: UILabel = {
-        var label = UILabel()
-        label.text = "추가옵션"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textAlignment = .left
-        return label
-    }()
+//    private lazy var optionTableHeader: UILabel = {
+//        var label = UILabel()
+//        label.text = "추가옵션"
+//        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+//        label.textAlignment = .left
+//        return label
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,14 +90,13 @@ class NewIssueViewController: UIViewController {
             make.height.equalTo(1)
         }
         
-        // TODO: Header설정
-        self.view.addSubview(optionTableHeader)
-        optionTable.tableHeaderView = optionTableHeader
+        // FIXME: Header설정
+        optionTable.tableHeaderView = UILabel()
         
         self.view.addSubview(optionTable)
         optionTable.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(200)
+            make.height.equalTo(optionTable.contentSize.height) // 자신의 컨텐츠 사이즈만큼 높이를 잡아준다
         }
         
         self.view.addSubview(contentField)
@@ -144,11 +143,14 @@ extension NewIssueViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewIssueOptionCell.identifier, for: indexPath) as? NewIssueOptionCell else {
-            return UITableViewCell()
-        }
-        cell.setTitle(text: optionList[indexPath.item])
-        cell.setSelectedOption(text: "선택내용")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "aa", for: indexPath)
+        var sidebarCell = UIListContentConfiguration.sidebarCell() // 짱이다!!
+        sidebarCell.text = optionList[indexPath.item]
+        sidebarCell.secondaryText = "선택내용"
+        sidebarCell.prefersSideBySideTextAndSecondaryText = true
+        
+        cell.contentConfiguration = sidebarCell
+        cell.accessoryType = .disclosureIndicator // > 표시 보이기
         return cell
     }
     
