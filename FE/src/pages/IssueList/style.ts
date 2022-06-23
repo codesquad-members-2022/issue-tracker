@@ -6,6 +6,22 @@ const $Contents = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  padding: 0 80px;
 `;
 
-export { $Contents };
+const $MenuWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 1280px;
+  margin-bottom: 25px;
+`;
+
+const $ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+`;
+
+export { $Contents, $MenuWrapper, $ButtonWrapper };
