@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import IssueHeader from './IssueHeader';
 import IssueItem from './IssueItem';
 import EmptyIssueItem from './EmptyIssueItem';
+import { CheckBoxType } from './CheckBox';
 
 type LabelColorType = {
   backgroundColor: string;
@@ -27,7 +28,8 @@ export type SelectedIssueType = {
 };
 
 function IssueList() {
-  // key: 이슈 아이디, value: true(selected) / false
+  const [headerCheckBoxType, setHeaderCheckBoxType] =
+    useState<CheckBoxType>('initial');
 
   const initSelectedIssues = (issues: IssueType[]) => {
     const initialSelectedIssue: SelectedIssueType = {};
@@ -40,29 +42,45 @@ function IssueList() {
   };
 
   const [selectedIssues, setSelectedIssues] = useState<SelectedIssueType>(
-    initSelectedIssues(issueList.issues),
+    initSelectedIssues(issueList.issues)
   );
-  // issueList 데이터 요청
 
   const updateIssueState = (id: string) => {
     selectedIssues[id] = !selectedIssues[id];
     setSelectedIssues({ ...selectedIssues });
+
+    const selectedIssuesCount = Object.values(selectedIssues).filter(
+      (isSelected) => isSelected
+    ).length;
+    if (selectedIssuesCount === Object.keys(selectedIssues).length) {
+      setHeaderCheckBoxType('active');
+    } else if (selectedIssuesCount) {
+      setHeaderCheckBoxType('disable');
+    } else {
+      setHeaderCheckBoxType('initial');
+    }
   };
 
   return (
-    <div>
-      <IssueHeader selectedIssues={selectedIssues} />
+    <>
+      <IssueHeader
+        selectedIssues={selectedIssues}
+        setSelectedIssues={setSelectedIssues}
+        headerCheckBoxType={headerCheckBoxType}
+        setHeaderCheckBoxType={setHeaderCheckBoxType}
+      />
       <div>
         {issueList.issues.map((issue, idx) => (
           <IssueItem
             key={issue.id}
             id={String(issue.id)}
+            isSelected={selectedIssues[issue.id]}
             isLast={idx === issueList.issues.length - 1}
             updateIssueState={updateIssueState}
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
@@ -84,18 +102,18 @@ const issueList = {
           name: '라벨네임',
           color: {
             backgroundColor: '#000000',
-            textColor: '#FFFFFF',
-          },
+            textColor: '#FFFFFF'
+          }
         },
         {
           name: '라벨네임1',
           color: {
             backgroundColor: '#000000',
-            textColor: '#FFFFFF',
-          },
-        },
+            textColor: '#FFFFFF'
+          }
+        }
       ],
-      milestoneName: '마일스톤',
+      milestoneName: '마일스톤'
     },
     {
       id: 2,
@@ -107,18 +125,18 @@ const issueList = {
           name: '라벨네임',
           color: {
             backgroundColor: '#000000',
-            textColor: '#FFFFFF',
-          },
+            textColor: '#FFFFFF'
+          }
         },
         {
           name: '라벨네임1',
           color: {
             backgroundColor: '#000000',
-            textColor: '#FFFFFF',
-          },
-        },
+            textColor: '#FFFFFF'
+          }
+        }
       ],
-      milestoneName: '마일스톤',
+      milestoneName: '마일스톤'
     },
     {
       id: 3,
@@ -130,18 +148,18 @@ const issueList = {
           name: '라벨네임',
           color: {
             backgroundColor: '#000000',
-            textColor: '#FFFFFF',
-          },
+            textColor: '#FFFFFF'
+          }
         },
         {
           name: '라벨네임1',
           color: {
             backgroundColor: '#000000',
-            textColor: '#FFFFFF',
-          },
-        },
+            textColor: '#FFFFFF'
+          }
+        }
       ],
-      milestoneName: '마일스톤',
-    },
-  ],
+      milestoneName: '마일스톤'
+    }
+  ]
 };

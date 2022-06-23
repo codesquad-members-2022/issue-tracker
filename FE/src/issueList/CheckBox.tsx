@@ -2,8 +2,10 @@ import Icon from '@/assets/icons/Icon';
 import icons from '@/assets/icons/svgs';
 import { COLORS, GREYSCALE } from '@/constants';
 
+export type CheckBoxType = 'initial' | 'active' | 'disable';
+
 type CheckBoxProps = {
-  checkBoxType: 'initial' | 'active' | 'disable';
+  checkBoxType: CheckBoxType;
   onClick: () => void;
 };
 

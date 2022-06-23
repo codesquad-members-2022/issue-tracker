@@ -1,6 +1,5 @@
 import Icon from '@/assets/icons/Icon';
 import { COLORS, GREYSCALE } from '@/constants';
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
@@ -8,18 +7,21 @@ import Label from './Label';
 
 type IssueItemProps = {
   id: string;
+  isSelected: boolean;
   isLast: boolean;
   updateIssueState: (id: string) => void;
 };
 
-function IssueItem({ id, isLast, updateIssueState }: IssueItemProps) {
-  const [isSelected, setIsSelected] = useState(false);
-
+function IssueItem({
+  id,
+  isSelected,
+  isLast,
+  updateIssueState
+}: IssueItemProps) {
   const IssueItemBox = isLast ? LastIssueItemBox : DefaultIssueItemBox;
   const checkBoxType = isSelected ? 'active' : 'initial';
 
   const handleClick = () => {
-    setIsSelected(!isSelected);
     updateIssueState(id);
   };
 

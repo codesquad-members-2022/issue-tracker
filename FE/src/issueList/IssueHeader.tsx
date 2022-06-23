@@ -1,32 +1,48 @@
 import { GREYSCALE } from '@/constants';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import CheckBox from './CheckBox';
+import CheckBox, { CheckBoxType } from './CheckBox';
 import { SelectedIssueType } from './IssueList';
 import IssueMenu from './IssueMenu';
 import IssueTab from './IssueTab';
 
 type IssueHeaderProps = {
   selectedIssues: SelectedIssueType;
+  setSelectedIssues: Dispatch<SetStateAction<SelectedIssueType>>;
+  headerCheckBoxType: CheckBoxType;
+  setHeaderCheckBoxType: Dispatch<SetStateAction<CheckBoxType>>;
 };
 
-function IssueHeader({ selectedIssues }: IssueHeaderProps) {
+function IssueHeader({
+  selectedIssues,
+  setSelectedIssues,
+  headerCheckBoxType,
+  setHeaderCheckBoxType
+}: IssueHeaderProps) {
   const selectedIssuesCount = Object.values(selectedIssues).filter(
     (selected) => selected
   ).length;
 
-  const getCheckBoxType = () => {
-    if (selectedIssuesCount === Object.keys(selectedIssues).length) {
-      return 'active';
+  const setAllIssuesState = (state: boolean) => {
+    Object.keys(selectedIssues).forEach((id) => {
+      selectedIssues[id] = state;
+    });
+    setSelectedIssues({ ...selectedIssues });
+  };
+
+  const handleClick = () => {
+    if (headerCheckBoxType === 'initial' || headerCheckBoxType === 'disable') {
+      setHeaderCheckBoxType('active');
+      setAllIssuesState(true);
+    } else {
+      setHeaderCheckBoxType('initial');
+      setAllIssuesState(false);
     }
-    if (selectedIssuesCount) {
-      return 'disable';
-    }
-    return 'initial';
   };
 
   return (
     <IssueHeaderBox>
-      <CheckBox checkBoxType={getCheckBoxType()} />
+      <CheckBox checkBoxType={headerCheckBoxType} onClick={handleClick} />
       {selectedIssuesCount ? (
         <>
           <SelectedIssuesCount>
