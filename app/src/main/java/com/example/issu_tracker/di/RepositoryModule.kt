@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
+import kotlinx.coroutines.Dispatchers
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
@@ -16,7 +17,7 @@ object RepositoryModule {
 
     @Provides
     fun provideHomeRepository(fireStore: FirebaseFirestore): HomeRepository {
-        return HomeRepositoryImpl(fireStore)
+        return HomeRepositoryImpl(fireStore, Dispatchers.IO)
     }
 
     @Provides

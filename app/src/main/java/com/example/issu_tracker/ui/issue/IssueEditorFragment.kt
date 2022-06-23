@@ -1,17 +1,23 @@
 package com.example.issu_tracker.ui.issue
 
+import android.Manifest
+import android.app.Activity.RESULT_OK
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.text.TextWatcher
-import android.view.ContextMenu
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Spinner
-import android.widget.TextView
+import android.view.*
+import android.widget.*
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -24,6 +30,7 @@ import com.example.issu_tracker.databinding.FragmentIssueEditorBinding
 import com.example.issu_tracker.ui.common.Constants
 import com.example.issu_tracker.ui.filter.FilterFragment
 import com.example.issu_tracker.ui.filter.SpinnerAdapter
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
 import io.noties.markwon.image.ImagesPlugin
@@ -36,11 +43,12 @@ class IssueEditor : Fragment() {
     private lateinit var markwon: Markwon
     private lateinit var navController: NavController
     private val viewModel: IssueEditorViewModel by viewModels()
+    private lateinit var photoFromGalleryLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentIssueEditorBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,6 +57,7 @@ class IssueEditor : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(binding.root)
         binding.tbIssueEditor.firstActionItem.isEnabled = true
+        photoFromGalleryLauncher = registerPhotoFromGalleryLauncher()
         markwon = Markwon.builder(requireContext())
             .usePlugin(ImagesPlugin.create())
             .build();
@@ -66,7 +75,10 @@ class IssueEditor : Fragment() {
         addIssueBodyTextChangedListener()
         setOnPreviewEventListener()
         setNavigationIconEventListener()
+        setIssueBodyLongClickEventListener()
+        setEditTextActionModeCallbackDisabled()
     }
+
 
     private suspend fun inputIssueTitle() {
         viewModel.issueTitleStateFlow.collect {
@@ -106,51 +118,15 @@ class IssueEditor : Fragment() {
     }
 
     private fun addIssueBodyTextChangedListener() {
-        binding.etIssueEditorBody.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                inputText: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                inputText: CharSequence?,
-                start: Int,
-                before: Int,
-                count: Int
-            ) {
-            }
-
-            override fun afterTextChanged(inputText: Editable?) {
-                viewModel.inputIssueBodyText(inputText.toString())
-            }
-        })
+        binding.etIssueEditorBody.doAfterTextChanged { changedText: Editable? ->
+            viewModel.inputIssueBodyText(changedText.toString())
+        }
     }
 
     private fun addIssueTitleTextChangedListener() {
-        binding.etIssueEditorTitle.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                inputText: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                inputText: CharSequence?,
-                start: Int,
-                before: Int,
-                count: Int
-            ) {
-            }
-
-            override fun afterTextChanged(inputText: Editable?) {
-                viewModel.inputIssueTitleText(inputText.toString())
-            }
-        })
+        binding.etIssueEditorTitle.doAfterTextChanged { changedText: Editable? ->
+            viewModel.inputIssueTitleText(changedText.toString())
+        }
     }
 
     private suspend fun setAssigneeSpinner() {
@@ -202,4 +178,145 @@ class IssueEditor : Fragment() {
             navController.popBackStack()
         }
     }
+
+    private fun isAllPermissionsGranted(): Boolean = REQUIRED_PERMISSIONS.all { permission ->
+        ContextCompat.checkSelfPermission(this.requireContext(), permission) ==
+                PackageManager.PERMISSION_GRANTED
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.entries.forEach { permission ->
+                when {
+                    permission.value -> {
+                        Snackbar.make(binding.root, "Permission granted", Snackbar.LENGTH_SHORT)
+                            .show()
+                    }
+                    shouldShowRequestPermissionRationale(permission.key) -> {
+                        //Setting 페이지 이동
+                    }
+                    else -> {
+                        Snackbar.make(binding.root, "Permission denied", Snackbar.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
+
+    private fun setIssueBodyLongClickEventListener() {
+        binding.etIssueEditorBody.setOnLongClickListener {
+            startEditTextCustomActionMode()
+            true
+        }
+    }
+
+    private fun startEditTextCustomActionMode() {
+        binding.etIssueEditorBody.startActionMode(object : ActionMode.Callback {
+
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                val inflater: MenuInflater? = mode?.menuInflater
+                inflater?.inflate(R.menu.issue_editor_context_menu, menu)
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                return false
+            }
+
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                val start: Int = binding.etIssueEditorBody.selectionStart
+                val end: Int = binding.etIssueEditorBody.selectionEnd
+
+                val ssb = SpannableStringBuilder(binding.etIssueEditorBody.text)
+                val clipboard =
+                    requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+
+                when (item?.itemId) {
+                    R.id.copy -> {
+                        val copyClip =
+                            ClipData.newPlainText("copy", ssb.subSequence(start, end))
+                        clipboard.setPrimaryClip(copyClip)
+                        mode?.finish()
+                        return true
+                    }
+                    R.id.cut -> {
+                        val cutClip = ClipData.newPlainText("cut", ssb.subSequence(start, end))
+                        ssb.delete(start, end)
+                        clipboard.setPrimaryClip(cutClip)
+                        binding.etIssueEditorBody.text = ssb
+                        mode?.finish()
+                        return true
+                    }
+                    R.id.paste -> {
+                        val clipData: CharSequence = clipboard.primaryClip?.getItemAt(0)?.text ?: ""
+                        ssb.replace(start, end, clipData)
+                        binding.etIssueEditorBody.text = ssb
+                        mode?.finish()
+                        return true
+                    }
+                    R.id.insert_photo -> {
+                        getPhotoUriFromGallery()
+                        mode?.finish()
+                        return true
+                    }
+                }
+                return false
+            }
+
+            override fun onDestroyActionMode(mode: ActionMode?) {
+            }
+
+        }, ActionMode.TYPE_FLOATING)
+    }
+
+    private fun setEditTextActionModeCallbackDisabled() {
+        binding.etIssueEditorBody.customSelectionActionModeCallback = object : ActionMode.Callback {
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                return false
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                return false
+            }
+
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                return false
+            }
+
+            override fun onDestroyActionMode(mode: ActionMode?) {
+            }
+
+        }
+    }
+
+    private fun getPhotoUriFromGallery() {
+        if (isAllPermissionsGranted()) {
+            launchToGetPhotoFromGallery()
+        } else {
+            requestPermissionLauncher.launch(REQUIRED_PERMISSIONS)
+        }
+    }
+
+    private fun launchToGetPhotoFromGallery() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+        }
+        photoFromGalleryLauncher.launch(intent)
+    }
+
+    private fun registerPhotoFromGalleryLauncher() =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.data != null && it.resultCode == RESULT_OK) {
+                val currentImageUri = it.data?.data
+                println("$currentImageUri")
+            }
+        }
+
+    companion object {
+        private val REQUIRED_PERMISSIONS = arrayOf(
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+        )
+    }
+
 }
