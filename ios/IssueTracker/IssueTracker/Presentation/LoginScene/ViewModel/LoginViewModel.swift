@@ -21,14 +21,25 @@ protocol LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
 
     func getURL() -> URL?
     func showMainScene()
+    func showLoginScene(type: LoginType)
 }
 
+// 코디네이터가 의존성 주입할 네비게이션 액션 핸들러
 protocol LoginFlowAction {
-    var goToMainScene: () -> Void { get }
+    var showMainScene: () -> Void { get }
+    var showGithubLoginScene: () -> Void { get }
+    var showAppleLoginScene: () -> Void { get }
 }
 
 struct LoginViewModelAction: LoginFlowAction {
-    var goToMainScene: () -> Void
+    var showMainScene: () -> Void
+    var showGithubLoginScene: () -> Void
+    var showAppleLoginScene: () -> Void
+}
+
+enum LoginType {
+    case github
+    case apple
 }
 
 struct DefaultLoginViewModel: LoginViewModel {
@@ -53,6 +64,17 @@ struct DefaultLoginViewModel: LoginViewModel {
 // MARK: - Navigation
 extension DefaultLoginViewModel {
     func showMainScene() {
-        navigationAction.goToMainScene()
+        navigationAction.showMainScene()
+    }
+
+    func showLoginScene(type: LoginType) {
+        switch type {
+        case .github:
+            return navigationAction.showGithubLoginScene()
+        case .apple:
+            return navigationAction.showAppleLoginScene()
+        @unknown case _:
+            return
+        }
     }
 }

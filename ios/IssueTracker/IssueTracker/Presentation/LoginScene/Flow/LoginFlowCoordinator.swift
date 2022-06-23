@@ -24,8 +24,15 @@ final class LoginFlowCoordinator: Coordinator {
         print("Deinit: \(#fileID)")
     }
 
-    func start() {
-        let action = LoginViewModelAction(goToMainScene: showMainTabBar)
+    func start(with deepLink: DeepLink? = nil) {
+        if case let .login(code) = deepLink, let code = code {}
+
+        let action = LoginViewModelAction(
+            showMainScene: showMainTabBar,
+            showGithubLoginScene: showGithubLogin,
+            showAppleLoginScene: showAppleLogin
+        )
+
         let viewController = dependency.makeLoginViewController(action: action)
         navigationController.viewControllers = [viewController]
     }
@@ -33,4 +40,14 @@ final class LoginFlowCoordinator: Coordinator {
     private func showMainTabBar() {
         // new flow start or push view controller
     }
+
+    private func showGithubLogin() {
+        guard let url = URL(string: "https://github.com/login/oauth/authorize?client_id=1f7a746c1d01cc6de0bf") else {
+            return
+        }
+
+        UIApplication.shared.open(url)
+    }
+
+    private func showAppleLogin() {}
 }
