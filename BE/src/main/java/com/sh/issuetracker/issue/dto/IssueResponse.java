@@ -21,6 +21,7 @@ public class IssueResponse {
 		private final String issueStatus;
 		private final int issueNumber;
 		private final String author;
+		private final String authorImage;
 		private final String createdAt;
 		private final String milestoneTitle;
 		private final List<LabelDesign> labels;
@@ -31,7 +32,8 @@ public class IssueResponse {
 				.issueTitle(issue.getTitle())
 				.issueStatus(issue.getStatus())
 				.issueNumber(issue.getOrder())
-				.author(issue.writer())
+				.author(issue.author())
+				.authorImage(issue.authorImage())
 				.createdAt(issue.getCreatedAt())
 				.milestoneTitle(issue.milestoneTitle())
 				.labels(toLabelDesigns(issue))

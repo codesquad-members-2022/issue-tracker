@@ -6,6 +6,7 @@ import com.sh.issuetracker.milestone.Milestone;
 import com.sh.issuetracker.project.Project;
 import com.sh.issuetracker.user.User;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
@@ -27,7 +28,6 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -35,14 +35,13 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @ToString(exclude = {"project"})
 @NamedEntityGraph(name = "Issue.all",
-attributeNodes = {
-	@NamedAttributeNode("milestone"),
-	@NamedAttributeNode("project"),
-	@NamedAttributeNode("user"),
-	@NamedAttributeNode(value = "issueLabels", subgraph = "issueLabels")},
+	attributeNodes = {
+		@NamedAttributeNode("milestone"),
+		@NamedAttributeNode("project"),
+		@NamedAttributeNode("author"),
+		@NamedAttributeNode(value = "issueLabels", subgraph = "issueLabels")},
 	subgraphs = @NamedSubgraph(
 		name = "issueLabels",
 		attributeNodes = @NamedAttributeNode("label"))
@@ -67,7 +66,8 @@ public class Issue {
 	private int order;
 	@Column(name = "created")
 	private LocalDateTime createdAt;
-	private boolean isDeleted;
+	@ColumnDefault("0")
+	private boolean isDeleted = false;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "milestone_id")
@@ -77,12 +77,16 @@ public class Issue {
 	@JoinColumn(name = "project_id")
 	private Project project;
 
-	@OneToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User user;
+	private User author;
 
 	@OneToMany(mappedBy = "issue")
 	private List<IssueLabel> issueLabels = new ArrayList<>();
+
+	public boolean openStatus() {
+		return this.status.isOpen();
+	}
 
 	public Long getId() {
 		return this.id;
@@ -100,8 +104,12 @@ public class Issue {
 		return order;
 	}
 
-	public String writer() {
-		return user.nickName();
+	public String author() {
+		return author.nickName();
+	}
+
+	public String authorImage() {
+		return author.image();
 	}
 
 	public String getCreatedAt() {
