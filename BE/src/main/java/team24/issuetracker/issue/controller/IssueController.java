@@ -20,22 +20,22 @@ public class IssueController {
 	private final IssueService issueService;
 
 	@GetMapping("created-by/{id}")
-	public List<IssueListResponse> findByWriter(@PathVariable("id") Long id) {
-		return issueService.findIssuesCreatedByMe(id);
+	public List<IssueListResponse> getByWriter(@PathVariable("id") Long id) {
+		return issueService.findByWriter(id);
 	}
 
 	@GetMapping("assigned-to/{id}")
-	public List<IssueListResponse> findByAssignee(@PathVariable("id") Long id) {
-		return issueService.findIssuesAssignedToMe(id);
+	public List<IssueListResponse> getByAssignee(@PathVariable("id") Long id) {
+		return issueService.findByAssignee(id);
 	}
 
 	@GetMapping("commented-by/{id}")
-	public List<IssueListResponse> findByComment(@PathVariable("id") Long id) {
-		return issueService.findIssuesCommentedByMe(id);
+	public List<IssueListResponse> getByComment(@PathVariable("id") Long id) {
+		return issueService.findByCommenter(id);
 	}
 
 	@GetMapping
-	public List<IssueListResponse> findClosedIssues(@RequestParam("closed") Boolean isClosed) {
-		return issueService.findByIsClosed(isClosed);
+	public List<IssueListResponse> getByState(@RequestParam("closed") Boolean isClosed) {
+		return issueService.findByState(isClosed);
 	}
 }

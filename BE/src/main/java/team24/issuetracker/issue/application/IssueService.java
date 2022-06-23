@@ -16,32 +16,26 @@ public class IssueService {
 
 	private final IssueRepository issueRepository;
 
-	public List<IssueListResponse> findIssues() {
-		return issueRepository.findAll().stream()
-			.map(IssueListResponse::new)
-			.collect(Collectors.toList());
-	}
-
-	public List<IssueListResponse> findIssuesCreatedByMe(@PathVariable Long id) {
+	public List<IssueListResponse> findByWriter(@PathVariable Long id) {
 		return issueRepository.findByWriter(id).stream()
 			.map(IssueListResponse::new)
 			.collect(Collectors.toList());
 	}
 
-	public List<IssueListResponse> findIssuesAssignedToMe(@PathVariable Long id) {
+	public List<IssueListResponse> findByAssignee(@PathVariable Long id) {
 		return issueRepository.findByAssignee(id).stream()
 			.map(IssueListResponse::new)
 			.collect(Collectors.toList());
 	}
 
-	public List<IssueListResponse> findIssuesCommentedByMe(@PathVariable Long id) {
-		return issueRepository.findByComment(id).stream()
+	public List<IssueListResponse> findByCommenter(@PathVariable Long id) {
+		return issueRepository.findByCommenter(id).stream()
 			.map(IssueListResponse::new)
 			.collect(Collectors.toList());
 	}
 
-	public List<IssueListResponse> findByIsClosed(Boolean isClosed) {
-		return issueRepository.findByClosed(isClosed).stream()
+	public List<IssueListResponse> findByState(Boolean isClosed) {
+		return issueRepository.findByState(isClosed).stream()
 			.map(IssueListResponse::new)
 			.collect(Collectors.toList());
 	}

@@ -19,8 +19,8 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
 	List<Issue> findByAssignee(@Param("id") Long id);
 
 	@Query("select i from Issue i join fetch i.comments as c where c.writer.id = :id and i.isDeleted = false")
-	List<Issue> findByComment(@Param("id") Long id);
+	List<Issue> findByCommenter(@Param("id") Long id);
 
 	@Query("select i from Issue i where i.isClosed = :isClosed and i.isDeleted = false")
-	List<Issue> findByClosed(@Param("isClosed") Boolean isClosed);
+	List<Issue> findByState(@Param("isClosed") Boolean isClosed);
 }
