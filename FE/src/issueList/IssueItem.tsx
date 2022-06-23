@@ -5,8 +5,23 @@ import styled from 'styled-components';
 import CheckBox from './CheckBox';
 import Label from './Label';
 
+type LabelColorType = {
+  backgroundColor: string;
+  textColor: string;
+};
+
+type LabelType = {
+  name: string;
+  color: LabelColorType;
+};
+
 type IssueItemProps = {
   id: string;
+  title: string;
+  createdTime: string;
+  writer: string;
+  labels: LabelType[];
+  milestoneName: string;
   isSelected: boolean;
   isLast: boolean;
   updateIssueState: (id: string) => void;
@@ -14,6 +29,11 @@ type IssueItemProps = {
 
 function IssueItem({
   id,
+  title,
+  createdTime,
+  writer,
+  labels,
+  milestoneName,
   isSelected,
   isLast,
   updateIssueState
@@ -24,6 +44,46 @@ function IssueItem({
   const handleClick = () => {
     updateIssueState(id);
   };
+
+  const getTimeStamp = (writtenTime: string) => {
+    let timeStamp;
+
+    const writtenDate = new Date(writtenTime);
+    const today = new Date();
+
+    const sec = 60 * 1000;
+    const min = sec * 60;
+    const hour = min * 24;
+    const day = hour * 30;
+    const gap = today.getTime() - writtenDate.getTime();
+
+    switch (true) {
+      case gap < sec:
+        timeStamp = `${Math.floor(gap / 1000)}초 전`;
+        break;
+      case gap < min:
+        timeStamp = `${Math.floor(gap / sec)}분 전`;
+        break;
+      case gap < hour:
+        timeStamp = `${Math.floor(gap / min)}시간 전`;
+        break;
+      case gap < day:
+        timeStamp = `${Math.floor(gap / hour)}일 전`;
+        break;
+      case writtenDate.getFullYear() === today.getFullYear():
+        timeStamp = `${
+          writtenDate.getMonth() + 1
+        }월 ${writtenDate.getDate()}일`;
+        break;
+      default:
+        timeStamp = `${writtenDate.getFullYear()}년 ${
+          writtenDate.getMonth() + 1
+        }월 ${writtenDate.getDate()}일`;
+    }
+
+    return timeStamp;
+  };
+  const timeStamp = getTimeStamp(createdTime);
 
   return (
     <IssueItemBox>
@@ -36,7 +96,7 @@ function IssueItem({
             fill={COLORS.LIGHT_BLUE}
           />
           <Link to="/issueDetail">
-            <TitleText>이슈 제목</TitleText>
+            <TitleText>{title}</TitleText>
           </Link>
           <Labels>
             <Label
@@ -47,12 +107,16 @@ function IssueItem({
           </Labels>
         </IssueTitle>
         <IssueInfo>
-          <span>#이슈번호</span>
-          <span>작성자 및 타임스탬프 정보</span>
-          <Milestone>
-            <Icon iconName="milestone" fill={GREYSCALE.LABEL} />
-            마일스톤
-          </Milestone>
+          <span>#{id}</span>
+          <span>
+            이 이슈가 {timeStamp}에, {writer}에 의해 작성되었습니다
+          </span>
+          {milestoneName && (
+            <Milestone>
+              <Icon iconName="milestone" fill={GREYSCALE.LABEL} />
+              {milestoneName}
+            </Milestone>
+          )}
         </IssueInfo>
       </IssueText>
       <IssueAssignee>

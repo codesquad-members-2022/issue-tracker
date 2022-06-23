@@ -74,6 +74,11 @@ function IssueList() {
           <IssueItem
             key={issue.id}
             id={String(issue.id)}
+            title={issue.title}
+            createdTime={issue.createdTime}
+            writer={issue.writer}
+            labels={issue.labels}
+            milestoneName={issue.milestoneName}
             isSelected={selectedIssues[issue.id]}
             isLast={idx === issueList.issues.length - 1}
             updateIssueState={updateIssueState}
@@ -94,9 +99,9 @@ const issueList = {
   issues: [
     {
       id: 1,
-      title: '제목',
-      createdTime: '2022-06-13 12:12:13',
-      writer: '글쓴이',
+      title: '제목1',
+      createdTime: '2022-06-23 12:12:13',
+      writer: '글쓴이1',
       labels: [
         {
           name: '라벨네임',
@@ -113,13 +118,13 @@ const issueList = {
           }
         }
       ],
-      milestoneName: '마일스톤'
+      milestoneName: '마일스톤1'
     },
     {
       id: 2,
-      title: '제목',
-      createdTime: '2022-06-13 12:12:13',
-      writer: '글쓴이',
+      title: '제목2',
+      createdTime: '2022-06-22 12:12:13',
+      writer: '글쓴이2',
       labels: [
         {
           name: '라벨네임',
@@ -136,13 +141,13 @@ const issueList = {
           }
         }
       ],
-      milestoneName: '마일스톤'
+      milestoneName: '마일스톤2'
     },
     {
       id: 3,
-      title: '제목',
-      createdTime: '2022-06-13 12:12:13',
-      writer: '글쓴이',
+      title: '제목3',
+      createdTime: '2021-06-22 20:12:13',
+      writer: '글쓴이3',
       labels: [
         {
           name: '라벨네임',
@@ -159,7 +164,7 @@ const issueList = {
           }
         }
       ],
-      milestoneName: '마일스톤'
+      milestoneName: '마일스톤3'
     }
   ]
 };
