@@ -22,9 +22,9 @@ interface IPanelProps extends I$PanelProps {
   panelRef: React.MutableRefObject<HTMLDivElement | null>;
   title: string;
   options: Option[];
-  selectedValue: string;
+  selectedValue: string | undefined;
   updateSelectedValue: (value: string) => void;
   hidePanel: () => void;
 }
 
-export type { I$PanelProps, I$SelectedItemProps, IPanelProps };
+export type { Option, I$PanelProps, I$SelectedItemProps, IPanelProps };

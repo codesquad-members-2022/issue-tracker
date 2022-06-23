@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Panel from '@/components/Dropdown/Panel';
-import { Icon } from '@/components/Icon';
 
 export default {
   title: 'Dropdown/Panel',

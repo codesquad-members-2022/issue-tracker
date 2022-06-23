@@ -15,7 +15,6 @@ const $FilterBar = styled.div<I$FilterBar>`
   height: 40px;
   border: 1px solid ${({ theme }) => theme.COLOR.line};
   border-radius: 11px;
-  overflow: hidden;
   ${({ isFocus }) => isFocus && focusStyle}
 `;
 

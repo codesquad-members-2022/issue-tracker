@@ -36,7 +36,7 @@ export default function Panel({
             key={value}
             id={value}
             selected={value === selectedValue}
-            onClick={() => handleSelectedItemClick(value)}
+            onMouseUp={() => handleSelectedItemClick(value)}
           >
             {children}
             {value === selectedValue ? radio?.on : radio?.off}
