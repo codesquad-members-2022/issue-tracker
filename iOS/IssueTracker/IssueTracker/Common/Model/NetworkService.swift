@@ -47,12 +47,6 @@ private extension NetworkService {
             var request = URLRequest(url: url)
             request.httpMethod = target.method
 
-            if let target = target as? EditingIssueNetworkTarget,
-               let body = target.body {
-                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.httpBody = body
-            }
-
             return request
         }
         return nil
