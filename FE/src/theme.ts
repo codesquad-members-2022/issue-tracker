@@ -95,4 +95,4 @@ const theme = {
   TYPOGRAPHY,
 };
 
-export { theme };
+export default theme;
