@@ -9,6 +9,7 @@ import UIKit
 
 protocol AppFlowCoordinatorDependencies {
     func makeLoginFlowDIContainer() -> DIContainer
+    func checkUserLoggedIn() -> Bool
 }
 
 final class AppFlowCoordinator: Coordinator {
@@ -24,6 +25,8 @@ final class AppFlowCoordinator: Coordinator {
         print("Deinit: \(#fileID)")
     }
 
+    func start() {}
+
     func start(with deepLink: DeepLink? = nil) {
         guard let deepLink = deepLink else {
             runLoginFlow() // or run default flow
@@ -32,7 +35,7 @@ final class AppFlowCoordinator: Coordinator {
 
         switch deepLink {
         case .home:
-            // run home flow with deepLink
+            runTabBarFlow(with: deepLink)
             return
         case .login:
             runLoginFlow(with: deepLink)
@@ -48,4 +51,6 @@ final class AppFlowCoordinator: Coordinator {
         let flow = container.makeCoordinator(navigationController: navigationController)
         flow.start(with: deepLink)
     }
+
+    func runTabBarFlow(with _: DeepLink? = nil) {}
 }

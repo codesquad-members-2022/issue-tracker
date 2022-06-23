@@ -12,7 +12,7 @@ protocol DIContainer {
 }
 
 class LoginFlowDIContainer: DIContainer {
-    private let storage = UserDefaults.standard
+    private let localStorage = UserDefaults.standard
 
     func makeLoginViewController(action: LoginViewModelAction) -> UIViewController {
         let viewModel = DefaultLoginViewModel(navigationAction: action)
@@ -26,6 +26,6 @@ class LoginFlowDIContainer: DIContainer {
 
 extension LoginFlowDIContainer: LoginFlowCoordinatorDependencies {
     func setAuthCode(code: String) {
-        storage.set(code, forKey: "AuthorizationCode")
+        localStorage.set(code, forKey: LocalStorageConstants.AuthCode)
     }
 }
