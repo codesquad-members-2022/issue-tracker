@@ -1,39 +1,80 @@
-import styled from "styled-components";
+import React from "react";
+import { Link } from "react-router-dom";
+import styled, { css, useTheme } from "styled-components";
 
-interface InputProps {
-  size: string;
+import TagIcon from "components/Icons/Tag";
+import MileStoneIcon from "components/Icons/MileStone";
+import { FlexCenterBox, IconBox } from "styles/boxes";
+import { tabStyle, linkStyle } from "constants/tabStyle";
+
+interface TabProps {
+  counts: {
+    label: number;
+    mileStone: number;
+  };
 }
 
-function Input({ size }) {
+function Tab({ counts }: TabProps) {
+  const theme = useTheme();
+  const iconColor = theme.colors[tabStyle.font.fontColor];
+
   return (
-    <InputWrapper>
-      <Title>아이디</Title>
-      <TextInput placeholder={size === "large" ? "아이디" : "제목"} />;
-    </InputWrapper>
+    <StyledTab as="ul">
+      <TabItem>
+        <Link to="/label" style={linkStyle}>
+          <IconBox as="span" width={16} height={16}>
+            <TagIcon color={iconColor} />
+          </IconBox>
+          레이블 ({counts.label})
+        </Link>
+      </TabItem>
+      <TabItem>
+        <Link to="/milestone" style={linkStyle}>
+          <IconBox as="span" width={16} height={16}>
+            <MileStoneIcon color={iconColor} />
+          </IconBox>
+          마일스톤 ({counts.mileStone})
+        </Link>
+      </TabItem>
+    </StyledTab>
   );
 }
 
-const InputWrapper = styled.div`
-  width: 340px;
-  height: 64px;
-  background: #fefefe;
-  border: 1px solid #14142b;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px 24px;
+const StyledTab = styled(FlexCenterBox)`
+  ${({ theme: { colors } }) => {
+    const borderColor = tabStyle.borderColor;
+
+    return css`
+      display: inline-flex;
+      border: 1px solid ${colors[borderColor]};
+      border-radius: 11px;
+      overflow: hidden;
+    `;
+  }}
 `;
 
-const Title = styled.div`
-  width: 292px;
-  height: 28px;
+const TabItem = styled(FlexCenterBox)`
+  ${({ theme: { colors, fontWeight, fontSize } }) => {
+    const {
+      tabItemSize: { width, height },
+      bgColor,
+      borderColor,
+      font: { fontColor: ftColor, fontWeight: ftWeight, fontSize: ftSize },
+    } = tabStyle;
+
+    return css`
+      width: ${width}px;
+      height: ${height}px;
+      background: ${colors[bgColor]};
+      color: ${colors[ftColor]};
+      font-weight: ${fontWeight[ftWeight]};
+      font-size: ${fontSize[ftSize]};
+
+      &:first-child {
+        border-right: 1px solid ${colors[borderColor]};
+      }
+    `;
+  }}
 `;
 
-const TextInput = styled.input`
-  width: 290px;
-  height: 28px;
-`;
-
-export default Input;
+export { Tab };
