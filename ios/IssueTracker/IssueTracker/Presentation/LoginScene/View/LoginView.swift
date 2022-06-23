@@ -24,7 +24,7 @@ final class LoginView: UIView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Issue Tracker"
+        label.text = "이슈트래커"
         label.font = .systemFont(ofSize: 45)
         label.textAlignment = .center
         return label

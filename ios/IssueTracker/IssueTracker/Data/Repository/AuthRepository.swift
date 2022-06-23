@@ -15,6 +15,7 @@ enum NetworkError: Error {
     case invalidAuthCode
     case invalidURL
     case encodingError
+    case error(Error)
 }
 
 enum HTTPMethod: String {
@@ -22,50 +23,17 @@ enum HTTPMethod: String {
 }
 
 class AuthRepository {
-    struct TokenDTO: Encodable {
-        let code: String
-    }
-
-    struct TokenBag: Decodable {
-        let token: String
-    }
-
-    private let userDefaults = UserDefaults.standard
-    private let session: URLSession
-
-    init(session: URLSession = URLSession.shared) {
-        self.session = session
-    }
-
-    private func getCode() -> String? {
-        let code = UserDefaults.standard.string(forKey: LocalStorageConstants.AuthCode)
-        return code
-    }
+    private let storage = Storage()
+    private let service = Service()
 
     func getToken(completion: @escaping (Result<TokenBag, NetworkError>) -> Void) {
-        guard let url = makeTokenURL() else {
-            completion(.failure(.invalidURL))
-            return
-        }
-
-        guard let code = getCode() else {
+        guard let code = storage.getCode() else {
             completion(.failure(.invalidAuthCode))
             return
         }
 
-        guard let body = try? JSONEncoder().encode(TokenDTO(code: code)) else {
-            completion(.failure(.encodingError))
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = body
-
-        session.dataTask(with: request) { data, response, error in
-            self.deleteCode()
+        service.getToken(code: code) { data, response, error in
+            self.storage.deleteCode()
 
             if let error = self.getError(
                 data: data,
@@ -84,21 +52,15 @@ class AuthRepository {
                 guard let decodedResponse = try? JSONDecoder().decode(TokenBag.self, from: data) else {
                     return
                 }
-
                 completion(.success(decodedResponse))
             } catch {
                 completion(.failure((.decodeFailedError)))
             }
-        }.resume()
+        }
     }
 
     func setToken(token: String) {
-        userDefaults.setValue(token, forKey: LocalStorageConstants.AuthToken)
-    }
-
-    private func makeTokenURL() -> URL? {
-        let url = "https://us-central1-onboarding-5054d.cloudfunctions.net/github/auth"
-        return URL(string: url)
+        storage.setToken(token: token)
     }
 
     private func getError(data: Data?, response: URLResponse?, error: Error?) -> NetworkError? {
@@ -115,9 +77,5 @@ class AuthRepository {
         }
 
         return nil
-    }
-
-    private func deleteCode() {
-        userDefaults.removeObject(forKey: LocalStorageConstants.AuthCode)
     }
 }

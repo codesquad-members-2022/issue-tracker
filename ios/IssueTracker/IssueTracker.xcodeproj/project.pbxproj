@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		736E6BA72864090A00BB3490 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E6BA62864090A00BB3490 /* UseCase.swift */; };
 		736E6BA92864093100BB3490 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E6BA82864093100BB3490 /* AuthRepository.swift */; };
+		7389100228646DC000502A86 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7389100128646DC000502A86 /* Storage.swift */; };
+		738910042864726B00502A86 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738910032864726B00502A86 /* Service.swift */; };
 		738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C4AAE285AD38C0050990E /* LoginButton.swift */; };
 		73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC52859697600191F99 /* Extension+UIColor.swift */; };
 		73A7EDC92859A68800191F99 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC82859A68800191F99 /* LoginView.swift */; };
@@ -34,6 +36,8 @@
 /* Begin PBXFileReference section */
 		736E6BA62864090A00BB3490 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		736E6BA82864093100BB3490 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		7389100128646DC000502A86 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		738910032864726B00502A86 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		738C4AAE285AD38C0050990E /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		73A7EDC52859697600191F99 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		73A7EDC82859A68800191F99 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				736E6BA2286408BF00BB3490 /* Repository */,
+				7389100128646DC000502A86 /* Storage.swift */,
+				738910032864726B00502A86 /* Service.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -429,10 +435,12 @@
 				E46FBE842862B77D000CB998 /* DeepLink.swift in Sources */,
 				E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */,
 				E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */,
+				7389100228646DC000502A86 /* Storage.swift in Sources */,
 				E4D87386285884AE00AFCE4D /* LoginViewController.swift in Sources */,
 				73A7EDC92859A68800191F99 /* LoginView.swift in Sources */,
 				E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */,
 				E4D87382285884AE00AFCE4D /* AppDelegate.swift in Sources */,
+				738910042864726B00502A86 /* Service.swift in Sources */,
 				738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */,
 				E4F44CF0285C292E00D3A3E6 /* AppFlowDIContainer.swift in Sources */,
 				736E6BA92864093100BB3490 /* AuthRepository.swift in Sources */,
