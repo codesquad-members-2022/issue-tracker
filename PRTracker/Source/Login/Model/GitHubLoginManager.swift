@@ -44,18 +44,20 @@ struct GitHubLoginManager {
         uiApplication.open(url)
     }
     
-    func getAccessToken(with code: String) {
+    func getAccessToken(with code: String, completion: @escaping (Bool) -> Void) {
         guard let url = makeAccessTokenURL(with: code) else { return }
         let request = makeAccessTokenRequest(with: url)
         
         networkService.request(request) { (response: TokenResponse?) -> Void in
             guard let response = response else {
-                Log.error("Network Request for access token is failed")
-                return
+                Log.error("Request for access token is failed. Code: \(code)")
+                return completion(false)
             }
+            
             keyChainService.save(response.accessToken,
                                  service: GitHubLoginManager.keyChainToken,
                                  account: GitHubLoginManager.keyChainAccount)
+            completion(true)
         }
     }
     
