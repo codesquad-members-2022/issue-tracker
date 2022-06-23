@@ -13,14 +13,14 @@ struct IssueViewModel {
 
 class IssueListViewModel {
     
-    var issueListViewModel: [IssueViewModel]
+    var allIssueViewModel: [IssueViewModel]
     
     init() {
-        self.issueListViewModel = [issueListViewModel]()
+        self.allIssueViewModel = [allIssueViewModel]()
     }
     
     func issueListViewModel(at index: Int) -> IssueViewModel {
-        return self.issueListViewModel[index]
+        return self.allIssueViewModel[index]
     }
     
 }

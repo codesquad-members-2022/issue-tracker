@@ -26,3 +26,20 @@ struct Label {
     let backgroundColor: String
     let isDarkMode: Bool
 }
+
+extension IssueItem {
+    
+    init?(_ issueVM: IssueViewModel) {
+        guard let id = issueVM.id, let title = issueVM.title,
+              let content = issueVM.content,let milestoneName = issueVM.milestoneName,
+              let labels = issueVM.labels else {
+            return nil
+        }
+        self.id = id
+        self.title = title
+        self.content = content
+        self.milestoneName = milestoneName
+        self.labels = labels
+    }
+    
+}
