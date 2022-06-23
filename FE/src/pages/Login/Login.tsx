@@ -3,6 +3,8 @@ import React from 'react';
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
+const URL = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&scope=read:user&redirect_uri=${process.env.REACT_APP_GITHUB_REDIRECT_URI}`;
+
 function Login(): JSX.Element {
   return (
     <S.Container>
@@ -10,7 +12,7 @@ function Login(): JSX.Element {
         <S.Logo>
           <S.LogoImg alt="logo" src="./LogotypeLarge.svg" />
         </S.Logo>
-        <GitHubBtn to="/" size="lg">
+        <GitHubBtn href={URL} size="lg">
           GitHub 계정으로 로그인
         </GitHubBtn>
         <S.OR
