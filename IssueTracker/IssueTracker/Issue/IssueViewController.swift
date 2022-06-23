@@ -45,7 +45,6 @@ final class IssueViewController: UIViewController {
         setupViews()
         model?.requestIssue()
         model?.updatedIssues = { issues in // 모델과 바인딩
-            print(issues)
             self.collectionView.reloadData()
         }
     }
