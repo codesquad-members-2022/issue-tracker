@@ -13,6 +13,24 @@ final class IssueViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var addButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+//        configuration.image = UIImage(systemName: "plus")
+        configuration.baseBackgroundColor = .systemBlue
+        configuration.baseForegroundColor = .white
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        configuration.background.cornerRadius = 70
+        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { _ in
+            self.touchedAddButton()
+        }))
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+//        button.layer.cornerRadius = 50 / 2
+        
+        return button
+    }()
+    
+    
     private var model: IssueModel?
     
     convenience init(model: IssueModel?) {
@@ -41,9 +59,13 @@ final class IssueViewController: UIViewController {
         print("touchedFilterButton")
     }
     
+    @objc func touchedAddButton() {
+        self.navigationController?.pushViewController(Container().getViewController(.newIssue), animated: true)
+    }
+    
     private func setupNavigationBar() {
         self.title = "이슈"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         let filterButton = createButton(title: "필터", image: UIImage(systemName: "scroll"), action: UIAction(handler: { _ in
             self.touchedFilterButton()
@@ -63,6 +85,12 @@ final class IssueViewController: UIViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(self.view)
         }
+        
+        view.addSubview(addButton)
+        addButton.snp.makeConstraints { make in
+            make.bottom.equalTo(self.view).offset(-50)
+            make.trailing.equalTo(self.view).offset(-50)
+        }
     }
     
     private func createButton(title: String, image: UIImage?, action: UIAction) -> UIButton {
@@ -74,6 +102,17 @@ final class IssueViewController: UIViewController {
         configuration.buttonSize = .small
         configuration.image = image
         configuration.imagePadding = 4
+        let button = UIButton(configuration: configuration, primaryAction: action)
+        return button
+    }
+    
+    private func createButton(title: String, action: UIAction) -> UIButton {
+        var configuration = UIButton.Configuration.plain()
+        var container = AttributeContainer()
+        container.font = UIFont.systemFont(ofSize: 14)
+        configuration.attributedTitle = AttributedString(title, attributes: container)
+        
+        configuration.buttonSize = .small
         let button = UIButton(configuration: configuration, primaryAction: action)
         return button
     }
