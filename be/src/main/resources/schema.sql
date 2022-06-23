@@ -80,6 +80,7 @@ CREATE TABLE label
     name        VARCHAR(64),
     description VARCHAR(255),
     color       VARCHAR(64),
+    dark_text_flag TINYINT(1) default 0 COMMENT '1 : 어두운 텍스트 색상, 0 : 밝은 텍스트 색상',
     PRIMARY KEY (label_id)
 );
 

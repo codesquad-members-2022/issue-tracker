@@ -31,4 +31,7 @@ public class Label {
     private String name;
     private String description;
     private String color;
+
+    @Column(name = "dark_text_flag")
+    private boolean isDarkText;
 }

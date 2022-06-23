@@ -23,7 +23,8 @@ public class LabelRepository {
                 label.id,
                 label.name,
                 label.description,
-                label.color
+                label.color,
+                label.isDarkText
             ))
             .from(label)
             .fetch();

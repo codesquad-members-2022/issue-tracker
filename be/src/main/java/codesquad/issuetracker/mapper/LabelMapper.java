@@ -10,7 +10,7 @@ public class LabelMapper {
     public static LabelDto convertToDto(Label label) {
         if (label != null) {
             return new LabelDto(label.getId(), label.getName(), label.getDescription(),
-                label.getColor());
+                label.getColor(), label.isDarkText());
         }
 
         return null;

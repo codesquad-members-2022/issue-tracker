@@ -13,10 +13,10 @@ VALUES (1, 1, '백엔드 기능 구현', '백엔드', 'OPEN', NOW(), NOW()),
        (3, null, '배포', '배포', 'OPEN', NOW(), NOW()),
        (1, 2, '백엔드 기능 구현', '백엔드', 'CLOSED', NOW(), NOW());
 
-INSERT INTO label (name, description, color)
-VALUES ('be', '백엔드 라벨', '#333333'),
-       ('fe', '프론트엔드 라벨', '#222222'),
-       ('bug', '버그 해결', '#444444');
+INSERT INTO label (name, description, color, dark_text_flag)
+VALUES ('be', '백엔드 라벨', '#333333', 0),
+       ('fe', '프론트엔드 라벨', '#222222', 0),
+       ('bug', '버그 해결', '#444444', 0);
 
 INSERT INTO issue_label (issue_id, label_id) VALUES (1, 1), (2, 1), (1, 3), (2, 2);
 
