@@ -1,5 +1,4 @@
 import { GREYSCALE } from '@/constants';
-import React from 'react';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
 import { SelectedIssueType } from './IssueList';
@@ -11,42 +10,56 @@ type IssueHeaderProps = {
 };
 
 function IssueHeader({ selectedIssues }: IssueHeaderProps) {
-  const checkBoxType = (() => {
-    const selectedIssuesList = Object.values(selectedIssues);
-    if (selectedIssuesList.every((selected) => selected === true)) {
+  const selectedIssuesCount = Object.values(selectedIssues).filter(
+    (selected) => selected
+  ).length;
+
+  const getCheckBoxType = () => {
+    if (selectedIssuesCount === Object.keys(selectedIssues).length) {
       return 'active';
     }
-
-    if (selectedIssuesList.some((selected) => selected === true)) {
+    if (selectedIssuesCount) {
       return 'disable';
     }
-
     return 'initial';
-  })();
+  };
 
   return (
     <IssueHeaderBox>
-      <CheckBox checkBoxType={checkBoxType} />
-      <IssueMenus>
-        <IssueMenu
-          icon={'alertCircle'}
-          menuName={'열린 이슈'}
-          count={2}
-          isCurrent
-        />
-        <IssueMenu
-          icon={'archive'}
-          menuName={'닫힌 이슈'}
-          count={0}
-          isCurrent={false}
-        />
-      </IssueMenus>
-      <IssueTabs>
-        <IssueTab tabName={'담당자'} />
-        <IssueTab tabName={'레이블'} />
-        <IssueTab tabName={'마일스톤'} />
-        <IssueTab tabName={'작성자'} />
-      </IssueTabs>
+      <CheckBox checkBoxType={getCheckBoxType()} />
+      {selectedIssuesCount ? (
+        <>
+          <SelectedIssuesCount>
+            {selectedIssuesCount}개 이슈 선택
+          </SelectedIssuesCount>
+          <IssueTabs>
+            <IssueTab tabName="상태 수정" />
+          </IssueTabs>
+        </>
+      ) : (
+        <>
+          <IssueMenus>
+            <IssueMenu
+              icon={'alertCircle'}
+              menuName={'열린 이슈'}
+              count={2}
+              isCurrent
+            />
+            <IssueMenu
+              icon={'archive'}
+              menuName={'닫힌 이슈'}
+              count={0}
+              isCurrent={false}
+            />
+          </IssueMenus>
+          <IssueTabs>
+            <IssueTab tabName={'담당자'} />
+            <IssueTab tabName={'레이블'} />
+            <IssueTab tabName={'마일스톤'} />
+            <IssueTab tabName={'작성자'} />
+          </IssueTabs>
+        </>
+      )}
     </IssueHeaderBox>
   );
 }
@@ -67,7 +80,7 @@ const IssueMenus = styled.ul`
   gap: 24px;
 `;
 
-const SelectedIssueText = styled.p`
+const SelectedIssuesCount = styled.p`
   ${({ theme }) => theme.TYPOGRAPHY.LINK_SMALL}
   color: ${GREYSCALE.LABEL};
 `;
