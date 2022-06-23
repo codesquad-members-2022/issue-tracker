@@ -18,7 +18,7 @@ public class MilestoneController {
 	private final MilestoneService milestoneService;
 
 	@GetMapping
-	public List<MilestoneListResponse> findMilestones() {
-		return milestoneService.findAll();
+	public List<MilestoneListResponse> getMilestones() {
+		return milestoneService.findLabels();
 	}
 }

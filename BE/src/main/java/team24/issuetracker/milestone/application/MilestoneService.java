@@ -18,7 +18,7 @@ public class MilestoneService {
 
 	private final MilestoneRepository milestoneRepository;
 
-	public List<MilestoneListResponse> findAll() {
+	public List<MilestoneListResponse> findLabels() {
 		List<Milestone> milestoneList = milestoneRepository.findAll();
 		List<MilestoneListResponse> milestoneListResponses = new ArrayList<>();
 		for (Milestone milestone : milestoneList) {

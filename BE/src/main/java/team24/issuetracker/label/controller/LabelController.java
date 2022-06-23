@@ -16,7 +16,7 @@ public class LabelController {
 	private final LabelService labelService;
 
 	@GetMapping
-	public List<LabelListResponse> findLabels(){
-		return labelService.findLabel();
+	public List<LabelListResponse> getLabels(){
+		return labelService.findLabels();
 	}
 }

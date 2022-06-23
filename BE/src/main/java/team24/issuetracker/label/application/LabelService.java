@@ -13,7 +13,7 @@ public class LabelService {
 
 	private final LabelRepository labelRepository;
 
-	public List<LabelListResponse> findLabel() {
+	public List<LabelListResponse> findLabels() {
 		return labelRepository.findAll().stream().map(LabelListResponse::new).collect(
 			Collectors.toList());
 	}
