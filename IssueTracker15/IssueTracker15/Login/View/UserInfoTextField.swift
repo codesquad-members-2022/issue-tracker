@@ -9,7 +9,7 @@ import UIKit
 
 final class UserInfoTextField: UITextField, ViewBindable {
     var vc: ViewBinding?
-    private(set) var type:UserInputType = .ID
+    private(set) var type: UserInputType = .ID
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,11 +21,11 @@ final class UserInfoTextField: UITextField, ViewBindable {
     }
     
     func sendAction(_ param: Any?) {
-        vc?.inputViewEvent(self, nil)
+        vc?.inputViewEvent(self, param)
     }
     
     func receive(_ responseData: Any) {
-        print(responseData)
+        
     }
     
     func setVC(_ binding: ViewBinding) {

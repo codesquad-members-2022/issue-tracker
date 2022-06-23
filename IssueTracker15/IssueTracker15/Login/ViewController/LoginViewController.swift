@@ -10,14 +10,12 @@ import SnapKit
 
 final class LoginViewController: UIViewController, ViewBinding {
     
-    private var vm: LoginViewModel?
+    private var loginViewModel: CommonViewModel?
+    private var userInputViewModel: CommonViewModel?
     
     private lazy var userInfoInputStackView: UserInfoInputStackView = {
         let stackView = UserInfoInputStackView()
-        stackView.subviews.forEach {
-            guard let bindableView = $0 as? ViewBindable else { return }
-            bindableView.setVC(self)
-        }
+        stackView.setVC(self)
         return stackView
     }()
     
@@ -54,9 +52,14 @@ final class LoginViewController: UIViewController, ViewBinding {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        vm = LoginViewModel { loginUrl, _ in
+        loginViewModel = LoginViewModel { loginUrl, _ in
             guard let loginUrl = loginUrl as? URL else { return }
             UIApplication.shared.open(loginUrl)
+        }
+        
+        userInputViewModel = UserInputViewModel { result, _ in
+            guard let result = result as? ValidatedResult else { return }
+            self.userInfoInputStackView.setValidatedResultLabel(result)
         }
         
         addViews()
@@ -64,7 +67,14 @@ final class LoginViewController: UIViewController, ViewBinding {
     }
     
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
-        self.vm?.request(target, param: param)
+        switch target {
+        case let target as UserInfoTextField:
+            self.userInputViewModel?.request(target, param: param)
+        case let target as OAuthLoginButton:
+            self.loginViewModel?.request(target, param: param)
+        default:
+            break
+        }
     }
     
     func presentIssueList(accessToken: String) {
@@ -79,32 +89,54 @@ final class LoginViewController: UIViewController, ViewBinding {
     }
     
     private func setUp() {
+        let screenHeight = UIScreen.main.bounds.height
+        let screenWeight = UIScreen.main.bounds.width
+        
         titleLabel.snp.makeConstraints {
-            let insetValue = UIScreen.main.bounds.height / 4
-            $0.top.equalToSuperview().inset(insetValue)
+            $0.top.equalToSuperview()
+                .inset(screenHeight * LayoutRatio.titleTopInsetRatio)
             $0.centerX.equalToSuperview()
         }
         
         userInfoInputStackView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(72.0)
+            $0.top.equalToSuperview()
+                .inset(screenHeight * LayoutRatio.userInfoInputStackViewInsetRatio)
             $0.leading.trailing.equalToSuperview()
         }
-        
+
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(userInfoInputStackView.snp.bottom).offset(32.0)
-            $0.leading.equalToSuperview().inset(96.0)
+            $0.top.equalToSuperview()
+                .inset(screenHeight * LayoutRatio.loginButtonTopInsetRatio)
+            $0.leading.equalToSuperview()
+                .inset(screenWeight * LayoutRatio.loginButtonLeadingInsetRatio)
         }
-        
+
         makeIDButton.snp.makeConstraints {
-            $0.top.equalTo(userInfoInputStackView.snp.bottom).offset(32.0)
-            $0.leading.equalTo(loginButton.snp.trailing).offset(79.0)
+            $0.top.equalToSuperview()
+                .inset(screenHeight * LayoutRatio.makeIdButtonTopInsetRatio)
+            $0.trailing.equalToSuperview()
+                .inset(screenWeight * LayoutRatio.makeIdButtonTrailingInsetRatio)
         }
-        
+
         oAuthLoginStackView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(60.0)
-            $0.top.equalTo(userInfoInputStackView.snp.bottom).offset(228.0)
-            $0.leading.trailing.equalToSuperview().inset(16.0)
+            $0.bottom.equalToSuperview()
+                .inset(screenHeight * LayoutRatio.oAuthStackViewBottomInsetRatio)
+            $0.trailing.leading.equalToSuperview()
+                .inset(screenWeight * LayoutRatio.oAuthStackViewSideInsetRatio)
         }
-        
     }
+}
+
+private struct LayoutRatio {
+    static let titleTopInsetRatio: CGFloat = 165 / 812
+    static let userInfoInputStackViewInsetRatio: CGFloat = 312 / 812
+    
+    static let loginButtonTopInsetRatio: CGFloat = 430 / 812
+    static let loginButtonLeadingInsetRatio: CGFloat = 96 / 375
+    
+    static let makeIdButtonTopInsetRatio: CGFloat = 430 / 812
+    static let makeIdButtonTrailingInsetRatio: CGFloat = 96 / 375
+    
+    static let oAuthStackViewBottomInsetRatio: CGFloat = 60 / 812
+    static let oAuthStackViewSideInsetRatio: CGFloat = 16 / 375
 }

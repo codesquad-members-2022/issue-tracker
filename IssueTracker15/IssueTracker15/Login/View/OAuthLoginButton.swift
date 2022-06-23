@@ -43,7 +43,7 @@ final class OAuthLoginButton: UIButton, ViewBindable {
     
     private func setUp() {
         var config = UIButton.Configuration.filled()
-        config.contentInsets = .init(top: 8, leading: 32, bottom: 8, trailing: 32)
+        config.contentInsets = .init(top: 16, leading: 32, bottom: 16, trailing: 32)
         config.baseBackgroundColor = .black
         config.background.cornerRadius = 16.0
         config.imagePlacement = .leading

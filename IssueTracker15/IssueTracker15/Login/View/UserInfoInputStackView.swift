@@ -62,6 +62,14 @@ final class UserInfoInputStackView: UIStackView {
 
     private let separatorLineView = UIView.makeSeparator()
     
+    private let validatedResultLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: 12.0, weight: .light)
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -72,8 +80,27 @@ final class UserInfoInputStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setVC(_ binding: ViewBinding) {
+        [IDTextField, PasswordTextField].forEach {
+            $0.setVC(binding)
+        }
+    }
+    
+    func setValidatedResultLabel(_ validateType: ValidatedResult) {
+        switch validateType {
+        case .success:
+            self.validatedResultLabel.text = ""
+        case .unValidatedID:
+            self.validatedResultLabel.text = "에러: 유효하지 않은 아이디형식\n@ 이전까지, (영)소,대문자 혹은 숫자로 6~16자의 아이디를 작성해주세요."
+            self.validatedResultLabel.textColor = .red
+        case .unValidatePassword:
+            self.validatedResultLabel.text = "에러: 유효하지 않은 비밀번호형식\n(영)대문자,소문자,특수문자,숫자를 최소 하나씩 6~12자의 비밀번호를 작성해주세요."
+            self.validatedResultLabel.textColor = .red
+        }
+    }
+    
     private func addViews() {
-        [IDStackView, separatorLineView, passwordStackView].forEach {
+        [IDStackView, separatorLineView, passwordStackView, validatedResultLabel].forEach {
             self.addArrangedSubview($0)
         }
     }
