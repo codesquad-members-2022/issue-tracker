@@ -21,9 +21,9 @@ export const Tab = styled.div<TabType>`
   ${({ active }) =>
     active &&
     css`
-      border: 2px solid #30363d;
+      border: 2px solid ${({ theme }) => theme.border.primary};
       z-index: 1;
-      border-bottom: #22272d;
+      border-bottom: none;
     `};
   padding: 16px;
   font-size: 0.875rem;

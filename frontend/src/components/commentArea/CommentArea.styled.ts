@@ -9,12 +9,12 @@ export const CommentBox = styled.textarea<CommentBoxType>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   padding: 10px 15px;
-  border: 1px solid #383e47;
+  border: 2px solid ${({ theme }) => theme.border.primary};
   border-radius: 5px;
-  background-color: #22272e;
-  color: #adbac7;
+  background-color: ${({ theme }) => theme.background.secondary};
+  color: ${({ theme }) => theme.color.basic};
   &:focus {
-    border: 2px solid #57a6ff;
+    border: 2px solid ${({ theme }) => theme.border.focus};
   }
   &:focus-visible {
     outline: none;

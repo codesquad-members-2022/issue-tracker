@@ -9,7 +9,7 @@ type CreateIssueType = {
 export const CreateIssueBox = styled.div<CreateIssueType>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  border: 1px solid #30363d;
+  border: 1px solid ${({ theme }) => theme.border.secondary};
   border-radius: 5px;
   margin-right: 24px;
 `;

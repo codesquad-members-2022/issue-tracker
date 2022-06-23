@@ -13,7 +13,7 @@ export const FlexBox = styled.div`
 
   p {
     font-weight: 700;
-    color: #a0a3bd;
+    color: ${({ theme }) => theme.color.subText};
   }
 `;
 
@@ -24,7 +24,7 @@ export const Title = styled.div`
   font-size: 3.5rem;
   line-height: 72px;
   margin-bottom: 53px;
-  color: #cdd9e5;
+  color: ${({ theme }) => theme.color.primary}; ;
 `;
 
 export const LoginBox = styled.button<LoginBoxType>`
@@ -34,7 +34,7 @@ export const LoginBox = styled.button<LoginBoxType>`
   font-size: 1.125rem;
   padding: 16px 24px;
   ${({ loginType }) => setBackgroundColor(loginType === 'Github' ? '#14142b' : '#007aff')};
-  color: #cdd9e5;
+  color: ${({ theme }) => theme.color.primary};
   border-radius: 16px;
   border: 0;
   cursor: pointer;
@@ -49,7 +49,7 @@ export const InputBox = styled.div`
   width: 340px;
   height: 64px;
   padding: 8px 24px;
-  background-color: #eff0f6;
+  background-color: ${({ theme }) => theme.background.complementary};
   border-radius: 16px;
 
   input {
@@ -57,12 +57,12 @@ export const InputBox = styled.div`
     border: 0;
     line-height: 28px;
     width: 100%;
-    background-color: #eff0f6;
+    background-color: ${({ theme }) => theme.background.complementary};
   }
 `;
 
 export const SignUp = styled.div`
-  color: #cdd9e5;
+  color: ${({ theme }) => theme.color.primary};
   font-size: 0.75rem;
   cursor: pointer;
 `;

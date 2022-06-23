@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const ToolbarBox = styled.div`
   ${flexLayoutMixin('row', 'space-between', 'center')}
   width: 100%;
-  background-color: #2d333b;
+  background-color: ${({ theme }) => theme.background.primary};
   padding: 16px;
   color-scheme: dark;
 `;
@@ -17,11 +17,11 @@ export const ToggleBox = styled.div`
 export const Toggle = styled.div`
   ${flexLayoutMixin('row', 'center', 'center')}
   gap: 7px;
-  color: #768390;
-  fill: #768390;
+  color: ${({ theme }) => theme.color.bold};
+  fill: ${({ theme }) => theme.color.bold};
   &:hover {
-    color: #adbac7;
-    fill: #adbac7;
+    color: ${({ theme }) => theme.color.basic};
+    fill: ${({ theme }) => theme.color.basic};
     cursor: pointer;
   }
 `;
@@ -38,12 +38,12 @@ export const ClosedText = styled.div`
 
 export const DropdownList = styled.div`
   ${flexLayoutMixin('row', 'center', 'center')}
-  color: #768390;
-  fill: #768390;
+  color: ${({ theme }) => theme.color.bold};
+  fill: ${({ theme }) => theme.color.bold};
   font-size: 0.875rem;
   div:hover {
-    color: #adbac7;
-    fill: #adbac7;
+    color: ${({ theme }) => theme.color.basic};
+    fill: ${({ theme }) => theme.color.basic};
     cursor: pointer;
   }
 `;

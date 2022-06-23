@@ -11,7 +11,7 @@ export const CreateIssuePageBox = styled.div<CreateIssuePageType>`
   height: ${({ height }) => height};
   ${flexLayoutMixin('row', 'center', '')};
   margin-top: 24px;
-  color: #adbac7;
+  color: ${({ theme }) => theme.color.basic}; ;
 `;
 
 export const SideBar = styled.div``;

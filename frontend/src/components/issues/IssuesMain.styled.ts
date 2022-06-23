@@ -5,7 +5,7 @@ export const IssuesMainBox = styled.div`
   ${flexLayoutMixin('column', 'center', 'center')};
   width: 63%;
   border-radius: 6px;
-  border: 1px solid #444c56;
+  border: 1px solid ${({ theme }) => theme.border.deep}; ;
 `;
 
 export const IssuesItems = styled.div`

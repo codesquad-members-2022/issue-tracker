@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     user-select: none; 
   }
   body {
-    background-color: #22272E;
+    background-color: ${({ theme }) => theme.background.basic};
   }
 `;
 

@@ -17,12 +17,12 @@ export const IssueSideBarFormBox = styled.div`
 export const IssueSideBarHeader = styled.div`
   ${flexLayoutMixin('row', 'space-between', 'center')};
   margin-bottom: 20px;
-  fill: #8b949e;
+  fill: ${({ theme }) => theme.fill.header};
   cursor: pointer;
 `;
 
 export const IssueSideBarFormContent = styled.div<ContentType>`
   ${({ styles }) => styles};
   padding-bottom: 20px;
-  border-bottom: 1px solid #21262c;
+  border-bottom: 1px solid ${({ theme }) => theme.border.deep};
 `;

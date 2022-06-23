@@ -4,12 +4,12 @@ import styled from 'styled-components';
 const HeaderBox = styled.div`
   ${flexLayoutMixin('row', 'space-between', 'center')}
   padding: 16px 32px;
-  background-color: #2d333b;
-  color: #cdd9e5;
-  fill: #cdd9e5;
+  background-color: ${({ theme }) => theme.background.primary};
+  color: ${({ theme }) => theme.color.primary};
+  fill: ${({ theme }) => theme.color.primary};
   svg:hover {
     cursor: pointer;
-    fill: #9eb3b3;
+    fill: ${({ theme }) => theme.color.hover};
   }
 `;
 
@@ -23,12 +23,12 @@ const SearchBox = styled.div`
     font-size: 0.875rem;
     min-height: 28px;
     padding: 3px 12px;
-    background-color: #22272e;
+    background-color: ${({ theme }) => theme.background.secondary};
     border: none;
-    color: #c1c3c4;
+    color: ${({ theme }) => theme.color.basic};
   }
   input::placeholder {
-    color: #c1c3c4;
+    color: ${({ theme }) => theme.color.basic};
   }
 `;
 
@@ -39,7 +39,7 @@ const NavBar = styled.ul`
 
   li:hover {
     cursor: pointer;
-    color: #9eb3b3;
+    color: ${({ theme }) => theme.color.hover};
   }
 `;
 

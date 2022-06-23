@@ -5,10 +5,10 @@ export const RepositoryHeaderBox = styled.div`
   ${flexLayoutMixin('column', 'space-between')};
   padding: 16px 32px;
   font-size: 1.25rem;
-  fill: #8b949e;
-  color: #adbac7;
+  fill: ${({ theme }) => theme.fill.header};
+  color: ${({ theme }) => theme.color.basic};
   gap: 20px;
-  border-bottom: 1px solid #383e47;
+  border-bottom: 1px solid ${({ theme }) => theme.border.primary}; ;
 `;
 
 export const TopArea = styled.div`
@@ -27,23 +27,24 @@ export const ContentArea = styled.div`
 
 export const Status = styled.div`
   ${flexLayoutMixin('', 'center', 'center')}
-  background-color: #373e47;
+  background-color: ${({ theme }) => theme.background.box};
   padding: 3px 12px;
-  border: 1px solid #363b41;
+  border: 1px solid ${({ theme }) => theme.border.primary};
   border-radius: 5px;
   font-size: 0.75rem;
   gap: 5px;
   line-height: 17px;
+  color: ${({ theme }) => theme.color.primary};
   &:hover {
-    background-color: #444c57;
-    border: 1px solid #768390;
+    background-color: ${({ theme }) => theme.background.third};
+    border: 1px solid ${({ theme }) => theme.border.hover};
     cursor: pointer;
   }
 `;
 
 export const TitleText = styled.div`
   font-size: 1.25rem;
-  color: #57a6ff;
+  color: ${({ theme }) => theme.color.link};
   margin: 0 5px;
   &:hover {
     text-decoration: underline;

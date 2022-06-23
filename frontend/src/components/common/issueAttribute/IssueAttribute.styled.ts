@@ -5,10 +5,10 @@ const AttributeBox = styled.div`
   ${flexLayoutMixin('row', 'center', 'center')}
   padding: 5px 16px;
   gap: 3px;
-  border: 2px solid #373e47;
+  border: 2px solid ${({ theme }) => theme.border.primary};
   border-radius: 6px;
   &:hover {
-    background-color: #2d333b;
+    background-color: ${({ theme }) => theme.background.primary};
     cursor: pointer;
   }
 `;

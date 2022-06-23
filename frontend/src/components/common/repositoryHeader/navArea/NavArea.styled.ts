@@ -6,7 +6,7 @@ export const NavBox = styled.div`
   gap: 7px;
   padding: 6px 10px;
   &:hover {
-    background-color: #30353d;
+    background-color: ${({ theme }) => theme.background.third};
     border-radius: 7px;
     cursor: pointer;
   }

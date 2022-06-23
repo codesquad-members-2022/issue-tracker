@@ -7,9 +7,9 @@ export const IssuesItemBox = styled.div`
   color-scheme: dark;
   padding: 16px;
   gap: 15px;
-  fill: #57ab5a;
+  fill: ${({ theme }) => theme.fill.green};
   &:hover {
-    background-color: #2d333b;
+    background-color: ${({ theme }) => theme.background.primary};
   }
 `;
 
@@ -20,15 +20,15 @@ export const ItemMain = styled.div`
 
 export const Title = styled.span`
   font-weight: 600;
-  color: #adbac7;
+  color: ${({ theme }) => theme.color.basic};
   &:hover {
-    color: #4c8cdb;
+    color: ${({ theme }) => theme.color.lightBlue};
     cursor: pointer;
   }
 `;
 
 export const OpenedBy = styled.span`
-  color: #768390;
+  color: ${({ theme }) => theme.color.bold};
   font-size: 0.75rem;
 `;
 
@@ -49,14 +49,14 @@ export const Assignee = styled.div`
 `;
 export const Review = styled.div`
   ${flexLayoutMixin('row', 'center', 'flex-start')}
-  fill: #768390;
+  fill: ${({ theme }) => theme.color.bold};
   padding: 0 20px;
   gap: 2px;
   line-height: 17px;
-  color: #768390;
+  color: ${({ theme }) => theme.color.bold};
   &:hover {
-    fill: #4c8cdb;
-    color: #4c8cdb;
+    fill: ${({ theme }) => theme.color.lightBlue};
+    color: ${({ theme }) => theme.color.lightBlue};
     cursor: pointer;
   }
 `;

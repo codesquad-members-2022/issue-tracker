@@ -8,7 +8,8 @@ const ItemsNumberBox = styled.div`
   line-height: 19px;
   text-align: center;
   border-radius: 10px;
-  background-color: #444c56;
+  background-color: ${({ theme }) => theme.background.third};
+  color: ${({ theme }) => theme.color.basic};
 `;
 
 export default ItemsNumberBox;
