@@ -17,9 +17,9 @@ public class AccessToken extends Token {
         super.token = token;
     }
 
-    AccessToken(String memberId, Key secretKey, SignatureAlgorithm signatureAlgorithm, Date expiration) {
+    AccessToken(String memberId, Key secretKey, SignatureAlgorithm signatureAlgorithm, long expiration) {
         super.secretKey = secretKey;
-        super.token = compactToken(memberId, signatureAlgorithm, expiration);
+        super.token = compactToken(memberId, signatureAlgorithm, new Date(System.currentTimeMillis() + expiration));
     }
 
     private String compactToken(String memberId, SignatureAlgorithm signatureAlgorithm, Date expiration) {

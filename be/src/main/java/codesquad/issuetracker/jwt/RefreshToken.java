@@ -17,9 +17,9 @@ public class RefreshToken extends Token {
         super.secretKey = secretKey;
     }
 
-    RefreshToken(String memberId, Key secretKey, SignatureAlgorithm signatureAlgorithm, Date expiration) {
+    RefreshToken(String memberId, Key secretKey, SignatureAlgorithm signatureAlgorithm, long duration) {
         super.secretKey = secretKey;
-        super.token = compactToken(memberId, signatureAlgorithm, expiration);
+        super.token = compactToken(memberId, signatureAlgorithm, new Date(System.currentTimeMillis() + duration));
     }
 
     private String compactToken(String memberId, SignatureAlgorithm signatureAlgorithm, Date expiration) {
