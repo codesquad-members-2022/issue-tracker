@@ -28,4 +28,16 @@ class IssueListViewModelTests: XCTestCase {
         // 데이터 갯수가 2개라면 테스트 성공
         XCTAssertEqual(sut.issueViewModels.value?.count, 2)
     }
+    
+    func test_viewModel_should_get_no_data_when_issueManager_get_issues() {
+        // given - 뷰모델에 issueManager가 있을 때
+        let sut = IssueListViewModel(issueService: IssueServiceFailureStub())
+
+        // when - 이슈 목록을 요청하면
+        sut.requestData()
+
+        // then - 이슈 목록 (데이터)을 가져왔는지 확인.
+        // 데이터 갯수가 0개라면 테스트 성공
+        XCTAssertEqual(sut.issueViewModels.value?.count, 0)
+    }
 }

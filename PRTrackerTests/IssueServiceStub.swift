@@ -35,3 +35,9 @@ struct IssueServiceSuccessStub: IssueService {
         completion([model1, model2])
     }
 }
+
+struct IssueServiceFailureStub: IssueService {
+    func getIssues(then completion: @escaping ([Issue]?) -> Void) {
+        completion([])
+    }
+}
