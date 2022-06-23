@@ -1,7 +1,3 @@
-import React from 'react';
-
-function DetailIssue(): JSX.Element {
+export function DetailIssue(): JSX.Element {
   return <div />;
 }
-
-export default DetailIssue;

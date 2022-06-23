@@ -1,11 +1,9 @@
-import React from 'react';
-
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
 const URL = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&scope=read:user&redirect_uri=${process.env.REACT_APP_GITHUB_REDIRECT_URI}`;
 
-function Login(): JSX.Element {
+export function Login(): JSX.Element {
   return (
     <S.Container>
       <S.Wrapper>
@@ -41,4 +39,3 @@ function Login(): JSX.Element {
     </S.Container>
   );
 }
-export default Login;

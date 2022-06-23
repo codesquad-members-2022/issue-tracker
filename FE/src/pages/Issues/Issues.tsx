@@ -1,8 +1,14 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import Header from '../../component/Header';
+import * as S from './Issues.styled';
+import Filter from './Filter';
+import MoveBtn from './MoveBtn';
+import IssueHeader from './IssueHeader';
+import Issue from './Issue';
 
-function Issues(): JSX.Element {
+export function Issues() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -19,6 +25,23 @@ function Issues(): JSX.Element {
       // console.log(githubAPI);
     })();
   }, []);
-  return <div />;
+
+  return (
+    <div>
+      <Header />
+      <S.Container>
+        <S.Wrapper>
+          <S.Header>
+            <Filter />
+            <MoveBtn />
+          </S.Header>
+          <S.Content>
+            <IssueHeader />
+            <Issue />
+          </S.Content>
+        </S.Wrapper>
+      </S.Container>
+    </div>
+  );
 }
-export default Issues;
+
