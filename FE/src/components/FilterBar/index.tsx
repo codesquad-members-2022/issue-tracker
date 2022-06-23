@@ -42,6 +42,7 @@ export default function FilterBar({
         <Icon iconType="search" color={inputInfo.value !== '' ? COLOR.label : COLOR.placeholder} />
         <TextInput
           status={null}
+          height="36px"
           padding="0 10px"
           borderRadius="0"
           styleType={inputStyleType}

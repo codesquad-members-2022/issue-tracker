@@ -13,6 +13,7 @@ const $FilterBar = styled.div<I$FilterBar>`
   display: flex;
   width: 600px;
   height: 40px;
+  background-color: ${({ theme }) => theme.COLOR.inputBackground};
   border: 1px solid ${({ theme }) => theme.COLOR.line};
   border-radius: 11px;
   ${({ isFocus }) => isFocus && focusStyle}
@@ -24,10 +25,6 @@ const $InputWrapper = styled.div`
   align-items: center;
   flex: 1;
   border-left: 1px solid ${({ theme }) => theme.COLOR.line};
-  background-color: ${({ theme }) => theme.COLOR.inputBackground};
-  :focus-within {
-    background-color: ${({ theme }) => theme.PALETTE.WHITE};
-  }
 `;
 
 export { $FilterBar, $InputWrapper };
