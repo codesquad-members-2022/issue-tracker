@@ -1,5 +1,5 @@
 import * as I from 'design/icons';
-import * as S from 'components/LabelPage/styled.newLabelList';
+import * as S from 'components/LabelPage/styled/styled.newLabelList';
 import LabelItem from 'components/LabelPage/LabelItem';
 import { useRecoilState } from 'recoil';
 import { labelState } from 'context/label';
@@ -10,25 +10,46 @@ type LabelListType = {
 
 function NewLabelList({ isNewLabel }: LabelListType) {
   const [newLabel, setNewLabel] = useRecoilState(labelState);
-
+  function makeNewLabelInfo(e: React.FocusEvent<HTMLInputElement, Element>) {
+    const { value, name } = e.target;
+    setNewLabel({
+      ...newLabel,
+      [name]: value,
+    });
+  }
   return (
     <S.newLabelListWrapper>
-      <LabelItem label={newLabel} key="key" isLastList={false} />
+      <LabelItem label={newLabel} key="key" isLastList={false} isNewLabel={isNewLabel} />
       <S.labelForm>
         <S.labelName>
           <span>Label name</span>
-          <S.labelInput />
+          <S.labelInput
+            name="title"
+            onBlur={(e) => {
+              makeNewLabelInfo(e);
+            }}
+          />
         </S.labelName>
         <S.labelDescription>
           <span>Description</span>
-          <S.labelInput />
+          <S.labelInput
+            name="description"
+            onBlur={(e) => {
+              makeNewLabelInfo(e);
+            }}
+          />
         </S.labelDescription>
         <S.labelColor>
           <span>Color</span>
           <S.labelColorController>
             <S.labelColorButton>
               <I.refresh />
-              <S.labelInput />
+              <S.labelInput
+                name="color"
+                onBlur={(e) => {
+                  makeNewLabelInfo(e);
+                }}
+              />
             </S.labelColorButton>
           </S.labelColorController>
         </S.labelColor>
@@ -44,7 +65,11 @@ function NewLabelList({ isNewLabel }: LabelListType) {
               <I.cross />
               취소
             </S.cancleButton>
-            <S.saveButton>
+            <S.saveButton
+              onClick={() => {
+                console.log(newLabel);
+              }}
+            >
               <I.edit />
               완료
             </S.saveButton>

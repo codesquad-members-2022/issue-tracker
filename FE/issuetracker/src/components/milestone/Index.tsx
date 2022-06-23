@@ -1,6 +1,6 @@
 import * as I from 'design/icons';
 import * as S from 'components/milestone/styled/styled.index';
-import * as L from 'components/LabelPage/styled.labelList';
+import * as L from 'components/LabelPage/styled/styled.labelList';
 import { keyMaker } from 'utils/util';
 import LabelAndMileStoneBtns from 'components/common/LabelAndMileStoneBtns';
 import MileStone from './MileStone';
