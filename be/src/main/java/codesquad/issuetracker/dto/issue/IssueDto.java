@@ -2,15 +2,12 @@ package codesquad.issuetracker.dto.issue;
 
 import codesquad.issuetracker.domain.Issue;
 import codesquad.issuetracker.domain.IssueStatus;
-import codesquad.issuetracker.domain.Label;
 import codesquad.issuetracker.domain.Member;
-import codesquad.issuetracker.domain.Milestone;
 import codesquad.issuetracker.dto.label.LabelDto;
+import codesquad.issuetracker.dto.label.LabelDtos;
 import codesquad.issuetracker.dto.member.MemberDto;
+import codesquad.issuetracker.dto.member.MemberDtos;
 import codesquad.issuetracker.dto.milestone.MilestoneDto;
-import codesquad.issuetracker.mapper.LabelMapper;
-import codesquad.issuetracker.mapper.MemberMapper;
-import codesquad.issuetracker.mapper.MilestoneMapper;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -33,12 +30,14 @@ public class IssueDto {
 
     private IssueDto() {}
 
-    public static IssueDto of(Issue issue, Milestone milestone, List<Member> assignees, List<Label> labels) {
+    public static IssueDto of(Issue issue) {
         Member writer = issue.getWriter();
-        return new IssueDto(issue.getId(), issue.getStatus(), issue.getSubject(), issue.getDescription(),
+        return new IssueDto(
+            issue.getId(), issue.getStatus(), issue.getSubject(), issue.getDescription(),
             writer.getIdentity(), writer.getProfileUrl(), issue.getCreatedDateTime(),
-            MilestoneMapper.convertToDto(milestone),
-            MemberMapper.convertToListDto(assignees),
-            LabelMapper.convertToListDto(labels));
+            MilestoneDto.convertToDto(issue.getMilestone()),
+            MemberDtos.convertToListDto(issue.assignees()),
+            LabelDtos.convertToListDto(issue.labels())
+        );
     }
 }

@@ -1,5 +1,6 @@
 package codesquad.issuetracker.domain;
 
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -60,5 +61,19 @@ public class Issue extends BaseTimeEntity {
 
     public boolean hasSameStatus(IssueStatus status) {
         return this.status.equals(status);
+    }
+
+    public List<Member> assignees() {
+        return assignees
+            .stream()
+            .map(Assignee::getMember)
+            .collect(Collectors.toList());
+    }
+
+    public List<Label> labels() {
+        return issueLabels
+            .stream()
+            .map(IssueLabel::getLabel)
+            .collect(Collectors.toList());
     }
 }

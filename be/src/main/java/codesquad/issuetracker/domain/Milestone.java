@@ -1,5 +1,6 @@
 package codesquad.issuetracker.domain;
 
+import codesquad.issuetracker.dto.milestone.MilestoneDto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,4 +32,8 @@ public class Milestone {
     private String subject;
     private String description;
     private LocalDate endDate;
+
+    public MilestoneDto convertToDto() {
+        return new MilestoneDto(id, subject, description);
+    }
 }

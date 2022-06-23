@@ -39,15 +39,7 @@ public class IssueService {
             countOfIssuesByStatus.getOrDefault(IssueStatus.CLOSED, 0L),
             issues.stream()
                 .filter(issue -> issue.hasSameStatus(condition.getStatus()))
-                .map(issue -> IssueDto.of(
-                        issue,
-                        issue.getMilestone(),
-                        issue.getAssignees().stream().map(Assignee::getMember)
-                            .collect(Collectors.toList()),
-                        issue.getIssueLabels().stream().map(IssueLabel::getLabel)
-                            .collect(Collectors.toList())
-                    )
-                )
+                .map(issue -> IssueDto.of(issue))
                 .collect(Collectors.toList())
         );
     }

@@ -6,7 +6,9 @@ import lombok.Getter;
 @Getter
 public class MilestoneDtos {
 
-    private final List<MilestoneDto> milestones;
+    private List<MilestoneDto> milestones;
+
+    private MilestoneDtos() {}
 
     public MilestoneDtos(List<MilestoneDto> milestones) {
         this.milestones = milestones;
