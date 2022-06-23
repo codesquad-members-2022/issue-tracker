@@ -9,7 +9,7 @@ import Foundation
 
 final class IssueListViewModel {
     private let mockDataService = MockDataService()
-    private let issueManager = IssueManager()
+    private let issueService: IssueService
     
     var issueViewModels: Observable<[IssueTableCellViewModel]?> = Observable(nil)
 
@@ -17,12 +17,16 @@ final class IssueListViewModel {
         return issueViewModels.value?.count ?? 0
     }
     
+    init(issueService: IssueService = IssueManager()) {
+        self.issueService = issueService
+    }
+    
     func searchBarTextDidChange(with text: String) {
         // TODO: SearchBarText가 바뀌면 호출되는 부분 구현
     }
     
     func requestData() {
-        issueManager.getIssues { issues in
+        issueService.getIssues { issues in
             guard let issues = issues else {
                 return
             }
