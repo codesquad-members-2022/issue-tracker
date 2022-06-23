@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import * as I from 'design/icons';
-import * as S from 'components/LabelPage/styled.labelTop';
+import * as S from 'components/LabelPage/styled/styled.labelTop';
 import NewLabelList from 'components/LabelPage/NewLabelList';
 
 interface Props {
-  activeLabel: boolean;
+  $activeLabel: boolean;
 }
 
-function LabelTop({ activeLabel }: Props) {
+function LabelTop({ $activeLabel }: Props) {
   const [isClicked, setIsClicked] = useState(false);
   const isNewLabel = true;
   function showLabel() {
@@ -17,7 +17,7 @@ function LabelTop({ activeLabel }: Props) {
     <>
       <S.labelTop>
         <S.tabBar>
-          <S.leftBar to="/label" activeLabel={activeLabel}>
+          <S.leftBar to="/label" $activeLabel={$activeLabel}>
             <I.tag />
             <S.LinkText>레이블</S.LinkText>
             <S.numberText>(3)</S.numberText>
