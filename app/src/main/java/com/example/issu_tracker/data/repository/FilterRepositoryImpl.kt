@@ -5,15 +5,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class FilterRepositoryImpl @Inject constructor(private val fireStore: FirebaseFirestore) : FilterRepository {
+class FilterRepositoryImpl @Inject constructor(private val fireStore: FirebaseFirestore) :
+    FilterRepository {
 
     override suspend fun loadUsers(): List<String> {
         val list = mutableListOf<String>()
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_USER_PATH).get().await()
 
         collectionData.documents.forEach {
-            val issueObj = it.toObject(User::class.java)
-            issueObj?.let { label ->
+            val userObj = it.toObject(User::class.java)
+            userObj?.let { label ->
                 list.add(label.name)
             }
         }
@@ -25,8 +26,8 @@ class FilterRepositoryImpl @Inject constructor(private val fireStore: FirebaseFi
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_LABEL_PATH).get().await()
 
         collectionData.documents.forEach {
-            val issueObj = it.toObject(Label::class.java)
-            issueObj?.let { label ->
+            val labelObj = it.toObject(Label::class.java)
+            labelObj?.let { label ->
                 list.add(label.content)
             }
         }
