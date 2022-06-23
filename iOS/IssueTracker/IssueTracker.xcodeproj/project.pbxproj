@@ -39,8 +39,6 @@
 		0290D0EE28640AC800A4E3A7 /* EditingIssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0ED28640AC800A4E3A7 /* EditingIssueViewModel.swift */; };
 		0290D0F1286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F0286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift */; };
 		0290D0F3286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F2286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift */; };
-		0290D0F628645BD100A4E3A7 /* EditingIssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F528645BD100A4E3A7 /* EditingIssueManager.swift */; };
-		0290D0F828645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0290D0F728645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift */; };
 		02AEC2EE285C1AF500AAE835 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */; };
 		02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */; };
 		02AEC2F428600ACF00AAE835 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */; };
@@ -135,8 +133,6 @@
 		0290D0ED28640AC800A4E3A7 /* EditingIssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueViewModel.swift; sourceTree = "<group>"; };
 		0290D0F0286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueTextViewDelegate.swift; sourceTree = "<group>"; };
 		0290D0F2286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueTextFieldDelegate.swift; sourceTree = "<group>"; };
-		0290D0F528645BD100A4E3A7 /* EditingIssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueManager.swift; sourceTree = "<group>"; };
-		0290D0F728645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingIssueNetworkTarget.swift; sourceTree = "<group>"; };
 		02AEC2ED285C1AF500AAE835 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		02AEC2EF285C1B9700AAE835 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		02AEC2F328600ACF00AAE835 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
@@ -482,8 +478,6 @@
 			isa = PBXGroup;
 			children = (
 				5B29A115285ABF2F0088EC11 /* IssueItem.swift */,
-				0290D0F528645BD100A4E3A7 /* EditingIssueManager.swift */,
-				0290D0F728645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -748,7 +742,6 @@
 				0290D0E72863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift in Sources */,
 				5BE928CF285852C100D237AB /* IssueCollectionView.swift in Sources */,
 				5B29A0C528573E400088EC11 /* IssueViewController.swift in Sources */,
-				0290D0F628645BD100A4E3A7 /* EditingIssueManager.swift in Sources */,
 				027C7E86285A42B900A5175B /* SignInNetworkTarget.swift in Sources */,
 				0290D0E92863F75600A4E3A7 /* UIStackView+Extension.swift in Sources */,
 				5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */,
@@ -776,7 +769,6 @@
 				0290D0F1286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift in Sources */,
 				5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */,
 				5BE928DB2859B94A00D237AB /* IssueCollectionViewDataSource.swift in Sources */,
-				0290D0F828645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift in Sources */,
 				02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */,
 				02AEC2FD28600E8500AAE835 /* Observable.swift in Sources */,
 				5BE928D72858568B00D237AB /* MilestoneViewController.swift in Sources */,
