@@ -8,7 +8,7 @@
 import Foundation
 
 struct IssueItem {
-    let id: Int
+    var id: Int?
     let title, content: String
     let milestoneName: String
     let labels: [Label]
