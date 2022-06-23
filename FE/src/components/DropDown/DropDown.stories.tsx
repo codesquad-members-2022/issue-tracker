@@ -30,8 +30,7 @@ Large.args = {
       value: 'c'
     }
   ],
-  selected: 'a',
-  top: '0px',
-  left: 'right'
+  initialValue: 'a',
+  left: 'left'
 };
 Large.storyName = 'DropDown';
