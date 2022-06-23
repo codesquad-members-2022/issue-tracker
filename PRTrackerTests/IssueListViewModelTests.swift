@@ -33,7 +33,7 @@ class IssueListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.issueViewModels.value?[1].content.value, "작업 내용은 다음과 같습니다,,\n클릭해서 봐주세욤")
     }
     
-    func test_viewModel_should_get_no_data_when_issueManager_get_issues() {
+    func test_viewModel_should_get_no_data_when_issueManager_get_zero_issues() {
         // given - 뷰모델에 issueManager가 있을 때
         let sut = IssueListViewModel(issueService: IssueServiceFailureStub())
 
