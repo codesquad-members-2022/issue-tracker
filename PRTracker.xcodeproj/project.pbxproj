@@ -20,7 +20,6 @@
 		BC2F598C286092EE0012D18C /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598A286092EE0012D18C /* URLRequest+Extension.swift */; };
 		BC2F598E2860979D0012D18C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598D2860979D0012D18C /* User.swift */; };
 		BC2F598F2860979D0012D18C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F598D2860979D0012D18C /* User.swift */; };
-		BC2F5991286098B70012D18C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* URLProtocolStub.swift */; };
 		BC2F5992286098B70012D18C /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5990286098B70012D18C /* URLProtocolStub.swift */; };
 		BC2F5994286153AF0012D18C /* dummyResponseUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5993286153AF0012D18C /* dummyResponseUser.json */; };
 		BC2F5995286155510012D18C /* dummyResponseUser.json in Resources */ = {isa = PBXBuildFile; fileRef = BC2F5993286153AF0012D18C /* dummyResponseUser.json */; };
@@ -593,7 +592,6 @@
 				BCF57C00285704FE0059E61D /* ListingManager.swift in Sources */,
 				BC2F59A82862F9F00012D18C /* TokenValidationResponse.swift in Sources */,
 				BCF57BC4285701FB0059E61D /* SceneDelegate.swift in Sources */,
-				BC2F5991286098B70012D18C /* URLProtocolStub.swift in Sources */,
 				D0E98CE2285C01530051413E /* MockDataService.swift in Sources */,
 				BCF57BFD285704F40059E61D /* IssueListViewModel.swift in Sources */,
 				D04099D22859C08B0008B517 /* PullListViewController.swift in Sources */,

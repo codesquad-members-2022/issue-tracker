@@ -10,21 +10,21 @@ import XCTest
 
 class UserManagerTests: XCTestCase {
 
-    var sut: UserManager!
+    let mockSession: URLSession = {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [URLProtocolStub.self]
+        return URLSession(configuration: config)
+    }()
     
     override func setUpWithError() throws {
         super.setUp()
-        
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [URLProtocolStub.self]
-        let session = URLSession(configuration: config)
-        
-        sut = UserManager(keyChainService: KeyChainSuccessStub(),
-                          networkService: NetworkManger(urlSession: session))
     }
     
     func test_UserManager_should_return_User_when_token_is_stored() throws {
         // Given - keyChain에 token이 저장돼 있을 때
+        let sut = UserManager(keyChainService: KeyChainSuccessStub(),
+                          networkService: NetworkManger(urlSession: mockSession))
+        
         guard let url = URL(string: BaseURL.user) else {
             Log.error("Wrong Base URL: \(BaseURL.user)")
             return
@@ -35,8 +35,11 @@ class UserManagerTests: XCTestCase {
             return
         }
         
-        // URLSession에 dummy Reponse 주입
-        URLProtocolStub.testURLs = [url: dummyData]
+        // URLSession에 dummy Reponse와 dummy Data 주입
+        URLProtocolStub.completionHandler = { _ in
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (response, dummyData)
+        }
         
         // When - User 정보를 요청하면
         sut.getCurrentUser { user in
@@ -50,7 +53,8 @@ class UserManagerTests: XCTestCase {
     
     func test_UserManager_should_return_nil_when_token_is_not_stored() throws {
         // Given - keyChain에 token이 안 저장돼 있을 때
-        sut = UserManager(keyChainService: KeyChainFailureStub())
+        let sut = UserManager(keyChainService: KeyChainFailureStub(),
+                          networkService: NetworkManger(urlSession: mockSession))
         
         // When - User 정보를 요청하면
         sut.getCurrentUser { user in

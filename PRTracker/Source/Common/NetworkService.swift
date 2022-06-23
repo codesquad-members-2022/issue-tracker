@@ -53,7 +53,7 @@ struct NetworkManger: NetworkService {
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                Log.error("Cannot parse HTTP reponse status code")
+                Log.error("Cannot parse HTTP response status code")
                 return completion(nil)
             }
             
