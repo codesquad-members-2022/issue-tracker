@@ -8,6 +8,7 @@
 import UIKit
 
 protocol LoginFlowCoordinatorDependencies {
+    func setAuthCode(code: String)
     func makeLoginViewController(action: LoginViewModelAction) -> UIViewController
 }
 
@@ -25,7 +26,9 @@ final class LoginFlowCoordinator: Coordinator {
     }
 
     func start(with deepLink: DeepLink? = nil) {
-        if case let .login(code) = deepLink, let code = code {}
+        if case let .login(code) = deepLink, let code = code {
+            dependency.setAuthCode(code: code)
+        }
 
         let action = LoginViewModelAction(
             showMainScene: showMainTabBar,

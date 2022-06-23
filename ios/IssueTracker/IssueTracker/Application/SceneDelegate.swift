@@ -40,9 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // MARK: - Universal Links
     func scene(_: UIScene, continue userActivity: NSUserActivity) {
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-              let incomingURL = userActivity.webpageURL else
-        {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb, let incomingURL = userActivity.webpageURL else {
             return
         }
 
