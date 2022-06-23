@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, Outlet } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import Header from 'components/header';
 import IssueList from 'components/IssueList';
@@ -23,7 +23,6 @@ function ProtectedRoute({ login, redirectPath = '/login', children }: Props) {
     <>
       <Header />
       {children}
-      <Outlet />
     </>
   );
 }
