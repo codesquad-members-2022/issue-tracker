@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
-public class OAuthService {
+public class GithubClient {
 
     private static final String GITHUB_AUTHORIZATION_SERVER_URL = "https://github.com/login/oauth/access_token";
     private static final String GITHUB_API_ACCEPT_HEADER = "application/vnd.github.v3+json";
