@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
 @ResponseBody
-public class ExceptionController {
+public class ExceptionControllerAdvice {
 
     @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<ResponseMessage> handleJwtException(InvalidTokenException exception) {

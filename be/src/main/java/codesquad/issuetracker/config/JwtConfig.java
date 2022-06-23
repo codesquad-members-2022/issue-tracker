@@ -11,8 +11,9 @@ public class JwtConfig {
 
     private static final String SECRET = System.getenv("JWT_SECRET");
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
-    public static final long ACCESS_TOKEN_DURATION = 60 * 1 * 1000; // access token 유효시간 : 1분
-    public static final long REFRESH_TOKEN_DURATION = 60 * 2 * 1000; // refresh token 유효시간 : 2분
+    private static final long MINUTE = 60 * 1000;
+    private static final long ACCESS_TOKEN_DURATION = 1 * MINUTE; // access token 유효시간 : 1분
+    private static final long REFRESH_TOKEN_DURATION = 2 * MINUTE; // refresh token 유효시간 : 2분
 
     @Bean
     public AccessTokenProvider accessTokenProvider() {
