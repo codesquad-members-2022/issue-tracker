@@ -53,6 +53,11 @@ public class AuthService {
             .block();
     }
 
+    public GithubUser getGithubUser(String code) {
+        TokenInformation token = getToken(code);
+        return getUser(token.getAccessToken());
+    }
+
     private MultiValueMap<String, Object> getBodyValue(String code) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("client_id", clientId);

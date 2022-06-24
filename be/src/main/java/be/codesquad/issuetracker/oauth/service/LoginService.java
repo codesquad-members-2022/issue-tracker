@@ -13,13 +13,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class LoginService {
 
+    private static final int EXPIRED_SECOND = 24 * 60 * 60;
+
     private final UserRepository userRepository;
+    private final AuthService authService;
 
     @Transactional
     public User upsertUser(GithubUser githubUser) {
-        User user = new User(githubUser.getId(), githubUser.getUsername(),
-            githubUser.getImageUrl());
-        return userRepository.findByAuthId(githubUser.getId()).orElseGet(() ->
+        User user = User.of(githubUser);
+        User findUser = userRepository.findByAuthId(githubUser.getId()).orElseGet(() ->
             userRepository.save(user));
+        findUser.update(user);
+        return findUser;
+    }
+
+    @Transactional
+    public String getJwtToken(String code) {
+        GithubUser githubUser = authService.getGithubUser(code);
+        User user = upsertUser(githubUser);
+        return JwtFactory.create(user, EXPIRED_SECOND);
     }
 }

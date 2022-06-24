@@ -1,5 +1,6 @@
 package be.codesquad.issuetracker.user.domain;
 
+import be.codesquad.issuetracker.oauth.dto.GithubUser;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,5 +24,15 @@ public class User {
         this.authId = authId;
         this.username = username;
         this.imageUrl = imageUrl;
+    }
+
+    public void update(User user) {
+        this.authId = user.getAuthId();
+        this.username = user.getUsername();
+        this.imageUrl = user.getImageUrl();
+    }
+
+    public static User of(GithubUser githubUser) {
+        return new User(githubUser.getId(), githubUser.getUsername(), githubUser.getImageUrl());
     }
 }
