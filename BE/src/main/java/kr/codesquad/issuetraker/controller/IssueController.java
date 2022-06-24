@@ -15,8 +15,8 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping
-    public ResponseEntity<List<IssueListResponseDto>> loadAllIssues() {
-        return ResponseEntity.ok(issueService.getAllIssues());
+    public ResponseEntity<List<IssueListResponseDto>> loadAllIssues(@ModelAttribute SearchFilterDto searchFilterDto) {
+        return ResponseEntity.ok(issueService.getAllIssues(searchFilterDto));
     }
 
     @PostMapping
@@ -47,5 +47,20 @@ public class IssueController {
     @GetMapping("/{issueId}/comments")
     public ResponseEntity<List<CommentListResponseDto>> loadAllComments(@PathVariable Long issueId) {
         return ResponseEntity.ok(issueService.getAllComments(issueId));
+    }
+
+    @PostMapping("/{issueId}/comments")
+    public ResponseEntity<NewCommentResponseDto> createComment(@PathVariable Long issueId, @RequestBody NewCommentRequestDto requestDto) {
+        return ResponseEntity.ok(issueService.createComment(issueId, requestDto));
+    }
+
+    @PatchMapping("/{issueId}/comments/{commentId}")
+    public ResponseEntity<GeneralResponseDto> modifyCommentContent(@PathVariable Long issueId, @PathVariable Long commentId, @RequestBody CommentModificationRequestDto requestDto) {
+        return ResponseEntity.ok(issueService.modifyComment(issueId, commentId, requestDto));
+    }
+
+    @DeleteMapping("/{issueId}/comments/{commentId}")
+    public ResponseEntity<GeneralResponseDto> deleteComment(@PathVariable Long issueId, @PathVariable Long commentId) {
+        return ResponseEntity.ok(issueService.deleteComment(issueId, commentId));
     }
 }
