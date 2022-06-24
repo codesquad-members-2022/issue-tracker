@@ -1,8 +1,12 @@
 import Foundation
 import Alamofire
 
+enum OAuthError: Error {
+    case tokenNotFound
+    case storageKeyNotFound
+}
 
-struct OAuthManager {
+struct OAuthService {
     func fetchToken(from url: URL, completion: @escaping (UserToken?) -> Void) {
         if !url.absoluteString.starts(with: "issuetracker://login") {
             return
@@ -20,7 +24,30 @@ struct OAuthManager {
         }
     }
     
-    private func requestAccessToken(with code: String, completion: @escaping (Result<UserToken, NetworkError>) -> Void) {
+    func requestCode(completion: @escaping (Result<URL, OAuthError>) -> Void) {
+        let scope = "repo,user"
+        let urlString = RequestURL.authorize.description
+        guard var urlComponents = URLComponents(string: urlString) else {
+           return
+        }
+        
+        do {
+            let clientId = try PrivateStorage().getClientId()
+            urlComponents.queryItems = [
+                URLQueryItem(name: QueryParameter.clientId.description, value: clientId),
+                URLQueryItem(name: QueryParameter.scope.description, value: scope),
+            ]
+            
+            guard let url = urlComponents.url else {
+                return
+            }
+            completion(.success(url))
+        } catch {
+            completion(.failure(.storageKeyNotFound))
+        }
+    }
+    
+    private func requestAccessToken(with code: String, completion: @escaping (Result<UserToken, OAuthError>) -> Void) {
         let url = RequestURL.accessToken.description
         let privateStorage = PrivateStorage()
         guard let clientId = try? privateStorage.getClientId(),

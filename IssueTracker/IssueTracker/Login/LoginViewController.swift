@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  IssueTracker
 //
 //  Created by Sujin Jin on 2022/06/13.
@@ -9,7 +9,14 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
+    
+    private var oauthService: OAuthService?
+    
+    convenience init(service: OAuthService) {
+        self.init()
+        self.oauthService = service
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +50,7 @@ class ViewController: UIViewController {
     }()
     
     private func touchedLoginButton() {
-        NetworkManager.shared.requestCode { result in
+        oauthService?.requestCode { result in
             switch result {
             case .success(let url):
                 UIApplication.shared.open(url)

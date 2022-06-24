@@ -3,26 +3,32 @@ import UIKit
 
 final class IssueViewController: UIViewController {
 
-    private var issues: [Issue] = []
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
     
+    private var model: IssueModel?
+    
+    convenience init(model: IssueModel?) {
+        self.init()
+        self.model = model
+    }
+    
+    // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
-        requestIssue()
-    }
-    
-    private func requestIssue() {
-        guard let token = GithubUserDefaults.getToken() else {
-            return
-        }
-        NetworkManager.shared.requestIssues(accessToken: token) { result in
-            switch result {
-            case .success(let issues):
-                self.issues = issues
+        model?.requestIssue()
+        model?.updatedIssues = { issues in // 모델과 바인딩
+            DispatchQueue.main.async {
                 self.collectionView.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
             }
         }
     }
@@ -59,16 +65,6 @@ final class IssueViewController: UIViewController {
         }
     }
     
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        return collectionView
-    }()
-    
     private func createButton(title: String, image: UIImage?, action: UIAction) -> UIButton {
         var configuration = UIButton.Configuration.plain()
         var container = AttributeContainer()
@@ -86,14 +82,14 @@ final class IssueViewController: UIViewController {
 
 extension IssueViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.issues.count
+        return self.model?.getIssuesCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.identifier, for: indexPath) as? IssueListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.identifier, for: indexPath) as? IssueListCell,
+              let data = model?.getIssue(at: indexPath.row) else {
             return UICollectionViewCell()
         }
-        let data = issues[indexPath.row]
         cell.updateViews(title: data.title, description: data.body, milestone: data.milestone?.title, labels: data.labels)
         return cell
     }
