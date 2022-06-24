@@ -17,6 +17,7 @@
 		E43D17862859C7B50091DDF1 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */; };
 		E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D17892859C8590091DDF1 /* LoginViewModel.swift */; };
 		E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44DF6AB2859A71700FAC8FB /* Observable.swift */; };
+		E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */; };
 		E46C69F1286555DE0074AEF9 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F0286555DE0074AEF9 /* LabelViewController.swift */; };
 		E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */; };
 		E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F5286556020074AEF9 /* AccountViewController.swift */; };
@@ -56,6 +57,7 @@
 		E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43D17892859C8590091DDF1 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E44DF6AB2859A71700FAC8FB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowDIContainer.swift; sourceTree = "<group>"; };
 		E4687602285CB0E800E93700 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		E46C69F0286555DE0074AEF9 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */,
+				E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */,
 				E46C6A02286559830074AEF9 /* IssueFlowDIContainer.swift */,
 				E46C6A0628655AC70074AEF9 /* LabelFlowDIContainer.swift */,
 				E46C6A0828655B320074AEF9 /* MilestoneFlowDIContainer.swift */,
@@ -628,6 +631,7 @@
 				E46C6A0928655B320074AEF9 /* MilestoneFlowDIContainer.swift in Sources */,
 				E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */,
 				E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */,
+				E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */,
 				E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
