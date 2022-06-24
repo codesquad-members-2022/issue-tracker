@@ -96,7 +96,6 @@ class IssueAdapter() : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil
                     //뷰의 생성된 후 크기와 위치 구하기
                     rootWidth = binding.root.width
                     binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
-
                 }
             })
         }
