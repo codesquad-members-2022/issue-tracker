@@ -22,7 +22,7 @@ data class Issue(
     val mileStone: String,
     val state: Boolean,
     val title: String,
-    val user: User,
+    val user: User
 ) : Serializable
 
 fun IssueDto.toIssue(): Issue? {

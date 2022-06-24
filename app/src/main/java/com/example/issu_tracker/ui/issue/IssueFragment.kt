@@ -2,6 +2,7 @@ package com.example.issu_tracker.ui.issue
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.example.issu_tracker.databinding.FragmentIssueBinding
 import com.example.issu_tracker.ui.DetailIssueActivity
 import com.example.issu_tracker.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -34,6 +36,8 @@ class IssueFragment : Fragment() {
     private lateinit var navController: NavController
     private val issueViewModel: IssueViewModel by viewModels()
     private val homeViewModel: HomeViewModel by activityViewModels<HomeViewModel>()
+    private lateinit var itemTouchHelper: ItemTouchHelper
+    lateinit var swipeHelperCallback: SwipeHelperCallback
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +64,7 @@ class IssueFragment : Fragment() {
         val conditions = arguments?.getParcelable<FilterCondition>("filterCondition")
         conditions?.let {
             homeViewModel.filterIssueList(conditions)
-        }   
+        }
     }
 
     private fun setSelectedIssueCount() {
@@ -74,7 +78,6 @@ class IssueFragment : Fragment() {
     }
 
     private fun listenEditModeEvent() {
-
         // editMode 나가기
         binding.ibEditClose.setOnClickListener {
             issueAdapter.isEditMode = false
@@ -82,6 +85,8 @@ class IssueFragment : Fragment() {
             binding.clIssueEditModeTop.visibility = View.GONE
             issueAdapter.notifyDataSetChanged()
             issueViewModel.clearSelectedList()
+            itemTouchHelper.attachToRecyclerView(binding.rvIssue)
+
         }
 
         // 선택요소 수정
@@ -103,7 +108,6 @@ class IssueFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun updateRecyclerview() {
@@ -124,6 +128,7 @@ class IssueFragment : Fragment() {
         }
     }
 
+
     private fun settingRecyclerview() {
         issueAdapter = IssueAdapter()
         issueAdapter.issueAdapterEventListener = object : IssueAdapterEventListener {
@@ -138,12 +143,16 @@ class IssueFragment : Fragment() {
                 binding.clIssueOriginalModeTop.visibility = View.GONE
                 binding.clIssueEditModeTop.visibility = View.VISIBLE
                 issueAdapter.notifyDataSetChanged()
+
+                itemTouchHelper.attachToRecyclerView(null)
             }
 
             override fun switchToOriginMode() {
                 issueAdapter.isEditMode = false
                 binding.clIssueOriginalModeTop.visibility = View.VISIBLE
                 binding.clIssueEditModeTop.visibility = View.GONE
+                Log.d("sdsd" , "sdsd")
+                itemTouchHelper.attachToRecyclerView(binding.rvIssue)
             }
 
             override fun addInCheckList(issue: Issue) {
@@ -165,8 +174,8 @@ class IssueFragment : Fragment() {
         binding.rvIssue.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        val swipeHelperCallback = SwipeHelperCallback()
-        val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
+        swipeHelperCallback = SwipeHelperCallback()
+        itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.rvIssue)
     }
 

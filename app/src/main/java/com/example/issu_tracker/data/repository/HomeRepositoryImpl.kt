@@ -3,20 +3,27 @@ package com.example.issu_tracker.data.repository
 import android.util.Log
 import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.data.IssueDto
+import com.example.issu_tracker.data.User
+import com.example.issu_tracker.data.local.FriendDatabase
 import com.example.issu_tracker.data.toIssue
+import com.example.issu_tracker.ui.home.userUid
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.lang.StringBuilder
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFirestore) :
-    HomeRepository {
+class HomeRepositoryImpl @Inject constructor(
+    private val fireStore: FirebaseFirestore,
+    override val coroutineContext: CoroutineContext
+) :
+    HomeRepository, CoroutineScope {
     override suspend fun loadIssues(): List<Issue> {
         val list = mutableListOf<Issue>()
-        val collectionData = fireStore.collection(FIREBASE_COLLECTION_PATH).get().await()
+        val collectionData = fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).get().await()
 
         collectionData.documents.forEach {
             val issueObj = it.toObject(IssueDto::class.java)
@@ -31,11 +38,8 @@ class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFire
     }
 
     override suspend fun updateIssueState(itemId: String, boolean: Boolean) {
-//delete 문
-//        fireStore.collection(FIREBASE_COLLECTION_PATH).document(itemId)
-//            .delete().await()
 
-        fireStore.collection(FIREBASE_COLLECTION_PATH).document(itemId)
+        fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document(itemId)
             .update("state", false).await()
 
     }
@@ -44,7 +48,7 @@ class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFire
     override suspend fun deleteIssueList(list: List<Issue>) {
         CoroutineScope(Dispatchers.IO).launch {
             for (i in list) {
-                fireStore.collection(FIREBASE_COLLECTION_PATH).document(i.id).delete()
+                fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document(i.id).delete()
             }
         }.join()
     }
@@ -53,12 +57,15 @@ class HomeRepositoryImpl @Inject constructor(private val fireStore: FirebaseFire
     override suspend fun updateIssueListState(list: List<Issue>, boolean: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
             for (i in list) {
-                fireStore.collection(FIREBASE_COLLECTION_PATH).document(i.id).update("state", false)
+                fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document(i.id)
+                    .update("state", false)
             }
         }.join()
     }
 
+
     companion object {
-        const val FIREBASE_COLLECTION_PATH = "Issue"
+        const val FIREBASE_COLLECTION_ISSUE_PATH = "Issue"
+        const val FIREBASE_COLLECTION_FRIEND_PATH = "User"
     }
 }
