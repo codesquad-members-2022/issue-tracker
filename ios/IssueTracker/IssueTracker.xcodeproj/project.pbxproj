@@ -19,6 +19,7 @@
 		E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44DF6AB2859A71700FAC8FB /* Observable.swift */; };
 		E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */; };
 		E45477AF2865617D002379F1 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477AE2865617D002379F1 /* UIImage+Extensions.swift */; };
+		E45477B3286564B2002379F1 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477B2286564B2002379F1 /* BaseCoordinator.swift */; };
 		E46C69F1286555DE0074AEF9 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F0286555DE0074AEF9 /* LabelViewController.swift */; };
 		E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */; };
 		E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F5286556020074AEF9 /* AccountViewController.swift */; };
@@ -60,6 +61,7 @@
 		E44DF6AB2859A71700FAC8FB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowDIContainer.swift; sourceTree = "<group>"; };
 		E45477AE2865617D002379F1 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		E45477B2286564B2002379F1 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		E4687602285CB0E800E93700 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		E46C69F0286555DE0074AEF9 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 			children = (
 				E46FBE832862B77D000CB998 /* DeepLink.swift */,
 				E46FBE802862B759000CB998 /* Coordinator.swift */,
+				E45477B2286564B2002379F1 /* BaseCoordinator.swift */,
 				E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */,
 				E4CD5BA528644F9D00A9B1B8 /* TabBarFlowCoordinator.swift */,
 			);
@@ -636,6 +639,7 @@
 				E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */,
 				E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */,
 				E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */,
+				E45477B3286564B2002379F1 /* BaseCoordinator.swift in Sources */,
 				E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
