@@ -60,4 +60,20 @@ struct IssueService {
                 }
             }
     }
+    
+    func requestRepos(accessToken: String, completion: @escaping (Result<[Repository], IssueError>) -> Void) {
+        let urlString = RequestURL.repos.description
+        let headers: HTTPHeaders = [
+            NetworkHeader.acceptV3.getHttpHeader(),
+            NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
+        ]
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        AF.request(urlString, method: .get, headers: headers)
+            .responseData(queue: DispatchQueue.global(qos: .default)) { response in
+                print("statusCode == ", response.response?.statusCode)
+            }
+    }
 }

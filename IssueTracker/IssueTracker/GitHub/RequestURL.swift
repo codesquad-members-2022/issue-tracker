@@ -5,6 +5,7 @@ enum RequestURL: CustomStringConvertible {
     case accessToken
     case issues
     case createIssue(owner: String, repo: String)
+    case repos
     
     var description: String {
         switch self {
@@ -16,6 +17,8 @@ enum RequestURL: CustomStringConvertible {
             return "https://api.github.com/issues"
         case let .createIssue(owner, repo):
             return "https://api.github.com/repos/\(owner)/\(repo)/issues"
+        case .repos:
+            return "https://github.com/user/repos"
         }
     }
 }
