@@ -67,11 +67,12 @@ final class LoginViewController: UIViewController, ViewBinding {
         self.vm?.request(target, param: param)
     }
     
-    func presentIssueList(accessToken: String) {
+    func presentIssueList() {
         let issueListVC = MainTabBarController()
         issueListVC.modalPresentationStyle = .fullScreen
         issueListVC.modalTransitionStyle = .coverVertical
-        present(issueListVC, animated: true)
+        self.navigationController?.pushViewController(issueListVC, animated: true)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func addViews() {
@@ -107,6 +108,5 @@ final class LoginViewController: UIViewController, ViewBinding {
             $0.top.equalTo(userInfoInputStackView.snp.bottom).offset(228.0)
             $0.leading.trailing.equalToSuperview().inset(16.0)
         }
-        
     }
 }
