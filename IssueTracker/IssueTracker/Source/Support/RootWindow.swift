@@ -15,7 +15,6 @@ final class RootWindow: UIWindow {
     init(scene: UIWindowScene) {
         super.init(windowScene: scene)
         overrideUserInterfaceStyle = .light
-//        setRootViewController()
     }
 
     func setRootViewController() {
@@ -30,7 +29,6 @@ final class RootWindow: UIWindow {
             } else {
                 DispatchQueue.main.async {
                     self.rootViewController = LoginViewController(viewModel: LoginViewModel(repository: LoginRepository()))
-//                    self.rootViewController = IssueListViewController()
                     return
                 }
             }

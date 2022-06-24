@@ -18,6 +18,4 @@ final class LoginViewModel {
     func excuteLogin() {
         repository.requestGithubAuthorize()
     }
-
-    // 로그인 상태인지 판단 메소드
 }
