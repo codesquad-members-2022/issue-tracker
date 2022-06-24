@@ -26,6 +26,7 @@
 		E46C6A01286559100074AEF9 /* IssueFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C6A00286559100074AEF9 /* IssueFlowCoordinator.swift */; };
 		E46C6A03286559830074AEF9 /* IssueFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C6A02286559830074AEF9 /* IssueFlowDIContainer.swift */; };
 		E46C6A0728655AC70074AEF9 /* LabelFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C6A0628655AC70074AEF9 /* LabelFlowDIContainer.swift */; };
+		E46C6A0928655B320074AEF9 /* MilestoneFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C6A0828655B320074AEF9 /* MilestoneFlowDIContainer.swift */; };
 		E46FBE842862B77D000CB998 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE832862B77D000CB998 /* DeepLink.swift */; };
 		E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE802862B759000CB998 /* Coordinator.swift */; };
 		E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */; };
@@ -64,6 +65,7 @@
 		E46C6A00286559100074AEF9 /* IssueFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFlowCoordinator.swift; sourceTree = "<group>"; };
 		E46C6A02286559830074AEF9 /* IssueFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFlowDIContainer.swift; sourceTree = "<group>"; };
 		E46C6A0628655AC70074AEF9 /* LabelFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelFlowDIContainer.swift; sourceTree = "<group>"; };
+		E46C6A0828655B320074AEF9 /* MilestoneFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneFlowDIContainer.swift; sourceTree = "<group>"; };
 		E46FBE802862B759000CB998 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E46FBE832862B77D000CB998 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		E47CCCDD2859EE1B00D37ED8 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */,
 				E46C6A02286559830074AEF9 /* IssueFlowDIContainer.swift */,
 				E46C6A0628655AC70074AEF9 /* LabelFlowDIContainer.swift */,
+				E46C6A0828655B320074AEF9 /* MilestoneFlowDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 				E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */,
 				73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */,
 				E46C6A03286559830074AEF9 /* IssueFlowDIContainer.swift in Sources */,
+				E46C6A0928655B320074AEF9 /* MilestoneFlowDIContainer.swift in Sources */,
 				E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */,
 				E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */,
 				E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */,
