@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MilestoneViewController: UIViewController {
+final class MilestoneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }

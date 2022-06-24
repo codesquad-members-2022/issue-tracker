@@ -11,7 +11,7 @@ protocol LabelFlowCoordinatorDependencies {
     func makeLabelViewController() -> UIViewController
 }
 
-class LabelFlowCoordinator: Coordinator {
+final class LabelFlowCoordinator: Coordinator {
     private let navigationController: UINavigationController
     private let dependencies: LabelFlowCoordinatorDependencies
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LabelViewController: UIViewController {
+final class LabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
