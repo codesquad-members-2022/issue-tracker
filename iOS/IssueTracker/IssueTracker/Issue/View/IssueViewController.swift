@@ -17,7 +17,7 @@ class IssueViewController: UIViewController {
     
     init(issueViewModel: IssueViewModel) {
         self.issueViewModel = issueViewModel
-        self.dataSource = IssueCollectionViewDataSource(issueViewModel: issueViewModel)
+        self.dataSource = IssueCollectionViewDataSource(issueEntityList: issueViewModel.list)
         super.init(nibName: nil, bundle: nil)
     }
     
