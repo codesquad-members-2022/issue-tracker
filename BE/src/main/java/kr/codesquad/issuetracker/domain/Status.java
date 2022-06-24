@@ -1,4 +1,4 @@
-package kr.codesquad.issuetracker.domain.issue;
+package kr.codesquad.issuetracker.domain;
 
 import lombok.RequiredArgsConstructor;
 

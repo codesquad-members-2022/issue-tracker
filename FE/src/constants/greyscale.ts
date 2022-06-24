@@ -9,4 +9,4 @@ const GREYSCALE = {
   TITLE_ACTION: '#14142B',
 };
 
-export { GREYSCALE };
+export default GREYSCALE;
