@@ -58,12 +58,12 @@ final class IssueCollectionViewCell: UICollectionViewCell {
         return labelName
     }()
     
-    func configure(with items: IssueItem) {
-        self.title.text = items.title
-        self.issueDescription.text = items.content
-        self.milestoneName.text = items.milestoneName
-        self.labelName.text = items.labels[0].title
-        self.labelName.backgroundColor = UIColor.init(hex: items.labels[0].backgroundColor)
+    func configure(with viewModel: IssueItem) {
+        self.title.text = viewModel.title
+        self.issueDescription.text = viewModel.content
+        self.milestoneName.text = viewModel.milestoneName
+        self.labelName.text = viewModel.labels[0].title
+        self.labelName.backgroundColor = UIColor.init(hex: viewModel.labels[0].backgroundColor)
     }
     
     override func layoutSubviews() {

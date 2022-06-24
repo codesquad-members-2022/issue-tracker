@@ -7,43 +7,33 @@
 
 import Foundation
 
-struct IssueViewModel {
-    let issue: IssueItem
+protocol IssueViewModelOutput {
+    var list: Observable<[IssueItem]> { get }
 }
 
-class IssueListViewModel {
+class IssueViewModel: IssueViewModelOutput {
+
+    private var issueManager = IssueManager()
     
-    var allIssueViewModel: [IssueViewModel]
-    
-    init() {
-        self.allIssueViewModel = [IssueViewModel]()
+    init(issueManager: IssueManager) {
+        self.issueManager = issueManager
     }
     
-    func issueListViewModel(at index: Int) -> IssueViewModel {
-        return self.allIssueViewModel[index]
+    var list: Observable<[IssueItem]> = Observable([IssueItem]())
+    var cellCount: Int { list.value.count }
+    
+    subscript(index: Int) -> IssueItem? {
+        guard index < list.value.count else { return nil }
+        return list.value[index]
     }
     
 }
 
+// MARK: - Request Order List
 extension IssueViewModel {
-    
-    var id: Int {
-        return self.issue.id
-    }
-    
-    var title: String {
-        return self.issue.title
-    }
-    
-    var content: String {
-        return self.issue.content
-    }
-    
-    var milestoneName: String {
-        return self.issue.milestoneName
-    }
-    
-    var labels: [Label] {
-        return self.issue.labels
+    func loadFromIssueManager() {
+        issueManager.load { issueItemList in
+            self.list.value = issueItemList
+        }
     }
 }
