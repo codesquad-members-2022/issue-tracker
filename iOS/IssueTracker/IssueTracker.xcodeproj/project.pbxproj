@@ -217,6 +217,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		021745972865AB9100ED1BCC /* IssueViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				022D77CF2863878300ACA5FA /* IssueViewNavigationItems.swift */,
+				5BE928CE285852C100D237AB /* IssueCollectionView.swift */,
+				5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */,
+			);
+			path = IssueViewComponents;
+			sourceTree = "<group>";
+		};
 		024F43B62859A1DF008C4235 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +301,6 @@
 				5B29A114285ABF070088EC11 /* Model */,
 				0290D0EF28640ACD00A4E3A7 /* ViewModel */,
 				02174595286575EE00ED1BCC /* LabelFactory.swift */,
-				5BF01C7828641FFE00A4D8D7 /* ViewModel */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -300,11 +309,9 @@
 			isa = PBXGroup;
 			children = (
 				5B29A0C428573E400088EC11 /* IssueViewController.swift */,
-				022D77CF2863878300ACA5FA /* IssueViewNavigationItems.swift */,
-				5BE928CE285852C100D237AB /* IssueCollectionView.swift */,
-				5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */,
 				028CB80C286191AC00DAFE26 /* EditingIssueViewController.swift */,
 				0290D0EC2863FBAB00A4E3A7 /* EditingViewComponents */,
+				021745972865AB9100ED1BCC /* IssueViewComponents */,
 				0290D0F428641A8600A4E3A7 /* Delegate */,
 			);
 			path = View;
@@ -394,6 +401,7 @@
 		0290D0EF28640ACD00A4E3A7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5BF01C792864202000A4D8D7 /* IssueViewModel.swift */,
 				0290D0ED28640AC800A4E3A7 /* EditingIssueViewModel.swift */,
 			);
 			path = ViewModel;
@@ -501,14 +509,6 @@
 				5BF01C7E28655F0700A4D8D7 /* IssueNetworkTarget.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		5BF01C7828641FFE00A4D8D7 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				5BF01C792864202000A4D8D7 /* IssueViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		83679A2BB4C553F474D664CC /* Frameworks */ = {
