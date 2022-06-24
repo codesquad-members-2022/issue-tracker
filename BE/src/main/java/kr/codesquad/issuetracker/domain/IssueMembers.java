@@ -9,7 +9,6 @@ public class IssueMembers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "issues_members_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)

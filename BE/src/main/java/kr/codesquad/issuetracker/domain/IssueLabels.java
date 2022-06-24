@@ -8,7 +8,6 @@ import static javax.persistence.FetchType.LAZY;
 public class IssueLabels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "issues_labels_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)

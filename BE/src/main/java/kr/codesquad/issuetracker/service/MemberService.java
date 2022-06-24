@@ -15,7 +15,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public Member findLoginMember(GitHubUser gitHubUser){
-        if (!memberRepository.findByGithubId(gitHubUser.getGithubId()).isPresent()){
+        if (!memberRepository.existsByGithubId(gitHubUser.getGithubId())) {
             Member member = gitHubUser.createMember();
             memberRepository.save(member);
             return member;
