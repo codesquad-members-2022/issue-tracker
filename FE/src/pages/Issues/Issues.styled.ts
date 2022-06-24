@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FilterStyle } from '../../common/Filter/FilterBar.styled';
 import { CustomBtn } from '../../common/button.styled';
