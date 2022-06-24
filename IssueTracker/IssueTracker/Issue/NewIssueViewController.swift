@@ -48,13 +48,13 @@ class NewIssueViewController: UIViewController {
         return tableView
     }()
     
-//    private lazy var optionTableHeader: UILabel = {
-//        var label = UILabel()
-//        label.text = "추가옵션"
-//        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-//        label.textAlignment = .left
-//        return label
-//    }()
+    private lazy var optionTableHeader: UILabel = {
+        var label = UILabel()
+        label.text = "추가옵션"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .left
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,13 +90,16 @@ class NewIssueViewController: UIViewController {
             make.height.equalTo(1)
         }
         
-        // FIXME: Header설정
-        optionTable.tableHeaderView = UILabel()
+        optionTable.tableHeaderView = optionTableHeader
+        optionTable.tableHeaderView?.frame.size.height = 30
         
         self.view.addSubview(optionTable)
+        optionTable.isScrollEnabled = true
         optionTable.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(optionTable.contentSize.height) // 자신의 컨텐츠 사이즈만큼 높이를 잡아준다
+            make.height.equalTo(optionTable
+                .contentSize
+                .height + 30) // 자신의 컨텐츠 사이즈만큼 높이를 잡아준다
         }
         
         self.view.addSubview(contentField)
@@ -154,7 +157,7 @@ extension NewIssueViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "추가옵션"
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "추가옵션"
+//    }
 }
