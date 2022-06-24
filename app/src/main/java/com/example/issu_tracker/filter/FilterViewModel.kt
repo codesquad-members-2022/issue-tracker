@@ -1,9 +1,8 @@
-package com.example.issu_tracker.ui.filter
+package com.example.issu_tracker.filter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.FilterCondition
-import com.example.issu_tracker.data.repository.FilterRepository
 import com.example.issu_tracker.ui.common.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FilterViewModel @Inject constructor(private val repository: FilterRepository) : ViewModel() {
+class FilterViewModel @Inject constructor() : ViewModel() {
 
     private val _stateStateFlow = MutableStateFlow<List<String>>(mutableListOf(""))
     val stateStateFlow = _stateStateFlow.asStateFlow()
@@ -45,31 +44,11 @@ class FilterViewModel @Inject constructor(private val repository: FilterReposito
         }
         test.add(DEFAULT_VALUE)
         viewModelScope.launch {
-            setStateList()
-            setWriterList()
-            setLabelList()
+            _stateStateFlow.emit(test)
+            _writerStateFlow.emit(test)
+            _labelStateFlow.emit(test)
             _mileStoneStateFlow.emit(test)
         }
-    }
-
-    private suspend fun setStateList() {
-        val stateList = mutableListOf<String>()
-        stateList.add("열린 이슈")
-        stateList.add("닫힌 이슈")
-        stateList.add(DEFAULT_VALUE)
-        _stateStateFlow.emit(stateList)
-    }
-
-    private suspend fun setLabelList() {
-        val labelList = repository.loadLabel().toMutableList()
-        labelList.add(DEFAULT_VALUE)
-        _labelStateFlow.emit(labelList)
-    }
-
-    private suspend fun setWriterList() {
-        val writerList = repository.loadUsers().toMutableList()
-        writerList.add(DEFAULT_VALUE)
-        _writerStateFlow.emit(writerList)
     }
 
     fun inputSpinnerValue(text: String, conditionType: Int) {
@@ -78,10 +57,10 @@ class FilterViewModel @Inject constructor(private val repository: FilterReposito
                 _conditionValueStateFlow.emit(true)
             }
             when (conditionType) {
-                Constants.CONDITION_TYPE_STATE -> stateConditionValue = text
-                Constants.CONDITION_TYPE_WRITER -> writerConditionValue = text
-                Constants.CONDITION_TYPE_LABEL -> labelConditionValue = text
-                Constants.CONDITION_TYPE_ASSIGNEE -> mileStoneConditionValue = text
+                Constants.FILTER_TYPE_STATE_CONDITION -> stateConditionValue = text
+                Constants.FILTER_TYPE_WRITER_CONDITION -> writerConditionValue = text
+                Constants.FILTER_TYPE_LABEL_CONDITION -> labelConditionValue = text
+                Constants.FILTER_TYPE_MILESTONE_CONDITION -> mileStoneConditionValue = text
             }
         }
     }

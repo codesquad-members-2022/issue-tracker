@@ -15,108 +15,62 @@
         android:layout_height="170dp"
         android:padding="15dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_delete_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ImageView
 
-            <TextView
-                android:id="@+id/tv_delete_close"
-                style="@style/HeadLine6.20.bold"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:background="@color/issue_tracker_blue"
-                android:gravity="center"
-                android:text="@string/issue_close"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.3" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <CheckBox
-            android:theme="@style/checkBoxStyle"
-            android:id="@+id/cb_issue_selector"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="30dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/cl_swipe_container"
+            android:id="@+id/iv_mile_stone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_baseline_fork_right_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_issue_mile_stone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.2" />
+            app:layout_constraintTop_toTopOf="@id/tv_issue_mile_stone" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_swipe_container"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cb_issue_selector">
+        <TextView
+            android:id="@+id/tv_issue_mile_stone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@{issue.mileStone}"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/iv_mile_stone"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_mile_stone"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/ic_baseline_fork_right_24"
-                app:layout_constraintBottom_toBottomOf="@id/tv_issue_mile_stone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_issue_mile_stone" />
+        <TextView
+            android:layout_marginTop="7dp"
+            android:id="@+id/tv_issue_item_title"
+            style="@style/HeadLine6.20.bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{issue.title}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_issue_mile_stone"
+            tools:text="@string/milestone" />
 
-            <TextView
-                android:id="@+id/tv_issue_mile_stone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="@{issue.mileStone}"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@id/iv_mile_stone"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:layout_marginTop="7dp"
+            android:id="@+id/tv_issue_item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{issue.description}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_title"
+            tools:text="@string/temp_string_long" />
 
-            <TextView
-                android:id="@+id/tv_issue_item_title"
-                style="@style/HeadLine6.20.bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:text="@{issue.title}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_issue_mile_stone"
-                tools:text="@string/milestone" />
+        <LinearLayout
+            labelList="@{issue.label}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/view_issue_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_description" />
 
-            <TextView
-                android:id="@+id/tv_issue_item_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:text="@{issue.description}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_title"
-                tools:text="@string/temp_string_long" />
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/view_issue_item"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_issue_item_description">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    labelListOnRecyclerview="@{issue.label}"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </androidx.core.widget.NestedScrollView>
-
-
-            <View
-                android:id="@+id/view_issue_item"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/background2"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/view_issue_item"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginVertical="5dp"
+            android:background="@color/background2"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

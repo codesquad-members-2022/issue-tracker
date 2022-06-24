@@ -10,9 +10,6 @@
 
     <declare-styleable name="ConditionBar">
         <attr name="conditionBarTitle" format="string" />
-        <attr name="conditionBarBackground" format="reference" />
-        <attr name="conditionBarTextAppearance" format="reference" />
-        <attr name="conditionBarBackgroundTint" format="reference" />
     </declare-styleable>
 
 </resources>

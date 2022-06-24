@@ -1,9 +1,7 @@
 package com.example.issu_tracker.ui.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,9 +16,6 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     private val _issueList = MutableStateFlow<List<Issue>>(listOf())
     val issueList: StateFlow<List<Issue>> = _issueList
 
-    private val _filteredIssueList = MutableStateFlow<List<Issue>>(listOf())
-    val filteredIssueList: StateFlow<List<Issue>> = _filteredIssueList
-
     init {
         viewModelScope.launch {
             getIssueList()
@@ -31,53 +26,4 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         val issueDummyData = repository.loadIssues()
         _issueList.value = issueDummyData
     }
-
-    suspend fun updateIssueSate(itemId: String, boolean: Boolean) {
-        repository.updateIssueState(itemId, boolean)
-        getIssueList()
-    }
-    
-    suspend fun deleteIssueList(issueList: List<Issue>) {
-        repository.deleteIssueList(issueList)
-        getIssueList()
-        Log.d("updateDelte", issueList.toString())
-    }
-
-    suspend fun updateIssueList(issueList: List<Issue>, boolean: Boolean) {
-        repository.updateIssueListState(issueList, boolean)
-        getIssueList()
-        Log.d("updateDelte", issueList.toString())
-    }
-
-    fun filterIssueList(condition: FilterCondition) {
-        val filteredIssueList = _issueList.value
-            .filter {
-                if (condition.state.isNotEmpty()) {
-                    it.state
-                } else {
-                    true
-                }
-            }.filter {
-                if (condition.writer.isNotEmpty()) {
-                    it.user.name == condition.writer
-                } else {
-                    true
-                }
-            }
-            .filter {
-                it.label.any { label ->
-                    if (condition.label.isNotEmpty()) {
-                        label.content == condition.label
-                    } else {
-                        true
-                    }
-                }
-            }
-
-        _filteredIssueList.value = filteredIssueList
-    }
 }
-
-
-
-
