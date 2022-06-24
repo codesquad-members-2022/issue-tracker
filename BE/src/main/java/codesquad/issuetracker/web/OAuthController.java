@@ -1,8 +1,7 @@
 package codesquad.issuetracker.web;
 
 import codesquad.issuetracker.service.OAuthService;
-import codesquad.issuetracker.web.dto.GithubUserInformation;
-import codesquad.issuetracker.web.jwt.JwtFactory;
+import codesquad.issuetracker.web.dto.LoginResponseDto;
 import java.net.URI;
 import java.net.URISyntaxException;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +17,7 @@ public class OAuthController {
 
 	private static final String GITHUB_REDIRECT_URL = "https://github.com/login/oauth/authorize?client_id=a062f7e1bd2cefcb3157";
 
-	private final OAuthService loginService;
-	private final JwtFactory jwtFactory;
+	private final OAuthService oAuthService;
 
 	@GetMapping("/login/oauth")
 	public ResponseEntity<Void> login() throws URISyntaxException {
@@ -28,10 +26,8 @@ public class OAuthController {
 	}
 
 	@GetMapping("/login/oauth/redirect")
-	public void oauth(@RequestParam String code) {
-		GithubUserInformation userInformation = loginService.login(code);
-		// TODO JWT 로직 구현
-
+	public LoginResponseDto oauth(@RequestParam String code) {
+		return oAuthService.login(code);
 	}
 
 }

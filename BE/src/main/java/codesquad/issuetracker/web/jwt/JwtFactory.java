@@ -1,18 +1,53 @@
 package codesquad.issuetracker.web.jwt;
 
+import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtFactory {
 
+	private static final int ACCESS_TOKEN_EXPIRES_MINUTE = 60;
+	private static final int REFRESH_TOKEN_EXPIRES_WEEK = 60 * 24 * 14;
+	private static final String USER_ID = "userId";
 	private final Algorithm algorithm;
 
 	public JwtFactory(@Value("${auth.jwt.secret_key}") String secretKey) {
 		this.algorithm = Algorithm.HMAC256(secretKey);
 	}
 
-	//TODO 미구현
+	public String createAccessToken(long userId) {
+		Date accessTokenExpiredDate = Date.from(
+			Instant.now().plus(ACCESS_TOKEN_EXPIRES_MINUTE, ChronoUnit.MINUTES));
+
+		return JWT.create()
+			.withClaim(USER_ID, userId)
+			.withExpiresAt(accessTokenExpiredDate)
+			.sign(algorithm);
+	}
+
+	public String createRefreshToken(long userId) {
+		Date accessTokenExpiredDate = Date.from(
+			Instant.now().plus(REFRESH_TOKEN_EXPIRES_WEEK, ChronoUnit.MINUTES));
+
+		return JWT.create()
+			.withClaim(USER_ID, userId)
+			.withExpiresAt(accessTokenExpiredDate)
+			.sign(algorithm);
+	}
+
+	public void validateToken(String token) {
+		JWT.require(algorithm).build().verify(token);
+	}
+
+	public Long getClaimFromToken(String token, String claim) {
+		DecodedJWT jwt = JWT.decode(token);
+		return jwt.getClaim(claim).asLong();
+	}
 
 }
