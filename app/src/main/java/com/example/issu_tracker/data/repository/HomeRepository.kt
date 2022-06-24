@@ -12,5 +12,5 @@ interface HomeRepository {
 
     suspend fun updateIssueListState(list: List<Issue>, boolean: Boolean)
 
-    suspend fun loadFriendList(): List<User>
+
 }
