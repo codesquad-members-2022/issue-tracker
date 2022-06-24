@@ -8,24 +8,34 @@
 import UIKit
 
 protocol AppFlowCoordinatorDependencies {
+    func makeTabBarFlowDIContainer() -> DIContainer
     func makeLoginFlowDIContainer() -> DIContainer
     func checkUserLoggedIn() -> Bool
 }
 
 final class AppFlowCoordinator: Coordinator {
     private let navigationController: UINavigationController
-    private let appDIContainer: AppFlowCoordinatorDependencies
+    private let appDependencies: AppFlowCoordinatorDependencies
 
-    init(navigationController: UINavigationController, dependency: AppFlowCoordinatorDependencies) {
+    init(navigationController: UINavigationController, dependencies: AppFlowCoordinatorDependencies) {
         self.navigationController = navigationController
-        self.appDIContainer = dependency
+        self.appDependencies = dependencies
     }
 
     deinit {
         print("Deinit: \(#fileID)")
     }
 
-    func start(with deepLink: DeepLink? = nil) {
+    func start() {
+        if appDependencies.checkUserLoggedIn() {
+            print("Run")
+            runTabBarFlow()
+        } else {
+            runLoginFlow()
+        }
+    }
+
+    func start(with deepLink: DeepLink?) {
         guard let deepLink = deepLink else {
             runLoginFlow() // or run default flow
             return
@@ -45,10 +55,14 @@ final class AppFlowCoordinator: Coordinator {
     }
 
     func runLoginFlow(with deepLink: DeepLink? = nil) {
-        let container = appDIContainer.makeLoginFlowDIContainer()
+        let container = appDependencies.makeLoginFlowDIContainer()
         let flow = container.makeCoordinator(navigationController: navigationController)
         flow.start(with: deepLink)
     }
 
-    func runTabBarFlow(with _: DeepLink? = nil) {}
+    func runTabBarFlow(with deepLink: DeepLink? = nil) {
+        let container = appDependencies.makeTabBarFlowDIContainer()
+        let flow = container.makeCoordinator(navigationController: navigationController)
+        flow.start(with: deepLink)
+    }
 }

@@ -14,14 +14,18 @@ enum LocalStorageConstants {
 
 final class AppFlowDIContainer {
     private let localStorage = UserDefaults.standard
-
-    func makeLoginFlowDIContainer() -> DIContainer {
-        LoginFlowDIContainer()
-    }
 }
 
 extension AppFlowDIContainer: AppFlowCoordinatorDependencies {
     func checkUserLoggedIn() -> Bool {
-        localStorage.string(forKey: LocalStorageConstants.AuthCode) != nil
+        localStorage.string(forKey: LocalStorageConstants.AuthToken) != nil
+    }
+
+    func makeLoginFlowDIContainer() -> DIContainer {
+        LoginFlowDIContainer()
+    }
+
+    func makeTabBarFlowDIContainer() -> DIContainer {
+        TabBarFlowDIContainer()
     }
 }
