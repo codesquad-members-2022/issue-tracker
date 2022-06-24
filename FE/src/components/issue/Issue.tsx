@@ -1,39 +1,121 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Issue.module.scss';
-import { Input } from '@UI/Input';
+import { Input } from '../../common/Input';
 
-const Issue = () => {
+// 매개변수 getTime();
+function elapsedText(fetchedTime: number, createdTime: number) {
+  // 초 (밀리초)
+  const seconds = 1;
+  // 분
+  const minute = seconds * 60;
+  // 시
+  const hour = minute * 60;
+  // 일
+  const day = hour * 24;
+
+  let elapsedTime = Math.trunc((fetchedTime - createdTime) / 1000);
+
+  let elapsedText = '';
+  if (elapsedTime < seconds) {
+    elapsedText = '방금 전';
+  } else if (elapsedTime < minute) {
+    elapsedText = elapsedTime + '초 전';
+  } else if (elapsedTime < hour) {
+    elapsedText = Math.trunc(elapsedTime / minute) + '분 전';
+  } else if (elapsedTime < day) {
+    elapsedText = Math.trunc(elapsedTime / hour) + '시간 전';
+  } else if (elapsedTime < day * 15) {
+    elapsedText = Math.trunc(elapsedTime / day) + '일 전';
+  }
+  return elapsedText;
+}
+
+type IssuePropType = {
+  id: number;
+  title: string;
+  milestoneTitle: string;
+  createdAt: number;
+  fetchedAt: number;
+  userId: string;
+  userImg: string;
+  checkboxHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  checkedIssues: string[];
+};
+
+const Issue = ({
+  id,
+  title,
+  milestoneTitle,
+  createdAt,
+  fetchedAt,
+  userId,
+  userImg,
+  checkboxHandler,
+  checkedIssues,
+}: IssuePropType) => {
+  const passedTime = elapsedText(fetchedAt, createdAt);
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (checkedIssues.includes(String(id))) setIsChecked(true);
+    else setIsChecked(false);
+  }, [checkedIssues]);
+
+  // {!isChecked && (
+  //   <div>
+  //     <span>열린 이슈</span>
+  //     <span>닫힌 이슈</span>
+  //   </div>
+  // )}
+  // <div
+  //   style={{
+  //     display: 'flex',
+  //     width: '30%',
+  //     justifyContent: 'space-around',
+  //   }}
+  // >
+  //   <span>담당자</span>
+  //   <span>담당자</span>
+  //   <span>담당자</span>
+  //   <span>담당자</span>
+  // </div>
+
   return (
     <div className={styles.issueWrapper}>
-      <div className={styles.leftWrapper}>
-        <div className={styles.checkBoxWrapper}>
-          <Input
-            label="issueSelect"
-            info={{
-              id: 'issueSelect',
-              type: 'checkbox',
-              value: 'issueSelect',
-            }}
-          />
-        </div>
-        <div className={styles.issue__contentWrapper}>
-          <div>
-            <span>이슈 제목</span>
+      <div className={styles.checkBoxWrapper}>
+        <Input
+          label={`issue${id}`}
+          info={{
+            id: `${id}`,
+            type: 'checkbox',
+            value: 'issueSelect',
+            onChange: checkboxHandler,
+            checked: isChecked,
+          }}
+        />
+      </div>
+      <div className={styles.issue__contentWrapper}>
+        <div className={styles.textWrapper}>
+          <div className={styles.titleWrapper}>
+            <span className={styles.title}>{title}</span>
             <span>badge</span>
           </div>
-          <div>
-            <span>#이슈번호</span>
-            <span>작성자 및 타임스탬프 정보</span>
-            <span>마일스톤</span>
+          <div className={styles.info}>
+            <span>#{id}</span>
+            <span>
+              이 이슈가 {passedTime}, {userId}님에 의해 작성되었습니다.
+            </span>
+            <span>{milestoneTitle}</span>
           </div>
         </div>
-      </div>
-
-      <div className={styles.rightWrapper}>
-        <div>무언가</div>
-        <div>무언가</div>
-        <div>무언가</div>
-        <div>무언가</div>
+        <div className={styles.right}>
+          <div>무언가</div>
+          <div>무언가</div>
+          <div>무언가</div>
+          <div>
+            <img className={styles.avatar} src={userImg} alt="userAvatarImg" />
+          </div>
+        </div>
       </div>
     </div>
   );
