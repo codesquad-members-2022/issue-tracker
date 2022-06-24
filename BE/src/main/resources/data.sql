@@ -4,9 +4,9 @@ values ('#000000', '#FFFFFF', 'bug fix', 'bug'),
        ('#a9a9a9', '#FFFFFF', 'new documentation', 'documentation');
 
 insert into milestone(created_date_time, modified_date_time, description, dead_line, status, title)
-values (now(), now(), 'milestone1 마일스톤에 대한 설명', '2021-06-21', 'closed', 'milestone1'),
-       (now(), now(), 'milestone2 마일스톤에 대한 설명', '2021-07-01', 'open', 'milestone2'),
-       (now(), now(), 'milestone3 마일스톤에 대한 설명', '2021-07-01', 'open', 'milestone3');
+values (now(), now(), 'milestone1 마일스톤에 대한 설명', '2021-06-21', 'CLOSED', 'milestone1'),
+       (now(), now(), 'milestone2 마일스톤에 대한 설명', '2021-07-01', 'OPEN', 'milestone2'),
+       (now(), now(), 'milestone3 마일스톤에 대한 설명', '2021-07-01', 'OPEN', 'milestone3');
 
 insert into members(`name`, email, image_url, token)
 values ('KTH-96','taehyun960@gamil.com','https://avatars.githubusercontent.com/u/75709176?v=4', 'e98f3701c96af24cdeaa'),
@@ -14,9 +14,9 @@ values ('KTH-96','taehyun960@gamil.com','https://avatars.githubusercontent.com/u
        ('bbbb','bbbbb0@gamil.com','https://avatars.githubusercontent.com/u/75709176?v=4', 'e98f3701c96af24cdeaa');
 
 insert into issue(created_date_time, modified_date_time, content, status, title, milestone_id, member_id)
-values (now(), now(), 'issue1번 설명입니다.', 'closed', 'issue1', 1, 1),
-       (now(), now(), 'issue2번 설명입니다.', 'open', 'issue2', 2, 2),
-       (now(), now(), 'issue3번 설명입니다.', 'closed', 'issue3', 3, 3);
+values (now(), now(), 'issue1번 설명입니다.', 'CLOSED', 'issue1', 1, 1),
+       (now(), now(), 'issue2번 설명입니다.', 'OPEN', 'issue2', 2, 2),
+       (now(), now(), 'issue3번 설명입니다.', 'CLOSED', 'issue3', 3, 3);
 
 insert into comments(created_date_time, modified_date_time, content, issue_id, member_id)
 values (now(), now(), 'issue1번 첫번째 댓글입니다.', 1, 2),

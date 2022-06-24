@@ -20,5 +20,5 @@ public class BaseTimeEntity {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	@LastModifiedDate
-	private LocalDateTime modifiedDateTime	;
+	private LocalDateTime modifiedDateTime;
 }

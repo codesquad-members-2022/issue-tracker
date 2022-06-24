@@ -1,11 +1,13 @@
 package kr.codesquad.issuetracker.domain;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public enum Status {
-	OPEN("open"),
-	CLOSED("closed");
+	OPEN("OPEN"),
+	CLOSED("CLOSED");
 
 	private final String value;
 }

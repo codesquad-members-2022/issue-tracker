@@ -8,7 +8,6 @@ import kr.codesquad.issuetracker.domain.label.Label;
 import kr.codesquad.issuetracker.domain.label.repository.LabelRepository;
 import kr.codesquad.issuetracker.domain.milestone.repository.MilestoneRepository;
 import kr.codesquad.issuetracker.exception.CustomException;
-import kr.codesquad.issuetracker.exception.ErrorMessage;
 import kr.codesquad.issuetracker.web.dto.label.LabelDto;
 import kr.codesquad.issuetracker.web.dto.label.LabelRequestDto;
 import kr.codesquad.issuetracker.web.dto.label.LabelResponseDto;
@@ -61,7 +60,7 @@ public class LabelService {
 	@Transactional
 	public void update(Long id, LabelRequestDto dto) {
 		Label label = labelRepository.findById(id).orElseThrow(
-			() -> new CustomException(MEMBER_NOT_FOUND)
+			() -> new CustomException(LABEL_NOT_FOUND)
 		);
 		label.update(dto);
 	}
