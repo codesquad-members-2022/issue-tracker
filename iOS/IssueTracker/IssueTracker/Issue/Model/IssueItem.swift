@@ -17,27 +17,12 @@ struct IssueItem: Codable {
         case id
         case title, content
         case milestoneName = "milestoneTitle"
-        case labels = "label"
+        case labels
     }
 }
 
 // MARK: - Label
 struct Label: Codable {
     let title, backgroundColor: String
-    let isDarkMode: Bool
+    let darkMode: Bool
 }
-
-//extension IssueItem{
-//    init?(_ issueVM: IssueViewModel) {
-//        guard let id = issueVM.id, let title = issueVM.title,
-//              let content = issueVM.content,let milestoneName = issueVM.milestoneName,
-//              let labels = issueVM.labels else {
-//            return nil
-//        }
-//        self.id = id
-//        self.title = title
-//        self.content = content
-//        self.milestoneName = milestoneName
-//        self.labels = labels
-//    }
-//}
