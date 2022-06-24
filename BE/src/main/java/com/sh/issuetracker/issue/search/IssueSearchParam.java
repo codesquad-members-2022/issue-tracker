@@ -2,7 +2,6 @@ package com.sh.issuetracker.issue.search;
 
 import com.sh.issuetracker.exception.InvalidSearchParamException;
 import com.sh.issuetracker.issue.IssueStatus;
-import com.sh.issuetracker.issue.dto.IssueSearchRequest;
 
 import java.util.List;
 import java.util.regex.Matcher;

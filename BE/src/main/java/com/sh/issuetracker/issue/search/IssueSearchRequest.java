@@ -1,4 +1,4 @@
-package com.sh.issuetracker.issue.dto;
+package com.sh.issuetracker.issue.search;
 
 import org.apache.logging.log4j.util.Strings;
 
