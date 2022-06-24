@@ -38,9 +38,7 @@ public class LabelService {
     @Transactional
     public LabelResponse update(Long id, String title, String color, String description) {
         Label findLabel = labelRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        findLabel.updateTitle(title);
-        findLabel.updateColor(color);
-        findLabel.updateDescription(description);
+        findLabel.update(title, color, description);
 
         return LabelResponse.from(findLabel);
     }

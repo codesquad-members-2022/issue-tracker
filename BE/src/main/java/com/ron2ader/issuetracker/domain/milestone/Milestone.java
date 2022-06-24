@@ -37,21 +37,10 @@ public class Milestone {
             .count();
     }
 
-    public void updateTitle(String title) {
-        if (title != null) {
-            this.title = title;
-        }
+    public void update(String title, String description, LocalDate endDate) {
+        this.title = title;
+        this.description = description;
+        this.endDate = endDate;
     }
 
-    public void updateDescription(String description) {
-        if (description != null) {
-            this.description = description;
-        }
-    }
-
-    public void updateEndDate(LocalDate endDate) {
-        if (endDate != null) {
-            this.endDate = endDate;
-        }
-    }
 }

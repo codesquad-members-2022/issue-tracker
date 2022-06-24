@@ -7,7 +7,7 @@ import lombok.Getter;
 public class MilestoneRequest {
 
     private String title;
-    private LocalDate endDate;
     private String description;
+    private LocalDate endDate;
 
 }

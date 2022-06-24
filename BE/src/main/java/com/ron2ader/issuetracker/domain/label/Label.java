@@ -33,21 +33,9 @@ public class Label {
         return new Label(null, title, color, description, null);
     }
 
-    public void updateTitle(String title) {
-        if (title != null) {
-            this.title = title;
-        }
-    }
-
-    public void updateColor(String color) {
-        if (color != null) {
-            this.color = color;
-        }
-    }
-
-    public void updateDescription(String description) {
-        if (description != null) {
-            this.description = description;
-        }
+    public void update(String title, String color, String description) {
+        this.title = title;
+        this.color = color;
+        this.description = description;
     }
 }

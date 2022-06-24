@@ -47,10 +47,7 @@ public class MilestoneService {
     @Transactional
     public MilestoneResponse update(Long id, String title, String description, LocalDate endDate) {
         Milestone findMilestone = milestoneRepository.findById(id).orElseThrow(NoSuchElementException::new);
-
-        findMilestone.updateTitle(title);
-        findMilestone.updateDescription(description);
-        findMilestone.updateEndDate(endDate);
+        findMilestone.update(title, description, endDate);
 
         return MilestoneResponse.of(findMilestone.getId(), findMilestone.getTitle(), findMilestone.getDescription(),
             findMilestone.getEndDate(), findMilestone.issueCountByOpenStatus(true),
