@@ -17,6 +17,19 @@
 	</array>
 	<key>GITHUB_API_URL</key>
 	<string>$(GITHUB_API_URL)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>43.200.49.127</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>SERVER_API_URL</key>
 	<string>$(SERVER_API_URL)</string>
 	<key>UIApplicationSceneManifest</key>
