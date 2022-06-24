@@ -60,7 +60,7 @@ public class LoginController {
     ) {
         TokenInformation token = authService.getToken(code);
         GithubUser githubUser = authService.getUser(token.getAccessToken());
-        User user = loginService.saveUser(githubUser);
+        User user = loginService.upsertUser(githubUser);
         String jwtToken = JwtFactory.create(user, EXPIRED_SECOND);
         log.debug("jwtToken: {}", jwtToken);
 

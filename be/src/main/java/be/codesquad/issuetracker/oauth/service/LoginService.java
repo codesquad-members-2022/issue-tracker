@@ -17,9 +17,10 @@ public class LoginService {
 
     @Transactional
     public User upsertUser(GithubUser githubUser) {
-        User user = new User(githubUser.getId(), githubUser.getUsername(),
-            githubUser.getImageUrl());
-        return userRepository.findByAuthId(githubUser.getId()).orElseGet(() ->
+        User user = User.of(githubUser);
+        User findUser = userRepository.findByAuthId(githubUser.getId()).orElseGet(() ->
             userRepository.save(user));
+        findUser.update(user);
+        return findUser;
     }
 }

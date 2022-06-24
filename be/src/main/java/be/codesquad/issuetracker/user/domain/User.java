@@ -26,6 +26,12 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
+    public void update(User user) {
+        this.authId = user.getAuthId();
+        this.username = user.getUsername();
+        this.imageUrl = user.getImageUrl();
+    }
+
     public static User of(GithubUser githubUser) {
         return new User(githubUser.getId(), githubUser.getUsername(), githubUser.getImageUrl());
     }
