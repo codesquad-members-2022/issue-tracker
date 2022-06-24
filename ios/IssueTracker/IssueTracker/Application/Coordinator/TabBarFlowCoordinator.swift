@@ -8,8 +8,8 @@
 import UIKit
 
 protocol TabBarFlowCoordinatorDependencies {
-    func makeIssueTabFlowDIContainer() -> DIContainer
-    func makeLabelTabFlowDIContainer() -> DIContainer
+    func makeIssueFlowDIContainer() -> DIContainer
+    func makeLabelFlowDIContainer() -> DIContainer
     func makeMilestoneFlowDIContainer() -> DIContainer
     func makeAccountFlowDIContainer() -> DIContainer
 }
@@ -23,5 +23,36 @@ class TabBarFlowCoordinator: Coordinator {
         self.dependency = dependency
     }
 
-    func start(with _: DeepLink?) {}
+    func start(with _: DeepLink?) {
+        let tabBarController = UITabBarController()
+        let issueNavigationController = UINavigationController()
+        let labelNavigationController = UINavigationController()
+        let milestoneNavigationController = UINavigationController()
+        let accountNavigationController = UINavigationController()
+
+        tabBarController.viewControllers = [
+            issueNavigationController,
+            labelNavigationController,
+            milestoneNavigationController,
+            accountNavigationController
+        ]
+
+        let issueFlowDIContainer = dependency.makeIssueFlowDIContainer()
+        let labelFlowDIContainer = dependency.makeLabelFlowDIContainer()
+        let milestoneFlowDIContainer = dependency.makeMilestoneFlowDIContainer()
+        let accountFlowDIContainer = dependency.makeAccountFlowDIContainer()
+
+        let issueFlowCoordinator = issueFlowDIContainer.makeCoordinator(navigationController: issueNavigationController)
+
+        let labelFlowCoordinator = labelFlowDIContainer.makeCoordinator(navigationController: labelNavigationController)
+
+        let milestoneFlowCoordinator = milestoneFlowDIContainer.makeCoordinator(navigationController: milestoneNavigationController)
+
+        let accountFlowCoordinator = accountFlowDIContainer.makeCoordinator(navigationController: accountNavigationController)
+
+        issueFlowCoordinator.start(with: nil)
+        labelFlowCoordinator.start(with: nil)
+        milestoneFlowCoordinator.start(with: nil)
+        accountFlowCoordinator.start(with: nil)
+    }
 }
