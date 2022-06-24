@@ -7,10 +7,25 @@
 
 import Foundation
 
+protocol SignInManagable {
+    typealias StringDictionary = [String: String]
+
+    func requestCode(completion: @escaping (Result<URL, Error>) -> Void)
+    func requestJWTToken(codeURL: URL, completion: @escaping (Result<StringDictionary, NetworkError>) -> Void)
+}
+
 struct SignInManager {
     private let clientID = Bundle.main.clientID
     private let clientSecret = Bundle.main.clientSecret
+    private let urlSession: URLSessionProtocol
+    
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
+        self.urlSession = urlSession
+    }
+}
 
+// MARK: - SignInManagable Method
+extension SignInManager: SignInManagable {
     func requestCode(completion: @escaping (Result<URL, Error>) -> Void) {
         let networkTarget = SignInNetworkTarget.requestCode(clientID: clientID)
         var components = URLComponents(string: networkTarget.url) ?? URLComponents()
@@ -22,13 +37,14 @@ struct SignInManager {
         completion(.success(url))
     }
 
-    func requestAccessToken(codeURL: URL, completion: @escaping (Result<[String: String], NetworkError>) -> Void) {
-        if codeURL.absoluteString.starts(with: "issuetrackerapp://"),
-           let code = codeURL.absoluteString.split(separator: "=").last.map({String($0)}) {
-            NetworkManager<[String: String]>.fetchData(
-                target: SignInNetworkTarget.requestAccessToken(clientID: clientID,
-                                            clientSecret: clientSecret,
-                                            code: code),
+    func requestJWTToken(codeURL: URL, completion: @escaping (Result<StringDictionary, NetworkError>) -> Void) {
+        if let code = URLComponents(string: codeURL.absoluteString)?
+            .queryItems?
+            .filter({ $0.name == "code" })
+            .first?.value {
+            NetworkService<StringDictionary>.fetchData(
+                target: SignInNetworkTarget.requestJWTTokenFromGitHub(code: code),
+                urlSession: urlSession,
                 completion: completion)
         }
     }

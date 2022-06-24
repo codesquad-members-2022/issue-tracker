@@ -7,32 +7,45 @@
 
 import Foundation
 
-protocol SignInViewModelProtocol: AnyObject {
-    var buttonAction: ((URL) -> Void)? { get set }
-    var errorAction: ((String) -> Void)? { get set }
-    var presentAction: (() -> Void)? { get set }
-    func requestOAuthCode()
+protocol SignInViewModelInput {
+    func didSelect()
+}
+
+protocol SignInViewModelOutput {
+    var error: Observable<String> { get }
+}
+
+protocol SignInViewModelProtocol: SignInViewModelInput, SignInViewModelOutput {
+    func setOpenURLAction(_ action: @escaping (URL) -> Void)
+}
+
+struct SignInViewModelActions {
+    let openURL: (URL) -> Void
 }
 
 final class SignInViewModel: SignInViewModelProtocol {
-    private let useCase = SignInManager()
-    var buttonAction: ((URL) -> Void)?
-    var errorAction: ((String) -> Void)?
-    var presentAction: (() -> Void)?
+    private(set) var error: Observable<String> = Observable("")
+    private let useCase: SignInManagable
+    private var actions: SignInViewModelActions?
 
-    init() {
+    init(useCase: SignInManagable) {
+        self.useCase = useCase
         setObserver()
     }
 
-    func requestOAuthCode() {
-        useCase.requestCode { [weak self] result in
+    func didSelect() {
+        useCase.requestCode { [weak self] (result) in
             switch result {
-            case let .success(url):
-                self?.buttonAction?(url)
-            case let .failure(error):
-                self?.errorAction?(error.localizedDescription)
+            case .success(let url):
+                self?.actions?.openURL(url)
+            case .failure(let error):
+                self?.error.value = error.localizedDescription
             }
         }
+    }
+
+    func setOpenURLAction(_ action: @escaping (URL) -> Void) {
+        actions = SignInViewModelActions(openURL: action)
     }
 }
 
@@ -40,11 +53,7 @@ final class SignInViewModel: SignInViewModelProtocol {
 private extension SignInViewModel {
     func setObserver() {
         NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didGetSignInError, object: nil, queue: nil) { [weak self] notification in
-            self?.errorAction?(notification.description)
+            self?.error.value = notification.description
             }
-
-        NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didSignIn, object: nil, queue: nil) { [weak self] _ in
-            self?.presentAction?()
-        }
     }
 }

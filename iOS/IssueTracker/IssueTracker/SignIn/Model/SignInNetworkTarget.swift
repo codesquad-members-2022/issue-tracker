@@ -9,20 +9,16 @@ import Foundation
 
 enum SignInNetworkTarget {
     case requestCode(clientID: String)
-    case requestAccessToken(clientID: String, clientSecret: String, code: String)
+    case requestJWTTokenFromGitHub(code: String)
 }
 
-extension SignInNetworkTarget: NetworkTargetable {
+extension SignInNetworkTarget: NetworkTargetProtocol {
     var queryItem: [URLQueryItem]? {
         switch self {
         case .requestCode(let clientID):
             return [URLQueryItem(name: "client_id", value: clientID)]
-        case .requestAccessToken(let clientID, let clientSecret, let code):
-            return [
-                URLQueryItem(name: "client_id", value: clientID),
-                URLQueryItem(name: "client_secret", value: clientSecret),
-                URLQueryItem(name: "code", value: code)
-            ]
+        case .requestJWTTokenFromGitHub(let code):
+            return [URLQueryItem(name: "code", value: code)]
         }
     }
 
@@ -34,17 +30,8 @@ extension SignInNetworkTarget: NetworkTargetable {
         switch self {
         case .requestCode:
             return nil
-        case .requestAccessToken:
+        case .requestJWTTokenFromGitHub:
             return "GET"
-        }
-    }
-
-    var isAcceptJSON: Bool {
-        switch self {
-        case .requestCode:
-            return false
-        case .requestAccessToken:
-            return true
         }
     }
 }
@@ -52,15 +39,20 @@ extension SignInNetworkTarget: NetworkTargetable {
 // MARK: - private computed properties
 private extension SignInNetworkTarget {
     private var baseURL: String {
-        return "https://github.com/login/oauth"
+        switch self {
+        case .requestJWTTokenFromGitHub:
+            return "https://008b1557-6228-4eb0-af91-8ea0225787e5.mock.pstmn.io/login/oauth"
+        default:
+            return "https://github.com/login/oauth"
+        }
     }
 
     private var path: String {
         switch self {
         case .requestCode:
             return "/authorize"
-        case .requestAccessToken:
-            return "/access_token"
+        case .requestJWTTokenFromGitHub:
+            return "/github"
         }
     }
 }
