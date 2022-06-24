@@ -18,6 +18,7 @@
 		E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D17892859C8590091DDF1 /* LoginViewModel.swift */; };
 		E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44DF6AB2859A71700FAC8FB /* Observable.swift */; };
 		E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */; };
+		E45477AF2865617D002379F1 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477AE2865617D002379F1 /* UIImage+Extensions.swift */; };
 		E46C69F1286555DE0074AEF9 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F0286555DE0074AEF9 /* LabelViewController.swift */; };
 		E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */; };
 		E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F5286556020074AEF9 /* AccountViewController.swift */; };
@@ -58,6 +59,7 @@
 		E43D17892859C8590091DDF1 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E44DF6AB2859A71700FAC8FB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowDIContainer.swift; sourceTree = "<group>"; };
+		E45477AE2865617D002379F1 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		E4687602285CB0E800E93700 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		E46C69F0286555DE0074AEF9 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				73A7EDC52859697600191F99 /* Extension+UIColor.swift */,
+				E45477AE2865617D002379F1 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				E46C69FF2865589D0074AEF9 /* AccountFlowCoordinator.swift in Sources */,
 				E4D87382285884AE00AFCE4D /* AppDelegate.swift in Sources */,
 				E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */,
+				E45477AF2865617D002379F1 /* UIImage+Extensions.swift in Sources */,
 				738910042864726B00502A86 /* Service.swift in Sources */,
 				E46C69F1286555DE0074AEF9 /* LabelViewController.swift in Sources */,
 				738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */,

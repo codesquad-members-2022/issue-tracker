@@ -37,6 +37,30 @@ final class TabBarFlowCoordinator: Coordinator {
             accountNavigationController
         ]
 
+        issueNavigationController.tabBarItem = .init(
+            title: "Issue",
+            image: .info,
+            selectedImage: .info
+        )
+
+        labelNavigationController.tabBarItem = .init(
+            title: "Label",
+            image: .tag,
+            selectedImage: .tag
+        )
+
+        milestoneNavigationController.tabBarItem = .init(
+            title: "Milestone",
+            image: .signpost,
+            selectedImage: .signpost
+        )
+
+        accountNavigationController.tabBarItem = .init(
+            title: "Account",
+            image: .profile,
+            selectedImage: .profile
+        )
+
         let issueFlowDIContainer = dependencies.makeIssueFlowDIContainer()
         let labelFlowDIContainer = dependencies.makeLabelFlowDIContainer()
         let milestoneFlowDIContainer = dependencies.makeMilestoneFlowDIContainer()
