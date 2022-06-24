@@ -21,6 +21,7 @@
 		E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */; };
 		E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F5286556020074AEF9 /* AccountViewController.swift */; };
 		E46C69F92865568C0074AEF9 /* LabelFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F82865568C0074AEF9 /* LabelFlowCoordinator.swift */; };
+		E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69FC286557F20074AEF9 /* MilestoneFlowCoordinator.swift */; };
 		E46FBE842862B77D000CB998 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE832862B77D000CB998 /* DeepLink.swift */; };
 		E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE802862B759000CB998 /* Coordinator.swift */; };
 		E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */; };
@@ -54,6 +55,7 @@
 		E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		E46C69F5286556020074AEF9 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		E46C69F82865568C0074AEF9 /* LabelFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelFlowCoordinator.swift; sourceTree = "<group>"; };
+		E46C69FC286557F20074AEF9 /* MilestoneFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneFlowCoordinator.swift; sourceTree = "<group>"; };
 		E46FBE802862B759000CB998 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E46FBE832862B77D000CB998 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		E47CCCDD2859EE1B00D37ED8 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		E46C69EA286555AE0074AEF9 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				E46C69FC286557F20074AEF9 /* MilestoneFlowCoordinator.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */,
 				E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */,
 				73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */,
+				E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */,
 				E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */,
 				E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */,
 			);

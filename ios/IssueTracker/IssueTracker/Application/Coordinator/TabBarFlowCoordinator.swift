@@ -14,7 +14,7 @@ protocol TabBarFlowCoordinatorDependencies {
     func makeAccountFlowDIContainer() -> DIContainer
 }
 
-class TabBarFlowCoordinator: Coordinator {
+final class TabBarFlowCoordinator: Coordinator {
     private let navigationController: UINavigationController
     private let dependencies: TabBarFlowCoordinatorDependencies
 
