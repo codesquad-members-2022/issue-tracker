@@ -24,7 +24,7 @@ public class Milestone {
     private String description;
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "milestone", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
 
     public static Milestone of(String title, String description, LocalDate endDate) {

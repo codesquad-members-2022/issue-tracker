@@ -23,7 +23,7 @@ public class IssueController {
     private final IssueService issueService;
 
     /*
-    * id만 반환?
+    * id만 반환할지, dto로 변환해서 저장된 내용 다시 보내줄지 상의 필요
     * */
     @PostMapping("/issues")
     public Long register(@Login String issuerId, IssueCreateRequest issueCreateRequest) {
