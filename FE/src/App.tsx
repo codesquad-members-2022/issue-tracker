@@ -12,6 +12,10 @@ import Callback from 'pages/Callback';
 
 // worker.start();
 
+import { worker } from './mocks/browser';
+
+worker.start();
+
 function App(): JSX.Element {
   return (
     <Routes>
