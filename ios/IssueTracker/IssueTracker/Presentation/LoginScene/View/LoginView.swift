@@ -18,14 +18,14 @@ final class LoginView: UIView {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = 15
         return stackView
     }()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "이슈트래커"
-        label.font = .systemFont(ofSize: 45)
+        label.font = .systemFont(ofSize: 38, weight: .medium)
         label.textAlignment = .center
         return label
     }()
@@ -62,7 +62,7 @@ final class LoginView: UIView {
         stackView.addArrangedSubview(githubLoginButton)
         stackView.addArrangedSubview(appleLoginButton)
 
-        stackView.setCustomSpacing(40, after: titleLabel)
+        stackView.setCustomSpacing(30, after: titleLabel)
 
         githubLoginButton.snp.makeConstraints {
             $0.height.equalTo(60)
