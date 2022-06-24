@@ -8,44 +8,35 @@
 import Foundation
 
 protocol SignInViewModelInput {
-    func didSelect()
+    func didTouchGitHubSignIn()
 }
 
 protocol SignInViewModelOutput {
+    var gitHubSignInURL: Observable<URL?> { get }
     var error: Observable<String> { get }
 }
 
-protocol SignInViewModelProtocol: SignInViewModelInput, SignInViewModelOutput {
-    func setOpenURLAction(_ action: @escaping (URL) -> Void)
-}
-
-struct SignInViewModelActions {
-    let openURL: (URL) -> Void
-}
+protocol SignInViewModelProtocol: SignInViewModelInput, SignInViewModelOutput { }
 
 final class SignInViewModel: SignInViewModelProtocol {
+    private(set) var gitHubSignInURL: Observable<URL?> = Observable(URL(string: ""))
     private(set) var error: Observable<String> = Observable("")
     private let useCase: SignInManagable
-    private var actions: SignInViewModelActions?
 
     init(useCase: SignInManagable) {
         self.useCase = useCase
         setObserver()
     }
 
-    func didSelect() {
+    func didTouchGitHubSignIn() {
         useCase.requestCode { [weak self] (result) in
             switch result {
             case .success(let url):
-                self?.actions?.openURL(url)
+                self?.gitHubSignInURL.value = url
             case .failure(let error):
                 self?.error.value = error.localizedDescription
             }
         }
-    }
-
-    func setOpenURLAction(_ action: @escaping (URL) -> Void) {
-        actions = SignInViewModelActions(openURL: action)
     }
 }
 
