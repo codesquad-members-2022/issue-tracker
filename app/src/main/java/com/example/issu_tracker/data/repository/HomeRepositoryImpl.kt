@@ -17,10 +17,8 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class HomeRepositoryImpl @Inject constructor(
-    private val fireStore: FirebaseFirestore,
-    override val coroutineContext: CoroutineContext
-) :
-    HomeRepository, CoroutineScope {
+    private val fireStore: FirebaseFirestore
+) : HomeRepository {
     override suspend fun loadIssues(): List<Issue> {
         val list = mutableListOf<Issue>()
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).get().await()
