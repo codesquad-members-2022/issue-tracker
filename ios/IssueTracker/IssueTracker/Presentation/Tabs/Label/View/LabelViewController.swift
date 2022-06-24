@@ -10,5 +10,10 @@ import UIKit
 final class LabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+    }
+
+    deinit {
+        print("Deinit: \(#fileID)")
     }
 }

@@ -10,5 +10,10 @@ import UIKit
 final class MilestoneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+    }
+
+    deinit {
+        print("Deinit: \(#fileID)")
     }
 }
