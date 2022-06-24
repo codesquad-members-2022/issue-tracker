@@ -16,20 +16,18 @@ public class LoginService {
     private static final int EXPIRED_SECOND = 24 * 60 * 60;
 
     private final UserRepository userRepository;
-    private final AuthService authService;
 
     @Transactional
     public User upsertUser(GithubUser githubUser) {
         User user = User.of(githubUser);
-        User findUser = userRepository.findByAuthId(githubUser.getId()).orElseGet(() ->
+        User findUser = userRepository.findByAuthId(user.getAuthId()).orElseGet(() ->
             userRepository.save(user));
         findUser.update(user);
         return findUser;
     }
 
     @Transactional
-    public String getJwtToken(String code) {
-        GithubUser githubUser = authService.getGithubUser(code);
+    public String getJwtToken(GithubUser githubUser) {
         User user = upsertUser(githubUser);
         return JwtFactory.create(user, EXPIRED_SECOND);
     }

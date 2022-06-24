@@ -1,5 +1,7 @@
 package be.codesquad.issuetracker.oauth.controller;
 
+import be.codesquad.issuetracker.oauth.controller.dto.AuthLoginDto;
+import be.codesquad.issuetracker.oauth.dto.GithubUser;
 import be.codesquad.issuetracker.oauth.service.AuthService;
 import be.codesquad.issuetracker.oauth.service.LoginService;
 import java.net.URI;
@@ -22,6 +24,7 @@ public class LoginController {
     private final String clientId;
     private final String redirectUri;
     private final LoginService loginService;
+    private final AuthService authService;
 
     public LoginController(
         @Value("${oauth.github.client-id}") String clientId,
@@ -31,6 +34,7 @@ public class LoginController {
         this.clientId = clientId;
         this.redirectUri = redirectUri;
         this.loginService = loginService;
+        this.authService = authService;
     }
 
     @GetMapping
@@ -47,11 +51,12 @@ public class LoginController {
     }
 
     @GetMapping("/callback")
-    public ResponseEntity<String> callback(@RequestParam String code) {
-        String jwtToken = loginService.getJwtToken(code);
+    public ResponseEntity<AuthLoginDto> callback(@RequestParam String code) {
+        GithubUser githubUser = authService.getGithubUser(code);
+        String jwtToken = loginService.getJwtToken(githubUser);
         log.debug("jwtToken: {}", jwtToken);
         // TODO: 2022/06/22 로그인 하기 직전의 페이지 url을 ?state= 로 받아뒀다가 body에 담아서 보내주는 방식
         return ResponseEntity.status(HttpStatus.OK)
-            .body(jwtToken);
+            .body(new AuthLoginDto(jwtToken));
     }
 }

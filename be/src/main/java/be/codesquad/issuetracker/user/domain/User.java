@@ -33,6 +33,6 @@ public class User {
     }
 
     public static User of(GithubUser githubUser) {
-        return new User(githubUser.getId(), githubUser.getUsername(), githubUser.getImageUrl());
+        return new User(githubUser.getAuthId(), githubUser.getUsername(), githubUser.getImageUrl());
     }
 }
