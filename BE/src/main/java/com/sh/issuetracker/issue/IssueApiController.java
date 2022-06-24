@@ -4,13 +4,11 @@ import com.sh.issuetracker.issue.dto.IssueRequest;
 import com.sh.issuetracker.issue.dto.IssueResponse;
 import com.sh.issuetracker.user.AuthUser;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class IssueApiController {
 	private final IssueService issueService;
 
-	@GetMapping(value = {"/","/open"})
+	@GetMapping(value = {"/", "/open"})
 	public ResponseEntity<List<IssueResponse.Row>> readAllWithOpen() {
 		List<IssueResponse.Row> response = issueService.readAllOf(AuthUser.of(), IssueStatus.OPEN);
 		return ResponseEntity.ok().body(response);
@@ -49,7 +47,6 @@ public class IssueApiController {
 		return ResponseEntity.ok().body(response);
 	}
   
-  @ResponseStatus(HttpStatus.OK)
 	@PatchMapping("/status")
 	public void updateStatus(@Valid @RequestBody IssueRequest request) {
 		issueService.update(request);
