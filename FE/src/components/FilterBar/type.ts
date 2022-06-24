@@ -5,7 +5,7 @@ interface IFilterBarProps {
   indicatorName: string;
   panelName: string;
   options: Option[];
-  initialValue: string;
+  initialValue?: string;
   inputStyleType?: StyleType;
   placeholder: string;
   label?: string;

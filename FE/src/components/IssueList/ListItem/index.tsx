@@ -19,7 +19,9 @@ export default function ListItem({
       <$Contents>
         <$Title>
           <Icon iconType={status === 'OPEN' ? 'openLabel' : 'closeLabel'} />
-          <$Text size="large">{title}</$Text>
+          <$Text as="h3" size="large">
+            {title}
+          </$Text>
           {labelList &&
             labelList.map((value: string) => (
               <Label key={value} size="small" status="dark">
@@ -29,7 +31,7 @@ export default function ListItem({
         </$Title>
         <$Info>
           <$Text size="small">{`#${number}`}</$Text>
-          <$Text size="small">{`이 이슈가 ${author?.name}님에 의해 작성되었습니다.`}</$Text>
+          <$Text as="p" size="small">{`이 이슈가 ${author?.name}님에 의해 작성되었습니다.`}</$Text>
           <Button styleType="mediumText" gap="8px" fontWeight="normal">
             <Icon iconType="milestone" />
             {milestone}

@@ -7,6 +7,8 @@ import { $DropDown } from '@/components/Dropdown/style';
 
 export default function DropDown({
   indicatorName,
+  indicatorGap,
+  indicatorPadding,
   panelName,
   initialValue,
   ...panelProps
@@ -27,7 +29,12 @@ export default function DropDown({
 
   return (
     <$DropDown>
-      <Button styleType="mediumText" gap="30px" padding="0 24px" onClick={() => setIsOpen(!isOpen)}>
+      <Button
+        styleType="mediumText"
+        gap={indicatorGap}
+        padding={indicatorPadding}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {indicatorName}
         <Icon iconType={isOpen ? 'arrowUp' : 'arrowDown'} />
       </Button>

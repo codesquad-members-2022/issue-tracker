@@ -8,7 +8,8 @@ export default function List() {
     <$IssueWrapper>
       <ListHeader />
       <$IssueList>
-        {mockData && mockData.map(issueData => <ListItem key={issueData.number} {...issueData} />)}
+        {mockData &&
+          mockData.issueList.map(issueData => <ListItem key={issueData.number} {...issueData} />)}
       </$IssueList>
     </$IssueWrapper>
   );

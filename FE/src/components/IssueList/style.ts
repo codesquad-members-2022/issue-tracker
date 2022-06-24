@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const $IssueWrapper = styled.div`
-  min-width: 1280px;
   width: 100%;
   overflow: hidden;
   border-radius: 16px;

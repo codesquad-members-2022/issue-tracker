@@ -33,6 +33,8 @@ export default function FilterBar({
     <$FilterBar isFocus={isFocus}>
       <Dropdown
         left="left"
+        indicatorGap="30px"
+        indicatorPadding="0 24px"
         indicatorName={indicatorName}
         panelName={panelName}
         options={options}

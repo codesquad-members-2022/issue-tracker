@@ -33,7 +33,7 @@ const $Info = styled.div`
   gap: 16px;
 `;
 
-const $Text = styled.div<I$Text>`
+const $Text = styled.span<I$Text>`
   color: ${({ theme, size }) => (size === 'large' ? theme.COLOR.title : theme.COLOR.label)};
   font-size: ${({ theme, size }) =>
     size === 'large' ? theme.FONT.SIZE.MEDIUM : theme.FONT.SIZE.BASE};
