@@ -30,7 +30,12 @@ public class AuthService {
         this.clientSecret = clientSecret;
     }
 
-    public TokenInformation getToken(String code) {
+    public GithubUser getGithubUser(String code) {
+        TokenInformation token = getToken(code);
+        return getUser(token.getAccessToken());
+    }
+
+    private TokenInformation getToken(String code) {
         return WebClient.create()
             .post()
             .uri(URI.create(authPath))
@@ -42,7 +47,7 @@ public class AuthService {
             .block();
     }
 
-    public GithubUser getUser(String accessToken) {
+    private GithubUser getUser(String accessToken) {
         return WebClient.create()
             .get()
             .uri(URI.create(resourcePath))
@@ -51,11 +56,6 @@ public class AuthService {
             .retrieve()
             .bodyToMono(GithubUser.class)
             .block();
-    }
-
-    public GithubUser getGithubUser(String code) {
-        TokenInformation token = getToken(code);
-        return getUser(token.getAccessToken());
     }
 
     private MultiValueMap<String, Object> getBodyValue(String code) {
