@@ -53,9 +53,9 @@
 		1BD75056285886C70025DDC8 /* PasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174836285885640028E037 /* PasswordChecker.swift */; };
 		40B2C70D0084E13935624E19 /* Pods_IssueTracker15.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8581CFC489C61282E0355D9F /* Pods_IssueTracker15.framework */; };
 		8D06CC46286491CD00142943 /* ValidateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06CC45286491CD00142943 /* ValidateModel.swift */; };
+		8D06CC4C2864A92200142943 /* AccessTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06CC4B2864A92200142943 /* AccessTokenManager.swift */; };
 		8D0F1D79286402EC00626040 /* UserInfoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F1D78286402EC00626040 /* UserInfoTextField.swift */; };
 		8D0F1D7B28643AE100626040 /* UserInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F1D7A28643AE100626040 /* UserInputViewModel.swift */; };
-		8D06CC4C2864A92200142943 /* AccessTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06CC4B2864A92200142943 /* AccessTokenManager.swift */; };
 		8D21137B2859E5FD00B65676 /* ContainerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21137A2859E5FD00B65676 /* ContainerUnitTest.swift */; };
 		8D2113812859E61700B65676 /* Resolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D66A2C0285959CF001B514C /* Resolvable.swift */; };
 		8D2113822859E61900B65676 /* UseCaseContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D66A2ED28598CA1001B514C /* UseCaseContainer.swift */; };
@@ -158,9 +158,9 @@
 		6E5A22FB498819D6DAD72D75 /* Pods-IssueTracker15.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.release.xcconfig"; sourceTree = "<group>"; };
 		8581CFC489C61282E0355D9F /* Pods_IssueTracker15.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker15.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D06CC45286491CD00142943 /* ValidateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateModel.swift; sourceTree = "<group>"; };
+		8D06CC4B2864A92200142943 /* AccessTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenManager.swift; sourceTree = "<group>"; };
 		8D0F1D78286402EC00626040 /* UserInfoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoTextField.swift; sourceTree = "<group>"; };
 		8D0F1D7A28643AE100626040 /* UserInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputViewModel.swift; sourceTree = "<group>"; };
-		8D06CC4B2864A92200142943 /* AccessTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenManager.swift; sourceTree = "<group>"; };
 		8D2113782859E5FD00B65676 /* ContainerUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContainerUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D21137A2859E5FD00B65676 /* ContainerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerUnitTest.swift; sourceTree = "<group>"; };
 		8D2113842859E6BA00B65676 /* MockContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContainer.swift; sourceTree = "<group>"; };
@@ -468,11 +468,11 @@
 			children = (
 				8DF770B72861A00F00C02D1F /* AccessInfo.swift */,
 				8DF770B52861A00100C02D1F /* OAuthLoginSource .swift */,
-				8DDEBAEC285B59EF00A4E4DC /* ViewController */,
-				8DF770B92861A26200C02D1F /* Model */,
 				8DDEBAED285B59FA00A4E4DC /* View */,
-				8DF770B428619F9900C02D1F /* UseCase */,
+				8DDEBAEC285B59EF00A4E4DC /* ViewController */,
 				8DDEBAEE285B5A0100A4E4DC /* ViewModel */,
+				8DF770B428619F9900C02D1F /* UseCase */,
+				8DF770B92861A26200C02D1F /* Model */,
 			);
 			path = Login;
 			sourceTree = "<group>";

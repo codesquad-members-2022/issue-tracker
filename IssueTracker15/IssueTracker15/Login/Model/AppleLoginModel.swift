@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppleLoginModel {
+struct AppleLoginModel: LoginURLCreator {
     func getLoginURL() -> URL? {
         return nil
     }

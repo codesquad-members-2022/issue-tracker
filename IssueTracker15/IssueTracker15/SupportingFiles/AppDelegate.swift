@@ -10,12 +10,14 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        registUseCaseDependencies()
         return true
     }
     
-    func registDependencies() {
-        UseCaseContainer.shard.regist(instance: TestUseCase())
+    // UseCase 등록
+    func registUseCaseDependencies() {
+        UseCaseContainer.shard.regist(instance: GithubLoginUseCase(model: GitHubLoginModel()))
+        UseCaseContainer.shard.regist(instance: AppleLoginUseCase(model: AppleLoginModel()))
     }
-    
 }
 
