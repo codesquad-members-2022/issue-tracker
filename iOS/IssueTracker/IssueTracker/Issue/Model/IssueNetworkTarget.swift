@@ -14,16 +14,7 @@ enum IssueNetworkTarget {
 
 extension IssueNetworkTarget: NetworkTargetProtocol {
     var queryItem: [URLQueryItem]? {
-        switch self {
-        case .issuesList:
-            return nil
-        case .issueListDetail:
-            return nil
-        case .createIssue:
-            return nil
-        case .deleteIssue:
-            return nil
-        }
+        return nil
     }
 
     var url: String {
@@ -39,6 +30,10 @@ extension IssueNetworkTarget: NetworkTargetProtocol {
         case .deleteIssue:
             return "DEL"
         }
+    }
+
+    var body: Data? {
+        return nil
     }
 }
 
