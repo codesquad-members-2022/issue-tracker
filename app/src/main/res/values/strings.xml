@@ -26,5 +26,6 @@
     <string name="friend_title">친구목록</string>
     <string name="add_friend">친구추가</string>
     <string name="my_account">내 계정</string>
-    <string name="send_msg">쪽지 보내기</string>
+    <string name="send_msg">메세지</string>
+    <string name="dlt_friend">삭제</string>
 </resources>

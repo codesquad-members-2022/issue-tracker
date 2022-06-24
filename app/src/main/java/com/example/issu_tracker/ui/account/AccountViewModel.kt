@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.Repository
 import com.example.issu_tracker.data.User
-import com.example.issu_tracker.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,4 +20,16 @@ class AccountViewModel @Inject constructor(private val repository: Repository) :
             _friendList.value = repository.loadFriendList()
         }
     }
+
+    fun dltFriend(user: User) {
+        viewModelScope.launch {
+            val updateList = friendList.value.toMutableList()
+            updateList.remove(user)
+            repository.updateFriend(updateList)
+            _friendList.value = repository.loadFriendListFromRemote()
+            repository.updateRemoteDatabase()
+        }
+    }
+
+
 }

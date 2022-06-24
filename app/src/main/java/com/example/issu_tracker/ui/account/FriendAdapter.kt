@@ -14,7 +14,8 @@ import com.example.issu_tracker.R
 import com.example.issu_tracker.data.User
 import com.example.issu_tracker.databinding.ItemFriendBinding
 
-class FriendAdapter : ListAdapter<User, FriendAdapter.FriendViewHolder>(diffUtil) {
+class FriendAdapter(val userAdapterEventListener: UserAdapterEventListener) :
+    ListAdapter<User, FriendAdapter.FriendViewHolder>(diffUtil) {
     inner class FriendViewHolder(val binding: ItemFriendBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: User) {
@@ -23,7 +24,12 @@ class FriendAdapter : ListAdapter<User, FriendAdapter.FriendViewHolder>(diffUtil
                 .load(item.userPhoto)
                 .circleCrop()
                 .into(binding.ivFiendPhoto)
+
+            binding.btDltFriend.setOnClickListener {
+                userAdapterEventListener.dltUser(item)
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {

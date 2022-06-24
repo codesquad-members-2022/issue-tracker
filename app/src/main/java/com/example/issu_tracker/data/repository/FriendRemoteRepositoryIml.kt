@@ -2,6 +2,7 @@ package com.example.issu_tracker.data.repository
 
 import android.util.Log
 import com.example.issu_tracker.data.User
+import com.example.issu_tracker.ui.home.userUid
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import java.lang.StringBuilder
@@ -14,7 +15,7 @@ class FriendRemoteRepositoryIml @Inject constructor(private val fireStore: Fireb
     override suspend fun loadFriendList(): List<User> {
         val userData =
             fireStore.collection(HomeRepositoryImpl.FIREBASE_COLLECTION_FRIEND_PATH)
-                .document("User1").get().await()
+                .document(userUid).get().await()
         val friendData = userData["friend"] as List<Map<String, String>>
         Log.d("friend", friendData.toString())
 
@@ -22,11 +23,18 @@ class FriendRemoteRepositoryIml @Inject constructor(private val fireStore: Fireb
 
         friendData.forEach {
             val user =
-                User(it["UID"] ?: "", it["name"] ?: "",
-                    it["userPhoto"]?.let { it1 -> convertUriToImageUrl(it1) })
+                User(
+                    it["UID"] ?: "", it["name"] ?: "",
+                    it["userPhoto"] ?: ""
+                )
             friendList.add(user)
         }
         return friendList
+    }
+
+    override suspend fun updateFriend(users: List<User>) {
+        fireStore.collection(HomeRepositoryImpl.FIREBASE_COLLECTION_FRIEND_PATH)
+            .document(userUid).update("friend", users)
     }
 
     private fun convertUriToImageUrl(uri: String): String {

@@ -15,7 +15,6 @@
         android:paddingEnd="20dp"
         android:paddingBottom="10dp">
 
-
         <ImageView
             android:id="@+id/iv_fiend_photo"
             android:layout_width="70dp"
@@ -42,12 +41,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:background="@drawable/round_rectangle_background"
             android:text="@string/send_msg"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/bt_dlt_friend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bt_dlt_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="3dp"
+            android:text="@string/dlt_friend"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/bt_send_msg" />
 
         <View
             android:layout_width="match_parent"
