@@ -11,6 +11,8 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    private let container = Container()
+    
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -21,31 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // { 다시 로그인을 해야된다고 판단 => UerDefaults.token 삭제 }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        changeScreen(to: window)
+        window?.rootViewController = container.buildRootViewController()
         window?.makeKeyAndVisible()
         return true
     }
     
-    private func changeScreen(to window: UIWindow?) {
-        let container = Container()
-        let rootViewController: UIViewController
-        if let accessToken = GithubUserDefaults.getToken() {
-            rootViewController =
-                container.getViewController(.issue(token: accessToken))
-        } else {
-            rootViewController = container.getViewController(.login)
-        }
-        window?.rootViewController = rootViewController
-    }
-    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        OAuthService().fetchToken(from: url) { accessToken in
+        OAuthService().fetchToken(from: url) { [weak self] accessToken in
             guard let token = accessToken else {
                 // TODO: 로그인 실패 얼럿띄우기
                 return
             }
             GithubUserDefaults.setToken(token)
-            self.changeScreen(to: self.window)
+            self?.window?.rootViewController = self?.container.buildRootViewController()
         }
         return true
     }
