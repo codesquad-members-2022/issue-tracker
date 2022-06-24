@@ -28,7 +28,8 @@ final class RootWindowViewModel {
 
     // Action
     func requestLoginStatus() {
-        guard let token = UserDefaults.standard.object(forKey: Environment.token) as? String else { return }
+        guard let token = UserDefaults.standard.object(forKey: Environment.token) as? String else { self.onUpdateLoginSatus(false)
+            return }
         loginRepository.requestLoginStatus(IssueTrackerTarget.requestLoginStatus(token: token)) { [weak self] answer in
             self?.onUpdateLoginSatus(answer)
         }
