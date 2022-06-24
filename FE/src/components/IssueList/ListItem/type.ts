@@ -30,17 +30,14 @@ interface IMilestone {
   closed_issue: number;
 }
 
-type mockDataIssueListKey = 'issueList';
-
-type mockDataIssueOptionKey = 'labelList' | 'milestoneList';
-
-type MockData = Record<
-  mockDataIssueListKey & mockDataIssueOptionKey,
-  IListItem[] | ILabel[] | IMilestone[]
->;
+interface MockData {
+  issueList: IListItem[];
+  labelList: ILabel[];
+  milestoneList: IMilestone[];
+}
 
 interface I$Text {
   size: 'large' | 'small';
 }
 
-export type { IListItem, ILabel, IMilestone, mockDataIssueOptionKey, MockData, I$Text };
+export type { IListItem, ILabel, IMilestone, MockData, I$Text };

@@ -7,7 +7,6 @@ import {
   $FilterMenuWrapper
 } from '@/components/IssueList/ListHeader/style';
 import mockData from '@/components/IssueList/mockData';
-import { mockDataIssueOptionKey } from '../ListItem/type';
 
 const radioIcon = {
   off: <Icon iconType="radioOff" />,
@@ -38,7 +37,7 @@ const ISSUE_FILTERS_PROPS = [
 ];
 
 export default function ListHeader() {
-  const getIssueFilterOptions = (dataName: mockDataIssueOptionKey) => {
+  const getIssueFilterOptions = (dataName: 'labelList' | 'milestoneList') => {
     const options = mockData[dataName].map(
       ({ name, description }: { name: string; description: string }) => {
         return {
