@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { FilterStyle } from '../../common/Filter/FilterBar.styled';
 import { CustomBtn } from '../../common/button.styled';
 
 export const Container = styled.div`
@@ -16,17 +17,20 @@ export const Header = styled.div`
 export const Filter = styled.div`
   display: flex;
   width:600px
-  height:40px;
-  justify-content:center;
-  align-items:center;
-  border:1px solid ${({ theme: { colors } }) => colors.line};
-  border-radius:10px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${({ theme: { colors } }) => colors.line};
+  border-radius: 10px;
+  div:first-child{
+    width: 128px;
+    justify-content: space-around;
+  }
 `;
 
 export const FilterBar = styled.div`
-  border-right: 1px solid ${({ theme: { colors } }) => colors.background};
+  position: relative;
   padding: 5px;
-  width: 128px;
   display: flex;
   justify-content: space-around;
   p {
@@ -210,3 +214,48 @@ export const LabelTitle = styled.div`
 `;
 
 export const IssuesContent = styled.div``;
+
+export const DetailWrapper = styled.summary`
+  display: flex;
+  //width: 128px;
+  display: flex;
+  justify-content: space-around;
+  ::marker {
+    display: none;
+    content: '';
+  }
+  p {
+    margin-right: 10px;
+  }
+`;
+
+export const DetailContent = styled.div<{ position: string }>`
+  ${FilterStyle}
+  position: absolute;
+  // top: 35px;
+  // left: 0;
+  width: 240px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  //padding: 5px;
+  p {
+    font-size: 15px;
+    //padding: 8px;
+  }
+`;
+
+export const IssueFilter = styled.p`
+  background: #eee;
+  padding: 10px;
+  border-radius: 16px 16px 0px 0px;
+`;
+
+export const FilterTest = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    padding: 10px;
+  }
+`;
