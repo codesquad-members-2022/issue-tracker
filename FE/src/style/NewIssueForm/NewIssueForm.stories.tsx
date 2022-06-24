@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { NewIssueForm } from './NewIssueForm';
 
 export default {
-  title: 'common/NewIssueForm',
+  title: 'style/NewIssueForm',
   component: NewIssueForm,
 } as ComponentMeta<typeof NewIssueForm>;
 
