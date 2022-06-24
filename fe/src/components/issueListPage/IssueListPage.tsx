@@ -14,6 +14,7 @@ const counts = {
 
 function IssueListPage() {
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       <TabBar counts={counts} />
       <Link to="/addIssue">

@@ -9,7 +9,7 @@ import Panel from "../panel/Panel";
 import FilterBarInput from "./FilterBarInput";
 import { FilterBarProps, StyledFilterBarProps } from "./FilterBarInterface";
 
-function FilterBar({ menuList, handlePanelClick }: FilterBarProps) {
+function FilterBar({ menuList, handlePanelClick, inputDisplay, text }: FilterBarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(DEFAULT_VALUE);
   const [isFocus, setIsFocus] = useState(false);
@@ -43,19 +43,19 @@ function FilterBar({ menuList, handlePanelClick }: FilterBarProps) {
 
   return (
     <div style={{ position: "relative" }}>
-      <StyledFilterBar isFocus={isFocus}>
-        <Filter as="button" type="button" ref={filterRef} isFocus={isFocus}>
-          <Indicator {...filterStyle.indicator} onClick={handleIndicatorClick} />
-          <Panel
-            {...filterStyle.panel}
-            isOpen={isOpen}
-            menuList={menuList}
-            type="checkbox"
-            onClick={handlePanelClick}
-          />
-        </Filter>
-        <FilterBarInput isFocus={isFocus} inputRef={inputRef} inputValue={inputValue} setInputValue={setInputValue} />
-      </StyledFilterBar>
+      {/* <StyledFilterBar isFocus={isFocus}> */}
+      <Filter as="button" type="button" ref={filterRef} isFocus={isFocus}>
+        <Indicator {...filterStyle.indicator} onClick={handleIndicatorClick} text={text} />
+        <Panel {...filterStyle.panel} isOpen={isOpen} menuList={menuList} type="checkbox" onClick={handlePanelClick} />
+      </Filter>
+      <FilterBarInput
+        display={inputDisplay}
+        isFocus={isFocus}
+        inputRef={inputRef}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
+      {/* </StyledFilterBar> */}
     </div>
   );
 }
