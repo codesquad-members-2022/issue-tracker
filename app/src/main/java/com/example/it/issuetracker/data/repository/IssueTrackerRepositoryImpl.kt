@@ -2,9 +2,11 @@ package com.example.it.issuetracker.data.repository
 
 import com.example.it.issuetracker.data.datasource.IssueTrackerDataSource
 import com.example.it.issuetracker.data.dto.toIssue
+import com.example.it.issuetracker.data.dto.toIssueDetail
 import com.example.it.issuetracker.data.dto.toMember
 import com.example.it.issuetracker.data.dto.toMilestone
 import com.example.it.issuetracker.domain.model.Issue
+import com.example.it.issuetracker.domain.model.IssueDetail
 import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.domain.repository.IssueTrackerRepository
@@ -61,6 +63,12 @@ class IssueTrackerRepositoryImpl(
     override fun findIssue(title: String): Flow<List<Issue>> {
         return issueTrackerDataSource.findByIssueName(title).map {
             it.map { issue -> issue.toIssue() }
+        }
+    }
+
+    override fun getIssueDetail(id: Long): Flow<IssueDetail> {
+        return issueTrackerDataSource.getIssueDetail(id).map { issueDetail ->
+            issueDetail.toIssueDetail()
         }
     }
 }

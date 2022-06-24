@@ -3,6 +3,7 @@ package com.example.it.issuetracker.presentation.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.data.datasource.UserSharedPrefDataSource
+import com.example.it.issuetracker.domain.model.LoginInformation
 import com.example.it.issuetracker.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,12 +23,22 @@ class LoginViewModel(
         _uiState.value = LoginUiState.GetUserInformation(loginInformation = loginInformation)
     }
 
-    fun saveJwt(jwt: String) {
+    private fun saveJwt(jwt: String) {
         sharedPref.saveData("jwt", jwt)
     }
 
-    fun saveId(id: Long) {
+    private fun saveId(id: Long) {
         sharedPref.saveData("id", id)
+    }
+
+    private fun saveProfile(imageUrl: String) {
+        sharedPref.saveData("profile", imageUrl)
+    }
+
+    fun saveUser(loginInformation: LoginInformation) {
+        saveJwt(loginInformation.jwt)
+        saveId(loginInformation.id)
+        saveProfile(loginInformation.imageUrl)
     }
 
 }

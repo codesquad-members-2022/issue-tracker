@@ -1,9 +1,6 @@
 package com.example.it.issuetracker.data.datasource
 
-import com.example.it.issuetracker.data.dto.IssueDto
-import com.example.it.issuetracker.data.dto.LabelDto
-import com.example.it.issuetracker.data.dto.MemberDto
-import com.example.it.issuetracker.data.dto.MilestoneDto
+import com.example.it.issuetracker.data.dto.*
 import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.domain.model.MileStone
 import kotlinx.coroutines.flow.Flow
@@ -114,6 +111,26 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         )
     )
 
+    private val issueDetail = IssueDetailDto(
+        id = 1,
+        title = "제목쓰",
+        issueStatus = "close",
+        writer = "stitch",
+        manager = "wooki",
+        description = "안녕하세요. 제목쓰에 대한 설명입니다.",
+        createdTime = "2022-05-06 09:11:23",
+        labels = listOf(LabelFakeDatabase.database[0], LabelFakeDatabase.database[1]),
+        milestones = listOf(MilestoneDto(id = 4,
+            title = "마스터즈 코스 숫자",
+            deadLine = "2022-06-20",
+            description = "")),
+        comments = listOf(CommentDto(id = "Daniel",
+            imageUrl = "",
+            content = "내용",
+            createDate = "2022-05-06 12:13:13",
+            reaction = 1))
+    )
+
     override suspend fun getIssue(): Result<List<IssueDto>> {
         return runCatching { issues.filter { it.state } }
     }
@@ -202,5 +219,9 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
     override fun findByIssueName(title: String): Flow<List<IssueDto>> = flow {
         val result = issues.filter { it.title.contains(title) }
         emit(result)
+    }
+
+    override fun getIssueDetail(id: Long): Flow<IssueDetailDto> = flow {
+        emit(issueDetail)
     }
 }

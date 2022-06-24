@@ -13,7 +13,7 @@ data class MileStone(
     val openedIssue: Int? = null,
     val closedIssue: Int? = null,
     var isChecked: Boolean = false,
-    val mode: Mode = Mode.DEFAULT
+    val mode: Mode = Mode.DEFAULT,
 ) : Serializable
 
 fun MileStone.toMileStoneDto(): MilestoneDto {

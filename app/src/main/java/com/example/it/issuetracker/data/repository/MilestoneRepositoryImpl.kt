@@ -6,14 +6,14 @@ import com.example.it.issuetracker.domain.repository.MilestoneRepository
 import kotlinx.coroutines.flow.Flow
 
 class MilestoneRepositoryImpl(
-    private val dataSource: MilestoneDataSource
+    private val dataSource: MilestoneDataSource,
 ) : MilestoneRepository {
 
     override fun getMilestoneInfoList(): Flow<List<MilestoneDto>> {
         return dataSource.getMilestoneInfoList()
     }
 
-    override suspend fun addMilestone(title: String, description: String ,deadline: String) {
+    override suspend fun addMilestone(title: String, description: String, deadline: String) {
         dataSource.addMilestone(title, description, deadline)
     }
 

@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MilestoneViewModel(
-    private val milestoneRepository: MilestoneRepository
+    private val milestoneRepository: MilestoneRepository,
 ) : ViewModel() {
 
     private var _milestoneList = MutableStateFlow<List<MileStone>>(emptyList())

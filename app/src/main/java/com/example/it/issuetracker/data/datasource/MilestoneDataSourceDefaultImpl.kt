@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class MilestoneDataSourceDefaultImpl(
-    private val issueTrackerApi: IssueTrackerService
+    private val issueTrackerApi: IssueTrackerService,
 ) : MilestoneDataSource {
 
     override fun getMilestoneInfoList(): Flow<List<MilestoneDto>> = flow {

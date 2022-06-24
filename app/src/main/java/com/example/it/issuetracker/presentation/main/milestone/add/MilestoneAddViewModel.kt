@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MilestoneAddViewModel(
-    private val milestoneRepository: MilestoneRepository
+    private val milestoneRepository: MilestoneRepository,
 ) : ViewModel() {
 
     var title = MutableStateFlow("")

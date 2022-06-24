@@ -75,7 +75,9 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
                 else -> false
             }
         }
-        binding.toolbarLayout.editToolbar.setNavigationOnClickListener { viewModel.changeEditMode(false) }
+        binding.toolbarLayout.editToolbar.setNavigationOnClickListener {
+            viewModel.changeEditMode(false)
+        }
     }
 
     private fun navigatePage(label: Label?) {
