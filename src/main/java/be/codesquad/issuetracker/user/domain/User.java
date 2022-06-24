@@ -1,6 +1,5 @@
 package be.codesquad.issuetracker.user.domain;
 
-import be.codesquad.issuetracker.oauth.dto.GithubUser;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
