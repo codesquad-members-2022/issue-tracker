@@ -16,11 +16,11 @@ protocol TabBarFlowCoordinatorDependencies {
 
 class TabBarFlowCoordinator: Coordinator {
     private let navigationController: UINavigationController
-    private let dependency: TabBarFlowCoordinatorDependencies
+    private let dependencies: TabBarFlowCoordinatorDependencies
 
-    init(navigationController: UINavigationController, dependency: TabBarFlowCoordinatorDependencies) {
+    init(navigationController: UINavigationController, dependencies: TabBarFlowCoordinatorDependencies) {
         self.navigationController = navigationController
-        self.dependency = dependency
+        self.dependencies = dependencies
     }
 
     func start(with _: DeepLink?) {
@@ -37,10 +37,10 @@ class TabBarFlowCoordinator: Coordinator {
             accountNavigationController
         ]
 
-        let issueFlowDIContainer = dependency.makeIssueFlowDIContainer()
-        let labelFlowDIContainer = dependency.makeLabelFlowDIContainer()
-        let milestoneFlowDIContainer = dependency.makeMilestoneFlowDIContainer()
-        let accountFlowDIContainer = dependency.makeAccountFlowDIContainer()
+        let issueFlowDIContainer = dependencies.makeIssueFlowDIContainer()
+        let labelFlowDIContainer = dependencies.makeLabelFlowDIContainer()
+        let milestoneFlowDIContainer = dependencies.makeMilestoneFlowDIContainer()
+        let accountFlowDIContainer = dependencies.makeAccountFlowDIContainer()
 
         let issueFlowCoordinator = issueFlowDIContainer.makeCoordinator(navigationController: issueNavigationController)
 
