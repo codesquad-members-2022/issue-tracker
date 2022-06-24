@@ -63,7 +63,7 @@ final class IssueCollectionViewCell: UICollectionViewCell {
         self.milestoneName.text = viewModel.milestoneName
 
         viewModel.labels.forEach { label in
-            let newLabel = LabelFactory.createLael(label)
+            let newLabel = LabelFactory.createLabel(label)
             labelStack.addArrangedSubview(newLabel)
             newLabel.layer.cornerRadius = 15
         }
