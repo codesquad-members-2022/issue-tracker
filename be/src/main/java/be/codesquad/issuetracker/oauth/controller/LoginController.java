@@ -28,20 +28,20 @@ public class LoginController {
     private final String clientId;
     private final String redirectUri;
     private final LoginService loginService;
-    private final AuthService githubOAuthClient;
+    private final AuthService authService;
 
     public LoginController(
         @Value("${oauth.github.client-id}") String clientId,
         @Value("${oauth.github.redirect-uri}")String redirectUri,
         LoginService loginService,
-        AuthService githubOAuthClient) {
+        AuthService authService) {
         this.clientId = clientId;
         this.redirectUri = redirectUri;
         this.loginService = loginService;
-        this.githubOAuthClient = githubOAuthClient;
+        this.authService = authService;
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Void> githubLogin() {
         URI location = UriComponentsBuilder
             .fromPath(redirectUri)
@@ -56,11 +56,11 @@ public class LoginController {
 
     @GetMapping("/callback")
     public ResponseEntity<String> githubLoginCallback(
-        @RequestParam(value = "code", required = false) String code
+        @RequestParam String code
     ) {
-        TokenInformation token = githubOAuthClient.getToken(code);
-        GithubUser githubUser = githubOAuthClient.getUser(token.getAccessToken());
-        User user = loginService.upsertUser(githubUser);
+        TokenInformation token = authService.getToken(code);
+        GithubUser githubUser = authService.getUser(token.getAccessToken());
+        User user = loginService.saveUser(githubUser);
         String jwtToken = JwtFactory.create(user, EXPIRED_SECOND);
         log.debug("jwtToken: {}", jwtToken);
 
