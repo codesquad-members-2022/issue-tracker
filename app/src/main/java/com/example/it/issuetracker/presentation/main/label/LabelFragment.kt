@@ -10,6 +10,7 @@ import com.example.it.issuetracker.databinding.FragmentLabelBinding
 import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
+import com.example.it.issuetracker.presentation.main.label.add.LabelAddFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -55,9 +56,9 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
     private fun setupToolbar() {
         binding.recyclerviewLabelItem.adapter = adapter
         binding.recyclerviewLabelItem.layoutManager = LinearLayoutManager(requireContext())
-        binding.defaultToolbar.setOnMenuItemClickListener { menuItem ->
+        binding.toolbarLayout.defaultToolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.add_label -> {
+                R.id.add_blue_icon -> {
                     navigatePage(null)
                     true
                 }
@@ -65,16 +66,16 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
             }
         }
 
-        binding.editToolbar.setOnMenuItemClickListener { menuItem ->
+        binding.toolbarLayout.editToolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.delete_label -> {
+                R.id.delete_white_icon -> {
                     viewModel.deleteItems()
                     true
                 }
                 else -> false
             }
         }
-        binding.editToolbar.setNavigationOnClickListener { viewModel.changeEditMode(false) }
+        binding.toolbarLayout.editToolbar.setNavigationOnClickListener { viewModel.changeEditMode(false) }
     }
 
     private fun navigatePage(label: Label?) {

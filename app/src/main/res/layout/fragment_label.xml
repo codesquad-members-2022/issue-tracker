@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -18,39 +19,12 @@
         android:layout_height="match_parent"
         tools:context=".presentation.main.label.LabelFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/label_appbarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/default_toolbar"
-                style="@style/Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                android:background="@color/white"
-                android:visibility="@{viewModel.editMode? View.GONE : View.VISIBLE}"
-                app:menu="@menu/label_default_menu"
-                app:title="@string/label_string" />
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/edit_toolbar"
-                style="@style/Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                android:background="@color/main"
-                android:visibility="@{viewModel.editMode? View.VISIBLE : View.GONE}"
-                app:menu="@menu/label_edit_menu"
-                app:navigationIcon="@drawable/ic_exit"
-                app:title="@string/select_label"
-                app:titleTextColor="@color/white"
-                tools:visibility="gone" />
-
-        </com.google.android.material.appbar.AppBarLayout>
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/toolbar_edit_layout"
+            bind:defaultToolbarTitle="@{@string/label_string}"
+            bind:editToolbarTitle="@{@string/select_label}"
+            bind:editToolbarVisible="@{viewModel.editMode}" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refresh_layout"
@@ -60,7 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_appbarLayout"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
             app:onRefreshListener="@{viewModel::getLabelInfoList}"
             app:refreshing="@{viewModel.dataLoading}">
 
@@ -68,12 +42,8 @@
                 android:id="@+id/recyclerview_label_item"
                 style="@style/Body2"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_appbarLayout"
                 tools:listitem="@layout/label_item" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

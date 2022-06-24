@@ -6,27 +6,25 @@
 
     <data>
 
-        <import type="android.graphics.Color" />
-
         <variable
             name="toolbarTitle"
             type="String" />
 
         <variable
             name="viewModel"
-            type="com.example.it.issuetracker.presentation.main.label.add.LabelAddViewModel" />
+            type="com.example.it.issuetracker.presentation.main.milestone.add.MilestoneAddViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.main.label.add.LabelAddFragment">
+        tools:context=".presentation.main.milestone.add.MilestoneAddFragment">
 
         <include
             android:id="@+id/label_appbarLayout"
-            bind:title="@{toolbarTitle}"
-            layout="@layout/toolbar_add_layout" />
+            layout="@layout/toolbar_add_layout"
+            bind:title="@{toolbarTitle}" />
 
         <TextView
             android:id="@+id/tv_subject"
@@ -83,45 +81,45 @@
             app:layout_constraintTop_toTopOf="@id/tv_description" />
 
         <TextView
-            android:id="@+id/tv_background"
+            android:id="@+id/tv_complete_date"
             style="@style/Body2"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="33dp"
-            android:text="@string/background_string"
+            android:text="@string/milestone_complete_date"
             android:textColor="@color/dark_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
         <TextView
-            android:id="@+id/edit_background"
+            android:id="@+id/edit_complete_date"
             style="@style/Body2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:background="@android:color/transparent"
-            android:text="@{viewModel.backgroundColor}"
+            android:hint="@string/optional_input_date_string"
+            android:text="@{viewModel.deadline}"
             android:textColor="@color/dark_gray"
-            app:layout_constraintBottom_toBottomOf="@id/tv_background"
-            app:layout_constraintEnd_toStartOf="@id/btn_generate_color"
-            app:layout_constraintStart_toEndOf="@id/tv_background"
-            app:layout_constraintTop_toTopOf="@id/tv_background"
-            tools:text="#3DDCFF" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_complete_date"
+            app:layout_constraintEnd_toStartOf="@id/btn_clear_date"
+            app:layout_constraintStart_toEndOf="@id/tv_complete_date"
+            app:layout_constraintTop_toTopOf="@id/tv_complete_date" />
 
         <ImageButton
-            android:id="@+id/btn_generate_color"
+            android:id="@+id/btn_clear_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/change_color_string"
-            android:onClick="@{() -> viewModel.randomColor()}"
-            android:src="@drawable/ic_refresh"
-            app:layout_constraintBottom_toBottomOf="@id/edit_background"
+            android:contentDescription="@string/clear_date_string"
+            android:onClick="@{() -> viewModel.clearDeadline()}"
+            android:src="@drawable/ic_exit_grey"
+            app:layout_constraintBottom_toBottomOf="@id/edit_complete_date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/edit_background" />
+            app:layout_constraintTop_toTopOf="@id/edit_complete_date" />
 
         <View
             android:id="@+id/divider"
@@ -131,38 +129,7 @@
             android:background="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_background" />
-
-        <View
-            android:id="@+id/label_preview_container"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/label_container_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/label_background"
-            android:backgroundTint="@{Color.parseColor(viewModel.backgroundColor)}"
-            android:paddingStart="12dp"
-            android:paddingTop="6dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="6dp"
-            android:text="@{viewModel.title}"
-            android:textColor="@{Color.parseColor(viewModel.textColor)}"
-            app:layout_constraintBottom_toBottomOf="@id/label_preview_container"
-            app:layout_constraintEnd_toEndOf="@id/label_preview_container"
-            app:layout_constraintStart_toStartOf="@id/label_preview_container"
-            app:layout_constraintTop_toTopOf="@id/label_preview_container"
-            tools:backgroundTint="@color/black"
-            tools:text="제목"
-            tools:textColor="@color/white" />
+            app:layout_constraintTop_toBottomOf="@id/edit_complete_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
