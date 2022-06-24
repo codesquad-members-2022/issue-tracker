@@ -52,6 +52,9 @@
 		1BD75055285886C40025DDC8 /* IDChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174835285885640028E037 /* IDChecker.swift */; };
 		1BD75056285886C70025DDC8 /* PasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B174836285885640028E037 /* PasswordChecker.swift */; };
 		40B2C70D0084E13935624E19 /* Pods_IssueTracker15.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8581CFC489C61282E0355D9F /* Pods_IssueTracker15.framework */; };
+		8D06CC46286491CD00142943 /* ValidateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06CC45286491CD00142943 /* ValidateModel.swift */; };
+		8D0F1D79286402EC00626040 /* UserInfoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F1D78286402EC00626040 /* UserInfoTextField.swift */; };
+		8D0F1D7B28643AE100626040 /* UserInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F1D7A28643AE100626040 /* UserInputViewModel.swift */; };
 		8D06CC4C2864A92200142943 /* AccessTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06CC4B2864A92200142943 /* AccessTokenManager.swift */; };
 		8D21137B2859E5FD00B65676 /* ContainerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21137A2859E5FD00B65676 /* ContainerUnitTest.swift */; };
 		8D2113812859E61700B65676 /* Resolvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D66A2C0285959CF001B514C /* Resolvable.swift */; };
@@ -154,6 +157,9 @@
 		1BD7504E2858867E0025DDC8 /* RegularExpressionCheckerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionCheckerUnitTest.swift; sourceTree = "<group>"; };
 		6E5A22FB498819D6DAD72D75 /* Pods-IssueTracker15.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker15.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker15/Pods-IssueTracker15.release.xcconfig"; sourceTree = "<group>"; };
 		8581CFC489C61282E0355D9F /* Pods_IssueTracker15.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker15.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D06CC45286491CD00142943 /* ValidateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateModel.swift; sourceTree = "<group>"; };
+		8D0F1D78286402EC00626040 /* UserInfoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoTextField.swift; sourceTree = "<group>"; };
+		8D0F1D7A28643AE100626040 /* UserInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputViewModel.swift; sourceTree = "<group>"; };
 		8D06CC4B2864A92200142943 /* AccessTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenManager.swift; sourceTree = "<group>"; };
 		8D2113782859E5FD00B65676 /* ContainerUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContainerUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D21137A2859E5FD00B65676 /* ContainerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerUnitTest.swift; sourceTree = "<group>"; };
@@ -484,6 +490,7 @@
 			children = (
 				8D2113B7285B0D0400B65676 /* UserInfoInputStackView.swift */,
 				8DDEBAE7285B382400A4E4DC /* OAuthLoginStackView.swift */,
+				8D0F1D78286402EC00626040 /* UserInfoTextField.swift */,
 				8D21138D285ADFA700B65676 /* OAuthLoginButton.swift */,
 			);
 			path = View;
@@ -493,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */,
+				8D0F1D7A28643AE100626040 /* UserInputViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -511,6 +519,7 @@
 			children = (
 				8DF770BB2861A26200C02D1F /* GitHubLoginModel.swift */,
 				8DF770BA2861A26200C02D1F /* AppleLoginModel.swift */,
+				8D06CC45286491CD00142943 /* ValidateModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -786,6 +795,7 @@
 				1B174837285885640028E037 /* IDChecker.swift in Sources */,
 				8DF770B82861A00F00C02D1F /* AccessInfo.swift in Sources */,
 				8D21138C285AC4F800B65676 /* LoginViewController.swift in Sources */,
+				8D0F1D79286402EC00626040 /* UserInfoTextField.swift in Sources */,
 				1B1A818628608CEE003C135A /* UserDTO.swift in Sources */,
 				8DDEBAEB285B57B000A4E4DC /* LoginViewModel.swift in Sources */,
 				1BC7F8AC2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift in Sources */,
@@ -795,6 +805,7 @@
 				1B1A81982860A56A003C135A /* IssueNavigationController.swift in Sources */,
 				1B1A819E2860A828003C135A /* MilestoneNavigationController.swift in Sources */,
 				1B87F708285B6C7A002B47B7 /* Repository.swift in Sources */,
+				8D06CC46286491CD00142943 /* ValidateModel.swift in Sources */,
 				1B174851285885710028E037 /* TestUseCase.swift in Sources */,
 				1B174825285885180028E037 /* ViewController.swift in Sources */,
 				1B174821285885180028E037 /* AppDelegate.swift in Sources */,
@@ -802,6 +813,7 @@
 				1B174838285885640028E037 /* PasswordChecker.swift in Sources */,
 				1B87F705285B6C7A002B47B7 /* PersistentService.swift in Sources */,
 				1B1A818E28608E72003C135A /* IssueDTO.swift in Sources */,
+				8D0F1D7B28643AE100626040 /* UserInputViewModel.swift in Sources */,
 				8D66A2C1285959CF001B514C /* Resolvable.swift in Sources */,
 				8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */,
 				1B87F70F285C221D002B47B7 /* Transferable.swift in Sources */,
