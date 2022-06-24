@@ -57,10 +57,10 @@ final class IssueCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    func configure(with items: IssueItem) {
-        self.title.text = items.title
-        self.issueDescription.text = items.content
-        self.milestoneName.text = items.milestoneName
+    func configure(with viewModel: IssueItem) {
+        self.title.text = viewModel.title
+        self.issueDescription.text = viewModel.content
+        self.milestoneName.text = viewModel.milestoneName
 
         items.labels.forEach { label in
             let newLabel = LabelFactory.createLael(label)

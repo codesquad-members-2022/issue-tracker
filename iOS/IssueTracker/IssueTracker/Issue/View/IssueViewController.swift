@@ -10,8 +10,21 @@ import UIKit
 class IssueViewController: UIViewController {
     private let navigationItems = IssueViewNavigationItems()
     private lazy var issueCollectionView = IssueCollectionView(frame: view.frame)
-    private var dataSource = IssueCollectionViewDataSource()
+    private var dataSource: IssueCollectionViewDataSource
     private var searchController = UISearchController(searchResultsController: nil)
+    
+    let issueViewModel: IssueViewModel
+    
+    init(issueViewModel: IssueViewModel) {
+        self.issueViewModel = issueViewModel
+        self.dataSource = IssueCollectionViewDataSource(issueViewModel: issueViewModel)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +35,8 @@ class IssueViewController: UIViewController {
         issueCollectionView.setDataSource(dataSource)
         setButtonAction()
         issueCollectionView.setCollectionViewDelegate(self)
+        bind()
+        issueViewModel.loadFromIssueManager()
     }
     private func setNavigationItems() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationItems.filterButton)
@@ -61,6 +76,14 @@ extension IssueViewController: UICollectionViewDelegate {
             navigationItem.searchController = searchController
         } else {
             navigationItem.searchController = nil
+        }
+    }
+    
+    func bind() {
+        self.issueViewModel.list.bind(on: self) { _ in
+            DispatchQueue.main.async {
+                self.issueCollectionView.update()
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
 private extension TabBarController {
     
     func setTabBarItems() {
-        let issueViewController = IssueViewController()
+        let issueViewController = IssueViewController(issueViewModel: IssueViewModel(issueManager: IssueManager()))
         let labelViewController = LabelViewController()
         let milestoneViewController = MilestoneViewController()
         let myAccountViewController = MyAccountViewController()

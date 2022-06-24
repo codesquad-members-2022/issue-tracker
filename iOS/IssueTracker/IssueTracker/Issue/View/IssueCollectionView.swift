@@ -59,6 +59,10 @@ final class IssueCollectionView: UIView {
         addNewIssueButton.addAction(action, for: .touchUpInside)
     }
     
+    func update() {
+        self.collectionView.reloadData()
+    }
+    
     override func layoutSubviews() {
         let screenSize = UIScreen.main.bounds.size
 
