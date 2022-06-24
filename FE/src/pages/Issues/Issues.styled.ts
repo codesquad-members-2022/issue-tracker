@@ -16,13 +16,13 @@ export const Header = styled.div`
 `;
 export const Filter = styled.div`
   display: flex;
-  width:600px
+  width: 600px;
   height: 40px;
   justify-content: center;
   align-items: center;
   border: 1px solid ${({ theme: { colors } }) => colors.line};
   border-radius: 10px;
-  div:first-child{
+  div:first-child {
     width: 128px;
     justify-content: space-around;
   }

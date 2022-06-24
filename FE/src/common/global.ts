@@ -18,6 +18,14 @@ const GlobalStyles = createGlobalStyle`
     font-family: Noto Sans KR;
   }
 
+  textarea {
+    font-family: Noto Sans KR;
+  }
+
+  input {
+    font-family: Noto Sans KR;
+  }
+
   a {
     text-decoration:none;
   }
