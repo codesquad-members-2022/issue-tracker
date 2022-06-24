@@ -13,7 +13,7 @@ protocol AppFlowCoordinatorDependencies {
     func checkUserLoggedIn() -> Bool
 }
 
-final class AppFlowCoordinator: Coordinator {
+final class AppFlowCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
     private let appDependencies: AppFlowCoordinatorDependencies
 
@@ -26,7 +26,7 @@ final class AppFlowCoordinator: Coordinator {
         print("Deinit: \(#fileID)")
     }
 
-    func start() {
+    override func start() {
         if appDependencies.checkUserLoggedIn() {
             print("Run")
             runTabBarFlow()
@@ -35,7 +35,7 @@ final class AppFlowCoordinator: Coordinator {
         }
     }
 
-    func start(with deepLink: DeepLink?) {
+    override func start(with deepLink: DeepLink?) {
         guard let deepLink = deepLink else {
             runLoginFlow() // or run default flow
             return
@@ -57,12 +57,16 @@ final class AppFlowCoordinator: Coordinator {
     func runLoginFlow(with deepLink: DeepLink? = nil) {
         let container = appDependencies.makeLoginFlowDIContainer()
         let flow = container.makeCoordinator(navigationController: navigationController)
+
         flow.start(with: deepLink)
+        addDependency(flow)
     }
 
     func runTabBarFlow(with deepLink: DeepLink? = nil) {
         let container = appDependencies.makeTabBarFlowDIContainer()
         let flow = container.makeCoordinator(navigationController: navigationController)
+
         flow.start(with: deepLink)
+        addDependency(flow)
     }
 }

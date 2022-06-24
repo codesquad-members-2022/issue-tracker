@@ -14,7 +14,7 @@ protocol TabBarFlowCoordinatorDependencies {
     func makeAccountFlowDIContainer() -> DIContainer
 }
 
-final class TabBarFlowCoordinator: Coordinator {
+final class TabBarFlowCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
     private let dependencies: TabBarFlowCoordinatorDependencies
 
@@ -23,19 +23,17 @@ final class TabBarFlowCoordinator: Coordinator {
         self.dependencies = dependencies
     }
 
-    func start(with _: DeepLink?) {
+    override func start(with _: DeepLink?) {
         let tabBarController = UITabBarController()
         let issueNavigationController = UINavigationController()
         let labelNavigationController = UINavigationController()
         let milestoneNavigationController = UINavigationController()
         let accountNavigationController = UINavigationController()
 
-        tabBarController.viewControllers = [
-            issueNavigationController,
-            labelNavigationController,
-            milestoneNavigationController,
-            accountNavigationController
-        ]
+        tabBarController.tabBar.addTopBorder(with: .gray, andWidth: 0.5)
+
+        navigationController.viewControllers = [tabBarController]
+        navigationController.navigationBar.isHidden = true
 
         issueNavigationController.tabBarItem = .init(
             title: "Issue",
@@ -61,6 +59,13 @@ final class TabBarFlowCoordinator: Coordinator {
             selectedImage: .profile
         )
 
+        tabBarController.viewControllers = [
+            issueNavigationController,
+            labelNavigationController,
+            milestoneNavigationController,
+            accountNavigationController
+        ]
+
         let issueFlowDIContainer = dependencies.makeIssueFlowDIContainer()
         let labelFlowDIContainer = dependencies.makeLabelFlowDIContainer()
         let milestoneFlowDIContainer = dependencies.makeMilestoneFlowDIContainer()
@@ -78,5 +83,12 @@ final class TabBarFlowCoordinator: Coordinator {
         labelFlowCoordinator.start(with: nil)
         milestoneFlowCoordinator.start(with: nil)
         accountFlowCoordinator.start(with: nil)
+
+        addDependency(issueFlowCoordinator)
+        addDependency(labelFlowCoordinator)
+        addDependency(milestoneFlowCoordinator)
+        addDependency(accountFlowCoordinator)
+
+        print("Done")
     }
 }
