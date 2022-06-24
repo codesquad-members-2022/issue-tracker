@@ -71,7 +71,8 @@ final class LoginViewController: UIViewController, ViewBinding {
         let issueListVC = MainTabBarController()
         issueListVC.modalPresentationStyle = .fullScreen
         issueListVC.modalTransitionStyle = .coverVertical
-        present(issueListVC, animated: true)
+        self.navigationController?.pushViewController(issueListVC, animated: true)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func addViews() {
