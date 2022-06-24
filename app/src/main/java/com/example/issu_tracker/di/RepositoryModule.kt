@@ -18,6 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
+
     @Provides
     fun provideHomeRepository(fireStore: FirebaseFirestore): HomeRepository {
         return HomeRepositoryImpl(fireStore)
@@ -29,6 +30,11 @@ object RepositoryModule {
     }
 
     @Provides
+    fun provideIssueEditorRepository(fireStore: FirebaseFirestore): IssueEditorRepository {
+        return IssueEditorRepositoryImpl(fireStore)
+    }
+
+    @Provides
     fun provideFireStoreDB(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
     }
@@ -36,11 +42,6 @@ object RepositoryModule {
     @Provides
     fun provideFriendRemoteRepository(fireStore: FirebaseFirestore): FriendRemoteRepository {
         return FriendRemoteRepositoryIml(fireStore)
-    }
-
-    @Provides
-    fun provideIssueEditorRepository(fireStore: FirebaseFirestore): IssueEditorRepository {
-        return IssueEditorRepositoryImpl(fireStore)
     }
 
     @Singleton
