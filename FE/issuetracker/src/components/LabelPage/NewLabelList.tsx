@@ -1,7 +1,7 @@
 import * as I from 'design/icons';
 import * as S from 'components/LabelPage/styled/styled.newLabelList';
 import LabelItem from 'components/LabelPage/LabelItem';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { initialLabelState, labelState } from 'context/label';
 import { useState } from 'react';
 
@@ -40,7 +40,7 @@ function NewLabelList({ isNewLabel }: LabelListType) {
     });
   }
 
-  const useResetNewLabelValue = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const resetNewLabelValue = () => {
     setNewLabel(initialLabelState);
     resetText();
   };
@@ -100,13 +100,17 @@ function NewLabelList({ isNewLabel }: LabelListType) {
             </S.deleteButton>
           </S.buttonWrapperTop>
           <S.buttonWrapperBottom>
-            <S.cancleButton onClick={useResetNewLabelValue}>
+            <S.cancleButton
+              onClick={() => {
+                resetNewLabelValue();
+              }}
+            >
               <I.cross />
               취소
             </S.cancleButton>
             <S.saveButton
               onClick={() => {
-                console.log(newLabel);
+                alert('성공적으로 등록되었습니다');
               }}
             >
               <I.edit />
