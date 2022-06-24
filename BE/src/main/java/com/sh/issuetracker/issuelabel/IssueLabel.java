@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.ToString;
-
 @Table(name = "label_has_issue")
 @Entity
 public class IssueLabel {

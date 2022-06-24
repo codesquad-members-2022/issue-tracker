@@ -3,7 +3,6 @@ package com.sh.issuetracker.issue.search;
 import com.sh.issuetracker.exception.InvalidSearchParamException;
 import com.sh.issuetracker.issue.IssueStatus;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,11 +14,16 @@ public class IssueSearchParam {
 	private static final String REGEX_MIDDLE_VALUE_SEPARATOR = "[:](.*?)[+]";
 
 	private IssueStatus status;
-	private List<String> author;
-	private List<String> assignee;
-	private List<String> milestone;
-	private List<String> label;
+	private String author;
+	private String assignee;
+	private String milestone;
+	private String label;
 
+	/**
+	 * 이슈 제목 검색 보류
+	 * @param request
+	 * @return
+	 */
 	public static IssueSearchParam from(IssueSearchRequest request) {
 		String text = request.getText();
 		int firstKeySeparatorIdx = text.indexOf('+');
@@ -53,9 +57,11 @@ public class IssueSearchParam {
 				break;
 			}
 			invalidOf(key, value);
+			if (searchWords.alreadyHasValue(SearchKeyType.getKey(key))) {
+				throw new InvalidSearchParamException("중복된 검색키 요청은 빈 리스트를 반환합니다.");
+			}
 			searchWords.add(SearchKeyType.getKey(key), value);
 		}
-
 		String lastKey = matcherOfKey.group(1);
 		String lastValue = behindSearchWords.substring(behindSearchWords.lastIndexOf(':') + 1);
 		searchWords.add(SearchKeyType.getKey(lastKey), lastValue);
