@@ -17,6 +17,9 @@
 		E43D17862859C7B50091DDF1 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */; };
 		E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D17892859C8590091DDF1 /* LoginViewModel.swift */; };
 		E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44DF6AB2859A71700FAC8FB /* Observable.swift */; };
+		E46C69F1286555DE0074AEF9 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F0286555DE0074AEF9 /* LabelViewController.swift */; };
+		E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */; };
+		E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F5286556020074AEF9 /* AccountViewController.swift */; };
 		E46FBE842862B77D000CB998 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE832862B77D000CB998 /* DeepLink.swift */; };
 		E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE802862B759000CB998 /* Coordinator.swift */; };
 		E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */; };
@@ -46,6 +49,9 @@
 		E43D17892859C8590091DDF1 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E44DF6AB2859A71700FAC8FB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		E4687602285CB0E800E93700 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
+		E46C69F0286555DE0074AEF9 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
+		E46C69F5286556020074AEF9 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		E46FBE802862B759000CB998 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E46FBE832862B77D000CB998 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		E47CCCDD2859EE1B00D37ED8 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
@@ -173,6 +179,144 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		E46C69DB286555450074AEF9 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				E46C69DF2865557A0074AEF9 /* Issue */,
+				E46C69E02865557F0074AEF9 /* Label */,
+				E46C69E2286555840074AEF9 /* Milestone */,
+				E46C69E1286555810074AEF9 /* Account */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		E46C69DF2865557A0074AEF9 /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+				E46C69EE286555D00074AEF9 /* Flow */,
+				E46C69ED286555CE0074AEF9 /* View */,
+				E46C69E3286555920074AEF9 /* ViewModel */,
+			);
+			path = Issue;
+			sourceTree = "<group>";
+		};
+		E46C69E02865557F0074AEF9 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				E46C69EC286555CA0074AEF9 /* Flow */,
+				E46C69EB286555BF0074AEF9 /* View */,
+				E46C69E4286555940074AEF9 /* ViewModel */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		E46C69E1286555810074AEF9 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				E46C69E82865559A0074AEF9 /* Flow */,
+				E46C69E6286555970074AEF9 /* View */,
+				E46C69E7286555980074AEF9 /* ViewModel */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		E46C69E2286555840074AEF9 /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				E46C69EA286555AE0074AEF9 /* Flow */,
+				E46C69E9286555AD0074AEF9 /* View */,
+				E46C69E5286555950074AEF9 /* ViewModel */,
+			);
+			path = Milestone;
+			sourceTree = "<group>";
+		};
+		E46C69E3286555920074AEF9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E46C69E4286555940074AEF9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E46C69E5286555950074AEF9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E46C69E6286555970074AEF9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E46C69F5286556020074AEF9 /* AccountViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E46C69E7286555980074AEF9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E46C69E82865559A0074AEF9 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		E46C69E9286555AD0074AEF9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E46C69EA286555AE0074AEF9 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		E46C69EB286555BF0074AEF9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E46C69F0286555DE0074AEF9 /* LabelViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E46C69EC286555CA0074AEF9 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		E46C69ED286555CE0074AEF9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E46C69EE286555D00074AEF9 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
 		E46FBE7E2862B733000CB998 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +416,7 @@
 			children = (
 				73A7EDC32859694B00191F99 /* Utils */,
 				E4C5DADE285891A00093CFF1 /* LoginScene */,
+				E46C69DB286555450074AEF9 /* Tabs */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -440,10 +585,13 @@
 				73A7EDC92859A68800191F99 /* LoginView.swift in Sources */,
 				E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */,
 				E4D87382285884AE00AFCE4D /* AppDelegate.swift in Sources */,
+				E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */,
 				738910042864726B00502A86 /* Service.swift in Sources */,
+				E46C69F1286555DE0074AEF9 /* LabelViewController.swift in Sources */,
 				738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */,
 				E4F44CF0285C292E00D3A3E6 /* AppFlowDIContainer.swift in Sources */,
 				736E6BA92864093100BB3490 /* AuthRepository.swift in Sources */,
+				E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */,
 				E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */,
 				E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */,
 				73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */,
