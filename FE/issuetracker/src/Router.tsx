@@ -7,6 +7,7 @@ import Issue from 'components/Issue';
 import NewIssue from 'components/newIssue';
 import LabelPage from 'components/LabelPage';
 import MileStone from 'components/milestone';
+import Callback from 'components/Callback';
 import { loginState } from 'context/loginState';
 
 interface Props {
@@ -40,6 +41,7 @@ function Router() {
         }
       />
       <Route path="/login" element={<Login />} />
+      <Route path="/callback" element={<Callback />} />
       <Route
         path="/newIssue"
         element={
