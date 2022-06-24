@@ -14,10 +14,21 @@ class Repository @Inject constructor(
 ) {
     suspend fun loadFriendList(): List<User> {
         // TODO  네트워크 상태에 따른 분기 처리 필요
+        Log.d("sdd","0")
+        // 1. 리모트에서 로컬에 캐시해줌
+        updateRemoteDatabase()
 
+
+        // 2. 업데이트된 로컬을 통해서 반환해줌
+        val result = friendLocalDatabase.userDao().getAll()
+
+        return result
+    }
+
+    suspend fun updateRemoteDatabase() {
         // 1. 리모트에서 로컬에 캐시해줌
         val userList = friendRemoteDatabase.loadFriendList()
-
+        Log.d("sdd","1")
         CoroutineScope(Dispatchers.IO).launch {
             friendLocalDatabase.userDao().deleteAllUsers()
             userList.forEach {
@@ -26,8 +37,14 @@ class Repository @Inject constructor(
                 }
             }
         }.join()
-        // 2. 업데이트된 로컬을 통해서 반환해줌
-        val result = friendLocalDatabase.userDao().getAll()
-        return result
+        Log.d("sdd","2")
+    }
+
+    suspend fun loadFriendListFromRemote(): List<User> {
+        return friendRemoteDatabase.loadFriendList()
+    }
+
+    suspend fun updateFriend(userList: List<User>) {
+        friendRemoteDatabase.updateFriend(userList)
     }
 }

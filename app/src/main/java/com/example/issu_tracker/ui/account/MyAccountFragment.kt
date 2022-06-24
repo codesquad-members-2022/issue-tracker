@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
 import com.example.issu_tracker.databinding.FragmentIssueBinding
 import com.example.issu_tracker.databinding.FragmentMyAccountBinding
+import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -50,10 +51,18 @@ class MyAccountFragment : Fragment() {
     private fun setRecyclerView() {
         accountViewModel.loadFriendList()
 
-        adapter = FriendAdapter()
+        adapter = FriendAdapter(object :UserAdapterEventListener{
+            override fun dltUser(user: com.example.issu_tracker.data.User) {
+                accountViewModel.dltFriend(user)
+            }
+        })
         binding.rvFriendList.adapter = adapter
         binding.rvFriendList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
+}
+
+interface UserAdapterEventListener {
+    fun dltUser(user: com.example.issu_tracker.data.User)
 }

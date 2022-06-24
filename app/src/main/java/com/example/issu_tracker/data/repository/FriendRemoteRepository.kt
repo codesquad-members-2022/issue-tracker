@@ -7,5 +7,6 @@ import kotlinx.coroutines.tasks.await
 interface FriendRemoteRepository {
 
     suspend fun loadFriendList(): List<User>
+    suspend fun updateFriend(users: List<User>)
 
 }
