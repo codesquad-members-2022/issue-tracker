@@ -12,7 +12,7 @@
 		7389100228646DC000502A86 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7389100128646DC000502A86 /* Storage.swift */; };
 		738910042864726B00502A86 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738910032864726B00502A86 /* Service.swift */; };
 		738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C4AAE285AD38C0050990E /* LoginButton.swift */; };
-		73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC52859697600191F99 /* Extension+UIColor.swift */; };
+		73A7EDC62859697600191F99 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC52859697600191F99 /* UIColor+Extensions.swift */; };
 		73A7EDC92859A68800191F99 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC82859A68800191F99 /* LoginView.swift */; };
 		E43D17862859C7B50091DDF1 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */; };
 		E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D17892859C8590091DDF1 /* LoginViewModel.swift */; };
@@ -20,6 +20,7 @@
 		E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */; };
 		E45477AF2865617D002379F1 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477AE2865617D002379F1 /* UIImage+Extensions.swift */; };
 		E45477B3286564B2002379F1 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477B2286564B2002379F1 /* BaseCoordinator.swift */; };
+		E45477B5286566FA002379F1 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45477B4286566FA002379F1 /* UIView+Extensions.swift */; };
 		E46C69F1286555DE0074AEF9 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F0286555DE0074AEF9 /* LabelViewController.swift */; };
 		E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */; };
 		E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C69F5286556020074AEF9 /* AccountViewController.swift */; };
@@ -53,7 +54,7 @@
 		7389100128646DC000502A86 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		738910032864726B00502A86 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		738C4AAE285AD38C0050990E /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
-		73A7EDC52859697600191F99 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
+		73A7EDC52859697600191F99 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		73A7EDC82859A68800191F99 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C1D71F4808639204766E3B8B /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +63,7 @@
 		E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowDIContainer.swift; sourceTree = "<group>"; };
 		E45477AE2865617D002379F1 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		E45477B2286564B2002379F1 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		E45477B4286566FA002379F1 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		E4687602285CB0E800E93700 /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		E46C69F0286555DE0074AEF9 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		E46C69F3286555F30074AEF9 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
@@ -162,8 +164,9 @@
 		73A7EDC42859696000191F99 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				73A7EDC52859697600191F99 /* Extension+UIColor.swift */,
+				73A7EDC52859697600191F99 /* UIColor+Extensions.swift */,
 				E45477AE2865617D002379F1 /* UIImage+Extensions.swift */,
+				E45477B4286566FA002379F1 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */,
 				E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */,
 				7389100228646DC000502A86 /* Storage.swift in Sources */,
+				E45477B5286566FA002379F1 /* UIView+Extensions.swift in Sources */,
 				E4D87386285884AE00AFCE4D /* LoginViewController.swift in Sources */,
 				73A7EDC92859A68800191F99 /* LoginView.swift in Sources */,
 				E46C69F92865568C0074AEF9 /* LabelFlowCoordinator.swift in Sources */,
@@ -633,7 +637,7 @@
 				E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */,
 				E46C6A0728655AC70074AEF9 /* LabelFlowDIContainer.swift in Sources */,
 				E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */,
-				73A7EDC62859697600191F99 /* Extension+UIColor.swift in Sources */,
+				73A7EDC62859697600191F99 /* UIColor+Extensions.swift in Sources */,
 				E46C6A03286559830074AEF9 /* IssueFlowDIContainer.swift in Sources */,
 				E46C6A0928655B320074AEF9 /* MilestoneFlowDIContainer.swift in Sources */,
 				E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */,
