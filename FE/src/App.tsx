@@ -7,6 +7,10 @@ import { DetailIssue } from 'pages/DetailIssue';
 import { Labels } from 'pages/Labels';
 import { Milestones } from 'pages/Milestones';
 
+import { worker } from './mocks/browser';
+
+worker.start();
+
 function App(): JSX.Element {
   return (
     <Routes>

@@ -1,5 +1,6 @@
+import FilterBar from 'common/Filter/FilterBar';
 import * as S from './Issues.styled';
-import { ListItem, filterItems } from './Data';
+import { author, label, mileStone, writer } from './Constants';
 
 function IssueHeader() {
   return (
@@ -16,12 +17,10 @@ function IssueHeader() {
         </S.ClosedIssue>
       </S.Issue>
       <S.Table>
-        {filterItems.map(({ id, item }: ListItem) => (
-          <S.TableList key={id}>
-            <p>{item}</p>
-            <img src="icons/filterIcon.svg" alt="" />
-          </S.TableList>
-        ))}
+        <FilterBar filterTitle="담당자" filterList={author} />
+        <FilterBar filterTitle="레이블" filterList={label} />
+        <FilterBar filterTitle="마일스톤" filterList={mileStone} />
+        <FilterBar filterTitle="작성자" filterList={writer} />
       </S.Table>
     </S.IssueHeader>
   );
