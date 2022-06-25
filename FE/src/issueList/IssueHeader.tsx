@@ -2,11 +2,15 @@ import { GREYSCALE } from '@/constants';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import CheckBox, { CheckBoxType } from './CheckBox';
-import { SelectedIssueType } from './IssueList';
+import { IssueListStateType, SelectedIssueType } from './IssueList';
 import IssueMenu from './IssueMenu';
 import IssueTab from './IssueTab';
 
 type IssueHeaderProps = {
+  issueListState: IssueListStateType;
+  setIssueListState: Dispatch<SetStateAction<IssueListStateType>>;
+  openedIssueCount: number;
+  closedIssueCount: number;
   selectedIssues: SelectedIssueType;
   setSelectedIssues: Dispatch<SetStateAction<SelectedIssueType>>;
   headerCheckBoxType: CheckBoxType;
@@ -14,6 +18,10 @@ type IssueHeaderProps = {
 };
 
 function IssueHeader({
+  issueListState,
+  setIssueListState,
+  openedIssueCount,
+  closedIssueCount,
   selectedIssues,
   setSelectedIssues,
   headerCheckBoxType,
@@ -57,15 +65,17 @@ function IssueHeader({
           <IssueMenus>
             <IssueMenu
               icon={'alertCircle'}
-              menuName={'열린 이슈'}
-              count={2}
-              isCurrent
+              menuName="열린 이슈"
+              count={openedIssueCount}
+              isCurrent={issueListState === 'opened'}
+              onClick={() => setIssueListState('opened')}
             />
             <IssueMenu
               icon={'archive'}
-              menuName={'닫힌 이슈'}
-              count={0}
-              isCurrent={false}
+              menuName="닫힌 이슈"
+              count={closedIssueCount}
+              isCurrent={issueListState === 'closed'}
+              onClick={() => setIssueListState('closed')}
             />
           </IssueMenus>
           <IssueTabs>
