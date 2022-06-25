@@ -46,40 +46,49 @@ function IssueItem({
     updateIssueState(id);
   };
 
-  const getTimeStamp = (writtenTime: string) => {
+  const getTimeStamp = (createdTime: string) => {
     let timeStamp;
 
-    const writtenDate = new Date(writtenTime);
+    const createdTimeDate = new Date(createdTime);
     const today = new Date();
 
-    const sec = 60 * 1000;
-    const min = sec * 60;
-    const hour = min * 24;
-    const day = hour * 30;
-    const gap = today.getTime() - writtenDate.getTime();
+    const createdDate = {
+      year: createdTimeDate.getFullYear(),
+      month: createdTimeDate.getMonth(),
+      date: createdTimeDate.getDate(),
+      hour: createdTimeDate.getHours(),
+      min: createdTimeDate.getMinutes(),
+      sec: createdTimeDate.getSeconds()
+    };
+    const todayDate = {
+      year: today.getFullYear(),
+      month: today.getMonth(),
+      date: today.getDate(),
+      hour: today.getHours(),
+      min: today.getMinutes(),
+      sec: today.getSeconds()
+    };
 
     switch (true) {
-      case gap < sec:
-        timeStamp = `${Math.floor(gap / 1000)}초 전`;
+      case createdDate.year !== todayDate.year:
+        timeStamp = `${createdDate.year}년 ${createdDate.month + 1}월 ${
+          createdDate.date
+        }일`;
         break;
-      case gap < min:
-        timeStamp = `${Math.floor(gap / sec)}분 전`;
+      case createdDate.month !== todayDate.month:
+        timeStamp = `${createdDate.month + 1}월 ${createdDate.date}일`;
         break;
-      case gap < hour:
-        timeStamp = `${Math.floor(gap / min)}시간 전`;
+      case createdDate.date !== todayDate.date:
+        timeStamp = `${todayDate.date - createdDate.date}일 전`;
         break;
-      case gap < day:
-        timeStamp = `${Math.floor(gap / hour)}일 전`;
+      case createdDate.hour !== todayDate.hour:
+        timeStamp = `${todayDate.hour - createdDate.hour}시간 전`;
         break;
-      case writtenDate.getFullYear() === today.getFullYear():
-        timeStamp = `${
-          writtenDate.getMonth() + 1
-        }월 ${writtenDate.getDate()}일`;
+      case createdDate.min !== todayDate.min:
+        timeStamp = `${todayDate.min - createdDate.min}분 전`;
         break;
       default:
-        timeStamp = `${writtenDate.getFullYear()}년 ${
-          writtenDate.getMonth() + 1
-        }월 ${writtenDate.getDate()}일`;
+        timeStamp = `${todayDate.sec - createdDate.sec}초 전`;
     }
 
     return timeStamp;
