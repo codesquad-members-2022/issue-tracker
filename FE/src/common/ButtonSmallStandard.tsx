@@ -11,7 +11,7 @@ type ButtonSmallStandardProps = {
 function ButtonSmallStandard({
   isDisabled,
   label,
-  onClick,
+  onClick
 }: ButtonSmallStandardProps) {
   const Box = isDisabled ? ButtonBoxDisabled : ButtonBoxAbled;
 
