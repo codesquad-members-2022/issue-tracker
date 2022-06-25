@@ -8,14 +8,21 @@ type IssueMenuProps = {
   menuName: string;
   count: number;
   isCurrent: boolean;
+  onClick: () => void;
 };
 
-function IssueMenu({ icon, menuName, count, isCurrent }: IssueMenuProps) {
+function IssueMenu({
+  icon,
+  menuName,
+  count,
+  isCurrent,
+  onClick
+}: IssueMenuProps) {
   const Menu = isCurrent ? CurrentMenu : DefaultMenu;
   const color = isCurrent ? GREYSCALE.TITLE_ACTION : GREYSCALE.LABEL;
 
   return (
-    <IssueMenuBox>
+    <IssueMenuBox onClick={onClick}>
       <Icon iconName={icon} width={14} height={14} stroke={color} />
       <Menu>
         {menuName}({count})

@@ -10,10 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import kr.codesquad.issuetracker.domain.comment.Comment;
+import kr.codesquad.issuetracker.domain.issue.Issue;
 
 @Entity
-@Table(name = "comment_image")
-public class CommentImage {
+@Table(name = "image")
+public class Image {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "comment_image_id")
@@ -24,4 +26,8 @@ public class CommentImage {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "comment_id")
 	private Comment comment;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "issue_id")
+	private Issue issue;
 }

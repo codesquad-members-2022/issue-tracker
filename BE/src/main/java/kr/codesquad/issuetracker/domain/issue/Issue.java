@@ -17,7 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import kr.codesquad.issuetracker.domain.BaseTimeEntity;
+import kr.codesquad.issuetracker.domain.Status;
 import kr.codesquad.issuetracker.domain.comment.Comment;
+import kr.codesquad.issuetracker.domain.image.Image;
 import kr.codesquad.issuetracker.domain.label.Label;
 import kr.codesquad.issuetracker.domain.member.Member;
 import kr.codesquad.issuetracker.domain.milestone.Milestone;
@@ -40,10 +42,13 @@ public class Issue extends BaseTimeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
-	private Member member;
+	private Member writer;
 
 	@OneToMany(mappedBy = "issue")
 	private List<Comment> comments = new ArrayList<>();
+
+	@OneToMany(mappedBy = "issue")
+	private List<Image> images = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "milestone_id")
@@ -55,7 +60,7 @@ public class Issue extends BaseTimeEntity {
 		joinColumns = @JoinColumn(name = "issue_id"),
 		inverseJoinColumns = @JoinColumn(name = "member_id")
 	)
-	private List<Member> members = new ArrayList<>();
+	private List<Member> assignees = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(

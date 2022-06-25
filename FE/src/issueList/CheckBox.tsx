@@ -2,8 +2,11 @@ import Icon from '@/assets/icons/Icon';
 import icons from '@/assets/icons/svgs';
 import { COLORS, GREYSCALE } from '@/constants';
 
+export type CheckBoxType = 'initial' | 'active' | 'disable';
+
 type CheckBoxProps = {
-  checkBoxType: 'initial' | 'active' | 'disable';
+  checkBoxType: CheckBoxType;
+  onClick: () => void;
 };
 
 type CheckBoxIconProps = {
@@ -12,21 +15,21 @@ type CheckBoxIconProps = {
   fill: string;
 };
 
-function CheckBox({ checkBoxType }: CheckBoxProps) {
+function CheckBox({ checkBoxType, onClick }: CheckBoxProps) {
   const initialCheckBox: CheckBoxIconProps = {
     iconName: 'checkBoxInitial',
     stroke: GREYSCALE.LINE,
-    fill: GREYSCALE.OFF_WHITE,
+    fill: GREYSCALE.OFF_WHITE
   };
   const activeCheckBox: CheckBoxIconProps = {
     iconName: 'checkBoxActive',
     stroke: GREYSCALE.OFF_WHITE,
-    fill: COLORS.BLUE,
+    fill: COLORS.BLUE
   };
   const disableCheckBox: CheckBoxIconProps = {
     iconName: 'checkBoxDisable',
     stroke: GREYSCALE.OFF_WHITE,
-    fill: COLORS.BLUE,
+    fill: COLORS.BLUE
   };
 
   const checkBox: CheckBoxIconProps = (() => {
@@ -45,6 +48,7 @@ function CheckBox({ checkBoxType }: CheckBoxProps) {
       iconName={checkBox.iconName}
       stroke={checkBox.stroke}
       fill={checkBox.fill}
+      onClick={onClick}
     />
   );
 }

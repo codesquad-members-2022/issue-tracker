@@ -1,7 +1,7 @@
 import { GREYSCALE } from '@/constants';
 import styled from 'styled-components';
 
-type LabelProps = {
+export type LabelProps = {
   labelName: string;
   backgroundColor: string;
   textColor: string;

@@ -6,6 +6,7 @@ type IconProps = {
   height?: number;
   stroke?: string;
   fill?: string;
+  onClick?: (() => void) | null;
 };
 
 function Icon({
@@ -14,9 +15,18 @@ function Icon({
   height = 16,
   stroke = 'none',
   fill = 'none',
+  onClick = null
 }: IconProps) {
   const IconSvg = icons[iconName];
-  return <IconSvg width={width} height={height} stroke={stroke} fill={fill} />;
+  return (
+    <IconSvg
+      width={width}
+      height={height}
+      stroke={stroke}
+      fill={fill}
+      onClick={onClick}
+    />
+  );
 }
 
 export default Icon;
