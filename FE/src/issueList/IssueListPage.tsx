@@ -3,9 +3,7 @@ import ButtonSmallStandard from '@/common/ButtonSmallStandard';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LinkTabs from '@/issueList/LinkTabs';
-import IssueItem from './IssueItem';
-import IssueHeader from './IssueHeader';
-import EmptyIssueItem from './EmptyIssueItem';
+import IssueList from './IssueList';
 
 function IssueListPage() {
   return (
@@ -17,13 +15,7 @@ function IssueListPage() {
           <ButtonSmallStandard isDisabled={false} label="이슈 작성" />
         </Link>
       </Wrap>
-      <div>
-        <IssueHeader />
-        <div>
-          <IssueItem />
-          <IssueItem isLast />
-        </div>
-      </div>
+      <IssueList />
     </>
   );
 }

@@ -1,34 +1,91 @@
 import { GREYSCALE } from '@/constants';
-import React from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import CheckBox from './CheckBox';
+import CheckBox, { CheckBoxType } from './CheckBox';
+import { IssueListStateType, SelectedIssueType } from './IssueList';
 import IssueMenu from './IssueMenu';
 import IssueTab from './IssueTab';
 
-function IssueHeader() {
+type IssueHeaderProps = {
+  issueListState: IssueListStateType;
+  setIssueListState: Dispatch<SetStateAction<IssueListStateType>>;
+  openedIssueCount: number;
+  closedIssueCount: number;
+  selectedIssues: SelectedIssueType;
+  setSelectedIssues: Dispatch<SetStateAction<SelectedIssueType>>;
+  headerCheckBoxType: CheckBoxType;
+  setHeaderCheckBoxType: Dispatch<SetStateAction<CheckBoxType>>;
+};
+
+function IssueHeader({
+  issueListState,
+  setIssueListState,
+  openedIssueCount,
+  closedIssueCount,
+  selectedIssues,
+  setSelectedIssues,
+  headerCheckBoxType,
+  setHeaderCheckBoxType
+}: IssueHeaderProps) {
+  const selectedIssuesCount = Object.values(selectedIssues).filter(
+    (selected) => selected
+  ).length;
+
+  const setAllIssuesState = (state: boolean) => {
+    Object.keys(selectedIssues).forEach((id) => {
+      selectedIssues[id] = state;
+    });
+    setSelectedIssues({ ...selectedIssues });
+  };
+
+  const handleClick = () => {
+    if (headerCheckBoxType === 'initial' || headerCheckBoxType === 'disable') {
+      setHeaderCheckBoxType('active');
+      setAllIssuesState(true);
+    } else {
+      setHeaderCheckBoxType('initial');
+      setAllIssuesState(false);
+    }
+  };
+
   return (
     <IssueHeaderBox>
-      <CheckBox checkBoxType={'initial'} />
-      <IssueMenus>
-        <IssueMenu
-          icon={'alertCircle'}
-          menuName={'열린 이슈'}
-          count={2}
-          isCurrent
-        />
-        <IssueMenu
-          icon={'archive'}
-          menuName={'닫힌 이슈'}
-          count={0}
-          isCurrent={false}
-        />
-      </IssueMenus>
-      <IssueTabs>
-        <IssueTab tabName={'담당자'} />
-        <IssueTab tabName={'레이블'} />
-        <IssueTab tabName={'마일스톤'} />
-        <IssueTab tabName={'작성자'} />
-      </IssueTabs>
+      <CheckBox checkBoxType={headerCheckBoxType} onClick={handleClick} />
+      {selectedIssuesCount ? (
+        <>
+          <SelectedIssuesCount>
+            {selectedIssuesCount}개 이슈 선택
+          </SelectedIssuesCount>
+          <IssueTabs>
+            <IssueTab tabName="상태 수정" />
+          </IssueTabs>
+        </>
+      ) : (
+        <>
+          <IssueMenus>
+            <IssueMenu
+              icon={'alertCircle'}
+              menuName="열린 이슈"
+              count={openedIssueCount}
+              isCurrent={issueListState === 'opened'}
+              onClick={() => setIssueListState('opened')}
+            />
+            <IssueMenu
+              icon={'archive'}
+              menuName="닫힌 이슈"
+              count={closedIssueCount}
+              isCurrent={issueListState === 'closed'}
+              onClick={() => setIssueListState('closed')}
+            />
+          </IssueMenus>
+          <IssueTabs>
+            <IssueTab tabName={'담당자'} />
+            <IssueTab tabName={'레이블'} />
+            <IssueTab tabName={'마일스톤'} />
+            <IssueTab tabName={'작성자'} />
+          </IssueTabs>
+        </>
+      )}
     </IssueHeaderBox>
   );
 }
@@ -49,7 +106,7 @@ const IssueMenus = styled.ul`
   gap: 24px;
 `;
 
-const SelectedIssueText = styled.p`
+const SelectedIssuesCount = styled.p`
   ${({ theme }) => theme.TYPOGRAPHY.LINK_SMALL}
   color: ${GREYSCALE.LABEL};
 `;
