@@ -12,7 +12,7 @@ type HasInputType = {
 function Login() {
   const [hasInput, setHasInput] = useState<HasInputType>({
     id: false,
-    password: false,
+    password: false
   });
   const [ErrorMessage, setErrorMessage] = useState('');
 
@@ -30,13 +30,8 @@ function Login() {
     if (!isValidUser()) {
       setErrorMessage('아이디와 비밀번호가 일치하지 않습니다.');
 
-      if (idRef.current) {
-        idRef.current.focus();
-      }
-
-      if (passwordRef.current) {
-        passwordRef.current.value = '';
-      }
+      idRef.current?.focus();
+      if (passwordRef.current) passwordRef.current.value = '';
     }
     // 로그인 성공
   };

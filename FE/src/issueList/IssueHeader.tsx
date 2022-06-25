@@ -64,14 +64,14 @@ function IssueHeader({
         <>
           <IssueMenus>
             <IssueMenu
-              icon={'alertCircle'}
+              icon="alertCircle"
               menuName="열린 이슈"
               count={openedIssueCount}
               isCurrent={issueListState === 'opened'}
               onClick={() => setIssueListState('opened')}
             />
             <IssueMenu
-              icon={'archive'}
+              icon="archive"
               menuName="닫힌 이슈"
               count={closedIssueCount}
               isCurrent={issueListState === 'closed'}
@@ -79,10 +79,10 @@ function IssueHeader({
             />
           </IssueMenus>
           <IssueTabs>
-            <IssueTab tabName={'담당자'} />
-            <IssueTab tabName={'레이블'} />
-            <IssueTab tabName={'마일스톤'} />
-            <IssueTab tabName={'작성자'} />
+            <IssueTab tabName="담당자" />
+            <IssueTab tabName="레이블" />
+            <IssueTab tabName="마일스톤" />
+            <IssueTab tabName="작성자" />
           </IssueTabs>
         </>
       )}
