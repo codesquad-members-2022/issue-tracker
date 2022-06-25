@@ -4,13 +4,13 @@ import * as S from 'components/common/SaveButton/styled.index';
 interface Props {
   buttonText: string;
   margin: string;
-  clickHandler: () => void;
+  handleButtonClick: () => void;
 }
 
-function SaveButton({ buttonText, margin, clickHandler }: Props) {
+function SaveButton({ buttonText, margin, handleButtonClick }: Props) {
   return (
     <S.saveCommentButtonWrapper margin={margin}>
-      <S.saveCommentButton onClick={clickHandler}>
+      <S.saveCommentButton onClick={handleButtonClick}>
         <I.plus />
         <S.saveCommentButtonText>{buttonText}</S.saveCommentButtonText>
       </S.saveCommentButton>

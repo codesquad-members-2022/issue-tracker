@@ -60,7 +60,7 @@ function InputComment() {
           </S.attachFileButtonWrapper>
         </S.comment>
       </S.commentWrapper>
-      <SaveButton buttonText="완료" margin="0 0 0 60px" clickHandler={saveComment} />
+      <SaveButton buttonText="완료" margin="0 0 0 60px" handleButtonClick={saveComment} />
     </S.inputComment>
   );
 }
