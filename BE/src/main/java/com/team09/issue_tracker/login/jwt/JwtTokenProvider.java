@@ -15,7 +15,7 @@ public class JwtTokenProvider {
 
 	private final Key key;
 	private final long accessTokenExpireTime;
-	private final long refreshTokenExpireTime;
+	public final long refreshTokenExpireTime;
 
 	public JwtTokenProvider(String secret, long accessTokenExpireTime,
 		long refreshTokenExpireTime) {
@@ -24,7 +24,7 @@ public class JwtTokenProvider {
 		this.refreshTokenExpireTime = refreshTokenExpireTime;
 	}
 
-	public JwtToken createJwtToken(Long id, String userName) {
+	public JwtToken createJwtToken(String id, String userName) {
 		return new JwtToken(key, accessTokenExpireTime, refreshTokenExpireTime, id, userName);
 	}
 
@@ -32,7 +32,7 @@ public class JwtTokenProvider {
 		return parseClaims(token) != null;
 	}
 
-	private Claims parseClaims(String token) {
+	public Claims parseClaims(String token) {
 		try {
 			return Jwts.parserBuilder()
 				.setSigningKey(key)
@@ -44,9 +44,8 @@ public class JwtTokenProvider {
 		} catch (MalformedJwtException e) {
 			log.info("Invalid JWT token.");
 		} catch (ExpiredJwtException e) {
-			// TODO : 만료된 토큰 처리
 			log.info("Expired JWT token.");
-			return e.getClaims();
+			throw new RuntimeException("토큰이 만료되었습니다!!");
 		} catch (UnsupportedJwtException e) {
 			log.info("Unsupported JWT token.");
 		} catch (IllegalArgumentException e) {

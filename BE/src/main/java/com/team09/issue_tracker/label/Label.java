@@ -6,8 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Label {
 
@@ -24,8 +30,15 @@ public class Label {
 
 	private String backgroundColor;
 
-	@Transient
-	private Long writerId;
+	private Long memberId;
+
+
+	public static Label of(Long labelid) {
+		return Label.builder()
+			.id(labelid)
+			.build();
+	}
+
 
 	public LabelSelectResponseDto toResponseDto() {
 		return LabelSelectResponseDto.builder()

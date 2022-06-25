@@ -1,6 +1,7 @@
 package com.team09.issue_tracker.member;
 
 import com.team09.issue_tracker.login.oauth.user.OauthUserProfile;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +19,19 @@ public class MemberService {
 		return memberRepository.save(resultMember);
 	}
 
+	public Long findIdFromUserId(String userId) {
+		Member member = findByUserId(userId);
+		return member.getId();
+	}
+
+	public Member findByUserId(String userId) {
+		return memberRepository.findByUserId(userId)
+			.orElseThrow(() -> new RuntimeException("userId에 해당하는 멤버가 존재하지 않습니다!!"));
+	}
+
+	public boolean validateMemberIds(List<Long> memberIds){
+		long countOfMemberFromDb = memberRepository.countByIdIn(memberIds);
+
+		return countOfMemberFromDb == memberIds.size();
+	}
 }

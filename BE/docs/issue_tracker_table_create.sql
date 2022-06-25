@@ -17,7 +17,8 @@ USE `issue_tracker` ;
 -- -----------------------------------------------------
 create TABLE IF NOT EXISTS `issue_tracker`.`member` (
   `member_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `user_id` VARCHAR(20) NULL DEFAULT NULL,
+  `user_id` VARCHAR(20) NULL DEFAULT NULL UNIQUE,
+  `email` VARCHAR(20) NULL DEFAULT NULL,
   `name` VARCHAR(20) NULL DEFAULT NULL,
   `type` VARCHAR(10) NULL DEFAULT NULL,  
   `img_url` VARCHAR(100) NULL DEFAULT NULL,
@@ -163,6 +164,8 @@ create TABLE IF NOT EXISTS `issue_tracker`.`issue_label` (
   `issue_label_id` BIGINT NOT NULL AUTO_INCREMENT,
   `issue_id` BIGINT NULL DEFAULT NULL,
   `label_id` BIGINT NULL DEFAULT NULL,
+  `created_at` DATETIME(6) NULL DEFAULT (CURRENT_TIME),
+  `modified_at` DATETIME(6) NULL DEFAULT (CURRENT_TIME),
 --  `member_id` BIGINT NULL DEFAULT NULL, -- 없어져도 될 것
   PRIMARY KEY (`issue_label_id`),
   INDEX `fk_issue_label_issue_id` (`issue_id` ASC) VISIBLE,
@@ -190,6 +193,8 @@ create TABLE IF NOT EXISTS `issue_tracker`.`issue_member` (
   `issue_member_id` BIGINT NOT NULL AUTO_INCREMENT,
   `member_id` BIGINT NULL DEFAULT NULL,
   `issue_id` BIGINT NULL DEFAULT NULL,
+  `created_at` DATETIME(6) NULL DEFAULT (CURRENT_TIME),
+  `modified_at` DATETIME(6) NULL DEFAULT (CURRENT_TIME),
   PRIMARY KEY (`issue_member_id`),
   INDEX `fk_issue_member_member_id` (`member_id` ASC) VISIBLE,
   INDEX `fk_issue_member_issue_id` (`issue_id` ASC) VISIBLE,
@@ -204,4 +209,4 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 -- TODO : 해당 제약 사항, 컬럼 순서 무엇이 좋을 지 확인하기
-ALTER TABLE issue_member ADD UNIQUE (member_id, issue_id);
+ALTER TABLE issue_member ADD UNIQUE (issue_id, member_id);
