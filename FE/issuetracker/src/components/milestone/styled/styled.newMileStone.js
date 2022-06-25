@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { mixin } from 'design/GlobalStyles';
 
 export const newMileStoneWrapper = styled.div`
   width: 100%;
@@ -7,6 +6,7 @@ export const newMileStoneWrapper = styled.div`
   padding: 32px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};
   border-radius: 16px;
+  margin-top: 24px;
   background: ${({ theme }) => theme.backgroundColors.gray1};
 `;
 
