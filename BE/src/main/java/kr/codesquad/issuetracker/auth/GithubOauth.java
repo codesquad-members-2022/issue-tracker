@@ -1,6 +1,5 @@
 package kr.codesquad.issuetracker.auth;
 
-import static kr.codesquad.issuetracker.auth.utils.Utils.TOKEN;
 import static kr.codesquad.issuetracker.exception.ErrorMessage.ACCESS_TOKEN_NOT_FOUND;
 import static kr.codesquad.issuetracker.exception.ErrorMessage.GITHUB_USER_INFO_NOT_FOUND;
 
@@ -19,6 +18,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class GithubOauth {
 
+	private static final String TOKEN = "token";
 	private final String clientId;
 	private final String clientSecret;
 	private final String accessTokenUri;

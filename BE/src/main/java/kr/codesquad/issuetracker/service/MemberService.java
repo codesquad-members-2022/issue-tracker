@@ -7,9 +7,8 @@ import kr.codesquad.issuetracker.auth.dto.AccessTokenResponseDto;
 import kr.codesquad.issuetracker.auth.dto.UserProfile;
 import kr.codesquad.issuetracker.auth.service.JwtService;
 import kr.codesquad.issuetracker.domain.member.Member;
-import kr.codesquad.issuetracker.domain.member.MemberRepository;
+import kr.codesquad.issuetracker.domain.member.repository.MemberRepository;
 import kr.codesquad.issuetracker.exception.CustomException;
-import kr.codesquad.issuetracker.exception.ErrorMessage;
 import kr.codesquad.issuetracker.web.dto.member.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,17 +31,25 @@ public class MemberService {
 		UserProfile userInfo = oauth.getUserInfo(token.getAccessToken());
 		log.debug("userInfo = {}", userInfo);
 
-		if (MemberDuplicateCheck(userInfo.getEmail())) {
-			Member member = memberRepository.findByEmail(userInfo.getEmail())
-				.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
-			Member updateMember = member.update(userInfo, token.getAccessToken());
-			return MemberResponseDto.of(updateMember, jwtService.createToken(updateMember));
+		if (isNotMember(userInfo.getEmail())) {
+			return join(token, userInfo);
 		}
-		Member member = Member.createMember(userInfo, token.getAccessToken());
-		return MemberResponseDto.of(member, jwtService.createToken(memberRepository.save(member)));
+		return login(token, userInfo);
 	}
 
-	private boolean MemberDuplicateCheck(String email) {
-		return memberRepository.findByEmail(email).isPresent();
+	private MemberResponseDto login(AccessTokenResponseDto token, UserProfile userInfo) {
+		Member member = memberRepository.findByEmail(userInfo.getEmail())
+			.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+		member.update(userInfo, token.getAccessToken());
+		return MemberResponseDto.of(member, jwtService.createToken(member));
+	}
+
+	private MemberResponseDto join(AccessTokenResponseDto token, UserProfile userInfo) {
+		Member member = Member.createMember(userInfo, token.getAccessToken());
+		return 	MemberResponseDto.of(member, jwtService.createToken(memberRepository.save(member)));
+	}
+
+	private boolean isNotMember(String email) {
+		return memberRepository.findByEmail(email).isEmpty();
 	}
 }

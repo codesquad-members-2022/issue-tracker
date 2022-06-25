@@ -23,7 +23,9 @@ import kr.codesquad.issuetracker.domain.image.Image;
 import kr.codesquad.issuetracker.domain.label.Label;
 import kr.codesquad.issuetracker.domain.member.Member;
 import kr.codesquad.issuetracker.domain.milestone.Milestone;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "issue")
 public class Issue extends BaseTimeEntity {
@@ -69,4 +71,13 @@ public class Issue extends BaseTimeEntity {
 		inverseJoinColumns = @JoinColumn(name = "label_id")
 	)
 	private List<Label> labels = new ArrayList<>();
+
+	public boolean isOpenOrClosed(String value) {
+		return this.status.getValue().equals(value);
+	}
+
+	public Issue deleteMilestone() {
+		this.milestone = null;
+		return this;
+	}
 }
