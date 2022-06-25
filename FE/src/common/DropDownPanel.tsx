@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { GREYSCALE } from '@/constants';
-import DropDownCheckBoxItem from './\bDropDownCheckBoxItem';
+import DropDownCheckBoxItem from './DropDownCheckBoxItem';
 
 type DropDownPanelProps = {
   items: any; // 배열안에 객체가 있는 타입, 수정해야함
