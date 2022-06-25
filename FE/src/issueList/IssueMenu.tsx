@@ -3,6 +3,7 @@ import { GREYSCALE } from '@/constants';
 import styled from 'styled-components';
 import icons from '@/assets/icons/svgs';
 
+
 type IssueMenuProps = {
   icon: keyof typeof icons;
   menuName: string;

@@ -1,5 +1,4 @@
 import icons from '@/assets/icons/svgs';
-import React from 'react';
 
 type IconProps = {
   iconName: keyof typeof icons;
@@ -16,7 +15,7 @@ function Icon({
   height = 16,
   stroke = 'none',
   fill = 'none',
-  onClick = null,
+  onClick = null
 }: IconProps) {
   const IconSvg = icons[iconName];
   return (
