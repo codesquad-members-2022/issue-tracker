@@ -15,21 +15,21 @@ public class MilestoneListResponse {
 	private final Long openedIssue;
 	private final Long closedIssue;
 
-	public MilestoneListResponse(Milestone milestone, long total, long openedIssue) {
+	public MilestoneListResponse(Milestone milestone, long totalNumber, long openedIssueNumber) {
 		this.id = milestone.getId();
 		this.title = milestone.getTitle();
 		this.description = milestone.getDescription();
 		this.dueDate = milestone.getDueDate();
-		this.openedIssue = openedIssue;
-		this.closedIssue = calculateClosedIssue(total, openedIssue);
-		this.progress = calculateProgress(total, openedIssue);
+		this.openedIssue = openedIssueNumber;
+		this.closedIssue = calculateClosedIssue(totalNumber, openedIssueNumber);
+		this.progress = calculateProgress(totalNumber, openedIssueNumber);
 	}
 
-	private double calculateProgress(long total, long openedIssue) {
-		return (double)openedIssue / total;
+	private double calculateProgress(long totalNumber, long openedIssueNumber) {
+		return (double)openedIssueNumber / totalNumber;
 	}
 
-	private long calculateClosedIssue(long total, long openedIssue) {
-		return total - openedIssue;
+	private long calculateClosedIssue(long totalNumber, long openedIssueNumber) {
+		return totalNumber - openedIssueNumber;
 	}
 }

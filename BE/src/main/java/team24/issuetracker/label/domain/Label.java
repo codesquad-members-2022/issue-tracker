@@ -22,5 +22,6 @@ public class Label {
 
     private String title;
     private String description;
-    private boolean isDeleted;
+    private String color;
+    private boolean deleted;
 }

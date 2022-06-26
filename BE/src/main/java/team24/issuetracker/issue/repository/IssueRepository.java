@@ -15,26 +15,26 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
 	@Query("select i "
 		+ "from Issue i "
 		+ "where  i.writer.id = :id "
-		+ "and i.isDeleted = false")
+		+ "and i.deleted = false")
 	List<Issue> findByWriter(@Param("id") Long id);
 
 	@Query("select i "
 		+ "from Issue i "
 		+ "join fetch i.assignees as a "
 		+ "where a.member.id = :id "
-		+ "and i.isDeleted = false")
+		+ "and i.deleted = false")
 	List<Issue> findByAssignee(@Param("id") Long id);
 
 	@Query("select i "
 		+ "from Issue i "
 		+ "join fetch i.comments as c "
 		+ "where c.writer.id = :id "
-		+ "and i.isDeleted = false")
+		+ "and i.deleted = false")
 	List<Issue> findByCommenter(@Param("id") Long id);
 
 	@Query("select i "
 		+ "from Issue i "
-		+ "where i.isClosed = :isClosed "
-		+ "and i.isDeleted = false")
+		+ "where i.closed = :isClosed "
+		+ "and i.deleted = false")
 	List<Issue> findByState(@Param("isClosed") Boolean isClosed);
 }

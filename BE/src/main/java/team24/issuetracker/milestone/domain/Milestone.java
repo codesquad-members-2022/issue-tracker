@@ -26,7 +26,7 @@ public class Milestone {
     private String title;
     private String description;
     private LocalDate dueDate;
-    private boolean isDeleted;
+    private boolean deleted;
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues;
