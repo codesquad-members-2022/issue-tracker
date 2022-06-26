@@ -5,7 +5,7 @@ import com.example.it.issuetracker.data.dto.AddLabelDto
 import com.example.it.issuetracker.data.dto.LabelDto
 import com.example.it.issuetracker.data.network.IssueTrackerService
 
-const val TAG = "LabelDataSourceImpl"
+private const val TAG = "LabelDataSourceImpl"
 
 class LabelDataSourceDefaultImpl(
     private val issueTrackerApi: IssueTrackerService,

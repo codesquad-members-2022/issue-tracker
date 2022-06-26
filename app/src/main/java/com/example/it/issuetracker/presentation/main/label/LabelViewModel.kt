@@ -80,7 +80,10 @@ class LabelViewModel(
                 it.isChecked
             }.forEach {
                 val result = labelRepository.deleteLabelInfo(it.id)
-                if (result.isFailure) _error.emit(R.string.network_error)
+                if (result.isFailure) {
+                    _error.emit(R.string.network_error)
+                    return@launch
+                }
             }
         }
         _completeDelete.value = true

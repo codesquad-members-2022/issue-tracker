@@ -13,7 +13,7 @@ class MilestoneRepositoryImpl(
         return dataSource.getMilestoneInfoList()
     }
 
-    override suspend fun addMilestone(title: String, description: String ,deadline: String) {
+    override suspend fun addMilestone(title: String, description: String, deadline: String) {
         dataSource.addMilestone(title, description, deadline)
     }
 

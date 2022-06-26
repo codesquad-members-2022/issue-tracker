@@ -25,8 +25,8 @@
 
         <include
             android:id="@+id/label_appbarLayout"
-            bind:title="@{toolbarTitle}"
-            layout="@layout/toolbar_add_layout" />
+            layout="@layout/toolbar_add_layout"
+            bind:title="@{toolbarTitle}" />
 
         <TextView
             android:id="@+id/tv_subject"
