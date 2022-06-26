@@ -3,6 +3,7 @@ package com.example.it.issuetracker.presentation.main.label
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.R
+import com.example.it.issuetracker.data.dto.toLabel
 import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.domain.repository.LabelRepository
 import com.example.it.issuetracker.presentation.main.issue.list.Mode
@@ -42,13 +43,7 @@ class LabelViewModel(
             val result = labelRepository.getLabelInfoList()
             if (result.isSuccess) {
                 _labelList.value = result.getOrDefault(emptyList()).map { labelDto ->
-                    Label(
-                        labelDto.id,
-                        labelDto.title,
-                        labelDto.description,
-                        labelDto.color,
-                        labelDto.textColor
-                    )
+                    labelDto.toLabel()
                 }
             } else {
                 _error.emit(R.string.network_error)
@@ -85,7 +80,7 @@ class LabelViewModel(
                     return@launch
                 }
             }
+            _completeDelete.value = true
         }
-        _completeDelete.value = true
     }
 }
