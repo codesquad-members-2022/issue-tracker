@@ -11,8 +11,8 @@ public interface IssueRepository extends JpaRepository<Issue, Long>, IssueCustom
     Long countByOpenStatus(Boolean openStatus);
 
     @Query("select i from Issue i " +
-            "left join fetch i.assignees " +
-            "left join fetch i.milestone " +
+            "left join fetch i.milestone m " +
+            "left join fetch m.issues " +
             "where i.id = :id")
     @Override
     Optional<Issue> findById(@Param("id") Long id);

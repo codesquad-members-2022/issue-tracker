@@ -43,10 +43,6 @@ public class IssueService {
         Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(NoSuchElementException::new);
         Issue createdIssue = issueRepository.save(Issue.createIssue(member, title, contents, milestone));
 
-        /*
-        * 메서드 분리 필요 (findAllById로 찾을지, 스트림을 활용해서 찾을지)
-        * 예외에 대해서 더 공부하기
-        * */
         try {
             List<Label> labels = labelRepository.findAllById(labelIds);
             List<Member> assignees = memberRepository.findAllById(assigneeIds);
@@ -74,16 +70,20 @@ public class IssueService {
         Issue issue = issueRepository.findById(issueNumber)
                 .orElseThrow(() -> new NoSuchElementException("해당하는 이슈가 없습니다."));
 
-        List<MemberDto> assignees = issue.getAssignees().stream()
-                .map(issueAssignee -> MemberDto.from(issueAssignee.getAssignee()))
-                .collect(Collectors.toList());
-
-        List<LabelResponse> labels = issue.getLabels()
+        List<MemberDto> assignees = issueAssigneeRepository.findByIssue(issue)
                 .stream()
-                .map(issueLabel -> LabelResponse.from(issueLabel.getLabel()))
+                .map(IssueAssignee::getAssignee)
+                .map(MemberDto::from)
                 .collect(Collectors.toList());
 
-        return new IssueDetailResponse(MemberDto.from(issue.getIssuer()),
+        List<LabelResponse> labels = issueLabelRepository.findByIssue(issue)
+                .stream()
+                .map(IssueLabel::getLabel)
+                .map(LabelResponse::from)
+                .collect(Collectors.toList());
+
+        return new IssueDetailResponse(
+                MemberDto.from(issue.getIssuer()),
                 IssueDetail.from(issue),
                 assignees,
                 labels,

@@ -7,3 +7,10 @@ INSERT INTO label(title, color, description) VALUES ('be label', 'red', 'is back
 INSERT INTO label(title, color, description) VALUES ('fe label', 'blue', 'is frontend label');
 
 
+INSERT INTO issue (issuer_id, title, contents, open_status, milestone_id) VALUES (1, "first issue", "first issue contents", true, 1);
+
+INSERT INTO issue_label (issue_id, label_id) VALUES (1, 1);
+INSERT INTO issue_label (issue_id, label_id) VALUES (1, 2);
+
+INSERT INTO issue_assignee (issue_id, assignee_id) VALUES (1, 1);
+INSERT INTO issue_assignee (issue_id, assignee_id) VALUES (1, 2);
