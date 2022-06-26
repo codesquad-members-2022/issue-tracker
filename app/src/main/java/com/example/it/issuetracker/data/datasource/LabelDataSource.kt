@@ -1,18 +1,13 @@
 package com.example.it.issuetracker.data.datasource
 
+import com.example.it.issuetracker.data.dto.AddLabelDto
 import com.example.it.issuetracker.data.dto.LabelDto
-import kotlinx.coroutines.flow.Flow
 
 interface LabelDataSource {
 
-    fun getLabelInfoList(): Flow<List<LabelDto>>
+    suspend fun getLabelInfoList(): List<LabelDto>
 
-    suspend fun addLabel(
-        title: String,
-        description: String,
-        backgroundColor: String,
-        textColor: String,
-    )
+    suspend fun addLabel(addLabelDto: AddLabelDto)
 
     suspend fun editLabel(labelDto: LabelDto)
 

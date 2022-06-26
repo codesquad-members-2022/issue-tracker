@@ -9,7 +9,10 @@ import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.domain.repository.IssueTrackerRepository
 import com.example.it.issuetracker.domain.repository.LabelRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class FilterViewModel(
@@ -62,7 +65,7 @@ class FilterViewModel(
     }
 
     private fun getLabelInfoList() = viewModelScope.launch {
-        labelRepository.getLabelInfoList().collectLatest {
+        labelRepository.getLabelInfoList().map {
             val list = it.toMutableList()
             list.add(0, LabelDto(0, "선택", "", "#FFFFFF", "#007AFF"))
             _labelList.value = list

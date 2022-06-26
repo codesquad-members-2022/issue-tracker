@@ -2,6 +2,7 @@ package com.example.it.issuetracker.presentation.main.label
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,12 +46,18 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
                 }
             }
         }
+
+        repeatOnLifecycleExtension {
+            viewModel.error.collect { msgId ->
+                val msg = getString(msgId)
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     override fun initView() {
         binding.recyclerviewLabelItem.adapter = adapter
         setupToolbar()
-        viewModel.start()
     }
 
     private fun setupToolbar() {
@@ -75,7 +82,9 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
                 else -> false
             }
         }
-        binding.toolbarLayout.editToolbar.setNavigationOnClickListener { viewModel.changeEditMode(false) }
+        binding.toolbarLayout.editToolbar.setNavigationOnClickListener {
+            viewModel.changeEditMode(false)
+        }
     }
 
     private fun navigatePage(label: Label?) {

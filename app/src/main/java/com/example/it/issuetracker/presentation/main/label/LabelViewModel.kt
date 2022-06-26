@@ -2,12 +2,14 @@ package com.example.it.issuetracker.presentation.main.label
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.it.issuetracker.R
 import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.domain.repository.LabelRepository
 import com.example.it.issuetracker.presentation.main.issue.list.Mode
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class LabelViewModel(
@@ -26,32 +28,34 @@ class LabelViewModel(
     private var _completeDelete = MutableStateFlow(false)
     val completeDelete = _completeDelete.asStateFlow()
 
-    private var hasData = false
+    private var _error = MutableSharedFlow<Int>()
+    val error = _error.asSharedFlow()
 
-    fun start() {
-        if (!hasData) {
-            getLabelInfoList()
-            hasData = true
-        }
+    init {
+        getLabelInfoList()
     }
 
     fun getLabelInfoList() {
         viewModelScope.launch {
             _dataLoading.value = true
-            labelRepository.getLabelInfoList().collectLatest { labelDtoList ->
-                _labelList.value = labelDtoList.map { dto ->
+
+            val result = labelRepository.getLabelInfoList()
+            if (result.isSuccess) {
+                _labelList.value = result.getOrDefault(emptyList()).map { labelDto ->
                     Label(
-                        dto.id,
-                        dto.title,
-                        dto.description,
-                        dto.color,
-                        dto.textColor
+                        labelDto.id,
+                        labelDto.title,
+                        labelDto.description,
+                        labelDto.color,
+                        labelDto.textColor
                     )
                 }
-                _dataLoading.value = false
+            } else {
+                _error.emit(R.string.network_error)
             }
+            _dataLoading.value = false
+            _completeDelete.value = false
         }
-        _completeDelete.value = false
     }
 
     fun changeEditMode(editMode: Boolean) {
@@ -75,7 +79,8 @@ class LabelViewModel(
             _labelList.value.filter {
                 it.isChecked
             }.forEach {
-                labelRepository.deleteLabelInfo(it.id)
+                val result = labelRepository.deleteLabelInfo(it.id)
+                if (result.isFailure) _error.emit(R.string.network_error)
             }
         }
         _completeDelete.value = true

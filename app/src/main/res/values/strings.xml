@@ -52,4 +52,6 @@
     <string name="milestone_edit_string">마일스톤 수정</string>
     <string name="clear_date_string">날짜 초기화</string>
 
+    <!-- network error message -->
+    <string name="network_error">서버와 통신할 수 없습니다.</string>
 </resources>
