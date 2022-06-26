@@ -1,13 +1,12 @@
+import FilterBar from 'common/Filter/FilterBar';
 import * as S from './Issues.styled';
+import { filterList } from './Constants';
 
 function Filter() {
   return (
     <S.Filter>
-      <S.FilterBar>
-        <p>필터</p>
-        <img src="icons/filterIcon.svg" alt="filterIcon" />
-      </S.FilterBar>
-      <S.SearchForm type="text" />
+      <FilterBar filterTitle="필터" filterList={filterList} />
+      <S.SearchForm type="text" defaultValue="is:Open" />
     </S.Filter>
   );
 }

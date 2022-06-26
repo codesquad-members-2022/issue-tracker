@@ -1,10 +1,19 @@
+import { useEffect, useState } from 'react';
 import * as S from './Issues.styled';
-import { IssueDatasType, issueDatas } from './Data';
+import { IssueDatasType } from './Constants';
 
 function Issue() {
+  const [issueData, setIssueData] = useState([]);
+  useEffect(() => {
+    fetch('/issues')
+      .then(res => res.json())
+      .then(data => {
+        setIssueData(data);
+      });
+  }, []);
   return (
     <>
-      {issueDatas.map(
+      {issueData.map(
         ({
           id,
           title,

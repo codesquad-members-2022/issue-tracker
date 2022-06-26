@@ -8,7 +8,7 @@ export function Login(): JSX.Element {
     <S.Container>
       <S.Wrapper>
         <S.Logo>
-          <S.LogoImg alt="logo" src="./LogotypeLarge.svg" />
+          <S.LogoImg alt="logo" src="./imgs/LogotypeLarge.svg" />
         </S.Logo>
         <GitHubBtn href={URL} size="lg">
           GitHub 계정으로 로그인
