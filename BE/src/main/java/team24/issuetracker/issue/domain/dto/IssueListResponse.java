@@ -7,24 +7,24 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import team24.issuetracker.issue.domain.Issue;
 import team24.issuetracker.issue.domain.reference.IssueLabel;
-import team24.issuetracker.issue.domain.reference.IssueUser;
+import team24.issuetracker.issue.domain.reference.IssueMember;
 
 @Getter
 public class IssueListResponse {
 
 	private final Long id;
 	private final String title;
-	private final IssueListUserResponse writer;
+	private final IssueListMemberResponse writer;
 	private final LocalDateTime writtenTime;
 	private final IssueListMilestoneResponse milestone;
 	private final List<IssueListLabelResponse> labels;
 	private final boolean isClosed;
-	private final List<IssueListUserResponse> assignees;
+	private final List<IssueListMemberResponse> assignees;
 
 	public IssueListResponse(Issue issue) {
 		this.id = issue.getId();
 		this.title = issue.getTitle();
-		this.writer = new IssueListUserResponse(issue.getWriter());
+		this.writer = new IssueListMemberResponse(issue.getWriter());
 		this.writtenTime = issue.getWrittenTime();
 		this.milestone = new IssueListMilestoneResponse(issue.getMilestone());
 		this.labels = issue.getIssueLabels()
@@ -35,8 +35,8 @@ public class IssueListResponse {
 		this.isClosed = issue.isClosed();
 		this.assignees = issue.getAssignees()
 			.stream()
-			.map(IssueUser::getUser)
-			.map(IssueListUserResponse::new)
+			.map(IssueMember::getMember)
+			.map(IssueListMemberResponse::new)
 			.collect(Collectors.toList());
 	}
 }
