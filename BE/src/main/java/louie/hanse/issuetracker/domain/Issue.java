@@ -37,15 +37,13 @@ public class Issue {
     private List<IssueManager> issueManagers = new ArrayList<>();
 
     private String title;
-    private LocalDateTime createDateTime;
+    private LocalDateTime createDateTime = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.OPEN;
 
-    public Issue(String title, LocalDateTime createDateTime, Status status) {
+    public Issue(String title) {
         this.title = title;
-        this.createDateTime = createDateTime;
-        this.status = status;
     }
 
     public void updateMilestone(Milestone milestone) {

@@ -31,14 +31,12 @@ public class Comment {
     @JoinColumn
     private Member writer;
 
-    private String content;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
+    private String contents;
+    private LocalDateTime createdDateTime = LocalDateTime.now();
+    private LocalDateTime updatedDateTime = LocalDateTime.now();
 
-    public Comment(Issue issue, String content, LocalDateTime createdDateTime, LocalDateTime updatedDateTime) {
+    public Comment(Issue issue, String contents) {
         this.issue = issue;
-        this.content = content;
-        this.createdDateTime = createdDateTime;
-        this.updatedDateTime = updatedDateTime;
+        this.contents = contents;
     }
 }

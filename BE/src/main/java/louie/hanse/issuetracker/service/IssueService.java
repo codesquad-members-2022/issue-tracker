@@ -8,7 +8,6 @@ import louie.hanse.issuetracker.web.dto.IssueSaveRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,11 +25,11 @@ public class IssueService {
 
     @Transactional
     public void register(IssueSaveRequest issueSaveRequest){
-        Issue issue = new Issue(issueSaveRequest.getTitle(), LocalDateTime.now(), Status.OPEN);
+        Issue issue = new Issue(issueSaveRequest.getTitle());
         log.info("issueSaveRequest {}", issueSaveRequest);
         issueRepository.save(issue);
         if (issueSaveRequest.getContents() != null) {
-            Comment comment = new Comment(issue, issueSaveRequest.getContents(), LocalDateTime.now(), LocalDateTime.now());
+            Comment comment = new Comment(issue, issueSaveRequest.getContents());
             commentRepository.save(comment);
         }
         if (!issueSaveRequest.getManagerIds().isEmpty()) {
@@ -48,7 +47,8 @@ public class IssueService {
             }
         }
         if (issueSaveRequest.getMilestoneId() != null) {
-            Milestone milestone = milestoneRepository.findById(issueSaveRequest.getMilestoneId()).orElseThrow(IllegalStateException::new);
+            Milestone milestone = milestoneRepository.findById(issueSaveRequest.getMilestoneId())
+                    .orElseThrow(IllegalStateException::new);
             issue.updateMilestone(milestone);
         }
     }
