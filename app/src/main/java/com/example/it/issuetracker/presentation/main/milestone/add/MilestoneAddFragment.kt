@@ -2,6 +2,7 @@ package com.example.it.issuetracker.presentation.main.milestone.add
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
@@ -102,6 +103,13 @@ class MilestoneAddFragment :
                     clickSaveListener?.invoke()
                     popBackStack()
                 }
+            }
+        }
+
+        repeatOnLifecycleExtension {
+            viewModel.error.collect { msgId ->
+                val msg = getString(msgId)
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
             }
         }
     }

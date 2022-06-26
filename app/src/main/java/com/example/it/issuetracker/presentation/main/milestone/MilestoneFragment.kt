@@ -2,6 +2,7 @@ package com.example.it.issuetracker.presentation.main.milestone
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -27,7 +28,6 @@ class MilestoneFragment : BaseFragment<FragmentMilestoneBinding>(R.layout.fragme
         binding.viewModel = viewModel
 
         setupToolbar()
-        viewModel.getMilestoneInfoList()
         initView()
         observerData()
     }
@@ -47,6 +47,13 @@ class MilestoneFragment : BaseFragment<FragmentMilestoneBinding>(R.layout.fragme
                 }
             }
         }
+
+        repeatOnLifecycleExtension {
+            viewModel.error.collect { msgId ->
+                val msg = getString(msgId)
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     override fun initView() {
@@ -54,7 +61,6 @@ class MilestoneFragment : BaseFragment<FragmentMilestoneBinding>(R.layout.fragme
         val dividerItemDecoration = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
         binding.recyclerviewMilestoneItem.addItemDecoration(dividerItemDecoration)
         setupToolbar()
-        viewModel.start()
     }
 
     private fun setupToolbar() {

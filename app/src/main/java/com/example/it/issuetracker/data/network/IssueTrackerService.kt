@@ -1,8 +1,6 @@
 package com.example.it.issuetracker.data.network
 
-import com.example.it.issuetracker.data.dto.AddLabelDto
-import com.example.it.issuetracker.data.dto.LabelDto
-import com.example.it.issuetracker.data.dto.LoginDto
+import com.example.it.issuetracker.data.dto.*
 import retrofit2.http.*
 
 interface IssueTrackerService {
@@ -18,4 +16,13 @@ interface IssueTrackerService {
 
     @DELETE("labels/{id}")
     suspend fun deleteLabelInfo(@Path("id") id: Int)
+
+    @GET("milestones")
+    suspend fun getMilestoneInfoList(): List<MilestoneDto>
+
+    @POST("milestones")
+    suspend fun addMilestone(@Body addMilestoneDto: AddMilestoneDto)
+
+    @DELETE("milestones/{id}")
+    suspend fun deleteMilestone(@Path("id") id: Long)
 }

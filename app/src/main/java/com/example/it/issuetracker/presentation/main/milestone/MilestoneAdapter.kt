@@ -74,10 +74,10 @@ class MilestoneAdapter(
 
 private val diffUtil = object : DiffUtil.ItemCallback<MileStone>() {
     override fun areItemsTheSame(oldItem: MileStone, newItem: MileStone): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: MileStone, newItem: MileStone): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem == newItem
     }
 }

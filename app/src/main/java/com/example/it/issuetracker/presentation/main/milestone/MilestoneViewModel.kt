@@ -1,15 +1,18 @@
 package com.example.it.issuetracker.presentation.main.milestone
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.it.issuetracker.R
 import com.example.it.issuetracker.data.dto.toMilestone
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.domain.repository.MilestoneRepository
 import com.example.it.issuetracker.presentation.main.issue.list.Mode
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MilestoneViewModel(
@@ -28,24 +31,31 @@ class MilestoneViewModel(
     private var _completeDelete = MutableStateFlow(false)
     val completeDelete = _completeDelete.asStateFlow()
 
-    private var hasData = false
+    private var _error = MutableSharedFlow<Int>()
+    val error = _error.asSharedFlow()
 
-    fun start() {
-        if (!hasData) {
-            getMilestoneInfoList()
-            hasData = true
-        }
+    init {
+        getMilestoneInfoList()
     }
 
     fun getMilestoneInfoList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             _dataLoading.value = true
-            milestoneRepository.getMilestoneInfoList().collectLatest { milestoneDtoList ->
-                _milestoneList.value = milestoneDtoList.map { dto -> dto.toMilestone() }
-                _dataLoading.value = false
+
+            val result = milestoneRepository.getMilestoneInfoList()
+            if (result.isSuccess) {
+                _milestoneList.value = result.getOrDefault(emptyList()).map { milestoneDto ->
+                    milestoneDto.toMilestone()
+                }
+
+                Log.d("test", _milestoneList.value.toString())
+
+            } else {
+                _error.emit(R.string.network_error)
             }
+            _dataLoading.value = false
+            _completeDelete.value = false
         }
-        _completeDelete.value = false
     }
 
     fun changeEditMode(editMode: Boolean) {
@@ -69,9 +79,13 @@ class MilestoneViewModel(
             _milestoneList.value.filter {
                 it.isChecked
             }.forEach {
-                milestoneRepository.deleteMilestone(it.id)
+                val result = milestoneRepository.deleteMilestone(it.id)
+                if (result.isFailure) {
+                    _error.emit(R.string.network_error)
+                    return@forEach
+                }
             }
+            _completeDelete.value = true
         }
-        _completeDelete.value = true
     }
 }
