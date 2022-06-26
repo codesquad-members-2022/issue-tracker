@@ -45,7 +45,7 @@ public class Issue {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Milestone milestone;
-    private boolean isClosed;
+    private boolean closed;
 
     @OneToMany(mappedBy = "issue")
     private List<Image> images;
@@ -54,5 +54,5 @@ public class Issue {
     @OneToMany(mappedBy = "issue")
     private List<Comment> comments;
 
-    private boolean isDeleted;
+    private boolean deleted;
 }

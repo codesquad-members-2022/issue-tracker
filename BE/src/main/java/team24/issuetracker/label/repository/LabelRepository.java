@@ -11,6 +11,6 @@ public interface LabelRepository extends JpaRepository<Label, Long> {
 
 	@Query("select l "
 		+ "from Label l "
-		+ "where l.isDeleted = false")
+		+ "where l.deleted = false")
 	List<Label> findAll();
 }

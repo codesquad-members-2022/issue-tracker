@@ -18,7 +18,7 @@ public class IssueListResponse {
 	private final LocalDateTime writtenTime;
 	private final IssueListMilestoneResponse milestone;
 	private final List<IssueListLabelResponse> labels;
-	private final boolean isClosed;
+	private final boolean closed;
 	private final List<IssueListMemberResponse> assignees;
 
 	public IssueListResponse(Issue issue) {
@@ -32,7 +32,7 @@ public class IssueListResponse {
 			.map(IssueLabel::getLabel)
 			.map(IssueListLabelResponse::new)
 			.collect(Collectors.toList());
-		this.isClosed = issue.isClosed();
+		this.closed = issue.isClosed();
 		this.assignees = issue.getAssignees()
 			.stream()
 			.map(IssueMember::getMember)
