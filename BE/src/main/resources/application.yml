@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: classpath:auth.yml
   datasource:
     url: ${DATASOURCE_URL}
     username: ${DATASOURCE_USERNAME}
