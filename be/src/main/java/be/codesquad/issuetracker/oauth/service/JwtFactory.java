@@ -8,9 +8,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.stereotype.Component;
 
-@Component
 public class JwtFactory {
 
     private static final Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -30,6 +28,7 @@ public class JwtFactory {
         Map<String, Object> header = new HashMap<>();
         header.put("alg", "HS256");
         header.put("typ", "JWT");
+        header.put("regDate", System.currentTimeMillis());
         return header;
     }
 

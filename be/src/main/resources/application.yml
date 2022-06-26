@@ -1,0 +1,14 @@
+spring:
+  mvc:
+    servlet:
+      path: /api
+  profiles:
+    active: ${profile}
+
+oauth:
+  github:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    auth-path: https://github.com/login/oauth/access_token
+    resource-path: https://api.github.com/user
+    redirect-uri: https://github.com/login/oauth/authorize
