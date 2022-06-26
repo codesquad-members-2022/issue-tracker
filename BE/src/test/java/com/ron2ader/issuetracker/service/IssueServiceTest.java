@@ -1,35 +1,30 @@
 package com.ron2ader.issuetracker.service;
 
+import com.ron2ader.issuetracker.controller.issuedto.IssueDetail;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
-import com.ron2ader.issuetracker.domain.member.MemberRepository;
-import com.ron2ader.issuetracker.domain.milestone.MilestoneRepository;
+import com.ron2ader.issuetracker.controller.labeldto.LabelResponse;
+import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
+import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 @ActiveProfiles("local")
-@Sql("classpath:sql/data.sql")
 class IssueServiceTest {
 
     private final IssueService issueService;
-    private final MemberRepository memberRepository;
-    private final MilestoneRepository milestoneRepository;
-
 
     @Autowired
-    public IssueServiceTest(IssueService issueService,
-                            MemberRepository memberRepository,
-                            MilestoneRepository milestoneRepository) {
+    public IssueServiceTest(IssueService issueService) {
         this.issueService = issueService;
-        this.memberRepository = memberRepository;
-        this.milestoneRepository = milestoneRepository;
     }
 
     @BeforeEach
@@ -40,37 +35,37 @@ class IssueServiceTest {
     @Test
     @DisplayName("issue를 등록하면 등록된 이슈의 아이디를 반환한다.")
     void registerIssueTest() {
+        // given & when
         Long createdIssueId = issueService.registerIssue("ron2",
-                "first issue",
-                "issue contents",
+                "my issue",
+                "contents",
                 List.of(1L, 2L),
                 List.of(1L, 2L),
                 1L);
 
-        IssueDetailResponse issueDetailResponse = issueService.findById(createdIssueId);
-        System.out.println(issueDetailResponse.toString());
-
-
+        // then
+        assertThat(createdIssueId).isEqualTo(2L);
     }
 
-//
-//    @Test
-//    void findByIdTest() {
-//        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest.getTitle(), issueCreateRequest.getContents(), "ron2");
-//        IssueDetailResponse findIssue = issueService.findById(issueDetailResponse.getIssueDetail().getId());
-//
-//        assertThat(findIssue).isEqualTo(issueDetailResponse);
-//    }
-//
-//    @Test
-//    void findAllByOpenStatusPagingTest() {
-//        for (int i = 0; i < 10; i++) {
-//            issueService.registerIssue(issues.get(i).getTitle(), issues.get(i).getTitle(), "ron2");
-//        }
-//
-//        Page<IssueSimpleResponse> allByOpenStatus = issueService.findByOpenStatus(PageRequest.of(0, 5), true);
-//
-//        assertThat(allByOpenStatus.getTotalElements()).isEqualTo(10);
-//        assertThat(allByOpenStatus.getSize()).isEqualTo(5);
-//    }
+
+    @Test
+    @DisplayName("이슈 아이디로 이슈를 조회하면 issuer, issueDetail, milestone, assignees," +
+            " labels를 모두 담은 IssueDetailResponse를 반환한다.")
+    void findByIdTest() {
+        //given & when
+        IssueDetailResponse issueDetailResponse = issueService.findById(1L);
+        MemberDto issuer = issueDetailResponse.getIssuer();
+        IssueDetail issueDetail = issueDetailResponse.getIssueDetail();
+        MilestoneResponse milestone = issueDetailResponse.getMilestone();
+        List<MemberDto> assignees = issueDetailResponse.getAssignees();
+        List<LabelResponse> labels = issueDetailResponse.getLabels();
+
+        //then
+        assertThat(issuer.getMemberId()).isEqualTo("ron2");
+        assertThat(issueDetail.getId()).isEqualTo(1L);
+        assertThat(milestone.getId()).isEqualTo(1L);
+        assertThat(assignees).hasSize(2);
+        assertThat(labels).hasSize(2);
+    }
+
 }

@@ -20,8 +20,8 @@ public class IssueDetailResponse {
     private final MemberDto issuer;
     private final IssueDetail issueDetail;
     private final List<MemberDto> assignees;
-    private final List<LabelResponse> labelResponse;
-    private final MilestoneResponse milestoneResponse;
+    private final List<LabelResponse> labels;
+    private final MilestoneResponse milestone;
 
 
     @Override
