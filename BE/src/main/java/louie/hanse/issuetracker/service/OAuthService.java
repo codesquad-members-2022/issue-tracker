@@ -1,10 +1,10 @@
 package louie.hanse.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
-import louie.hanse.issuetracker.oauth.GithubAccessToken;
-import louie.hanse.issuetracker.oauth.GithubAccessTokenRequest;
-import louie.hanse.issuetracker.oauth.GithubUser;
-import louie.hanse.issuetracker.oauth.OAuthProperties;
+import louie.hanse.issuetracker.login.oauth.GithubAccessToken;
+import louie.hanse.issuetracker.login.oauth.GithubAccessTokenRequest;
+import louie.hanse.issuetracker.login.oauth.GithubUser;
+import louie.hanse.issuetracker.login.oauth.OAuthProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;

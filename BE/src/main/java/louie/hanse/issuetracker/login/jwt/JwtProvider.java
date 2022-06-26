@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker.jwt;
+package louie.hanse.issuetracker.login.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
