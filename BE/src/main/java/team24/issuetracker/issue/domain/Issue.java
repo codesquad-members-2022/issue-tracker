@@ -16,9 +16,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team24.issuetracker.issue.domain.reference.IssueLabel;
-import team24.issuetracker.issue.domain.reference.IssueUser;
+import team24.issuetracker.issue.domain.reference.IssueMember;
+import team24.issuetracker.member.domain.Member;
 import team24.issuetracker.milestone.domain.Milestone;
-import team24.issuetracker.common.domain.User;
 
 @Entity
 @Getter
@@ -35,10 +35,10 @@ public class Issue {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User writer;
+    private Member writer;
 
     @OneToMany(mappedBy = "issue")
-    private List<IssueUser> assignees;
+    private List<IssueMember> assignees;
 
     @OneToMany(mappedBy = "issue")
     private List<IssueLabel> issueLabels;
