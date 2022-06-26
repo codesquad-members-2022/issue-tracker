@@ -35,6 +35,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 		return true;
 	}
 
+	//TODO:리프레쉬 토큰을 사용해서 로그인 세션유지
 	private void hasMember(HttpServletRequest request) {
 		String header = request.getHeader(AUTHORIZATION);
 		isHeader(header);

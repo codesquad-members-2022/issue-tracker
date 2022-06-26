@@ -4,6 +4,7 @@ package kr.codesquad.issuetracker.domain.milestone;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import kr.codesquad.issuetracker.domain.BaseTimeEntity;
 import kr.codesquad.issuetracker.domain.Status;
@@ -57,13 +59,13 @@ public class Milestone extends BaseTimeEntity {
 
 	public int countOpenIssue() {
 		return (int) issues.stream()
-			.filter(issue -> issue.isOpenOrClosed(Status.OPEN.getValue()))
+			.filter(Issue::isOpened)
 			.count();
 	}
 
 	public int countClosedIssue() {
 		return (int) issues.stream()
-			.filter(issue -> issue.isOpenOrClosed(Status.CLOSED.getValue()))
+			.filter(Issue::isClosed)
 			.count();
 	}
 
@@ -71,6 +73,11 @@ public class Milestone extends BaseTimeEntity {
 		this.title = dto.getTitle();
 		this.description = dto.getDescription();
 		this.deadLine = dto.getDeadLine();
-		this.status = Status.valueOf(dto.getStatus().toUpperCase());
+		this.status = dto.getStatus();
+	}
+
+	@PreRemove
+	public void delete() {
+		issues.forEach(Issue::deleteMilestone);
 	}
 }

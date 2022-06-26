@@ -28,35 +28,26 @@ public class MilestonesService {
 	private final LabelRepository labelRepository;
 
 	@Transactional(readOnly = true)
-	public MilestoneResponseDto list(String statusValue) {
-		Status status = isStatus(statusValue);
+	public MilestoneResponseDto list(Status status) {
 		return new MilestoneResponseDto(
 			(int) labelRepository.count(),
-			isOpenCount(),
-			isClosedCount(),
+			countOpened(),
+			countClosed(),
 			findMilestonesDtos(status)
 		);
 	}
 
-	private Status isStatus(String status) {
-		String value = status.toUpperCase();
-		if (Status.OPEN.getValue().equals(value)) {
-			return Status.OPEN;
-		}
-		return Status.CLOSED;
-	}
-
-	private int isOpenCount() {
+	private int countOpened() {
 		return (int) milestoneRepository.countByStatus(Status.OPEN);
 	}
 
-	private int isClosedCount() {
+	private int countClosed() {
 		return (int) milestoneRepository.countByStatus(Status.CLOSED);
 	}
 
 	private List<MilestoneDto> findMilestonesDtos(Status status) {
 		return milestoneRepository.findAllByStatus(status).stream()
-			.map(MilestoneDto::of)
+			.map(MilestoneDto::from)
 			.collect(Collectors.toList());
 	}
 
@@ -68,14 +59,11 @@ public class MilestonesService {
 		}
 	}
 
-	//TODO: FK삭제를 어떻게 해야하나.....
 	@Transactional
 	public void delete(Long id) {
 		Milestone milestone = milestoneRepository.findById(id).orElseThrow(
 			() -> new CustomException(MILESTONE_NOT_FOUND)
 		);
-		milestone.getIssues().stream()
-			.map(Issue::deleteMilestone);
 		milestoneRepository.delete(milestone);
 	}
 

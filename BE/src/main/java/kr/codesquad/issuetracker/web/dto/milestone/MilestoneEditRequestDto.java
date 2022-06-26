@@ -21,5 +21,5 @@ public class MilestoneEditRequestDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate deadLine;
 
-	private String status;
+	private Status status;
 }

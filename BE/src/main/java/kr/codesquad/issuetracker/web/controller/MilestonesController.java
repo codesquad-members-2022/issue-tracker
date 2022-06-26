@@ -1,6 +1,7 @@
 package kr.codesquad.issuetracker.web.controller;
 
 
+import kr.codesquad.issuetracker.domain.Status;
 import kr.codesquad.issuetracker.service.MilestonesService;
 import kr.codesquad.issuetracker.web.dto.milestone.MilestoneEditRequestDto;
 import kr.codesquad.issuetracker.web.dto.milestone.MilestoneRequestDto;
@@ -25,7 +26,7 @@ public class MilestonesController {
 	private final MilestonesService milestonesService;
 
 	@GetMapping
-	public MilestoneResponseDto milestoneList(@RequestParam String status) {
+	public MilestoneResponseDto milestoneList(@RequestParam Status status) {
 		log.debug("마일스톤 조회");
 		return milestonesService.list(status);
 	}
@@ -44,7 +45,7 @@ public class MilestonesController {
 
 	@PostMapping("{id}")
 	public void milestoneEdit(@PathVariable Long id, @RequestBody MilestoneEditRequestDto dto) {
-		log.debug("라벨 수정");
+		log.debug("마일스톤 수정");
 		milestonesService.update(id, dto);
 	}
 }

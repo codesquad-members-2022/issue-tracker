@@ -35,7 +35,7 @@ public class LabelService {
 
 	private List<LabelDto> findLabelDtos() {
 		return labelRepository.findAll().stream()
-			.map(LabelDto::of)
+			.map(LabelDto::from)
 			.collect(Collectors.toList());
 	}
 
@@ -47,14 +47,10 @@ public class LabelService {
 		}
 	}
 
-	//TODO: 라벨을 삭제시 이슈전부 찾아서 이슈 id를 삭제?
 	@Transactional
 	public void delete(Long id) {
-		try {
-			labelRepository.deleteById(id);
-		} catch (Exception e) {
-			throw new CustomException(UNIQUE_CONSTRAINT_VIOLATED);
-		}
+		Label label = labelRepository.findById(id).orElseThrow(() -> new CustomException(LABEL_NOT_FOUND));
+		labelRepository.delete(label);
 	}
 
 	@Transactional

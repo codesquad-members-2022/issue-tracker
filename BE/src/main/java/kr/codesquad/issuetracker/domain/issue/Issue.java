@@ -2,6 +2,8 @@ package kr.codesquad.issuetracker.domain.issue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import kr.codesquad.issuetracker.domain.BaseTimeEntity;
 import kr.codesquad.issuetracker.domain.Status;
@@ -56,7 +59,7 @@ public class Issue extends BaseTimeEntity {
 	@JoinColumn(name = "milestone_id")
 	private Milestone milestone;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 		name = "assignee",
 		joinColumns = @JoinColumn(name = "issue_id"),
@@ -64,7 +67,7 @@ public class Issue extends BaseTimeEntity {
 	)
 	private List<Member> assignees = new ArrayList<>();
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "issue_label",
 		joinColumns = @JoinColumn(name = "issue_id"),
@@ -72,12 +75,23 @@ public class Issue extends BaseTimeEntity {
 	)
 	private List<Label> labels = new ArrayList<>();
 
-	public boolean isOpenOrClosed(String value) {
-		return this.status.getValue().equals(value);
+	public boolean isOpened() {
+		return this.status.equals(Status.OPEN);
+	}
+
+	public boolean isClosed() {
+		return this.status.equals(Status.CLOSED);
 	}
 
 	public Issue deleteMilestone() {
 		this.milestone = null;
+		return this;
+	}
+
+	public Issue deleteLabel(Label label) {
+		labels = labels.stream().
+			filter(l -> !l.equals(label))
+			.collect(Collectors.toList());
 		return this;
 	}
 }
