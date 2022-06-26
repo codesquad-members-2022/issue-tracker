@@ -1,10 +1,12 @@
-type AccountType = {
+import AccountSrc from 'assets/images/UserImageLarge.svg';
+
+export type AccountType = {
   id: number;
   name: string;
   email: string;
   profileImage: string;
 };
-type MileSotneType = {
+export type MileStoneType = {
   id: number;
   title: string;
   description: string;
@@ -13,28 +15,42 @@ type MileSotneType = {
   openedIssue: number;
   closedIssue: number;
 };
-type LabelType = {
-  id: number;
+export type LabelType = {
+  id?: number;
   title: string;
   color: string;
-  description: string;
+  description?: string;
 };
+export type ContentType = {
+  id: number;
+  name?: string;
+  email?: string;
+  profileImage?: string;
+  title?: string;
+  description?: string;
+  dueDate?: string;
+  progress?: number;
+  openedIssue?: number;
+  closedIssue?: number;
+  color?: string;
+};
+
 export const accountsData: Array<AccountType> = [
   {
     id: 1,
     name: 'js',
     email: 'js@codesquad.com',
-    profileImage: 'profile_image',
+    profileImage: AccountSrc,
   },
   {
     id: 2,
     name: 's',
     email: 's@codesquad.com',
-    profileImage: 'profile_image',
+    profileImage: AccountSrc,
   },
 ];
 
-export const mileStonesData: Array<MileSotneType> = [
+export const mileStonesData: Array<MileStoneType> = [
   {
     id: 1,
     title: '이슈트래커 1주차',
@@ -66,5 +82,11 @@ export const labelsData: Array<LabelType> = [
     title: 'bug',
     description: '서비스에 발생하는 오류들',
     color: '#C60B00',
+  },
+  {
+    id: 3,
+    title: 'refact',
+    description: '서비스 개선',
+    color: '#000000',
   },
 ];
