@@ -1,5 +1,8 @@
 package louie.hanse.issuetracker.domain;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
@@ -10,6 +13,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Issue {
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -38,4 +42,13 @@ public class Issue {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public Issue(String title, LocalDateTime createDateTime, Status status) {
+        this.title = title;
+        this.createDateTime = createDateTime;
+        this.status = status;
+    }
+
+    public void updateMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
 }

@@ -1,10 +1,14 @@
 package louie.hanse.issuetracker.domain;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueManager {
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -16,5 +20,10 @@ public class IssueManager {
 
     @ManyToOne
     @JoinColumn
-    private Member manger;
+    private Member manager;
+
+    public IssueManager(Issue issue, Member manager) {
+        this.issue = issue;
+        this.manager = manager;
+    }
 }
