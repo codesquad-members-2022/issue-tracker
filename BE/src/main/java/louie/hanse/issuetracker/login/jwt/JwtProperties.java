@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker.jwt;
+package louie.hanse.issuetracker.login.jwt;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

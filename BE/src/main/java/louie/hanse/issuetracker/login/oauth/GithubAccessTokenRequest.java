@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker.oauth;
+package louie.hanse.issuetracker.login.oauth;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

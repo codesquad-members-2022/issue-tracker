@@ -1,12 +1,12 @@
-package louie.hanse.issuetracker.controller;
+package louie.hanse.issuetracker.web.controller;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import louie.hanse.issuetracker.jwt.JwtProvider;
-import louie.hanse.issuetracker.oauth.GithubAccessToken;
-import louie.hanse.issuetracker.oauth.GithubUser;
-import louie.hanse.issuetracker.oauth.OAuthProperties;
+import louie.hanse.issuetracker.login.jwt.JwtProvider;
+import louie.hanse.issuetracker.login.oauth.GithubAccessToken;
+import louie.hanse.issuetracker.login.oauth.GithubUser;
+import louie.hanse.issuetracker.login.oauth.OAuthProperties;
 import louie.hanse.issuetracker.service.OAuthService;
 import louie.hanse.issuetracker.service.MemberService;
 import org.springframework.http.HttpStatus;

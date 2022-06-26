@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker.oauth;
+package louie.hanse.issuetracker.login.oauth;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

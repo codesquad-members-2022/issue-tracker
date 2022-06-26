@@ -3,7 +3,7 @@ package louie.hanse.issuetracker.service;
 import lombok.RequiredArgsConstructor;
 import louie.hanse.issuetracker.domain.Member;
 import louie.hanse.issuetracker.exception.MemberNotFoundException;
-import louie.hanse.issuetracker.oauth.GithubUser;
+import louie.hanse.issuetracker.login.oauth.GithubUser;
 import louie.hanse.issuetracker.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
