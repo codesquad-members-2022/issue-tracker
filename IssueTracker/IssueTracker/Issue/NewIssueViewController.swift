@@ -9,6 +9,28 @@ import UIKit
 
 class NewIssueViewController: UIViewController {
     
+    private let optionList = Option.allCases
+    
+    enum Option: CaseIterable {
+        case repository
+        case label
+        case milestone
+        case assignee
+        
+        var description: String {
+            switch self {
+            case .repository:
+                return "저장소"
+            case .label:
+                return "레이블"
+            case .milestone:
+                return "마일스톤"
+            case .assignee:
+                return "담당자"
+            }
+        }
+    }
+    
     private lazy var navSegmentedControl: UISegmentedControl = {
         let buttonList = ["마크다운", "미리보기"]
         var control = UISegmentedControl(items: buttonList)
@@ -38,7 +60,6 @@ class NewIssueViewController: UIViewController {
         return devider
     }()
     
-    private let optionList = ["저장소", "레이블", "마일스톤", "담당자"]
     private let optionTableCellIdentifier = "optionTableCellIdentifier"
     
     private lazy var optionTable: UITableView = {
@@ -140,7 +161,9 @@ class NewIssueViewController: UIViewController {
 }
 
 extension NewIssueViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 extension NewIssueViewController: UITableViewDataSource {
@@ -152,7 +175,7 @@ extension NewIssueViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: optionTableCellIdentifier,
                                                  for: indexPath)
         var sidebarCell = UIListContentConfiguration.sidebarCell()
-        sidebarCell.text = optionList[indexPath.item]
+        sidebarCell.text = optionList[indexPath.item].description
         sidebarCell.secondaryText = "선택내용"
         sidebarCell.prefersSideBySideTextAndSecondaryText = true
         

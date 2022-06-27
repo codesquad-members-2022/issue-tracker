@@ -30,7 +30,7 @@ struct Container {
             let service = IssueService()
             let model = IssueModel(service: service, token: token)
             let viewController = IssueViewController(model: model)
-            return UINavigationController(rootViewController: vc)
+            return UINavigationController(rootViewController: viewController)
         case .newIssue:
             return NewIssueViewController()
         }
