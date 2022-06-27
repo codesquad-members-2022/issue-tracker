@@ -11,9 +11,11 @@ import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentMilestoneBinding
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.Constants
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.milestone.add.MilestoneAddFragment
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MilestoneFragment : BaseFragment<FragmentMilestoneBinding>(R.layout.fragment_milestone) {
@@ -34,25 +36,30 @@ class MilestoneFragment : BaseFragment<FragmentMilestoneBinding>(R.layout.fragme
 
     override fun observerData() {
         repeatOnLifecycleExtension {
-            viewModel.milestoneList.collectLatest {
-                adapter.submitList(it)
-            }
-        }
-
-        repeatOnLifecycleExtension {
-            viewModel.completeDelete.collect { complete ->
-                if (complete) {
-                    viewModel.getMilestoneInfoList()
-                    viewModel.changeEditMode(false)
+            viewModel.uiState.map { it.milestoneList }
+                .distinctUntilChanged()
+                .collect {
+                    adapter.submitList(it)
                 }
-            }
         }
-
         repeatOnLifecycleExtension {
-            viewModel.error.collect { msgId ->
-                val msg = getString(msgId)
-                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-            }
+            viewModel.uiState.map { it.completeTask }
+                .distinctUntilChanged()
+                .collect { isCompleted ->
+                    if (isCompleted) {
+                        viewModel.getMilestoneInfoList()
+                        viewModel.changeEditMode(false)
+                    }
+                }
+        }
+        repeatOnLifecycleExtension {
+            viewModel.uiState.map { it.errorMsgId }
+                .distinctUntilChanged()
+                .collect { msgId ->
+                    if (msgId == Constants.INIT_ERROR_MSG_ID) return@collect
+                    val msg = getString(msgId)
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                }
         }
     }
 
