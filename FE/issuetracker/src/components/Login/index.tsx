@@ -24,7 +24,7 @@ function Login() {
           if (login) {
             navigate('/');
           } else {
-            navigate('BE와 협의한 주소');
+            navigate('/callback');
           }
         }}
       >

@@ -1,21 +1,30 @@
 import { useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import { loginState } from 'context/loginState';
+import { userState } from 'context/userState';
 
 function Callback() {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const authUri = 'BE와 협의한 주소';
+  const setLogin = useSetRecoilState(loginState);
+  const [userData, setUserData] = useRecoilState(userState);
+  const authUri = 'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/login';
 
   useEffect(() => {
     const getToken = async () => {
-      const code = searchParams.get('code');
-
       try {
-        const response = await fetch(`${authUri}?code=${code}`);
+        const response = await fetch(authUri);
         const data = await response.json();
 
-        localStorage.setItem('token', data.jwt);
-        localStorage.setItem('userImageUrl', data);
+        localStorage.setItem('name', data.name);
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('profileImage', data.profileImage);
+
+        setUserData({
+          name: data.name,
+          profileUrl: data.profileImage,
+        });
+        setLogin(true);
 
         navigate('/');
       } catch (error) {
@@ -23,7 +32,7 @@ function Callback() {
       }
     };
     getToken();
-  }, [searchParams, navigate, authUri]);
+  }, [setLogin, setUserData, userData, navigate, authUri]);
 
   return <div>Callback</div>;
 }
