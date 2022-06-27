@@ -29,8 +29,6 @@
 		BC2F599A286167E70012D18C /* DummyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5999286167E70012D18C /* DummyResponse.swift */; };
 		BC2F599B286167E70012D18C /* DummyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F5999286167E70012D18C /* DummyResponse.swift */; };
 		BC2F599E286168450012D18C /* GithubLoginManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599C286168450012D18C /* GithubLoginManagerTests.swift */; };
-		BC2F59A028616A940012D18C /* UIApplicationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599F28616A940012D18C /* UIApplicationStub.swift */; };
-		BC2F59A128616A940012D18C /* UIApplicationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F599F28616A940012D18C /* UIApplicationStub.swift */; };
 		BC2F59A32861F2620012D18C /* BaseURLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A22861F2620012D18C /* BaseURLString.swift */; };
 		BC2F59A42861F3580012D18C /* BaseURLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A22861F2620012D18C /* BaseURLString.swift */; };
 		BC2F59A62861FD350012D18C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2F59A52861FD350012D18C /* LoginViewController.swift */; };
@@ -123,7 +121,6 @@
 		BC2F5996286162F60012D18C /* dummyResponseIssues.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = dummyResponseIssues.json; sourceTree = "<group>"; };
 		BC2F5999286167E70012D18C /* DummyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyResponse.swift; sourceTree = "<group>"; };
 		BC2F599C286168450012D18C /* GithubLoginManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubLoginManagerTests.swift; sourceTree = "<group>"; };
-		BC2F599F28616A940012D18C /* UIApplicationStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationStub.swift; sourceTree = "<group>"; };
 		BC2F59A22861F2620012D18C /* BaseURLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLString.swift; sourceTree = "<group>"; };
 		BC2F59A52861FD350012D18C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BC2F59A72862F9F00012D18C /* TokenValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenValidationResponse.swift; sourceTree = "<group>"; };
@@ -255,7 +252,6 @@
 				BC2F59852860759B0012D18C /* IssueManagerTests.swift */,
 				BC2F599C286168450012D18C /* GithubLoginManagerTests.swift */,
 				BC2F5981286075520012D18C /* KeyChainStub.swift */,
-				BC2F599F28616A940012D18C /* UIApplicationStub.swift */,
 				BC2F5999286167E70012D18C /* DummyResponse.swift */,
 				BC2F5990286098B70012D18C /* URLProtocolStub.swift */,
 				D054F43C2864A97700CBE5F7 /* IssueListViewModelTests.swift */,
@@ -590,7 +586,6 @@
 				BC2F599A286167E70012D18C /* DummyResponse.swift in Sources */,
 				BC2F5975285C2A660012D18C /* Repo.swift in Sources */,
 				D04099DC2859C6930008B517 /* Observable.swift in Sources */,
-				BC2F59A028616A940012D18C /* UIApplicationStub.swift in Sources */,
 				BCF57BC2285701FB0059E61D /* AppDelegate.swift in Sources */,
 				BCF57C092857051C0059E61D /* LoginViewModel.swift in Sources */,
 				BC2F59A62861FD350012D18C /* LoginViewController.swift in Sources */,
@@ -640,7 +635,6 @@
 				D04099E52859D9D00008B517 /* PullListViewController.swift in Sources */,
 				D0E98CE9285C02800051413E /* PullListModel.swift in Sources */,
 				D054F43F2864A9B200CBE5F7 /* IssueServiceStub.swift in Sources */,
-				BC2F59A128616A940012D18C /* UIApplicationStub.swift in Sources */,
 				BC2F599E286168450012D18C /* GithubLoginManagerTests.swift in Sources */,
 				D04099E22859D9BD0008B517 /* IssueTableCellViewModel.swift in Sources */,
 				BC97093C2859B23D00E54F93 /* Issue.swift in Sources */,
