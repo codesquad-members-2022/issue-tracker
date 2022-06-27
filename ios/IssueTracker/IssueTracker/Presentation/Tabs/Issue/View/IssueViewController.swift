@@ -12,17 +12,20 @@ class IssueViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let dataSource = TableviewDataSource()
 
-    private let leftButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.image = UIImage(systemName: "line.3.horizontal.decrease.circle")
-        button.tintColor = .primary
+    private let leftButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
+        button.setTitle("필터", for: .normal)
+        button.setTitleColor(UIColor.primary, for: .normal)
         return button
     }()
-
-    private let rightButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.image = UIImage(systemName: "checkmark.circle")
-        button.tintColor = .primary
+    
+    private let rightButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        button.setTitle("선택", for: .normal)
+        button.setTitleColor(UIColor.primary, for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
         return button
     }()
 
@@ -36,8 +39,10 @@ class IssueViewController: UIViewController {
         layout()
         configureView()
         view.backgroundColor = .white
-        navigationItem.leftBarButtonItem = leftButton
-        navigationItem.rightBarButtonItem = rightButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        navigationController?.navigationBar.prefersLargeTitles = true
+
         navigationItem.title = "이슈"
     }
 
