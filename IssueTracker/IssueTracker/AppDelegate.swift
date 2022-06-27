@@ -11,8 +11,6 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    private let container = Container()
-    
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -23,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // { 다시 로그인을 해야된다고 판단 => UerDefaults.token 삭제 }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = container.buildRootViewController()
+        window?.rootViewController = Container.shared.buildRootViewController()
         window?.makeKeyAndVisible()
         return true
     }
@@ -34,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // TODO: 로그인 실패 얼럿띄우기
                 return
             }
-            GithubUserDefaults.setToken(token)
-            self?.window?.rootViewController = self?.container.buildRootViewController()
+            Container.shared.setAccessToken(token)
+            self?.window?.rootViewController = Container.shared.buildRootViewController()
         }
         return true
     }

@@ -8,10 +8,20 @@ protocol OptionSelectDelegate: AnyObject { // 이벤트 연결의 근-본
 class OptionSelectViewController: UIViewController {
     
     private let service = IssueService()
+    private var token: String?
     
     weak var delegate: OptionSelectDelegate? // 순환참조를 막기 위해 weak var로 선언
     private let dummy = ["issue-tracker", "banchan", "starbuckst"]
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
+    
+    init(token: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.token = token
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
