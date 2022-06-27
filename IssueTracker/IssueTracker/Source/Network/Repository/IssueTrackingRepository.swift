@@ -18,14 +18,22 @@ final class IssueTrackingRepository {
                        completion: @escaping (Result<[Issue]?,
                                               NetworkError>) -> Void) {
         guard let request = Provider.makeURLRequest(with: target)
-        else { return completion(.failure(.invalidTarget)) }
+        else { return completion(.failure(.invalieURLError)) }
 
-        Provider.request(with: request) { data in
-            guard let data = data,
-                  let issueList = DecodeManagerImplement
-                    .decodeJson(data: data, type: [Issue].self)
-            else { return completion(.failure(.decodingError)) }
-            return completion(.success(issueList))
+        Provider.request(with: request) { response in
+
+            switch response {
+            case .failure:
+                completion(.failure(.missingData))
+                return
+            case .success(let data):
+                guard let data = data,
+                      let issueList = DecodeManagerImplement
+                        .decodeJson(data: data, type: [Issue].self)
+                else { return completion(.failure(.decodingError)) }
+                return completion(.success(issueList))
+            }
+
         }
     }
 

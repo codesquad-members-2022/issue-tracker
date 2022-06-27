@@ -11,6 +11,7 @@ enum IssueTrackerTarget {
     case requestAuthorizeCode
     case requestAccessToken(code: String)
     case requestIssueList(token: String)
+    case requestLoginStatus(token: String)
 }
 
 extension IssueTrackerTarget: BaseTarget {
@@ -20,6 +21,8 @@ extension IssueTrackerTarget: BaseTarget {
             return URL(string: "https://github.com/login/oauth")
         case .requestIssueList:
             return URL(string: "https://api.github.com")
+        case .requestLoginStatus:
+            return URL(string: "https://api.github.com/user")
         }
     }
     // MARK: - End Point
@@ -31,7 +34,10 @@ extension IssueTrackerTarget: BaseTarget {
             return "/authorize"
         case .requestIssueList:
             return "/repos/asqw887/issue-tracker/issues"
+        default:
+            return nil
         }
+
     }
 
     // TODO: KeyChain 사용해서 client_id, client_secret 등은 안보이게 하는 것이 좋겠다.
@@ -48,7 +54,7 @@ extension IssueTrackerTarget: BaseTarget {
                 "client_id": Environment.clientId,
                 "scope": Environment.scope
             ]
-        case .requestIssueList:
+        default:
             return nil
         }
     }
@@ -57,7 +63,7 @@ extension IssueTrackerTarget: BaseTarget {
         switch self {
         case .requestAccessToken:
             return .post
-        case .requestIssueList, .requestAuthorizeCode:
+        case .requestIssueList, .requestAuthorizeCode, .requestLoginStatus:
             return .get
         }
     }
@@ -68,7 +74,7 @@ extension IssueTrackerTarget: BaseTarget {
             return nil
         case .requestAccessToken:
             return .oauth
-        case .requestIssueList(let token):
+        case .requestIssueList(let token), .requestLoginStatus(let token):
             return .githubAPIRequest(token: token)
         }
     }

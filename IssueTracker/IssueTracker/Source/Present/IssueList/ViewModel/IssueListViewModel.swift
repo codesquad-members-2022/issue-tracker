@@ -16,16 +16,13 @@ final class IssueListViewModel {
         return issueList.count
     }
 
-    var loginSuccess: (() -> Void)?
-    var loginFailure: (() -> Void)?
+    var loadedIssues: (() -> Void)?
+    var loadFailure: (() -> Void)?
 
     func loadIssueList() {
         guard let token = UserDefaults
                 .standard.object(forKey: Environment.token) as? String else {
-                    // MAKR: 로그인하고 보여지는 화면은 무조건 LoginVC가 나옴
-                    /// 1. 앱 처음 구동 -> self.loginFailure?()
-                    /// 2.
-                    self.loginFailure?()
+                    self.loadFailure?()
                     return
                 }
         let target = IssueTrackerTarget.requestIssueList(token: token)
@@ -33,10 +30,10 @@ final class IssueListViewModel {
             switch response {
             case .success(let issue):
                 self.issueList = issue ?? [Issue]()
-                self.loginSuccess?()
+                self.loadedIssues?()
             case .failure(let error):
                 print(error)
-                self.loginFailure?()
+                self.loadFailure?()
             }
         }
     }
