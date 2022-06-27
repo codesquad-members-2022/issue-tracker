@@ -37,6 +37,7 @@ public class Comment {
 
     public Comment(Issue issue, String contents) {
         this.issue = issue;
+        issue.addComment(this);
         this.contents = contents;
     }
 }

@@ -24,6 +24,7 @@ public class IssueManager {
 
     public IssueManager(Issue issue, Member manager) {
         this.issue = issue;
+        issue.addIssueManager(this);
         this.manager = manager;
     }
 }
