@@ -29,6 +29,7 @@ extension Requestable where ModelType: Decodable {
 struct APIRequest<Resource: APIResource>: Requestable {
     typealias ModelType = Resource.ModelType
     
+    let session: URLSession
     let resource: Resource
     let httpMethod: HTTPMethod
     let header: [String: String]
@@ -38,11 +39,14 @@ struct APIRequest<Resource: APIResource>: Requestable {
     init(resource: Resource,
          httpMethod: HTTPMethod = .get,
          header: [String: String] = [:],
-         body: String = "") {
+         body: String = "",
+         session: URLSession = .shared
+    ) {
         self.resource = resource
         self.httpMethod = httpMethod
         self.header = header
         self.body = body
+        self.session = session
     }
     
     // Initialize with token
@@ -50,10 +54,12 @@ struct APIRequest<Resource: APIResource>: Requestable {
          httpMethod: HTTPMethod = .get,
          token: String,
          header: [String: String] = [:],
-         body: String = "") {
+         body: String = "",
+         session: URLSession = .shared
+    ) {
         var header = header
         header["Authorization"] = "token \(token)"
-        self.init(resource: resource, httpMethod: httpMethod, header: header, body: body)
+        self.init(resource: resource, httpMethod: httpMethod, header: header, body: body, session: session)
     }
     
     var request: URLRequest {
@@ -73,7 +79,7 @@ struct APIRequest<Resource: APIResource>: Requestable {
     
     func execute(completion: @escaping (Result<Resource.ModelType, NetworkError>) -> Void) {
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        session.dataTask(with: request) { data, response, error in
             if let error = error {
                 return completion(.failure(.networkFailure(error: error)))
             }
