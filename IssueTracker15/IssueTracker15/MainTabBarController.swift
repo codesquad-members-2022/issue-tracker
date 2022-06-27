@@ -12,7 +12,7 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        let issueVC = IssueListViewController()
+        let issueVC = IssueListTableViewController()
         let navVC = IssueNavigationController(rootViewController: issueVC)
         navVC.tabBarItem.title = "이슈"
         navVC.tabBarItem.image = UIImage(systemName: "exclamationmark.circle")

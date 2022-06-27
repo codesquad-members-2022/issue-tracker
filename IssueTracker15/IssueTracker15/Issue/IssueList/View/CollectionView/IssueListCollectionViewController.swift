@@ -10,26 +10,7 @@ import UIKit
 enum Section {
     case main
 }
-
-<<<<<<< HEAD:IssueTracker15/IssueTracker15/Issue/IssueList/View/IssueListViewController.swift
-enum IssueListStatus {
-    case list
-    case selection
-    
-    mutating func toggle() {
-        switch self {
-        case .list:
-            self = .selection
-        case .selection:
-            self = .list
-        }
-    }
-}
-
-class IssueListViewController: UIViewController {
-=======
 class IssueListCollectionViewController: UIViewController {
->>>>>>> c2ade633f (feature: convert collection view to table view):IssueTracker15/IssueTracker15/Issue/IssueList/View/CollectionView/IssueListCollectionViewController.swift
     
     // MARK: - typealias(shorten type definition) ref by raywenderlich
     typealias IssueDataSource = UICollectionViewDiffableDataSource<Section, IssueDTO>
@@ -70,24 +51,6 @@ class IssueListCollectionViewController: UIViewController {
             let section = NSCollectionLayoutSection(// Definition Layout Cells in Section
                 group: NSCollectionLayoutGroup.vertical(layoutSize: .cellSize, subitem: item, count: 1)
             )
-            
-<<<<<<< HEAD:IssueTracker15/IssueTracker15/Issue/IssueList/View/IssueListViewController.swift
-            section.boundarySupplementaryItems = [
-                NSCollectionLayoutBoundarySupplementaryItem( // Definition Layout Header
-                    layoutSize: .headerSize,
-                    elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .top
-                ),
-                NSCollectionLayoutBoundarySupplementaryItem( // Definition Layout Footer
-                    layoutSize: .footerSize,
-                    elementKind: UICollectionView.elementKindSectionFooter,
-                    alignment: .bottom
-                )
-            ]
-            
-            return section
-        })
-=======
             let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, view, completion in
                 
                 guard let cell = view as? IssueListCollectioViewCell, let issue = cell.issueDTO else {
@@ -129,7 +92,6 @@ class IssueListCollectionViewController: UIViewController {
         // (_ itemIndexPath: IndexPath, _ sectionSeparatorConfiguration: UIListSeparatorConfiguration) -> UIListSeparatorConfiguration
         
         return UICollectionViewCompositionalLayout.list(using: listConfig)
->>>>>>> c2ade633f (feature: convert collection view to table view):IssueTracker15/IssueTracker15/Issue/IssueList/View/CollectionView/IssueListCollectionViewController.swift
     }
     
     private lazy var issueDataSource: IssueDataSource = {

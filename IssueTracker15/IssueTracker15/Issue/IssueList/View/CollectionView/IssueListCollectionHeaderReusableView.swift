@@ -1,5 +1,5 @@
 //
-//  IssueListHeaderReusableView.swift
+//  IssueListCollectionHeaderReusableView.swift
 //  IssueTracker15
 //
 //  Created by 백상휘 on 2022/06/21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueListHeaderReusableView: UICollectionReusableView {
+class IssueListCollectionHeaderReusableView: UICollectionReusableView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
