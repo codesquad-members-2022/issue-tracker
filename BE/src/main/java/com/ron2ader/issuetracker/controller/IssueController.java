@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -20,9 +19,6 @@ public class IssueController {
 
     private final IssueService issueService;
 
-    /*
-    * id만 반환할지, dto로 변환해서 저장된 내용 다시 보내줄지 상의 필요
-    * */
     @PostMapping("/issues")
     public Long register(@Login String issuerId, @RequestBody IssueCreateRequest issueCreateRequest) {
 
@@ -35,14 +31,14 @@ public class IssueController {
     }
 
     @GetMapping("/issues/{issueNumber}")
-    public IssueDetailResponse showIssue(@PathVariable Long issueNumber) {
+    public IssueDetailResponse getIssue(@PathVariable Long issueNumber) {
         IssueDetailResponse issueDetailResponse = issueService.findById(issueNumber);
 
         return issueDetailResponse;
     }
 
     @GetMapping("/issues")
-    public IssuesResponse showIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
+    public IssuesResponse getIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
 
         Page<IssueSimpleResponse> issues = issueService.findByOpenStatus(pageable, openStatus);
         Long countByStatus = issueService.countByStatus(!openStatus);

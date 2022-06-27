@@ -17,7 +17,7 @@ public class IssueCondition {
     private Milestone milestone;
     private Member issuer;
 
-    public static IssueCondition ofForFindOpenStatus(Boolean openStatus) {
+    public static IssueCondition createByOpenStatus(Boolean openStatus) {
         return new IssueCondition(openStatus, null, null, null, null);
     }
 }

@@ -35,7 +35,7 @@ public class MilestoneController {
     }
 
     @DeleteMapping("/milestones/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         milestoneService.delete(id);
     }

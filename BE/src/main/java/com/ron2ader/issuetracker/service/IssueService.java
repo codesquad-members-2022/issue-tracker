@@ -8,7 +8,6 @@ import com.ron2ader.issuetracker.controller.labeldto.LabelResponse;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
 import com.ron2ader.issuetracker.domain.issue.*;
-import com.ron2ader.issuetracker.domain.label.Label;
 import com.ron2ader.issuetracker.domain.label.LabelRepository;
 import com.ron2ader.issuetracker.domain.member.Member;
 import com.ron2ader.issuetracker.domain.member.MemberRepository;
@@ -95,7 +94,7 @@ public class IssueService {
 
     @Transactional(readOnly = true)
     public Page<IssueSimpleResponse> findByOpenStatus(Pageable pageable, Boolean openStatus) {
-        Page<Issue> issues = issueRepository.findByCondition(pageable, IssueCondition.ofForFindOpenStatus(openStatus));
+        Page<Issue> issues = issueRepository.findByCondition(pageable, IssueCondition.createByOpenStatus(openStatus));
         return issues.map(IssueSimpleResponse::from);
     }
 

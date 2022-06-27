@@ -10,10 +10,11 @@ import lombok.ToString;
 @ToString
 public class MemberDto {
 
+    private Long id;
     private String memberId;
     private String avatarUrl;
 
     public static MemberDto from(Member member) {
-        return new MemberDto(member.getMemberId(), member.getAvatarUrl());
+        return new MemberDto(member.getId(), member.getMemberId(), member.getAvatarUrl());
     }
 }
