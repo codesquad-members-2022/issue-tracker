@@ -1,5 +1,6 @@
 package kr.codesquad.issuetracker.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.codesquad.issuetracker.domain.Issue;
 import kr.codesquad.issuetracker.domain.Milestone;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class MilestoneResponse {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
 
+    @JsonIgnore
     private List<Issue> issueList;
 
     public MilestoneResponse(Milestone milestone) {

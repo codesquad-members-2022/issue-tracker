@@ -21,8 +21,10 @@ public class Comment {
     private LocalDateTime createdTime;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn
     private Member member;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn
     private Issue issue;
 }

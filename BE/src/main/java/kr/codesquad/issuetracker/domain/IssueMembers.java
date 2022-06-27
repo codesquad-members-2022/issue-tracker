@@ -12,8 +12,10 @@ public class IssueMembers {
     private Long id;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn
     private Issue issue;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn
     private Member member;
 }
