@@ -8,13 +8,21 @@
 import Foundation
 
 struct IssuesResource: APIResource {
-    typealias ModelType = Issue
+    typealias ModelType = [Issue]
     
-    let filter: IssueFilter = .assigned
-    let state: IssueState = .open
-    let sort: IssueSort = .created
-    let isDescending: Bool = true
-    let isPull: Bool = true
+    let filter: IssueFilter
+    let state: IssueState
+    let sort: IssueSort
+    let isDescending: Bool
+    let isPull: Bool
+    
+    init(filter: IssueFilter = .assigned, state: IssueState = .open, sort: IssueSort = .created, isDescending: Bool = true, isPull: Bool = true) {
+        self.filter = filter
+        self.state = state
+        self.sort = sort
+        self.isDescending = isDescending
+        self.isPull = isPull
+    }
     
     var path: String {
         return "/issues"
@@ -23,7 +31,7 @@ struct IssuesResource: APIResource {
     var query: [String: String]? {
         var queries = [String: String]()
         queries["filter"] = filter.rawValue
-        queries["State"] = state.rawValue
+        queries["state"] = state.rawValue
         queries["sort"] = sort.rawValue
         queries["direction"] = isDescending ? "desc" : "asc"
         queries["pulls"] = isPull ? "true" : "false"

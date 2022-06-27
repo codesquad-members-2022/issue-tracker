@@ -28,22 +28,18 @@ struct IssueManager: IssueService {
             return completion(nil)
         }
         
-        guard let url = URL(string: BaseURL.issues) else {
-            Log.error("Wrong Base URL: \(BaseURL.issues)")
-            return completion(nil)
-        }
+        let issuesResource = IssuesResource(state: .all, isPull: true)
+        let issuesRequest = APIRequest(resource: issuesResource, token: accessToken)
         
-        let request = URLRequest(url: url, with: accessToken)
-        
-        networkService.request(request, then: { (result: Result<[Issue], NetworkError>) in
+        issuesRequest.execute { result in
             switch result {
             case .success(let data):
                 completion(data)
             case .failure(let error):
-                Log.error(error.localizedDescription)
+                Log.error(error.localizedDescription + "(\(#file), \(#function), \(#line))")
                 completion(nil)
             }
-        })
+        }
     }
 }
 

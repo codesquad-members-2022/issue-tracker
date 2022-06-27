@@ -10,20 +10,10 @@ import OSLog
 
 struct Log {
     static func error(_ message: String) {
-        let context = "(\(#file), \(#function), \(#line))"
-        os_log(.error, log: .default, "%@", message + context)
+        os_log(.error, log: .default, "%@", message)
     }
     
     static func info(_ message: String) {
-        let context = "(\(#file), \(#function), \(#line))"
-        os_log(.info, log: .default, "%@", message + context)
-    }
-    
-    static func check(_ message: String) {
-        let context = "(\(#file), \(#function), \(#line))"
-        if #available(iOS 14.0, *) {
-            let log = Logger()
-            log.info("\(message + context)")
-        }
+        os_log(.info, log: .default, "%@", message)
     }
 }

@@ -62,16 +62,17 @@ struct APIRequest<Resource: APIResource>: Requestable {
         request.httpBody = body.data(using: .utf8)
         
         defaultHeader.forEach { (key, value) in
-            request.setValue(key, forHTTPHeaderField: value)
+            request.setValue(value, forHTTPHeaderField: key)
         }
         header.forEach { (key, value) in
-            request.setValue(key, forHTTPHeaderField: value)
+            request.setValue(value, forHTTPHeaderField: key)
         }
         
         return request
     }
     
     func execute(completion: @escaping (Result<Resource.ModelType, NetworkError>) -> Void) {
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 return completion(.failure(.networkFailure(error: error)))
