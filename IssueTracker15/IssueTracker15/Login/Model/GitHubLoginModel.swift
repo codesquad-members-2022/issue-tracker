@@ -7,8 +7,11 @@
 
 import Foundation
 
-struct GitHubLoginModel {
-    
+protocol LoginURLCreator {
+    func getLoginURL() -> URL?
+}
+
+struct GitHubLoginModel: LoginURLCreator {
     func getLoginURL() -> URL? {
         let baseUrlString = Bundle.main.gitLoginURL
         let clientID = Bundle.main.gitClientID
