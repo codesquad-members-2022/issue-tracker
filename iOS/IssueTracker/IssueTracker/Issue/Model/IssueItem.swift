@@ -28,6 +28,6 @@ struct Label: Codable {
     
     enum LabelCodingKeys: String, CodingKey {
         case title, backgroundColor
-        case isDarkMode = "darkMode"
+        case darkMode = "isDarkMode"
     }
 }
