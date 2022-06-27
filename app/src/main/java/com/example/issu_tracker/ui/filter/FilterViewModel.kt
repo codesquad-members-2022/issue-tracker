@@ -2,9 +2,10 @@ package com.example.issu_tracker.ui.filter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.issu_tracker.data.ConditionType
 import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.data.repository.FilterRepository
-import com.example.issu_tracker.ui.common.Constants
+import com.example.issu_tracker.ui.common.SpinnerViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FilterViewModel @Inject constructor(private val repository: FilterRepository) : ViewModel() {
+class FilterViewModel @Inject constructor(private val repository: FilterRepository) : ViewModel(), SpinnerViewModel {
 
     private val _stateStateFlow = MutableStateFlow<List<String>>(mutableListOf(""))
     val stateStateFlow = _stateStateFlow.asStateFlow()
@@ -61,27 +62,27 @@ class FilterViewModel @Inject constructor(private val repository: FilterReposito
     }
 
     private suspend fun setLabelList() {
-        val labelList = repository.loadLabel().toMutableList()
+        val labelList = repository.loadLabel().keys.toMutableList()
         labelList.add(DEFAULT_VALUE)
         _labelStateFlow.emit(labelList)
     }
 
     private suspend fun setWriterList() {
-        val writerList = repository.loadUsers().toMutableList()
+        val writerList = repository.loadUsers().keys.toMutableList()
         writerList.add(DEFAULT_VALUE)
         _writerStateFlow.emit(writerList)
     }
 
-    fun inputSpinnerValue(text: String, conditionType: Int) {
+    override fun inputSpinnerValue(text: String, conditionType: Enum<ConditionType>) {
         if (text != DEFAULT_VALUE) {
             viewModelScope.launch {
                 _conditionValueStateFlow.emit(true)
             }
             when (conditionType) {
-                Constants.CONDITION_TYPE_STATE -> stateConditionValue = text
-                Constants.CONDITION_TYPE_WRITER -> writerConditionValue = text
-                Constants.CONDITION_TYPE_LABEL -> labelConditionValue = text
-                Constants.CONDITION_TYPE_ASSIGNEE -> mileStoneConditionValue = text
+                ConditionType.STATE -> stateConditionValue = text
+                ConditionType.WRITER -> writerConditionValue = text
+                ConditionType.LABEL -> labelConditionValue = text
+                ConditionType.MILESTONE -> mileStoneConditionValue = text
             }
         }
     }
