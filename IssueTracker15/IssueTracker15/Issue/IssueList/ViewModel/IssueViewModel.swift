@@ -9,7 +9,7 @@ import Foundation
 
 class IssueListViewModel: CommonViewModel {
     
-    private(set) var issueList = Array(repeating: IssueDTO.empty, count: 25)
+    private(set) var issueList = Array(repeating: IssueDTO.empty, count: 3)
     
     var output: (Any?, ViewBindable) -> Void
 
@@ -37,7 +37,37 @@ class IssueListViewModel: CommonViewModel {
         }
         
         issueList[inx].isSelected.toggle()
-        output(nil, cell)
+        output(cell.indexPath, cell)
         return true
+    }
+    
+    func closeIssue(_ dto: IssueDTO, target: ViewBindable) {
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.randomFive) { [weak self] in
+            
+            guard let inx = self?.issueList.firstIndex(where: { $0.id == dto.id }) else { return }
+            
+            self?.issueList[inx].closed_at = "closed!"
+            
+            self?.output(
+                (target as? IssueListTableViewCell)?.indexPath,
+                target
+            )
+        }
+    }
+    
+    func deleteIssue(_ dto: IssueDTO, target: ViewBindable) {
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.randomFive) { [weak self] in
+            
+            self?.output(
+                self?.issueList.removeAll(where: { $0.id == dto.id }),
+                target
+            )
+        }
+    }
+}
+
+private extension DispatchTime {
+    static var randomFive: DispatchTime {
+        DispatchTime(uptimeNanoseconds: UInt64(Int.random(in: 1...5)))
     }
 }

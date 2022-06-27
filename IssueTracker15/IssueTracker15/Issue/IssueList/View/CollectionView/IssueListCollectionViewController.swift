@@ -47,40 +47,7 @@ class IssueListCollectionViewController: UIViewController {
     
     private var issueListViewLayout: () -> UICollectionViewCompositionalLayout = {
         
-        UICollectionViewCompositionalLayout(sectionProvider: { (_, _) -> NSCollectionLayoutSection? in
-            let item = NSCollectionLayoutItem(layoutSize: .cellSize)
-            let section = NSCollectionLayoutSection(// Definition Layout Cells in Section
-                group: NSCollectionLayoutGroup.vertical(layoutSize: .cellSize, subitem: item, count: 1)
-            )
-            let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, view, completion in
-                
-                guard let cell = view as? IssueListCollectioViewCell, let issue = cell.issueDTO else {
-                    completion(false)
-                    return
-                }
-                
-                self.vm?.deleteIssue(issue, target: cell)
-                completion(true)
-            }
-            
-            deleteAction.image = UIImage(systemName: "xmark.circle")
-            
-            let closeAction = UIContextualAction(style: .normal, title: "Close") { _, view, completion in
-                
-                guard let cell = view as? IssueListCollectioViewCell, let issue = cell.issueDTO else {
-                    completion(false)
-                    return
-                }
-                
-                self.vm?.closeIssue(issue, target: cell)
-                completion(true)
-            }
-            
-            closeAction.image = UIImage(systemName: "xmark.circle")
-            
-            return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
-        }
-        
+        var listConfig = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         listConfig.itemSeparatorHandler = { _, _ in
             var sectionConfig = UIListSeparatorConfiguration(listAppearance: UICollectionLayoutListConfiguration.Appearance.plain)
             
@@ -157,7 +124,7 @@ class IssueListCollectionViewController: UIViewController {
     }
 }
 
-extension IssueListViewController: ViewBinding {
+extension IssueListCollectionViewController: ViewBinding {
     
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
         
@@ -180,7 +147,7 @@ extension IssueListViewController: ViewBinding {
 }
 
 // MARK: - CollectionView Delegate
-extension IssueListViewController: UICollectionViewDelegate {
+extension IssueListCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("IssueListCell Delegate for Issue Detail")
     }
