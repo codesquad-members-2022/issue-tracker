@@ -16,11 +16,6 @@ struct Issue: Codable {
     let repository: Repository
 }
 
-struct Repository: Codable {
-    let name: String
-    let owner: Owner
-}
-
 struct Owner: Codable {
     let login: String
 }

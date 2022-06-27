@@ -27,8 +27,12 @@ struct IssueService {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         let globalThread = DispatchQueue.global(qos: .default)
-        AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [Issue].self, queue: globalThread, decoder: decoder) { (response) in
+        AF.request(urlString,
+                   method: .get,
+                   headers: headers)
+            .responseDecodable(of: [Issue].self,
+                               queue: globalThread,
+                               decoder: decoder) { (response) in
             switch response.result {
             case let .success(decodeData):
                 completion(.success(decodeData))
@@ -71,6 +75,7 @@ struct IssueService {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let globalThread = DispatchQueue.global(qos: .default)
         
         AF.request(urlString, method: .get, headers: headers)
             .responseDecodable(of: [Repository].self, decoder: decoder) { response in

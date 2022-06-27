@@ -7,6 +7,8 @@ protocol OptionSelectDelegate: AnyObject { // 이벤트 연결의 근-본
 
 class OptionSelectViewController: UIViewController {
     
+    private let service = IssueService()
+    
     weak var delegate: OptionSelectDelegate? // 순환참조를 막기 위해 weak var로 선언
     private let dummy = ["issue-tracker", "banchan", "starbuckst"]
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
