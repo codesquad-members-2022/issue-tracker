@@ -7,13 +7,13 @@ import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
 import com.ron2ader.issuetracker.controller.issuedto.IssuesResponse;
 import com.ron2ader.issuetracker.service.IssueService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class IssueController {
@@ -24,7 +24,7 @@ public class IssueController {
     * id만 반환할지, dto로 변환해서 저장된 내용 다시 보내줄지 상의 필요
     * */
     @PostMapping("/issues")
-    public Long register(@Login String issuerId, IssueCreateRequest issueCreateRequest) {
+    public Long register(@Login String issuerId, @RequestBody IssueCreateRequest issueCreateRequest) {
 
         return issueService.registerIssue(issuerId,
                 issueCreateRequest.getTitle(),

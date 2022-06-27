@@ -34,17 +34,17 @@ public class Issue extends BaseEntity {
 
     private Boolean openStatus;
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<IssueAssignee> assignees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<IssueLabel> labels = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Reply> replies = new ArrayList<>();
 
     private Issue(Member issuer, String title, String contents, Milestone milestone) {
@@ -60,13 +60,23 @@ public class Issue extends BaseEntity {
         return new Issue(null, member, title, contents, true, assignees, labels, milestone, replies);
     }
 
-    public static Issue createIssue(Member issuer, String title, String contents, Milestone milestone)  {
-        return new Issue(issuer, title, contents, milestone);
+    public static Issue createIssue(Member issuer, String title, String contents)  {
+        return new Issue(issuer, title, contents, null);
     }
 
     public void addReply(Reply reply) {
-        reply.setIssue(this);
         this.replies.add(reply);
     }
 
+    public void addAssignee(IssueAssignee issueAssignee) {
+        this.assignees.add(issueAssignee);
+    }
+
+    public void addLabel(IssueLabel issueLabel) {
+        this.labels.add(issueLabel);
+    }
+
+    public void setMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
 }

@@ -37,31 +37,33 @@ public class IssueService {
 
     @Transactional
     public Long registerIssue(String issuerId, String title, String contents,
-                                             List<Long> assigneeIds, List<Long> labelIds, Long milestoneId) {
+                              List<Long> assigneeIds, List<Long> labelIds, Long milestoneId) {
 
         Member member = memberRepository.findByMemberId(issuerId).orElseThrow(NoSuchElementException::new);
-        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(NoSuchElementException::new);
-        Issue createdIssue = issueRepository.save(Issue.createIssue(member, title, contents, milestone));
+        Issue issue = Issue.createIssue(member, title, contents);
 
         try {
-            List<Label> labels = labelRepository.findAllById(labelIds);
-            List<Member> assignees = memberRepository.findAllById(assigneeIds);
 
-            List<IssueLabel> issueLabels = labels.stream()
-                    .map(label -> IssueLabel.of(createdIssue, label))
-                    .collect(Collectors.toList());
-            issueLabelRepository.saveAll(issueLabels);
+            labelRepository.findAllById(labelIds).stream()
+                    .map(label -> IssueLabel.of(issue, label))
+                    .forEach(issue::addLabel);
 
-            List<IssueAssignee> issueAssignees = assignees.stream()
-                    .map(assignee -> IssueAssignee.of(createdIssue, assignee))
-                    .collect(Collectors.toList());
-            issueAssigneeRepository.saveAll(issueAssignees);
+            memberRepository.findAllById(assigneeIds).stream()
+                    .map(assignee -> IssueAssignee.of(issue, assignee))
+                    .forEach(issue::addAssignee);
 
         } catch (IllegalArgumentException exception) {
             throw new NoSuchElementException(exception.getMessage());
         }
 
-        return createdIssue.getId();
+        if (milestoneId != null) {
+            Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(NoSuchElementException::new);
+            issue.setMilestone(milestone);
+        }
+
+        Issue savedIssue = issueRepository.save(issue);
+
+        return savedIssue.getId();
     }
 
     // 상세 정보
