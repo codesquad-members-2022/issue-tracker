@@ -10,6 +10,8 @@ import SwiftUI
 
 class NewIssueViewController: UIViewController {
     
+    private let service = IssueService()
+    
     private let optionList = Option.allCases
     private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
@@ -164,6 +166,7 @@ extension NewIssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch optionList[indexPath.row] {
         case .repository:
+            // TODO: issueService의 requestRepos() 연결해서 저장소목록 보여주기
             let viewController = OptionSelectViewController()
             viewController.delegate = self
             self.navigationController?.pushViewController(viewController, animated: true)
