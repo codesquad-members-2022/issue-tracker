@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.data.datasource.UserSharedPrefDataSource
 import com.example.it.issuetracker.domain.repository.LoginRepository
+import com.example.it.issuetracker.presentation.common.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -23,11 +24,22 @@ class LoginViewModel(
     }
 
     fun saveJwt(jwt: String) {
-        sharedPref.saveData("jwt", jwt)
+        sharedPref.saveData(Constants.LOGIN_PREF_JWT, jwt)
     }
 
     fun saveId(id: Long) {
-        sharedPref.saveData("id", id)
+        sharedPref.saveData(Constants.LOGIN_PREF_ID, id)
     }
 
+    fun saveUserImageUrl(imageUrl: String) {
+        sharedPref.saveData(Constants.LOGIN_PREF_IMAGE_URL, imageUrl)
+    }
+
+    fun saveLoginOption(loginOption: LoginOption) {
+        when (loginOption) {
+            LoginOption.GOOGLE -> sharedPref.saveData(Constants.LOGIN_PREF_OPTION, "GOOGLE")
+            LoginOption.GITHUB -> sharedPref.saveData(Constants.LOGIN_PREF_OPTION, "GITHUB")
+            LoginOption.GUEST -> sharedPref.saveData(Constants.LOGIN_PREF_OPTION, "GUEST")
+        }
+    }
 }
