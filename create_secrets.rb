@@ -8,6 +8,8 @@ struct Secrets {
     static let clientId = "#{ENV['CLIENT_ID_GITHUB']}"
     // ENV['CLIENT_SECRET_GITHUB']
     static let clientSecret = "#{ENV['CLIENT_SECRET_GITHUB']}"
+    // ENV['ACCESS_TOKEN_GITHUB']
+    static let accessToken = "#{ENV['ACCESS_TOKEN_GITHUB']}"
 }
 CREDS_FILE_STRING
 

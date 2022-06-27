@@ -8,32 +8,34 @@
 import UIKit
 
 class PullListViewController: UIViewController {
-
-    private let viewModel = PullListViewModel()
-    private var pullListDatas: [Pull]?
-    private var cellViewModel = [PullTableCellViewModel]()
+    
+    @IBOutlet weak var loaderView: UIActivityIndicatorView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    private let viewModel = IssueListViewModel()
+    private var isSearchControllerConfigured = false
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
-        configureObserver()
+        configureBind()
         configureNavigationBar()
+        configureRefreshControl()
         requestData()
     }
     
-    private func bind() {
-        viewModel.pullViewModelList.bind { tableCellViewModels in
-            self.cellViewModel = tableCellViewModels ?? []
-            
-            NotificationCenter.default.post(name: .PullListDidChange,
-                                            object: nil,
-                                            userInfo: ["cellViewModels": self.cellViewModel])
+    private func configureBind() {
+        viewModel.issueViewModels.bind { _ in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.loaderView.isHidden = true
+            }
         }
     }
     
     private func requestData() {
-        viewModel.requestPullListData()
+        viewModel.requestData()
     }
     
     private func configureSearchController() {
@@ -43,8 +45,9 @@ class PullListViewController: UIViewController {
         searchController.searchBar.delegate = self
         searchController.searchBar.showsCancelButton = false
         searchController.hidesNavigationBarDuringPresentation = false
-        
         self.navigationItem.searchController = searchController
+        navigationController?.navigationItem.hidesSearchBarWhenScrolling = true
+        isSearchControllerConfigured = true
     }
     
     private func configureNavigationBar() {
@@ -53,13 +56,25 @@ class PullListViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(customView: button.right)
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        self.navigationItem.hidesSearchBarWhenScrolling = true
         self.navigationItem.title = "PR"
     }
     
-    private func configureObserver() {
-        NotificationCenter.default.addObserver(forName: .TableViewDidReload,
-                                                           object: nil,
-                                                           queue: .main) { _ in
+    private func configureRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func didPullToRefresh() {
+        DispatchQueue.main.async {
+            self.requestData()
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !self.isSearchControllerConfigured {
             DispatchQueue.main.async {
                 self.configureSearchController()
             }
@@ -76,5 +91,38 @@ extension PullListViewController: UISearchResultsUpdating {
 extension PullListViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         return true
+    }
+}
+
+extension PullListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfViewModels
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
+                                                       for: indexPath) as? PullListTableViewCell,
+              let cellViewModel = viewModel.getCellViewModel(index: indexPath.row) else {
+            return UITableViewCell()
+        }
+        cell.configure(with: cellViewModel)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+}
+
+
+extension PullListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
     }
 }

@@ -13,6 +13,10 @@ struct Log {
         os_log(.error, log: .default, "%@", message)
     }
     
+    static func info(_ message: String) {
+        os_log(.info, log: .default, "%@", message)
+    }
+    
     static func check(_ message: String) {
         if #available(iOS 14.0, *) {
             let log = Logger()

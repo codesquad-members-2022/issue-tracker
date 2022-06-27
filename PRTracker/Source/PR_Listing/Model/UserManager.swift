@@ -9,7 +9,6 @@ import Foundation
 
 struct UserManager {
     
-    static let userURL = "https://api.github.com/user"
     let keyChainService: KeyChainService
     let networkService: NetworkService
     
@@ -25,15 +24,13 @@ struct UserManager {
             return completion(nil)
         }
         
-        guard let url = URL(string: Self.userURL) else {
-            Log.error("User API URL is wrong")
+        guard let url = URL(string: BaseURL.user) else {
+            Log.error("Wrong Base URL: \(BaseURL.user)")
             return completion(nil)
         }
         
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
+        let request = URLRequest(url: url, with: accessToken)
         
-        networkService.get(request: request, then: completion)
+        networkService.request(request, then: completion)
     }
 }

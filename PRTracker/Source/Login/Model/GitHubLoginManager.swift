@@ -9,22 +9,38 @@ import Foundation
 import UIKit
 
 
+enum AuthorizationStatus {
+    case authorized
+    case failed
+    case none
+}
+
 struct GitHubLoginManager {
+    typealias AccessToken = String
     
     static let shared = GitHubLoginManager()
     
     static let requiredScope = "repo,user"
     static let authorizeBaseURL = "https://github.com/login/oauth/authorize"
     static let accessTokenURL = "https://github.com/login/oauth/access_token"
+    static let validateTokenURL = "https://github.com/applications/\(Secrets.clientId)/token"
+    static let keyChainAccount = "github"
+    static let keyChainToken = "access-token"
     
     let keyChainService: KeyChainService
     let networkService: NetworkService
+    let uiApplication: UIApplication
     
     init(keyChainService: KeyChainService = KeyChainManager(),
-         networkService: NetworkService = NetworkManger()) {
+         networkService: NetworkService = NetworkManger(),
+         uiApplication: UIApplication = UIApplication.shared
+    ) {
         self.keyChainService = keyChainService
         self.networkService = networkService
+        self.uiApplication = uiApplication
     }
+    
+    
     
     func requestAuthorization() {
         guard var components = URLComponents(string: GitHubLoginManager.authorizeBaseURL) else { return }
@@ -33,19 +49,34 @@ struct GitHubLoginManager {
             URLQueryItem(name: "scope", value: GitHubLoginManager.requiredScope)
         ]
         guard let url = components.url else { return }
-        UIApplication.shared.open(url)
+        uiApplication.open(url)
     }
+    
+    let authorization: Observable<AuthorizationStatus> = Observable(.none)
     
     func getAccessToken(with code: String) {
         guard let url = makeAccessTokenURL(with: code) else { return }
         let request = makeAccessTokenRequest(with: url)
-
-        networkService.get(request: request) { (response: TokenResponse?) -> Void in
+        
+        networkService.request(request) { (response: TokenResponse?) -> Void in
             guard let response = response else {
-                Log.error("Network Request for access token is failed")
+                Log.error("Request for access token is failed. Code: \(code)")
+                authorization.value = .failed
                 return
             }
-            keyChainService.save(response.accessToken, service: "access-token", account: "github")
+            
+            keyChainService.save(response.accessToken,
+                                 service: GitHubLoginManager.keyChainToken,
+                                 account: GitHubLoginManager.keyChainAccount)
+            authorization.value = .authorized
+        }
+    }
+    
+    func checkAuthorization(completion: @escaping (Bool) -> Void) {
+        // User 요청이 성공하면 유효한 것으로 판단
+        UserManager().getCurrentUser { user in
+            if user == nil { return completion(false) }
+            return completion(true)
         }
     }
     
