@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Spinner
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -17,11 +14,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.issu_tracker.R
+import com.example.issu_tracker.data.ConditionType
 import com.example.issu_tracker.databinding.FragmentFilterBinding
-import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_LABEL
-import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_ASSIGNEE
-import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_STATE
-import com.example.issu_tracker.ui.common.Constants.CONDITION_TYPE_WRITER
+import com.example.issu_tracker.ui.common.setSpinner
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,6 +26,7 @@ class FilterFragment : Fragment() {
     private val viewModel: FilterViewModel by viewModels()
     private lateinit var binding: FragmentFilterBinding
     private lateinit var navController: NavController
+    private var spinnerColor: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +39,7 @@ class FilterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        spinnerColor = ContextCompat.getColor(requireContext(), R.color.white)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -66,25 +63,25 @@ class FilterFragment : Fragment() {
 
     private suspend fun setStateSpinner() {
         viewModel.stateStateFlow.collect {
-            setSpinner(binding.cbFilterState.spinner, it, CONDITION_TYPE_STATE)
+           binding.cbFilterState.spinner.setSpinner(this.requireContext(), it, ConditionType.STATE, viewModel, spinnerColor)
         }
     }
 
     private suspend fun setWriterSpinner() {
         viewModel.writerStateFlow.collect {
-            setSpinner(binding.cbFilterWriter.spinner, it, CONDITION_TYPE_WRITER)
+            binding.cbFilterWriter.spinner.setSpinner(this.requireContext(), it, ConditionType.WRITER, viewModel, spinnerColor)
         }
     }
 
     private suspend fun setLabelSpinner() {
         viewModel.labelStateFlow.collect {
-            setSpinner(binding.cbFilterLabel.spinner, it, CONDITION_TYPE_LABEL)
+            binding.cbFilterLabel.spinner.setSpinner(this.requireContext(), it, ConditionType.LABEL, viewModel, spinnerColor)
         }
     }
 
     private suspend fun setMileStoneSpinner() {
         viewModel.mileStoneStateFlow.collect {
-            setSpinner(binding.cbFilterMilestone.spinner, it, CONDITION_TYPE_ASSIGNEE)
+            binding.cbFilterMilestone.spinner.setSpinner(this.requireContext(), it, ConditionType.MILESTONE, viewModel, spinnerColor)
         }
     }
 
@@ -118,28 +115,6 @@ class FilterFragment : Fragment() {
                 bundleOf("filterCondition" to savedValues)
             )
             true
-        }
-    }
-
-    private fun setSpinner(spinner: Spinner, list: List<String>, conditionType: Int) {
-        val spinnerAdapter = SpinnerAdapter(this.requireContext(), R.layout.item_spinner, list)
-        spinner.adapter = spinnerAdapter
-        spinner.setSelection(list.size - SPINNER_DEFAULT_INDEX)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedView = view as TextView
-                selectedView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                viewModel.inputSpinnerValue(selectedView.text.toString(), conditionType)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-
         }
     }
 

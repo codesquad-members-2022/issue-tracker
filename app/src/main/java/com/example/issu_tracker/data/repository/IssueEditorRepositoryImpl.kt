@@ -14,27 +14,27 @@ import javax.inject.Inject
 class IssueEditorRepositoryImpl @Inject constructor(private val fireStore: FirebaseFirestore) :
     IssueEditorRepository {
 
-    override suspend fun loadLabel(): List<Label> {
-        val labelList = mutableListOf<Label>()
+    override suspend fun loadLabel(): Map<String, Label> {
+        val labelList = mutableMapOf<String, Label>()
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_LABEL_PATH).get().await()
 
         collectionData.documents.forEach { it ->
             val labelObj = it.toObject(Label::class.java)
             labelObj?.let { label ->
-                labelList.add(label)
+                labelList[label.content] = label
             }
         }
         return labelList
     }
 
-    override suspend fun loadAssignee(): List<User> {
-        val assigneeList = mutableListOf<User>()
+    override suspend fun loadAssignee(): Map<String, User> {
+        val assigneeList = mutableMapOf<String, User>()
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_USER_PATH).get().await()
 
         collectionData.documents.forEach {
             val assigneeObj = it.toObject(User::class.java)
             assigneeObj?.let { user ->
-                assigneeList.add(user)
+                assigneeList[user.name] = user
             }
         }
         return assigneeList
