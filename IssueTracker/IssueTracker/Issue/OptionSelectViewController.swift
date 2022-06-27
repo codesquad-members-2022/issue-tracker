@@ -4,6 +4,7 @@ import SnapKit
 class OptionSelectViewController: UIViewController {
 
     private let dummy = ["bug", "feature", "document"]
+    private let tableViewCellIdentifier = "tableViewCellIdentifier"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +21,13 @@ class OptionSelectViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self,
+                           forCellReuseIdentifier: tableViewCellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
     }()
+
 }
 
 extension OptionSelectViewController: UITableViewDelegate {
@@ -40,7 +43,8 @@ extension OptionSelectViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier,
+                                                 for: indexPath)
         var content = cell.defaultContentConfiguration()
         content.attributedText = NSAttributedString(string: dummy[indexPath.row])
         cell.contentConfiguration = content

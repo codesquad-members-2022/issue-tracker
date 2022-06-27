@@ -39,12 +39,14 @@ class NewIssueViewController: UIViewController {
     }()
     
     private let optionList = ["저장소", "레이블", "마일스톤", "담당자"]
+    private let optionTableCellIdentifier = "optionTableCellIdentifier"
     
     private lazy var optionTable: UITableView = {
         var tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aa")
+        tableView.register(UITableViewCell.self,
+                           forCellReuseIdentifier: optionTableCellIdentifier)
         return tableView
     }()
     
@@ -146,8 +148,9 @@ extension NewIssueViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "aa", for: indexPath)
-        var sidebarCell = UIListContentConfiguration.sidebarCell() // 짱이다!!
+        let cell = tableView.dequeueReusableCell(withIdentifier: optionTableCellIdentifier,
+                                                 for: indexPath)
+        var sidebarCell = UIListContentConfiguration.sidebarCell()
         sidebarCell.text = optionList[indexPath.item]
         sidebarCell.secondaryText = "선택내용"
         sidebarCell.prefersSideBySideTextAndSecondaryText = true
