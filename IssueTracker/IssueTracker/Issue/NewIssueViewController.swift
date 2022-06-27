@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SwiftUI
 
 class NewIssueViewController: UIViewController {
     
     private let optionList = Option.allCases
+    private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
     enum Option: CaseIterable {
         case repository
@@ -130,7 +132,6 @@ class NewIssueViewController: UIViewController {
             make.top.equalTo(horizontalDevider.snp.bottom)
             make.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
             make.bottom.equalTo(optionTable.snp.top)
-            
         }
     }
 
@@ -156,13 +157,20 @@ class NewIssueViewController: UIViewController {
             //2-1. 이전 화면으로 돌아가고
             //2-2. 이슈 목록 조회 다시해서 보여주기
         //3. api 가 실패했다면 => issue 생성실패 얼럿띄우기
-        
     }
 }
 
 extension NewIssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch optionList[indexPath.row] {
+        case .repository:
+            let viewController = OptionSelectViewController()
+            viewController.delegate = self
+            self.navigationController?.pushViewController(viewController, animated: true)
+        default:
+            break
+        }
+        print(optionList[indexPath.row])
     }
 }
 
@@ -176,7 +184,7 @@ extension NewIssueViewController: UITableViewDataSource {
                                                  for: indexPath)
         var sidebarCell = UIListContentConfiguration.sidebarCell()
         sidebarCell.text = optionList[indexPath.item].description
-        sidebarCell.secondaryText = "선택내용"
+        sidebarCell.secondaryText = selectedList[indexPath.item]
         sidebarCell.prefersSideBySideTextAndSecondaryText = true
         
         cell.contentConfiguration = sidebarCell
@@ -184,4 +192,11 @@ extension NewIssueViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+extension NewIssueViewController: OptionSelectDelegate {
+    func selected(item: String) {
+        selectedList[0] = item
+        self.optionTable.reloadData()
+    }
 }

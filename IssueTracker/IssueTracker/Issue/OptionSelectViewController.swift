@@ -1,9 +1,14 @@
 import UIKit
 import SnapKit
 
-class OptionSelectViewController: UIViewController {
+protocol OptionSelectDelegate: AnyObject { // 이벤트 연결의 근-본
+    func selected(item: String)
+}
 
-    private let dummy = ["bug", "feature", "document"]
+class OptionSelectViewController: UIViewController {
+    
+    weak var delegate: OptionSelectDelegate? // 순환참조를 막기 위해 weak var로 선언
+    private let dummy = ["issue-tracker", "banchan", "starbuckst"]
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     
     override func viewDidLoad() {
@@ -32,7 +37,9 @@ class OptionSelectViewController: UIViewController {
 
 extension OptionSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: - 선택한 옵션을 이전 ViewController 에 넘겨주기
+        let selectedItem = dummy[indexPath.row]
+        delegate?.selected(item: selectedItem) // 이벤트 보내기
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

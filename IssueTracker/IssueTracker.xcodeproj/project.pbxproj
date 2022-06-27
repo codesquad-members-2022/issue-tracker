@@ -145,9 +145,9 @@
 		981BD438285B123A00DDDE64 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				988FA2E92864034C0058C333 /* OptionSelectViewController.swift */,
 				98130E1A285AC8A5001B6DA1 /* IssueViewController.swift */,
 				005E48D728630635004BD5F6 /* NewIssueViewController.swift */,
+				988FA2E92864034C0058C333 /* OptionSelectViewController.swift */,
 				00567EEA2861B43600F3E8EC /* Model */,
 				00567EE92861B42A00F3E8EC /* Service */,
 				981BD439285B124E00DDDE64 /* View */,
