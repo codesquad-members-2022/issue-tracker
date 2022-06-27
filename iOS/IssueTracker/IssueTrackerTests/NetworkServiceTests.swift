@@ -49,5 +49,9 @@ private extension NetworkServiceTests {
         var method: String? {
             return nil
         }
+
+        var body: Data? {
+            return nil
+        }
     }
 }

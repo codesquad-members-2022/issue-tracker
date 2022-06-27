@@ -12,15 +12,6 @@ class SignInManagerTests: XCTestCase {
 
     var sut: SignInManager!
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        sut = SignInManager()
-    }
-
-    override func tearDownWithError() throws {
-        sut = nil
-    }
-
     func test_requestCode호출시_올바른URL을_생성하는지() {
         let promise = expectation(description: "올바른 URL 생성")
         let url = URL(string: "https://github.com/login/oauth/authorize")!
@@ -31,7 +22,7 @@ class SignInManagerTests: XCTestCase {
 
         let stubURLSession = StubURLSession(dummy: dummy)
 
-        sut.setURLSession(stubURLSession)
+        sut = SignInManager(urlSession: stubURLSession)
 
         sut.requestCode { result in
             switch result {
@@ -57,7 +48,7 @@ class SignInManagerTests: XCTestCase {
 
         let stubURLSession = StubURLSession(dummy: dummy)
 
-        sut.setURLSession(stubURLSession)
+        sut = SignInManager(urlSession: stubURLSession)
 
         let codeURL = URL(string: "issuetrackerapp://?code=a1b2c3d4")!
         sut.requestJWTToken(codeURL: codeURL) { result in
