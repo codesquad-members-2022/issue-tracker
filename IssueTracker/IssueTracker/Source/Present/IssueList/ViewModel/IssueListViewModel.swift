@@ -9,31 +9,25 @@ import Foundation
 
 final class IssueListViewModel {
 
-    var issueList: [Issue] = [Issue]()
+    var issueList: Observable<[Issue]> = Observable([])
     var issueRepository = IssueTrackingRepository()
 
     var numberOfItemsInSection: Int {
-        return issueList.count
+        return issueList.value.count
     }
 
-    var loadedIssues: (() -> Void)?
-    var loadFailure: (() -> Void)?
-
     func loadIssueList() {
-        guard let token = UserDefaults
-                .standard.object(forKey: Environment.token) as? String else {
-                    self.loadFailure?()
-                    return
-                }
+        let token: String = UserDefaults.standard.object(forKey: Environment.token) as? String ?? ""
         let target = IssueTrackerTarget.requestIssueList(token: token)
         issueRepository.requestIssues(with: target) { response in
             switch response {
             case .success(let issue):
-                self.issueList = issue ?? [Issue]()
-                self.loadedIssues?()
+                guard let issue = issue else { return }
+                self.issueList = Observable(issue)
+
             case .failure(let error):
+                // TODO: error Alert
                 print(error)
-                self.loadFailure?()
             }
         }
     }

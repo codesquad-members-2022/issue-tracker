@@ -32,14 +32,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let urlRequest = IssueTrackerTarget.requestAccessToken(code: authorizedCode)
 
         let issueListViewModel = IssueListViewModel()
-
-        issueListViewModel.loadedIssues = {
-            DispatchQueue.main.async {
-                let issueListVC = IssueListViewController()
-                issueListVC.viewModel = issueListViewModel
-                self.window?.rootViewController = issueListVC
-            }
-        }
+//        issueListViewModel.loadedIssues = {
+//            DispatchQueue.main.async {
+//                let issueListVC = IssueListViewController()
+//                issueListVC.viewModel = issueListViewModel
+//                self.window?.rootViewController = issueListVC
+//            }
+//        }
 
         loginViewModel.repository.getGithubAccessToken(urlRequest) { tokenValue in
             UserDefaults.standard.set(tokenValue, forKey: Environment.token)
