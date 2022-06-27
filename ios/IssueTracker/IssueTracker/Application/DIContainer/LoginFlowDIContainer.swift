@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol DIContainer {
-    func makeCoordinator(navigationController: UINavigationController) -> Coordinator
-}
-
 class LoginFlowDIContainer: DIContainer {
     private let localStorage = UserDefaults.standard
 
@@ -19,7 +15,7 @@ class LoginFlowDIContainer: DIContainer {
         return LoginViewController.create(with: viewModel)
     }
 
-    func makeCoordinator(navigationController: UINavigationController) -> Coordinator {
+    func makeCoordinator(navigationController: UINavigationController) -> Coordinator & LoginFlowCoordinatorOutput {
         LoginFlowCoordinator(navigationController: navigationController, dependency: self)
     }
 }

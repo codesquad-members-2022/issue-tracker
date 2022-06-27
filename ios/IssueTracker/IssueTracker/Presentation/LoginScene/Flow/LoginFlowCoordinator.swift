@@ -7,12 +7,18 @@
 
 import UIKit
 
+protocol LoginFlowCoordinatorOutput {
+    var finishFlow: (() -> Void)? { get set }
+}
+
 protocol LoginFlowCoordinatorDependencies {
     func setAuthCode(code: String)
     func makeLoginViewController(action: LoginViewModelAction) -> UIViewController
 }
 
-final class LoginFlowCoordinator: Coordinator {
+final class LoginFlowCoordinator: Coordinator, LoginFlowCoordinatorOutput {
+    var finishFlow: (() -> Void)?
+
     private let navigationController: UINavigationController
     private let dependency: LoginFlowCoordinatorDependencies
 

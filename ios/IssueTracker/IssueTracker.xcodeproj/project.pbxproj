@@ -49,6 +49,7 @@
 		E4D8738E285884AF00AFCE4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4D8738C285884AF00AFCE4D /* LaunchScreen.storyboard */; };
 		E4D873992858854D00AFCE4D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E4D873982858854C00AFCE4D /* .swiftlint.yml */; };
 		E4D8739F2858861000AFCE4D /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = E4D8739E2858861000AFCE4D /* .swiftformat */; };
+		E4EDB1E4286953DF00273014 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EDB1E3286953DF00273014 /* DIContainer.swift */; };
 		E4F44CEE285C26C900D3A3E6 /* LoginFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */; };
 		E4F44CF0285C292E00D3A3E6 /* AppFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		E4D8738F285884AF00AFCE4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4D873982858854C00AFCE4D /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		E4D8739E2858861000AFCE4D /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
+		E4EDB1E3286953DF00273014 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowDIContainer.swift; sourceTree = "<group>"; };
 		E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowDIContainer.swift; sourceTree = "<group>"; };
 		FF7E055DCBFAC002F724EBA1 /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -365,7 +367,9 @@
 		E46FBE7E2862B733000CB998 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				E4EDB1E3286953DF00273014 /* DIContainer.swift */,
 				E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */,
+				E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */,
 				E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */,
 				E46C6A02286559830074AEF9 /* IssueFlowDIContainer.swift */,
 				E46C6A0628655AC70074AEF9 /* LabelFlowDIContainer.swift */,
@@ -401,7 +405,6 @@
 			isa = PBXGroup;
 			children = (
 				E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */,
-				E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				73888537286836DB00F65BEF /* TableviewDataSource.swift in Sources */,
 				E46C69F92865568C0074AEF9 /* LabelFlowCoordinator.swift in Sources */,
 				E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */,
+				E4EDB1E4286953DF00273014 /* DIContainer.swift in Sources */,
 				E46C6A0B28655B760074AEF9 /* AccountFlowDIContainer.swift in Sources */,
 				E46C6A01286559100074AEF9 /* IssueFlowCoordinator.swift in Sources */,
 				E46C69FF2865589D0074AEF9 /* AccountFlowCoordinator.swift in Sources */,
