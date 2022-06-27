@@ -58,17 +58,18 @@ struct GitHubLoginManager {
         guard let url = makeAccessTokenURL(with: code) else { return }
         let request = makeAccessTokenRequest(with: url)
         
-        networkService.request(request) { (response: TokenResponse?) -> Void in
-            guard let response = response else {
-                Log.error("Request for access token is failed. Code: \(code)")
+        networkService.request(request) { (result: Result<TokenResponse, NetworkError>) in
+            switch result {
+            case .success(let data):
+                keyChainService.save(data.accessToken,
+                                     service: GitHubLoginManager.keyChainToken,
+                                     account: GitHubLoginManager.keyChainAccount)
+                authorization.value = .authorized
+                
+            case .failure(let error):
+                Log.error(error.localizedDescription)
                 authorization.value = .failed
-                return
             }
-            
-            keyChainService.save(response.accessToken,
-                                 service: GitHubLoginManager.keyChainToken,
-                                 account: GitHubLoginManager.keyChainAccount)
-            authorization.value = .authorized
         }
     }
     

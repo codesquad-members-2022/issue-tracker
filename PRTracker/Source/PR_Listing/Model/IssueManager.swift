@@ -35,7 +35,15 @@ struct IssueManager: IssueService {
         
         let request = URLRequest(url: url, with: accessToken)
         
-        networkService.request(request, then: completion)
+        networkService.request(request, then: { (result: Result<[Issue], NetworkError>) in
+            switch result {
+            case .success(let data):
+                completion(data)
+            case .failure(let error):
+                Log.error(error.localizedDescription)
+                completion(nil)
+            }
+        })
     }
 }
 
