@@ -1,5 +1,6 @@
 package kr.codesquad.issuetracker.domain;
 
+import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@Getter
 public class Issue {
 
     @Id
@@ -30,12 +32,14 @@ public class Issue {
     private final List<IssueMembers> issueMembersList = new ArrayList<>();
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn
     private Member member;
 
     @OneToMany(mappedBy = "issue")
     private List<Comment> commentList = new ArrayList<>();
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn
     private Milestone milestone;
 
     @OneToMany(mappedBy = "issue")
