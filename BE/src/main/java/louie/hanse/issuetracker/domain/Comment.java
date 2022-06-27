@@ -20,9 +20,6 @@ public class Comment {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "comment")
-    private List<UploadFile> uploadFiles = new ArrayList<>();
-
     @ManyToOne(fetch = LAZY)
     @JoinColumn
     private Issue issue;

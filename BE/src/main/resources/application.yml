@@ -19,7 +19,16 @@ spring:
     defer-datasource-initialization: true
 
   config:
-    import: classpath:oauth.yml
+    import: classpath:oauth.yml,classpath:s3.yml
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
 
 logging.level:
-  org.hibernate.SQL: debug
+  org:
+    hibernate.SQL: debug
+  com:
+    amazonaws:
+      util:
+        EC2MetadataUtils: error
