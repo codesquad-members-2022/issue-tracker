@@ -149,7 +149,6 @@
 			children = (
 				000651BD285A09DE00A6426A /* IssueTrackerTarget.swift */,
 				000651BF285A09FA00A6426A /* Base */,
-				00B2A26328585CD700D201D3 /* DecodeManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -174,13 +173,9 @@
 		00DBECBA2859C379004BD0CA /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				B3BFBD3E28572E6C00D69A34 /* Assets.xcassets */,
+				00B2A26328585CD700D201D3 /* DecodeManager.swift */,
 				B3BFBD3528572E5400D69A34 /* AppDelegate.swift */,
 				B3BFBD3728572E5400D69A34 /* SceneDelegate.swift */,
-				00E87233285C3C3600C527B5 /* Eevironment.swift */,
-				B3D736E8286008440053E887 /* Extension+.swift */,
-				B3D73711286432230053E887 /* RootWindow.swift */,
-				B3D737132864330B0053E887 /* RootWindowViewModel.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -216,10 +211,9 @@
 		B3773F2428585143008C4AAF /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				002422002862BDE200F97984 /* Login */,
-				B3773F252858515C008C4AAF /* IssueList */,
-				B3773F342858648E008C4AAF /* TabBarViewController.swift */,
-				00DBECBA2859C379004BD0CA /* Support */,
+				B3D7371A28694D670053E887 /* Util */,
+				B3D7371928694CED0053E887 /* Network */,
+				B3D7371828694CE20053E887 /* Present */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -243,16 +237,6 @@
 				B3773F2D28585237008C4AAF /* Tag.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		B3773F3128585624008C4AAF /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-				B3419D31285C1E3300F1273C /* Repository */,
-				00B2A26528585CE200D201D3 /* API */,
-				00B2A26828586D0600D201D3 /* Issue.json */,
-			);
-			path = Resource;
 			sourceTree = "<group>";
 		};
 		B3BFBD2928572E5400D69A34 = {
@@ -281,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				00B0BE50285734A000FC4F60 /* .swiftlint.yml */,
-				B3773F3128585624008C4AAF /* Resource */,
 				B3773F2428585143008C4AAF /* Source */,
 				B3BFBD4328572E6C00D69A34 /* Info.plist */,
 			);
@@ -294,6 +277,63 @@
 				B3D736EF2861893D0053E887 /* IssueListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B3D7371528694A250053E887 /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				B3D7371728694A420053E887 /* ViewModel */,
+				B3D7371628694A3D0053E887 /* View */,
+			);
+			path = Window;
+			sourceTree = "<group>";
+		};
+		B3D7371628694A3D0053E887 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B3D73711286432230053E887 /* RootWindow.swift */,
+				B3773F342858648E008C4AAF /* TabBarViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B3D7371728694A420053E887 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B3D737132864330B0053E887 /* RootWindowViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B3D7371828694CE20053E887 /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				00DBECBA2859C379004BD0CA /* Support */,
+				B3D7371528694A250053E887 /* Window */,
+				002422002862BDE200F97984 /* Login */,
+				B3773F252858515C008C4AAF /* IssueList */,
+			);
+			path = Present;
+			sourceTree = "<group>";
+		};
+		B3D7371928694CED0053E887 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B3419D31285C1E3300F1273C /* Repository */,
+				00B2A26528585CE200D201D3 /* API */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B3D7371A28694D670053E887 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				B3BFBD3E28572E6C00D69A34 /* Assets.xcassets */,
+				00E87233285C3C3600C527B5 /* Eevironment.swift */,
+				B3D736E8286008440053E887 /* Extension+.swift */,
+				00B2A26828586D0600D201D3 /* Issue.json */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		D4ED0A569A6551F7DF8A5460 /* Frameworks */ = {
