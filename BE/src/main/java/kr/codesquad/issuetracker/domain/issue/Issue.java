@@ -94,4 +94,8 @@ public class Issue extends BaseTimeEntity {
 			.collect(Collectors.toList());
 		return this;
 	}
+
+	public void updateStatus(Status status) {
+		this.status = status;
+	}
 }
