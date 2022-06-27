@@ -24,19 +24,19 @@
             layout="@layout/toolbar_edit_layout"
             bind:defaultToolbarTitle="@{@string/label_string}"
             bind:editToolbarTitle="@{@string/select_label}"
-            bind:editToolbarVisible="@{viewModel.editMode}" />
+            bind:editToolbarVisible="@{viewModel.uiState.editMode}" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:enabled="@{!viewModel.editMode}"
+            app:enabled="@{!viewModel.uiState.editMode}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
             app:onRefreshListener="@{viewModel::getLabelInfoList}"
-            app:refreshing="@{viewModel.dataLoading}">
+            app:refreshing="@{viewModel.uiState.dataLoading}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_label_item"
