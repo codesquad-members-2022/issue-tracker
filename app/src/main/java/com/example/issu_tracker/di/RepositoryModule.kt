@@ -1,6 +1,5 @@
 package com.example.issu_tracker.di
 
-
 import android.content.Context
 import androidx.room.Room
 import com.example.issu_tracker.data.Repository
@@ -14,8 +13,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import dagger.hilt.android.components.ActivityRetainedComponent
-import kotlinx.coroutines.Dispatchers
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -24,7 +21,7 @@ object RepositoryModule {
 
     @Provides
     fun provideHomeRepository(fireStore: FirebaseFirestore): HomeRepository {
-        return HomeRepositoryImpl(fireStore, Dispatchers.IO)
+        return HomeRepositoryImpl(fireStore)
     }
 
     @Provides
