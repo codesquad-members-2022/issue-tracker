@@ -101,7 +101,7 @@ class NewIssueViewController: UIViewController {
             make.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(optionTable
                 .contentSize
-                .height + 30) // 자신의 컨텐츠 사이즈만큼 높이를 잡아준다
+                .height + 30)
         }
         
         self.view.addSubview(contentField)
@@ -129,6 +129,7 @@ class NewIssueViewController: UIViewController {
     }()
     
     private func touchedCreateButton() {
+        // TODO: 이슈생성
         //1. api 호출
         //2. api 가 성공적으로 응답을 보내줬다면 =>
             //2-1. 이전 화면으로 돌아가고
@@ -156,11 +157,8 @@ extension NewIssueViewController: UITableViewDataSource {
         sidebarCell.prefersSideBySideTextAndSecondaryText = true
         
         cell.contentConfiguration = sidebarCell
-        cell.accessoryType = .disclosureIndicator // > 표시 보이기
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "추가옵션"
-//    }
 }

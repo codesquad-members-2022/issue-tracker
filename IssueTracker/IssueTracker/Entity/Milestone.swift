@@ -13,5 +13,5 @@ struct Milestone: Codable {
     let description: String
     let openIssues, closedIssues: Int
     let state: String
-    let dueOn: String? // Date?
+    let dueOn: String?
 }

@@ -33,7 +33,6 @@ class OptionSelectViewController: UIViewController {
 extension OptionSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: - 선택한 옵션을 이전 ViewController 에 넘겨주기
-        print(indexPath.row)
     }
 }
 

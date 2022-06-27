@@ -14,7 +14,7 @@ class Devider: UIView {
     }
     
     convenience init(direction: Devider.Direction, color: UIColor) {
-        self.init() // convenience init 사용 시 self.init 먼저 해 주고, override func draw() 해야
+        self.init()
         switch direction {
         case .horizontal(let width):
             self.frame = CGRect(origin: .zero,

@@ -47,19 +47,17 @@ final class IssueViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         model.requestIssue()
-        model.updatedIssues = { [weak self] issues in // 모델과 바인딩
-            DispatchQueue.main.async { [weak self] in // -> 이걸 그대로 두거나 or AF에서 main이 아닌 다른 큐를 사용하게 설정하거나.
+        model.updatedIssues = { [weak self] issues in
+            DispatchQueue.main.async { [weak self] in 
                 self?.collectionView.reloadData()
             }
         }
     }
     
     @objc func touchedSelectButton() {
-        print("touchedSelectButton")
     }
     
     @objc func touchedFilterButton() {
-        print("touchedFilterButton")
         let vc = UIViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
