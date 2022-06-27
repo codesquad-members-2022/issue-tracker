@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import IssueHeader from './IssueHeader';
 import IssueItem from './IssueItem';
 import EmptyIssueItem from './EmptyIssueItem';
@@ -25,7 +25,15 @@ type IssueType = {
 
 export type SelectedIssueType = {
   [key: string]: boolean;
-};
+} | null;
+
+type IssueListType = {
+  labelCount: number;
+  milestoneCount: number;
+  openedIssues: number;
+  closedIssues: number;
+  issues: IssueType[];
+} | null;
 
 export type IssueListStateType = 'opened' | 'closed' | 'all';
 
@@ -34,6 +42,17 @@ function IssueList() {
     useState<IssueListStateType>('opened');
   const [headerCheckBoxType, setHeaderCheckBoxType] =
     useState<CheckBoxType>('initial');
+  const [issueList, setIssueList] = useState<IssueListType>(null);
+  const [selectedIssues, setSelectedIssues] = useState<SelectedIssueType>(null);
+
+  useEffect(() => {
+    fetch(`/issues?status=${issueListState}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setIssueList(data);
+        setSelectedIssues(initSelectedIssues(data.issues));
+      });
+  }, [issueListState]);
 
   const initSelectedIssues = (issues: IssueType[]) => {
     const initialSelectedIssue: SelectedIssueType = {};
@@ -45,18 +64,8 @@ function IssueList() {
     return initialSelectedIssue;
   };
 
-  const issueList =
-    issueListState === 'opened'
-      ? openedIssueList
-      : issueListState === 'closed'
-      ? closedIssueList
-      : allIssueList;
-
-  const [selectedIssues, setSelectedIssues] = useState<SelectedIssueType>(
-    initSelectedIssues(issueList.issues)
-  );
-
   const updateIssueState = (id: string) => {
+    if (!selectedIssues) return;
     selectedIssues[id] = !selectedIssues[id];
     setSelectedIssues({ ...selectedIssues });
 
@@ -72,6 +81,10 @@ function IssueList() {
     }
   };
 
+  if (!issueList) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <IssueHeader
@@ -84,167 +97,29 @@ function IssueList() {
         headerCheckBoxType={headerCheckBoxType}
         setHeaderCheckBoxType={setHeaderCheckBoxType}
       />
-      <div>
-        {!!issueList.issues.length ? (
-          issueList.issues.map(
-            (
-              { id, title, createdTime, writer, labels, milestoneName },
-              idx
-            ) => (
-              <IssueItem
-                key={id}
-                id={String(id)}
-                title={title}
-                createdTime={createdTime}
-                writer={writer}
-                labels={labels}
-                milestoneName={milestoneName}
-                isSelected={selectedIssues[id]}
-                isLast={idx === issueList.issues.length - 1}
-                updateIssueState={updateIssueState}
-              />
-            )
+
+      {issueList?.issues.length ? (
+        issueList.issues.map(
+          ({ id, title, createdTime, writer, labels, milestoneName }, idx) => (
+            <IssueItem
+              key={id}
+              id={String(id)}
+              title={title}
+              createdTime={createdTime}
+              writer={writer}
+              labels={labels}
+              milestoneName={milestoneName}
+              isSelected={selectedIssues[id]}
+              isLast={idx === issueList.issues.length - 1}
+              updateIssueState={updateIssueState}
+            />
           )
-        ) : (
-          <EmptyIssueItem />
-        )}
-      </div>
+        )
+      ) : (
+        <EmptyIssueItem />
+      )}
     </>
   );
 }
 
 export default IssueList;
-
-const openedIssueList = {
-  labelCount: 3,
-  milestoneCount: 2,
-  openedIssues: 3,
-  closedIssues: 0,
-  issues: [
-    {
-      id: 1,
-      title: '제목1',
-      createdTime: '2022-06-23 12:12:13',
-      writer: '글쓴이1',
-      labels: [
-        {
-          name: '라벨네임',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        },
-        {
-          name: '라벨네임1',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        }
-      ],
-      milestoneName: '마일스톤1'
-    },
-    {
-      id: 2,
-      title: '제목2',
-      createdTime: '2022-06-22 12:12:13',
-      writer: '글쓴이2',
-      labels: [],
-      milestoneName: '마일스톤2'
-    },
-    {
-      id: 3,
-      title: '제목3',
-      createdTime: '2021-06-22 20:12:13',
-      writer: '글쓴이3',
-      labels: [
-        {
-          name: '라벨네임',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        },
-        {
-          name: '라벨네임1',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        }
-      ],
-      milestoneName: ''
-    }
-  ]
-};
-
-const closedIssueList = {
-  labelCount: 3,
-  milestoneCount: 2,
-  openedIssues: 3,
-  closedIssues: 0,
-  issues: []
-};
-
-const allIssueList = {
-  labelCount: 3,
-  milestoneCount: 2,
-  openedIssues: 3,
-  closedIssues: 0,
-  issues: [
-    {
-      id: 1,
-      title: '제목1',
-      createdTime: '2022-06-23 12:12:13',
-      writer: '글쓴이1',
-      labels: [
-        {
-          name: '라벨네임',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        },
-        {
-          name: '라벨네임1',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        }
-      ],
-      milestoneName: '마일스톤1'
-    },
-    {
-      id: 2,
-      title: '제목2',
-      createdTime: '2022-06-22 12:12:13',
-      writer: '글쓴이2',
-      labels: [],
-      milestoneName: '마일스톤2'
-    },
-    {
-      id: 3,
-      title: '제목3',
-      createdTime: '2021-06-22 20:12:13',
-      writer: '글쓴이3',
-      labels: [
-        {
-          name: '라벨네임',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        },
-        {
-          name: '라벨네임1',
-          color: {
-            backgroundColor: '#000000',
-            textColor: '#FFFFFF'
-          }
-        }
-      ],
-      milestoneName: ''
-    }
-  ]
-};

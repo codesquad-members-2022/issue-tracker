@@ -1,9 +1,11 @@
 import { rest } from 'msw';
-import allIssueList from './allIssueList';
+import issueListData from './issueListData';
 
 const handlers = [
-  rest.get('/test', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(allIssueList));
+  rest.get('/issues', (req, res, ctx) => {
+    const status = req.url.searchParams.get('status');
+
+    return res(ctx.status(200), ctx.json(issueListData[status]));
   })
 ];
 
