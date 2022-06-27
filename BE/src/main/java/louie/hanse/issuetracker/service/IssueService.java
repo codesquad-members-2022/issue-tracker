@@ -24,8 +24,10 @@ public class IssueService {
     private final MilestoneRepository milestoneRepository;
 
     @Transactional
-    public void register(IssueSaveRequest issueSaveRequest){
-        Issue issue = new Issue(issueSaveRequest.getTitle());
+    public void register(IssueSaveRequest issueSaveRequest, Long memberId) {
+        Member writer = memberRepository.findById(memberId)
+            .orElseThrow(IllegalStateException::new);
+        Issue issue = new Issue(issueSaveRequest.getTitle(), writer);
         log.info("issueSaveRequest {}", issueSaveRequest);
         issueRepository.save(issue);
         if (issueSaveRequest.getContents() != null) {
@@ -48,7 +50,7 @@ public class IssueService {
         }
         if (issueSaveRequest.getMilestoneId() != null) {
             Milestone milestone = milestoneRepository.findById(issueSaveRequest.getMilestoneId())
-                    .orElseThrow(IllegalStateException::new);
+                .orElseThrow(IllegalStateException::new);
             issue.updateMilestone(milestone);
         }
     }

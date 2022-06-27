@@ -24,4 +24,7 @@ public class Label {
     private String backgroundColor;
     private String textColor;
 
+    public void addIssueLabel(IssueLabel issueLabel) {
+        this.issueLabels.add(issueLabel);
+    }
 }

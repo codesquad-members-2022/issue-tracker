@@ -25,6 +25,8 @@ public class IssueLabel {
 
     public IssueLabel(Issue issue, Label label) {
         this.issue = issue;
+        issue.addIssueLabel(this);
         this.label = label;
+        label.addIssueLabel(this);
     }
 }

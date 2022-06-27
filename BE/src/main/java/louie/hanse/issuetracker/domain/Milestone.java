@@ -14,7 +14,7 @@ public class Milestone {
     private Long id;
 
     @OneToMany(mappedBy = "milestone")
-    private List<Issue> issue = new ArrayList<>();
+    private List<Issue> issues = new ArrayList<>();
 
     private String title;
 
@@ -24,4 +24,8 @@ public class Milestone {
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    public void addIssue(Issue issue) {
+        this.issues.add(issue);
+    }
 }

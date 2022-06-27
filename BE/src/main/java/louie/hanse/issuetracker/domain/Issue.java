@@ -42,11 +42,25 @@ public class Issue {
     @Enumerated(EnumType.STRING)
     private Status status = Status.OPEN;
 
-    public Issue(String title) {
+    public Issue(String title, Member writer) {
         this.title = title;
+        this.writer = writer;
     }
 
     public void updateMilestone(Milestone milestone) {
         this.milestone = milestone;
+        milestone.addIssue(this);
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
+
+    public void addIssueManager(IssueManager issueManager) {
+        this.issueManagers.add(issueManager);
+    }
+
+    public void addIssueLabel(IssueLabel issueLabel) {
+        this.issueLabels.add(issueLabel);
     }
 }
