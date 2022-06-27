@@ -13,32 +13,23 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/milestones")
 public class MilestoneController {
 
     private final MilestoneService milestoneService;
 
-    @GetMapping("/milestones")
+    @GetMapping
     public List<MilestoneResponse> getMilestones(){
         return milestoneService.getMilestoneList();
     }
 
-    @PostMapping("/milestones")
+    @PostMapping
     public ResponseEntity createMilestone (@RequestBody MilestoneRequest milestoneRequest){
-        try {
-            milestoneService.createMilestone(milestoneRequest);
-        } catch (RuntimeException e) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity(HttpStatus.OK);
+        return milestoneService.createMilestone(milestoneRequest);
     }
 
-    @DeleteMapping("/milestones/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteMilestone (@PathVariable Long id){
-        try {
-            milestoneService.deleteMilestone(id);
-        } catch (EmptyResultDataAccessException e) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity(HttpStatus.OK);
+        return milestoneService.deleteMilestone(id);
     }
 }

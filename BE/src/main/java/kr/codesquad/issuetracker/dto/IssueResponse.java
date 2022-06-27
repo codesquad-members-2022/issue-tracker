@@ -19,7 +19,7 @@ public class IssueResponse {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime createdTime;
-    private String content;
+    private String description;
     private String milestoneName;
 
     @JsonProperty("labels")
@@ -29,7 +29,7 @@ public class IssueResponse {
         this.id = issue.getId();
         this.title = issue.getTitle();
         this.createdTime = issue.getCreatedTime();
-        this.content = issue.getContent();
+        this.description = issue.getContent();
         this.milestoneName = issue.getMilestone().getTitle();
         List<IssueLabels> issueLabels = issue.getIssueLabelsList();
         this.issueLabelsList = issueLabels.stream()
