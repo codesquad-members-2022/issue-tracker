@@ -7,26 +7,9 @@
 
 import Foundation
 
-protocol Requestable {
-    associatedtype ModelType
-
-    var request: URLRequest { get }
-    func decode(_ data: Data) -> ModelType?
+// Resource 타입이 Codable할 때 사용가능한 타입
+struct APIRequest<Resource: APIResource>: APIRequestable where Resource.ModelType: Codable {
     
-    func execute(completion: @escaping (Result<ModelType, NetworkError>) -> Void)
-}
-
-extension Requestable where ModelType: Decodable {
-    func decode(_ data: Data) -> ModelType? {
-        return try? JSONDecoder().decode(ModelType.self, from: data)
-    }
-    
-    var defaultHeader: [String: String] {
-        return ["Accept": "application/json"]
-    }
-}
-
-struct APIRequest<Resource: APIResource>: Requestable {
     typealias ModelType = Resource.ModelType
     
     let session: URLSession
@@ -77,30 +60,4 @@ struct APIRequest<Resource: APIResource>: Requestable {
         return request
     }
     
-    func execute(completion: @escaping (Result<Resource.ModelType, NetworkError>) -> Void) {
-        
-        session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                return completion(.failure(.networkFailure(error: error)))
-            }
-            
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                return completion(.failure(.failedParsingHTTPResponse))
-            }
-            
-            guard (200..<300).contains(statusCode) else {
-                return completion(.failure(.unexpectedStatusCode(statusCode)))
-            }
-            
-            guard let data = data else {
-                return completion(.failure(.missingData))
-            }
-            
-            guard let decoded = decode(data) else {
-                return completion(.failure(.failedDecoding(type: "\(Resource.ModelType.self)")))
-            }
-            
-            completion(.success(decoded))
-        }.resume()
-    }
 }

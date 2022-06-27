@@ -8,7 +8,6 @@
 import Foundation
 
 final class IssueListViewModel {
-    private let mockDataService = MockDataService()
     private let issueService: IssueService
     
     var issueViewModels: Observable<[IssueTableCellViewModel]?> = Observable(nil)
@@ -32,16 +31,6 @@ final class IssueListViewModel {
             }
             
             self.issueViewModels.value = self.convertModelToViewModel(issues)
-        }
-    }
-    
-    func requestMockData() {
-        mockDataService.getMockIssues { issues in
-            guard let issues = issues else {
-                return
-            }
-            
-            self.issueViewModels.value = convertModelToViewModel(issues)
         }
     }
     

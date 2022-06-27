@@ -31,7 +31,7 @@ struct IssueManager: IssueService {
         let issuesResource = IssuesResource(state: .all, isPull: true)
         let issuesRequest = APIRequest(resource: issuesResource, token: accessToken)
         
-        issuesRequest.execute { result in
+        networkService.execute(issuesRequest) { result in
             switch result {
             case .success(let data):
                 completion(data)

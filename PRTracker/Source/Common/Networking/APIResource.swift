@@ -7,8 +7,10 @@
 
 import Foundation
 
+// REST API 중에서 '자원(Resource)'를 추상화한 타입
+
 protocol APIResource {
-    associatedtype ModelType: Codable
+    associatedtype ModelType
     var url: URL { get }
     var path: String { get }
     var query: [String: String]? { get }
