@@ -10,6 +10,7 @@ import UIKit
 enum Section {
     case main
 }
+
 class IssueListCollectionViewController: UIViewController {
     
     // MARK: - typealias(shorten type definition) ref by raywenderlich
