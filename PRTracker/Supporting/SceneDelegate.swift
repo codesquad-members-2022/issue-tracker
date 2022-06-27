@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let code = parseCode(from: URLContexts) else { return }
-        GitHubLoginManager.shared.getAccessToken(with: code)
+        GitHubLoginManager.shared.requestAccessToken(with: code)
     }
     
     private func parseCode(from URLContexts: Set<UIOpenURLContext>) -> String? {

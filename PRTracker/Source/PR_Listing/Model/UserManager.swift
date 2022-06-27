@@ -24,19 +24,15 @@ struct UserManager {
             return completion(nil)
         }
         
-        guard let url = URL(string: BaseURL.user) else {
-            Log.error("Wrong Base URL: \(BaseURL.user)")
-            return completion(nil)
-        }
+        let userResource = UserResource()
+        let userRequest = APIRequest(resource: userResource, token: accessToken)
         
-        let request = URLRequest(url: url, with: accessToken)
-        
-        networkService.request(request) { (result: Result<User, NetworkError>) in
+        networkService.execute(userRequest) { result in
             switch result {
             case .success(let data):
                 completion(data)
             case .failure(let error):
-                Log.error(error.localizedDescription)
+                Log.error(error.localizedDescription + "(\(#file), \(#function), \(#line))")
                 completion(nil)
             }
         }
