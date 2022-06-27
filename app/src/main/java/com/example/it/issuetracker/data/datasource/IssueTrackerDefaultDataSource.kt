@@ -91,25 +91,25 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         MilestoneDto(
             id = 1,
             title = "마일스톤",
-            deadLine = "2022-06-14",
+            deadline = "2022-06-14",
             description = ""
         ),
         MilestoneDto(
             id = 2,
             title = "마스터즈 코스",
-            deadLine = "2022-06-16",
+            deadline = "2022-06-16",
             description = ""
         ),
         MilestoneDto(
             id = 3,
             title = "테스트 그룹",
-            deadLine = "2022-06-17",
+            deadline = "2022-06-17",
             description = ""
         ),
         MilestoneDto(
             id = 4,
             title = "마스터즈 코스 숫자",
-            deadLine = "2022-06-20",
+            deadline = "2022-06-20",
             description = ""
         )
     )

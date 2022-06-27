@@ -7,7 +7,7 @@ data class MilestoneDto(
     val title: String,
     val description: String? = null,
     val startDate: String? = null,
-    val deadLine: String? = null,
+    val deadline: String? = null,
     val openedIssue: Int? = null,
     val closedIssue: Int? = null,
 )
@@ -18,7 +18,7 @@ fun MilestoneDto.toMilestone(): MileStone =
         title = title,
         description = description,
         startDate = startDate,
-        deadLine = deadLine,
+        deadLine = deadline,
         openedIssue = openedIssue,
         closedIssue = closedIssue
     )
