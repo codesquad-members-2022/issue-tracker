@@ -41,6 +41,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "msw": "^0.42.3",
     "prettier": "2.7.1",
     "sass": "^1.52.3",
     "sass-loader": "^13.0.0",
