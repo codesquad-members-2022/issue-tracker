@@ -27,10 +27,10 @@ class IssueListViewModel: CommonViewModel {
     func getIssues() { }
     
     @discardableResult
-    func selectList(_ cell: IssueListCell) -> Bool {
+    func selectList(_ cell: IssueListTableViewCell) -> Bool {
         
         guard
-            let issueId = cell.issueDTO?.id,
+            let issueId = cell.dto?.id,
             let inx = self.issueList.firstIndex(where: { $0.id == issueId })
         else {
             return false

@@ -1,5 +1,5 @@
 //
-//  IssueListCell.swift
+//  IssueListCollectioViewCell.swift
 //  IssueTracker15
 //
 //  Created by 백상휘 on 2022/06/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IssueListCell: UICollectionViewCell,
+class IssueListCollectioViewCell: UICollectionViewCell,
                         ViewBindable {
     
     // MARK: - ViewBindable Implements. Select Multiple Issue List Functionality.
@@ -141,15 +141,5 @@ class IssueListCell: UICollectionViewCell,
     
     @objc func checkSelectButtonTouchUpInsdie(_ sender: CheckSelectButton) {
         sendAction(nil)
-    }
-        
-    // MARK: - CheckButton inherited from UIButton
-    class CheckSelectButton: UIButton {
-        override var isSelected: Bool {
-            didSet {
-                setImage(isSelected ? .checkButtonImageFilled : .checkButtonImage, for: .normal)
-                setNeedsDisplay()
-            }
-        }
     }
 }

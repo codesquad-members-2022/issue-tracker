@@ -7,6 +7,20 @@
 
 import UIKit
 
+enum IssueListStatus {
+    case list
+    case selection
+    
+    mutating func toggle() {
+        switch self {
+        case .list:
+            self = .selection
+        case .selection:
+            self = .list
+        }
+    }
+}
+
 class IssueNavigationController: UINavigationController, ViewBindable {
     
     var vc: ViewBinding?
@@ -72,7 +86,7 @@ class IssueNavigationController: UINavigationController, ViewBindable {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        let isIssueList = viewController is IssueListViewController
+        let isIssueList = viewController is IssueListCollectionViewController
         navigationItem.hidesBackButton = isIssueList
         navigationBar.topItem?.leftBarButtonItem?.customView?.isHidden = isIssueList
         navigationBar.topItem?.rightBarButtonItem?.customView?.isHidden = isIssueList
