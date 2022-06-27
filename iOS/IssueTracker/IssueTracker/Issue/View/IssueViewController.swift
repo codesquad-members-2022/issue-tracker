@@ -82,7 +82,7 @@ extension IssueViewController: UICollectionViewDelegate {
     func bind() {
         self.issueViewModel.list.bind(on: self) { _ in
             DispatchQueue.main.async {
-                self.issueCollectionView.update()
+                self.issueCollectionView.updateIssueView()
             }
         }
     }

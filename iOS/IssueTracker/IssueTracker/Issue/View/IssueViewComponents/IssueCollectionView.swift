@@ -59,7 +59,7 @@ final class IssueCollectionView: UIView {
         addNewIssueButton.addAction(action, for: .touchUpInside)
     }
     
-    func update() {
+    func updateIssueView() {
         self.collectionView.reloadData()
     }
     
