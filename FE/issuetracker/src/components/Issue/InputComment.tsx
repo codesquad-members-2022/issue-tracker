@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 
 import * as I from 'design/icons';
 import * as S from 'components/Issue/styled/inputComment';
+import SaveButton from 'components/common/SaveButton';
 
 import userImageURL from 'assets/images/UserImageLarge.svg';
 import { issueState } from 'context/issue';
@@ -13,19 +14,19 @@ function InputComment() {
   const [isInputActive, setIsInputActive] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const focusInput = () => {
+  const focusOnComment = () => {
     setIsInputActive(true);
   };
 
-  const blurInput = () => {
+  const focusOutComment = () => {
     setIsInputActive(false);
   };
 
-  const changeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const changeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
   };
 
-  const saveInput = () => {
+  const saveComment = () => {
     const newComment = {
       writer: issueData.writer,
       log: `${calculateInterval(issueData.writtenTime)}초 전`,
@@ -45,8 +46,12 @@ function InputComment() {
         <S.commentUserImage>
           <img src={userImageURL} alt="user-icon-img" />
         </S.commentUserImage>
-        <S.comment isInputActive={isInputActive} onFocus={focusInput} onBlur={blurInput}>
-          <S.textArea placeholder="코멘트를 입력하세요" value={inputValue} onChange={changeInput} />
+        <S.comment isInputActive={isInputActive} onFocus={focusOnComment} onBlur={focusOutComment}>
+          <S.textArea
+            placeholder="코멘트를 입력하세요"
+            value={inputValue}
+            onChange={changeComment}
+          />
           <S.attachFileButtonWrapper>
             <S.attachFileButton>
               <I.paperclip />
@@ -55,12 +60,7 @@ function InputComment() {
           </S.attachFileButtonWrapper>
         </S.comment>
       </S.commentWrapper>
-      <S.saveCommentButtonWrapper>
-        <S.saveCommentButton onClick={saveInput}>
-          <I.plus />
-          <S.saveCommentButtonText>코멘트 작성</S.saveCommentButtonText>
-        </S.saveCommentButton>
-      </S.saveCommentButtonWrapper>
+      <SaveButton buttonText="완료" margin="0 0 0 60px" handleButtonClick={saveComment} />
     </S.inputComment>
   );
 }
