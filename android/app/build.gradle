@@ -62,4 +62,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
 
+    // kakao oauth
+    implementation "com.kakao.sdk:v2-user:2.10.0"
+
+    // coroutine
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+
 }

@@ -14,7 +14,7 @@ class LabelAddViewModel @Inject constructor(
     private val labelRepository: LabelRepository
 ) : ViewModel() {
 
-    private val _label: MutableStateFlow<Label> = MutableStateFlow(Label(null, "", null, INITIAL_COLOR))
+    private val _label: MutableStateFlow<Label> = MutableStateFlow(defaultLabel)
     val label: StateFlow<Label> = _label.asStateFlow()
 
     val labelTitle: MutableStateFlow<String> = MutableStateFlow("")
@@ -42,7 +42,7 @@ class LabelAddViewModel @Inject constructor(
     }
 
     fun saveLabel() {
-        if(_label.value.labelColor == INITIAL_COLOR) {
+        if(_label.value === defaultLabel) {
             labelRepository.addLabelList(Label(null, labelTitle.value, labelDescription.value, INITIAL_COLOR))
             return
         }
@@ -55,5 +55,6 @@ class LabelAddViewModel @Inject constructor(
 
     companion object {
         const val INITIAL_COLOR = "#FF828282"
+        val defaultLabel = Label(null, "", null, INITIAL_COLOR)
     }
 }

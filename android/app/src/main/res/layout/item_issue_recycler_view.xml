@@ -48,7 +48,7 @@
                 android:id="@+id/issue_check_box"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:visibility="gone"
+                checkBoxVisible="@{issue.longClicked}"
                 android:buttonTint="@color/primary_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

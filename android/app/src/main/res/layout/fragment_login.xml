@@ -107,6 +107,16 @@
             app:buttonImage="@{R.drawable.custom_google_logo}"
             app:text="구글 계정으로 로그인" />
 
+        <com.example.issue_tracker.ui.login.LoginCustomButton
+            android:id="@+id/cb_kakao_login"
+            android:layout_width="199dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cb_google_login"
+            app:text="카카오 계정으로 로그인" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

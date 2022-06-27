@@ -16,6 +16,7 @@ import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentMileStoneAddBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -23,12 +24,17 @@ import kotlinx.coroutines.flow.collect
 class MileStoneAddFragment : Fragment() {
 
     private lateinit var binding: FragmentMileStoneAddBinding
+
     private val viewModel: MileStoneAddViewModel by viewModels()
 
     private val datePicker by lazy {
         MaterialDatePicker.Builder.datePicker()
             .setTitleText("날짜를 선택해주세요")
             .build()
+    }
+
+    private val errorSnackBar by lazy {
+        view?.let { Snackbar.make(it, "저장 실행되지 않음", Snackbar.LENGTH_SHORT) }
     }
 
     override fun onCreateView(
@@ -77,15 +83,20 @@ class MileStoneAddFragment : Fragment() {
     private fun observeDate() {
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.mileStone.collect { mileStone ->
-                binding.tvMileStoneDatePicker.text = mileStone.dueDate
+                binding.mileStone = mileStone
             }
         }
     }
 
     private fun saveMileStone(navController: NavController) {
         binding.btnMileStoneSave.setOnClickListener {
-            viewModel.saveData()
-            navController.navigate(R.id.action_mileStoneAddFragment_to_mileStoneFragment)
+            kotlin.runCatching {
+                viewModel.saveData()
+            }.onSuccess {
+                navController.navigate(R.id.action_mileStoneAddFragment_to_mileStoneFragment)
+            }.onFailure {
+                errorSnackBar?.show()
+            }
         }
     }
 }

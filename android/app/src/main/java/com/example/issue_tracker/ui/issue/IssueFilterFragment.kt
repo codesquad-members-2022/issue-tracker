@@ -27,6 +27,7 @@ class IssueFilterFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue_filter, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -43,23 +44,18 @@ class IssueFilterFragment : Fragment() {
                 when (item.itemId) {
                     R.id.open_issue -> {
                         viewModel.setStatusChoose("열린 이슈")
-                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                     R.id.issue_i_worte -> {
                         viewModel.setStatusChoose("내가 작성한 이슈")
-                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                     R.id.issue_for_me -> {
                         viewModel.setStatusChoose("나에게 할당된 이슈")
-                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                     R.id.issue_i_comment -> {
                         viewModel.setStatusChoose("내가 댓글을 남긴 이슈")
-                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                     R.id.closed_issue -> {
                         viewModel.setStatusChoose("닫힌 이슈")
-                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                 }
                 false

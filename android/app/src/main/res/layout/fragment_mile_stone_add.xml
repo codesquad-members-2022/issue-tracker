@@ -9,6 +9,10 @@
             name="viewModel"
             type="com.example.issue_tracker.ui.milestone.MileStoneAddViewModel" />
 
+        <variable
+            name="mileStone"
+            type="com.example.issue_tracker.model.MileStone" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            android:text="@string/pick_date"
+            android:text="@{mileStone.dueDate}"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/tv_mile_stone_date"
             app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_description" />

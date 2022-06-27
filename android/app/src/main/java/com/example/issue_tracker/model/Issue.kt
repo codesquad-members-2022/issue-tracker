@@ -7,7 +7,8 @@ data class Issue(
     val contents: String,
     val label: Label,
     var isSwiped: Boolean = false,
-    var isLongClicked: Boolean = false
+    var isLongClicked: Boolean = false,
+    var isChecked: Boolean = false
 )
 
 data class Label(

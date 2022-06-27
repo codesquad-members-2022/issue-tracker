@@ -41,84 +41,84 @@ class IssueRepositoryImpl @Inject constructor(): IssueRepository {
             )
         )
         val secondIssue2 = Issue(
-            2,
+            3,
             "코코아 코스",
             "ios 이슈트래커",
             "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
             Label(
-                2,
+                3,
                 "fix",
                 "fix",
                 "#D5D5DB"
             )
         )
         val secondIssue3 = Issue(
-            2,
+            4,
             "코코아 코스",
             "ios 이슈트래커",
             "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
             Label(
-                2,
+                4,
                 "fix",
                 "fix",
                 "#D5D5DB"
             )
         )
         val secondIssue4 = Issue(
-            2,
+            5,
             "코코아 코스",
             "ios 이슈트래커",
             "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
             Label(
-                2,
+                5,
                 "fix",
                 "fix",
                 "#D5D5DB"
             )
         )
         val secondIssue5 = Issue(
-            2,
+            6,
             "코코아 코스",
             "ios 이슈트래커",
             "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
             Label(
-                2,
+                6,
                 "fix",
                 "fix",
                 "#D5D5DB"
             )
         )
         val secondIssue6 = Issue(
-            2,
+            7,
             "코코아 코스",
             "ios 이슈트래커",
             "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
             Label(
-                2,
+                7,
                 "fix",
                 "fix",
                 "#D5D5DB"
             )
         )
         val secondIssue7 = Issue(
-            2,
+            8,
             "코코아 코스",
             "ios 이슈트래커",
             "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
             Label(
-                2,
+                8,
                 "fix",
                 "fix",
                 "#D5D5DB"
             )
         )
         val secondIssue8 = Issue(
-            2,
+            9,
             "코코아 코스",
             "ios 이슈트래커",
             "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
             Label(
-                2,
+                9,
                 "fix",
                 "fix",
                 "#D5D5DB"

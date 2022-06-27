@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_issueFragment_to_issueFilterFragment"
             app:destination="@id/issueFilterFragment" />
+        <action
+            android:id="@+id/action_issueFragment_to_issueAddFragment"
+            app:destination="@id/issueAddFragment" />
+        <action
+            android:id="@+id/action_issueFragment_to_issueSearchFragment"
+            app:destination="@id/issueSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -63,5 +69,23 @@
         <action
             android:id="@+id/action_mileStoneAddFragment_to_mileStoneFragment"
             app:destination="@id/mileStoneFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/issueAddFragment"
+        android:name="com.example.issue_tracker.ui.issue.IssueAddFragment"
+        android:label="IssueAddFragment"
+        tools:layout="@layout/fragment_issue_add" >
+        <action
+            android:id="@+id/action_issueAddFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/issueSearchFragment"
+        android:name="com.example.issue_tracker.ui.issue.IssueSearchFragment"
+        android:label="IssueSearchFragment"
+        tools:layout="@layout/fragment_issue_search" >
+        <action
+            android:id="@+id/action_issueSearchFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
     </fragment>
 </navigation>

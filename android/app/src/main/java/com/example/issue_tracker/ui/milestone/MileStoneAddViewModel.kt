@@ -14,7 +14,7 @@ class MileStoneAddViewModel @Inject constructor(
     private val repository: MileStoneRepository
 ): ViewModel() {
 
-    private val _mileStone = MutableStateFlow(MileStone(null, "", "", INITIAL_DATE))
+    private val _mileStone = MutableStateFlow(defaultMileStone)
     val mileStone = _mileStone.asStateFlow()
 
     val mileStoneTitle: MutableStateFlow<String> = MutableStateFlow("")
@@ -27,7 +27,7 @@ class MileStoneAddViewModel @Inject constructor(
     }
 
     fun saveData() {
-        if(_mileStone.value.dueDate == INITIAL_DATE) {
+        if(_mileStone.value === defaultMileStone) {
             repository.addLabelList(MileStone(null, mileStoneTitle.value, mileStoneDescription.value, INITIAL_DATE))
             return
         }
@@ -36,6 +36,7 @@ class MileStoneAddViewModel @Inject constructor(
 
     companion object {
         private const val INITIAL_DATE = "선택사항 (yyyy-mm-dd)"
+        val defaultMileStone = MileStone(null, "", "", INITIAL_DATE)
     }
 
 }

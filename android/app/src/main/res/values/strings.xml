@@ -52,4 +52,10 @@
     <string name="label_delete_longclick">delete longClick</string>
     <string name="label_delete_issue">delete_issue</string>
     <string name="label_close_issue">close_issue</string>
+    <string name="add_new_issue">이슈 작성</string>
+    <string name="text_pre_view">미리보기</string>
+    <string name="new_issue_title">제목</string>
+    <string name="add_new_issue_title">이슈 작성</string>
+    <string name="label_search">검색</string>
+    <string name="label_search_issue_hint">검색어를 입력하세요</string>
 </resources>

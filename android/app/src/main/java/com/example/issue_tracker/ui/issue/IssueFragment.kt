@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -30,15 +31,18 @@ class IssueFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility", "NotifyDataSetChanged")
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
-        goToFilter(findNavController)
+        goToIssueFilterFragments(findNavController)
+        goToSearchIssueFragment(findNavController)
+        goToIssueAddFragment(findNavController)
         viewModel.getIssue()
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
@@ -53,14 +57,9 @@ class IssueFragment : Fragment() {
         }
 
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
-            viewModel.issue.collect {
+            viewModel.issueList.collect {
                 adapter.submitList(it)
-            }
-        }
-
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
-            viewModel.longClick.collect { isLongClicked ->
-                when (isLongClicked) {
+                when (it[0].isLongClicked) {
                     true -> {
                         binding.tbIssueFragment.visibility = View.GONE
                         binding.tbIssueFragmentLongClick.visibility = View.VISIBLE
@@ -74,14 +73,39 @@ class IssueFragment : Fragment() {
         }
 
         binding.btnCloseLongClick.setOnClickListener {
+            viewModel.clearCheckedIdList()
             viewModel.changeClickedState()
-            adapter.notifyDataSetChanged()
+        }
+
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+            viewModel.closeIssue.collect {
+                Toast.makeText(requireContext(), "$it 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.btnAppBarCloseIssue.setOnClickListener {
+            viewModel.closeIssueByCheckBox(viewModel.checkedIssueIdList.value)
+            Toast.makeText(requireContext(), "${viewModel.checkedIssueIdListTemp.value} 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
+            viewModel.clearCheckedIdList()
+            viewModel.changeClickedState()
         }
     }
 
-    private fun goToFilter(findNavController: NavController) {
+    private fun goToIssueFilterFragments(findNavController: NavController) {
         binding.btnIssueFilter.setOnClickListener {
             findNavController.navigate(R.id.action_issueFragment_to_issueFilterFragment)
+        }
+    }
+
+    private fun goToIssueAddFragment(findNavController: NavController) {
+        binding.fabIssueAdd.setOnClickListener {
+            findNavController.navigate(R.id.action_issueFragment_to_issueAddFragment)
+        }
+    }
+
+    private fun goToSearchIssueFragment(findNavController: NavController) {
+        binding.btnIssueSearch.setOnClickListener {
+            findNavController.navigate(R.id.action_issueFragment_to_issueSearchFragment)
         }
     }
 }
