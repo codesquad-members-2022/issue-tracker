@@ -20,10 +20,9 @@ class LoginButton: UIButton {
 
     private func layout() {
         var config = UIButton.Configuration.bordered()
-        config.baseBackgroundColor = .white
-        config.baseForegroundColor = .black
-        config.background.strokeColor = .line
-        config.cornerStyle = .medium
+        config.baseBackgroundColor = .deepGray
+        config.baseForegroundColor = .white
+        config.cornerStyle = .capsule
         config.imagePadding = 10
         config.imagePlacement = .leading
         configuration = config

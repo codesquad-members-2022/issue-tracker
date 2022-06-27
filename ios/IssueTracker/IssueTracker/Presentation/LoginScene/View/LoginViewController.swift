@@ -29,6 +29,7 @@ final class LoginViewController: UIViewController, View {
         layout()
         bind()
         loginView.delegate = self
+        viewModel?.fetchToken()
     }
 
     deinit {

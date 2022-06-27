@@ -7,10 +7,25 @@
 
 import Foundation
 
+enum LocalStorageConstants {
+    static let AuthCode = "AuthorizationCode"
+    static let AuthToken = "AccessToken"
+}
+
 final class AppFlowDIContainer {
+    private let localStorage = UserDefaults.standard
+}
+
+extension AppFlowDIContainer: AppFlowCoordinatorDependencies {
+    func checkUserLoggedIn() -> Bool {
+        localStorage.string(forKey: LocalStorageConstants.AuthToken) != nil
+    }
+
     func makeLoginFlowDIContainer() -> DIContainer {
         LoginFlowDIContainer()
     }
-}
 
-extension AppFlowDIContainer: AppFlowCoordinatorDependencies {}
+    func makeTabBarFlowDIContainer() -> DIContainer {
+        TabBarFlowDIContainer()
+    }
+}

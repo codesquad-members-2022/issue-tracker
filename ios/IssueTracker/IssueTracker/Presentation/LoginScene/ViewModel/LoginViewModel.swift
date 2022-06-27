@@ -19,9 +19,9 @@ protocol LoginViewModel: LoginViewModelInput, LoginViewModelOutput {
     var input: LoginViewModelInput { get }
     var output: LoginViewModelOutput { get }
 
-    func getURL() -> URL?
     func showMainScene()
     func showLoginScene(type: LoginType)
+    func fetchToken()
 }
 
 // 코디네이터가 의존성 주입할 네비게이션 액션 핸들러
@@ -46,7 +46,7 @@ struct DefaultLoginViewModel: LoginViewModel {
     var input: LoginViewModelInput { self }
     var output: LoginViewModelOutput { self }
 
-    private let gitHubURL = URL(string: "https://")
+    private let useCase = UseCase(loginRepository: AuthRepository())
 
     var isAuthenticated = Observable(false)
 
@@ -54,10 +54,6 @@ struct DefaultLoginViewModel: LoginViewModel {
 
     init(navigationAction: LoginFlowAction) {
         self.navigationAction = navigationAction
-    }
-
-    func getURL() -> URL? {
-        gitHubURL
     }
 }
 
@@ -75,6 +71,17 @@ extension DefaultLoginViewModel {
             return navigationAction.showAppleLoginScene()
         @unknown case _:
             return
+        }
+    }
+
+    func fetchToken() {
+        useCase.start { error in
+            if error == nil {
+                print("done")
+                navigationAction.showMainScene()
+            }
+
+            // TODO: Error handling
         }
     }
 }
