@@ -25,4 +25,9 @@ struct IssueItem: Codable {
 struct Label: Codable {
     let title, backgroundColor: String
     let darkMode: Bool
+    
+    enum LabelCodingKeys: String, CodingKey {
+        case title, backgroundColor
+        case isDarkMode = "darkMode"
+    }
 }
