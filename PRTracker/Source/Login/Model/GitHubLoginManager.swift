@@ -29,18 +29,12 @@ struct GitHubLoginManager {
     
     let keyChainService: KeyChainService
     let networkService: NetworkService
-    let uiApplication: UIApplication
     
     init(keyChainService: KeyChainService = KeyChainManager(),
-         networkService: NetworkService = NetworkManger(),
-         uiApplication: UIApplication = UIApplication.shared
-    ) {
+         networkService: NetworkService = NetworkManger()) {
         self.keyChainService = keyChainService
         self.networkService = networkService
-        self.uiApplication = uiApplication
     }
-    
-    
     
     func requestAuthorization() {
         guard var components = URLComponents(string: GitHubLoginManager.authorizeBaseURL) else { return }
@@ -49,7 +43,7 @@ struct GitHubLoginManager {
             URLQueryItem(name: "scope", value: GitHubLoginManager.requiredScope)
         ]
         guard let url = components.url else { return }
-        uiApplication.open(url)
+        UIApplication.shared.open(url)
     }
     
     let authorization: Observable<AuthorizationStatus> = Observable(.none)
@@ -58,17 +52,18 @@ struct GitHubLoginManager {
         guard let url = makeAccessTokenURL(with: code) else { return }
         let request = makeAccessTokenRequest(with: url)
         
-        networkService.request(request) { (response: TokenResponse?) -> Void in
-            guard let response = response else {
-                Log.error("Request for access token is failed. Code: \(code)")
+        networkService.request(request) { (result: Result<TokenResponse, NetworkError>) in
+            switch result {
+            case .success(let data):
+                keyChainService.save(data.accessToken,
+                                     service: GitHubLoginManager.keyChainToken,
+                                     account: GitHubLoginManager.keyChainAccount)
+                authorization.value = .authorized
+                
+            case .failure(let error):
+                Log.error(error.localizedDescription)
                 authorization.value = .failed
-                return
             }
-            
-            keyChainService.save(response.accessToken,
-                                 service: GitHubLoginManager.keyChainToken,
-                                 account: GitHubLoginManager.keyChainAccount)
-            authorization.value = .authorized
         }
     }
     

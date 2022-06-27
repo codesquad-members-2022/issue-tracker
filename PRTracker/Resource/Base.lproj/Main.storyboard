@@ -214,7 +214,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="githubLoginButton" destination="ze4-gF-XCp" id="v0Q-Sb-XDu"/>
                         <segue destination="sVA-oP-Vgq" kind="custom" identifier="mainSegue" customClass="ReplaceRootSegue" customModule="PRTracker" customModuleProvider="target" id="toQ-Cc-Ot1"/>
                     </connections>
                 </viewController>
@@ -387,7 +386,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Gxo-dv-5ho"/>
+        <segue reference="toQ-Cc-Ot1"/>
     </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="CustomBlack">
