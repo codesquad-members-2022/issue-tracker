@@ -15,10 +15,12 @@ class IssueListTableViewController: UIViewController, ViewBinding {
     
     // MARK: - ViewModel
     private lazy var vm = IssueListViewModel { [weak self] indexPath, _ in
-        if let indexPath = indexPath as? IndexPath {
-            self?.tableView.reloadRows(at: [indexPath], with: .fade)
-        } else {
-            self?.tableView.reloadData()
+        DispatchQueue.main.async {
+            if let indexPath = indexPath as? IndexPath {
+                self?.tableView.reloadRows(at: [indexPath], with: .fade)
+            } else {
+                self?.tableView.reloadData()
+            }
         }
     }
     
@@ -134,7 +136,41 @@ extension IssueListTableViewController: UITableViewDataSource {
     }
 }
 
-extension IssueListTableViewController: UITableViewDelegate { }
+extension IssueListTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard viewStatus == .list else {
+            return nil
+        }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제", handler: { _, _, completionHandler in
+            
+            guard let cell = tableView.cellForRow(at: indexPath) as? NormalCell, let issue = cell.dto else {
+                completionHandler(false)
+                return
+            }
+            
+            self.vm.deleteIssue(issue, target: cell)
+            completionHandler(true)
+        })
+        deleteAction.image = UIImage(systemName: "xmark.circle")
+        deleteAction.backgroundColor = .red
+        
+        let closeAction = UIContextualAction(style: .normal, title: "Close") { _, _, completionHandler in
+            
+            guard let cell = tableView.cellForRow(at: indexPath) as? NormalCell, let issue = cell.dto else {
+                completionHandler(false)
+                return
+            }
+            
+            self.vm.closeIssue(issue, target: cell)
+            completionHandler(true)
+        }
+        closeAction.image = UIImage(systemName: "xmark.circle")
+        closeAction.backgroundColor = .purple
+        
+        return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
+    }
+}
 private extension UITableViewCell {
     static var reuseIdentifier: String {
         return String(describing: Self.self)
