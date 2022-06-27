@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		736E6BA72864090A00BB3490 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E6BA62864090A00BB3490 /* UseCase.swift */; };
 		736E6BA92864093100BB3490 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E6BA82864093100BB3490 /* AuthRepository.swift */; };
+		73888535286836DB00F65BEF /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73888532286836DB00F65BEF /* IssueViewController.swift */; };
+		73888536286836DB00F65BEF /* IssueListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73888533286836DB00F65BEF /* IssueListCell.swift */; };
+		73888537286836DB00F65BEF /* TableviewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73888534286836DB00F65BEF /* TableviewDataSource.swift */; };
+		7388853A2868371200F65BEF /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738885382868371200F65BEF /* TitleView.swift */; };
+		7388853B2868371200F65BEF /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738885392868371200F65BEF /* BadgeLabel.swift */; };
 		7389100228646DC000502A86 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7389100128646DC000502A86 /* Storage.swift */; };
 		738910042864726B00502A86 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738910032864726B00502A86 /* Service.swift */; };
 		738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C4AAE285AD38C0050990E /* LoginButton.swift */; };
@@ -51,6 +56,11 @@
 /* Begin PBXFileReference section */
 		736E6BA62864090A00BB3490 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		736E6BA82864093100BB3490 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		73888532286836DB00F65BEF /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
+		73888533286836DB00F65BEF /* IssueListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListCell.swift; sourceTree = "<group>"; };
+		73888534286836DB00F65BEF /* TableviewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableviewDataSource.swift; sourceTree = "<group>"; };
+		738885382868371200F65BEF /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		738885392868371200F65BEF /* BadgeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
 		7389100128646DC000502A86 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		738910032864726B00502A86 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		738C4AAE285AD38C0050990E /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
@@ -146,6 +156,8 @@
 		738C4AAD285AD3630050990E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				738885392868371200F65BEF /* BadgeLabel.swift */,
+				738885382868371200F65BEF /* TitleView.swift */,
 				738C4AAE285AD38C0050990E /* LoginButton.swift */,
 			);
 			path = View;
@@ -335,6 +347,9 @@
 		E46C69ED286555CE0074AEF9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				73888533286836DB00F65BEF /* IssueListCell.swift */,
+				73888532286836DB00F65BEF /* IssueViewController.swift */,
+				73888534286836DB00F65BEF /* TableviewDataSource.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -620,12 +635,14 @@
 				E45477B5286566FA002379F1 /* UIView+Extensions.swift in Sources */,
 				E4D87386285884AE00AFCE4D /* LoginViewController.swift in Sources */,
 				73A7EDC92859A68800191F99 /* LoginView.swift in Sources */,
+				73888537286836DB00F65BEF /* TableviewDataSource.swift in Sources */,
 				E46C69F92865568C0074AEF9 /* LabelFlowCoordinator.swift in Sources */,
 				E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */,
 				E46C6A0B28655B760074AEF9 /* AccountFlowDIContainer.swift in Sources */,
 				E46C6A01286559100074AEF9 /* IssueFlowCoordinator.swift in Sources */,
 				E46C69FF2865589D0074AEF9 /* AccountFlowCoordinator.swift in Sources */,
 				E4D87382285884AE00AFCE4D /* AppDelegate.swift in Sources */,
+				73888536286836DB00F65BEF /* IssueListCell.swift in Sources */,
 				E46C69F6286556020074AEF9 /* AccountViewController.swift in Sources */,
 				E45477AF2865617D002379F1 /* UIImage+Extensions.swift in Sources */,
 				738910042864726B00502A86 /* Service.swift in Sources */,
@@ -633,14 +650,17 @@
 				738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */,
 				E4F44CF0285C292E00D3A3E6 /* AppFlowDIContainer.swift in Sources */,
 				736E6BA92864093100BB3490 /* AuthRepository.swift in Sources */,
+				7388853B2868371200F65BEF /* BadgeLabel.swift in Sources */,
 				E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */,
 				E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */,
 				E46C6A0728655AC70074AEF9 /* LabelFlowDIContainer.swift in Sources */,
+				73888535286836DB00F65BEF /* IssueViewController.swift in Sources */,
 				E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */,
 				73A7EDC62859697600191F99 /* UIColor+Extensions.swift in Sources */,
 				E46C6A03286559830074AEF9 /* IssueFlowDIContainer.swift in Sources */,
 				E46C6A0928655B320074AEF9 /* MilestoneFlowDIContainer.swift in Sources */,
 				E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */,
+				7388853A2868371200F65BEF /* TitleView.swift in Sources */,
 				E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */,
 				E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */,
 				E45477B3286564B2002379F1 /* BaseCoordinator.swift in Sources */,

@@ -15,6 +15,6 @@ final class IssueFlowDIContainer: DIContainer {
 
 extension IssueFlowDIContainer: IssueFlowCoordinatorDependencies {
     func makeIssueViewController() -> UIViewController {
-        UIViewController()
+        IssueViewController()
     }
 }
