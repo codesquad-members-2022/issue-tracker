@@ -13,11 +13,32 @@ final class IssueViewController: UIViewController {
         return collectionView
     }()
     
-    private var model: IssueModel?
+    private lazy var addButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+//        configuration.image = UIImage(systemName: "plus")
+        configuration.baseBackgroundColor = .systemBlue
+        configuration.baseForegroundColor = .white
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        configuration.background.cornerRadius = 70
+        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
+            self?.touchedAddButton()
+        }))
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+//        button.layer.cornerRadius = 50 / 2
+        
+        return button
+    }()
     
-    convenience init(model: IssueModel?) {
-        self.init()
+    private var model: IssueModel
+    
+    init(model: IssueModel) {
         self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: ViewDidLoad
@@ -25,33 +46,38 @@ final class IssueViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
-        model?.requestIssue()
-        model?.updatedIssues = { issues in // 모델과 바인딩
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+        model.requestIssue()
+        model.updatedIssues = { [weak self] issues in
+            DispatchQueue.main.async { [weak self] in 
+                self?.collectionView.reloadData()
             }
         }
     }
     
     @objc func touchedSelectButton() {
-        print("touchedSelectButton")
     }
     
     @objc func touchedFilterButton() {
-        print("touchedFilterButton")
+        let vc = UIViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    @objc func touchedAddButton() {
+        self.navigationController?.pushViewController(Container().buildViewController(.newIssue), animated: true)
     }
     
     private func setupNavigationBar() {
         self.title = "이슈"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
         
-        let filterButton = createButton(title: "필터", image: UIImage(systemName: "scroll"), action: UIAction(handler: { _ in
-            self.touchedFilterButton()
+        let filterButton = createButton(title: "필터", image: UIImage(systemName: "scroll"), action: UIAction(handler: { [weak self] _ in
+            self?.touchedFilterButton()
         }))
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButton)
         
-        let selectButton = createButton(title: "선택", image: UIImage(systemName: "checkmark.circle"), action: UIAction(handler: { _ in
-            self.touchedSelectButton()
+        let selectButton = createButton(title: "선택", image: UIImage(systemName: "checkmark.circle"), action: UIAction(handler: { [weak self] _ in
+            self?.touchedSelectButton()
         }))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: selectButton)
     }
@@ -60,8 +86,20 @@ final class IssueViewController: UIViewController {
         self.view.backgroundColor = .white
         
         view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
+        collectionView.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.edges.equalTo(self.view)
+        }
+        
+        view.addSubview(addButton)
+        addButton.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
+            make.bottom.equalTo(self.view).offset(-50)
+            make.trailing.equalTo(self.view).offset(-50)
         }
     }
     
@@ -77,17 +115,28 @@ final class IssueViewController: UIViewController {
         let button = UIButton(configuration: configuration, primaryAction: action)
         return button
     }
+    
+    private func createButton(title: String, action: UIAction) -> UIButton {
+        var configuration = UIButton.Configuration.plain()
+        var container = AttributeContainer()
+        container.font = UIFont.systemFont(ofSize: 14)
+        configuration.attributedTitle = AttributedString(title, attributes: container)
+        
+        configuration.buttonSize = .small
+        let button = UIButton(configuration: configuration, primaryAction: action)
+        return button
+    }
 }
 
 
 extension IssueViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.model?.getIssuesCount() ?? 0
+        return self.model.getIssuesCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueListCell.identifier, for: indexPath) as? IssueListCell,
-              let data = model?.getIssue(at: indexPath.row) else {
+              let data = model.getIssue(at: indexPath.row) else {
             return UICollectionViewCell()
         }
         cell.updateViews(title: data.title, description: data.body, milestone: data.milestone?.title, labels: data.labels)

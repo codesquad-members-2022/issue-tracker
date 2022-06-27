@@ -8,18 +8,31 @@
 import UIKit
 
 struct Container {
-    
     enum Screen {
         case login
         case issue(token: String)
+        case newIssue
     }
     
-    func getViewController(_ screen: Screen) -> UIViewController {
+    func buildRootViewController() -> UIViewController {
+        if let accessToken = GithubUserDefaults.getToken() {
+            return buildViewController(.issue(token: accessToken))
+        } else {
+            return buildViewController(.login)
+        }
+    }
+    
+    func buildViewController(_ screen: Screen) -> UIViewController {
         switch screen {
         case .login:
             return LoginViewController(service: OAuthService())
         case .issue(let token):
-            return UINavigationController(rootViewController: IssueViewController(model: IssueModel(service: GitHubService(), token: token)))
+            let service = IssueService()
+            let model = IssueModel(service: service, token: token)
+            let viewController = IssueViewController(model: model)
+            return UINavigationController(rootViewController: vc)
+        case .newIssue:
+            return NewIssueViewController()
         }
     }
 }

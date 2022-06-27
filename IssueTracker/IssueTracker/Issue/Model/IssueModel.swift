@@ -9,21 +9,19 @@ import Foundation
 
 class IssueModel {
 
-    private let githubService: GitHubService
+    private let service: IssueService
     private let accessToken: String
     
-    init(service: GitHubService, token: String) {
-        self.githubService = service
+    init(service: IssueService, token: String) {
+        self.service = service
         self.accessToken = token
     }
     
-    var updatedIssues: (_ issues: [Issue]) -> Void = { issues in
-        
-    }
+    var updatedIssues: ( (_ issues: [Issue]) -> Void )?
     
     private var issues: [Issue] = [] {
-        didSet { // issue내용 바뀌면 updatedIssues를 호출 : delegate역할
-            updatedIssues(issues)
+        didSet {
+            updatedIssues?(issues)
         }
     }
     
@@ -39,7 +37,7 @@ class IssueModel {
     }
     
     func requestIssue() {
-        githubService.requestIssues(accessToken: self.accessToken) { result in
+        service.requestIssues(accessToken: accessToken) { result in
             switch result {
             case .success(let issues):
                 self.issues = issues
