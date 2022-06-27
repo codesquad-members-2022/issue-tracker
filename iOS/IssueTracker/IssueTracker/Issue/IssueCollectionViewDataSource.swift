@@ -9,14 +9,15 @@ import UIKit
 
 class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    let issueViewModel: IssueViewModel
+    private var data: Observable<[IssueItem]>
     
-    init(issueViewModel: IssueViewModel) {
-        self.issueViewModel = issueViewModel
+    init(issueEntityList: Observable<[IssueItem]>) {
+        self.data = issueEntityList
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.issueViewModel.cellCount
+        let issueEntityList = data.value
+        return issueEntityList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -24,7 +25,8 @@ class IssueCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCollectionViewCell.identifier, for: indexPath) as? IssueCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let issueEntity = issueViewModel.list.value[indexPath.item]
+        let issueEntityList = data.value
+        let issueEntity = issueEntityList[indexPath.item]
         cell.configure(with: issueEntity)
         
         return cell

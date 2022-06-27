@@ -11,4 +11,5 @@ protocol NetworkTargetProtocol {
     var url: String { get }
     var queryItem: [URLQueryItem]? { get }
     var method: String? { get }
+    var body: Data? { get }
 }

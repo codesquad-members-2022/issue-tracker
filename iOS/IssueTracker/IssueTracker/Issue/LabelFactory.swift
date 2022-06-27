@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct LabelFactory {
-    static func createLael(_ label: Label) -> PaddingLabel {
+    static func createLabel(_ label: Label) -> PaddingLabel {
         let paddingLabel = PaddingLabel()
         paddingLabel.translatesAutoresizingMaskIntoConstraints = false
         paddingLabel.font = UIFont(name: "SFProDisplay-Regular", size: 17)

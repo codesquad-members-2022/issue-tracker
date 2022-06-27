@@ -129,7 +129,9 @@ private extension EditingIssueViewController {
     }
 
     func popViewController() {
-        self.navigationController?.popViewController(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
     func showAlert(of errorMessage: String) {

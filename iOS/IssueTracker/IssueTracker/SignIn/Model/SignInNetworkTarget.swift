@@ -34,6 +34,10 @@ extension SignInNetworkTarget: NetworkTargetProtocol {
             return "GET"
         }
     }
+
+    var body: Data? {
+        return nil
+    }
 }
 
 // MARK: - private computed properties

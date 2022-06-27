@@ -12,14 +12,6 @@ class EditingIssueManagerTests: XCTestCase {
 
     var sut: EditingIssueManagable!
 
-    override func setUpWithError() throws {
-        sut = EditingIssueManager()
-    }
-
-    override func tearDownWithError() throws {
-        sut = nil
-    }
-
     func test_sendNewIssue호출시_key가id인데이터를_잘받아오는지() {
         let promise = expectation(description: "올바른 URL 생성")
         let url = URL(string: "https://008b1557-6228-4eb0-af91-8ea0225787e5.mock.pstmn.io")!
@@ -30,7 +22,7 @@ class EditingIssueManagerTests: XCTestCase {
 
         let stubURLSession = StubURLSession(dummy: dummy)
 
-        sut.setURLSession(stubURLSession)
+        sut = EditingIssueManager(urlSession: stubURLSession)
 
         let mockIssueItem = IssueItem(id: -1, title: "", content: "", milestoneName: "", labels: [])
         sut.sendNewIssue(mockIssueItem) { (result) in

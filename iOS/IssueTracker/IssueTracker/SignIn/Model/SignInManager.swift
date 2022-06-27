@@ -12,13 +12,12 @@ protocol SignInManagable {
 
     func requestCode(completion: @escaping (Result<URL, Error>) -> Void)
     func requestJWTToken(codeURL: URL, completion: @escaping (Result<StringDictionary, NetworkError>) -> Void)
-    mutating func setURLSession(_ session: URLSessionProtocol)
 }
 
 struct SignInManager {
     private let clientID = Bundle.main.clientID
     private let clientSecret = Bundle.main.clientSecret
-    private var urlSession: URLSessionProtocol
+    private let urlSession: URLSessionProtocol
     
     init(urlSession: URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
@@ -48,9 +47,5 @@ extension SignInManager: SignInManagable {
                 urlSession: urlSession,
                 completion: completion)
         }
-    }
-
-    mutating func setURLSession(_ session: URLSessionProtocol) {
-        urlSession = session
     }
 }
