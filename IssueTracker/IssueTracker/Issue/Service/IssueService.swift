@@ -73,8 +73,13 @@ struct IssueService {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         AF.request(urlString, method: .get, headers: headers)
-            .responseData(queue: DispatchQueue.global(qos: .default)) { response in
-                print("statusCode == ", response.response?.statusCode)
+            .responseDecodable(of: [Repository].self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure:
+                    completion(.failure(.issueNotFound))
+                }
             }
     }
 }

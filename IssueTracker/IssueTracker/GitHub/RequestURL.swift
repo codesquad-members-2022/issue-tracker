@@ -18,7 +18,7 @@ enum RequestURL: CustomStringConvertible {
         case let .createIssue(owner, repo):
             return "https://api.github.com/repos/\(owner)/\(repo)/issues"
         case .repos:
-            return "https://github.com/user/repos"
+            return "https://api.github.com/user/repos"
         }
     }
 }
