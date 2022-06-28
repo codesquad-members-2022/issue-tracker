@@ -59,5 +59,4 @@ struct APIRequest<Resource: APIResource>: APIRequestable where Resource.ModelTyp
         
         return request
     }
-    
 }

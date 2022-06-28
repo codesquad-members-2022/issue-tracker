@@ -20,6 +20,7 @@ struct NetworkManger: NetworkService {
     }
     
     func execute<T: APIRequestable>(_ request: T, completion: @escaping (Result<T.ModelType, NetworkError>) -> Void) {
+        
         session.dataTask(with: request.request) { data, response, error in
             if let error = error {
                 return completion(.failure(.networkFailure(error: error)))
@@ -38,6 +39,7 @@ struct NetworkManger: NetworkService {
             }
             
             guard let decoded = request.decode(data) else {
+                
                 return completion(.failure(.failedDecoding(type: "\(T.ModelType.self)")))
             }
             

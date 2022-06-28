@@ -27,6 +27,7 @@ struct UserManager {
         let userResource = UserResource()
         let userRequest = APIRequest(resource: userResource, token: accessToken)
         
+        
         networkService.execute(userRequest) { result in
             switch result {
             case .success(let data):

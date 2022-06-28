@@ -9,6 +9,7 @@ import Foundation
 
 struct Issue: Codable {
     let id: Int
+    let number: Int
     let title: String
     let body: String?
     let state: String
@@ -17,6 +18,7 @@ struct Issue: Codable {
     let labels: [Label]
     let milestone: Milestone?
     let pull: Pull?
+    let repository: Repository
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,6 +30,8 @@ struct Issue: Codable {
         case pull = "pull_request"
         case labels
         case milestone
+        case repository
+        case number
     }
 }
 

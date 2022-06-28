@@ -16,7 +16,6 @@ protocol APIRequestable {
     func decode(_ data: Data) -> ModelType?
 }
 
-
 // 응답 타입이 JSON으로 Decoding 가능한 경우의 기본 구현
 extension APIRequestable where ModelType: Codable {
     func decode(_ data: Data) -> ModelType? {

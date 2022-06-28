@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 struct IssuesResource: APIResource {
     typealias ModelType = [Issue]
     
