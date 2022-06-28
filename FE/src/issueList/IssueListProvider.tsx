@@ -5,28 +5,31 @@ import {
   useReducer,
   Dispatch
 } from 'react';
-import checkReducer, { stateType, actionType } from './checkReducer';
+import checkReducer, {
+  IssueListCheckStateType,
+  IssueListActionType
+} from './checkReducer';
 
-type issueListContextType = {
-  state: stateType;
-  dispatch: Dispatch<actionType>;
+type IssueListContextType = {
+  state: IssueListCheckStateType;
+  dispatch: Dispatch<IssueListActionType>;
 };
 
-const issueListInitialState: stateType = {
+type IssueListProviderProps = {
+  children: ReactNode;
+};
+
+const issueListInitialState: IssueListCheckStateType = {
   headerCheckBox: 'initial',
   selectedIssues: {}
 };
 
-const issueListContext = createContext<issueListContextType>({
+const issueListContext = createContext<IssueListContextType>({
   state: issueListInitialState,
   dispatch: () => {}
 });
 
 export const useIssueListContext = () => useContext(issueListContext);
-
-type IssueListProviderProps = {
-  children: ReactNode;
-};
 
 function IssueListProvider({ children }: IssueListProviderProps) {
   const [state, dispatch] = useReducer(checkReducer, issueListInitialState);

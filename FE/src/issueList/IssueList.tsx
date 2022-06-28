@@ -69,7 +69,7 @@ function IssueList() {
       ) : (
         <ClickedIssueHeader />
       )}
-      {issueList?.issues.length ? (
+      {issueList.issues.length ? (
         issueList.issues.map(
           ({ id, title, createdTime, writer, labels, milestoneName }, idx) => (
             <IssueItem
