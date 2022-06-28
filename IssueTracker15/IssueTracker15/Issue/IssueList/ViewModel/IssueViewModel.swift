@@ -42,29 +42,18 @@ class IssueListViewModel: CommonViewModel {
     }
     
     func closeIssue(_ dto: IssueDTO, target: ViewBindable) {
-        DispatchQueue.global().asyncAfter(deadline: DispatchTime.randomFive) { [weak self] in
-            
-            guard let inx = self?.issueList.firstIndex(where: { $0.id == dto.id }) else { return }
-            
-            self?.issueList[inx].closed_at = "closed!"
-            
-            self?.output(
-                (target as? IssueListTableViewCell)?.indexPath,
-                target
-            )
-        }
+        guard let index = issueList.firstIndex(of: dto) else { return }
+        
+        issueList[index].closed_at = "closed!"
+        output(IndexPath(row: index, section: 0), target)
     }
     
     func deleteIssue(_ dto: IssueDTO, target: ViewBindable) {
-        DispatchQueue.global().asyncAfter(deadline: DispatchTime.randomFive) { [weak self] in
-            var indexPath: IndexPath?
-            
-            if let index = self?.issueList.firstIndex(of: dto) {
-                indexPath = IndexPath(row: index, section: 0)
-            }
-            
-            self?.output(indexPath, target)
-        }
+        guard let index = issueList.firstIndex(of: dto) else { return }
+        
+        issueList.remove(at: index)
+        (target as? IssueListTableViewCell)?.willBeDelete = true
+        output(IndexPath(row: index, section: 0), target)
     }
 }
 

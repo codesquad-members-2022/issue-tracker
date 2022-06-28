@@ -754,7 +754,7 @@
 				1B1A818A28608DE5003C135A /* MilestoneDTO.swift in Sources */,
 				8DF9BA332861DD6500BF6CF4 /* Bundle.swift in Sources */,
 				1B1A819A2860A73C003C135A /* MainTabBarController.swift in Sources */,
-				1B1A8193286090A1003C135A /* IssueListViewController.swift in Sources */,
+				1B1A8193286090A1003C135A /* IssueListCollectionViewController.swift in Sources */,
 				1B174850285885710028E037 /* UseCaseResponsible.swift in Sources */,
 				1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */,
 				1BD476372869401700F08BDB /* ViewBinding.swift in Sources */,
