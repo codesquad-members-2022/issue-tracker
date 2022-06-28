@@ -20,15 +20,11 @@
 		1B1A818A28608DE5003C135A /* MilestoneDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A818928608DE4003C135A /* MilestoneDTO.swift */; };
 		1B1A818C28608E3A003C135A /* PullRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A818B28608E3A003C135A /* PullRequestDTO.swift */; };
 		1B1A818E28608E72003C135A /* IssueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A818D28608E72003C135A /* IssueDTO.swift */; };
-		1B1A8193286090A1003C135A /* IssueListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A8192286090A1003C135A /* IssueListCollectionViewController.swift */; };
-		1B1A81952860A0F6003C135A /* IssueListCollectioViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81942860A0F6003C135A /* IssueListCollectioViewCell.swift */; };
 		1B1A81982860A56A003C135A /* IssueNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81972860A56A003C135A /* IssueNavigationController.swift */; };
 		1B1A819A2860A73C003C135A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81992860A73C003C135A /* MainTabBarController.swift */; };
 		1B1A819C2860A814003C135A /* LabelNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A819B2860A814003C135A /* LabelNavigationController.swift */; };
 		1B1A819E2860A828003C135A /* MilestoneNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A819D2860A828003C135A /* MilestoneNavigationController.swift */; };
 		1B1A81A02860AABC003C135A /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A819F2860AABC003C135A /* IssueViewModel.swift */; };
-		1B1A81A3286160F5003C135A /* IssueListCollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81A2286160F5003C135A /* IssueListCollectionHeaderReusableView.swift */; };
-		1B1A81A528617FB3003C135A /* IssueListCollectionFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81A428617FB3003C135A /* IssueListCollectionFooterReusableView.swift */; };
 		1B1D5AA028695A37001A6734 /* IssueListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D5A9F28695A37001A6734 /* IssueListTableViewCell.swift */; };
 		1B1D5AA228699C25001A6734 /* IssueListSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D5AA128699C25001A6734 /* IssueListSearchBar.swift */; };
 		1B87F704285B6C7A002B47B7 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */; };
@@ -120,15 +116,11 @@
 		1B1A818928608DE4003C135A /* MilestoneDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneDTO.swift; sourceTree = "<group>"; };
 		1B1A818B28608E3A003C135A /* PullRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestDTO.swift; sourceTree = "<group>"; };
 		1B1A818D28608E72003C135A /* IssueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDTO.swift; sourceTree = "<group>"; };
-		1B1A8192286090A1003C135A /* IssueListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionViewController.swift; sourceTree = "<group>"; };
-		1B1A81942860A0F6003C135A /* IssueListCollectioViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectioViewCell.swift; sourceTree = "<group>"; };
 		1B1A81972860A56A003C135A /* IssueNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueNavigationController.swift; sourceTree = "<group>"; };
 		1B1A81992860A73C003C135A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1B1A819B2860A814003C135A /* LabelNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNavigationController.swift; sourceTree = "<group>"; };
 		1B1A819D2860A828003C135A /* MilestoneNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneNavigationController.swift; sourceTree = "<group>"; };
 		1B1A819F2860AABC003C135A /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
-		1B1A81A2286160F5003C135A /* IssueListCollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionHeaderReusableView.swift; sourceTree = "<group>"; };
-		1B1A81A428617FB3003C135A /* IssueListCollectionFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCollectionFooterReusableView.swift; sourceTree = "<group>"; };
 		1B1D5A9F28695A37001A6734 /* IssueListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListTableViewCell.swift; sourceTree = "<group>"; };
 		1B1D5AA128699C25001A6734 /* IssueListSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListSearchBar.swift; sourceTree = "<group>"; };
 		1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
@@ -308,7 +300,6 @@
 				1B1D5A9F28695A37001A6734 /* IssueListTableViewCell.swift */,
 				1BD476432869540E00F08BDB /* IssueListTableViewDelegate.swift */,
 				1BD476452869541600F08BDB /* IssueListTableViewDataSource.swift */,
-				1BD47647286957DA00F08BDB /* CollectionView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -409,17 +400,6 @@
 				1B1A819D2860A828003C135A /* MilestoneNavigationController.swift */,
 			);
 			path = Milestone;
-			sourceTree = "<group>";
-		};
-		1BD47647286957DA00F08BDB /* CollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				1B1A8192286090A1003C135A /* IssueListCollectionViewController.swift */,
-				1B1A81942860A0F6003C135A /* IssueListCollectioViewCell.swift */,
-				1B1A81A2286160F5003C135A /* IssueListCollectionHeaderReusableView.swift */,
-				1B1A81A428617FB3003C135A /* IssueListCollectionFooterReusableView.swift */,
-			);
-			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		1BD7504D2858867E0025DDC8 /* RegularExpressionCheckerUnitTest */ = {
@@ -754,13 +734,11 @@
 				1B1A818A28608DE5003C135A /* MilestoneDTO.swift in Sources */,
 				8DF9BA332861DD6500BF6CF4 /* Bundle.swift in Sources */,
 				1B1A819A2860A73C003C135A /* MainTabBarController.swift in Sources */,
-				1B1A8193286090A1003C135A /* IssueListCollectionViewController.swift in Sources */,
 				1B174850285885710028E037 /* UseCaseResponsible.swift in Sources */,
 				1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */,
 				1BD476372869401700F08BDB /* ViewBinding.swift in Sources */,
 				1B1A818828608D8A003C135A /* LabelDTO.swift in Sources */,
 				8DF770B228619F9500C02D1F /* AppleLoginUseCase.swift in Sources */,
-				1B1A81A528617FB3003C135A /* IssueListCollectionFooterReusableView.swift in Sources */,
 				8D66A2EE28598CA1001B514C /* UseCaseContainer.swift in Sources */,
 				8D21138E285ADFA700B65676 /* OAuthLoginButton.swift in Sources */,
 				8DF770B62861A00100C02D1F /* OAuthLoginSource .swift in Sources */,
@@ -769,9 +747,7 @@
 				1B1A81A02860AABC003C135A /* IssueViewModel.swift in Sources */,
 				8DF770BC2861A26200C02D1F /* AppleLoginModel.swift in Sources */,
 				8D2113BA285B1C6700B65676 /* UIView.swift in Sources */,
-				1B1A81A3286160F5003C135A /* IssueListCollectionHeaderReusableView.swift in Sources */,
 				8D2113B8285B0D0500B65676 /* UserInfoInputStackView.swift in Sources */,
-				1B1A81952860A0F6003C135A /* IssueListCollectioViewCell.swift in Sources */,
 				1B1D5AA228699C25001A6734 /* IssueListSearchBar.swift in Sources */,
 				1B1D5AA028695A37001A6734 /* IssueListTableViewCell.swift in Sources */,
 				8D06CC4C2864A92200142943 /* AccessTokenManager.swift in Sources */,
