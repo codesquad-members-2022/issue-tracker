@@ -1,6 +1,4 @@
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
 
 function OAuth() {
   const URI = 'http://louie-03.com/login';
@@ -10,8 +8,10 @@ function OAuth() {
       try {
         const response = await fetch(URI);
         const data = await response.json();
+        // eslint-disable-next-line no-console
         console.log(data);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error);
       }
     };

@@ -12,9 +12,12 @@ export function Login(): JSX.Element {
       try {
         const response = await fetch(URL);
         const data = await response.json();
+        // eslint-disable-next-line no-console
         console.log('ssss', data.access_token);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.log('???????error???????');
+        // eslint-disable-next-line no-console
         console.log(error);
       }
     };
