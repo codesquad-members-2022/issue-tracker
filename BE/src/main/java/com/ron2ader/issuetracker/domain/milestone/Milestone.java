@@ -4,6 +4,7 @@ import com.ron2ader.issuetracker.domain.issue.Issue;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 import lombok.AccessLevel;
@@ -51,4 +52,20 @@ public class Milestone {
                 .count();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Milestone milestone = (Milestone) o;
+        return Objects.equals(id, milestone.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -2,7 +2,10 @@ package com.ron2ader.issuetracker.auth;
 
 import com.ron2ader.issuetracker.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Component
 public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final AuthService authService;
@@ -24,8 +28,7 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-        String token = Optional.ofNullable(AuthorizationExtractor.extract(request)).orElseThrow(RuntimeException::new);
-
+        String token = Optional.ofNullable(AuthorizationExtractor.extract(request)).orElseThrow(IllegalAccessException::new);
         return authService.extractUserIdByToken(token);
     }
 }

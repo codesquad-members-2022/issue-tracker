@@ -21,6 +21,7 @@ public class IssueSimpleResponse {
     private List<MemberDto> assignees;
     private List<LabelResponse> labels;
     private String milestoneTitle;
+    private Boolean openStatus;
 
     public static IssueSimpleResponse from(Issue issue) {
         return new IssueSimpleResponse(MemberDto.from(issue.getIssuer()),
@@ -33,6 +34,7 @@ public class IssueSimpleResponse {
             issue.getLabels().stream()
                 .map(issueLabel -> LabelResponse.from(issueLabel.getLabel()))
                 .collect(Collectors.toList()),
-            issue.getMilestone().getTitle());
+            issue.getMilestone().getTitle(),
+            issue.getOpenStatus());
     }
 }

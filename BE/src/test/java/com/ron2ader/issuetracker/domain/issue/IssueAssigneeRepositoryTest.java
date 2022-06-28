@@ -18,7 +18,6 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @Import(JpaConfig.class)
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @ActiveProfiles("local")
-@Sql(scripts = "classpath:sql/data.sql")
 class IssueAssigneeRepositoryTest {
 
     @Autowired

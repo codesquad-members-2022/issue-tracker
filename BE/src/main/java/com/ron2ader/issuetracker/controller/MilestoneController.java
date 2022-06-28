@@ -21,14 +21,14 @@ public class MilestoneController {
     }
 
     @PostMapping("/milestones")
-    public MilestoneResponse register(MilestoneRequest milestoneRequest) {
+    public MilestoneResponse register(@RequestBody MilestoneRequest milestoneRequest) {
         return milestoneService.save(milestoneRequest.getTitle(),
                 milestoneRequest.getDescription(),
                 milestoneRequest.getEndDate());
     }
 
     @PostMapping("/milestones/{id}")
-    public MilestoneResponse update(@PathVariable Long id, MilestoneRequest milestoneRequest) {
+    public MilestoneResponse update(@PathVariable Long id, @RequestBody MilestoneRequest milestoneRequest) {
         return milestoneService.update(id, milestoneRequest.getTitle(),
                 milestoneRequest.getDescription(),
                 milestoneRequest.getEndDate());
