@@ -40,16 +40,14 @@ function FilterBar() {
         필터
         <Icon iconName="chevronDown" stroke={iconColor} />
       </ButtonBox>
-      {isFilterButtonShow && (
-        <DropDownPanel
-          items={filterCheckBoxItems}
-          showCheckBox
-          filterName="이슈필터"
-          positionX={44}
-          positionY={0}
-        />
-      )}
       <DropDownBox>
+        {isFilterButtonShow && (
+          <DropDownPanel
+            items={filterCheckBoxItems}
+            showCheckBox
+            filterName="이슈필터"
+          />
+        )}
       </DropDownBox>
       <InputBox>
         <Icon iconName="search" stroke={iconColor} />
