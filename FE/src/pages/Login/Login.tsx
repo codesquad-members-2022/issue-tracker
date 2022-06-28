@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import axios from 'axios';
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
@@ -10,10 +11,10 @@ export function Login(): JSX.Element {
   useEffect(() => {
     const getToken = async () => {
       try {
-        const response = await fetch(URL);
-        const data = await response.json();
+        const response = await axios.get('/login');
+        // const data = await response;
 
-        console.log('ssss', data);
+        console.log('ssss', response);
       } catch (error) {
         console.log('???????error???????');
 
