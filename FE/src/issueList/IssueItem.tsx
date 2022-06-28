@@ -1,19 +1,107 @@
 import Icon from '@/assets/icons/Icon';
 import { COLORS, GREYSCALE } from '@/constants';
+import { getRandomKey } from '@/utils';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
+import { useIssueListContext } from './IssueListProvider';
 import Label from './Label';
 
-type IssueItemProps = {
-  isLast?: boolean;
+type LabelColorType = {
+  backgroundColor: string;
+  textColor: string;
 };
 
-function IssueItem({ isLast }: IssueItemProps) {
+type LabelType = {
+  name: string;
+  color: LabelColorType;
+};
+
+type IssueItemProps = {
+  id: string;
+  title: string;
+  createdTime: string;
+  writer: string;
+  labels: LabelType[];
+  milestoneName: string;
+  isLast: boolean;
+};
+
+function IssueItem({
+  id,
+  title,
+  createdTime,
+  writer,
+  labels,
+  milestoneName,
+  isLast
+}: IssueItemProps) {
+  const { state, dispatch } = useIssueListContext();
+
   const IssueItemBox = isLast ? LastIssueItemBox : DefaultIssueItemBox;
+  const checkBoxType = state.selectedIssues[id] ? 'active' : 'initial';
+
+  const handleCheckBoxClick = () => {
+    console.log(`isclicked: ${state.selectedIssues[id]}`);
+    if (state.selectedIssues[id]) {
+      dispatch({ type: 'ITEM_UNCHECK', payload: { id } });
+    } else {
+      dispatch({ type: 'ITEM_CHECK', payload: { id } });
+    }
+  };
+
+  const getTimeStamp = (createdTime: string) => {
+    let timeStamp;
+
+    const createdTimeDate = new Date(createdTime);
+    const today = new Date();
+
+    const createdDate = {
+      year: createdTimeDate.getFullYear(),
+      month: createdTimeDate.getMonth(),
+      date: createdTimeDate.getDate(),
+      hour: createdTimeDate.getHours(),
+      min: createdTimeDate.getMinutes(),
+      sec: createdTimeDate.getSeconds()
+    };
+    const todayDate = {
+      year: today.getFullYear(),
+      month: today.getMonth(),
+      date: today.getDate(),
+      hour: today.getHours(),
+      min: today.getMinutes(),
+      sec: today.getSeconds()
+    };
+
+    switch (true) {
+      case createdDate.year !== todayDate.year:
+        timeStamp = `${createdDate.year}년 ${createdDate.month + 1}월 ${
+          createdDate.date
+        }일`;
+        break;
+      case createdDate.month !== todayDate.month:
+        timeStamp = `${createdDate.month + 1}월 ${createdDate.date}일`;
+        break;
+      case createdDate.date !== todayDate.date:
+        timeStamp = `${todayDate.date - createdDate.date}일 전`;
+        break;
+      case createdDate.hour !== todayDate.hour:
+        timeStamp = `${todayDate.hour - createdDate.hour}시간 전`;
+        break;
+      case createdDate.min !== todayDate.min:
+        timeStamp = `${todayDate.min - createdDate.min}분 전`;
+        break;
+      default:
+        timeStamp = `${todayDate.sec - createdDate.sec}초 전`;
+    }
+
+    return timeStamp;
+  };
+  const timeStamp = getTimeStamp(createdTime);
+
   return (
     <IssueItemBox>
-      <CheckBox checkBoxType="initial" />
+      <CheckBox checkBoxType={checkBoxType} onClick={handleCheckBoxClick} />
       <IssueText>
         <IssueTitle>
           <Icon
@@ -22,23 +110,31 @@ function IssueItem({ isLast }: IssueItemProps) {
             fill={COLORS.LIGHT_BLUE}
           />
           <Link to="/issueDetail">
-            <TitleText>이슈 제목</TitleText>
+            <TitleText>{title}</TitleText>
           </Link>
           <Labels>
-            <Label
-              labelName="레이블 이름"
-              backgroundColor={GREYSCALE.BACKGROUND}
-              textColor="어두운 색"
-            />
+            {!!labels.length &&
+              labels.map(({ name, color }) => (
+                <Label
+                  key={getRandomKey()}
+                  labelName={name}
+                  backgroundColor={color.backgroundColor}
+                  textColor={color.textColor}
+                />
+              ))}
           </Labels>
         </IssueTitle>
         <IssueInfo>
-          <span>#이슈번호</span>
-          <span>작성자 및 타임스탬프 정보</span>
-          <Milestone>
-            <Icon iconName="milestone" fill={GREYSCALE.LABEL} />
-            마일스톤
-          </Milestone>
+          <span>#{id}</span>
+          <span>
+            이 이슈가 {timeStamp}에, {writer}에 의해 작성되었습니다
+          </span>
+          {!!milestoneName && (
+            <Milestone>
+              <Icon iconName="milestone" fill={GREYSCALE.LABEL} />
+              {milestoneName}
+            </Milestone>
+          )}
         </IssueInfo>
       </IssueText>
       <IssueAssignee>
