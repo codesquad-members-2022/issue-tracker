@@ -49,6 +49,8 @@ function FilterBar() {
           positionY={0}
         />
       )}
+      <DropDownBox>
+      </DropDownBox>
       <InputBox>
         <Icon iconName="search" stroke={iconColor} />
         <Input
@@ -88,10 +90,12 @@ const ButtonBox = styled.button`
     color: ${GREYSCALE.BODY};
     background-color: ${GREYSCALE.LINE};
   }
+`;
 
-  & > div {
-    position: absolute;
-  }
+const DropDownBox = styled.div`
+  position: absolute;
+  top: 44px;
+  left: 0;
 `;
 
 const InputBox = styled.div`
