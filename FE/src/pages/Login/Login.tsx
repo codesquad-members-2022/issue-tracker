@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
