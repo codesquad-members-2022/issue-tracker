@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
-const URL = `http://louie-03.com/login`;
+const URL = 'http://louie-03.com/login';
 
 export function Login(): JSX.Element {
   // const URI = 'http://louie-03.com/login';
@@ -12,12 +12,11 @@ export function Login(): JSX.Element {
       try {
         const response = await fetch(URL);
         const data = await response.json();
-        // eslint-disable-next-line no-console
-        console.log('ssss', data.access_token);
+
+        console.log('ssss', data);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.log('???????error???????');
-        // eslint-disable-next-line no-console
+
         console.log(error);
       }
     };

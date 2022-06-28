@@ -8,9 +8,9 @@ import { Labels } from 'pages/Labels';
 import { Milestones } from 'pages/Milestones';
 import { Container } from 'component/Container';
 import OAuth from 'pages/OAuth';
-import { worker } from './mocks/browser';
+// import { worker } from './mocks/browser';
 
-worker.start();
+// worker.start();
 
 function App(): JSX.Element {
   return (
