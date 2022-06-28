@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import IssueHeader from './IssueHeader';
 import IssueItem from './IssueItem';
 import EmptyIssueItem from './EmptyIssueItem';
-import { CheckBoxType } from './CheckBox';
+import ClickedIssueHeader from './ClickedIssueHeader';
+import { useIssueListContext } from './IssueListProvider';
 
 type LabelColorType = {
   backgroundColor: string;
@@ -14,7 +15,7 @@ type LabelType = {
   color: LabelColorType;
 };
 
-type IssueType = {
+export type IssueType = {
   id: number;
   title: string;
   createdTime: string;
@@ -38,53 +39,19 @@ type IssueListType = {
 export type IssueListStateType = 'opened' | 'closed' | 'all';
 
 function IssueList() {
+  const { state, dispatch } = useIssueListContext();
   const [issueListState, setIssueListState] =
     useState<IssueListStateType>('opened');
-  const [headerCheckBoxType, setHeaderCheckBoxType] =
-    useState<CheckBoxType>('initial');
   const [issueList, setIssueList] = useState<IssueListType>(null);
-  const [selectedIssues, setSelectedIssues] = useState<SelectedIssueType>({});
 
   useEffect(() => {
     fetch(`/issues?status=${issueListState}`)
       .then((res) => res.json())
       .then((data) => {
         setIssueList(data);
-        setSelectedIssues(initSelectedIssues(data.issues));
+        dispatch({ type: 'INIT', payload: { data: data.issues } });
       });
   }, [issueListState]);
-
-  const initSelectedIssues = (issues: IssueType[]) => {
-    const initialSelectedIssue: SelectedIssueType = {};
-
-    issues.forEach(({ id }) => {
-      initialSelectedIssue[id] = false;
-    });
-
-    return initialSelectedIssue;
-  };
-
-  const updateHeaderCheckBoxType = (selectedIssues: SelectedIssueType) => {
-    const selectedIssuesCount = Object.values(selectedIssues).filter(
-      (isSelected) => isSelected
-    ).length;
-
-    if (selectedIssuesCount === Object.keys(selectedIssues).length) {
-      setHeaderCheckBoxType('active');
-    } else if (selectedIssuesCount) {
-      setHeaderCheckBoxType('disable');
-    } else {
-      setHeaderCheckBoxType('initial');
-    }
-  };
-
-  const updateIssueState = (id: string) => {
-    const updatedIssues: SelectedIssueType = { ...selectedIssues };
-    updatedIssues[id] = !selectedIssues[id];
-    setSelectedIssues({ ...updatedIssues });
-
-    updateHeaderCheckBoxType(updatedIssues);
-  };
 
   if (!issueList) {
     return <div>Loading...</div>;
@@ -92,17 +59,16 @@ function IssueList() {
 
   return (
     <>
-      <IssueHeader
-        issueListState={issueListState}
-        setIssueListState={setIssueListState}
-        openedIssueCount={issueList.openedIssues}
-        closedIssueCount={issueList.closedIssues}
-        selectedIssues={selectedIssues}
-        setSelectedIssues={setSelectedIssues}
-        headerCheckBoxType={headerCheckBoxType}
-        setHeaderCheckBoxType={setHeaderCheckBoxType}
-      />
-
+      {state.headerCheckBox === 'initial' ? (
+        <IssueHeader
+          issueListState={issueListState}
+          setIssueListState={setIssueListState}
+          openedIssueCount={issueList.openedIssues}
+          closedIssueCount={issueList.closedIssues}
+        />
+      ) : (
+        <ClickedIssueHeader />
+      )}
       {issueList?.issues.length ? (
         issueList.issues.map(
           ({ id, title, createdTime, writer, labels, milestoneName }, idx) => (
@@ -114,9 +80,7 @@ function IssueList() {
               writer={writer}
               labels={labels}
               milestoneName={milestoneName}
-              isSelected={selectedIssues[id]}
               isLast={idx === issueList.issues.length - 1}
-              updateIssueState={updateIssueState}
             />
           )
         )

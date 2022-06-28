@@ -4,6 +4,7 @@ import { getRandomKey } from '@/utils';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
+import { useIssueListContext } from './IssueListProvider';
 import Label from './Label';
 
 type LabelColorType = {
@@ -23,9 +24,7 @@ type IssueItemProps = {
   writer: string;
   labels: LabelType[];
   milestoneName: string;
-  isSelected: boolean;
   isLast: boolean;
-  updateIssueState: (id: string) => void;
 };
 
 function IssueItem({
@@ -35,15 +34,20 @@ function IssueItem({
   writer,
   labels,
   milestoneName,
-  isSelected,
-  isLast,
-  updateIssueState
+  isLast
 }: IssueItemProps) {
-  const IssueItemBox = isLast ? LastIssueItemBox : DefaultIssueItemBox;
-  const checkBoxType = isSelected ? 'active' : 'initial';
+  const { state, dispatch } = useIssueListContext();
 
-  const handleClick = () => {
-    updateIssueState(id);
+  const IssueItemBox = isLast ? LastIssueItemBox : DefaultIssueItemBox;
+  const checkBoxType = state.selectedIssues[id] ? 'active' : 'initial';
+
+  const handleCheckBoxClick = () => {
+    console.log(`isclicked: ${state.selectedIssues[id]}`);
+    if (state.selectedIssues[id]) {
+      dispatch({ type: 'ITEM_UNCHECK', payload: { id } });
+    } else {
+      dispatch({ type: 'ITEM_CHECK', payload: { id } });
+    }
   };
 
   const getTimeStamp = (createdTime: string) => {
@@ -97,7 +101,7 @@ function IssueItem({
 
   return (
     <IssueItemBox>
-      <CheckBox checkBoxType={checkBoxType} onClick={handleClick} />
+      <CheckBox checkBoxType={checkBoxType} onClick={handleCheckBoxClick} />
       <IssueText>
         <IssueTitle>
           <Icon
