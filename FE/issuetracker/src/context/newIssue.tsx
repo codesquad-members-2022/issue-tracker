@@ -3,6 +3,7 @@ import AccountSrc from 'assets/images/UserImageLarge.svg';
 import { MileStoneType, LabelType, AccountType } from 'data';
 
 type WriterType = {
+  id?: number;
   name: string;
   imgUrl: string;
 };
@@ -13,6 +14,7 @@ type CommentType = {
 };
 
 export type newIssueType = {
+  id?: number;
   title: string;
   writer: WriterType;
   writtenTime: string;
@@ -22,7 +24,7 @@ export type newIssueType = {
   assignees: Array<AccountType>;
   closed: boolean;
 };
-type initialStateType = {
+export type initialStateType = {
   key: string;
   default: newIssueType;
 };

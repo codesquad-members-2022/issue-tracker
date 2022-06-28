@@ -6,7 +6,6 @@ import * as S from 'components/Issue/styled/inputComment';
 
 import userImageURL from 'assets/images/UserImageLarge.svg';
 import { issueState } from 'context/issue';
-import { calculateInterval } from 'utils/util';
 
 function InputComment() {
   const [issueData, setIssueData] = useRecoilState(issueState);
@@ -28,7 +27,7 @@ function InputComment() {
   const saveComment = () => {
     const newComment = {
       writer: issueData.writer,
-      log: `${calculateInterval(issueData.writtenTime)}초 전`,
+      writtenTime: issueData.writtenTime,
       description: inputValue,
     };
     const updatedIssueData = {

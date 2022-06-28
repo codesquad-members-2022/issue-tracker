@@ -1,6 +1,5 @@
 import * as S from 'components/common/Sidebar/styled';
-import { newIssueState, newIssueType } from 'context/newIssue';
-import { useRecoilValue } from 'recoil';
+import { newIssueType } from 'context/newIssue';
 import { keyMaker } from 'utils/util';
 import Label, { ProgressBar } from '../Common';
 import DropDown from './Dropdown';

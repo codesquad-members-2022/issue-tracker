@@ -3,7 +3,7 @@ import AccountSrc from 'assets/images/UserImageLarge.svg';
 export type AccountType = {
   id?: number;
   name: string;
-  email: string;
+  email?: string;
   profileImage: string;
 };
 export type MileStoneType = {
