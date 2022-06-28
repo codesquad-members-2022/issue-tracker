@@ -7,5 +7,5 @@ data class AddLabelDto(
     val title: String,
     val description: String,
     val color: String,
-    val textColor: String
+    val textColor: String,
 )

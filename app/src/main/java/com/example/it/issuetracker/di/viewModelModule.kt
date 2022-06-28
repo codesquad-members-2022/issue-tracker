@@ -1,6 +1,7 @@
 package com.example.it.issuetracker.di
 
 import com.example.it.issuetracker.presentation.login.LoginViewModel
+import com.example.it.issuetracker.presentation.main.issue.detail.DetailViewModel
 import com.example.it.issuetracker.presentation.main.issue.filter.FilterViewModel
 import com.example.it.issuetracker.presentation.main.issue.list.IssueViewModel
 import com.example.it.issuetracker.presentation.main.issue.search.SearchViewModel
@@ -21,5 +22,6 @@ val viewModelModule = module {
     viewModel { SearchViewModel(get()) }
     viewModel { MilestoneViewModel(get()) }
     viewModel { MilestoneAddViewModel(get()) }
+    viewModel { DetailViewModel(get(), get()) }
     viewModel { MyPageViewModel(get(), get()) }
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MilestoneAddViewModel(
-    private val milestoneRepository: MilestoneRepository
+    private val milestoneRepository: MilestoneRepository,
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(NewMilestoneUiState())

@@ -8,5 +8,5 @@ data class MilestoneUiState(
     val dataLoading: Boolean = false,
     val editMode: Boolean = false,
     val completeTask: Boolean = false,
-    val errorMsgId: Int = Constants.INIT_ERROR_MSG_ID
+    val errorMsgId: Int = Constants.INIT_ERROR_MSG_ID,
 )

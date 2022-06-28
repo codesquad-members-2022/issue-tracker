@@ -7,5 +7,5 @@ data class NewMilestoneUiState(
     val description: String = "",
     val deadline: String = "",
     val completeTask: Boolean = false,
-    val errorMsgId: Int = Constants.INIT_ERROR_MSG_ID
+    val errorMsgId: Int = Constants.INIT_ERROR_MSG_ID,
 )

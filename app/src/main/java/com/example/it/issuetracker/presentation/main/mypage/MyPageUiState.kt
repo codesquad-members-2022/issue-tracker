@@ -6,5 +6,5 @@ data class MyPageUiState(
     val imageUrl: String = "",
     val loginOption: LoginOption = LoginOption.GUEST,
     val logout: Boolean = false,
-    val errorMsgId: Int = -1
+    val errorMsgId: Int = -1,
 )

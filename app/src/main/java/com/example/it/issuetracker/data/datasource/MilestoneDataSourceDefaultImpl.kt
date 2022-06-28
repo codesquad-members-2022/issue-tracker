@@ -4,13 +4,11 @@ import android.util.Log
 import com.example.it.issuetracker.data.dto.AddMilestoneDto
 import com.example.it.issuetracker.data.dto.MilestoneDto
 import com.example.it.issuetracker.data.network.IssueTrackerService
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 private const val TAG = "MilestoneDataSourceImpl"
 
 class MilestoneDataSourceDefaultImpl(
-    private val issueTrackerApi: IssueTrackerService
+    private val issueTrackerApi: IssueTrackerService,
 ) : MilestoneDataSource {
 
     override suspend fun getMilestoneInfoList(): List<MilestoneDto> {

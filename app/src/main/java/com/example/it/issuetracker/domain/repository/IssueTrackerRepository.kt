@@ -1,6 +1,7 @@
 package com.example.it.issuetracker.domain.repository
 
 import com.example.it.issuetracker.domain.model.Issue
+import com.example.it.issuetracker.domain.model.IssueDetail
 import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,11 @@ interface IssueTrackerRepository {
 
     suspend fun deleteIssue(list: List<Issue>): Result<List<Issue>>
 
+    suspend fun deleteIssue(id: Long)
+
     suspend fun closeIssue(list: List<Issue>): Result<List<Issue>>
+
+    suspend fun closeIssue(id: Long)
 
     suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<Issue>>
 
@@ -23,4 +28,14 @@ interface IssueTrackerRepository {
     suspend fun getFilterList(value: HashMap<String, Any>): Result<List<Issue>>
 
     fun findIssue(title: String): Flow<List<Issue>>
+
+    fun getIssueDetail(id: Long): Flow<IssueDetail>
+
+    suspend fun addLike(id: Long, uid: Long)
+
+    suspend fun addBest(id: Long, uid: Long)
+
+    suspend fun addHate(id: Long, uid: Long)
+
+    suspend fun addOk(id: Long, uid: Long)
 }

@@ -8,5 +8,5 @@ data class NewLabelUiState(
     val color: String = "#B71C1C",
     val textColor: String = "#FFFFFFFF",
     val completeTask: Boolean = false,
-    val errorMsgId: Int = Constants.INIT_ERROR_MSG_ID
+    val errorMsgId: Int = Constants.INIT_ERROR_MSG_ID,
 )

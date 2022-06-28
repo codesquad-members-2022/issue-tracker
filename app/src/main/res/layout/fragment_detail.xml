@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="issue"
+            type="com.example.it.issuetracker.domain.model.IssueDetail" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.main.issue.detail.DetailFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_default_issue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back_blue">
+
+            <ImageView
+                android:id="@+id/iv_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_option_blue" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{issue.title}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_default_issue"
+            tools:text="테스트 작성" />
+
+        <TextView
+            android:id="@+id/tv_id"
+            style="@style/Headline6"
+            issueNumber="@{issue.id}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
+            tools:text="#2" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toTopOf="@id/tv_created"
+            app:layout_constraintBottom_toBottomOf="@id/tv_created">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_open_issue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/issue_open"
+                android:textColor="@color/open_issue_text_color"
+                android:visibility="gone"
+                app:chipBackgroundColor="@color/open_issue_bg_color"
+                app:chipIcon="@drawable/ic_info_blue"
+                app:chipIconSize="20dp"
+                app:chipStrokeColor="@color/open_issue_text_color"
+                app:chipStrokeWidth="1dp"
+                app:iconStartPadding="5dp"
+                tools:text="열림"
+                tools:visibility="visible" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_close_issue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/issue_close"
+                android:textColor="@color/close_issue_text_color"
+                android:visibility="gone"
+                app:chipBackgroundColor="@color/close_issue_bg_color"
+                app:chipIcon="@drawable/ic_close_blue"
+                app:chipIconSize="15dp"
+                app:chipStrokeColor="@color/close_issue_text_color"
+                app:chipStrokeWidth="1dp"
+                app:iconStartPadding="5dp"
+                tools:text="닫힘"
+                tools:visibility="gone" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/tv_created"
+            formatDate="@{issue.createdTime}"
+            writer="@{issue.writer}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="22dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="8분전, Sam님이 작성했습니다." />
+
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="22dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_created" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_divider">
+
+            <include
+                android:id="@+id/view_writer"
+                layout="@layout/item_writer"
+                bind:issue="@{issue}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_comment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/layout_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout"
+            tools:listitem="@layout/item_comment" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_comment"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_comment">
+
+            <ImageButton
+                android:id="@+id/btn_up"
+                android:layout_width="52dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_up"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_down"
+                android:layout_width="52dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_down"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_up"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_comment"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:hint="코멘트를 입력해주세요."
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_add_comment"
+                app:layout_constraintStart_toEndOf="@id/btn_down"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_add_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_add_comment"
+                app:layout_constraintBottom_toBottomOf="@id/et_comment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/et_comment" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_search_result"
+            style="@style/Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_found_result"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

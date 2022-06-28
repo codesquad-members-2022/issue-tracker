@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 data class AddMilestoneDto(
     val title: String,
     val description: String,
-    val deadline: String
+    val deadline: String,
 )

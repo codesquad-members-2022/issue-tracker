@@ -49,9 +49,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handlerSuccess(state: LoginUiState.GetUserInformation) {
         val loginInformation = state.loginInformation
-        viewModel.saveJwt(loginInformation.jwt)
-//        viewModel.saveId(loginInformation.id) TODO(서버에서 id값 내려주면 주석 해제)
-        viewModel.saveUserImageUrl(loginInformation.imageUrl)
+        viewModel.saveUser(loginInformation)
         viewModel.saveLoginOption(LoginOption.GITHUB)
         navigateMain(loginInformation.imageUrl)
     }
