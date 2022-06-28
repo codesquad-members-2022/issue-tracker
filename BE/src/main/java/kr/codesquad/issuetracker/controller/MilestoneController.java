@@ -32,4 +32,9 @@ public class MilestoneController {
     public ResponseEntity deleteMilestone (@PathVariable Long id){
         return milestoneService.deleteMilestone(id);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity editMilestone (@PathVariable Long id, @RequestBody MilestoneRequest milestoneRequest){
+        return milestoneService.editMilestone(id, milestoneRequest);
+    }
 }

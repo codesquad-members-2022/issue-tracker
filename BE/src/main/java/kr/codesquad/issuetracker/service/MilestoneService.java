@@ -44,4 +44,10 @@ public class MilestoneService {
         }
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    public ResponseEntity editMilestone(Long id, MilestoneRequest milestoneRequest){
+        Milestone milestone = milestoneRepository.findById(id).orElseThrow(RuntimeException::new);
+        milestone.update(milestoneRequest);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
