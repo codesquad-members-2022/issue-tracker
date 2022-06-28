@@ -6,11 +6,12 @@ import com.ron2ader.issuetracker.controller.labeldto.LabelsResponse;
 import com.ron2ader.issuetracker.service.LabelService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,21 +31,21 @@ public class LabelController {
     }
 
     @PostMapping("/labels/{id}")
-    public ResponseEntity<LabelResponse> update(@PathVariable Long id, LabelRequest labelRequest) {
+    @ResponseStatus(HttpStatus.OK)
+    public LabelResponse update(@PathVariable Long id, LabelRequest labelRequest) {
         LabelResponse updateLabel = labelService.update(
-                id,
-                labelRequest.getTitle(),
-                labelRequest.getColor(),
-                labelRequest.getDescription()
-                );
+            id,
+            labelRequest.getTitle(),
+            labelRequest.getColor(),
+            labelRequest.getDescription()
+        );
 
-        return ResponseEntity.ok(updateLabel);
+        return updateLabel;
     }
 
     @DeleteMapping("/labels/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable Long id) {
         labelService.deleteById(id);
-
-        return ResponseEntity.noContent().build();
     }
 }
