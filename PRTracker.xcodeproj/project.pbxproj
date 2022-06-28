@@ -79,8 +79,6 @@
 		D04099E82859DA650008B517 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF57BC3285701FB0059E61D /* SceneDelegate.swift */; };
 		D054F43D2864A97700CBE5F7 /* IssueListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D054F43C2864A97700CBE5F7 /* IssueListViewModelTests.swift */; };
 		D054F43F2864A9B200CBE5F7 /* IssueServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D054F43E2864A9B200CBE5F7 /* IssueServiceStub.swift */; };
-		D06BF3252863292800CBE2AD /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BF3242863292800CBE2AD /* IntroViewController.swift */; };
-		D06BF3262863292A00CBE2AD /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BF3242863292800CBE2AD /* IntroViewController.swift */; };
 		D0E98CC6285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
 		D0E98CC7285AF81C0051413E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E98CC5285AF81C0051413E /* Secrets.swift */; };
 		D0E98CD0285B05000051413E /* LabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0E98CCF285B05000051413E /* LabelView.xib */; };
@@ -160,7 +158,6 @@
 		D04099DF2859C9400008B517 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
 		D054F43C2864A97700CBE5F7 /* IssueListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModelTests.swift; sourceTree = "<group>"; };
 		D054F43E2864A9B200CBE5F7 /* IssueServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueServiceStub.swift; sourceTree = "<group>"; };
-		D06BF3242863292800CBE2AD /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		D0E98CC5285AF81C0051413E /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D0E98CCF285B05000051413E /* LabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelView.xib; sourceTree = "<group>"; };
 		D0E98CDA285BAEE80051413E /* CustomBarButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomBarButton .swift"; sourceTree = "<group>"; };
@@ -226,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				BC0DAFA12869ACE300FAA8E5 /* Networking */,
-				D06BF3232863291900CBE2AD /* View */,
 				D0E98D04285CE97D0051413E /* KeyChainService.swift */,
 				BC9709412859C88100E54F93 /* Logger.swift */,
 				D04099DB2859C6930008B517 /* Observable.swift */,
@@ -394,14 +390,6 @@
 				D0E98CCF285B05000051413E /* LabelView.xib */,
 				D0E98CEA285C107E0051413E /* PullListTableViewCell.swift */,
 				D04099D12859C08B0008B517 /* PullListViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		D06BF3232863291900CBE2AD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				D06BF3242863292800CBE2AD /* IntroViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -631,7 +619,6 @@
 				D0E98D06285CE97D0051413E /* KeyChainService.swift in Sources */,
 				BC0DAF8D2869818600FAA8E5 /* APIResource.swift in Sources */,
 				D04099E02859C9400008B517 /* LabelViewModel.swift in Sources */,
-				D06BF3252863292800CBE2AD /* IntroViewController.swift in Sources */,
 				BC2F596A285C1AC10012D18C /* IssueManager.swift in Sources */,
 				BC0DAF9F2869ACDC00FAA8E5 /* NetworkError.swift in Sources */,
 				BC0DAF9328699E6D00FAA8E5 /* UserResource.swift in Sources */,
@@ -674,7 +661,6 @@
 				BC0DAF9428699E6D00FAA8E5 /* UserResource.swift in Sources */,
 				BC9709462859CACC00E54F93 /* TokenResponse.swift in Sources */,
 				BCF57BFE285704F40059E61D /* IssueListViewModel.swift in Sources */,
-				D06BF3262863292A00CBE2AD /* IntroViewController.swift in Sources */,
 				BC2F5992286098B70012D18C /* URLProtocolStub.swift in Sources */,
 				BC2F59A42861F3580012D18C /* BaseURLString.swift in Sources */,
 				BC0DAF9728699E9A00FAA8E5 /* IssuesResource.swift in Sources */,

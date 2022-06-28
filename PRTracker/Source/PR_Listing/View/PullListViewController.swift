@@ -28,7 +28,12 @@ class PullListViewController: UIViewController {
     private func configureBind() {
         viewModel.issueViewModels.bind { _ in
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                UIView.transition(with: self.tableView,
+                                  duration: 0.35,
+                                  options: .transitionCurlDown,
+                                  animations: {
+                    self.tableView.reloadData()
+                })
                 self.loaderView.isHidden = true
             }
         }
@@ -51,11 +56,6 @@ class PullListViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        let button = CustomBarButton()
-        let leftBarButtonItem = UIBarButtonItem(customView: button.left)
-        let rightBarButtonItem = UIBarButtonItem(customView: button.right)
-        self.navigationItem.leftBarButtonItem = leftBarButtonItem
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
         self.navigationItem.hidesSearchBarWhenScrolling = true
         self.navigationItem.title = "PR"
     }
@@ -115,7 +115,13 @@ extension PullListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            viewModel.close(at: indexPath.row) { isClosed in
+                if !isClosed {
+                    self.alert(title: "알림",
+                          message: "닫기 실패",
+                          okTitle: "확인")
+                }
+            }
         }
     }
 }

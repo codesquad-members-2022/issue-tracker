@@ -46,4 +46,11 @@ final class IssueListViewModel {
     func getCellViewModel(index: Int) -> IssueTableCellViewModel? {
         return issueViewModels.value?[index]
     }
+    
+    func close(at index: Int, completion: @escaping (Bool) -> Void) {
+        issueService.closeIssue(at: index) {
+            self.issueViewModels.value?.remove(at: index)
+            completion(true)
+        }
+    }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 protocol IssueService {
     func getIssues(then completion: @escaping ([Issue]?) -> Void)
+    func closeIssue(at index: Int, completion: @escaping () -> Void)
 }
 
 struct IssueManager: IssueService {
@@ -40,6 +41,10 @@ struct IssueManager: IssueService {
                 completion(nil)
             }
         }
+    }
+    
+    func closeIssue(at index: Int, completion: @escaping () -> Void) {
+        completion()
     }
 }
 
