@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -15,7 +15,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <Router>
           <Routes>
             <Route path="/">
               <Route index element={<AuthPage />} />
@@ -24,7 +24,7 @@ const App = () => {
               <Route path="callback" element={<Callback />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </Router>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Provider>

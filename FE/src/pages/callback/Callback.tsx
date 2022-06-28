@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
-import qs, { ParsedQs } from 'qs';
+import qs from 'qs';
 import LoginLoading from '@components/loginCallback/LoginLoading';
 import LoginError from '@components/loginCallback/LoginError';
 import { useAuthQuery } from '../../hooks/useAuthQuery';
-import { useIssueQuery, preFetchIssues } from '../../hooks/useIssueQuery';
 
 const Callback = () => {
   const navigate = useNavigate();
@@ -16,11 +15,13 @@ const Callback = () => {
   const { status, data: token } = useAuthQuery(code);
 
   if (status === 'success') {
-    // localStorage.setItem('jwt', token)
-    navigate('/issues');
+    // // localStorage.setItem('jwt', token)
+    // 아이디를 받고, 아이디를 넘겨주어야 함.
+    navigate(`/issues?id=${'test'}`);
   }
 
   if (status === 'loading') {
+    navigate('/issues');
     return <LoginLoading />;
   }
 
