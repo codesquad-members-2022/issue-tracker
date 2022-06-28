@@ -16,7 +16,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long login(GithubUser githubUser) {
+    public Member login(GithubUser githubUser) {
         Member member = memberRepository.findBySocialId(githubUser.getLogin())
                 .orElse(null);
 
@@ -24,7 +24,7 @@ public class MemberService {
             member = new Member(githubUser.getLogin(), githubUser.getAvatarUrl());
             memberRepository.save(member);
         }
-        return member.getId();
+        return member;
     }
 
     public String findRefreshTokenById(Long id) {

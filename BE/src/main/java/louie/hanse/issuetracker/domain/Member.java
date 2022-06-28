@@ -1,6 +1,7 @@
 package louie.hanse.issuetracker.domain;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
@@ -23,14 +25,6 @@ public class Member {
     public Member(String socialId, String avatarImageUrl) {
         this.socialId = socialId;
         this.avatarImageUrl = avatarImageUrl;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
     }
 
     public void changeRefreshToken(String refreshToken) {

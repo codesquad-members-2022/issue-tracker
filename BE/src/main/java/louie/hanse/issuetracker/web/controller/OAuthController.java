@@ -1,8 +1,11 @@
 package louie.hanse.issuetracker.web.controller;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import java.util.Collections;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import louie.hanse.issuetracker.domain.Member;
 import louie.hanse.issuetracker.login.jwt.JwtProvider;
 import louie.hanse.issuetracker.login.oauth.GithubAccessToken;
 import louie.hanse.issuetracker.login.oauth.GithubUser;
@@ -36,21 +39,22 @@ public class OAuthController {
     }
 
     @GetMapping("/login/callback")
-    public void login(String code, HttpServletResponse response) {
+    public Map<String, String> login(String code, HttpServletResponse response) {
         GithubAccessToken githubAccessToken = oAuthService.getAccessToken(code);
         GithubUser githubUser = oAuthService.getUserInfo(githubAccessToken);
-        Long memberId = memberService.login(githubUser);
+        Member member = memberService.login(githubUser);
 
-        String accessToken = jwtProvider.createAccessToken(memberId);
-        String refreshToken = jwtProvider.createRefreshToken(memberId);
+        String accessToken = jwtProvider.createAccessToken(member.getId());
+        String refreshToken = jwtProvider.createRefreshToken(member.getId());
 
-        memberService.updateRefreshToken(refreshToken, memberId);
+        memberService.updateRefreshToken(refreshToken, member.getId());
 
         response.setHeader("Access-Token", accessToken);
         response.setHeader("Refresh-Token", refreshToken);
 
         log.info("accessToken {}", accessToken);
 
+        return Collections.singletonMap("avatarImageUrl", member.getAvatarImageUrl());
     }
 
     @GetMapping("/reissue/access-token")
