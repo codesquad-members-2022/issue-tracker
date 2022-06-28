@@ -12,12 +12,12 @@ struct ContainerWrapper<T: Resolvable> {
     init(container: T) {
         self.container = container
     }
-    
-    func regist<P>(instance: P) {
-        container?.regist(instance: instance)
+
+    func regist<P>(type: P.Type, make: @escaping () -> T.Value) {
+            container?.regist(type: type, make: make)
     }
     
-    func resolve<P>(type: P.Type) -> T.Value? {
+    func resolve<P>(type: P.Type) -> (() -> T.Value)? {
         return container?.resolve(type: type)
     }
 }
