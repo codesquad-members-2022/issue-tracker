@@ -43,7 +43,7 @@ class IssueNavigationController: UINavigationController, ViewBindable {
             state: .on,
             handler: { [weak self] _ in
                 guard let self = self, let binding = self.vc else { return }
-                binding.inputViewEvent(self, nil)
+                binding.inputViewEvent(self, self.navigationBar.topItem?.leftBarButtonItem)
             }
         )
     }
@@ -58,21 +58,9 @@ class IssueNavigationController: UINavigationController, ViewBindable {
             state: .on,
             handler: { [weak self] _ in
                 guard let self = self, let binding = self.vc else { return }
-                self.currentViewState.toggle()
-                binding.inputViewEvent(self, self.currentViewState)
+                binding.inputViewEvent(self, self.navigationBar.topItem?.rightBarButtonItem)
             }
         )
-    }
-    
-    private(set) var currentViewState: IssueListStatus = .list {
-        willSet {
-            switch currentViewState {
-            case .list:
-                print("이슈 리스트 기본화면을 보여주세요.")
-            case .selection:
-                print("이슈 리스트 선택화면을 보여주세요.")
-            }
-        }
     }
     
     override func viewDidLoad() {

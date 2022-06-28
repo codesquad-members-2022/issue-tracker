@@ -73,8 +73,14 @@ class IssueListTableViewController: UIViewController, ViewBinding {
             
             print("IssueFilterItemSelectViewController Selected")
             
-        } else if (target as? IssueNavigationController) != nil {
-            viewStatus = viewStatus == .list ? .selection : .list
+        } else if (target as? IssueNavigationController) != nil, let button = param as? UIBarButtonItem {
+            let navigationItem = navigationController?.navigationBar.topItem
+            
+            if button == navigationItem?.leftBarButtonItem {
+                present(IssueFilterItemSelectViewController(), animated: true)
+            } else if button == navigationItem?.rightBarButtonItem {
+                viewStatus = viewStatus == .list ? .selection : .list
+            }
         }
     }
     
