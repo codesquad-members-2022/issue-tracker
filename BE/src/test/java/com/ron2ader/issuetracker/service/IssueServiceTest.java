@@ -1,10 +1,17 @@
 package com.ron2ader.issuetracker.service;
 
-import com.ron2ader.issuetracker.controller.issuedto.IssueDetail;
-import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
+import com.ron2ader.issuetracker.controller.issuedto.*;
 import com.ron2ader.issuetracker.controller.labeldto.LabelResponse;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
+import com.ron2ader.issuetracker.domain.issue.IssueAssigneeRepository;
+import com.ron2ader.issuetracker.domain.issue.IssueLabelRepository;
+import com.ron2ader.issuetracker.domain.label.Label;
+import com.ron2ader.issuetracker.domain.label.LabelRepository;
+import com.ron2ader.issuetracker.domain.member.Member;
+import com.ron2ader.issuetracker.domain.member.MemberRepository;
+import com.ron2ader.issuetracker.domain.milestone.Milestone;
+import com.ron2ader.issuetracker.domain.milestone.MilestoneRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,10 +29,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IssueServiceTest {
 
     private final IssueService issueService;
+    private final MemberRepository memberRepository;
+    private final MilestoneRepository milestoneRepository;
+    private final LabelRepository labelRepository;
 
     @Autowired
-    public IssueServiceTest(IssueService issueService) {
+    public IssueServiceTest(IssueService issueService,
+                            MemberRepository memberRepository,
+                            MilestoneRepository milestoneRepository,
+                            LabelRepository labelRepository) {
         this.issueService = issueService;
+        this.memberRepository = memberRepository;
+        this.milestoneRepository = milestoneRepository;
+        this.labelRepository = labelRepository;
     }
 
     @BeforeEach
@@ -44,7 +61,7 @@ class IssueServiceTest {
                 1L);
 
         // then
-        assertThat(createdIssueId).isEqualTo(2L);
+        assertThat(createdIssueId).isEqualTo(4L);
     }
 
 
@@ -66,6 +83,21 @@ class IssueServiceTest {
         assertThat(milestone.getId()).isEqualTo(1L);
         assertThat(assignees).hasSize(2);
         assertThat(labels).hasSize(2);
+    }
+
+    @Test
+    @DisplayName("issue filter로 조회하면 조건에 맞는 issuesResponse를 반환한다.")
+    void findByFilterTest() {
+        Member ron2 = memberRepository.findByMemberId("ron2").orElseThrow(NoSuchElementException::new);
+        Label label = labelRepository.findById(1L).orElseThrow(NoSuchElementException::new);
+        Milestone milestone = milestoneRepository.findById(1L).orElseThrow(NoSuchElementException::new);
+
+        IssueFilter filter = IssueFilter.from(IssueCondition.of(true, ron2, label, milestone, ron2));
+
+        IssuesResponse issuesResponse = issueService.findByIssueFilter(filter);
+
+        assertThat(issuesResponse.getOpenCount()).isEqualTo(4);
+        assertThat(issuesResponse.getCloseCount()).isEqualTo(0);
     }
 
 }

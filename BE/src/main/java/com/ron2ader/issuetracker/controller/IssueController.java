@@ -52,7 +52,7 @@ public class IssueController {
         return new IssuesPagingResponse(countByStatus, issues.getTotalElements(), issues);
     }
 
-    @GetMapping("/issues")
+    @GetMapping("/issues2")
     public IssuesResponse getIssuesByCondition(IssueCondition issueCondition) {
         return issueService.findByIssueFilter(IssueFilter.from(issueCondition));
     }

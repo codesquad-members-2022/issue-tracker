@@ -107,29 +107,20 @@ public class IssueService {
     @Transactional(readOnly = true)
     public IssuesResponse findByIssueFilter(IssueFilter issueFilter) {
         List<Issue> findIssues = issueRepository.findByIssueFilter(issueFilter);
+
         long allCount = findIssues.size();
+        long countByFilter = findIssues.stream()
+                .map(Issue::getOpenStatus)
+                .filter(openStatus -> openStatus == issueFilter.getOpenStatus())
+                .count();
+        Long oppositeCount = allCount - countByFilter;
+        List<IssueSimpleResponse> issues = findIssues.stream()
+                .map(IssueSimpleResponse::from)
+                .collect(Collectors.toList());
 
-        long openCount = 0, closeCount = 0;
         if (issueFilter.getOpenStatus()) {
-            openCount = findIssues.stream()
-                .map(Issue::getOpenStatus)
-                .filter(bol -> bol == issueFilter.getOpenStatus())
-                .count();
-
-            closeCount = allCount - openCount;
-        } else {
-            closeCount = findIssues.stream()
-                .map(Issue::getOpenStatus)
-                .filter(bol -> bol == issueFilter.getOpenStatus())
-                .count();
-
-            openCount = allCount - closeCount;
+            return new IssuesResponse(countByFilter, oppositeCount, issues);
         }
-
-        return new IssuesResponse(openCount, closeCount,
-            findIssues.stream()
-                .map(issue -> IssueSimpleResponse.from(issue))
-                .collect(Collectors.toList())
-            );
+        return new IssuesResponse(oppositeCount, countByFilter, issues);
     }
 }
