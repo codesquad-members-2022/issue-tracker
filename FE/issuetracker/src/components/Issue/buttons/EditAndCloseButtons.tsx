@@ -20,13 +20,13 @@ function EditAndCloseButtons({
         buttonIcon={<I.edit />}
         buttonText="제목 편집"
         buttonState="default"
-        handleButtonClick={handleEditButtonClick}
+        clickHandler={clickHandler1}
       />
       <IssueTitleButton
         buttonIcon={issueData.closed ? <I.alertCircle /> : <I.archive />}
         buttonText={issueData.closed ? '다시 열기' : '이슈 닫기'}
         buttonState="default"
-        handleButtonClick={handleCloseButtonClick}
+        clickHandler={clickHandler2}
       />
     </S.buttonWrapper>
   );

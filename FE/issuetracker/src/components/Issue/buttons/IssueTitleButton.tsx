@@ -12,7 +12,7 @@ function IssueTitleButton({
   clickHandler: () => void;
 }) {
   return (
-    <S.issueButton buttonState={buttonState} onClick={handleButtonClick}>
+    <S.issueButton buttonState={buttonState} onClick={clickHandler}>
       {buttonIcon}
       <S.buttonText>{buttonText}</S.buttonText>
     </S.issueButton>

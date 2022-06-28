@@ -15,13 +15,13 @@ function CancleAndSaveButtons({
         buttonIcon={<I.cross />}
         buttonText="편집 취소"
         buttonState="default"
-        handleButtonClick={handleCancleButtonClick}
+        clickHandler={clickHandler1}
       />
       <IssueTitleButton
         buttonIcon={<I.edit />}
         buttonText="편집 완료"
         buttonState="active"
-        handleButtonClick={handleSaveButtonClick}
+        clickHandler={clickHandler2}
       />
     </S.buttonWrapper>
   );
