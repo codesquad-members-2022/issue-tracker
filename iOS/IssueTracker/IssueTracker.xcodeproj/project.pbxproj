@@ -30,6 +30,7 @@
 		02751A282869FB0800C712FF /* LabelViewNavigationItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A272869FB0800C712FF /* LabelViewNavigationItems.swift */; };
 		02751A2A2869FB4200C712FF /* LabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A292869FB4200C712FF /* LabelTableView.swift */; };
 		02751A2C2869FCE900C712FF /* LabelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A2B2869FCE900C712FF /* LabelTableCell.swift */; };
+		02751A2F2869FF7800C712FF /* LabelTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A2E2869FF7800C712FF /* LabelTableDataSource.swift */; };
 		027C7E84285A3AF300A5175B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E83285A3AF300A5175B /* NetworkService.swift */; };
 		027C7E86285A42B900A5175B /* SignInNetworkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E85285A42B900A5175B /* SignInNetworkTarget.swift */; };
 		027C7E88285ABF1200A5175B /* StubURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C7E87285ABF1200A5175B /* StubURLSession.swift */; };
@@ -134,6 +135,7 @@
 		02751A272869FB0800C712FF /* LabelViewNavigationItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewNavigationItems.swift; sourceTree = "<group>"; };
 		02751A292869FB4200C712FF /* LabelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableView.swift; sourceTree = "<group>"; };
 		02751A2B2869FCE900C712FF /* LabelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableCell.swift; sourceTree = "<group>"; };
+		02751A2E2869FF7800C712FF /* LabelTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableDataSource.swift; sourceTree = "<group>"; };
 		027C7E83285A3AF300A5175B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		027C7E85285A42B900A5175B /* SignInNetworkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInNetworkTarget.swift; sourceTree = "<group>"; };
 		027C7E87285ABF1200A5175B /* StubURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubURLSession.swift; sourceTree = "<group>"; };
@@ -332,6 +334,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		02751A302869FF7D00C712FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02751A2E2869FF7800C712FF /* LabelTableDataSource.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		02751A34286A019600C712FF /* LabelViewComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +364,7 @@
 		027C7E8C285AF6D900A5175B /* Label */ = {
 			isa = PBXGroup;
 			children = (
+				02751A302869FF7D00C712FF /* Model */,
 				02751A2D2869FF5D00C712FF /* View */,
 			);
 			path = Label;
@@ -818,6 +829,7 @@
 				028CB80D286191AC00DAFE26 /* EditingIssueViewController.swift in Sources */,
 				02AEC2FB28600B8200AAE835 /* SignInStubURLSessionDataTask.swift in Sources */,
 				0290D0F3286419AE00A4E3A7 /* EditingIssueTextFieldDelegate.swift in Sources */,
+				02751A2F2869FF7800C712FF /* LabelTableDataSource.swift in Sources */,
 				024F43BD2859B857008C4235 /* Bundle+Extension.swift in Sources */,
 				02AEC2F628600AF500AAE835 /* URLSession+Extension.swift in Sources */,
 				5B29A118285ACACE0088EC11 /* CustomBarButton.swift in Sources */,

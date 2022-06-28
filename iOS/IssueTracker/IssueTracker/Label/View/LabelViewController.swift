@@ -11,6 +11,7 @@ final class LabelViewController: UIViewController {
     private let navigationItems = LabelViewNavigationItems()
     private lazy var labelTableView = LabelTableView(frame: view.frame)
 
+    private let dataSource = LabelTableDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
