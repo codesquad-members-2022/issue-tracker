@@ -74,10 +74,10 @@ class LabelListAdapter(
 
 private val diffUtil = object : DiffUtil.ItemCallback<Label>() {
     override fun areItemsTheSame(oldItem: Label, newItem: Label): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Label, newItem: Label): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem == newItem
     }
 }

@@ -1,33 +1,32 @@
 package com.example.it.issuetracker.data.datasource
 
+import android.util.Log
+import com.example.it.issuetracker.data.dto.AddLabelDto
 import com.example.it.issuetracker.data.dto.LabelDto
 import com.example.it.issuetracker.data.network.IssueTrackerService
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+
+private const val TAG = "LabelDataSourceImpl"
 
 class LabelDataSourceDefaultImpl(
-    private val issuerTrackerApi: IssueTrackerService,
+    private val issueTrackerApi: IssueTrackerService,
 ) : LabelDataSource {
 
-    override fun getLabelInfoList(): Flow<List<LabelDto>> = flow {
-        emit(LabelFakeDatabase.getAll())
+    override suspend fun getLabelInfoList(): List<LabelDto> {
+        try {
+            return issueTrackerApi.getLabelInfoList()
+        } catch (e: Exception) {
+            Log.e(TAG, e.message, e)
+            error(e)
+        }
     }
 
-    override suspend fun addLabel(
-        title: String,
-        description: String,
-        backgroundColor: String,
-        textColor: String,
-    ) {
-        LabelFakeDatabase.add(
-            LabelDto(
-                LabelFakeDatabase.size + 1,
-                title,
-                description,
-                backgroundColor,
-                textColor
-            )
-        )
+    override suspend fun addLabel(addLabelDto: AddLabelDto) {
+        try {
+            issueTrackerApi.addLabelInfo(addLabelDto)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message, e)
+            error(e)
+        }
     }
 
     override suspend fun editLabel(labelDto: LabelDto) {
@@ -35,6 +34,11 @@ class LabelDataSourceDefaultImpl(
     }
 
     override suspend fun deleteLabelInfo(id: Int) {
-        LabelFakeDatabase.delete(id)
+        try {
+            issueTrackerApi.deleteLabelInfo(id)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message, e)
+            error(e)
+        }
     }
 }

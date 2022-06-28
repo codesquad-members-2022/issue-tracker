@@ -2,14 +2,18 @@ package com.example.it.issuetracker.presentation.main.milestone.add
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentMilestoneAddBinding
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.Constants
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.google.android.material.datepicker.MaterialDatePicker
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -49,7 +53,6 @@ class MilestoneAddFragment :
                 description = binding.editDescription.text.toString(),
                 deadLine = binding.editCompleteDate.text.toString()
             )
-
             viewModel.editMilestone(milestoneInfo)
         }
     }
@@ -66,11 +69,8 @@ class MilestoneAddFragment :
         binding.labelAppbarLayout.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.save_string -> {
-                    if (editMilestoneInfo == null) {
-                        addMilestone()
-                    } else {
-                        editMilestone()
-                    }
+                    if (editMilestoneInfo == null) addMilestone()
+                    else editMilestone()
                     true
                 }
                 else -> false
@@ -80,29 +80,44 @@ class MilestoneAddFragment :
         binding.editSubject.doAfterTextChanged { input ->
             val text = input.toString()
             saveMenu.isEnabled = text.isNotEmpty()
-            viewModel.title.value = text
+            viewModel.setTitle(text)
+        }
+        binding.editDescription.doAfterTextChanged { input ->
+            val text = input.toString()
+            viewModel.setDescription(text)
         }
         binding.editCompleteDate.setOnClickListener {
             val datePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("날짜를 선택하세요")
                 .build()
-
             datePicker.addOnPositiveButtonClickListener {
-                binding.editCompleteDate.text = timestampToDateString(it)
+                val dateString = timestampToDateString(it)
+                binding.editCompleteDate.text = dateString
+                viewModel.setDeadline(dateString)
             }
-
             datePicker.show(parentFragmentManager, "datepicker")
         }
     }
 
     override fun observerData() {
         repeatOnLifecycleExtension {
-            viewModel.completeSaveLabel.collect { complete ->
-                if (complete) {
-                    clickSaveListener?.invoke()
-                    popBackStack()
+            viewModel.uiState.map { it.completeTask }
+                .distinctUntilChanged()
+                .collect { isCompleted ->
+                    if (isCompleted) {
+                        clickSaveListener?.invoke()
+                        popBackStack()
+                    }
                 }
-            }
+        }
+        repeatOnLifecycleExtension {
+            viewModel.uiState.map { it.errorMsgId }
+                .distinctUntilChanged()
+                .collect { msgId ->
+                    if (msgId == Constants.INIT_ERROR_MSG_ID) return@collect
+                    val msg = getString(msgId)
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                }
         }
     }
 

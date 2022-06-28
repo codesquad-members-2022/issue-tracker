@@ -1,13 +1,14 @@
 package com.example.it.issuetracker.data.datasource
 
+import com.example.it.issuetracker.data.dto.AddMilestoneDto
 import com.example.it.issuetracker.data.dto.MilestoneDto
 import kotlinx.coroutines.flow.Flow
 
 interface MilestoneDataSource {
 
-    fun getMilestoneInfoList(): Flow<List<MilestoneDto>>
+    suspend fun getMilestoneInfoList(): List<MilestoneDto>
 
-    suspend fun addMilestone(title: String, description: String, deadline: String)
+    suspend fun addMilestone(addMilestoneDto: AddMilestoneDto)
 
     suspend fun editMilestone(milestoneDto: MilestoneDto)
 
