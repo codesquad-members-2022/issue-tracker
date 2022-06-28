@@ -48,13 +48,16 @@ class AuthRepository {
                 return
             }
 
-            do {
-                guard let decodedResponse = try? JSONDecoder().decode(TokenBag.self, from: data) else {
-                    return
+            DispatchQueue.main.async {
+                do {
+                    guard let decodedResponse = try? JSONDecoder().decode(TokenBag.self, from: data) else {
+                        return
+                    }
+                    completion(.success(decodedResponse))
+                } catch {
+                    print(error)
+                    completion(.failure((.decodeFailedError)))
                 }
-                completion(.success(decodedResponse))
-            } catch {
-                completion(.failure((.decodeFailedError)))
             }
         }
     }

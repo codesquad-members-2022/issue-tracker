@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class IssueFlowDIContainer: DIContainer {
+final class IssueFlowDIContainer {
     func makeCoordinator(navigationController: UINavigationController) -> Coordinator {
         IssueFlowCoordinator(navigationController: navigationController, dependencies: self)
     }

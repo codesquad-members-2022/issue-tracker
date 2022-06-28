@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LabelFlowDIContainer: DIContainer {
+final class LabelFlowDIContainer {
     func makeCoordinator(navigationController: UINavigationController) -> Coordinator {
         LabelFlowCoordinator(navigationController: navigationController, dependencies: self)
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MilestoneFlowDIContainer: DIContainer {
+final class MilestoneFlowDIContainer {
     func makeCoordinator(navigationController: UINavigationController) -> Coordinator {
         MilestoneFlowCoordinator(
             navigationController: navigationController,

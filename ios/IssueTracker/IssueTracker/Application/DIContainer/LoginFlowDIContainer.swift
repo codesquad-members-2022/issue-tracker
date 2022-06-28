@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginFlowDIContainer: DIContainer {
+final class LoginFlowDIContainer {
     private let localStorage = UserDefaults.standard
 
     func makeLoginViewController(action: LoginViewModelAction) -> UIViewController {

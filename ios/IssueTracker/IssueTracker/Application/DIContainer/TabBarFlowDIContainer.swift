@@ -7,26 +7,26 @@
 
 import UIKit
 
-final class TabBarFlowDIContainer: DIContainer {
+final class TabBarFlowDIContainer {
     func makeCoordinator(navigationController: UINavigationController) -> Coordinator {
         TabBarFlowCoordinator(navigationController: navigationController, dependencies: self)
     }
 }
 
 extension TabBarFlowDIContainer: TabBarFlowCoordinatorDependencies {
-    func makeIssueFlowDIContainer() -> DIContainer {
+    func makeIssueFlowDIContainer() -> IssueFlowDIContainer {
         IssueFlowDIContainer()
     }
 
-    func makeLabelFlowDIContainer() -> DIContainer {
+    func makeLabelFlowDIContainer() -> LabelFlowDIContainer {
         LabelFlowDIContainer()
     }
 
-    func makeMilestoneFlowDIContainer() -> DIContainer {
+    func makeMilestoneFlowDIContainer() -> MilestoneFlowDIContainer {
         MilestoneFlowDIContainer()
     }
 
-    func makeAccountFlowDIContainer() -> DIContainer {
+    func makeAccountFlowDIContainer() -> AccountFlowDIContainer {
         AccountFlowDIContainer()
     }
 }

@@ -8,8 +8,8 @@
 import UIKit
 
 protocol AppFlowCoordinatorDependencies {
-    func makeTabBarFlowDIContainer() -> DIContainer
-    func makeLoginFlowDIContainer() -> DIContainer
+    func makeTabBarFlowDIContainer() -> TabBarFlowDIContainer
+    func makeLoginFlowDIContainer() -> LoginFlowDIContainer
     func checkUserLoggedIn() -> Bool
 }
 
@@ -56,7 +56,10 @@ final class AppFlowCoordinator: BaseCoordinator {
 
     func runLoginFlow(with deepLink: DeepLink? = nil) {
         let container = appDependencies.makeLoginFlowDIContainer()
-        let flow = container.makeCoordinator(navigationController: navigationController)
+        var flow = container.makeCoordinator(navigationController: navigationController)
+        flow.finishFlow = { [weak self] in
+            self?.runTabBarFlow()
+        }
 
         flow.start(with: deepLink)
         addDependency(flow)

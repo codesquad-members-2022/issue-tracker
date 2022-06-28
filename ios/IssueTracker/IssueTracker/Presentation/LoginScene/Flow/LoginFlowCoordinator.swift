@@ -47,7 +47,7 @@ final class LoginFlowCoordinator: Coordinator, LoginFlowCoordinatorOutput {
     }
 
     private func showMainTabBar() {
-        // new flow start or push view controller
+        finishFlow?()
     }
 
     private func showGithubLogin() {
