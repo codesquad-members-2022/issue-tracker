@@ -1,9 +1,12 @@
 package com.ron2ader.issuetracker.controller;
 
 import com.ron2ader.issuetracker.auth.Login;
+import com.ron2ader.issuetracker.controller.issuedto.IssueCondition;
 import com.ron2ader.issuetracker.controller.issuedto.IssueCreateRequest;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssueFilter;
 import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssuesPagingResponse;
 import com.ron2ader.issuetracker.controller.issuedto.IssuesResponse;
 import com.ron2ader.issuetracker.service.IssueService;
 import lombok.RequiredArgsConstructor;
@@ -38,14 +41,19 @@ public class IssueController {
     }
 
     @GetMapping("/issues")
-    public IssuesResponse getIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
+    public IssuesPagingResponse getIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
 
         Page<IssueSimpleResponse> issues = issueService.findByOpenStatus(pageable, openStatus);
         Long countByStatus = issueService.countByStatus(!openStatus);
 
         if (openStatus) {
-            return new IssuesResponse(issues.getTotalElements(), countByStatus, issues);
+            return new IssuesPagingResponse(issues.getTotalElements(), countByStatus, issues);
         }
-        return new IssuesResponse(countByStatus, issues.getTotalElements(), issues);
+        return new IssuesPagingResponse(countByStatus, issues.getTotalElements(), issues);
+    }
+
+    @GetMapping("/issues")
+    public IssuesResponse getIssuesByCondition(IssueCondition issueCondition) {
+        return issueService.findByIssueFilter(IssueFilter.from(issueCondition));
     }
 }

@@ -2,20 +2,20 @@ package com.ron2ader.issuetracker.domain.issue;
 
 import static com.ron2ader.issuetracker.domain.issue.QIssue.issue;
 import static com.ron2ader.issuetracker.domain.issue.QIssueAssignee.issueAssignee;
+import static com.ron2ader.issuetracker.domain.issue.QIssueLabel.issueLabel;
+import static com.ron2ader.issuetracker.domain.label.QLabel.label;
 import static com.ron2ader.issuetracker.domain.member.QMember.member;
-import static com.ron2ader.issuetracker.domain.reply.QReply.reply;
+import static com.ron2ader.issuetracker.domain.milestone.QMilestone.milestone;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ron2ader.issuetracker.controller.issuedto.IssueCondition;
+import com.ron2ader.issuetracker.controller.issuedto.IssueFilter;
+import com.ron2ader.issuetracker.domain.label.Label;
 import com.ron2ader.issuetracker.domain.member.Member;
+import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -36,51 +36,50 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
     }
 
     @Override
-    public Page<Issue> findByCondition(Pageable pageable, IssueCondition issueCondition) {
-        List<Issue> issues = jpaQueryFactory
+    public List<Issue> findByIssueFilter(IssueFilter issueFilter) {
+        return jpaQueryFactory
             .select(issue)
             .from(issue)
             .leftJoin(issue.assignees, issueAssignee)
-            .leftJoin(issue.replies, reply)
+            .leftJoin(issueAssignee.assignee, member)
+            .leftJoin(issue.labels, issueLabel)
+            .leftJoin(issueLabel.label, label)
+            .leftJoin(issue.milestone, milestone)
             .where(
-                openStatusEq(issueCondition.getOpenStatus()),
-                issuerEq(issueCondition.getIssuer()),
-                issueAssigneeEq(issueCondition.getAssignee()),
-                replyMemberEq(issueCondition.getIssuer())
+                issuerEq(issueFilter.getIssuer()),
+                issueAssigneeEq(issueFilter.getAssignee()),
+                issueLabelEq(issueFilter.getLabel()),
+                milestoneEq(issueFilter.getMilestone())
             )
-            .offset(pageable.getOffset())
-            .limit(pageable.getPageSize())
             .fetch();
+    }
 
-        JPAQuery<Issue> countQuery = jpaQueryFactory
-            .select(issue)
-            .from(issue)
-            .leftJoin(issue.assignees, issueAssignee)
-            .leftJoin(issue.replies, reply)
-            .where(
-                openStatusEq(issueCondition.getOpenStatus()),
-                issuerEq(issueCondition.getIssuer()),
-                issueAssigneeEq(issueCondition.getAssignee()),
-                replyMemberEq(issueCondition.getIssuer())
-            );
+    private BooleanExpression milestoneEq(Milestone milestone) {
+        if (milestone == null) {
+            return null;
+        }
 
-        return PageableExecutionUtils.getPage(issues, pageable, () -> countQuery.fetch().size());
+        return issue.milestone.eq(milestone);
+    }
+
+    private BooleanExpression issueLabelEq(Label label) {
+        if (label == null) {
+            return null;
+        }
+
+        return issueLabel.label.eq(label);
     }
 
     private BooleanExpression issuerIdEq(Long id) {
         return issue.issuer.id.eq(id);
     }
 
-    private BooleanExpression openStatusEq(Boolean openStatus) {
-        return issue.openStatus.eq(openStatus);
-    }
-
-    private BooleanExpression issuerEq(Member issueConditionIssuer) {
-        if (issueConditionIssuer == null) {
+    private BooleanExpression issuerEq(Member issuer) {
+        if (issuer == null) {
             return null;
         }
 
-        return issue.issuer.eq(issueConditionIssuer);
+        return issue.issuer.eq(issuer);
     }
 
     private BooleanExpression issueAssigneeEq(Member assignee) {
@@ -89,13 +88,5 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
         }
 
         return issueAssignee.assignee.eq(assignee);
-    }
-
-    private BooleanExpression replyMemberEq(Member issueConditionIssuer) {
-        if (issueConditionIssuer == null) {
-            return null;
-        }
-
-        return reply.member.eq(issueConditionIssuer);
     }
 }

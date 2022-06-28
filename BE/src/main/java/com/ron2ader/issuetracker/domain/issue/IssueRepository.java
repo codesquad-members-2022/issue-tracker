@@ -20,5 +20,4 @@ public interface IssueRepository extends JpaRepository<Issue, Long>, IssueCustom
     Optional<Issue> findById(@Param("id") Long id);
 
     Page<Issue> findAllByOpenStatus(Pageable pageable, @Param("openStatus") Boolean openStatus);
-
 }
