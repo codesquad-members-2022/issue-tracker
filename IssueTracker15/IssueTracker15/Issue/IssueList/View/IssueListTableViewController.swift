@@ -14,20 +14,25 @@ class IssueListTableViewController: UIViewController, ViewBinding {
     typealias SelectableCell = IssueListSelectableTableViewCell
     
     // MARK: - ViewModel
-    private lazy var vm = IssueListViewModel { [weak self] indexPath, _ in
+    private lazy var vm = IssueListViewModel { [weak self] param, _ in
         DispatchQueue.main.async {
-            if let indexPath = indexPath as? IndexPath {
-                self?.tableView.reloadRows(at: [indexPath], with: .fade)
-            } else {
+            guard let index = param as? IndexPath else {
                 self?.tableView.reloadData()
+                return
             }
+            
+            self?.tableView.reloadRows(at: [index], with: .fade)
         }
     }
     
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = label.font.withSize(34)
+        label.text = "이슈"
+        return label
+    }()
+    
     // MARK: - IssueTableView Properties
-    private var issueNavigationController: IssueNavigationController? {
-        return navigationController as? IssueNavigationController
-    }
     
     private var tableView = UITableView()
     
@@ -38,30 +43,25 @@ class IssueListTableViewController: UIViewController, ViewBinding {
                 return
             }
             
+            self.titleLabel.text = self.viewStatus == .list ? "이슈" : "이슈 선택"
             self.tableView.reloadRows(at: indexes, with: .left)
             
             // 빠른 스크롤에서 reload에 대응하지 못하여 추가하였습니다.
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                 
+                var indexes: [IndexPath]?
+                
                 switch self.viewStatus {
-                    
                 case .list:
-                    let selectableCells = self.tableView.visibleCells.filter({ $0 is SelectableCell }) as? [SelectableCell]
-                    
-                    selectableCells?.forEach({ cell in
-                        if let index = cell.indexPath {
-                            self.tableView.reloadRows(at: [index], with: .left)
-                        }
-                    })
-                    
+                    let selectableCells = self.tableView.visibleCells.filter({ $0 is SelectableCell })
+                    indexes = (selectableCells as? [SelectableCell])?.compactMap({ $0.indexPath })
                 case .selection:
-                    let selectableCells = self.tableView.visibleCells.filter({ $0 is NormalCell }) as? [NormalCell]
-                    
-                    selectableCells?.forEach({ cell in
-                        if let index = cell.indexPath {
-                            self.tableView.reloadRows(at: [index], with: .left)
-                        }
-                    })
+                    let selectableCells = self.tableView.visibleCells.filter({ $0 is NormalCell })
+                    indexes = (selectableCells as? [NormalCell])?.compactMap({ $0.indexPath })
+                }
+                
+                if let indexes = indexes {
+                    self.tableView.reloadRows(at: indexes, with: .left)
                 }
             }
         }
@@ -71,18 +71,12 @@ class IssueListTableViewController: UIViewController, ViewBinding {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let navigationBinding = navigationController as? ViewBindable {
-            navigationBinding.setVC(self)
-        }
+        (navigationController as? ViewBindable)?.setVC(self)
+        
+        setLayout()
         
         tableView.register(NormalCell.self, forCellReuseIdentifier: NormalCell.reuseIdentifier)
         tableView.register(SelectableCell.self, forCellReuseIdentifier: SelectableCell.reuseIdentifier)
-        
-        view.addSubview(tableView)
-        
-        tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -96,12 +90,32 @@ class IssueListTableViewController: UIViewController, ViewBinding {
             let isSelected = vm.selectList(cell)
             target.receive(isSelected)
             
+        } else if let _ = target as? SelectableCell {
+            
         } else if (target as? IssueFilterItemSelectViewController) != nil {
             
             print("IssueFilterItemSelectViewController Selected")
             
         } else if (target as? IssueNavigationController) != nil {
             viewStatus = viewStatus == .list ? .selection : .list
+        }
+    }
+    
+    private func setLayout() {
+        view.addSubview(titleLabel)
+        view.addSubview(tableView)
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(55)
+        }
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(self.titleLabel.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+//            $0.edges.equalToSuperview()
         }
     }
 }
@@ -165,12 +179,19 @@ extension IssueListTableViewController: UITableViewDelegate {
             self.vm.closeIssue(issue, target: cell)
             completionHandler(true)
         }
-        closeAction.image = UIImage(systemName: "xmark.circle")
+        closeAction.image = UIImage(systemName: "archivebox")
         closeAction.backgroundColor = .purple
         
         return UISwipeActionsConfiguration(actions: [closeAction, deleteAction])
     }
 }
+
+extension IssueListTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+}
+
 private extension UITableViewCell {
     static var reuseIdentifier: String {
         return String(describing: Self.self)
