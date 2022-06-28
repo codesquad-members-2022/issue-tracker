@@ -15,10 +15,12 @@ final class RootWindow: UIWindow {
     init(scene: UIWindowScene) {
         super.init(windowScene: scene)
         overrideUserInterfaceStyle = .light
+        rootWindowViewModel.requestLoginStatus()
+        bind()
     }
 
-    func setRootViewController() {
-        rootWindowViewModel.onUpdateLoginSatus = { answer in
+    private func bind() {
+        rootWindowViewModel.isValidLogin.bind { answer in
             if answer {
                 DispatchQueue.main.async {
                     let issueListVC = IssueListViewController(viewModel: IssueListViewModel())
@@ -33,8 +35,8 @@ final class RootWindow: UIWindow {
                 }
             }
         }
-        rootWindowViewModel.requestLoginStatus()
     }
+    
 
     func setIssueListVC() {
         DispatchQueue.main.async {
