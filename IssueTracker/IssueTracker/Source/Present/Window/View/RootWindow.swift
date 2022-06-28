@@ -23,9 +23,8 @@ final class RootWindow: UIWindow {
         rootWindowViewModel.isValidLogin.bind { answer in
             if answer {
                 DispatchQueue.main.async {
-                    let issueListVC = IssueListViewController(viewModel: IssueListViewModel())
-                    issueListVC.viewModel.loadIssueList()
-                    self.rootViewController = issueListVC
+                    let tabBarVC = TabBarViewController()
+                    self.rootViewController = tabBarVC
                     return
                 }
             } else {
@@ -36,13 +35,12 @@ final class RootWindow: UIWindow {
             }
         }
     }
-    
 
     func setIssueListVC() {
         DispatchQueue.main.async {
             let issueListVC = IssueListViewController(viewModel: IssueListViewModel())
             issueListVC.viewModel.loadIssueList()
-            self.rootViewController = issueListVC
+            self.rootViewController = TabBarViewController()
             return
         }
     }

@@ -74,7 +74,7 @@ final class IssueListViewController: UIViewController {
     }
 
     private func bind() {
-        viewModel.issueList.bind { [weak self] issueList in
+        viewModel.issueList.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
