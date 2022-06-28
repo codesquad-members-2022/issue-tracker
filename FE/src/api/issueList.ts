@@ -1,19 +1,21 @@
 import { requestApi } from '@/api/core';
 import { IssueStateType } from '@/api/type';
 
-const getIssueList = async (state: IssueStateType) => {
+const getIssueList = async (status: IssueStateType) => {
   const issueList = await requestApi({
     method: 'get',
-    url: `/issues?state=${state}`
+    url: `/issues?${status ? `state=${status}` : ''}`
   });
+
   return issueList;
 };
 
-const getIssueCount = async (state: IssueStateType) => {
+const getIssueCount = async (status: IssueStateType) => {
   const issueCount = await requestApi({
     method: 'get',
-    url: `/issues/counts?state=${state}`
+    url: `/issues/counts?${status ? `state=${status}` : ''}`
   });
+
   return issueCount;
 };
 

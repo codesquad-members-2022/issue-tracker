@@ -1,29 +1,26 @@
-import { getIssueCount } from '@/api/issueList';
 import { getIssueList } from '@/api/issueList';
+import { getIssueCount } from '@/api/issueList';
 import { IssueStateType } from '@/api/type';
 import { useQuery } from 'react-query';
 import { AxiosError } from 'axios';
+import { issueListQueryKeys, issueCountQueryKeys } from '@/api/queryKeys';
 
-function useIssueListData(state: IssueStateType = 'open') {
-  return useQuery(['issueList', { status: 'open' }], () => getIssueList(state), {
-    onSuccess: data => {
-      console.log(data);
-    },
-    onError: (e: AxiosError) => {
-      console.log(e.message);
-    }
+const printError = (error: AxiosError) => {
+  console.error(error.message);
+};
+
+function useIssueListData(status?: IssueStateType) {
+  return useQuery(issueListQueryKeys[status ? status : 'all'], () => getIssueList(status), {
+    onSuccess: data => {},
+    onError: printError
   });
 }
 
-function useIssueListCountData(state: IssueStateType = 'open') {
-  return useQuery(['issueList', { status: 'open' }, 'count'], () => getIssueCount(state), {
-    onSuccess: data => {
-      console.log(state + ' _ ' + data);
-    },
-    onError: (e: AxiosError) => {
-      console.log(e.message);
-    }
+function useIssueCountData(status?: IssueStateType) {
+  return useQuery(issueCountQueryKeys[status ? status : 'all'], () => getIssueCount(status), {
+    onSuccess: data => {},
+    onError: printError
   });
 }
 
-export { useIssueListData, useIssueListCountData };
+export { useIssueListData, useIssueCountData };

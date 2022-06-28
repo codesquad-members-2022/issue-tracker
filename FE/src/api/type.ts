@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 
-type IssueStateType = 'open' | 'close';
+type IssueStateType = 'open' | 'close' | undefined;
 
 type AxiosType = {
   method: 'get' | 'post' | 'put' | 'delete' | 'patch';
