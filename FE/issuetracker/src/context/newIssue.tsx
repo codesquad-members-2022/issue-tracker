@@ -54,14 +54,14 @@ const newIssue: newIssueType = {
   },
   labels: [
     {
-      title: 'documentation',
-      description: '서비스에 대한 개선 사항 혹은 추가 사항',
-      color: 'blue',
+      title: '',
+      description: '',
+      color: '',
     },
   ],
   assignees: [
     {
-      name: 'O',
+      name: '',
       profileImage: '',
       email: '',
     },
