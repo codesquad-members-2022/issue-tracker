@@ -1,13 +1,17 @@
 const issueListQueryKeys = {
-  all: ['issueList'],
-  open: ['issueList', { status: 'open' }],
-  close: ['issueList', { status: 'close' }]
+  all: ['issue'],
+  open: ['issue', { status: 'open' }],
+  close: ['issue', { status: 'close' }]
 };
 
-const issueListCountQueryKeys = {
-  all: ['issueList', 'count'],
-  open: ['issueList', { status: 'open' }, 'count'],
-  close: ['issueList', { status: 'close' }, 'count']
+const issueCountQueryKeys = {
+  all: ['issue', 'count'],
+  open: ['issue', { status: 'open' }, 'count'],
+  close: ['issue', { status: 'close' }, 'count']
 };
 
-export { issueListQueryKeys, issueListCountQueryKeys };
+const labelListQueryKeys = ['label'];
+
+const labelCountQueryKeys = ['label', 'count'];
+
+export { issueListQueryKeys, issueCountQueryKeys, labelListQueryKeys, labelCountQueryKeys };
