@@ -7,8 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface IssueCustomRepository {
 
-    Optional<Issue> findIssueById(@Param("id") Long id);
-
     List<Issue> findByIssueFilter(IssueFilter issueFilter);
 
 }

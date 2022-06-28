@@ -29,19 +29,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IssueServiceTest {
 
     private final IssueService issueService;
-    private final MemberRepository memberRepository;
-    private final MilestoneRepository milestoneRepository;
-    private final LabelRepository labelRepository;
 
     @Autowired
-    public IssueServiceTest(IssueService issueService,
-                            MemberRepository memberRepository,
-                            MilestoneRepository milestoneRepository,
-                            LabelRepository labelRepository) {
+    public IssueServiceTest(IssueService issueService) {
         this.issueService = issueService;
-        this.memberRepository = memberRepository;
-        this.milestoneRepository = milestoneRepository;
-        this.labelRepository = labelRepository;
     }
 
     @BeforeEach
@@ -88,13 +79,9 @@ class IssueServiceTest {
     @Test
     @DisplayName("issue filter로 조회하면 조건에 맞는 issuesResponse를 반환한다.")
     void findByFilterTest() {
-        Member ron2 = memberRepository.findByMemberId("ron2").orElseThrow(NoSuchElementException::new);
-        Label label = labelRepository.findById(1L).orElseThrow(NoSuchElementException::new);
-        Milestone milestone = milestoneRepository.findById(1L).orElseThrow(NoSuchElementException::new);
+        IssueFilter issueFilter = new IssueFilter(true, 1L, 1L, 1L, 1L);
 
-        IssueFilter filter = IssueFilter.from(IssueCondition.of(true, ron2, label, milestone, ron2));
-
-        IssuesResponse issuesResponse = issueService.findByIssueFilter(filter);
+        IssuesResponse issuesResponse = issueService.findByIssueFilter(issueFilter);
 
         assertThat(issuesResponse.getOpenCount()).isEqualTo(4);
         assertThat(issuesResponse.getCloseCount()).isEqualTo(0);

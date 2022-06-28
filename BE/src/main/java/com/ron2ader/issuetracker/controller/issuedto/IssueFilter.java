@@ -6,19 +6,24 @@ import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class IssueFilter {
 
-    private Boolean openStatus;
-    private Member assignee;
-    private Label label;
-    private Milestone milestone;
-    private Member issuer;
+    private final Boolean openStatus;
+    private final Long issuerId;
+    private final Long labelId;
+    private final Long milestoneId;
+    private final Long assigneeId;
 
     public static IssueFilter from(IssueCondition issueCondition) {
-        return new IssueFilter(issueCondition.getOpenStatus(), issueCondition.getAssignee(), issueCondition.getLabel(),
-            issueCondition.getMilestone(), issueCondition.getIssuer());
+        return new IssueFilter(issueCondition.getOpenStatus(),
+                issueCondition.getIssuerId(),
+                issueCondition.getLabelId(),
+                issueCondition.getMilestoneId(),
+                issueCondition.getAssigneeId());
     }
+
 }

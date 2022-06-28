@@ -25,68 +25,53 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public Optional<Issue> findIssueById(Long id) {
-        return Optional.ofNullable(jpaQueryFactory
-            .selectFrom(issue)
-            .leftJoin(issue.issuer, member)
-            .where(
-                issuerIdEq(id)
-            )
-            .fetchOne());
-    }
-
-    @Override
     public List<Issue> findByIssueFilter(IssueFilter issueFilter) {
         return jpaQueryFactory
             .select(issue)
             .from(issue)
-            .leftJoin(issue.assignees, issueAssignee)
-            .leftJoin(issueAssignee.assignee, member)
+            .leftJoin(issue.assignees, issueAssignee).fetchJoin()
+            .leftJoin(issueAssignee.assignee, member).fetchJoin()
             .leftJoin(issue.labels, issueLabel)
             .leftJoin(issueLabel.label, label)
-            .leftJoin(issue.milestone, milestone)
+            .leftJoin(issue.milestone, milestone).fetchJoin()
             .where(
-                issuerEq(issueFilter.getIssuer()),
-                issueAssigneeEq(issueFilter.getAssignee()),
-                issueLabelEq(issueFilter.getLabel()),
-                milestoneEq(issueFilter.getMilestone())
+                issuerEq(issueFilter.getIssuerId()),
+                issueAssigneeEq(issueFilter.getAssigneeId()),
+                issueLabelEq(issueFilter.getLabelId()),
+                milestoneEq(issueFilter.getMilestoneId())
             )
             .fetch();
     }
 
-    private BooleanExpression milestoneEq(Milestone milestone) {
-        if (milestone == null) {
+    private BooleanExpression milestoneEq(Long milestoneId) {
+        if (milestoneId == null) {
             return null;
         }
 
-        return issue.milestone.eq(milestone);
+        return issue.milestone.id.eq(milestoneId);
     }
 
-    private BooleanExpression issueLabelEq(Label label) {
-        if (label == null) {
+    private BooleanExpression issueLabelEq(Long labelId) {
+        if (labelId == null) {
             return null;
         }
 
-        return issueLabel.label.eq(label);
+        return issueLabel.label.id.eq(labelId);
     }
 
-    private BooleanExpression issuerIdEq(Long id) {
-        return issue.issuer.id.eq(id);
-    }
-
-    private BooleanExpression issuerEq(Member issuer) {
-        if (issuer == null) {
+    private BooleanExpression issuerEq(Long issuerId) {
+        if (issuerId == null) {
             return null;
         }
 
-        return issue.issuer.eq(issuer);
+        return issue.issuer.id.eq(issuerId);
     }
 
-    private BooleanExpression issueAssigneeEq(Member assignee) {
-        if (assignee == null) {
+    private BooleanExpression issueAssigneeEq(Long assigneeId) {
+        if (assigneeId == null) {
             return null;
         }
 
-        return issueAssignee.assignee.eq(assignee);
+        return issueAssignee.assignee.id.eq(assigneeId);
     }
 }

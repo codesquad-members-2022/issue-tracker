@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -41,7 +42,7 @@ public class IssueController {
     }
 
     @GetMapping("/issues")
-    public IssuesPagingResponse getIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
+    public IssuesPagingResponse getIssuesByOpenStatus(@PageableDefault Pageable pageable, Boolean openStatus) {
 
         Page<IssueSimpleResponse> issues = issueService.findByOpenStatus(pageable, openStatus);
         Long countByStatus = issueService.countByStatus(!openStatus);
@@ -52,7 +53,7 @@ public class IssueController {
         return new IssuesPagingResponse(countByStatus, issues.getTotalElements(), issues);
     }
 
-    @GetMapping("/issues2")
+    @GetMapping("/issues/search")
     public IssuesResponse getIssuesByCondition(IssueCondition issueCondition) {
         return issueService.findByIssueFilter(IssueFilter.from(issueCondition));
     }

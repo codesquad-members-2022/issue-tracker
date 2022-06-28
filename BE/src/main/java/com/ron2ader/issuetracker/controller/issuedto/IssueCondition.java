@@ -11,9 +11,9 @@ import lombok.Getter;
 public class IssueCondition {
 
     private Boolean openStatus;
-    private Member assignee;
-    private Label label;
-    private Milestone milestone;
-    private Member issuer;
+    private Long issuerId;
+    private Long labelId;
+    private Long milestoneId;
+    private Long assigneeId;
 
 }
