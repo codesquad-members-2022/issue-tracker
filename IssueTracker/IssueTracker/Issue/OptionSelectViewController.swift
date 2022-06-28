@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-protocol OptionSelectDelegate: AnyObject { // 이벤트 연결의 근-본
-    func selected(item: String)
+protocol OptionSelectDelegate: AnyObject {
+    func selected(item: Repository)
 }
 
 class OptionSelectViewController: UIViewController {
@@ -54,7 +54,7 @@ extension OptionSelectViewController: UITableViewDelegate {
             return
         }
         let selectedItem = options[indexPath.row]
-        delegate?.selected(item: selectedItem.name) // 이벤트 보내기
+        delegate?.selected(item: selectedItem) // 이벤트 보내기
         self.navigationController?.popViewController(animated: true)
     }
 }

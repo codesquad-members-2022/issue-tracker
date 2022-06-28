@@ -15,6 +15,9 @@ class NewIssueViewController: UIViewController {
     private let optionList = Option.allCases
     private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
+    private var selectedRepo: Repository?
+    
+    
     enum Option: CaseIterable {
         case repository
         case label
@@ -153,12 +156,26 @@ class NewIssueViewController: UIViewController {
     }()
     
     private func touchedCreateButton() {
-        // TODO: 이슈생성
-        //1. api 호출
-        //2. api 가 성공적으로 응답을 보내줬다면 =>
-            //2-1. 이전 화면으로 돌아가고
-            //2-2. 이슈 목록 조회 다시해서 보여주기
-        //3. api 가 실패했다면 => issue 생성실패 얼럿띄우기
+        guard let token = GithubUserDefaults.getToken(),
+            let selectedRepo = selectedRepo else {
+            return
+        }
+        
+        guard let titleString = self.titleField.text,
+           !titleString.isEmpty else {
+            // TODO: - 타이틀 입력 값이 없다 => 얼럿
+            print("타이틀 필드에 입력값이 없습니다")
+            return
+        }
+        
+        service.createIssue(title: titleString, repo: selectedRepo, accessToken: token) { responseResult in
+            switch responseResult {
+            case .success(let createdIssue):
+                print("Success Create Issue = ", createdIssue)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -216,8 +233,9 @@ extension NewIssueViewController: UITableViewDataSource {
 }
 
 extension NewIssueViewController: OptionSelectDelegate {
-    func selected(item: String) {
-        selectedList[0] = item
+    func selected(item: Repository) {
+        selectedList[0] = item.name
+        selectedRepo = item
         self.optionTable.reloadData()
     }
 }

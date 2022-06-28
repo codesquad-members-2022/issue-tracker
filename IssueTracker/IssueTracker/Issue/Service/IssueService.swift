@@ -42,8 +42,8 @@ struct IssueService {
         }
     }
     
-    func createIssue(title: String, accessToken: String, completion: @escaping (Result<Issue, IssueError>) -> Void) {
-        let urlString = RequestURL.createIssue(owner: "Jinsujin", repo: "issue-tracker").description
+    func createIssue(title: String, repo: Repository, accessToken: String, completion: @escaping (Result<Issue, IssueError>) -> Void) {
+        let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()

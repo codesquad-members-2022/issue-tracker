@@ -64,7 +64,11 @@ final class IssueViewController: UIViewController {
     }
     
     @objc func touchedAddButton() {
-        self.navigationController?.pushViewController(Container().buildViewController(.newIssue), animated: true)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let viewController = appdelegate.container.buildViewController(.newIssue)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func setupNavigationBar() {
