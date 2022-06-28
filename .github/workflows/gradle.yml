@@ -36,6 +36,7 @@ jobs:
           sed -i "s|\${DATASOURCE_USERNAME}|$DATASOURCE_USERNAME|g" ./src/main/resources/application.yml
           sed -i "s|\${DATASOURCE_PASSWORD}|$DATASOURCE_PASSWORD|g" ./src/main/resources/application.yml
 
+          sed -i "s|\${OAUTH_CLIENT_ID}|$OAUTH_CLIENT_ID|g" ./src/main/resources/oauth.yml
           sed -i "s|\${OAUTH_CLIENT_SECRET}|$OAUTH_CLIENT_SECRET|g" ./src/main/resources/oauth.yml
           sed -i "s|\${OAUTH_ACCESS_SCOPE}|$OAUTH_ACCESS_SCOPE|g" ./src/main/resources/oauth.yml
           sed -i "s|\${OAUTH_LOGIN_FORM_URL}|$OAUTH_LOGIN_FORM_URL|g" ./src/main/resources/oauth.yml
@@ -46,6 +47,7 @@ jobs:
           DATASOURCE_URL: ${{ secrets.DATASOURCE_URL }}
           DATASOURCE_USERNAME: ${{ secrets.DATASOURCE_USERNAME }}
           DATASOURCE_PASSWORD: ${{ secrets.DATASOURCE_PASSWORD }}
+          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
           OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
           OAUTH_ACCESS_SCOPE: ${{ secrets.OAUTH_ACCESS_SCOPE }}
           OAUTH_LOGIN_FORM_URL: ${{ secrets.OAUTH_LOGIN_FORM_URL }}
@@ -77,5 +79,5 @@ jobs:
             sudo docker ps -a -q --filter "name=issue-tracker" | grep -q . && docker stop issue-tracker && docker rm issue-tracker | true
             sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/issue-tracker:1.0
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/issue-tracker:1.0
-            sudo docker run -d -p 80:8080 --name issue-tracker ${{ secrets.DOCKER_USERNAME }}/issue-tracker:1.0
+            sudo docker run -d -p 80:8080 --name issue-tracker -e FILE_UPLOAD_S3_ACCESS_KEY=${{ secrets.FILE_UPLOAD_S3_ACCESS_KEY }} -e FILE_UPLOAD_S3_SECRET_KEY=${{ secrets.FILE_UPLOAD_S3_SECRET_KEY }} ${{ secrets.DOCKER_USERNAME }}/issue-tracker:1.0
             sudo docker rmi -f $(docker images -f "dangling=true" -q) || true
