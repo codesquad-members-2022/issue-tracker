@@ -9,8 +9,8 @@ const getLoginToken = async (data: any) =>
   await requestApi({
     method: 'get',
     url: '/login/oauth/github/callback?code=12345678',
-    data
-    // config: { withCredentials: true }  //-> 쿠키를 추가해주기 위한 옵션(현재 CORS ERROR 발생)
+    data,
+    config: { withCredentials: true }
   });
 
 export { getLoginURL, getLoginToken };

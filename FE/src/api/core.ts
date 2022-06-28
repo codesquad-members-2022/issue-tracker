@@ -1,4 +1,5 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
+import { AxiosType } from '@/api/type';
 
 const baseURL = 'https://0fc30a5e-96f5-446a-8ad1-7be878b3b9cb.mock.pstmn.io/api';
 
@@ -31,13 +32,6 @@ const handleError = (err: AxiosError) => {
   }
 
   return { data: null, status: null };
-};
-
-type AxiosType = {
-  method: 'get' | 'post' | 'put' | 'delete' | 'patch';
-  url: string;
-  data?: { [key: string]: string };
-  config?: AxiosRequestConfig;
 };
 
 const requestApi = async ({ method, url, data, config }: AxiosType) => {
