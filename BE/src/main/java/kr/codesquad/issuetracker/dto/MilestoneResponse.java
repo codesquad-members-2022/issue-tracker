@@ -1,6 +1,5 @@
 package kr.codesquad.issuetracker.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.codesquad.issuetracker.domain.Issue;
 import kr.codesquad.issuetracker.domain.Milestone;
 import lombok.Getter;
@@ -21,14 +20,29 @@ public class MilestoneResponse {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
 
-    @JsonIgnore
-    private List<Issue> issueList;
+    private int openedIssues;
+    private int closedIssues;
 
     public MilestoneResponse(Milestone milestone) {
         this.id = milestone.getId();
         this.title = milestone.getTitle();
         this.description = milestone.getContent();
         this.deadline = milestone.getDeadline();
-        this.issueList = milestone.getIssueList();
+        List<Issue> issueList = milestone.getIssueList();
+        countIssues(issueList);
+        this.openedIssues = getOpenedIssues();
+        this.closedIssues = getClosedIssues();
+    }
+
+
+    private void countIssues(List<Issue> issueList){
+        for (Issue issue : issueList) {
+            if (issue.isStatus()) {
+                openedIssues ++;
+            }
+            if (!issue.isStatus()){
+                closedIssues ++;
+            }
+        }
     }
 }
