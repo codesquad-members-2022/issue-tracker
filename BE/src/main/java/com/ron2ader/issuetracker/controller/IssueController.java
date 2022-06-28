@@ -41,6 +41,9 @@ public class IssueController {
         return issueDetailResponse;
     }
 
+    /*
+    * 첫 페이지
+    * */
     @GetMapping("/issues")
     public IssuesPagingResponse getIssuesByOpenStatus(@PageableDefault Pageable pageable, Boolean openStatus) {
 

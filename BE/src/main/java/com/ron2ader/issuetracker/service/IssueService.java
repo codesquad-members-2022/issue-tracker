@@ -43,7 +43,6 @@ public class IssueService {
         Issue issue = Issue.createIssue(member, title, contents);
 
         try {
-
             labelRepository.findAllById(labelIds).stream()
                 .map(label -> IssueLabel.of(issue, label))
                 .forEach(issue::addLabel);

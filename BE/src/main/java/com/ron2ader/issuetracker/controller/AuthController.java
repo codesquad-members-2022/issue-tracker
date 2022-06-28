@@ -23,7 +23,7 @@ public class AuthController {
     private final JwtProvider jwtProvider;
 
     @GetMapping("/auth/github")
-    public LoginResponse requestAccessToken(String code) {
+    public LoginResponse loginByGithub(String code) {
         GithubToken githubToken = githubOAuthService.requestAccessToken(code);
         GithubUserInfo githubUserInfo = githubOAuthService.requestUserInfo(githubToken);
 
@@ -36,8 +36,8 @@ public class AuthController {
     }
 
     @GetMapping("/auth/refresh")
-    public Tokens requestNewTokens(@Login MemberDto memberDto) {
-        MemberDto findMember = memberService.findMember(memberDto.getMemberId());
+    public Tokens requestNewTokens(@Login String userId) {
+        MemberDto findMember = memberService.findMember(userId);
 
         String accessToken = jwtProvider.generateAccessToken(findMember.getMemberId());
         String refreshToken = jwtProvider.generateRefreshToken(findMember.getMemberId());
