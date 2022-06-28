@@ -45,6 +45,8 @@ final class LabelTableCell: UITableViewCell {
         labelLabel.text = label.title
         descriptionLabel.text = label.description
         labelLabel.backgroundColor = UIColor(hex: label.backgroundColor)
+        label.isDarkMode == "true" ?
+        (labelLabel.textColor = .black) : (labelLabel.textColor = .white)
     }
 
     override func layoutSubviews() {
