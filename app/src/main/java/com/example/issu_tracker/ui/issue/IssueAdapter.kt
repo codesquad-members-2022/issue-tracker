@@ -51,19 +51,13 @@ class IssueAdapter() : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil
                 getRootWidth()
             }
 
+            // 스와이프 상태 유지 코드
             if (swipedIssueList.contains(issue)) {
                 binding.clSwipeContainer.x =
                     (rootWidth) * (-1f / 10 * 3)
             } else binding.clSwipeContainer.translationX = 0f
 
-            if (isEditMode) {
-                binding.cbIssueSelector.visibility = View.VISIBLE
-                binding.cbIssueSelector.isChecked = false
-
-            } else {
-                binding.cbIssueSelector.visibility = View.GONE
-            }
-
+            // 스와이프 후 클릭시 닫기
             binding.tvDeleteClose.setOnClickListener {
                 if (swipedIssueList.contains(issue)) {
                     issueAdapterEventListener?.updateIssueState(issue.id, false)
@@ -71,22 +65,30 @@ class IssueAdapter() : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil
                 }
             }
 
+            // EditMode 에서의 상단 변화 코드
+            if (isEditMode) {
+                binding.cbIssueSelector.visibility = View.VISIBLE
+                binding.cbIssueSelector.isChecked = false
+            } else {
+                binding.cbIssueSelector.visibility = View.GONE
+            }
+
             binding.root.setOnLongClickListener {
                 issueAdapterEventListener?.switchToEditMode(issue.id)
                 return@setOnLongClickListener (true)
             }
 
+
             binding.root.setOnClickListener {
                 issueAdapterEventListener?.getIntoDetail(issue)
             }
 
+            // EditMode 에서의 셀렉팅
             binding.cbIssueSelector.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     issueAdapterEventListener?.addInCheckList(issue)
                 } else issueAdapterEventListener?.deleteInCheckList(issue)
             }
-
-
         }
 
         private fun getRootWidth() {
@@ -99,7 +101,6 @@ class IssueAdapter() : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(diffUtil
                 }
             })
         }
-
     }
 
 

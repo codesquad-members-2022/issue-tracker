@@ -11,6 +11,4 @@ interface HomeRepository {
     suspend fun deleteIssueList(list: List<Issue>)
 
     suspend fun updateIssueListState(list: List<Issue>, boolean: Boolean)
-
-
 }

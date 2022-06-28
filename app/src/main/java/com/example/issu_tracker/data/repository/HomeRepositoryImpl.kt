@@ -29,7 +29,7 @@ class HomeRepositoryImpl @Inject constructor(
             issueObj?.let { it1 ->
                 it1.toIssue()?.let { it2 -> list.add(it2) }
                 // 데이터를 추가하는 코드
-                // fireStore.collection(FIREBASE_COLLECTION_PATH).document().set(it1)
+                // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
             }
         }
         return list
@@ -63,7 +63,7 @@ class HomeRepositoryImpl @Inject constructor(
 
 
     companion object {
-        const val FIREBASE_COLLECTION_ISSUE_PATH = "Issue"
+        const val FIREBASE_COLLECTION_ISSUE_PATH = "Issue2"
         const val FIREBASE_COLLECTION_FRIEND_PATH = "User"
     }
 }

@@ -1,8 +1,8 @@
-package com.example.issu_tracker.data
+package com.example.issu_tracker.data.repository
 
 import android.util.Log
+import com.example.issu_tracker.data.User
 import com.example.issu_tracker.data.local.FriendDatabase
-import com.example.issu_tracker.data.repository.FriendRemoteRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +21,6 @@ class Repository @Inject constructor(
 
         // 2. 업데이트된 로컬을 통해서 반환해줌
         val result = friendLocalDatabase.userDao().getAll()
-
         return result
     }
 

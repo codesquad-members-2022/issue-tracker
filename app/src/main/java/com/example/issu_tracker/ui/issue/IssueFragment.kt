@@ -23,10 +23,9 @@ import com.example.issu_tracker.ui.common.SwipeHelperCallback
 import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.databinding.FragmentIssueBinding
-import com.example.issu_tracker.ui.DetailIssueActivity
+import com.example.issu_tracker.ui.detail.DetailIssueActivity
 import com.example.issu_tracker.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -44,13 +43,13 @@ class IssueFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(binding.root)
-
         saveFilterConditionFromFilterFragment()
         settingRecyclerview()
         updateRecyclerview()
@@ -119,11 +118,11 @@ class IssueFragment : Fragment() {
                         issueAdapter.submitList(it.filter { it.state })
                     }
                 }
-                launch {
-                    homeViewModel.filteredIssueList.collect {
-                        issueAdapter.submitList(it)
-                    }
-                }
+//                launch {
+//                    homeViewModel.filteredIssueList.collect {
+//                        issueAdapter.submitList(it)
+//                    }
+//                }
             }
         }
     }
