@@ -11,16 +11,14 @@ final class RootWindowViewModel {
 
     let issueListViewModel = IssueListViewModel()
     let loginRepository = LoginRepository()
+    let isValidLogin: Observable<Bool> = Observable(false)
 
-    // Status
-    var onUpdateLoginSatus: (Bool) -> Void = { _ in  }
-
-    // Action
     func requestLoginStatus() {
-        guard let token = UserDefaults.standard.object(forKey: Environment.token) as? String else { self.onUpdateLoginSatus(false)
+        guard let token = UserDefaults.standard.object(forKey: Environment.token) as? String else {
+            self.isValidLogin.value = false
             return }
-        loginRepository.requestLoginStatus(IssueTrackerTarget.requestLoginStatus(token: token)) { [weak self] answer in
-            self?.onUpdateLoginSatus(answer)
+        loginRepository.requestLoginStatus(IssueTrackerTarget.requestLoginStatus(token: token)) { [weak self] _ in
+            self?.isValidLogin.value = true
         }
 
     }

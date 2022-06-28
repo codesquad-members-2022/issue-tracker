@@ -10,7 +10,17 @@ import SnapKit
 
 final class IssueListViewController: UIViewController {
 
-    var viewModel = IssueListViewModel()
+    var viewModel: IssueListViewModel
+
+    init(viewModel: IssueListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("\(#function) has not been implemented")
+    }
 
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -64,9 +74,10 @@ final class IssueListViewController: UIViewController {
     }
 
     private func bind() {
-        viewModel.loadedIssues = {
-            DispatchQueue.main.async { [weak self]  in
-                self?.collectionView.reloadData()
+        viewModel.issueList.bind { [weak self] issueList in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
             }
         }
     }
@@ -92,7 +103,7 @@ extension IssueListViewController: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as? IssueCell else { return UICollectionViewCell() }
-        cell.titleLabel.text = viewModel.issueList[indexPath.item].title
+        cell.titleLabel.text = viewModel.issueList.value[indexPath.item].title
         return cell
     }
 
