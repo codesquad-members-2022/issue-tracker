@@ -21,8 +21,8 @@ function FilterBar() {
   const borderColor = isFocus ? GREYSCALE.TITLE_ACTION : GREYSCALE.LINE;
   const iconColor = isFocus ? GREYSCALE.LABEL : GREYSCALE.PLACEHOLDER;
 
-  const onFocus = () => setFocus(true);
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const handleFilterBarFocus = () => setFocus(true);
+  const handleFilterInputValue = (event: React.ChangeEvent<HTMLInputElement>) =>
     setValue(event.target.value);
 
   const handleFilterButtonMouseDown = () =>
@@ -55,8 +55,8 @@ function FilterBar() {
           type="text"
           placeholder="Search all issues"
           value={value}
-          onFocus={onFocus}
-          onChange={onChange}
+          onFocus={handleFilterBarFocus}
+          onChange={handleFilterInputValue}
         />
       </InputBox>
     </FilterBarBox>
