@@ -14,4 +14,15 @@ const labelListQueryKeys = ['label'];
 
 const labelCountQueryKeys = ['label', 'count'];
 
-export { issueListQueryKeys, issueCountQueryKeys, labelListQueryKeys, labelCountQueryKeys };
+const milestoneListQueryKeys = ['milestone'];
+
+const milestoneCountQueryKeys = ['milestone', 'count'];
+
+export {
+  issueListQueryKeys,
+  issueCountQueryKeys,
+  labelListQueryKeys,
+  labelCountQueryKeys,
+  milestoneListQueryKeys,
+  milestoneCountQueryKeys
+};
