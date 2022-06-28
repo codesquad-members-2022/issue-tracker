@@ -31,11 +31,6 @@ public class LabelController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteLabel(@PathVariable Long id) {
-        try {
-            labelService.deleteLabel(id);
-        } catch (EmptyResultDataAccessException e) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity(HttpStatus.OK);
+        return labelService.deleteLabel(id);
     }
 }
