@@ -57,11 +57,13 @@ class IssueListViewModel: CommonViewModel {
     
     func deleteIssue(_ dto: IssueDTO, target: ViewBindable) {
         DispatchQueue.global().asyncAfter(deadline: DispatchTime.randomFive) { [weak self] in
+            var indexPath: IndexPath?
             
-            self?.output(
-                self?.issueList.removeAll(where: { $0.id == dto.id }),
-                target
-            )
+            if let index = self?.issueList.firstIndex(of: dto) {
+                indexPath = IndexPath(row: index, section: 0)
+            }
+            
+            self?.output(indexPath, target)
         }
     }
 }
