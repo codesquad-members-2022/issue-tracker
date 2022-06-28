@@ -38,7 +38,7 @@ struct IssueManager: IssueService {
             return completion(nil)
         }
         
-        let issuesResource = IssuesResource(state: .all, isPull: true)
+        let issuesResource = IssuesResource(state: .open, isPull: false)
         let issuesRequest = APIRequest(resource: issuesResource, token: token)
         
         networkService.execute(issuesRequest) { result in
@@ -63,7 +63,7 @@ struct IssueManager: IssueService {
             return completion(nil)
         }
 
-        let body = "{\"state\":\"close\"}"
+        let body = "{\"state\":\"closed\"}"
         
         let issueUpdate = IssueUpdateResource(issue: issue)
         let request = APIRequest(resource: issueUpdate, httpMethod: .patch, token: token, body: body)

@@ -117,9 +117,9 @@ extension PullListViewController: UITableViewDataSource {
         if editingStyle == .delete {
             viewModel.close(at: indexPath.row) { isClosed in
                 if !isClosed {
-                    self.alert(title: "알림",
-                          message: "닫기 실패",
-                          okTitle: "확인")
+                    DispatchQueue.main.async {
+                        self.alert(title: "알림", message: "닫기 실패", okTitle: "확인")
+                    }
                 }
             }
         }

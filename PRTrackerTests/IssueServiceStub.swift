@@ -9,8 +9,8 @@ import Foundation
 
 struct IssueServiceSuccessStub: IssueService {
     func getIssues(then completion: @escaping ([Issue]?) -> Void) {
-        let user1 = User(id: 0, name: "Eddy", userName: "EddySong", reposURL: "url~")
-        let user2 = User(id: 1, name: "Selina", userName: "iOS-h", reposURL: "url!")
+        let user1 = User(id: 0, userName: "EddySong", reposURL: "url~")
+        let user2 = User(id: 1, userName: "iOS-h", reposURL: "url!")
         let label1 = Label(id: 0, color: "Blue", name: "Documentation")
         let label2 = Label(id: 1, color: "Yello", name: "Refactor")
         let milestone = Milestone(id: 0, title: "마일스토온")
@@ -43,7 +43,7 @@ struct IssueServiceSuccessStub: IssueService {
     }
     
     func close(issueId: Int, completion: @escaping (Issue?) -> Void) {
-        let user1 = User(id: 0, name: "Eddy", userName: "EddySong", reposURL: "url~")
+        let user1 = User(id: 0, userName: "EddySong", reposURL: "url~")
         let label1 = Label(id: 0, color: "Blue", name: "Documentation")
         let milestone = Milestone(id: 0, title: "마일스토온")
         let repo = Repository(id: 0, name: "test", fullName: "test/test")

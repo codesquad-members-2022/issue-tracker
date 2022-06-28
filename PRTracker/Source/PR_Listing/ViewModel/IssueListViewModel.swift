@@ -30,17 +30,21 @@ final class IssueListViewModel {
                 return
             }
             
-            self.issueViewModels.value = self.convertModelToViewModel(issues)
+            self.issueViewModels.value = self.convertToViewModel(issues)
         }
     }
     
-    private func convertModelToViewModel(_ list: [Issue]) -> [IssueTableCellViewModel] {
-        let tableCellViewModelList = list.map { pull -> IssueTableCellViewModel in
-            let tableCellViewModel = IssueTableCellViewModel()
-            tableCellViewModel.configureCellData(with: pull)
-            return tableCellViewModel
+    private func convertToViewModel(_ list: [Issue]) -> [IssueTableCellViewModel] {
+        let tableCellViewModelList = list.map { issue -> IssueTableCellViewModel in
+            return convertToViewModel(issue)
         }
         return tableCellViewModelList
+    }
+    
+    private func convertToViewModel(_ issue: Issue) -> IssueTableCellViewModel {
+        let tableCellViewModel = IssueTableCellViewModel()
+        tableCellViewModel.configureCellData(with: issue)
+        return tableCellViewModel
     }
     
     func getCellViewModel(index: Int) -> IssueTableCellViewModel? {
@@ -48,8 +52,15 @@ final class IssueListViewModel {
     }
     
     func close(at index: Int, completion: @escaping (Bool) -> Void) {
-        issueService.closeIssue(at: index) {
-            self.issueViewModels.value?.remove(at: index)
+        guard let issueId = issueViewModels.value?[index].id else {
+            return completion(false)
+        }
+        
+        issueService.close(issueId: issueId) { issue in
+            guard let issue = issue else { return completion(false) }
+            let cellVM = self.convertToViewModel(issue)
+            
+            self.issueViewModels.value?[index] = cellVM
             completion(true)
         }
     }

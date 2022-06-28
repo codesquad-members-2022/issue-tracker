@@ -18,7 +18,7 @@ struct Issue: Codable {
     let labels: [Label]
     let milestone: Milestone?
     let pull: Pull?
-    let repository: Repository
+    let repository: Repository?
     
     enum CodingKeys: String, CodingKey {
         case id

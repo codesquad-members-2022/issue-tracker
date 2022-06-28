@@ -15,7 +15,10 @@ struct IssueUpdateResource: APIResource {
     let issue: Issue
     
     var path: String {
-        return "/repos/\(issue.repository.fullName)/issues/\(issue.number)"
+        guard let repository = issue.repository else {
+            return ""
+        }
+        return "/repos/\(repository.fullName)/issues/\(issue.number)"
     }
     
     var query: [String: String]? {
