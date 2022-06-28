@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="toolbarTitle"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.example.it.issuetracker.presentation.main.milestone.add.MilestoneAddViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.main.milestone.add.MilestoneAddFragment">
+
+        <include
+            android:id="@+id/label_appbarLayout"
+            layout="@layout/toolbar_add_layout"
+            bind:title="@{toolbarTitle}" />
+
+        <TextView
+            android:id="@+id/tv_subject"
+            style="@style/Body2"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp"
+            android:text="@string/label_subject_string"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_appbarLayout" />
+
+        <EditText
+            android:id="@+id/edit_subject"
+            style="@style/Body2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/must_input_string"
+            android:text="@{viewModel.title}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_subject"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_subject"
+            app:layout_constraintTop_toTopOf="@id/tv_subject" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            style="@style/Body2"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="33dp"
+            android:text="@string/description_string"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subject" />
+
+        <EditText
+            android:id="@+id/edit_description"
+            style="@style/Body2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/optional_input_string"
+            android:text="@{viewModel.description}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_description"
+            app:layout_constraintTop_toTopOf="@id/tv_description" />
+
+        <TextView
+            android:id="@+id/tv_complete_date"
+            style="@style/Body2"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="33dp"
+            android:text="@string/milestone_complete_date"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+        <TextView
+            android:id="@+id/edit_complete_date"
+            style="@style/Body2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/optional_input_date_string"
+            android:text="@{viewModel.deadline}"
+            android:textColor="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="@id/tv_complete_date"
+            app:layout_constraintEnd_toStartOf="@id/btn_clear_date"
+            app:layout_constraintStart_toEndOf="@id/tv_complete_date"
+            app:layout_constraintTop_toTopOf="@id/tv_complete_date" />
+
+        <ImageButton
+            android:id="@+id/btn_clear_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/clear_date_string"
+            android:onClick="@{() -> viewModel.clearDeadline()}"
+            android:src="@drawable/ic_exit_grey"
+            app:layout_constraintBottom_toBottomOf="@id/edit_complete_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/edit_complete_date" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="22dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_complete_date" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

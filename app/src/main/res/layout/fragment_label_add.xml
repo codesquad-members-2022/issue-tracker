@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,37 +9,24 @@
         <import type="android.graphics.Color" />
 
         <variable
+            name="toolbarTitle"
+            type="String" />
+
+        <variable
             name="viewModel"
-            type="com.example.it.issuetracker.presentation.main.label.LabelAddViewModel" />
+            type="com.example.it.issuetracker.presentation.main.label.add.LabelAddViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.main.label.LabelAddFragment">
+        tools:context=".presentation.main.label.add.LabelAddFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <include
             android:id="@+id/label_appbarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:elevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                android:background="@color/main"
-                app:menu="@menu/label_add_menu"
-                app:navigationIcon="@drawable/ic_back"
-                app:title="@string/label_add_string"
-                app:titleTextColor="@color/white" />
-
-        </com.google.android.material.appbar.AppBarLayout>
+            bind:title="@{toolbarTitle}"
+            layout="@layout/toolbar_add_layout" />
 
         <TextView
             android:id="@+id/tv_subject"

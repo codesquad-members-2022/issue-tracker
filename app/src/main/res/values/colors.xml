@@ -11,6 +11,7 @@
     <color name="gray">#FFE5E5EA</color>
     <color name="light_gray">#BDBCBC</color>
     <color name="dark_gray">#87878D</color>
+    <color name="transparent_gray">#F2F2F7</color>
 
     <!-- label dark color -->
     <color name="dark_red">#B71C1C</color>
@@ -29,4 +30,10 @@
     <color name="light_blue">#42A5F5</color>
     <color name="light_sky">#0288D1</color>
     <color name="light_purple">#BA68C8</color>
+
+    <!-- milestone issue color -->
+    <color name="open_issue_bg_color">#C7EBFF</color>
+    <color name="open_issue_text_color">#004DE3</color>
+    <color name="close_issue_bg_color">#CCD4FF</color>
+    <color name="close_issue_text_color">#0025E7</color>
 </resources>

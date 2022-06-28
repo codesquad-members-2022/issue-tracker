@@ -14,11 +14,14 @@ class UserSharedPrefDataSource(context: Context) {
         }
     }
 
-    fun getData(key: String): String {
-        return requireNotNull(sharedPref.getString(key, ""))
+    fun saveData(key: String, value: Long) {
+        sharedPref.edit {
+            remove(key)
+            putLong(key, value)
+        }
     }
 
-    companion object {
-        const val NULL_POINT_ERROR_MESSAGE = "jwt의 값을 가지고 있지 않습니다."
+    fun getData(key: String): String {
+        return requireNotNull(sharedPref.getString(key, ""))
     }
 }

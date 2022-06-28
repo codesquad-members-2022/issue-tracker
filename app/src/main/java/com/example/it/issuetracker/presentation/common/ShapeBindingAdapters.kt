@@ -9,8 +9,10 @@ import com.example.it.issuetracker.R
 
 @BindingAdapter("drawableBackgroundColor", "drawableTextColor")
 fun drawableColor(textView: TextView, color: String, textColor: String) {
-    val drawable = ContextCompat.getDrawable(textView.context,
-        R.drawable.shape_button_round50) as GradientDrawable
+    val drawable = ContextCompat.getDrawable(
+        textView.context,
+        R.drawable.shape_button_round50
+    ) as GradientDrawable
     drawable.setColor(Color.parseColor(color))
     textView.background = drawable
     textView.setTextColor(Color.parseColor(textColor))

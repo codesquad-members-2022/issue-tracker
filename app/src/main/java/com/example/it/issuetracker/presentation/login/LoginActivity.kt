@@ -50,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
     private fun handlerSuccess(state: LoginUiState.GetUserInformation) {
         val loginInformation = state.loginInformation
         viewModel.saveJwt(loginInformation.jwt)
+        viewModel.saveId(loginInformation.id)
         navigateMain(loginInformation.imageUrl)
     }
 
