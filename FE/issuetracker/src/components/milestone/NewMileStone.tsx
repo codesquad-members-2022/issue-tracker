@@ -17,7 +17,6 @@ function NewMileStone() {
 
   const handleSaveButtonClick = () => {
     // 추후에 mileStoneState 데이터를 POST 요청할 것
-    console.log(mileStoneState);
   };
 
   return (
