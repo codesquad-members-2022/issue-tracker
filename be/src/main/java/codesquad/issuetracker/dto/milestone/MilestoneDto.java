@@ -16,7 +16,7 @@ public class MilestoneDto {
     private Long id;
     private String subject;
     private String description;
-    private LocalDate endTime;
+    private LocalDate endDate;
     private MilestoneStatus status;
     private Long totalCountOfIssues;
     private Long countOfClosedIssues;
