@@ -2,6 +2,7 @@ package com.example.it.issuetracker.presentation.main.label
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,9 +10,11 @@ import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentLabelBinding
 import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.Constants
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.label.add.LabelAddFragment
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label) {
@@ -25,32 +28,42 @@ class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label
         binding.viewModel = viewModel
 
         setupToolbar()
-        viewModel.getLabelInfoList()
         initView()
         observerData()
     }
 
     override fun observerData() {
         repeatOnLifecycleExtension {
-            viewModel.labelList.collectLatest {
-                adapter.submitList(it)
-            }
-        }
-
-        repeatOnLifecycleExtension {
-            viewModel.completeDelete.collect { complete ->
-                if (complete) {
-                    viewModel.getLabelInfoList()
-                    viewModel.changeEditMode(false)
+            viewModel.uiState.map { it.labelList }
+                .distinctUntilChanged()
+                .collect {
+                    adapter.submitList(it)
                 }
-            }
+        }
+        repeatOnLifecycleExtension {
+            viewModel.uiState.map { it.completeTask }
+                .distinctUntilChanged()
+                .collect { isCompleted ->
+                    if (isCompleted) {
+                        viewModel.getLabelInfoList()
+                        viewModel.changeEditMode(false)
+                    }
+                }
+        }
+        repeatOnLifecycleExtension {
+            viewModel.uiState.map { it.errorMsgId }
+                .distinctUntilChanged()
+                .collect { msgId ->
+                    if (msgId == Constants.INIT_ERROR_MSG_ID) return@collect
+                    val msg = getString(msgId)
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                }
         }
     }
 
     override fun initView() {
         binding.recyclerviewLabelItem.adapter = adapter
         setupToolbar()
-        viewModel.start()
     }
 
     private fun setupToolbar() {

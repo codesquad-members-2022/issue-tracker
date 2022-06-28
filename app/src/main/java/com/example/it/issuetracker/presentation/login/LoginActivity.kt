@@ -50,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
     private fun handlerSuccess(state: LoginUiState.GetUserInformation) {
         val loginInformation = state.loginInformation
         viewModel.saveUser(loginInformation)
+        viewModel.saveLoginOption(LoginOption.GITHUB)
         navigateMain(loginInformation.imageUrl)
     }
 

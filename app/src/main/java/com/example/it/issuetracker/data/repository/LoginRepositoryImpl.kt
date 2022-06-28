@@ -14,4 +14,9 @@ class LoginRepositoryImpl(
 
         return loginDto.toLoginInformation()
     }
+
+    override suspend fun logout(): Result<Unit> {
+        // TODO(서버에서 로그아웃 기능이 구현되어야 함)
+        return Result.success(Unit)
+    }
 }

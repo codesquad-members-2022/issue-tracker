@@ -10,8 +10,10 @@ data class LoginDto(
     @Json(name = "jwt")
     val jwt: String,
 
-    @Json(name = "id")
-    val id: Long,
+//  TODO(서버에서 id값 내려주면 주석 해제)
+
+//    @Json(name = "id")
+//    val id: Long,
 
     @Json(name = "imageUrl")
     val imageUrl: String,
@@ -19,4 +21,7 @@ data class LoginDto(
 
 
 fun LoginDto.toLoginInformation(): LoginInformation =
-    LoginInformation(jwt = jwt, imageUrl = imageUrl, id = id)
+    LoginInformation(jwt = jwt,
+        imageUrl = imageUrl,
+    //    id = id TODO(서버에서 id값 내려주면 주석 해제)
+    )
