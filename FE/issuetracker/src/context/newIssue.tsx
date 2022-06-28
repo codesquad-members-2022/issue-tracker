@@ -12,7 +12,7 @@ type CommentType = {
   description: string;
 };
 
-type newIssueType = {
+export type newIssueType = {
   title: string;
   writer: WriterType;
   writtenTime: string;

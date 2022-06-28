@@ -1,12 +1,12 @@
 import * as S from 'components/common/Sidebar/styled';
-import { newIssueState } from 'context/newIssue';
+import { newIssueState, newIssueType } from 'context/newIssue';
 import { useRecoilValue } from 'recoil';
 import { keyMaker } from 'utils/util';
 import Label, { ProgressBar } from '../Common';
 import DropDown from './Dropdown';
 
-function SideBar() {
-  const { assignees, mileStone, labels } = useRecoilValue(newIssueState);
+function SideBar({ data }: { data: newIssueType }) {
+  const { assignees, mileStone, labels } = data;
   const labelContents =
     labels[0].title !== ''
       ? labels.map((label) => {
