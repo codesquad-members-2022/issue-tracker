@@ -10,11 +10,13 @@ import SnapKit
 
 class IssueListTableViewCell: UITableViewCell, ViewBindable {
     
+    var willBeDelete = false
     var vc: ViewBinding?
     var indexPath: IndexPath?
     var dto: IssueDTO? {
         didSet {
             titleLabel.text = dto?.title
+            titleLabel.textColor = (dto?.closed_at?.isEmpty ?? true) ? .label : .purple
             checkSelectButton.isSelected = dto?.isSelected ?? false
             bodyLabel.text = dto?.body
             mileStoneTitleLabel.text = "MileStoneMileStoneMileStoneMileStoneMileStoneMileStoneMileStoneMileStone"
@@ -145,73 +147,9 @@ class IssueListTableViewCell: UITableViewCell, ViewBindable {
     func setVC(_ binding: ViewBinding) {
         self.vc = binding
     }
-}
-
-class IssueListSelectableTableViewCell: UITableViewCell, ViewBindable {
     
-    var vc: ViewBinding?
-    var indexPath: IndexPath?
-    var dto: IssueDTO? {
-        didSet {
-            setDTO()
-        }
-    }
-    
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = label.font.withSize(18)
-        return label
-    }()
-    
-    private var contentsLabel: UILabel = {
-        let label = UILabel()
-        label.font = label.font.withSize(12)
-        return label
-    }()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setUI()
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setUI()
-    }
-    
-    private func setUI() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(contentsLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
-        }
-        
-        contentsLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(4)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-
-    private func setDTO() {
-        titleLabel.text = dto?.title
-        contentsLabel.text = dto?.body
-    }
-    
-    func sendAction(_ param: Any?) {
-        
-    }
-    
-    func receive(_ responseData: Any) {
-        
-    }
-    
-    func setVC(_ binding: ViewBinding) {
-        self.vc = binding
+    func showButton(_ isShow: Bool) {
+        checkSelectButton.isHidden = !isShow
     }
 }
 

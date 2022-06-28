@@ -10,18 +10,22 @@ import SnapKit
 
 class IssueListTableViewController: UIViewController, ViewBinding {
     
-    typealias NormalCell = IssueListTableViewCell
-    typealias SelectableCell = IssueListSelectableTableViewCell
+    // Cell의 타입 이름이 길어서 typealias 를 이용해 직관적으로 변경하였습니다.
+    typealias CELL = IssueListTableViewCell
     
     // MARK: - ViewModel
-    private lazy var vm = IssueListViewModel { [weak self] param, _ in
-        DispatchQueue.main.async {
+    private lazy var vm = IssueListViewModel { param, target in
+        DispatchQueue.main.async { [weak self] in
             guard let index = param as? IndexPath else {
                 self?.tableView.reloadData()
                 return
             }
             
-            self?.tableView.reloadRows(at: [index], with: .fade)
+            if let cell = target as? CELL, cell.willBeDelete {
+                self?.tableView.deleteRows(at: [index], with: .fade)
+            } else {
+                self?.tableView.reloadRows(at: [index], with: .fade)
+            }
         }
     }
     
@@ -38,32 +42,8 @@ class IssueListTableViewController: UIViewController, ViewBinding {
     
     private var viewStatus: IssueListStatus = .list {
         didSet {
-            guard let indexes = self.tableView.indexPathsForVisibleRows else {
-                self.tableView.reloadData()
-                return
-            }
-            
             self.titleLabel.text = self.viewStatus == .list ? "이슈" : "이슈 선택"
-            self.tableView.reloadRows(at: indexes, with: .left)
-            
-            // 빠른 스크롤에서 reload에 대응하지 못하여 추가하였습니다.
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-                
-                var indexes: [IndexPath]?
-                
-                switch self.viewStatus {
-                case .list:
-                    let selectableCells = self.tableView.visibleCells.filter({ $0 is SelectableCell })
-                    indexes = (selectableCells as? [SelectableCell])?.compactMap({ $0.indexPath })
-                case .selection:
-                    let selectableCells = self.tableView.visibleCells.filter({ $0 is NormalCell })
-                    indexes = (selectableCells as? [NormalCell])?.compactMap({ $0.indexPath })
-                }
-                
-                if let indexes = indexes {
-                    self.tableView.reloadRows(at: indexes, with: .left)
-                }
-            }
+            self.tableView.reloadData()
         }
     }
     
@@ -75,8 +55,7 @@ class IssueListTableViewController: UIViewController, ViewBinding {
         
         setLayout()
         
-        tableView.register(NormalCell.self, forCellReuseIdentifier: NormalCell.reuseIdentifier)
-        tableView.register(SelectableCell.self, forCellReuseIdentifier: SelectableCell.reuseIdentifier)
+        tableView.register(CELL.self, forCellReuseIdentifier: CELL.reuseIdentifier)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,12 +64,10 @@ class IssueListTableViewController: UIViewController, ViewBinding {
     }
     
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
-        if let cell = target as? NormalCell {
+        if let cell = target as? CELL {
             
             let isSelected = vm.selectList(cell)
             target.receive(isSelected)
-            
-        } else if let _ = target as? SelectableCell {
             
         } else if (target as? IssueFilterItemSelectViewController) != nil {
             
@@ -114,8 +91,8 @@ class IssueListTableViewController: UIViewController, ViewBinding {
         
         tableView.snp.makeConstraints {
             $0.top.equalTo(self.titleLabel.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
-//            $0.edges.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
 }
@@ -127,24 +104,15 @@ extension IssueListTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: UITableViewCell?
-        
-        switch viewStatus {
-        case .list:
-            cell = tableView.dequeueReusableCell(withIdentifier: NormalCell.reuseIdentifier, for: indexPath)
-        case .selection:
-            cell = tableView.dequeueReusableCell(withIdentifier: SelectableCell.reuseIdentifier, for: indexPath)
-        }
-        
-        guard let cell = cell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL.reuseIdentifier, for: indexPath) as? CELL else {
             return UITableViewCell()
         }
         
         let data = vm.issueList[indexPath.row]
-        (cell as? NormalCell)?.setVC(self)
-        (cell as? SelectableCell)?.setVC(self)
-        (cell as? NormalCell)?.dto = data
-        (cell as? SelectableCell)?.dto = data
+        
+        cell.showButton(viewStatus != .list)
+        cell.setVC(self)
+        cell.dto = data
         
         return cell
     }
@@ -158,7 +126,7 @@ extension IssueListTableViewController: UITableViewDelegate {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제", handler: { _, _, completionHandler in
             
-            guard let cell = tableView.cellForRow(at: indexPath) as? NormalCell, let issue = cell.dto else {
+            guard let cell = tableView.cellForRow(at: indexPath) as? CELL, let issue = cell.dto else {
                 completionHandler(false)
                 return
             }
@@ -169,9 +137,9 @@ extension IssueListTableViewController: UITableViewDelegate {
         deleteAction.image = UIImage(systemName: "xmark.circle")
         deleteAction.backgroundColor = .red
         
-        let closeAction = UIContextualAction(style: .normal, title: "Close") { _, _, completionHandler in
+        let closeAction = UIContextualAction(style: .normal, title: "닫기") { _, _, completionHandler in
             
-            guard let cell = tableView.cellForRow(at: indexPath) as? NormalCell, let issue = cell.dto else {
+            guard let cell = tableView.cellForRow(at: indexPath) as? CELL, let issue = cell.dto else {
                 completionHandler(false)
                 return
             }

@@ -11,7 +11,6 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
         let issueVC = IssueListTableViewController()
         let navVC = IssueNavigationController(rootViewController: issueVC)
         navVC.tabBarItem.title = "이슈"
