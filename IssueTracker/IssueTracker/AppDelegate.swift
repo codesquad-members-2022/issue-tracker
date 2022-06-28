@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    let container = Container()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: - 토큰 유효기간 판단
         // 토큰저장할때: 토큰 & 토큰이 저장된 시간 & 유효시간(1일)
@@ -21,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // { 다시 로그인을 해야된다고 판단 => UerDefaults.token 삭제 }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = Container.shared.buildRootViewController()
+        window?.rootViewController = container.buildRootViewController()
         window?.makeKeyAndVisible()
         return true
     }
@@ -32,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // TODO: 로그인 실패 얼럿띄우기
                 return
             }
-            Container.shared.setAccessToken(token)
-            self?.window?.rootViewController = Container.shared.buildRootViewController()
+            GithubUserDefaults.setToken(token)
+            self?.window?.rootViewController = self?.container.buildRootViewController()
         }
         return true
     }

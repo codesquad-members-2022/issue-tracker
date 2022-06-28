@@ -7,53 +7,37 @@
 
 import UIKit
 
-class Container {
-    
-    static let shared = Container()
-    
-    private let accessToken: String? = GithubUserDefaults.getToken()
-    
+import UIKit
+
+struct Container {
     enum Screen {
         case login
-        case issue
+        case issue(token: String)
         case newIssue
-        case optionSelect
-    }
-    
-    func setAccessToken(_ token: String) {
-        accessToken = token
-        GithubUserDefaults.setToken(token)
+        case optionSelect(token: String)
     }
     
     func buildRootViewController() -> UIViewController {
         if let accessToken = GithubUserDefaults.getToken() {
-            return buildViewController(.issue)
+            return buildViewController(.issue(token: accessToken))
         } else {
             return buildViewController(.login)
         }
     }
     
-    private func buildViewController(_ screen: Screen) -> UIViewController {
-    // TODO: AccessToken이 필요한 뷰컨과 필요하지 않은 뷰컨을 구분해서 + 옵셔널도 벗겨서 넣어줘야 함. 그런데 UIViewController는 옵셔널이면 안됨
+    func buildViewController(_ screen: Screen) -> UIViewController {
         switch screen {
-        case .login: // 토큰 x
+        case .login:
             return LoginViewController(service: OAuthService())
-        case .issue: // 토큰 o
+        case .issue(let token):
             let service = IssueService()
-            let model = IssueModel(service: service, token: accessToken)
+            let model = IssueModel(service: service, token: token)
             let viewController = IssueViewController(model: model)
             return UINavigationController(rootViewController: viewController)
-        case .newIssue: // 토큰 x
+        case .newIssue:
             return NewIssueViewController()
-        case .optionSelect: // 토큰 o
-            return OptionSelectViewController(token: accessToken) // token
+        case .optionSelect(let token):
+            return OptionSelectViewController(token: token)
         }
-    }
-    
-    func buildViewControllerWithToken(_ screen: Screen) -> UIViewController? {
-        guard let token = accessToken else {
-            return nil
-        }
-        return buildViewController(screen)
     }
 }

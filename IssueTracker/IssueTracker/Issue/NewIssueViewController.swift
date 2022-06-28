@@ -167,9 +167,13 @@ extension NewIssueViewController: UITableViewDelegate {
         switch optionList[indexPath.row] {
         case .repository:
             // TODO: issueService의 requestRepos() 연결해서 저장소목록 보여주기
-            let viewController = OptionSelectViewController() // token
-            viewController.delegate = self
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate,
+                  let token = GithubUserDefaults.getToken(),
+                  let viewController = appdelegate.container.buildViewController(.optionSelect(token: token)) as? OptionSelectViewController else {
+                return
+            }
             self.navigationController?.pushViewController(viewController, animated: true)
+            viewController.delegate = self
         default:
             break
         }
