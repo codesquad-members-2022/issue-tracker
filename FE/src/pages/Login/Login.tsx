@@ -1,9 +1,25 @@
+import { useEffect } from 'react';
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
-const URL = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&scope=read:user&redirect_uri=${process.env.REACT_APP_GITHUB_REDIRECT_URI}`;
+const URL = `http://louie-03.com/login`;
 
 export function Login(): JSX.Element {
+  // const URI = 'http://louie-03.com/login';
+
+  useEffect(() => {
+    const getToken = async () => {
+      try {
+        const response = await fetch(URL);
+        const data = await response.json();
+        console.log('ssss', data.access_token);
+      } catch (error) {
+        console.log('???????error???????');
+        console.log(error);
+      }
+    };
+    getToken();
+  });
   return (
     <S.Container>
       <S.Wrapper>

@@ -7,7 +7,7 @@ import { DetailIssue } from 'pages/DetailIssue';
 import { Labels } from 'pages/Labels';
 import { Milestones } from 'pages/Milestones';
 import { Container } from 'component/Container';
-
+import OAuth from 'pages/OAuth';
 import { worker } from './mocks/browser';
 
 worker.start();
@@ -16,6 +16,7 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/OAuth" element={<OAuth />} />
       <Route element={<Container />}>
         <Route path="/issues" element={<Issues />} />
         <Route path="/newissue" element={<NewIssue />} />
