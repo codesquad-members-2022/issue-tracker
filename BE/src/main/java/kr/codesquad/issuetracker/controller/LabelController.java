@@ -33,4 +33,9 @@ public class LabelController {
     public ResponseEntity deleteLabel(@PathVariable Long id) {
         return labelService.deleteLabel(id);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity editLabel(@PathVariable Long id, @RequestBody LabelRequest labelRequest) {
+        return labelService.editLabel(id, labelRequest);
+    }
 }

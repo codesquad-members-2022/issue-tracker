@@ -8,7 +8,8 @@ VALUES (1, '마일스톤1내용', '2022-07-01', '마일스톤1'),
 INSERT INTO label(id, title, content, background_color, text_color)
 VALUES (1, '레이블1', '레이블1설명', '#FFFF00', '#000000'),
        (2, '레이블2', '2설명', '#FFA500', '#000000'),
-       (3, '레이블3', '3설명', '#AFEEEE', '#000000');
+       (3, '레이블3', '3설명', '#AFEEEE', '#000000'),
+       (4, '레이블4', '4설명', '#AFEEEE', '#000000');
 
 INSERT INTO members(id, github_id, image_url, name)
     VALUE (1, 'leekm310', 'https://avatars.githubusercontent.com/u/87681380?v=4', 'K Lee');

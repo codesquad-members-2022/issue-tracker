@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +38,12 @@ public class LabelService {
         } catch (EmptyResultDataAccessException e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    public ResponseEntity editLabel(Long id, LabelRequest labelRequest) {
+        Label label = labelRepository.findById(id).orElseThrow(IllegalAccessError::new);
+        label.update(labelRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
