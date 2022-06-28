@@ -1,4 +1,4 @@
-import { Status } from '@/components/InputMessage/type';
+import { Status } from '@/components/common/InputMessage/type';
 
 type InputName = 'id' | 'pw';
 

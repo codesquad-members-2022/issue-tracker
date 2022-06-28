@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Button from '@/components/Button';
-import Logo from '@/components/Logo';
-import TextInput from '@/components/TextInput';
-import InputMessage from '@/components/InputMessage';
+import Button from '@/components/common/Button';
+import Logo from '@/components/common/Logo';
+import TextInput from '@/components/common/TextInput';
+import InputMessage from '@/components/common/InputMessage';
 import useInputTextValue from '@/hooks/useInputTextValue';
 import { InputName, Error } from '@/pages/Login/type';
 import Layout from '@/layout';

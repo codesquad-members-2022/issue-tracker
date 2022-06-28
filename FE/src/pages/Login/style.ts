@@ -1,4 +1,4 @@
-import { $TextInputWrap } from '@/components/TextInput/style';
+import { $TextInputWrap } from '@/components/common/TextInput/style';
 import styled from 'styled-components';
 
 const $LogoWrapper = styled.div`

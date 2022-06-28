@@ -1,5 +1,5 @@
-import Logo from '@/components/Logo';
-import UserProfile from '@/components/UserProfile';
+import Logo from '@/components/common/Logo';
+import UserProfile from '@/components/common/UserProfile';
 import { $Header } from '@/components/Header/style';
 import { useEffect, useState } from 'react';
 

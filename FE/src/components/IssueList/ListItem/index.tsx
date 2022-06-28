@@ -1,9 +1,9 @@
-import Button from '@/components/Button';
-import { Icon } from '@/components/Icon';
+import Button from '@/components/common/Button';
+import { Icon } from '@/components/common/Icon';
 import { $ListItem, $Contents, $Title, $Info, $Text } from '@/components/IssueList/ListItem/style';
 import { IListItem } from '@/components/IssueList/ListItem/type';
-import Label from '@/components/Label';
-import UserProfile from '@/components/UserProfile';
+import Label from '@/components/common/Label';
+import UserProfile from '@/components/common/UserProfile';
 
 export default function ListItem({
   title,

@@ -1,4 +1,4 @@
-import Logo from '@/components/Logo';
+import Logo from '@/components/common/Logo';
 import Layout from '@/layout';
 import { $Contents } from '@/pages/NotFound/style';
 import { Link, Outlet } from 'react-router-dom';

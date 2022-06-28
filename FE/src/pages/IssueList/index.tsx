@@ -1,10 +1,10 @@
-import Button from '@/components/Button';
-import FilterBar from '@/components/FilterBar';
+import Button from '@/components/common/Button';
+import FilterBar from '@/components/IssueList/FilterBar';
 import Header from '@/components/Header';
-import { Icon } from '@/components/Icon';
+import { Icon } from '@/components/common/Icon';
 import IssueList from '@/components/IssueList';
-import Tabs from '@/components/Tabs';
-import { listItem } from '@/components/Tabs/type';
+import Tabs from '@/components/common/Tabs';
+import { listItem } from '@/components/common/Tabs/type';
 import Layout from '@/layout';
 import { $MenuWrapper, $ButtonWrapper } from '@/pages/IssueList/style';
 
