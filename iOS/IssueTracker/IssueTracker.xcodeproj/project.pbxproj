@@ -31,6 +31,7 @@
 		02751A2A2869FB4200C712FF /* LabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A292869FB4200C712FF /* LabelTableView.swift */; };
 		02751A2C2869FCE900C712FF /* LabelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A2B2869FCE900C712FF /* LabelTableCell.swift */; };
 		02751A2F2869FF7800C712FF /* LabelTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A2E2869FF7800C712FF /* LabelTableDataSource.swift */; };
+		02751A36286A8B7000C712FF /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A35286A8B7000C712FF /* LabelViewModel.swift */; };
 		02751A39286A956E00C712FF /* labelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A38286A956E00C712FF /* labelManager.swift */; };
 		02751A3B286A95E500C712FF /* LabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A3A286A95E500C712FF /* LabelItem.swift */; };
 		02751A3D286A971200C712FF /* LabelNetworkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02751A3C286A971200C712FF /* LabelNetworkTarget.swift */; };
@@ -139,6 +140,7 @@
 		02751A292869FB4200C712FF /* LabelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableView.swift; sourceTree = "<group>"; };
 		02751A2B2869FCE900C712FF /* LabelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableCell.swift; sourceTree = "<group>"; };
 		02751A2E2869FF7800C712FF /* LabelTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableDataSource.swift; sourceTree = "<group>"; };
+		02751A35286A8B7000C712FF /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
 		02751A38286A956E00C712FF /* labelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = labelManager.swift; sourceTree = "<group>"; };
 		02751A3A286A95E500C712FF /* LabelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelItem.swift; sourceTree = "<group>"; };
 		02751A3C286A971200C712FF /* LabelNetworkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNetworkTarget.swift; sourceTree = "<group>"; };
@@ -361,6 +363,14 @@
 			path = LabelViewComponents;
 			sourceTree = "<group>";
 		};
+		02751A37286A8B7500C712FF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				02751A35286A8B7000C712FF /* LabelViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		027C7E8B285AF6C700A5175B /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +385,7 @@
 			children = (
 				02751A302869FF7D00C712FF /* Model */,
 				02751A2D2869FF5D00C712FF /* View */,
+				02751A37286A8B7500C712FF /* ViewModel */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -821,6 +832,7 @@
 				0290D0F628645BD100A4E3A7 /* EditingIssueManager.swift in Sources */,
 				02751A2C2869FCE900C712FF /* LabelTableCell.swift in Sources */,
 				027C7E86285A42B900A5175B /* SignInNetworkTarget.swift in Sources */,
+				02751A36286A8B7000C712FF /* LabelViewModel.swift in Sources */,
 				0290D0E92863F75600A4E3A7 /* UIStackView+Extension.swift in Sources */,
 				5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */,
 				027C7E9D285B954700A5175B /* SignInViewModel.swift in Sources */,

@@ -9,15 +9,14 @@ import UIKit
 
 final class LabelTableDataSource: NSObject, UITableViewDataSource {
 
-    // 임시로 가지고 있는 데이터입니다.
-    let data = [
-        LabelItem(title: "레이블 이름", description: "레이블에 대한 설명", backgroundColor: "#87878D"),
-        LabelItem(title: "레이블 이름", description: "레이블에 대한 설명", backgroundColor: "#87878D"),
-        LabelItem(title: "레이블 이름", description: "레이블에 대한 설명", backgroundColor: "#87878D")
-    ]
+    var data: Observable<[LabelItem]> = Observable([])
+
+    init(labelItemData: Observable<[LabelItem]>) {
+        data = labelItemData
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        data.value.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -28,16 +27,10 @@ final class LabelTableDataSource: NSObject, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let labelEntity = data[indexPath.item]
+        let labelEntity = data.value[indexPath.item]
 
         cell.configure(with: labelEntity)
 
         return cell
     }
-}
-
-struct LabelItem {
-    let title: String
-    let description: String
-    let backgroundColor: String
 }

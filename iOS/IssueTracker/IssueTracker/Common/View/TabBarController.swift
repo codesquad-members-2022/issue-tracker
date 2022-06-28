@@ -20,7 +20,7 @@ private extension TabBarController {
     
     func setTabBarItems() {
         let issueViewController = IssueViewController(issueViewModel: IssueViewModel(issueManager: IssueManager()))
-        let labelViewController = LabelViewController()
+        let labelViewController = LabelViewController(viewModel: LabelViewModel(labelManager: LabelManager()))
         let milestoneViewController = MilestoneViewController()
         let myAccountViewController = MyAccountViewController()
         let issueNavigationViewController = UINavigationController(rootViewController: issueViewController)
