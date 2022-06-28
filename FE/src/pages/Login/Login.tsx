@@ -4,29 +4,7 @@ import * as S from './Login.styled';
 
 const URI = 'http://louie-03.com/login';
 
-<<<<<<< HEAD
 export function Login() {
-=======
-export function Login(): JSX.Element {
-  // const URI = 'http://louie-03.com/login';
-
-  useEffect(() => {
-    const getToken = async () => {
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        // eslint-disable-next-line no-console
-        console.log('ssss', data.access_token);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log('???????error???????');
-        // eslint-disable-next-line no-console
-        console.log(error);
-      }
-    };
-    getToken();
-  });
->>>>>>> 303eefab (refactor : 배포 에러 수정)
   return (
     <S.Container>
       <S.Wrapper>

@@ -14,7 +14,7 @@ import Callback from 'pages/Callback';
 
 import { worker } from './mocks/browser';
 
-worker.start();
+// worker.start();
 
 function App(): JSX.Element {
   return (
