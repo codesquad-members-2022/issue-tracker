@@ -23,4 +23,6 @@
     <string name="detail_edit">편집하기</string>
     <string name="issue_open">열림</string>
     <string name="issue_close">닫힘</string>
+    <string name="detail_menu_edit">수정하기</string>
+    <string name="detail_menu_delete">삭제하기</string>
 </resources>

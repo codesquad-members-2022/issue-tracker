@@ -1,28 +1,67 @@
 package com.example.it.issuetracker.presentation.main.issue.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentDetailBinding
 import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
+import com.example.it.issuetracker.presentation.main.issue.list.IssueViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
 
+    private var id: Long = -1
     private val viewModel by sharedViewModel<DetailViewModel>()
-    private val adapter = CommentAdapter()
+    private val issueViewModel by viewModel<IssueViewModel>()
+    private val adapter = CommentAdapter { view, uid ->
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.like -> {
+                    issueViewModel.addLike(id, uid)
+                }
+                R.id.best -> {
+                    issueViewModel.addBest(id, uid)
+                }
+                R.id.hate -> {
+                    issueViewModel.addHate(id, uid)
+                }
+                R.id.ok -> {
+                    issueViewModel.addOk(id, uid)
+                }
+            }
+            viewModel.getIssueDetail(id)
+            true
+        }
+        popupMenu.inflate(R.menu.comment_menu)
+        try {
+            val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
+            fieldMPopup.isAccessible = true
+            val mPopup = fieldMPopup.get(popupMenu)
+            mPopup.javaClass
+                .getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                .invoke(mPopup, true)
+        } catch (e: Exception) {
+
+        } finally {
+            popupMenu.show()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         val bundle = arguments
         if (bundle != null) {
-            viewModel.getIssueDetail(bundle.getLong("id"))
+            id = bundle.getLong("id")
+            viewModel.getIssueDetail(id)
         }
         initView()
         observerData()
@@ -30,18 +69,53 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     override fun initView() = with(binding) {
         ivOption.setOnClickListener {
-            val bottomSheet = BottomSheetMenu()
-            val bundle = Bundle()
+            val bottomSheet = BottomSheetMenu(
+                onDeleteClick = {
+                    issueViewModel.deleteIssue(id)
+                    parentFragmentManager.popBackStack()
+                },
+                onCloseClick = {
+                    issueViewModel.closeIssue(id)
+                    viewModel.getIssueDetail(id)
+                }
+            )
             bottomSheet.show(parentFragmentManager, "detail_information")
-
         }
         toolbarDefaultIssue.setNavigationOnClickListener {
-            parentFragmentManager.popBackStack(
-                "search_issue",
-                FragmentManager.POP_BACK_STACK_INCLUSIVE
-            )
+            val count = parentFragmentManager.backStackEntryCount
+            if (count - 2 >= 0) {
+                val backStackEntryAt = parentFragmentManager.getBackStackEntryAt(count - 2)
+                if (backStackEntryAt.name == "search_issue") {
+                    parentFragmentManager.popBackStack(
+                        "search_issue",
+                        FragmentManager.POP_BACK_STACK_INCLUSIVE
+                    )
+                }
+            } else {
+                parentFragmentManager.popBackStack()
+            }
         }
         rvComment.adapter = adapter
+
+        viewWriter.btnOption.setOnClickListener {
+            val popup = PopupMenu(requireContext(), it)
+            popup.menuInflater.inflate(R.menu.detail_menu, popup.menu)
+            popup.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.edit -> {
+                        Toast.makeText(requireContext(), "수정하기 눌렀습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.delete -> {
+                        issueViewModel.deleteIssue(id)
+                        parentFragmentManager.popBackStack()
+                    }
+                }
+                false
+            }
+            popup.show()
+        }
+
+
     }
 
     override fun observerData() {
@@ -71,15 +145,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         binding.tvSearchResult.isVisible = false
         binding.issue = state.issue
         adapter.submitList(state.issue.comments)
-        Log.d("test", "handlerSuccess 1 ${state.issue.issueStatus}")
         when (state.issue.issueStatus) {
             context?.getString(R.string.issue_open_eng) -> {
-                Log.d("test", "handlerSuccess 2")
                 binding.chipOpenIssue.isVisible = true
                 binding.chipCloseIssue.isVisible = false
             }
             context?.getString(R.string.issue_close_eng) -> {
-                Log.d("test", "handlerSuccess 3")
                 binding.chipOpenIssue.isVisible = false
                 binding.chipCloseIssue.isVisible = true
             }

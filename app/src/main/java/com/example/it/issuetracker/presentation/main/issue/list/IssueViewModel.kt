@@ -86,6 +86,10 @@ class IssueViewModel(
         }
     }
 
+    fun deleteIssue(id: Long) = viewModelScope.launch {
+        issueRepository.deleteIssue(id)
+    }
+
     fun closeIssue() = viewModelScope.launch {
         when (_uiState.value) {
             is IssueUiState.GetIssues -> {
@@ -108,6 +112,10 @@ class IssueViewModel(
         }
     }
 
+    fun closeIssue(id: Long) = viewModelScope.launch {
+        issueRepository.closeIssue(id)
+    }
+
     private fun isCheckEmpty(filterList: List<Issue>): Boolean {
         if (filterList.isEmpty()) {
             updateDefaultViewType()
@@ -127,5 +135,21 @@ class IssueViewModel(
             return
         }
         _uiState.update { IssueUiState.GetIssues(value) }
+    }
+
+    fun addLike(id: Long, uid: Long) = viewModelScope.launch {
+        issueRepository.addLike(id, uid)
+    }
+
+    fun addBest(id: Long, uid: Long) = viewModelScope.launch {
+        issueRepository.addBest(id, uid)
+    }
+
+    fun addHate(id: Long, uid: Long) = viewModelScope.launch {
+        issueRepository.addHate(id, uid)
+    }
+
+    fun addOk(id: Long, uid: Long) = viewModelScope.launch {
+        issueRepository.addOk(id, uid)
     }
 }

@@ -12,11 +12,17 @@ interface IssueTrackerDataSource {
 
     suspend fun getIssue(): Result<List<IssueDto>>
     suspend fun deleteIssue(list: List<Issue>): Result<List<IssueDto>>
+    suspend fun deleteIssue(id: Long)
     suspend fun closeIssue(list: List<Issue>): Result<List<IssueDto>>
+    suspend fun closeIssue(id: Long)
     suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<IssueDto>>
     suspend fun getMember(): Result<List<MemberDto>>
     suspend fun getMilestone(): Result<List<MilestoneDto>>
     suspend fun getFilterList(value: HashMap<String, Any>): Result<List<IssueDto>>
     fun findByIssueName(title: String): Flow<List<IssueDto>>
     fun getIssueDetail(id: Long): Flow<IssueDetailDto>
+    suspend fun addLike(id: Long, uid: Long)
+    suspend fun addBest(id: Long, uid: Long)
+    suspend fun addHate(id: Long, uid: Long)
+    suspend fun addOk(id: Long, uid: Long)
 }

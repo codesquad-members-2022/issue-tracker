@@ -2,7 +2,6 @@ package com.example.it.issuetracker.data.datasource
 
 import com.example.it.issuetracker.data.dto.AddMilestoneDto
 import com.example.it.issuetracker.data.dto.MilestoneDto
-import kotlinx.coroutines.flow.Flow
 
 interface MilestoneDataSource {
 

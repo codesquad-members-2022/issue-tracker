@@ -30,10 +30,18 @@ class IssueTrackerRepositoryImpl(
         }
     }
 
+    override suspend fun deleteIssue(id: Long) {
+        issueTrackerDataSource.deleteIssue(id)
+    }
+
     override suspend fun closeIssue(list: List<Issue>): Result<List<Issue>> {
         return issueTrackerDataSource.closeIssue(list).map { issues ->
             issues.map { issue -> issue.toIssue() }
         }
+    }
+
+    override suspend fun closeIssue(id: Long) {
+        issueTrackerDataSource.closeIssue(id)
     }
 
     override suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<Issue>> {
@@ -70,5 +78,21 @@ class IssueTrackerRepositoryImpl(
         return issueTrackerDataSource.getIssueDetail(id).map { issueDetail ->
             issueDetail.toIssueDetail()
         }
+    }
+
+    override suspend fun addLike(id: Long, uid: Long) {
+        issueTrackerDataSource.addLike(id, uid)
+    }
+
+    override suspend fun addBest(id: Long, uid: Long) {
+        issueTrackerDataSource.addBest(id, uid)
+    }
+
+    override suspend fun addHate(id: Long, uid: Long) {
+        issueTrackerDataSource.addHate(id, uid)
+    }
+
+    override suspend fun addOk(id: Long, uid: Long) {
+        issueTrackerDataSource.addOk(id, uid)
     }
 }

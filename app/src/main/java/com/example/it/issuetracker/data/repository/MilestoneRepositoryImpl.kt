@@ -4,7 +4,6 @@ import com.example.it.issuetracker.data.datasource.MilestoneDataSource
 import com.example.it.issuetracker.data.dto.AddMilestoneDto
 import com.example.it.issuetracker.data.dto.MilestoneDto
 import com.example.it.issuetracker.domain.repository.MilestoneRepository
-import kotlinx.coroutines.flow.Flow
 
 class MilestoneRepositoryImpl(
     private val dataSource: MilestoneDataSource,

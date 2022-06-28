@@ -58,6 +58,165 @@
             app:layout_constraintTop_toBottomOf="@id/tv_created"
             tools:text="마크다운이 어떻게 보여지는지 확인합니다." />
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_profile"
+            app:layout_constraintTop_toBottomOf="@id/tv_description">
+
+            <LinearLayout
+                android:id="@+id/layout_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_like"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/like" />
+
+                <TextView
+                    android:id="@+id/tv_like"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="좋아!"
+                    android:textColor="@color/black"
+                    tools:text="좋아!" />
+
+                <TextView
+                    android:id="@+id/tv_like_count"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/shape_gray_background_circle"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@{String.valueOf(comment.like)}"
+                    android:textColor="@color/black"
+                    tools:text="5" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_best"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_best"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/best" />
+
+                <TextView
+                    android:id="@+id/tv_best"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="최고!"
+                    android:textColor="@color/black"
+                    tools:text="최고!" />
+
+                <TextView
+                    android:id="@+id/tv_best_count"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/shape_gray_background_circle"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@{String.valueOf(comment.best)}"
+                    android:textColor="@color/black"
+                    tools:text="5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_hate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_hate"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/hate" />
+
+                <TextView
+                    android:id="@+id/tv_hate"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="싫어!"
+                    android:textColor="@color/black"
+                    tools:text="싫어!" />
+
+                <TextView
+                    android:id="@+id/tv_hate_count"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/shape_gray_background_circle"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@{String.valueOf(comment.hate)}"
+                    android:textColor="@color/black"
+                    tools:text="5" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_ok"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ok" />
+
+                <TextView
+                    android:id="@+id/tv_ok"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="확인!"
+                    android:textColor="@color/black"
+                    tools:text="확인!" />
+
+                <TextView
+                    android:id="@+id/tv_ok_count"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/shape_gray_background_circle"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@{String.valueOf(comment.ok)}"
+                    android:textColor="@color/black"
+                    tools:text="5" />
+            </LinearLayout>
+        </LinearLayout>
+
         <ImageButton
             android:id="@+id/btn_option"
             android:layout_width="20dp"

@@ -53,6 +53,20 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             createdTime = "2022-05-21",
             milestoneId = 1,
             memberId = 1
+        ),
+        IssueDto(
+            id = 5,
+            title = "제목쓰",
+            description = "안녕하세요. 제목쓰에 대한 설명입니다.",
+            state = true,
+            label = listOf(LabelFakeDatabase.database[0], LabelFakeDatabase.database[1]),
+            mileStone = MileStone(id = 4,
+                title = "마스터즈 코스 숫자",
+                deadLine = "2022-06-20",
+                description = ""),
+            createdTime = "2022-05-06 09:11:23",
+            milestoneId = 1,
+            memberId = 1
         )
     )
 
@@ -111,10 +125,10 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         )
     )
 
-    private val issueDetail = IssueDetailDto(
-        id = 1,
+    private var issueDetail = IssueDetailDto(
+        id = 5,
         title = "제목쓰",
-        issueStatus = "close",
+        issueStatus = "open",
         writer = "stitch",
         manager = "wooki",
         description = "안녕하세요. 제목쓰에 대한 설명입니다.",
@@ -124,11 +138,32 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             title = "마스터즈 코스 숫자",
             deadline = "2022-06-20",
             description = "")),
-        comments = listOf(CommentDto(id = "Daniel",
-            imageUrl = "",
-            content = "내용",
-            createDate = "2022-05-06 12:13:13",
-            reaction = 1))
+        comments = listOf(
+            CommentDto(
+                uid = 1L,
+                id = "Daniel",
+                imageUrl = "",
+                content = "내용",
+                createDate = "2022-05-06 12:13:13",
+                reaction = 1,
+                like = 1,
+                hate = 0,
+                best = 4,
+                ok = 0
+            ),
+            CommentDto(
+                uid = 2L,
+                id = "Stitch",
+                imageUrl = "",
+                content = "happy day",
+                createDate = "2022-05-06 12:13:13",
+                reaction = 1,
+                like = 4,
+                hate = 2,
+                best = 0,
+                ok = 2
+            )
+        )
     )
 
     override suspend fun getIssue(): Result<List<IssueDto>> {
@@ -143,6 +178,11 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         return getIssue()
     }
 
+    override suspend fun deleteIssue(id: Long) {
+        val issue = issues.find { it.id == id }
+        issues.remove(issue)
+    }
+
     override suspend fun closeIssue(list: List<Issue>): Result<List<IssueDto>> {
         list.forEach { issue ->
             val closeIssue = issues.find { it.id == issue.id }
@@ -150,6 +190,13 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             issues[index].state = false
         }
         return getIssue()
+    }
+
+    override suspend fun closeIssue(id: Long) {
+        val issue = issues.find { it.id == id }
+        val index = issues.indexOf(issue)
+        issueDetail.issueStatus = "close"
+        issues[index].state = false
     }
 
     override suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<IssueDto>> {
@@ -223,5 +270,49 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
 
     override fun getIssueDetail(id: Long): Flow<IssueDetailDto> = flow {
         emit(issueDetail)
+    }
+
+    override suspend fun addLike(id: Long, uid: Long) {
+        val map = issueDetail.comments.map {
+            if (it.uid == uid) {
+                it.copy(like = it.like + 1)
+            } else {
+                it
+            }
+        }
+        issueDetail = issueDetail.copy(comments = map)
+    }
+
+    override suspend fun addBest(id: Long, uid: Long) {
+        val map = issueDetail.comments.map {
+            if (it.uid == uid) {
+                it.copy(best = it.best + 1)
+            } else {
+                it
+            }
+        }
+        issueDetail = issueDetail.copy(comments = map)
+    }
+
+    override suspend fun addHate(id: Long, uid: Long) {
+        val map = issueDetail.comments.map {
+            if (it.uid == uid) {
+                it.copy(hate = it.hate + 1)
+            } else {
+                it
+            }
+        }
+        issueDetail = issueDetail.copy(comments = map)
+    }
+
+    override suspend fun addOk(id: Long, uid: Long) {
+        val map = issueDetail.comments.map {
+            if (it.uid == uid) {
+                it.copy(ok = it.ok + 1)
+            } else {
+                it
+            }
+        }
+        issueDetail = issueDetail.copy(comments = map)
     }
 }

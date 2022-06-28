@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class MyPageViewModel(
     private val sharedPref: UserSharedPrefDataSource,
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(MyPageUiState())

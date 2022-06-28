@@ -12,7 +12,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class BottomSheetMenu : BottomSheetDialogFragment() {
+class BottomSheetMenu(
+    private val onDeleteClick: () -> Unit,
+    private val onCloseClick: () -> Unit,
+) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentBottomSheetMenuBinding
     private val viewModel by sharedViewModel<DetailViewModel>()
@@ -37,8 +40,14 @@ class BottomSheetMenu : BottomSheetDialogFragment() {
         btnClose.setOnClickListener { dismiss() }
         rvLabel.adapter = labelAdapter
         rvMilestone.adapter = milestoneAdapter
-        btnIssueClose.setOnClickListener { }
-        btnIssueDelete.setOnClickListener { }
+        btnIssueClose.setOnClickListener {
+            onCloseClick()
+            dismiss()
+        }
+        btnIssueDelete.setOnClickListener {
+            onDeleteClick()
+            dismiss()
+        }
     }
 
     private fun observerData() {

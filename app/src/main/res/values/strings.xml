@@ -61,6 +61,8 @@
     <string name="issue_close">닫힘</string>
     <string name="issue_open_eng">open</string>
     <string name="issue_close_eng">close</string>
+    <string name="detail_menu_edit">수정하기</string>
+    <string name="detail_menu_delete">삭제하기</string>
 
     <!-- network error message -->
     <string name="network_error">서버와 통신할 수 없습니다.</string>
