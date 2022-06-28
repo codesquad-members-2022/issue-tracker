@@ -32,10 +32,11 @@ function IssueHeader({
   ).length;
 
   const setAllIssuesState = (state: boolean) => {
-    Object.keys(selectedIssues).forEach((id) => {
-      selectedIssues[id] = state;
+    const updatedSelectedIssues = { ...selectedIssues };
+    Object.keys(updatedSelectedIssues).forEach((id) => {
+      updatedSelectedIssues[id] = state;
     });
-    setSelectedIssues({ ...selectedIssues });
+    return setSelectedIssues({ ...updatedSelectedIssues });
   };
 
   const handleClick = () => {
@@ -51,11 +52,11 @@ function IssueHeader({
   return (
     <IssueHeaderBox>
       <CheckBox checkBoxType={headerCheckBoxType} onClick={handleClick} />
-      {selectedIssuesCount ? (
+      {!!selectedIssuesCount ? (
         <>
-          <SelectedIssuesCount>
+          <SelectedIssuesCountBox>
             {selectedIssuesCount}개 이슈 선택
-          </SelectedIssuesCount>
+          </SelectedIssuesCountBox>
           <IssueTabs>
             <IssueTab tabName="상태 수정" />
           </IssueTabs>
@@ -106,7 +107,7 @@ const IssueMenus = styled.ul`
   gap: 24px;
 `;
 
-const SelectedIssuesCount = styled.p`
+const SelectedIssuesCountBox = styled.p`
   ${({ theme }) => theme.TYPOGRAPHY.LINK_SMALL}
   color: ${GREYSCALE.LABEL};
 `;

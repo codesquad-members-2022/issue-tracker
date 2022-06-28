@@ -25,7 +25,7 @@ type IssueType = {
 
 export type SelectedIssueType = {
   [key: string]: boolean;
-} | null;
+};
 
 type IssueListType = {
   labelCount: number;
@@ -43,7 +43,7 @@ function IssueList() {
   const [headerCheckBoxType, setHeaderCheckBoxType] =
     useState<CheckBoxType>('initial');
   const [issueList, setIssueList] = useState<IssueListType>(null);
-  const [selectedIssues, setSelectedIssues] = useState<SelectedIssueType>(null);
+  const [selectedIssues, setSelectedIssues] = useState<SelectedIssueType>({});
 
   useEffect(() => {
     fetch(`/issues?status=${issueListState}`)
@@ -64,14 +64,11 @@ function IssueList() {
     return initialSelectedIssue;
   };
 
-  const updateIssueState = (id: string) => {
-    if (!selectedIssues) return;
-    selectedIssues[id] = !selectedIssues[id];
-    setSelectedIssues({ ...selectedIssues });
-
+  const updateHeaderCheckBoxType = (selectedIssues: SelectedIssueType) => {
     const selectedIssuesCount = Object.values(selectedIssues).filter(
       (isSelected) => isSelected
     ).length;
+
     if (selectedIssuesCount === Object.keys(selectedIssues).length) {
       setHeaderCheckBoxType('active');
     } else if (selectedIssuesCount) {
@@ -79,6 +76,14 @@ function IssueList() {
     } else {
       setHeaderCheckBoxType('initial');
     }
+  };
+
+  const updateIssueState = (id: string) => {
+    const updatedIssues: SelectedIssueType = { ...selectedIssues };
+    updatedIssues[id] = !selectedIssues[id];
+    setSelectedIssues({ ...updatedIssues });
+
+    updateHeaderCheckBoxType(updatedIssues);
   };
 
   if (!issueList) {
