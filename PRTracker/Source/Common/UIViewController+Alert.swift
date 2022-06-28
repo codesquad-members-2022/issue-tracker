@@ -5,8 +5,21 @@
 //  Created by Bumgeun Song on 2022/06/23.
 //
 
-import Foundation
 import UIKit
+
+extension UIViewController {
+    func alert(title: String,
+               message: String,
+               okTitle: String,
+               handler: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: okTitle, style: .default, handler: handler)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+}
 
 extension UIAlertController {
     static func makeAlert(_ alertProvider: AlertConfiguration) -> UIAlertController {

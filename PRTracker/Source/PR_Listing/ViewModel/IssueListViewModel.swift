@@ -47,10 +47,10 @@ final class IssueListViewModel {
         return issueViewModels.value?[index]
     }
     
-    func close(at index: Int, completion: @escaping () -> Void) {
+    func close(at index: Int, completion: @escaping (Bool) -> Void) {
         issueService.closeIssue(at: index) {
             self.issueViewModels.value?.remove(at: index)
-            completion()
+            completion(true)
         }
     }
 }
