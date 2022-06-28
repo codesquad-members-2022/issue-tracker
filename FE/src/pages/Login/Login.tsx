@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import axios from 'axios';
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
