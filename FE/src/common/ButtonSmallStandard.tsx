@@ -5,13 +5,13 @@ import Icon from '@/assets/icons/Icon';
 type ButtonSmallStandardProps = {
   isDisabled: boolean;
   label: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 function ButtonSmallStandard({
   isDisabled,
   label,
-  onClick,
+  onClick
 }: ButtonSmallStandardProps) {
   const Box = isDisabled ? ButtonBoxDisabled : ButtonBoxAbled;
 
