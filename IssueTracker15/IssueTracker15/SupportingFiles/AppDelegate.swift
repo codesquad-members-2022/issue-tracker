@@ -16,8 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // UseCase 등록
     func registUseCaseDependencies() {
-        UseCaseContainer.shard.regist(instance: GithubLoginUseCase(model: GitHubLoginModel()))
-        UseCaseContainer.shard.regist(instance: AppleLoginUseCase(model: AppleLoginModel()))
+        UseCaseContainer.shared.regist(type: GithubLoginUseCase.self) {
+            return GithubLoginUseCase(model: GitHubLoginModel())
+        }
+//        UseCaseContainer.shard.regist(instance: AppleLoginUseCase(model: AppleLoginModel()))
     }
 }
 

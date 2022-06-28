@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-class PersistentService<T: NSData> {
-    func requestFromUseCase(type: ServiceType) -> AnyPublisher<T, Error>? {
-        return nil
-    }
-}
+//class PersistentService<T: NSData> {
+//    func requestFromUseCase(type: ServiceType) -> AnyPublisher<T, Error>? {
+//        return nil
+//    }
+//}

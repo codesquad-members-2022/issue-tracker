@@ -8,6 +8,14 @@
 protocol Resolvable {
     associatedtype Value
     
-    func regist<T>(instance: T)
-    func resolve<T>(type: T.Type) -> Value?
+    func regist<T>(type: T.Type, make: @escaping () -> Value)
+    func resolve<T>(type: T.Type) -> (() -> Value)?
+}
+
+extension Resolvable where Value == UseCaseResponsible {
+    func regist<T: UseCaseResponsible>(type: T.Type, make: @escaping () -> Value) { }
+    
+    func resolve<T: UseCaseResponsible>(type: T.Type) -> (() -> Value)? {
+        return nil
+    }
 }
