@@ -73,19 +73,29 @@ private extension EditingIssueViewController {
         viewModel.cancelButtonState.bind(on: self) { [weak self] _ in
             self?.popViewController()
         }
+        viewModel.saveButtonState.bind(on: self) { [weak self] isSaved in
+            if isSaved { self?.popViewController() }
+        }
         viewModel.segmentIndex.bind(on: self) { [weak self] selectedIndex in
             self?.didSegmentValueChanged(selectedIndex)
+        }
+        viewModel.error.bind(on: self) { [weak self] errorDescription in
+            self?.showAlert(of: errorDescription)
         }
 
         navigationItems.selectContentViewSegment.addAction(UIAction { [weak self] _ in
             guard let self = self else { return }
 
             let selectedIndex = self.navigationItems.selectContentViewSegment.selectedSegmentIndex
-            self.viewModel.didChangeSegmentValue(index: selectedIndex)
+            viewModel.didChangeSegmentValue(index: selectedIndex)
         }, for: .valueChanged)
 
-        navigationItems.cancelButton.addAction(UIAction { [weak self] _ in
-            self?.viewModel.didTouchCancel()
+        navigationItems.cancelButton.addAction(UIAction { _ in
+            viewModel.didTouchCancel()
+        }, for: .touchUpInside)
+
+        navigationItems.saveButton.addAction(UIAction { _ in
+            viewModel.didTouchSave()
         }, for: .touchUpInside)
     }
 
@@ -119,7 +129,18 @@ private extension EditingIssueViewController {
     }
 
     func popViewController() {
-        self.navigationController?.popViewController(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+
+    func showAlert(of errorMessage: String) {
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: "save 버튼을 다시 눌러주세요.", message: errorMessage, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .cancel)
+            alert.addAction(alertAction)
+            self?.present(alert, animated: true)
+        }
     }
 
     func setObserver() {

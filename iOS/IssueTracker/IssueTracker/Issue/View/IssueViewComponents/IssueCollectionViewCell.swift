@@ -13,7 +13,7 @@ final class IssueCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews(title, issueDescription, milestoneImage, milestoneName, labelName)
+        addSubviews(title, issueDescription, milestoneImage, milestoneName, labelStack)
     }
     
     @available(*, unavailable)
@@ -48,22 +48,25 @@ final class IssueCollectionViewCell: UICollectionViewCell {
         milestoneName.translatesAutoresizingMaskIntoConstraints = false
         return milestoneName
     }()
-    
-    private let labelName: PaddingLabel = {
-        let labelName = PaddingLabel()
-        labelName.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-        labelName.setEdgeInset(top: 4, bottom: 4, left: 16, right: 16)
-        labelName.clipsToBounds = true
-        labelName.translatesAutoresizingMaskIntoConstraints = false
-        return labelName
+
+    private let labelStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        return stackView
     }()
     
-    func configure(with items: IssueItem) {
-        self.title.text = items.title
-        self.issueDescription.text = items.content
-        self.milestoneName.text = items.milestoneName
-        self.labelName.text = items.labels[0].title
-        self.labelName.backgroundColor = UIColor.init(hex: items.labels[0].backgroundColor)
+    func configure(with viewModel: IssueItem) {
+        self.title.text = viewModel.title
+        self.issueDescription.text = viewModel.content
+        self.milestoneName.text = viewModel.milestoneName
+
+        viewModel.labels.forEach { label in
+            let newLabel = LabelFactory.createLabel(label)
+            labelStack.addArrangedSubview(newLabel)
+            newLabel.layer.cornerRadius = 15
+        }
     }
     
     override func layoutSubviews() {
@@ -91,13 +94,10 @@ final class IssueCollectionViewCell: UICollectionViewCell {
             make.trailing.lessThanOrEqualTo(-16)
         }
         
-        labelName.snp.makeConstraints { make in
+        labelStack.snp.makeConstraints { make in
             make.top.equalTo(milestoneImage.snp.bottom).offset(16)
             make.leading.equalTo(title)
             make.bottom.lessThanOrEqualTo(-24)
         }
-
-        labelName.layer.cornerRadius = labelName.frame.height/2
     }
-    
 }

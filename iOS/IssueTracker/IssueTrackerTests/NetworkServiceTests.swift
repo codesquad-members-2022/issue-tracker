@@ -25,7 +25,7 @@ class NetworkServiceTests: XCTestCase {
             case .success(let dataString):
                 XCTAssertEqual(dataString, "TestString")
                 promise.fulfill()
-            case .failure(let error):
+            case .failure:
                 return
             }
         }
@@ -47,6 +47,10 @@ private extension NetworkServiceTests {
         }
 
         var method: String? {
+            return nil
+        }
+
+        var body: Data? {
             return nil
         }
     }

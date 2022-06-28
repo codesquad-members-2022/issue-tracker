@@ -20,29 +20,17 @@ class SignInViewModelTests: XCTestCase {
         sut = nil
     }
 
-    func test_didSelect호출시_설정된URL이_잘호출되는지() {
+    func test_didTouchGitHubSignIn호출시_설정된URL이_잘호출되는지() {
         var testString = ""
 
-        sut.setOpenURLAction { url in
+        sut.gitHubSignInURL.bind(on: self) { url in
+            guard let url = url else { return }
             testString = url.description
         }
 
-        sut.didSelect()
+        sut.didTouchGitHubSignIn()
 
         XCTAssertEqual(testString, "https://example.com")
-    }
-
-    func test_setOpenURLAction로_openURLAction설정시_잘설정되는지() {
-        var testString2 = ""
-        let confirmationString = "Test Completed"
-
-        sut.setOpenURLAction({ _ in
-            testString2 = confirmationString
-        })
-
-        sut.didSelect()
-
-        XCTAssertEqual(testString2, confirmationString)
     }
 }
 
@@ -52,4 +40,6 @@ struct MockSignInManager: SignInManagable {
     }
 
     func requestJWTToken(codeURL: URL, completion: @escaping (Result<StringDictionary, NetworkError>) -> Void) { }
+
+    mutating func setURLSession(_ session: URLSessionProtocol) { }
 }

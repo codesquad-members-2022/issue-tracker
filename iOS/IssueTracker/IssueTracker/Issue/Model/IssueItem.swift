@@ -7,15 +7,27 @@
 
 import Foundation
 
-struct IssueItem {
+// MARK: - WelcomeElement
+struct IssueItem: Codable {
     let id: Int
-    let title, content: String
-    let milestoneName: String
+    let title, content, milestoneName: String
     let labels: [Label]
     
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title, content
+        case milestoneName = "milestoneTitle"
+        case labels
+    }
 }
 
-struct Label {
-    let title: String
-    let backgroundColor: String
+// MARK: - Label
+struct Label: Codable {
+    let title, backgroundColor: String
+    let darkMode: Bool
+    
+    enum LabelCodingKeys: String, CodingKey {
+        case title, backgroundColor
+        case darkMode = "isDarkMode"
+    }
 }
