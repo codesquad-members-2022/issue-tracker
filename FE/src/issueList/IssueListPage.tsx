@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LinkTabs from '@/issueList/LinkTabs';
 import IssueList from './IssueList';
+import IssueListProvider from './IssueListProvider';
 
 function IssueListPage() {
   return (
@@ -15,7 +16,9 @@ function IssueListPage() {
           <ButtonSmallStandard isDisabled={false} label="이슈 작성" />
         </Link>
       </Wrap>
-      <IssueList />
+      <IssueListProvider>
+        <IssueList />
+      </IssueListProvider>
     </>
   );
 }

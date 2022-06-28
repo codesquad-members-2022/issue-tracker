@@ -2,7 +2,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import worker from './mocks/browser';
 import App from './App';
+
+if (process.env.NODE_ENV === 'development') {
+  worker.start();
+}
 
 const queryClient = new QueryClient();
 
@@ -15,5 +20,5 @@ root.render(
       <ReactQueryDevtools initialIsOpen />
       <App />
     </QueryClientProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
