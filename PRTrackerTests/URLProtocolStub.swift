@@ -29,6 +29,8 @@ final class URLProtocolStub: URLProtocol {
         if let data = data {
             self.client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             self.client?.urlProtocol(self, didLoad: data)
+        } else {
+            Log.error("Failed to respond mock data")
         }
         self.client?.urlProtocolDidFinishLoading(self)
     }
