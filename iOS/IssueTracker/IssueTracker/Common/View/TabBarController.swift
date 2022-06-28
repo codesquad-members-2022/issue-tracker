@@ -23,14 +23,15 @@ private extension TabBarController {
         let labelViewController = LabelViewController()
         let milestoneViewController = MilestoneViewController()
         let myAccountViewController = MyAccountViewController()
-        let navigationViewController = UINavigationController(rootViewController: issueViewController)
+        let issueNavigationViewController = UINavigationController(rootViewController: issueViewController)
+        let labelNavigationViewController = UINavigationController(rootViewController: labelViewController)
         
-        navigationViewController.tabBarItem = UITabBarItem(title: "이슈", image: UIImage(named: "alertcircle"), tag: 0)
+        issueNavigationViewController.tabBarItem = UITabBarItem(title: "이슈", image: UIImage(named: "alertcircle"), tag: 0)
         labelViewController.tabBarItem = UITabBarItem(title: "레이블", image: UIImage(named: "tag"), tag: 1)
         milestoneViewController.tabBarItem = UITabBarItem(title: "마일스톤", image: UIImage(named: "milestone"), tag: 2)
         myAccountViewController.tabBarItem = UITabBarItem(title: "내 계정", image: UIImage(named: "userImageSmall"), tag: 3)
         
-        self.viewControllers = [navigationViewController, labelViewController, milestoneViewController, myAccountViewController]
+        self.viewControllers = [issueNavigationViewController, labelNavigationViewController, milestoneViewController, myAccountViewController]
     }
     
     func setTabBarBackgroundColor() {
