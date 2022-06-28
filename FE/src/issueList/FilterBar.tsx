@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import DropDownPanel from '@/common/DropDownPanel';
 
 const filterCheckBoxItems = [
-  { id: 1, isChecked: true, label: '열린 이슈' },
-  { id: 2, isChecked: false, label: '내가 작성한 이슈' },
-  { id: 3, isChecked: false, label: '나에게 할당된 이슈' },
-  { id: 4, isChecked: false, label: '내가 댓글을 남긴 이슈' },
-  { id: 5, isChecked: false, label: '닫힌 이슈' }
+  { isChecked: true, label: '열린 이슈' },
+  { isChecked: false, label: '내가 작성한 이슈' },
+  { isChecked: false, label: '나에게 할당된 이슈' },
+  { isChecked: false, label: '내가 댓글을 남긴 이슈' },
+  { isChecked: false, label: '닫힌 이슈' }
 ];
 
 function FilterBar() {
