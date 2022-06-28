@@ -1,8 +1,19 @@
 import * as I from 'design/icons';
 import * as S from 'components/common/Sidebar/styled/dropdown';
+
 import { ReactNode, useState } from 'react';
-import { accountsData, labelsData, mileStonesData } from 'data';
+import { useRecoilState } from 'recoil';
+
+import {
+  accountsData,
+  AccountType,
+  labelsData,
+  LabelType,
+  mileStonesData,
+  MileStoneType,
+} from 'data';
 import { keyMaker } from 'utils/util';
+import { newIssueState } from 'context/newIssue';
 import Label from '../Common';
 
 type DropdownType = {
@@ -11,6 +22,73 @@ type DropdownType = {
 
 function DropDown({ subject }: DropdownType) {
   const [isClicked, setIsClicked] = useState(false);
+  const [newIssue, setNewIssue] = useRecoilState(newIssueState);
+
+  function setAssignee(content: AccountType) {
+    if (newIssue.assignees[0].name === '')
+      setNewIssue({
+        ...newIssue,
+        assignees: [
+          {
+            name: content.name,
+            profileImage: content.profileImage,
+            email: '',
+          },
+        ],
+      });
+    else {
+      setNewIssue({
+        ...newIssue,
+        assignees: [
+          ...newIssue.assignees,
+          {
+            name: content.name,
+            profileImage: content.profileImage,
+            email: '',
+          },
+        ],
+      });
+    }
+  }
+  function setLabels(content: LabelType) {
+    if (newIssue.labels[0].title === '')
+      setNewIssue({
+        ...newIssue,
+        labels: [
+          {
+            title: content.title,
+            description: content.description,
+            color: content.color,
+          },
+        ],
+      });
+    else {
+      setNewIssue({
+        ...newIssue,
+        labels: [
+          ...newIssue.labels,
+          {
+            title: content.title,
+            description: content.description,
+            color: content.color,
+          },
+        ],
+      });
+    }
+  }
+  function setMileStone(content: MileStoneType) {
+    setNewIssue({
+      ...newIssue,
+      mileStone: {
+        title: content.title,
+        description: content.description,
+        dueDate: content.dueDate,
+        progress: content.progress,
+        openedIssue: content.openedIssue,
+        closedIssue: content.closedIssue,
+      },
+    });
+  }
   function getDropDownContents(subject: string) {
     let contentsData;
     let content: ReactNode;
@@ -21,7 +99,11 @@ function DropDown({ subject }: DropdownType) {
           const key = keyMaker();
           return (
             <S.DropDownList key={key} idx={idx}>
-              <S.DropDownContent>
+              <S.DropDownContent
+                onClick={() => {
+                  setAssignee(content);
+                }}
+              >
                 <S.SmallAcountImg src={content.profileImage} />
                 {content.name}
               </S.DropDownContent>
@@ -36,7 +118,11 @@ function DropDown({ subject }: DropdownType) {
           const key = keyMaker();
           return (
             <S.DropDownList key={key} idx={idx}>
-              <S.DropDownContent>
+              <S.DropDownContent
+                onClick={() => {
+                  setLabels(content);
+                }}
+              >
                 <Label title={content.title} color={content.color} />
               </S.DropDownContent>
               <I.offCheckCircle />
@@ -49,7 +135,13 @@ function DropDown({ subject }: DropdownType) {
         content = contentsData.map((content, idx) => {
           const key = keyMaker();
           return (
-            <S.DropDownList key={key} idx={idx}>
+            <S.DropDownList
+              onClick={() => {
+                setMileStone(content);
+              }}
+              key={key}
+              idx={idx}
+            >
               <S.DropDownContent>{content.title}</S.DropDownContent>
               <I.offCheckCircle />
             </S.DropDownList>

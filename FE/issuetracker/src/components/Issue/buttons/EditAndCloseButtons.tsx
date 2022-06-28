@@ -6,12 +6,13 @@ import * as S from 'components/Issue/styled/issueTitleButton';
 import IssueTitleButton from 'components/Issue/buttons/IssueTitleButton';
 import { issueState } from 'context/issue';
 
-interface Props {
-  handleEditButtonClick: () => void;
-  handleCloseButtonClick: () => void;
-}
-
-function EditAndCloseButtons({ handleEditButtonClick, handleCloseButtonClick }: Props) {
+function EditAndCloseButtons({
+  clickHandler1,
+  clickHandler2,
+}: {
+  clickHandler1: () => void;
+  clickHandler2: () => void;
+}) {
   const issueData = useRecoilValue(issueState);
   return (
     <S.buttonWrapper>

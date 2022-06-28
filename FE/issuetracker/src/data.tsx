@@ -1,13 +1,13 @@
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 
 export type AccountType = {
-  id: number;
+  id?: number;
   name: string;
-  email: string;
+  email?: string;
   profileImage: string;
 };
 export type MileStoneType = {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   dueDate: string;
@@ -20,19 +20,6 @@ export type LabelType = {
   title: string;
   color: string;
   description?: string;
-};
-export type ContentType = {
-  id: number;
-  name?: string;
-  email?: string;
-  profileImage?: string;
-  title?: string;
-  description?: string;
-  dueDate?: string;
-  progress?: number;
-  openedIssue?: number;
-  closedIssue?: number;
-  color?: string;
 };
 
 export const accountsData: Array<AccountType> = [
