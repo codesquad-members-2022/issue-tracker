@@ -9,8 +9,8 @@ import Foundation
 
 final class IssueListViewModel {
 
-    var issueList: Observable<[Issue]> = Observable([])
     var issueRepository = IssueTrackingRepository()
+    let issueList: Observable<[Issue]> = Observable([])
 
     var numberOfItemsInSection: Int {
         return issueList.value.count
@@ -23,7 +23,7 @@ final class IssueListViewModel {
             switch response {
             case .success(let issue):
                 guard let issue = issue else { return }
-                self.issueList = Observable(issue)
+                self.issueList.value = issue
 
             case .failure(let error):
                 // TODO: error Alert

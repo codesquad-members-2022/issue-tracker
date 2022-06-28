@@ -21,7 +21,7 @@ final class RootWindow: UIWindow {
         rootWindowViewModel.onUpdateLoginSatus = { answer in
             if answer {
                 DispatchQueue.main.async {
-                    let issueListVC = IssueListViewController()
+                    let issueListVC = IssueListViewController(viewModel: IssueListViewModel())
                     issueListVC.viewModel.loadIssueList()
                     self.rootViewController = issueListVC
                     return
@@ -38,7 +38,9 @@ final class RootWindow: UIWindow {
 
     func setIssueListVC() {
         DispatchQueue.main.async {
-            self.rootViewController = IssueListViewController()
+            let issueListVC = IssueListViewController(viewModel: IssueListViewModel())
+            issueListVC.viewModel.loadIssueList()
+            self.rootViewController = issueListVC
             return
         }
     }

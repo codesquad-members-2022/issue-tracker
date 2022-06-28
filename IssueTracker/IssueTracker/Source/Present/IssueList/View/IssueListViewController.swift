@@ -10,7 +10,17 @@ import SnapKit
 
 final class IssueListViewController: UIViewController {
 
-    var viewModel = IssueListViewModel()
+    var viewModel: IssueListViewModel
+
+    init(viewModel: IssueListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("\(#function) has not been implemented")
+    }
 
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -72,11 +82,6 @@ final class IssueListViewController: UIViewController {
             }
         }
 
-//        viewModel.loadedIssues = {
-//            DispatchQueue.main.async { [weak self]  in
-//                self?.collectionView.reloadData()
-//            }
-//        }
     }
 
     private func setNavigationController() {
