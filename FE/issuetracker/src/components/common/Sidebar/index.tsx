@@ -30,6 +30,7 @@ function SideBar() {
     mileStone.title !== '' ? (
       <>
         <ProgressBar
+          size="small"
           percent={(mileStone.closedIssue / (mileStone.openedIssue + mileStone.closedIssue)) * 100}
         />
         {mileStone.title}
