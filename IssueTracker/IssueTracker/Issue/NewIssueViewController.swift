@@ -168,12 +168,26 @@ extension NewIssueViewController: UITableViewDelegate {
         case .repository:
             // TODO: issueService의 requestRepos() 연결해서 저장소목록 보여주기
             guard let appdelegate = UIApplication.shared.delegate as? AppDelegate,
-                  let token = GithubUserDefaults.getToken(),
-                  let viewController = appdelegate.container.buildViewController(.optionSelect(token: token)) as? OptionSelectViewController else {
+                  let token = GithubUserDefaults.getToken() else {
                 return
             }
-            self.navigationController?.pushViewController(viewController, animated: true)
-            viewController.delegate = self
+            
+            service.requestRepos(accessToken: token) { result in
+                switch result {
+                case .success(let repositoryList):
+                    //repositoryList를 OptionSelectViewController에 전달해 주어야 함
+                    print(repositoryList)
+                    guard let viewController = appdelegate.container.buildViewController(.optionSelect(token: token, repositories: repositoryList)) as? OptionSelectViewController else {
+                        return
+                    }
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                    viewController.delegate = self
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
+            
         default:
             break
         }
