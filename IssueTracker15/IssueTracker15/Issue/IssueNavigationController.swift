@@ -7,6 +7,20 @@
 
 import UIKit
 
+enum IssueListStatus {
+    case list
+    case selection
+    
+    mutating func toggle() {
+        switch self {
+        case .list:
+            self = .selection
+        case .selection:
+            self = .list
+        }
+    }
+}
+
 class IssueNavigationController: UINavigationController, ViewBindable {
     
     var vc: ViewBinding?
@@ -29,7 +43,7 @@ class IssueNavigationController: UINavigationController, ViewBindable {
             state: .on,
             handler: { [weak self] _ in
                 guard let self = self, let binding = self.vc else { return }
-                binding.inputViewEvent(self, nil)
+                binding.inputViewEvent(self, self.navigationBar.topItem?.leftBarButtonItem)
             }
         )
     }
@@ -44,21 +58,9 @@ class IssueNavigationController: UINavigationController, ViewBindable {
             state: .on,
             handler: { [weak self] _ in
                 guard let self = self, let binding = self.vc else { return }
-                self.currentViewState.toggle()
-                binding.inputViewEvent(self, self.currentViewState)
+                binding.inputViewEvent(self, self.navigationBar.topItem?.rightBarButtonItem)
             }
         )
-    }
-    
-    private(set) var currentViewState: IssueListStatus = .list {
-        willSet {
-            switch currentViewState {
-            case .list:
-                print("이슈 리스트 기본화면을 보여주세요.")
-            case .selection:
-                print("이슈 리스트 선택화면을 보여주세요.")
-            }
-        }
     }
     
     override func viewDidLoad() {
@@ -72,7 +74,7 @@ class IssueNavigationController: UINavigationController, ViewBindable {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        let isIssueList = viewController is IssueListViewController
+        let isIssueList = viewController is IssueListTableViewController
         navigationItem.hidesBackButton = isIssueList
         navigationBar.topItem?.leftBarButtonItem?.customView?.isHidden = isIssueList
         navigationBar.topItem?.rightBarButtonItem?.customView?.isHidden = isIssueList

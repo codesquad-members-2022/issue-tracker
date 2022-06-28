@@ -9,7 +9,7 @@ import Foundation
 
 class IssueListViewModel: CommonViewModel {
     
-    private(set) var issueList = Array(repeating: IssueDTO.empty, count: 25)
+    private(set) var issueList = Array(repeating: IssueDTO.empty, count: 3)
     
     var output: (Any?, ViewBindable) -> Void
 
@@ -27,17 +27,38 @@ class IssueListViewModel: CommonViewModel {
     func getIssues() { }
     
     @discardableResult
-    func selectList(_ cell: IssueListCell) -> Bool {
+    func selectList(_ cell: IssueListTableViewCell) -> Bool {
         
         guard
-            let issueId = cell.issueDTO?.id,
+            let issueId = cell.dto?.id,
             let inx = self.issueList.firstIndex(where: { $0.id == issueId })
         else {
             return false
         }
         
         issueList[inx].isSelected.toggle()
-        output(nil, cell)
+        output(cell.indexPath, cell)
         return true
+    }
+    
+    func closeIssue(_ dto: IssueDTO, target: ViewBindable) {
+        guard let index = issueList.firstIndex(of: dto) else { return }
+        
+        issueList[index].closed_at = "closed!"
+        output(IndexPath(row: index, section: 0), target)
+    }
+    
+    func deleteIssue(_ dto: IssueDTO, target: ViewBindable) {
+        guard let index = issueList.firstIndex(of: dto) else { return }
+        
+        issueList.remove(at: index)
+        (target as? IssueListTableViewCell)?.willBeDelete = true
+        output(IndexPath(row: index, section: 0), target)
+    }
+}
+
+private extension DispatchTime {
+    static var randomFive: DispatchTime {
+        DispatchTime(uptimeNanoseconds: UInt64(Int.random(in: 1...5)))
     }
 }
