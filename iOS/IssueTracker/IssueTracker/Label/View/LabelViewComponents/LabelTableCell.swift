@@ -47,11 +47,8 @@ final class LabelTableCell: UITableViewCell {
         labelLabel.backgroundColor = UIColor(hex: label.backgroundColor)
         label.isDarkMode == "true" ?
         (labelLabel.textColor = .black) : (labelLabel.textColor = .white)
-    }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
+        layoutIfNeeded()
         labelLabel.layer.cornerRadius = labelLabel.frame.height/2
     }
 }

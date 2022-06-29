@@ -11,6 +11,7 @@ protocol LabelViewModelInput {
     func viewDidLoad()
     func didTouchAddButton()
     func didLabelSelected(index: Int)
+    func didAddNewLabel(_ label: LabelItem)
 }
 
 protocol LabelViewModelOutput {
@@ -32,6 +33,7 @@ final class LabelViewModel: LabelViewModelProtocol {
 
     init(labelManager: LabelManagable) {
         self.labelManager = labelManager
+        addObserver()
     }
 
     func viewDidLoad() {
@@ -51,5 +53,19 @@ final class LabelViewModel: LabelViewModelProtocol {
     
     func didLabelSelected(index: Int) {
         selectedLabelIndex.value = index
+    }
+
+    func didAddNewLabel(_ newLabel: LabelItem) {
+        labels.value.append(newLabel)
+    }
+}
+
+private extension LabelViewModel {
+    func addObserver() {
+        NotificationCenter.default.addObserver(forName: EditingLabelViewModel.NotificationNames.didSaveNewLabel, object: nil, queue: nil) { [weak self] notification in
+            guard let addedLabel = notification.userInfo?[EditingLabelViewModel.UserInfoKey.addedLabel] as? LabelItem else { return }
+
+            self?.didAddNewLabel(addedLabel)
+        }
     }
 }
