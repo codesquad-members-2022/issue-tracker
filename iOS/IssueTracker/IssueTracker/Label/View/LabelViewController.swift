@@ -81,7 +81,8 @@ private extension LabelViewController {
     }
 
     func showEditLabelView(with label: LabelItem? = nil) {
-        let editingLabelViewController = EditingLabelViewController()
+        let editingLabelViewModel = EditingLabelViewModel()
+        let editingLabelViewController = EditingLabelViewController(viewModel: editingLabelViewModel)
         let navigationController = UINavigationController(rootViewController: editingLabelViewController)
 
         present(navigationController, animated: true)

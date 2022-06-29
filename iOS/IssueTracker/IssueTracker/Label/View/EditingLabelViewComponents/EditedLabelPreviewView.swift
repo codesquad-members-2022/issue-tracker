@@ -13,7 +13,7 @@ final class EditedLabelPreviewView: UIView {
         label.setEdgeInset(top: 4, bottom: 4, left: 16, right: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-        label.text = "테스트"
+        label.text = "레이블"
         label.backgroundColor = .orange
         label.clipsToBounds = true
         return label

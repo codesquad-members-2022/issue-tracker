@@ -24,19 +24,42 @@ final class EditingLabelView: UIStackView {
 
     private let editedLabelPreviewView = EditedLabelPreviewView()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var viewModel: EditingLabelViewModelProtocol
+
+    init(viewModel: EditingLabelViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         let screenSize = UIScreen.main.bounds.size
 
         translatesAutoresizingMaskIntoConstraints = false
         axis = .vertical
         spacing = 11/812 * screenSize.height
         setSubviewsLayout()
+        bind(to: viewModel)
     }
 
     @available(*, unavailable)
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func updatePreviewLabelText(with text: String?) {
+        if let text = text,
+           !text.isEmpty {
+            editedLabelPreviewView.labelPreviewView.text = text
+        } else {
+            editedLabelPreviewView.labelPreviewView.text = "레이블"
+        }
+    }
+
+    func updatePreviewLabelBackgroundColor(with backgroundColorText: String) {
+        editedLabelPreviewView.labelPreviewView.backgroundColor = UIColor(hex: backgroundColorText)
+        editedLabelPreviewView.labelPreviewView.textColor = UIColor(hex: backgroundColorText).isDarkColor ?
+            .white : .black
+    }
+
+    func updateSelectedBackgroundLabel(with backgroundColorText: String) {
+        selectingLabelBackgroundColorView.selectedBackgroundColorLabel.text = backgroundColorText
     }
 }
 
@@ -72,5 +95,30 @@ private extension EditingLabelView {
 
     func setPreviewViewLayout() {
         addArrangedSubview(editedLabelPreviewView)
+    }
+
+    func bind(to viewModel: EditingLabelViewModelProtocol) {
+        viewModel.isOverFiftyCharactersInTitleText.bind(on: self) { [weak self] isOverFiftyCharactersInTitleText in
+            if isOverFiftyCharactersInTitleText,
+               let text = self?.titleTextField.editableTextField.text {
+                self?.titleTextField.editableTextField.text = String(text.dropLast())
+            }
+        }
+        selectingLabelBackgroundColorView.generateRandomColorButton.addAction(UIAction { _ in
+            viewModel.didTouchGenerateRandomBackgroundColorButton()
+        }, for: .touchUpInside)
+
+        titleTextField.editableTextField.addAction(UIAction { [weak self] _ in
+            
+            viewModel.didChangedTitleTextField(text: self?.titleTextField.editableTextField.text)
+        }, for: .editingChanged)
+
+        descriptionTextField.editableTextField.addAction(UIAction { [weak self] _ in
+            viewModel.didChangedDescriptionTextField(text: self?.descriptionTextField.editableTextField.text)
+        }, for: .editingChanged)
+
+        selectingLabelBackgroundColorView.generateRandomColorButton.addAction(UIAction { _ in
+            viewModel.didTouchGenerateRandomBackgroundColorButton()
+        }, for: .touchUpInside)
     }
 }

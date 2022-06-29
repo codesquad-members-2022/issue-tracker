@@ -9,14 +9,29 @@ import UIKit
 
 final class EditingLabelViewController: UIViewController {
     private let navigationItems = EditingLabelViewNavigationItems()
-    private let editingLabelListView = EditingLabelView()
+    private let editingLabelView: EditingLabelView
 
+    private var viewModel: EditingLabelViewModelProtocol
+
+    init(viewModel: EditingLabelViewModelProtocol) {
+        self.viewModel = viewModel
+        self.editingLabelView = EditingLabelView(viewModel: viewModel)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationItems()
-        view.addSubview(editingLabelListView)
+        view.addSubview(editingLabelView)
         view.backgroundColor = .background2
         setSubviewsLayout()
+        bind(to: viewModel)
+        viewModel.viewDidLoad()
     }
 }
 
@@ -25,15 +40,55 @@ private extension EditingLabelViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationItems.cancelButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationItems.saveButton)
 
+        navigationItems.saveButton.isEnabled = false
         navigationItem.title = "새로운 레이블"
     }
 
     func setSubviewsLayout() {
         let screenSize = UIScreen.main.bounds.size
-        editingLabelListView.snp.makeConstraints { make in
+        editingLabelView.snp.makeConstraints { make in
             make.top.equalTo(view).offset(100/812 * screenSize.height)
             make.leading.trailing.equalTo(view)
 
         }
+    }
+
+    func bind(to viewModel: EditingLabelViewModelProtocol) {
+        viewModel.cancelButtonState.bind(on: self) { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        viewModel.titleText.bind(on: self) { [weak self] titleText in
+            self?.changePreviewLabelText(with: titleText)
+            self?.updateSaveButtonState(with: titleText)
+        }
+        viewModel.backgroundColorText.bind(on: self) { [weak self] backgroundColorText in
+            self?.changePreviewLabelBackgroundColor(with: backgroundColorText)
+            self?.editingLabelView.updateSelectedBackgroundLabel(with: backgroundColorText)
+        }
+
+        navigationItems.cancelButton.addAction(UIAction { [weak self] _ in
+            self?.viewModel.didTouchCancel()
+        }, for: .touchUpInside)
+        navigationItems.saveButton.addAction(UIAction { [weak self] _ in
+            self?.viewModel.didTouchSave()
+        }, for: .touchUpInside)
+    }
+
+    func changePreviewLabelText(with text: String?) {
+        editingLabelView.updatePreviewLabelText(with: text)
+    }
+
+    func updateSaveButtonState(with titleText: String?) {
+        if let titleText = titleText,
+           !titleText.isEmpty {
+            navigationItems.saveButton.isEnabled = true
+        } else {
+            navigationItems.saveButton.isEnabled = false
+        }
+        
+    }
+
+    func changePreviewLabelBackgroundColor(with backgroundColorText: String) {
+        editingLabelView.updatePreviewLabelBackgroundColor(with: backgroundColorText)
     }
 }

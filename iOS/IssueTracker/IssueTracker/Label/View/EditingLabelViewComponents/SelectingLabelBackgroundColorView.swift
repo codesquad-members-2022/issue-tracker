@@ -22,7 +22,6 @@ final class SelectingLabelBackgroundColorView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "SFProDisplay-Regular", size: 17)
         label.numberOfLines = 1
-        label.text = "#ABCDEF"
         return label
     }()
 

@@ -13,6 +13,7 @@
 		0230801E286C2BB500E8F3D9 /* TextFieldWithTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230801D286C2BB500E8F3D9 /* TextFieldWithTitleView.swift */; };
 		02308020286C499400E8F3D9 /* SelectingLabelBackgroundColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230801F286C499400E8F3D9 /* SelectingLabelBackgroundColorView.swift */; };
 		02308022286C782200E8F3D9 /* EditedLabelPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02308021286C782200E8F3D9 /* EditedLabelPreviewView.swift */; };
+		02308024286C9A3100E8F3D9 /* EditingLabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02308023286C9A3100E8F3D9 /* EditingLabelViewModel.swift */; };
 		024F438B28596ED3008C4235 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F438A28596ED3008C4235 /* SignInView.swift */; };
 		024F438D2859704E008C4235 /* MontserratItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 024F438C2859704E008C4235 /* MontserratItalic.ttf */; };
 		024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F438E285972DB008C4235 /* UIView+Extension.swift */; };
@@ -129,6 +130,7 @@
 		0230801D286C2BB500E8F3D9 /* TextFieldWithTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithTitleView.swift; sourceTree = "<group>"; };
 		0230801F286C499400E8F3D9 /* SelectingLabelBackgroundColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingLabelBackgroundColorView.swift; sourceTree = "<group>"; };
 		02308021286C782200E8F3D9 /* EditedLabelPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedLabelPreviewView.swift; sourceTree = "<group>"; };
+		02308023286C9A3100E8F3D9 /* EditingLabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingLabelViewModel.swift; sourceTree = "<group>"; };
 		024F438A28596ED3008C4235 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		024F438C2859704E008C4235 /* MontserratItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MontserratItalic.ttf; sourceTree = "<group>"; };
 		024F438E285972DB008C4235 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				02751A35286A8B7000C712FF /* LabelViewModel.swift */,
+				02308023286C9A3100E8F3D9 /* EditingLabelViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -902,6 +905,7 @@
 				02751A282869FB0800C712FF /* LabelViewNavigationItems.swift in Sources */,
 				0290D0F828645CEB00A4E3A7 /* EditingIssueNetworkTarget.swift in Sources */,
 				02751A3B286A95E500C712FF /* LabelItem.swift in Sources */,
+				02308024286C9A3100E8F3D9 /* EditingLabelViewModel.swift in Sources */,
 				02AEC2F0285C1B9700AAE835 /* UIColor+Extension.swift in Sources */,
 				02751A39286A956E00C712FF /* labelManager.swift in Sources */,
 				02AEC2FD28600E8500AAE835 /* Observable.swift in Sources */,
