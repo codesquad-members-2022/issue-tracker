@@ -1,3 +1,4 @@
+import { IFilterCondition } from '@/types/common';
 import React from 'react';
 
 type Left = 'left' | 'right';
@@ -6,6 +7,7 @@ type Option = {
   children: React.ReactNode | string;
   radio?: { on: React.ReactNode; off: React.ReactNode };
   value: string;
+  filterCondition?: IFilterCondition;
 };
 
 interface I$PanelProps {

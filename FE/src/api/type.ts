@@ -1,6 +1,4 @@
-import { AxiosRequestConfig } from 'axios';
-
-type IssueStateType = 'open' | 'close' | undefined;
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 type AxiosType = {
   method: 'get' | 'post' | 'put' | 'delete' | 'patch';
@@ -9,4 +7,13 @@ type AxiosType = {
   config?: AxiosRequestConfig;
 };
 
-export type { IssueStateType, AxiosType };
+type APIIssueStatusType = 'open' | 'close' | undefined;
+
+type APIResponse =
+  | AxiosResponse<any, any>
+  | {
+      data: null;
+      status: null;
+    };
+
+export type { AxiosType, APIIssueStatusType, APIResponse };
