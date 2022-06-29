@@ -35,26 +35,19 @@ public class LabelService {
 
 	private List<LabelDto> findLabelDtos() {
 		return labelRepository.findAll().stream()
-			.map(LabelDto::of)
+			.map(LabelDto::from)
 			.collect(Collectors.toList());
 	}
 
 	@Transactional
 	public void add(LabelRequestDto dto) {
-		Label label = labelRepository.save(dto.toEntity());
-		if (label.getId() == null){
-			throw new CustomException(LABEL_NOT_SAVE);
-		}
+		labelRepository.save(dto.toEntity());
 	}
 
-	//TODO: 라벨을 삭제시 이슈전부 찾아서 이슈 id를 삭제?
 	@Transactional
 	public void delete(Long id) {
-		try {
-			labelRepository.deleteById(id);
-		} catch (Exception e) {
-			throw new CustomException(UNIQUE_CONSTRAINT_VIOLATED);
-		}
+		Label label = labelRepository.findById(id).orElseThrow(() -> new CustomException(LABEL_NOT_FOUND));
+		labelRepository.delete(label);
 	}
 
 	@Transactional
@@ -63,5 +56,9 @@ public class LabelService {
 			() -> new CustomException(LABEL_NOT_FOUND)
 		);
 		label.update(dto);
+	}
+
+	public List<Label> findLabels(List<Long> labels) {
+		return labelRepository.findAllById(labels);
 	}
 }

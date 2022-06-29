@@ -2,6 +2,8 @@ package kr.codesquad.issuetracker.domain.issue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,10 +25,15 @@ import kr.codesquad.issuetracker.domain.image.Image;
 import kr.codesquad.issuetracker.domain.label.Label;
 import kr.codesquad.issuetracker.domain.member.Member;
 import kr.codesquad.issuetracker.domain.milestone.Milestone;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "issue")
 public class Issue extends BaseTimeEntity {
 
@@ -56,7 +63,7 @@ public class Issue extends BaseTimeEntity {
 	@JoinColumn(name = "milestone_id")
 	private Milestone milestone;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 		name = "assignee",
 		joinColumns = @JoinColumn(name = "issue_id"),
@@ -64,7 +71,7 @@ public class Issue extends BaseTimeEntity {
 	)
 	private List<Member> assignees = new ArrayList<>();
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "issue_label",
 		joinColumns = @JoinColumn(name = "issue_id"),
@@ -72,12 +79,53 @@ public class Issue extends BaseTimeEntity {
 	)
 	private List<Label> labels = new ArrayList<>();
 
-	public boolean isOpenOrClosed(String value) {
-		return this.status.getValue().equals(value);
+	public static Issue createIssue(String title, String description, Member writer, List<Member> assignees,
+		List<Label> labels, Milestone milestone) {
+		return Issue.builder()
+			.title(title)
+			.content(description)
+			.writer(writer)
+			.assignees(assignees)
+			.labels(labels)
+			.status(Status.OPEN)
+			.milestone(milestone)
+			.build();
+	}
+
+	@Builder
+	public Issue(String title, Status status, String content, Member writer, Milestone milestone,
+		List<Member> assignees,
+		List<Label> labels) {
+		this.title = title;
+		this.status = status;
+		this.content = content;
+		this.writer = writer;
+		this.milestone = milestone;
+		this.assignees = assignees;
+		this.labels = labels;
+	}
+
+	public boolean isOpened() {
+		return this.status.equals(Status.OPEN);
+	}
+
+	public boolean isClosed() {
+		return this.status.equals(Status.CLOSED);
 	}
 
 	public Issue deleteMilestone() {
 		this.milestone = null;
 		return this;
+	}
+
+	public Issue deleteLabel(Label label) {
+		labels = labels.stream()
+			.filter(l -> !l.equals(label))
+			.collect(Collectors.toList());
+		return this;
+	}
+
+	public void updateStatus(Status status) {
+		this.status = status;
 	}
 }
