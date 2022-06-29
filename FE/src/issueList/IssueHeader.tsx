@@ -23,7 +23,7 @@ function IssueHeader({
   const { state, dispatch } = useIssueListContext();
 
   const handleHeaderCheckBoxClick = () => {
-    dispatch({ type: 'ALL_CHECK', payload: {} });
+    dispatch({ type: 'ALL_CHECK' });
   };
 
   return (

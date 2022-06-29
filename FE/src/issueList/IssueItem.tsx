@@ -1,9 +1,10 @@
-import Icon from '@/assets/icons/Icon';
+import Icon, { IconNameType } from '@/assets/icons/Icon';
 import { COLORS, GREYSCALE } from '@/constants';
 import { getRandomKey } from '@/utils';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CheckBox from './CheckBox';
+import { IssueStateType } from './IssueList';
 import { useIssueListContext } from './IssueListProvider';
 import Label from './Label';
 
@@ -22,9 +23,21 @@ type IssueItemProps = {
   title: string;
   createdTime: string;
   writer: string;
-  labels: LabelType[];
-  milestoneName: string;
+  labels: LabelType[] | null;
+  milestoneName: string | null;
   isLast: boolean;
+  status: IssueStateType;
+};
+
+type IconType = {
+  iconName: IconNameType;
+  stroke: string;
+  fill: string;
+};
+
+type IssueIconType = {
+  OPEN: IconType;
+  CLOSE: IconType;
 };
 
 function IssueItem({
@@ -34,15 +47,27 @@ function IssueItem({
   writer,
   labels,
   milestoneName,
-  isLast
+  isLast,
+  status
 }: IssueItemProps) {
   const { state, dispatch } = useIssueListContext();
 
   const IssueItemBox = isLast ? LastIssueItemBox : DefaultIssueItemBox;
   const checkBoxType = state.selectedIssues[id] ? 'active' : 'initial';
+  const issueIcon: IssueIconType = {
+    OPEN: {
+      iconName: 'alertCircle',
+      stroke: COLORS.BLUE,
+      fill: COLORS.LIGHT_BLUE
+    },
+    CLOSE: {
+      iconName: 'archive',
+      stroke: COLORS.PURPLE,
+      fill: COLORS.LIGHT_PURPLE
+    }
+  };
 
   const handleCheckBoxClick = () => {
-    console.log(`isclicked: ${state.selectedIssues[id]}`);
     if (state.selectedIssues[id]) {
       dispatch({ type: 'ITEM_UNCHECK', payload: { id } });
     } else {
@@ -105,15 +130,15 @@ function IssueItem({
       <IssueText>
         <IssueTitle>
           <Icon
-            iconName="alertCircle"
-            stroke={COLORS.BLUE}
-            fill={COLORS.LIGHT_BLUE}
+            iconName={issueIcon[status].iconName}
+            stroke={issueIcon[status].stroke}
+            fill={issueIcon[status].fill}
           />
           <Link to="/issueDetail">
             <TitleText>{title}</TitleText>
           </Link>
           <Labels>
-            {!!labels.length &&
+            {!!labels &&
               labels.map(({ name, color }) => (
                 <Label
                   key={getRandomKey()}

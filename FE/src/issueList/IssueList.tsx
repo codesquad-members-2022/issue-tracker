@@ -4,6 +4,7 @@ import IssueItem from './IssueItem';
 import EmptyIssueItem from './EmptyIssueItem';
 import ClickedIssueHeader from './ClickedIssueHeader';
 import { useIssueListContext } from './IssueListProvider';
+import { useQuery } from 'react-query';
 
 type LabelColorType = {
   backgroundColor: string;
@@ -15,13 +16,16 @@ type LabelType = {
   color: LabelColorType;
 };
 
+export type IssueStateType = 'OPEN' | 'CLOSE';
+
 export type IssueType = {
   id: number;
   title: string;
   createdTime: string;
   writer: string;
-  labels: LabelType[];
-  milestoneName: string;
+  labels: LabelType[] | null;
+  milestoneName: string | null;
+  status: IssueStateType;
 };
 
 export type SelectedIssueType = {
@@ -34,27 +38,51 @@ type IssueListType = {
   openedIssues: number;
   closedIssues: number;
   issues: IssueType[];
-} | null;
+};
 
 export type IssueListStateType = 'opened' | 'closed' | 'all';
+
+const fetchIssueList = async (issueListState: IssueListStateType) => {
+  const response = await fetch(`/issues?status=${issueListState}`);
+  const issueListData = await response.json();
+
+  return issueListData;
+};
 
 function IssueList() {
   const { state, dispatch } = useIssueListContext();
   const [issueListState, setIssueListState] =
     useState<IssueListStateType>('opened');
-  const [issueList, setIssueList] = useState<IssueListType>(null);
+
+  const { isLoading, isError, data, error } = useQuery<IssueListType, Error>(
+    ['issueList', issueListState],
+    () => fetchIssueList(issueListState)
+  );
 
   useEffect(() => {
-    fetch(`/issues?status=${issueListState}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setIssueList(data);
-        dispatch({ type: 'INIT', payload: { data: data.issues } });
-      });
-  }, [issueListState]);
+    const initSelectedIssues = (issues: IssueType[]) => {
+      const initialSelectedIssue: SelectedIssueType = {};
 
-  if (!issueList) {
+      issues.forEach(({ id }) => {
+        initialSelectedIssue[id] = false;
+      });
+
+      return initialSelectedIssue;
+    };
+    if (data) {
+      dispatch({
+        type: 'INIT',
+        payload: { initialSelectedIssues: initSelectedIssues(data.issues) }
+      });
+    }
+  }, [data]);
+
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isError || !data) {
+    return <div>Error: {error?.message}</div>;
   }
 
   return (
@@ -63,15 +91,18 @@ function IssueList() {
         <IssueHeader
           issueListState={issueListState}
           setIssueListState={setIssueListState}
-          openedIssueCount={issueList.openedIssues}
-          closedIssueCount={issueList.closedIssues}
+          openedIssueCount={data.openedIssues}
+          closedIssueCount={data.closedIssues}
         />
       ) : (
         <ClickedIssueHeader />
       )}
-      {issueList.issues.length ? (
-        issueList.issues.map(
-          ({ id, title, createdTime, writer, labels, milestoneName }, idx) => (
+      {data.issues.length ? (
+        data.issues.map(
+          (
+            { id, title, createdTime, writer, labels, milestoneName, status },
+            idx
+          ) => (
             <IssueItem
               key={id}
               id={String(id)}
@@ -80,7 +111,8 @@ function IssueList() {
               writer={writer}
               labels={labels}
               milestoneName={milestoneName}
-              isLast={idx === issueList.issues.length - 1}
+              isLast={idx === data.issues.length - 1}
+              status={status}
             />
           )
         )
