@@ -51,7 +51,7 @@ class MilestoneViewModel(
         viewModelScope.launch {
             _uiState.update { it.copy(completeTask = false) }
             _uiState.value.milestoneList.filter { it.isChecked }.forEach { milestone ->
-                val result = milestoneRepository.deleteMilestone(milestone.id)
+                val result = milestoneRepository.deleteMilestone(milestone.id!!)
                 if (result.isFailure) {
                     _uiState.update { it.copy(errorMsgId = R.string.network_error) }
                     return@forEach

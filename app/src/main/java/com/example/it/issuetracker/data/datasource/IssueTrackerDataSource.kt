@@ -10,7 +10,7 @@ import java.util.*
 
 interface IssueTrackerDataSource {
 
-    suspend fun getIssue(): Flow<List<IssueDto>>
+    fun getIssue(): Flow<List<IssueDto>>
     suspend fun deleteIssue(list: List<Issue>)
     suspend fun deleteIssue(id: Long)
     suspend fun closeIssue(list: List<Issue>)

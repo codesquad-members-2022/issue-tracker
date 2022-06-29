@@ -1,10 +1,12 @@
 package com.example.it.issuetracker.presentation.main.issue.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentIssueBinding
@@ -31,6 +33,10 @@ class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fra
                 .addToBackStack("detail")
                 .replace(R.id.container_main, detailFragment)
                 .commit()
+        },
+        onClose = { id ->
+            Log.d("test", ": $id")
+            viewModel.closeIssue(id)
         }
     )
 
@@ -51,6 +57,9 @@ class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fra
         ivSearch.setOnClickListener { navigateFragment(SearchFragment(), "search_issue") }
         btnIssue.setOnClickListener { navigateFragment(RegisterIssueFragment(), "register_issue") }
         rvIssue.adapter = adapter
+        val swipeHelper = SwipeHelper()
+        val itemTouchHelper = ItemTouchHelper(swipeHelper)
+        itemTouchHelper.attachToRecyclerView(binding.rvIssue)
         val dividerItemDecoration =
             DividerItemDecoration(context, LinearLayoutManager(context).orientation)
         rvIssue.addItemDecoration(dividerItemDecoration)

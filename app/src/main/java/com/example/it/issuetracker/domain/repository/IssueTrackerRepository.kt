@@ -9,7 +9,7 @@ import java.util.*
 
 interface IssueTrackerRepository {
 
-    suspend fun getIssue(): Flow<List<Issue>>
+    fun getIssue(): Flow<List<Issue>>
 
     suspend fun deleteIssue(list: List<Issue>)
 

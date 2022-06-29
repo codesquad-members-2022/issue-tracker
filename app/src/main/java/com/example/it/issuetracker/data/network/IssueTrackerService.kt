@@ -5,6 +5,9 @@ import retrofit2.http.*
 
 interface IssueTrackerService {
 
+    @GET("issues")
+    suspend fun getIssues(): List<IssueDto>
+
     @GET("login/oauth/github")
     suspend fun loginOAuthGithub(@Query("code") code: String): LoginDto
 

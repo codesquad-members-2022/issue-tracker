@@ -1,5 +1,6 @@
 package com.example.it.issuetracker.presentation.main.issue.list
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.domain.model.Issue
@@ -39,7 +40,7 @@ class IssueViewModel(
                 val editIssueList = state.issues.map { issue ->
                     when (issue.viewType) {
                         Mode.DEFAULT -> issue.copy(viewType = Mode.EDIT)
-                        Mode.EDIT -> issue.copy(viewType = Mode.DEFAULT)
+                        Mode.EDIT -> issue.copy(viewType = Mode.DEFAULT, isSwiped = false)
                     }
                 }
                 _uiState.update { IssueUiState.GetIssues(editIssueList) }
@@ -112,6 +113,7 @@ class IssueViewModel(
 
     fun closeIssue(id: Long) = viewModelScope.launch {
         issueRepository.closeIssue(id)
+        getIssues()
     }
 
     private fun isCheckEmpty(filterList: List<Issue>): Boolean {
