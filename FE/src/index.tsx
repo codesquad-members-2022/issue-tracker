@@ -16,7 +16,6 @@ const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* devtools */}
       <ReactQueryDevtools initialIsOpen />
       <App />
     </QueryClientProvider>
