@@ -8,33 +8,29 @@
 import Foundation
 
 // Resource 타입이 Codable할 때 사용가능한 타입
-struct APIRequest<Resource: APIResource>: APIRequestable where Resource.ModelType: Codable {
+struct APIRequest<Endpoint: APIEndpoint>: APIRequestable where Endpoint.ModelType: Codable {
     
-    typealias ModelType = Resource.ModelType
+    typealias ModelType = Endpoint.ModelType
     
     let session: URLSession
-    let resource: Resource
-    let httpMethod: HTTPMethod
+    let endpoint: Endpoint
     let header: [String: String]
     let body: String
     
     // Default Initialzier
-    init(resource: Resource,
-         httpMethod: HTTPMethod = .get,
+    init(endpoint: Endpoint,
          header: [String: String] = [:],
          body: String = "",
          session: URLSession = .shared
     ) {
-        self.resource = resource
-        self.httpMethod = httpMethod
+        self.endpoint = endpoint
         self.header = header
         self.body = body
         self.session = session
     }
     
     // Initialize with token
-    init(resource: Resource,
-         httpMethod: HTTPMethod = .get,
+    init(endpoint: Endpoint,
          token: String,
          header: [String: String] = [:],
          body: String = "",
@@ -42,12 +38,12 @@ struct APIRequest<Resource: APIResource>: APIRequestable where Resource.ModelTyp
     ) {
         var header = header
         header["Authorization"] = "token \(token)"
-        self.init(resource: resource, httpMethod: httpMethod, header: header, body: body, session: session)
+        self.init(endpoint: endpoint, header: header, body: body, session: session)
     }
     
     var request: URLRequest {
-        var request = URLRequest(url: resource.url)
-        request.httpMethod = httpMethod.rawValue
+        var request = URLRequest(url: endpoint.url)
+        request.httpMethod = endpoint.httpMethod.rawValue
         request.httpBody = body.data(using: .utf8)
         
         defaultHeader.forEach { (key, value) in

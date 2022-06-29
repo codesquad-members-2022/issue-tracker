@@ -27,7 +27,7 @@ class IssueManagerTests: XCTestCase {
                            networkService: NetworkManger(urlSession: mockSession))
         
         
-        let url = IssuesResource(state: .all, isPull: true).url
+        let url = GetIssues(parameter: IssuesParameter.standard).url
         
         guard let dummyData = DummyResponse.issues.data else {
             XCTFail("Cannot find \(DummyResponse.issues)")

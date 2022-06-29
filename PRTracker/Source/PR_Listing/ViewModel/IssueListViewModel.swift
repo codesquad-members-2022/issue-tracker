@@ -8,7 +8,7 @@
 import Foundation
 
 final class IssueListViewModel {
-    private let issueService: IssueService
+    private var issueService: IssueService
     
     var issueViewModels: Observable<[IssueTableCellViewModel]?> = Observable(nil)
 
@@ -24,12 +24,12 @@ final class IssueListViewModel {
         // TODO: SearchBarText가 바뀌면 호출되는 부분 구현
     }
     
+    
     func requestData() {
         issueService.getIssues { issues in
             guard let issues = issues else {
                 return
             }
-            
             self.issueViewModels.value = self.convertToViewModel(issues)
         }
     }

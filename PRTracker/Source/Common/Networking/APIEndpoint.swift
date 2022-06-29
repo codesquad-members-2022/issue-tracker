@@ -9,14 +9,15 @@ import Foundation
 
 // REST API 중에서 '자원(Resource)'를 추상화한 타입
 
-protocol APIResource {
+protocol APIEndpoint {
     associatedtype ModelType
     var url: URL { get }
     var path: String { get }
     var query: [String: String]? { get }
+    var httpMethod: HTTPMethod { get }
 }
 
-extension APIResource {
+extension APIEndpoint {
     var url: URL {
         var components = URLComponents(string: "https://api.github.com")!
         components.path = path
