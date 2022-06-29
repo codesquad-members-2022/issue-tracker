@@ -24,7 +24,9 @@ class LabelAdapter(private val labels: List<Label>) :
                 R.drawable.round_rectangle_background
             ) as GradientDrawable
 
-            background.setColor(Color.parseColor(item.color))
+            if (item.color.isNotBlank()) {
+                background.setColor(Color.parseColor(item.color))
+            }
 
             binding.tvLabelContent.background = background
         }

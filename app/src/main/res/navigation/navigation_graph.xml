@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_issueFragment2_to_issueEditor"
             app:destination="@id/issueEditor" />
+        <action
+            android:id="@+id/action_issueFragment2_to_issueSearch"
+            app:destination="@id/issueSearch" />
     </fragment>
     <fragment
         android:id="@+id/labelFragment2"
@@ -49,4 +52,9 @@
             android:id="@+id/action_issueEditor_to_issueFragment2"
             app:destination="@id/issueFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/issueSearch"
+        android:name="com.example.issu_tracker.ui.issue.IssueSearchFragment"
+        android:label="fragment_issue_search"
+        tools:layout="@layout/fragment_issue_search" />
 </navigation>

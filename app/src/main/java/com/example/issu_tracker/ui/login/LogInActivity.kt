@@ -33,9 +33,15 @@ class LogInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         firebaseAuth = Firebase.auth
 
+        val button: AppCompatButton = findViewById(R.id.btn_sign_out)
+        button.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
         initGoogleSignInButton()
         initGitHubSignInButton()
-        initSignOutButton()
+//        initSignOutButton()
     }
 
     override fun onStart() {
