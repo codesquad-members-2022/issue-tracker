@@ -103,7 +103,11 @@ extension IssueListViewController: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as? IssueCell else { return UICollectionViewCell() }
-        cell.titleLabel.text = viewModel.issueList.value[indexPath.item].title
+        let issueValue = viewModel.issueList.value[indexPath.item]
+        cell.titleLabel.text = issueValue.title
+        cell.descriptionLabel.text = issueValue.description
+        cell.milestoneLabel.text = issueValue.milestone?.title
+        cell.tagLabel.text = issueValue.tag?.first?.title
         return cell
     }
 

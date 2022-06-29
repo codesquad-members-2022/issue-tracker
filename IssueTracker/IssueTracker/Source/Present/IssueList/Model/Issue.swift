@@ -16,9 +16,19 @@ struct Issue: Codable {
         case closed
     }
 
+    let id: Int
     let title: String
-//    let description: String
-//    let milestone: Milestone?
-//    let tag: Tag?
-//    let state: IssueState?
+    let description: String?
+    let milestone: Milestone?
+    let tag: [Tag]?
+//    let state: State
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case description = "body"
+        case milestone
+        case tag = "labels"
+//        case state
+    }
 }
