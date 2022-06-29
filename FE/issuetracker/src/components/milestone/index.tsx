@@ -9,10 +9,11 @@ import { mileStoneData } from 'context/milestone';
 import { keyMaker } from 'utils/util';
 
 function MileStonePage() {
-  const [isAddButtonClicked, setButtonClick] = useState(false);
+  const [isAddButtonClicked, setAddButtonClick] = useState(false);
   const handleButtonClick = () => {
-    setButtonClick(!isAddButtonClicked);
+    setAddButtonClick(!isAddButtonClicked);
   };
+
   return (
     <S.MileStonePageWrapper>
       <LabelAndMileStoneBtns
