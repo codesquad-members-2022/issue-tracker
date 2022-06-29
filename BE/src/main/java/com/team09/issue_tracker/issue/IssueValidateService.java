@@ -18,11 +18,7 @@ public class IssueValidateService {
 	private final LabelService labelService;
 	private final MemberService memberService;
 
-	public void validateMyMilestoneId(Long milestoneId, Long memberId) {
-		if (!milestoneService.isMyMilestone(milestoneId, memberId)) {
-			throw new MilestoneInvalidException();
-		}
-	}
+
 
 	public void validateMyLabelIds(List<Long> labelIds, Long memberId) {
 		if (!labelService.isMyLabels(labelIds, memberId)) {

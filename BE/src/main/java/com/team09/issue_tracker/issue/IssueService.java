@@ -18,6 +18,7 @@ import com.team09.issue_tracker.label.Label;
 import com.team09.issue_tracker.member.Member;
 import com.team09.issue_tracker.milestone.Milestone;
 import com.team09.issue_tracker.milestone.MilestoneRepository;
+import com.team09.issue_tracker.milestone.MilestoneService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,7 @@ public class IssueService {
 	private final MilestoneRepository milestoneRepository;
 
 	private final IssueValidateService issueValidateService;
+	private final MilestoneService milestoneService;
 
 	@Transactional(readOnly = true)
 	public List<IssueListResponseDto> selectOpenedList(Long memberId) {
@@ -61,7 +63,8 @@ public class IssueService {
 		boolean isOpened = true;
 
 		//1. mileStone
-		Milestone milestone = createMilestone(issueSaveRequestDto, memberId);
+		Milestone milestone = milestoneService.createMilestone(issueSaveRequestDto.getMilestoneId()
+			, memberId);
 
 		//2. Issue
 		Issue issue = Issue.of(issueSaveRequestDto.getTitle(),
@@ -86,25 +89,18 @@ public class IssueService {
 		return savedIssue.toCommonResponse();
 	}
 
-	private Milestone createMilestone(IssueUpdateRequestDto issueUpdateRequestDto, Long memberId) {
-		Optional.ofNullable(issueUpdateRequestDto.getMilestoneId())
-			.ifPresent(
-				milestoneId -> issueValidateService.validateMyMilestoneId(milestoneId, memberId));
+	private void savedIssueAssignee(Issue issue, Issue savedIssue, List<Long> assigneeIds) {
+		if (assigneeIds.size() > 0) {
+			List<IssueAssignee> issueAssignees = assigneeIds.stream()
+				.map(assigneeId -> IssueAssignee.of(savedIssue, Member.of(assigneeId)))
+				.collect(Collectors.toList());
 
-		return Optional.ofNullable(issueUpdateRequestDto.getMilestoneId())
-			.map(Milestone::of)
-			.orElse(null);
-	}
-
-	private Milestone createMilestone(IssueSaveRequestDto issueSaveRequestDto, Long memberId) {
-		Optional.ofNullable(issueSaveRequestDto.getMilestoneId())
-			.ifPresent(
-				milestoneId -> issueValidateService.validateMyMilestoneId(milestoneId, memberId));
-
-		Milestone milestone = Optional.ofNullable(issueSaveRequestDto.getMilestoneId())
-			.map(Milestone::of)
-			.orElse(null);
-		return milestone;
+			List<IssueAssignee> savedIssueAssignees = issueAssignees.stream()
+				.map(issueAssignee -> issueAssigneeRepository.save(issueAssignee))
+				.collect(Collectors.toList());
+			//연관관계 편의메서드
+			issue.addIssueAssignee(savedIssueAssignees);
+		}
 	}
 
 	private void saveIssueLabel(Issue savedIssue, Long issueId, List<Long> labelIds) {
@@ -118,20 +114,6 @@ public class IssueService {
 				.collect(Collectors.toList());
 			//연관관계 편의 메서드
 			savedIssue.addIssueLabel(savedIssueLabels);
-		}
-	}
-
-	private void savedIssueAssignee(Issue issue, Issue savedIssue, List<Long> assigneeIds) {
-		if (assigneeIds.size() > 0) {
-			List<IssueAssignee> issueAssignees = assigneeIds.stream()
-				.map(assigneeId -> IssueAssignee.of(savedIssue, Member.of(assigneeId)))
-				.collect(Collectors.toList());
-
-			List<IssueAssignee> savedIssueAssignees = issueAssignees.stream()
-				.map(issueAssignee -> issueAssigneeRepository.save(issueAssignee))
-				.collect(Collectors.toList());
-			//연관관계 편의메서드
-			issue.addIssueAssignee(savedIssueAssignees);
 		}
 	}
 
@@ -184,8 +166,8 @@ public class IssueService {
 		issue.setTitle(issueUpdateRequestDto.getTitle());
 		issue.setContent(issueUpdateRequestDto.getContent());
 		issue.setOpened(issueUpdateRequestDto.isOpened());
-		issue.setMilestone(createMilestone(issueUpdateRequestDto, memberId));
-
+		issue.setMilestone(milestoneService.createMilestone(issueUpdateRequestDto.getMilestoneId()
+			, memberId));
 
 		CommonResponseDto response = updateIssueLabel(
 			issueUpdateRequestDto, issueId, issue);
@@ -194,10 +176,8 @@ public class IssueService {
 	}
 
 	/**
-	 * 	label 수정
-	 * 		 1.기존리스트 issueLabels 검색
-	 * 		 2.기존리스트에서 삭제된 레이블, DB삭제
-	 * 		 3.기존리스트에 없는 추가로 선택된 레이블, DB추가
+	 * label 수정 1.기존리스트 issueLabels 검색 2.기존리스트에서 삭제된 레이블, DB삭제 3.기존리스트에 없는 추가로 선택된 레이블, DB추가
+	 *
 	 * @param issueUpdateRequestDto
 	 * @param issueId
 	 * @param issue
