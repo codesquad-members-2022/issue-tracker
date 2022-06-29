@@ -5,7 +5,7 @@ import * as L from 'components/LabelPage/styled/styled.labelList';
 import LabelAndMileStoneBtns from 'components/common/LabelAndMileStoneBtns';
 import MileStone from 'components/milestone/MileStone';
 import NewMileStone from 'components/milestone/NewMileStone';
-import { mileStoneData } from 'context/milestone';
+import { mileStoneData } from 'store/milestone';
 import { keyMaker } from 'utils/util';
 
 function MileStonePage() {

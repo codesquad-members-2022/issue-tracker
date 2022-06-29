@@ -7,7 +7,7 @@ import CancleAndSaveButtons from 'components/Issue/buttons/CancleAndSaveButtons'
 import EditAndCloseButtons from 'components/Issue/buttons/EditAndCloseButtons';
 import IssueTitleContent from 'components/Issue/IssueTitleContent';
 import IssueTitleInput from 'components/Issue/IssueTitleInput';
-import { issueState } from 'context/issue';
+import { issueState } from 'store/issue';
 import { calculateInterval, getNowISOString } from 'utils/util';
 
 function IssueTitle() {

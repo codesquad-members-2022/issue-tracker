@@ -2,7 +2,7 @@ import { useRecoilState } from 'recoil';
 import * as S from 'components/milestone/styled/styled.newMileStone';
 import MileStoneInput from 'components/milestone/MileStoneInput';
 import SaveButton from 'components/common/SaveButton';
-import { mileStone, mileStoneType, initialMileStone } from 'context/milestone';
+import { mileStone, mileStoneType, initialMileStone } from 'store/milestone';
 
 interface Props {
   mileStoneData?: mileStoneType | undefined;

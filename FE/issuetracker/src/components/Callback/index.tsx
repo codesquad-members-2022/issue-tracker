@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { loginState } from 'context/loginState';
-import { userState } from 'context/userState';
+import { loginState } from 'store/loginState';
+import { userState } from 'store/userState';
 
 function Callback() {
   const navigate = useNavigate();

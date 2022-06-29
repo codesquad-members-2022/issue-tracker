@@ -10,7 +10,7 @@ export const DropdownPanel = styled.div<{ isClicked: boolean }>`
   position: absolute;
   z-index: 10;
   display: ${({ isClicked }) => (isClicked ? 'block' : 'none')};
-  right: -30px;
+  right: 30px;
   top: 30px;
   width: 240px;
   height: 138px;

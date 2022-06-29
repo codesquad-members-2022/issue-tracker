@@ -8,7 +8,7 @@ import NewIssue from 'components/newIssue';
 import LabelPage from 'components/LabelPage';
 import MileStone from 'components/milestone';
 import Callback from 'components/Callback';
-import { loginState } from 'context/loginState';
+import { loginState } from 'store/loginState';
 
 interface Props {
   login: boolean;

@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import * as S from 'components/Issue/styled/issueDetail';
 import IssueLabel from 'components/Issue/IssueLabel';
-import { issueState } from 'context/issue';
+import { issueState } from 'store/issue';
 import { calculateInterval } from 'utils/util';
 
 function IssueDetail() {

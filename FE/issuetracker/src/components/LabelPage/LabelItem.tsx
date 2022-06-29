@@ -1,6 +1,6 @@
 import * as I from 'design/icons';
 import * as S from 'components/LabelPage/styled/styled.labelItem';
-import { LabelType } from 'context/label';
+import { LabelType } from 'store/label';
 import Label from 'components/common/Common';
 
 type LabelItemType = {

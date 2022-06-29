@@ -4,7 +4,7 @@ import * as I from 'design/icons';
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 import SideBar from 'components/common/Sidebar';
 import { useRecoilValue } from 'recoil';
-import { newIssueState, newIssueType } from 'context/newIssue';
+import { newIssueState, newIssueType } from 'store/newIssue';
 
 function NewIssue() {
   const newIssueData: newIssueType = useRecoilValue(newIssueState);

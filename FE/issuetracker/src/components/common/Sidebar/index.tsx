@@ -1,5 +1,5 @@
 import * as S from 'components/common/Sidebar/styled';
-import { newIssueType } from 'context/newIssue';
+import { newIssueType } from 'store/newIssue';
 import { keyMaker } from 'utils/util';
 import Label, { ProgressBar } from '../Common';
 import DropDown from './Dropdown';

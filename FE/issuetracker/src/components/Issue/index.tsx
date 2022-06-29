@@ -3,7 +3,7 @@ import IssueTitle from 'components/Issue/IssueTitle';
 import IssueDetail from 'components/Issue/IssueDetail';
 import IssueComments from 'components/Issue/IssueCommentSection';
 import { useRecoilValue } from 'recoil';
-import { issueState } from 'context/issue';
+import { issueState } from 'store/issue';
 import SideBar from 'components/common/Sidebar';
 
 function Issue() {

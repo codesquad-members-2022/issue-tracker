@@ -5,7 +5,7 @@ import * as S from 'components/milestone/styled/styled.milestone';
 import { ProgressBar } from 'components/common/Common';
 import EditAndDeleteBtn from 'components/common/LabelAndMileStoneBtns/EditAndDeleteBtn';
 import NewMileStone from 'components/milestone/NewMileStone';
-import { mileStoneType, mileStoneData } from 'context/milestone';
+import { mileStoneType, mileStoneData } from 'store/milestone';
 import { calculatePercent, getDataByKey } from 'utils/util';
 
 interface Props {

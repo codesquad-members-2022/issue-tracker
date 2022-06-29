@@ -2,7 +2,7 @@ import { useRecoilValue } from 'recoil';
 import * as S from 'components/Issue/styled/issueCommentSection';
 import IssueComment from 'components/Issue/IssueComment';
 import InputComment from 'components/Issue/InputComment';
-import { issueState } from 'context/issue';
+import { issueState } from 'store/issue';
 
 function IssueCommentSection() {
   const issueData = useRecoilValue(issueState);

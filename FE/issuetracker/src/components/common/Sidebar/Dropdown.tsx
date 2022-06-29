@@ -13,7 +13,7 @@ import {
   MileStoneType,
 } from 'data';
 import { keyMaker } from 'utils/util';
-import { newIssueState } from 'context/newIssue';
+import { newIssueState } from 'store/newIssue';
 import Label from '../Common';
 
 type DropdownType = {
@@ -98,12 +98,14 @@ function DropDown({ subject }: DropdownType) {
         content = contentsData.map((content, idx) => {
           const key = keyMaker();
           return (
-            <S.DropDownList key={key} idx={idx}>
-              <S.DropDownContent
-                onClick={() => {
-                  setAssignee(content);
-                }}
-              >
+            <S.DropDownList
+              key={key}
+              idx={idx}
+              onClick={() => {
+                setAssignee(content);
+              }}
+            >
+              <S.DropDownContent>
                 <S.SmallAcountImg src={content.profileImage} />
                 {content.name}
               </S.DropDownContent>
@@ -117,12 +119,14 @@ function DropDown({ subject }: DropdownType) {
         content = contentsData.map((content, idx) => {
           const key = keyMaker();
           return (
-            <S.DropDownList key={key} idx={idx}>
-              <S.DropDownContent
-                onClick={() => {
-                  setLabels(content);
-                }}
-              >
+            <S.DropDownList
+              key={key}
+              idx={idx}
+              onClick={() => {
+                setLabels(content);
+              }}
+            >
+              <S.DropDownContent>
                 <Label title={content.title} color={content.color} />
               </S.DropDownContent>
               <I.offCheckCircle />
@@ -136,11 +140,11 @@ function DropDown({ subject }: DropdownType) {
           const key = keyMaker();
           return (
             <S.DropDownList
+              key={key}
+              idx={idx}
               onClick={() => {
                 setMileStone(content);
               }}
-              key={key}
-              idx={idx}
             >
               <S.DropDownContent>{content.title}</S.DropDownContent>
               <I.offCheckCircle />

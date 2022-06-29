@@ -6,7 +6,7 @@ import * as S from 'components/Issue/styled/inputComment';
 import SaveButton from 'components/common/SaveButton';
 
 import userImageURL from 'assets/images/UserImageLarge.svg';
-import { issueState } from 'context/issue';
+import { issueState } from 'store/issue';
 
 function InputComment() {
   const [issueData, setIssueData] = useRecoilState(issueState);
