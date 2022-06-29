@@ -93,8 +93,11 @@ final class IssueCell: UICollectionViewCell {
         }
     }
 
-    func setComponenets() {
-
+    func setComponenets(with viewModel: IssueCellViewModel) {
+        titleLabel.text = viewModel.title
+        descriptionLabel.text = viewModel.description
+        tagLabel.text = viewModel.tag
+        milestoneLabel.text = viewModel.milestone
     }
 
 }

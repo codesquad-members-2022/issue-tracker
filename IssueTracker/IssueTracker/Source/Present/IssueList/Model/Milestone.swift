@@ -11,13 +11,11 @@ struct Milestone: Codable {
     let id: Int
     let title: String
     let description: String?
-//    let completeDay: String?
 
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case description
-//        case completeDay
     }
 
 }
