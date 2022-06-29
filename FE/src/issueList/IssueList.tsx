@@ -52,7 +52,19 @@ function IssueList() {
       .then((res) => res.json())
       .then((data) => {
         setIssueList(data);
-        dispatch({ type: 'INIT', payload: { data: data.issues } });
+        const initSelectedIssues = (issues: IssueType[]) => {
+          const initialSelectedIssue: SelectedIssueType = {};
+
+          issues.forEach(({ id }) => {
+            initialSelectedIssue[id] = false;
+          });
+
+          return initialSelectedIssue;
+        };
+        dispatch({
+          type: 'INIT',
+          payload: { initialSelectedIssues: initSelectedIssues(data.issues) }
+        });
       });
   }, [issueListState]);
 
