@@ -60,3 +60,4 @@ class FriendAdapter(val userAdapterEventListener: UserAdapterEventListener) :
         }
     }
 }
+

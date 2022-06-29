@@ -5,12 +5,14 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.issu_tracker.R
 import com.example.issu_tracker.data.Label
 
@@ -43,6 +45,14 @@ fun setLabels(view: LinearLayout, list: List<Label>) {
     }
 
 
+}
+
+@BindingAdapter("image")
+fun setImage(view: ImageView, imageUrl: String) {
+    Glide.with(view.context)
+        .load(imageUrl)
+        .circleCrop()
+        .into(view)
 }
 
 @BindingAdapter("labelListOnRecyclerview")

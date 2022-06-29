@@ -15,9 +15,6 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.view.*
-import android.widget.AdapterView
-import android.widget.Spinner
-import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -31,10 +28,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.issu_tracker.R
+import com.example.issu_tracker.data.ConditionType
 import com.example.issu_tracker.databinding.FragmentIssueEditorBinding
-import com.example.issu_tracker.ui.common.Constants
-import com.example.issu_tracker.ui.filter.FilterFragment
-import com.example.issu_tracker.ui.filter.SpinnerAdapter
+import com.example.issu_tracker.ui.common.setSpinner
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
@@ -54,6 +50,7 @@ class IssueEditor : Fragment() {
     private var startSelectionOfIssueBody = 0
     private var endSelectionOfIssueBody = 0
     private var ssbForIssueBody: SpannableStringBuilder = SpannableStringBuilder()
+    private var spinnerColor: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +64,7 @@ class IssueEditor : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(binding.root)
         binding.tbIssueEditor.firstActionItem.isEnabled = true
+        spinnerColor = ContextCompat.getColor(requireContext(), R.color.label2)
         launcherToGetImageFromGallery = registerImageFromGalleryLauncher()
         launcherRequestPermission = registerRequestPermissionLauncher()
         markwon = Markwon.builder(requireContext())
@@ -143,46 +141,38 @@ class IssueEditor : Fragment() {
 
     private suspend fun setAssigneeSpinner() {
         viewModel.assigneeStateFlow.collect {
-            setSpinner(binding.cbIssueEditorAssignee.spinner, it, Constants.CONDITION_TYPE_ASSIGNEE)
+            binding.cbIssueEditorAssignee.spinner.setSpinner(
+                this.requireContext(),
+                it,
+                ConditionType.ASSIGNEE,
+                viewModel,
+                spinnerColor
+            )
         }
     }
 
     private suspend fun setLabelSpinner() {
         viewModel.labelStateFlow.collect {
-            setSpinner(binding.cbIssueEditorLabel.spinner, it, Constants.CONDITION_TYPE_LABEL)
+            binding.cbIssueEditorLabel.spinner.setSpinner(
+                this.requireContext(),
+                it,
+                ConditionType.LABEL,
+                viewModel,
+                spinnerColor
+            )
         }
     }
 
     private suspend fun setMileStoneSpinner() {
         viewModel.mileStoneStateFlow.collect {
-            setSpinner(
-                binding.cbIssueEditorMilestone.spinner,
+            binding.cbIssueEditorMilestone.spinner.setSpinner(
+                this.requireContext(),
                 it,
-                Constants.CONDITION_TYPE_MILESTONE
+                ConditionType.MILESTONE,
+                viewModel,
+                spinnerColor
             )
         }
-    }
-
-    private fun setSpinner(spinner: Spinner, list: List<String>, conditionType: Int) {
-        val spinnerAdapter = SpinnerAdapter(this.requireContext(), R.layout.item_spinner, list)
-        spinner.adapter = spinnerAdapter
-        spinner.setSelection(list.size - FilterFragment.SPINNER_DEFAULT_INDEX)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedView = view as TextView
-                selectedView.setTextColor(ContextCompat.getColor(requireContext(), R.color.label2))
-                viewModel.inputSpinnerValue(selectedView.text.toString(), conditionType)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
     }
 
     private fun setNavigationIconEventListener() {
