@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class IssueListViewModel {
+struct IssueListViewModel {
     private let issueService: IssueService
     
     var issueViewModels: Observable<[IssueTableCellViewModel]?> = Observable(nil)
@@ -44,7 +44,7 @@ final class IssueListViewModel {
     }
     
     private func convertToViewModel(_ issue: Issue) -> IssueTableCellViewModel {
-        let tableCellViewModel = IssueTableCellViewModel()
+        var tableCellViewModel = IssueTableCellViewModel()
         tableCellViewModel.configureCellData(with: issue)
         return tableCellViewModel
     }

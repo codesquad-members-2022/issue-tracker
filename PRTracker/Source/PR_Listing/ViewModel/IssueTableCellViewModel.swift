@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class IssueTableCellViewModel {
+struct IssueTableCellViewModel {
     var id: Int = 0
     var title: String = ""
     var state: String = ""
@@ -15,7 +15,7 @@ final class IssueTableCellViewModel {
     var projectName: String = ""
     var labelList = [Label]()
     
-    func configureCellData(with data: Issue) {
+    mutating func configureCellData(with data: Issue) {
         self.id = data.id
         self.title = data.title
         self.content = data.body ?? "No content"
