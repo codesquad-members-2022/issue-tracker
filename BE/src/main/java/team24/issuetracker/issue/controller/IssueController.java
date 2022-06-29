@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import team24.issuetracker.issue.domain.dto.IssueListResponse;
 import team24.issuetracker.issue.application.IssueService;
+import team24.issuetracker.issue.domain.dto.IssueListResponse;
+import team24.issuetracker.issue.domain.dto.IssueRequest;
 
 @RestController
 @RequestMapping("/issues")
@@ -18,6 +21,11 @@ import team24.issuetracker.issue.application.IssueService;
 public class IssueController {
 
 	private final IssueService issueService;
+
+	@PostMapping("new")
+	public void writeIssue(@RequestBody IssueRequest issueRequest) {
+		issueService.add(issueRequest);
+	}
 
 	@GetMapping("created-by/{id}")
 	public List<IssueListResponse> getByWriter(@PathVariable("id") Long id) {
