@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 const URI = 'http://louie-03.com/login/callback';
 
 function Callback() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const [imgLink, setImgLink] = useState('');
 
   useEffect(() => {
     getToken();
@@ -17,8 +18,11 @@ function Callback() {
     const data = await axios.get(URI, {
       params: { code },
     });
-    console.log(data);
+
+    setImgLink(data.data.avatarImageUrl);
   };
+
+  if (imgLink) return <img src={imgLink} alt="img" />;
 
   return <div>loading.....</div>;
 }
