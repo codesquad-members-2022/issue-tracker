@@ -17,19 +17,14 @@ const $FilterBar = styled.div<I$FilterBar>`
   border: 1px solid ${({ theme }) => theme.COLOR.line};
   border-radius: 11px;
   ${({ isFocus }) => isFocus && focusStyle}
-  overflow: hidden;
 `;
 
 const $InputWrapper = styled.div`
   display: flex;
-  padding: 0 0 0 24px;
+  padding: 0 11px 0 24px;
   align-items: center;
   flex: 1;
   border-left: 1px solid ${({ theme }) => theme.COLOR.line};
-  background-color: ${({ theme }) => theme.COLOR.inputBackground};
-  :focus-within {
-    background-color: ${({ theme }) => theme.PALETTE.WHITE};
-  }
 `;
 
 export { $FilterBar, $InputWrapper };
