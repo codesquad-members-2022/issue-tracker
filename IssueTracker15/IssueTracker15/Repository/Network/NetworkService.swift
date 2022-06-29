@@ -5,7 +5,7 @@
 import Foundation
 import Alamofire
 
-class NetworkService<T: Codable> {
+class NetworkService<T: Codable>: CommonService {
     
     private var urgentSession = Session(requestQueue: DispatchQueue.global(qos: .userInteractive))
     private var effectiveSession = Session(requestQueue: DispatchQueue.global(qos: .background))
@@ -14,6 +14,14 @@ class NetworkService<T: Codable> {
     func request(_ request: URLRequest, urgency: RequestUrgency) -> DataResponsePublisher<T>? {
         guard let method = request.method else {
             return nil
+        }
+        
+        AF.request(request).response { response in
+            guard let data = response.value else {
+                return
+            }
+            
+            print(data!.base64EncodedString())
         }
         
         switch method {
@@ -70,4 +78,8 @@ private extension Int {
         
         return nil
     }
+}
+
+protocol CommonService {
+    
 }

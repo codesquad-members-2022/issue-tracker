@@ -38,7 +38,7 @@ class IssueListTableViewController: UIViewController, ViewBinding {
     
     // MARK: - IssueTableView Properties
     
-    private var tableView = UITableView()
+    private var tableView = IssueTableView()
     
     private var viewStatus: IssueListStatus = .list {
         didSet {
@@ -61,13 +61,14 @@ class IssueListTableViewController: UIViewController, ViewBinding {
         tableView.dataSource = self
         tableView.rowHeight = 199
         tableView.tableHeaderView = IssueListSearchBar()
+        
+        vm.request(tableView, param: IssueAction.getIssue)
     }
     
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
         if let cell = target as? CELL {
             
-            let isSelected = vm.selectList(cell)
-            target.receive(isSelected)
+            vm.request(cell, param: IssueAction.selectIssue)
             
         } else if (target as? IssueFilterItemSelectViewController) != nil {
             
@@ -126,31 +127,23 @@ extension IssueListTableViewController: UITableViewDataSource {
 
 extension IssueListTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard viewStatus == .list else {
-            return nil
-        }
-        
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제", handler: { _, _, completionHandler in
-            
-            guard let cell = tableView.cellForRow(at: indexPath) as? CELL, let issue = cell.dto else {
-                completionHandler(false)
+            guard let cell = tableView.cellForRow(at: indexPath) as? CELL else { completionHandler(false)
                 return
             }
             
-            self.vm.deleteIssue(issue, target: cell)
+            self.vm.request(cell, param: IssueAction.deleteIssue)
             completionHandler(true)
         })
         deleteAction.image = UIImage(systemName: "xmark.circle")
         deleteAction.backgroundColor = .red
         
         let closeAction = UIContextualAction(style: .normal, title: "닫기") { _, _, completionHandler in
-            
-            guard let cell = tableView.cellForRow(at: indexPath) as? CELL, let issue = cell.dto else {
-                completionHandler(false)
+            guard let cell = tableView.cellForRow(at: indexPath) as? CELL else { completionHandler(false)
                 return
             }
             
-            self.vm.closeIssue(issue, target: cell)
+            self.vm.request(cell, param: IssueAction.closeIssue)
             completionHandler(true)
         }
         closeAction.image = UIImage(systemName: "archivebox")

@@ -9,18 +9,18 @@ import Foundation
 
 class MockContainer: Resolvable {
     typealias Value = MockProtocol
+    typealias Creator = () -> Value
     
-    var map: [ObjectIdentifier: Value] = [:]
+    var map: [ObjectIdentifier: Creator] = [:]
     
-    func regist<T>(instance: T) {
-        let identifier = ObjectIdentifier(T.self)
-        guard let useCase = instance as? Value else { return }
-        self.map[identifier] = useCase
+    func regist<T: Value>(type: T.Type, make: @escaping Creator) {
+        let identifier = ObjectIdentifier(type)
+        map[identifier] = make
     }
     
-    func resolve<T>(type: T.Type) -> Value? {
+    func resolve<T: Value>(type: T.Type) -> Value? {
         let identifier = ObjectIdentifier(type)
         guard let useCase = map[identifier] else { return nil }
-        return useCase
+        return useCase()
     }    
 }
