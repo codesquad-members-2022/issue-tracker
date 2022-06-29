@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class IssueListModel {
+final class IssueListModel {
     
     private var baseURL: URL? {
         return URL(string: "https://api.github.com")
@@ -39,7 +39,7 @@ class IssueListModel {
         
         return Repository
             .shared
-            .networkListService
+            .getRESTNetworkService(type: [IssueDTO].self)?
             .request(request, urgency: .effective)
     }
 }

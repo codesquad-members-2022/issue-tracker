@@ -23,6 +23,7 @@ class NetworkService<T: Codable>: CommonService {
 //            }
 //
 //            let result = try? JSONDecoder().decode([IssueDTO].self, from: data!)
+//            print(data!.base64EncodedString())
 //            print(result)
 //        }
         

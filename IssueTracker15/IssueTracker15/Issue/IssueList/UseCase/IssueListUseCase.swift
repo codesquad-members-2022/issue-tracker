@@ -24,6 +24,10 @@ class IssueListUseCase: UseCaseResponsible {
                 case .success(let result):
                     completionBlock(result)
                 case .failure(let error):
+//                    error.responseCode
+//                    error.isSessionDeinitializedError
+//                    error.errorDescription
+//                    error.localizedDescription
                     completionBlock(error)
                 }
             })

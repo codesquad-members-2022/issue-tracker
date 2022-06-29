@@ -10,7 +10,20 @@ import Foundation
 class Repository {
     static let shared = Repository()
 
-    let serviceWrapper = ContainerWrapper(container: ServiceContainer())
-    let networkService = NetworkService<IssueDTO>()
-    let networkListService = NetworkService<[IssueDTO]>()
+    private var serviceWrapper = ContainerWrapper(container: ServiceContainer())
+    
+    func getRESTNetworkService<T: Codable>(type: T.Type) -> NetworkService<T>? {
+        
+        guard let service = serviceWrapper.resolve(type: type.self) else {
+            
+            serviceWrapper.regist(type: type.self) {
+                return NetworkService<T>()
+            }
+            
+            let service = serviceWrapper.resolve(type: type.self)
+            return service?() as? NetworkService<T>
+        }
+        
+        return service() as? NetworkService<T>
+    }
 }
