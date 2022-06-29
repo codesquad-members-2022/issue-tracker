@@ -8,16 +8,17 @@ function Callback() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    const getToken = async () => {
-      const code = searchParams.get('code') as string;
-
-      const data = await axios.get(URI, {
-        params: { code },
-      });
-      console.log(data);
-    };
     getToken();
   }, []);
+
+  const getToken = async () => {
+    const code = searchParams.get('code') as string;
+
+    const data = await axios.get(URI, {
+      params: { code },
+    });
+    console.log(data);
+  };
 
   return <div>loading.....</div>;
 }

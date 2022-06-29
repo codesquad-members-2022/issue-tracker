@@ -1,27 +1,9 @@
-// import { useEffect } from 'react';
-import axios from 'axios';
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
+const URI = 'http://louie-03.com/login';
+
 export function Login() {
-  const URI = 'http://louie-03.com/login';
-
-  // const getToken = async () => {
-  //   try {
-  //     const response = await axios.get(URI);
-  //     // const data = await response;
-
-  //     // eslint-disable-next-line no-console
-  //     console.log('ssss', response);
-  //   } catch (error) {
-  //     // eslint-disable-next-line no-console
-  //     console.log('???????error???????');
-  //     // eslint-disable-next-line no-console
-  //     console.log(error);
-  //   }
-  // };
-  // getToken();
-
   return (
     <S.Container>
       <S.Wrapper>
