@@ -37,7 +37,6 @@ public class IssueService {
 	private final IssueAssigneeRepository issueAssigneeRepository;
 	private final MilestoneRepository milestoneRepository;
 
-	private final IssueValidateService issueValidateService;
 	private final MilestoneService milestoneService;
 
 	@Transactional(readOnly = true)
@@ -62,31 +61,21 @@ public class IssueService {
 	public CommonResponseDto create(IssueSaveRequestDto issueSaveRequestDto, Long memberId) {
 		boolean isOpened = true;
 
-		//1. mileStone
 		Milestone milestone = milestoneService.createMilestone(issueSaveRequestDto.getMilestoneId()
 			, memberId);
 
-		//2. Issue
 		Issue issue = Issue.of(issueSaveRequestDto.getTitle(),
 			issueSaveRequestDto.getContent(), memberId,
 			isOpened, milestone);
 
-		Issue savedIssue = issueRepository.save(issue);
-		Long issueId = savedIssue.getId();
+		issue = issueRepository.save(issue);
+		Long issueId = issue.getId();
 
-		//3. labelsIds
-		List<Long> labelIds = issueSaveRequestDto.getLabelIds();
-		validateLabelIds(labelIds, memberId);
+		saveIssueLabel(issue, issueId, issueSaveRequestDto.getLabelIds());
 
-		saveIssueLabel(savedIssue, issueId, labelIds);
+		savedIssueAssignee(issue, issue, issueSaveRequestDto.getAssigneeIds());
 
-		//4. assigneeIds
-		List<Long> assigneeIds = issueSaveRequestDto.getAssigneeIds();
-		validateAssigneeIds(assigneeIds);
-
-		savedIssueAssignee(issue, savedIssue, assigneeIds);
-
-		return savedIssue.toCommonResponse();
+		return issue.toCommonResponse();
 	}
 
 	private void savedIssueAssignee(Issue issue, Issue savedIssue, List<Long> assigneeIds) {
@@ -103,7 +92,7 @@ public class IssueService {
 		}
 	}
 
-	private void saveIssueLabel(Issue savedIssue, Long issueId, List<Long> labelIds) {
+	private void saveIssueLabel(Issue issue, Long issueId, List<Long> labelIds) {
 		if (!labelIds.isEmpty()) {
 			List<IssueLabel> issueLabels = labelIds.stream()
 				.map(labelId -> IssueLabel.of(issueId, labelId))
@@ -113,7 +102,7 @@ public class IssueService {
 				.map(issueLabel -> issueLabelRepository.save(issueLabel))
 				.collect(Collectors.toList());
 			//연관관계 편의 메서드
-			savedIssue.addIssueLabel(savedIssueLabels);
+			issue.addIssueLabel(savedIssueLabels);
 		}
 	}
 
@@ -156,9 +145,6 @@ public class IssueService {
 	@Transactional
 	public CommonResponseDto update(IssueUpdateRequestDto issueUpdateRequestDto, Long issueId,
 		Long memberId) {
-
-		List<Long> labelIds = issueUpdateRequestDto.getLabelIds();
-		validateLabelIds(labelIds, memberId);
 
 		Issue issue = issueRepository.findById(issueId)
 			.orElseThrow(() -> new IssueNotFoundException());
@@ -278,15 +264,4 @@ public class IssueService {
 		return new SelectableLabelMilestoneResponse(labelsResponse, milestoneResponse);
 	}
 
-	private void validateAssigneeIds(List<Long> assigneeIds) {
-		if (assigneeIds.size() > 0) {
-			issueValidateService.validateMember(assigneeIds);
-		}
-	}
-
-	private void validateLabelIds(List<Long> labelIds, Long memberId) {
-		if (labelIds.size() > 0) {
-			issueValidateService.validateMyLabelIds(labelIds, memberId);
-		}
-	}
 }
