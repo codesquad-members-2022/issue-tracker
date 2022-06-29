@@ -1,5 +1,7 @@
 package team24.issuetracker.member.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import team24.issuetracker.member.domain.Member;
+import team24.issuetracker.member.domain.dto.MemberResponse;
 import team24.issuetracker.member.exception.MemberNotFoundException;
 import team24.issuetracker.member.repository.MemberRepository;
 import team24.issuetracker.oauth.dto.GitHubUser;
@@ -48,6 +51,14 @@ public class MemberService {
 	}
 
 	public Member findByIdOrThrow(Long id) {
-		return memberRepository.findById(id).orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND_MESSAGE));
+		return memberRepository.findById(id)
+			.orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND_MESSAGE));
+	}
+
+	public List<MemberResponse> findMemberResponse() {
+		return memberRepository.findAll()
+			.stream()
+			.map(member -> new MemberResponse(member.getId(),member.getName(),member.getProfileImage()))
+			.collect(Collectors.toList());
 	}
 }
