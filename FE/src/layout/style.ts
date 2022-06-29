@@ -18,6 +18,8 @@ const Contents = styled.main`
   padding: 0 80px;
 `;
 
-const Footer = styled.footer``;
+const Footer = styled.footer`
+  height: 120px;
+`;
 
 export { Wrapper, Header, Contents, Footer };
