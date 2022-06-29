@@ -11,14 +11,18 @@ const printError = (error: AxiosError) => {
 function useMilestoneListData() {
   return useQuery(milestoneListQueryKeys, () => getMilestoneList(), {
     onSuccess: data => {},
-    onError: printError
+    onError: printError,
+    staleTime: Infinity,
+    cacheTime: Infinity
   });
 }
 
 function useMilestoneCountData() {
   return useQuery(milestoneCountQueryKeys, () => getMilestoneCount(), {
     onSuccess: data => {},
-    onError: printError
+    onError: printError,
+    staleTime: Infinity,
+    cacheTime: Infinity
   });
 }
 

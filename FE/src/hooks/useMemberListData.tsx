@@ -11,14 +11,18 @@ const printError = (error: AxiosError) => {
 function useMemberListData() {
   return useQuery(memberListQueryKeys, () => getMemberList(), {
     onSuccess: data => {},
-    onError: printError
+    onError: printError,
+    staleTime: Infinity,
+    cacheTime: Infinity
   });
 }
 
 function useMemberCountData() {
   return useQuery(currentMemberQueryKeys, () => getCurrentMember(), {
     onSuccess: data => {},
-    onError: printError
+    onError: printError,
+    staleTime: Infinity,
+    cacheTime: Infinity
   });
 }
 

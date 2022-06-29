@@ -5,7 +5,7 @@ interface IDropDown extends I$PanelProps {
   indicatorGap?: string;
   indicatorPadding?: string;
   panelName: string;
-  options: Option[];
+  options: Option[] | [];
   initialValue?: string;
 }
 

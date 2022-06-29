@@ -11,14 +11,18 @@ const printError = (error: AxiosError) => {
 function useLabelListData() {
   return useQuery(labelListQueryKeys, () => getLabelList(), {
     onSuccess: data => {},
-    onError: printError
+    onError: printError,
+    staleTime: Infinity,
+    cacheTime: Infinity
   });
 }
 
 function useLabelCountData() {
   return useQuery(labelCountQueryKeys, () => getLabelCount(), {
     onSuccess: data => {},
-    onError: printError
+    onError: printError,
+    staleTime: Infinity,
+    cacheTime: Infinity
   });
 }
 
