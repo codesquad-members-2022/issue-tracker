@@ -8,16 +8,14 @@ export type IssueListCheckStateType = {
 
 export type IssueListActionType = {
   type: 'INIT' | 'ALL_CHECK' | 'ALL_UNCHECK' | 'ITEM_CHECK' | 'ITEM_UNCHECK';
-  payload: { id?: string; data?: IssueType[] };
+  payload?: { id?: string; data?: IssueType[] };
 };
 
 function checkReducer(
   state: IssueListCheckStateType,
   action: IssueListActionType
 ): IssueListCheckStateType {
-  const { type, payload } = action;
-
-  switch (type) {
+  switch (action.type) {
     case 'INIT': {
       const initSelectedIssues = (issues: IssueType[]) => {
         const initialSelectedIssue: SelectedIssueType = {};
@@ -31,7 +29,7 @@ function checkReducer(
 
       return {
         headerCheckBox: 'initial',
-        selectedIssues: initSelectedIssues(payload.data!)
+        selectedIssues: initSelectedIssues(action.payload?.data!)
       };
     }
     case 'ALL_CHECK': {
@@ -62,7 +60,7 @@ function checkReducer(
       const updatedSelectedIssues: SelectedIssueType = {
         ...state.selectedIssues
       };
-      updatedSelectedIssues[payload.id!] = true;
+      updatedSelectedIssues[action.payload?.id!] = true;
 
       let headerCheckBox: CheckBoxType;
       if (
@@ -82,7 +80,7 @@ function checkReducer(
       const updatedSelectedIssues: SelectedIssueType = {
         ...state.selectedIssues
       };
-      updatedSelectedIssues[payload.id!] = false;
+      updatedSelectedIssues[action.payload?.id!] = false;
 
       let headerCheckBox: CheckBoxType;
       if (

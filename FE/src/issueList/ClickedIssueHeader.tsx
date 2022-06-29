@@ -14,9 +14,9 @@ function ClickedIssueHeader() {
 
   const handleIssueHeaderCheckBoxClick = () => {
     if (state.headerCheckBox === 'active') {
-      dispatch({ type: 'ALL_UNCHECK', payload: {} });
+      dispatch({ type: 'ALL_UNCHECK' });
     } else {
-      dispatch({ type: 'ALL_CHECK', payload: {} });
+      dispatch({ type: 'ALL_CHECK' });
     }
   };
 
