@@ -1,5 +1,5 @@
 //
-//  TokenResource.swift
+//  GetAccessToken.swift
 //  PRTracker
 //
 //  Created by Bumgeun Song on 2022/06/27.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TokenResource: APIResource {
+struct GetAccessToken: APIEndpoint {
     
     private let clientID: String
     private let clientSecret: String
@@ -19,7 +19,11 @@ struct TokenResource: APIResource {
         self.code = code
     }
     
-    typealias ModelType = TokenResponse
+    typealias ModelType = AccessToken
+    
+    var httpMethod: HTTPMethod {
+        return .get
+    }
     
     var path: String {
         return "/login/oauth/access_token"

@@ -25,7 +25,7 @@ class UserManagerTests: XCTestCase {
         let sut = UserManager(keyChainService: KeyChainSuccessStub(),
                           networkService: NetworkManger(urlSession: mockSession))
         
-        let url = UserResource().url
+        let url = GetUser().url
         
         guard let dummyData = DummyResponse.user.data else {
             XCTFail("Cannot find \(DummyResponse.user)")

@@ -26,12 +26,12 @@ struct IssueListViewModel {
         // TODO: SearchBarText가 바뀌면 호출되는 부분 구현
     }
     
+    
     func requestData() {
         issueService.getIssues(with: issueState) { issues in
             guard let issues = issues else {
                 return
             }
-            
             self.issueViewModels.value = self.convertToViewModel(issues)
         }
     }

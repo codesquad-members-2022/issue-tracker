@@ -8,6 +8,8 @@
 import Foundation
 
 struct IssueServiceSuccessStub: IssueService {
+    var currentParameter: IssuesParameter = IssuesParameter.standard
+    
     func getIssues(then completion: @escaping ([Issue]?) -> Void) {
         let user1 = User(id: 0, userName: "EddySong", reposURL: "url~")
         let user2 = User(id: 1, userName: "iOS-h", reposURL: "url!")
@@ -54,6 +56,8 @@ struct IssueServiceSuccessStub: IssueService {
 }
 
 struct IssueServiceFailureStub: IssueService {
+    var currentParameter: IssuesParameter = IssuesParameter.standard
+    
     func getIssues(then completion: @escaping ([Issue]?) -> Void) {
         completion([])
     }
