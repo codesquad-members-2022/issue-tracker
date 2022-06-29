@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tv_detail_info_title"
+                style="@style/HeadLine6.26.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:paddingVertical="15dp"
+                android:text="@string/detail_issue_info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/ic_outline_cancel_24"
+                app:layout_constraintBottom_toBottomOf="@id/tv_detail_info_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tv_label_title"
+                style="@style/Body2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grey05"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:text="@string/label"
+                android:textColor="@color/whiteGrey"
+                app:layout_constraintEnd_toStartOf="@id/tv_label_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_info_title" />
+
+            <TextView
+                android:id="@+id/tv_label_content"
+                style="@style/Body2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grey05"
+                android:gravity="end"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:text="@string/noneExist"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_label_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_detail_info_title"
+                tools:text="Document" />
+
+            <TextView
+                android:id="@+id/tv_milestone_title"
+                style="@style/Body2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grey05"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:text="@string/milestone"
+                android:textColor="@color/whiteGrey"
+                app:layout_constraintEnd_toStartOf="@id/tv_label_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_title" />
+
+            <TextView
+                android:id="@+id/tv_milestone_content"
+                style="@style/Body2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grey05"
+                android:gravity="end"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:text="@string/noneExist"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_milestone_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_label_title"
+                tools:text="Document" />
+
+            <com.example.issu_tracker.ui.common.CustomImageButton
+                android:id="@+id/custom_edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:customImageButtonImage="@drawable/ic_baseline_edit_24"
+                app:customImageButtonTitle="@string/edit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_milestone_content" />
+
+            <com.example.issu_tracker.ui.common.CustomImageButton
+                android:id="@+id/custom_close_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:customImageButtonImage="@drawable/ic_baseline_curtains_closed_24"
+                app:customImageButtonTitle="닫기"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/custom_edit_button" />
+
+            <com.example.issu_tracker.ui.common.CustomImageButton
+                app:customImageButtonTintColor="@color/red"
+                android:id="@+id/custom_delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:customImageButtonImage="@drawable/ic_baseline_delete_24"
+                app:customImageButtonTitle="삭제하기"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/custom_close_button" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

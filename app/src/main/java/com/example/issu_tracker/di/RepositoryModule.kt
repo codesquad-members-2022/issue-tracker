@@ -2,7 +2,7 @@ package com.example.issu_tracker.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.issu_tracker.data.Repository
+import com.example.issu_tracker.data.repository.Repository
 import com.example.issu_tracker.data.local.FriendDatabase
 import com.example.issu_tracker.data.local.UserDao
 import com.example.issu_tracker.data.repository.*
