@@ -11,8 +11,6 @@ protocol IssueService {
     var currentParameter: IssuesParameter { get set }
     func getIssues(then completion: @escaping ([Issue]?) -> Void)
     func close(issueId: Int, completion: @escaping (Issue?) -> Void)
-    
-//    func getIssues(with state: IssueState, then completion: @escaping ([Issue]?) -> Void)
 }
 
 struct IssueManager: IssueService {
@@ -50,29 +48,7 @@ struct IssueManager: IssueService {
             }
         }
     }
-    
-//    func getIssues(with state: IssueState, then completion: @escaping ([Issue]?) -> Void) {
-//        guard let token = getAccessToken() else {
-//            return completion(nil)
-//        }
-//        
-//        
-//        let issuesResource = IssuesResource(state: state, isPull: true)
-//        let issuesRequest = APIRequest(resource: issuesResource, token: token)
-//        let request = makeGetRequest(token: token)
-//        
-//        networkService.execute(request) { result in
-//            switch result {
-//            case .success(let issues):
-//                updateStorage(issues)
-//                completion(issues)
-//            case .failure(let error):
-//                Log.error(error.localizedDescription + "(\(#file), \(#function), \(#line))")
-//                completion(nil)
-//            }
-//        }
-//    }
-//    
+
     private func getAccessToken() -> String? {
         guard let accessToken = keyChainService.load(service: "access-token", account: "github") else {
             Log.error("Access Token is not found")

@@ -43,9 +43,12 @@ struct IssueListViewModel {
     }
     
     private func convertToViewModel(_ issue: Issue) -> IssueTableCellViewModel {
-        var tableCellViewModel = IssueTableCellViewModel()
-        tableCellViewModel.configureCellData(with: issue)
-        return tableCellViewModel
+        return IssueTableCellViewModel(id: issue.id,
+                                       title: issue.title,
+                                       state: issue.state,
+                                       content: issue.body ?? "No content",
+                                       projectName: issue.milestone?.title ?? "No title",
+                                       labelList: issue.labels ?? [Label(id: 999, color: "pink", name: "NoLabel")])
     }
     
     func getCellViewModel(index: Int) -> IssueTableCellViewModel? {
