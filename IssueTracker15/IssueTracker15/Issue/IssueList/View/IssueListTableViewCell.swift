@@ -1,46 +1,30 @@
 //
-//  IssueListCell.swift
+//  IssueListTableViewCell.swift
 //  IssueTracker15
 //
-//  Created by 백상휘 on 2022/06/20.
+//  Created by 백상휘 on 2022/06/27.
 //
 
 import UIKit
+import SnapKit
 
-class IssueListCell: UICollectionViewCell,
-                        ViewBindable {
+class IssueListTableViewCell: UITableViewCell, ViewBindable {
     
-    // MARK: - ViewBindable Implements. Select Multiple Issue List Functionality.
-    
+    var willBeDelete = false
     var vc: ViewBinding?
-    
-    func sendAction(_ param: Any?) {
-        vc?.inputViewEvent(self, param)
-    }
-    
-    func receive(_ responseData: Any) {
-        if let currentState = responseData as? Bool {
-            print(currentState)
-            self.checkSelectButton.isSelected = currentState
-        }
-    }
-    
-    func setVC(_ binding: ViewBinding) {
-        vc = binding
-    }
-    
-    var issueDTO: IssueDTO? {
+    var indexPath: IndexPath?
+    var dto: IssueDTO? {
         didSet {
-            titleLabel.text = issueDTO?.title
-            checkSelectButton.isSelected = issueDTO?.isSelected ?? false
-            bodyLabel.text = issueDTO?.body
+            titleLabel.text = dto?.title
+            titleLabel.textColor = (dto?.closed_at?.isEmpty ?? true) ? .label : .purple
+            checkSelectButton.isSelected = dto?.isSelected ?? false
+            bodyLabel.text = dto?.body
             mileStoneTitleLabel.text = "MileStoneMileStoneMileStoneMileStoneMileStoneMileStoneMileStoneMileStone"
             testLabels.text = "Documentation"
         }
     }
     
     // MARK: - UICollectionView Implements. Select Single Issue List Functionality.
-    
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = label.font.withSize(22)
@@ -80,18 +64,23 @@ class IssueListCell: UICollectionViewCell,
         let label = UILabel()
         return label
     }()
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setUI()
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setUI()
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        initializeUIElements()
+        setUI()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initializeUIElements()
-    }
-    
-    private func initializeUIElements() {
+    private func setUI() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(checkSelectButton)
         contentView.addSubview(bodyLabel)
@@ -142,14 +131,33 @@ class IssueListCell: UICollectionViewCell,
     @objc func checkSelectButtonTouchUpInsdie(_ sender: CheckSelectButton) {
         sendAction(nil)
     }
+    
+    func sendAction(_ param: Any?) {
+        vc?.inputViewEvent(self, param)
+    }
+    
+    func receive(_ responseData: Any) {
+        guard let currentState = responseData as? Bool else {
+            return
+        }
         
-    // MARK: - CheckButton inherited from UIButton
-    class CheckSelectButton: UIButton {
-        override var isSelected: Bool {
-            didSet {
-                setImage(isSelected ? .checkButtonImageFilled : .checkButtonImage, for: .normal)
-                setNeedsDisplay()
-            }
+        self.checkSelectButton.isSelected = currentState
+    }
+    
+    func setVC(_ binding: ViewBinding) {
+        self.vc = binding
+    }
+    
+    func showButton(_ isShow: Bool) {
+        checkSelectButton.isHidden = !isShow
+    }
+}
+
+class CheckSelectButton: UIButton {
+    override var isSelected: Bool {
+        didSet {
+            setImage(isSelected ? .checkButtonImageFilled : .checkButtonImage, for: .normal)
+            setNeedsDisplay()
         }
     }
 }
