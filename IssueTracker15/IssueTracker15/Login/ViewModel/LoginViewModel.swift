@@ -11,7 +11,6 @@ struct LoginViewModel: CommonViewModel {
     var output: (Any?, ViewBindable) -> Void
     
     private var githubLoginUseCase = UseCaseContainer.shared.resolve(type: GithubLoginUseCase.self)
-    //GithubLoginUseCase.init(model: GitHubLoginModel())
     private var appleLoginUseCase = UseCaseContainer.shared.resolve(type: AppleLoginUseCase.self)
     
     init(_ output: @escaping (Any?, ViewBindable) -> Void) {
@@ -23,13 +22,13 @@ struct LoginViewModel: CommonViewModel {
         
         switch loginType {
         case .gitHub:
-            guard let useCase = githubLoginUseCase?() else { return }
+            guard let useCase = githubLoginUseCase else { return }
             useCase.request { loginURL in
                 self.output(loginURL, bindable)
             }
             
         case .apple:
-            appleLoginUseCase?().request { loginURL in
+            appleLoginUseCase?.request { loginURL in
                 self.output(loginURL, bindable)
             }
         }
