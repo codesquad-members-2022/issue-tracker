@@ -28,28 +28,28 @@ export default function IssueListFilterDropDowns() {
     {
       indicatorName: '담당자',
       panelName: '담당자 필터',
-      dataName: 'memberList'
+      filterName: 'assignee'
     },
     {
       indicatorName: '레이블',
       panelName: '레이블 필터',
-      dataName: 'labelList'
+      filterName: 'label'
     },
     {
       indicatorName: '마일스톤',
       panelName: '마일스톤 필터',
-      dataName: 'milestoneList'
+      filterName: 'milestone'
     },
     {
       indicatorName: '작성자',
       panelName: '작성자 필터',
-      dataName: 'memberList'
+      filterName: 'author'
     }
   ];
 
-  const getIssueFilterOptions = (dataName: string) => {
-    switch (dataName) {
-      case 'memberList':
+  const getIssueFilterOptions = (filterName: string) => {
+    switch (filterName) {
+      case 'assignee':
         const optionData = memberList ? memberList?.data.data : [];
         return optionData.map(({ user_id, image_url }: IMemberData) => {
           return {
@@ -60,26 +60,53 @@ export default function IssueListFilterDropDowns() {
               </$IssueListFIlterSelect>
             ),
             radio: radioIcon,
-            value: user_id
+            value: user_id,
+            filterCondition: {
+              assignee: user_id
+            }
           };
         });
-      case 'labelList': {
+      case 'label': {
         const optionData = labelList ? labelList.data.data : [];
         return optionData.map(({ name, description }: ILabelData) => {
           return {
             children: name,
             radio: radioIcon,
-            value: description
+            value: description,
+            filterCondition: {
+              label: name
+            }
           };
         });
       }
-      case 'milestoneList': {
+      case 'milestone': {
         const optionData = milestoneList ? milestoneList.data.data : [];
         return optionData.map(({ name, description }: IMilestoneData) => {
           return {
             children: name,
             radio: radioIcon,
-            value: description
+            value: description,
+            filterCondition: {
+              milestone: name
+            }
+          };
+        });
+      }
+      case 'author': {
+        const optionData = memberList ? memberList?.data.data : [];
+        return optionData.map(({ user_id, image_url }: IMemberData) => {
+          return {
+            children: (
+              <$IssueListFIlterSelect>
+                <UserProfile src={image_url} size="small" />
+                {user_id}
+              </$IssueListFIlterSelect>
+            ),
+            radio: radioIcon,
+            value: user_id,
+            filterCondition: {
+              author: user_id
+            }
           };
         });
       }
@@ -88,8 +115,8 @@ export default function IssueListFilterDropDowns() {
 
   return (
     <$IssueListFilterDropDowns>
-      {ISSUE_FILTERS_PROPS.map(({ dataName, ...props }, idx) => (
-        <Dropdown key={idx} left="right" options={getIssueFilterOptions(dataName)} {...props} />
+      {ISSUE_FILTERS_PROPS.map(({ filterName, ...props }, idx) => (
+        <Dropdown key={idx} left="right" options={getIssueFilterOptions(filterName)} {...props} />
       ))}
     </$IssueListFilterDropDowns>
   );
