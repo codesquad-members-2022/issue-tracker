@@ -15,6 +15,8 @@ type LabelType = {
   color: LabelColorType;
 };
 
+export type IssueStateType = 'OPEN' | 'CLOSE';
+
 export type IssueType = {
   id: number;
   title: string;
@@ -22,6 +24,7 @@ export type IssueType = {
   writer: string;
   labels: LabelType[];
   milestoneName: string;
+  status: IssueStateType;
 };
 
 export type SelectedIssueType = {
@@ -71,7 +74,10 @@ function IssueList() {
       )}
       {issueList.issues.length ? (
         issueList.issues.map(
-          ({ id, title, createdTime, writer, labels, milestoneName }, idx) => (
+          (
+            { id, title, createdTime, writer, labels, milestoneName, status },
+            idx
+          ) => (
             <IssueItem
               key={id}
               id={String(id)}
@@ -81,6 +87,7 @@ function IssueList() {
               labels={labels}
               milestoneName={milestoneName}
               isLast={idx === issueList.issues.length - 1}
+              status={status}
             />
           )
         )

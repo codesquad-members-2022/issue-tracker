@@ -1,10 +1,9 @@
-import Icon from '@/assets/icons/Icon';
+import Icon, { IconNameType } from '@/assets/icons/Icon';
 import { GREYSCALE } from '@/constants';
 import styled from 'styled-components';
-import icons from '@/assets/icons/svgs';
 
 type IssueMenuProps = {
-  icon: keyof typeof icons;
+  icon: IconNameType;
   menuName: string;
   count: number;
   isCurrent: boolean;

@@ -2,8 +2,8 @@ const issueListData = {
   opened: {
     labelCount: 3,
     milestoneCount: 2,
-    openedIssues: 3,
-    closedIssues: 0,
+    openedIssues: 2,
+    closedIssues: 1,
     issues: [
       {
         id: 1,
@@ -26,15 +26,8 @@ const issueListData = {
             }
           }
         ],
-        milestoneName: '마일스톤1'
-      },
-      {
-        id: 2,
-        title: '제목2',
-        createdTime: '2022-06-22 12:12:13',
-        writer: '글쓴이2',
-        labels: [],
-        milestoneName: '마일스톤2'
+        milestoneName: '마일스톤1',
+        status: 'OPEN'
       },
       {
         id: 3,
@@ -57,22 +50,33 @@ const issueListData = {
             }
           }
         ],
-        milestoneName: ''
+        milestoneName: '',
+        status: 'OPEN'
       }
     ]
   },
   closed: {
     labelCount: 3,
     milestoneCount: 2,
-    openedIssues: 3,
-    closedIssues: 0,
-    issues: []
+    openedIssues: 2,
+    closedIssues: 1,
+    issues: [
+      {
+        id: 2,
+        title: '제목2',
+        createdTime: '2022-06-22 12:12:13',
+        writer: '글쓴이2',
+        labels: [],
+        milestoneName: '마일스톤2',
+        status: 'CLOSE'
+      }
+    ]
   },
   all: {
     labelCount: 3,
     milestoneCount: 2,
-    openedIssues: 3,
-    closedIssues: 0,
+    openedIssues: 2,
+    closedIssues: 1,
     issues: [
       {
         id: 1,
@@ -95,7 +99,8 @@ const issueListData = {
             }
           }
         ],
-        milestoneName: '마일스톤1'
+        milestoneName: '마일스톤1',
+        status: 'OPEN'
       },
       {
         id: 2,
@@ -103,7 +108,8 @@ const issueListData = {
         createdTime: '2022-06-22 12:12:13',
         writer: '글쓴이2',
         labels: [],
-        milestoneName: '마일스톤2'
+        milestoneName: '마일스톤2',
+        status: 'CLOSE'
       },
       {
         id: 3,
@@ -126,7 +132,8 @@ const issueListData = {
             }
           }
         ],
-        milestoneName: ''
+        milestoneName: '',
+        status: 'OPEN'
       }
     ]
   }

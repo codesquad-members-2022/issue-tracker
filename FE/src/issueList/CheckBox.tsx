@@ -1,5 +1,4 @@
-import Icon from '@/assets/icons/Icon';
-import icons from '@/assets/icons/svgs';
+import Icon, { IconNameType } from '@/assets/icons/Icon';
 import { COLORS, GREYSCALE } from '@/constants';
 
 export type CheckBoxType = 'initial' | 'active' | 'disable';
@@ -10,7 +9,7 @@ type CheckBoxProps = {
 };
 
 type CheckBoxIconProps = {
-  iconName: keyof typeof icons;
+  iconName: IconNameType;
   stroke: string;
   fill: string;
 };
