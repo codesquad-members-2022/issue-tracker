@@ -88,5 +88,7 @@ final class TabBarFlowCoordinator: BaseCoordinator {
         addDependency(labelFlowCoordinator)
         addDependency(milestoneFlowCoordinator)
         addDependency(accountFlowCoordinator)
+
+        tabBarController.selectedIndex = 1
     }
 }

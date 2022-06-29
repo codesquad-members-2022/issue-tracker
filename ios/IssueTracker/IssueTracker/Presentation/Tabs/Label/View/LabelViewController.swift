@@ -8,16 +8,15 @@
 import UIKit
 
 final class LabelViewController: UIViewController {
-    private let addButton: UIButton = {
-        var configuration = UIButton.Configuration.plain()
-        configuration.title = "추가"
-        configuration.image = UIImage(systemName: "plus")
-        configuration.imagePlacement = .trailing
-
-        let button = UIButton(configuration: configuration)
-
+    private lazy var addButton: TextButton = {
+        let button = TextButton()
+        button.setTitle("추가", for: .normal)
+        button.setSymbol(.plus, on: .trailing)
+        button.addAction(.init(handler: self.showLabelAdditionModal), for: .touchUpInside)
         return button
     }()
+
+    private let tableView = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +26,7 @@ final class LabelViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .systemBackground
         configureNavigationBar()
+        configureTableView()
     }
 
     private func configureNavigationBar() {
@@ -35,7 +35,45 @@ final class LabelViewController: UIViewController {
         navigationItem.rightBarButtonItem = .init(customView: addButton)
     }
 
+    private func configureTableView() {
+        view.addSubview(tableView)
+        tableView.frame = view.frame
+        tableView.autoresizingMask = [
+            .flexibleBottomMargin,
+            .flexibleLeftMargin,
+            .flexibleRightMargin,
+            .flexibleTopMargin,
+            .flexibleWidth,
+            .flexibleHeight
+        ]
+
+        tableView.dataSource = self
+        tableView.register(LabelCell.self, forCellReuseIdentifier: LabelCell.reuseIdentifier)
+    }
+
     deinit {
         print("Deinit: \(#fileID)")
+    }
+}
+
+// MARK: - Table view data source
+extension LabelViewController: UITableViewDataSource {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        20
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt _: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.reuseIdentifier) else {
+            return UITableViewCell()
+        }
+
+        return cell
+    }
+}
+
+// MARK: - Action handlers
+extension LabelViewController {
+    func showLabelAdditionModal(_: UIAction) {
+        // TODO: Show new view controller modally from view model
     }
 }
