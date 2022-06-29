@@ -8,6 +8,8 @@
 import Foundation
 
 struct LabelItem: Codable {
-    let id: Int
-    let title, description, backgroundColor, isDarkMode: String
+    var id: Int?
+    let title: String
+    let description: String?
+    let backgroundColor, isDarkMode: String
 }

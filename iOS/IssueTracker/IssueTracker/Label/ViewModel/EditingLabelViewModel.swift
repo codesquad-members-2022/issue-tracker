@@ -23,6 +23,7 @@ protocol EditingLabelViewModelOutput {
     var saveButtonState: Observable<Bool> { get }
     var cancelButtonState: Observable<Bool> { get }
     var isOverFiftyCharactersInTitleText: Observable<Bool> { get }
+    var error: Observable<String> { get }
 }
 
 protocol EditingLabelViewModelProtocol: EditingLabelViewModelInput, EditingLabelViewModelOutput { }
@@ -34,9 +35,31 @@ final class EditingLabelViewModel: EditingLabelViewModelProtocol {
     private(set) var saveButtonState: Observable<Bool> = Observable(false)
     private(set) var cancelButtonState: Observable<Bool> = Observable(false)
     private(set) var isOverFiftyCharactersInTitleText: Observable<Bool> = Observable(false)
+    private(set) var error: Observable<String> = Observable("")
+
+    private let useCase: EditingLabelManagable
+
+    init(useCase: EditingLabelManagable) {
+        self.useCase = useCase
+    }
 
     func didTouchSave() {
-        saveButtonState.value = true
+        guard let title = titleText.value else { return }
+        var labelEntity = LabelItem(title: title, description: descriptionText.value, backgroundColor: backgroundColorText.value, isDarkMode: "false")
+
+        useCase.addNewLabel(labelEntity) { [weak self] result in
+            switch result {
+            case .success(let labelIDData):
+                labelEntity.id = labelIDData["id"]
+                self?.saveButtonState.value = true
+
+                let userInfo = [UserInfoKey.addedLabel: labelEntity]
+                NotificationCenter.default.post(name: NotificationNames.didSaveNewLabel, object: self, userInfo: userInfo)
+            case .failure(let error):
+                self?.error.value = error.localizedDescription
+                self?.saveButtonState.value = false
+            }
+        }
     }
 
     func didTouchCancel() {
@@ -44,7 +67,7 @@ final class EditingLabelViewModel: EditingLabelViewModelProtocol {
     }
 
     func didTouchGenerateRandomBackgroundColorButton() {
-        let randomHexCode = generateRandomBackgroundColorString()
+        let randomHexCode = useCase.generateRandomBackgroundColorString()
 
         backgroundColorText.value = randomHexCode
     }
@@ -61,20 +84,18 @@ final class EditingLabelViewModel: EditingLabelViewModelProtocol {
     }
 
     func viewDidLoad() {
-        let randomHexCode = generateRandomBackgroundColorString()
+        let randomHexCode = useCase.generateRandomBackgroundColorString()
 
         backgroundColorText.value = randomHexCode
     }
 }
 
-private extension EditingLabelViewModel {
-    func generateRandomBackgroundColorString() -> String {
-        let hexCode = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F"]
-        return "#".appending(hexCode[Int.random(in: 0..<15)])
-            .appending(hexCode[Int.random(in: 0..<15)])
-            .appending(hexCode[Int.random(in: 0..<15)])
-            .appending(hexCode[Int.random(in: 0..<15)])
-            .appending(hexCode[Int.random(in: 0..<15)])
-            .appending(hexCode[Int.random(in: 0..<15)])
+extension EditingLabelViewModel {
+    enum NotificationNames {
+        static let didSaveNewLabel = Notification.Name("EditingLabelViewDidSaveNewLabel")
+    }
+
+    enum UserInfoKey {
+        static let addedLabel = "AddedLabel"
     }
 }
