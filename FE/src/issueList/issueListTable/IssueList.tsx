@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import IssueHeader from './IssueHeader';
-import IssueItem from './IssueItem';
-import EmptyIssueItem from './EmptyIssueItem';
-import ClickedIssueHeader from './ClickedIssueHeader';
-import { useIssueListContext } from './IssueListProvider';
 import { useQuery } from 'react-query';
+import IssueHeader from '@/issueList/issueListTable/issueHeader/IssueHeader';
+import IssueItem from '@/issueList/issueListTable/issueItem/IssueItem';
+import EmptyIssueItem from '@/issueList/issueListTable/issueItem/EmptyIssueItem';
+import ClickedIssueHeader from '@/issueList/issueListTable/issueHeader/ClickedIssueHeader';
+import { useIssueListContext } from '@/issueList/stores/IssueListProvider';
 
 type LabelColorType = {
   backgroundColor: string;

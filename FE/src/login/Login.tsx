@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import styled from 'styled-components';
-import TextInput from '@/common/TextInput';
-import Button, { ButtonBox } from '@/common/Button';
-import { COLORS, GREYSCALE } from '@/constants';
+import Button, { ButtonBox } from '@/common/components/buttons/Button';
+import { COLORS, GREYSCALE } from '@/common/constants';
+import TextInput from '@/common/components/TextInput';
 
 type HasInputType = {
   id: boolean;

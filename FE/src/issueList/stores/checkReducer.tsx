@@ -1,5 +1,5 @@
-import { CheckBoxType } from './CheckBox';
-import { SelectedIssueType } from './IssueList';
+import { CheckBoxType } from '../issueListTable/CheckBox';
+import { SelectedIssueType } from '../issueListTable/IssueList';
 
 export type IssueListCheckStateType = {
   headerCheckBox: CheckBoxType;

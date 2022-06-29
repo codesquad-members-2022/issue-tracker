@@ -10,7 +10,7 @@ const COLORS = {
   DARK_RED: '#C60B00',
   GREEN: '#34C759',
   LIGHT_GREEN: '#DDFFE6',
-  DARK_GREEN: '#00A028',
+  DARK_GREEN: '#00A028'
 };
 
 export default COLORS;

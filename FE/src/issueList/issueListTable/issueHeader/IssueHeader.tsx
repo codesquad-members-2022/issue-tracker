@@ -1,9 +1,9 @@
-import { GREYSCALE } from '@/constants';
+import { GREYSCALE } from '@/common/constants';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import CheckBox from './CheckBox';
-import { IssueListStateType } from './IssueList';
-import { useIssueListContext } from './IssueListProvider';
+import CheckBox from '@/issueList/issueListTable/CheckBox';
+import { IssueListStateType } from '@/issueList/issueListTable/IssueList';
+import { useIssueListContext } from '@/issueList/stores/IssueListProvider';
 import IssueMenu from './IssueMenu';
 import IssueTab from './IssueTab';
 
@@ -49,10 +49,10 @@ function IssueHeader({
         />
       </IssueMenus>
       <IssueTabs>
-        <IssueTab tabName="담당자" />
-        <IssueTab tabName="레이블" />
-        <IssueTab tabName="마일스톤" />
-        <IssueTab tabName="작성자" />
+        <IssueTab tabId="members" tabName="담당자" />
+        <IssueTab tabId="labels" tabName="레이블" />
+        <IssueTab tabId="milestones" tabName="마일스톤" />
+        <IssueTab tabId="authors" tabName="작성자" />
       </IssueTabs>
     </IssueHeaderBox>
   );

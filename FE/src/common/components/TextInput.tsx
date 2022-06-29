@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GREYSCALE } from '@/constants';
+import { GREYSCALE } from '@/common/constants';
 import { MutableRefObject } from 'react';
 
 type TextInputProps = {
@@ -17,7 +17,7 @@ function TextInput({
   minLength,
   maxLength,
   onChange,
-  refElement,
+  refElement
 }: TextInputProps) {
   return (
     <TextInputBox>

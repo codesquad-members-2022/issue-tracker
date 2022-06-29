@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { GREYSCALE } from '@/constants';
-import { getRandomKey } from '@/utils';
+import { GREYSCALE } from '@/common/constants';
 import DropDownCheckBoxItem from './DropDownCheckBoxItem';
 
 type DropDownPanelProps = {
@@ -20,7 +19,7 @@ function DropDownPanel({
       <ul>
         {items.map(({ id, isChecked, label, color, image }) => (
           <DropDownCheckBoxItem
-            key={getRandomKey()}
+            key={id}
             isChecked={isChecked}
             showCheckBox={showCheckBox}
             label={label}
