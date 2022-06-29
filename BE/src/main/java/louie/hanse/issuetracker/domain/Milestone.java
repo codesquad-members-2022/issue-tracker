@@ -1,5 +1,7 @@
 package louie.hanse.issuetracker.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.*;
 
+@Getter
 @Entity
 public class Milestone {
 

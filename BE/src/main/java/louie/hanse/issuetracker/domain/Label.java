@@ -1,12 +1,14 @@
 package louie.hanse.issuetracker.domain;
 
+import lombok.Getter;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
 
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.IDENTITY;
 
+@Getter
 @Entity
 public class Label {
 
