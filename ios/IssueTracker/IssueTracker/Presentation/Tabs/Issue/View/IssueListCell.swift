@@ -59,7 +59,7 @@ final class IssueListCell: UITableViewCell {
 
     private let badgeLabel: Label = {
         let badgeLabel = Label(frame: .zero)
-		badgeLabel.setPadding(top: 10, left: 15, bottom: 10, right: 15)
+        badgeLabel.setPadding(top: 10, left: 15, bottom: 10, right: 15)
         badgeLabel.font = .systemFont(ofSize: 12, weight: .bold)
         badgeLabel.textColor = .white
         badgeLabel.clipsToBounds = true

@@ -8,11 +8,15 @@
 import UIKit
 
 final class LabelViewController: UIViewController {
-    private lazy var addButton: TextButton = {
+    private lazy var addButton: UIButton = {
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 14)
+        let image = UIImage(systemName: "plus", withConfiguration: symbolConfiguration)
         let button = TextButton()
+
         button.setTitle("추가", for: .normal)
-        button.setSymbol(.plus, on: .trailing)
+        button.setSymbol(image, on: .trailing)
         button.addAction(.init(handler: self.showLabelAdditionModal), for: .touchUpInside)
+
         return button
     }()
 

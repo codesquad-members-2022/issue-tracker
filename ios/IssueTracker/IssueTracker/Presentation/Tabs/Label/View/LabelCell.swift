@@ -11,6 +11,24 @@ import UIKit
 final class LabelCell: UITableViewCell {
     static let reuseIdentifier = "LabelCell"
 
+    private let titleLabel: Label = {
+        let title = Label()
+        title.setPadding(top: 4, left: 16, bottom: 4, right: 16)
+        title.text = "Label name"
+        title.textColor = .white
+        title.backgroundColor = .labelGray
+        title.layer.cornerRadius = title.intrinsicContentSize.height / 2
+        title.clipsToBounds = true
+        return title
+    }()
+
+    private let descriptionLabel: Label = {
+        let description = Label()
+        description.text = "Description"
+        description.textColor = .gray1
+        return description
+    }()
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureUI()
@@ -27,17 +45,10 @@ final class LabelCell: UITableViewCell {
     }
 
     private func configureContent() {
-        let title = Label()
-        title.setPadding(top: 4, left: 16, bottom: 4, right: 16)
-        title.text = "Label name"
-        title.backgroundColor = .gray
-
-        let description = UILabel()
-        description.text = "Description"
-
-        let stack = UIStackView(arrangedSubviews: [title, description])
-        stack.axis = .vertical
+        let stack = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
         stack.spacing = 16
+        stack.axis = .vertical
+        stack.alignment = .leading
         stack.distribution = .fillProportionally
 
         contentView.addSubview(stack)
@@ -48,7 +59,11 @@ final class LabelCell: UITableViewCell {
         }
     }
 
-    func setTitle() {}
+    func setTitle(_ text: String) {
+        titleLabel.text = text
+    }
 
-    func setSubtitle() {}
+    func setDescription(_ text: String) {
+        descriptionLabel.text = text
+    }
 }
