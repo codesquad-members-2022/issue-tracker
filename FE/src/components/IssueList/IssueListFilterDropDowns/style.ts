@@ -7,4 +7,9 @@ const $IssueListFilterDropDowns = styled.div`
   justify-content: space-between;
 `;
 
-export { $IssueListFilterDropDowns };
+const $IssueListFIlterSelect = styled.span`
+  display: flex;
+  gap: 8px;
+`;
+
+export { $IssueListFilterDropDowns, $IssueListFIlterSelect };
