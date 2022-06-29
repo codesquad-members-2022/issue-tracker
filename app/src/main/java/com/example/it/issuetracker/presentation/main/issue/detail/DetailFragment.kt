@@ -8,14 +8,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentDetailBinding
-import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.issue.list.IssueViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
+class DetailFragment : DataBindingBaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
 
     private var id: Long = -1
     private val viewModel by sharedViewModel<DetailViewModel>()

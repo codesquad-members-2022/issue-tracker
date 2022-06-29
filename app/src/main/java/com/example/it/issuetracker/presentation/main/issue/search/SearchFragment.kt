@@ -8,14 +8,14 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentSearchBinding
-import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.issue.detail.DetailFragment
 import com.example.it.issuetracker.presentation.main.issue.list.IssueUiState
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
+class SearchFragment : DataBindingBaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
     private val viewModel by viewModel<SearchViewModel>()
     private val imm: InputMethodManager by lazy { activity?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager }

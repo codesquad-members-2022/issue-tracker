@@ -10,7 +10,7 @@ import com.example.it.issuetracker.databinding.ItemIssueBinding
 import com.example.it.issuetracker.domain.model.Issue
 
 class IssueAdapter(
-    private val toggle: () -> Unit,
+    private val onToggle: () -> Unit,
     private val onClick: (Long) -> Unit,
 ) : ListAdapter<Issue, RecyclerView.ViewHolder>(IssueDiffUtil()) {
 
@@ -19,12 +19,12 @@ class IssueAdapter(
             0 -> {
                 val binding =
                     ItemIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                IssueViewHolder(binding, toggle, onClick)
+                IssueViewHolder(binding, onToggle, onClick)
             }
             else -> {
                 val binding =
                     ItemEditIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                IssueEditViewHolder(binding, toggle)
+                IssueEditViewHolder(binding, onToggle)
             }
         }
     }
@@ -46,7 +46,7 @@ class IssueAdapter(
 
     class IssueViewHolder(
         private val binding: ItemIssueBinding,
-        private val toggle: () -> Unit,
+        private val onToggle: () -> Unit,
         private val onClick: (Long) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -60,7 +60,7 @@ class IssueAdapter(
                 onClick(issue.id)
             }
             binding.container.setOnLongClickListener {
-                toggle()
+                onToggle()
                 true
             }
         }
@@ -68,7 +68,7 @@ class IssueAdapter(
 
     class IssueEditViewHolder(
         private val binding: ItemEditIssueBinding,
-        private val toggle: () -> Unit,
+        private val onToggle: () -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val adapter = LabelAdapter()
@@ -81,7 +81,7 @@ class IssueAdapter(
                 issue.isChecked = isChecked
             }
             binding.container.setOnLongClickListener {
-                toggle()
+                onToggle()
                 true
             }
         }
