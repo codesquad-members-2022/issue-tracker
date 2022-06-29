@@ -65,4 +65,8 @@ public class Issue {
     public void addIssueLabel(IssueLabel issueLabel) {
         this.issueLabels.add(issueLabel);
     }
+
+    public boolean isClosed() {
+        return status.isClosed();
+    }
 }
