@@ -8,7 +8,6 @@ import lombok.ToString;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@ToString
 public class LabelResponse {
 
     private String title;

@@ -1,6 +1,5 @@
 package com.ron2ader.issuetracker.service;
 
-import com.ron2ader.issuetracker.controller.labeldto.LabelRequest;
 import com.ron2ader.issuetracker.controller.labeldto.LabelResponse;
 import com.ron2ader.issuetracker.controller.labeldto.LabelsResponse;
 import com.ron2ader.issuetracker.domain.label.Label;

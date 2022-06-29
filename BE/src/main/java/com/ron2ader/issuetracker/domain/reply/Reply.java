@@ -3,8 +3,6 @@ package com.ron2ader.issuetracker.domain.reply;
 import com.ron2ader.issuetracker.domain.common.BaseEntity;
 import com.ron2ader.issuetracker.domain.issue.Issue;
 import com.ron2ader.issuetracker.domain.member.Member;
-import lombok.Getter;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
 
 @Entity
 @Getter

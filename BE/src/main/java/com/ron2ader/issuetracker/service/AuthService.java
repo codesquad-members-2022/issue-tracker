@@ -5,16 +5,11 @@ import com.ron2ader.issuetracker.auth.github.GithubToken;
 import com.ron2ader.issuetracker.auth.github.GithubTokenRequest;
 import com.ron2ader.issuetracker.auth.github.GithubUserInfo;
 import com.ron2ader.issuetracker.auth.jwt.JwtProvider;
-import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
-import com.ron2ader.issuetracker.domain.member.Member;
-import com.ron2ader.issuetracker.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor

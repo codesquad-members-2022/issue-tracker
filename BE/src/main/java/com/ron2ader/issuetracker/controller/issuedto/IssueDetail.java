@@ -3,13 +3,12 @@ package com.ron2ader.issuetracker.controller.issuedto;
 import com.ron2ader.issuetracker.domain.issue.Issue;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@ToString
 public class IssueDetail {
 
     private Long id;

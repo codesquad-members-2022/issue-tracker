@@ -1,49 +1,42 @@
 package com.ron2ader.issuetracker.service;
 
-import com.ron2ader.issuetracker.controller.issuedto.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.ron2ader.issuetracker.controller.issuedto.IssueDetail;
+import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssueFilter;
+import com.ron2ader.issuetracker.controller.issuedto.IssuesResponse;
 import com.ron2ader.issuetracker.controller.labeldto.LabelResponse;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
-import com.ron2ader.issuetracker.domain.issue.IssueAssigneeRepository;
-import com.ron2ader.issuetracker.domain.issue.IssueLabelRepository;
-import com.ron2ader.issuetracker.domain.label.Label;
-import com.ron2ader.issuetracker.domain.label.LabelRepository;
-import com.ron2ader.issuetracker.domain.member.Member;
-import com.ron2ader.issuetracker.domain.member.MemberRepository;
-import com.ron2ader.issuetracker.domain.milestone.Milestone;
-import com.ron2ader.issuetracker.domain.milestone.MilestoneRepository;
-import org.junit.jupiter.api.BeforeEach;
+import com.ron2ader.issuetracker.domain.issue.IssueRepository;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @SpringBootTest
 @ActiveProfiles("local")
 class IssueServiceTest {
 
     private final IssueService issueService;
+    private final IssueRepository issueRepository;
 
     @Autowired
-    public IssueServiceTest(IssueService issueService) {
+    public IssueServiceTest(IssueService issueService,
+        IssueRepository issueRepository) {
         this.issueService = issueService;
-    }
-
-    @BeforeEach
-    void setUp() {
-
+        this.issueRepository = issueRepository;
     }
 
     @Test
     @DisplayName("issue를 등록하면 등록된 이슈의 아이디를 반환한다.")
     void registerIssueTest() {
         // given & when
+        long issueCount = issueRepository.count();
+
         Long createdIssueId = issueService.registerIssue("ron2",
                 "my issue",
                 "contents",
@@ -52,7 +45,7 @@ class IssueServiceTest {
                 1L);
 
         // then
-        assertThat(createdIssueId).isEqualTo(4L);
+        assertThat(createdIssueId).isEqualTo(issueCount + 1);
     }
 
 

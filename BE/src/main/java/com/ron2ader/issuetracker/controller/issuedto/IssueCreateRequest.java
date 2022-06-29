@@ -1,13 +1,10 @@
 package com.ron2ader.issuetracker.controller.issuedto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@ToString
 @NoArgsConstructor
 @Getter
 public class IssueCreateRequest {

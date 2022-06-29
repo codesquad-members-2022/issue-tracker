@@ -4,6 +4,7 @@ import com.ron2ader.issuetracker.auth.Login;
 import com.ron2ader.issuetracker.auth.github.GithubToken;
 import com.ron2ader.issuetracker.auth.github.GithubUserInfo;
 import com.ron2ader.issuetracker.auth.jwt.JwtProvider;
+import com.ron2ader.issuetracker.controller.authdto.LoginMember;
 import com.ron2ader.issuetracker.controller.authdto.LoginResponse;
 import com.ron2ader.issuetracker.controller.authdto.Tokens;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
@@ -36,11 +37,9 @@ public class AuthController {
     }
 
     @GetMapping("/auth/refresh")
-    public Tokens requestNewTokens(@Login String userId) {
-        MemberDto findMember = memberService.findMember(userId);
-
-        String accessToken = jwtProvider.generateAccessToken(findMember.getMemberId());
-        String refreshToken = jwtProvider.generateRefreshToken(findMember.getMemberId());
+    public Tokens requestNewTokens(@Login LoginMember loginMember) {
+        String accessToken = jwtProvider.generateAccessToken(loginMember.getMemberId());
+        String refreshToken = jwtProvider.generateRefreshToken(loginMember.getMemberId());
 
         return Tokens.of(accessToken, refreshToken);
     }

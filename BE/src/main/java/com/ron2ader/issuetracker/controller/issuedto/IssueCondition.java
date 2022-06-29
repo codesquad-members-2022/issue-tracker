@@ -1,8 +1,5 @@
 package com.ron2ader.issuetracker.controller.issuedto;
 
-import com.ron2ader.issuetracker.domain.label.Label;
-import com.ron2ader.issuetracker.domain.member.Member;
-import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -2,13 +2,12 @@ package com.ron2ader.issuetracker.controller.milestonedto;
 
 import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import java.time.LocalDate;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
-@AllArgsConstructor
-@ToString
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MilestoneResponse {
 
     private Long id;

@@ -1,6 +1,7 @@
 package com.ron2ader.issuetracker.controller;
 
 import com.ron2ader.issuetracker.auth.Login;
+import com.ron2ader.issuetracker.controller.authdto.LoginMember;
 import com.ron2ader.issuetracker.controller.issuedto.IssueCondition;
 import com.ron2ader.issuetracker.controller.issuedto.IssueCreateRequest;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
@@ -14,7 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
@@ -24,9 +29,9 @@ public class IssueController {
     private final IssueService issueService;
 
     @PostMapping("/issues")
-    public Long register(@Login String issuerId, @RequestBody IssueCreateRequest issueCreateRequest) {
+    public Long register(@Login LoginMember loginMember, @RequestBody IssueCreateRequest issueCreateRequest) {
 
-        return issueService.registerIssue(issuerId,
+        return issueService.registerIssue(loginMember.getMemberId(),
                 issueCreateRequest.getTitle(),
                 issueCreateRequest.getContents(),
                 issueCreateRequest.getAssigneeIds(),

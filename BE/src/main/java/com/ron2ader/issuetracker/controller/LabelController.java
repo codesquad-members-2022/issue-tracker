@@ -6,8 +6,12 @@ import com.ron2ader.issuetracker.controller.labeldto.LabelsResponse;
 import com.ron2ader.issuetracker.service.LabelService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +30,6 @@ public class LabelController {
     }
 
     @PostMapping("/labels/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public LabelResponse update(@PathVariable Long id, @RequestBody LabelRequest labelRequest) {
         LabelResponse updateLabel = labelService.update(
             id,
@@ -39,7 +42,6 @@ public class LabelController {
     }
 
     @DeleteMapping("/labels/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         labelService.deleteById(id);
     }

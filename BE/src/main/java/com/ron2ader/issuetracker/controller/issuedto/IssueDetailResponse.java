@@ -2,18 +2,14 @@ package com.ron2ader.issuetracker.controller.issuedto;
 
 import com.ron2ader.issuetracker.controller.labeldto.LabelResponse;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
-
+import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
 import java.util.List;
 import java.util.Objects;
-
-import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
-import com.ron2ader.issuetracker.domain.issue.IssueAssignee;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter
-@ToString
 @RequiredArgsConstructor
 public class IssueDetailResponse {
 

@@ -3,14 +3,13 @@ package com.ron2ader.issuetracker.service;
 import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
 import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import com.ron2ader.issuetracker.domain.milestone.MilestoneRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

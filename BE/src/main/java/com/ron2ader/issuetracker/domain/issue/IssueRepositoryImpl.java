@@ -10,11 +10,7 @@ import static com.ron2ader.issuetracker.domain.milestone.QMilestone.milestone;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ron2ader.issuetracker.controller.issuedto.IssueFilter;
-import com.ron2ader.issuetracker.domain.label.Label;
-import com.ron2ader.issuetracker.domain.member.Member;
-import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

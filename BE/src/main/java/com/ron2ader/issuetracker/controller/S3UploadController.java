@@ -1,6 +1,5 @@
 package com.ron2ader.issuetracker.controller;
 
-import com.ron2ader.issuetracker.auth.Login;
 import com.ron2ader.issuetracker.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +13,6 @@ public class S3UploadController {
 
     private final S3UploadService s3uploadService;
 
-    @Login
     @PostMapping("/images/upload")
     public String upload(@RequestPart("file") MultipartFile multipartFile ) {
         return s3uploadService.uploadPublic(multipartFile);
