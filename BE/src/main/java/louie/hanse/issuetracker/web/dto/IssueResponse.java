@@ -1,6 +1,7 @@
 package louie.hanse.issuetracker.web.dto;
 
 import louie.hanse.issuetracker.domain.Issue;
+import louie.hanse.issuetracker.domain.IssueLabel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +14,7 @@ public class IssueResponse {
     private String writerImageUrl;
     private LocalDateTime createDateTime;
     private String milestoneTitle;
-    private List<LabelSearchResponse> labels;
+    private List<LabelResponse> labels;
 
     public IssueResponse(Issue issue) {
         this.issueId = issue.getId();
@@ -23,8 +24,8 @@ public class IssueResponse {
         this.createDateTime = issue.getCreateDateTime();
         this.milestoneTitle = issue.getMilestone().getTitle();
         this.labels = issue.getIssueLabels().stream()
-                .map(issueLabel -> issueLabel.getLabel())
-                .map(label -> new LabelSearchResponse(label))
+                .map(IssueLabel::getLabel)
+                .map(LabelResponse::new)
                 .collect(Collectors.toList());
     }
 }
