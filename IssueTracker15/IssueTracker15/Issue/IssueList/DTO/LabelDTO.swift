@@ -18,8 +18,7 @@ struct LabelDTO: Codable {
     var name: String
     var desc: String
     var color: String
-    /// Original Name : default
-    var isDefault: Bool
+    var isDefault: Bool // default
     
     enum CodingKeys: String, CodingKey {
         case id

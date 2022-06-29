@@ -23,6 +23,7 @@ class IssueListModel {
         url.appendPathComponent("repos")
         url.appendPathComponent("SangHwi-Back")
         url.appendPathComponent("issue-tracker")
+        url.appendPathComponent("issues")
         
         guard
             var request = try? URLRequest(url: url, method: .get),

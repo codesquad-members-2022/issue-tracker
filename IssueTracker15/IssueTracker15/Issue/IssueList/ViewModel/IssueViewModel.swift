@@ -42,8 +42,6 @@ class IssueListViewModel: CommonViewModel {
         switch param {
         case .getIssue: getIssues(bindable)
         case .selectIssue: selectList(bindable)
-//            case .closeIssue: closeIssue(bindable)
-//            case .deleteIssue: deleteIssue(bindable)
         case .closeIssue, .deleteIssue: updateIssue(bindable, param: param)
         }
     }
@@ -65,53 +63,22 @@ class IssueListViewModel: CommonViewModel {
             return
         }
         
-        issueList[index].isSelected.toggle()
+        issueList[index].isSelected?.toggle()
         output(cell.indexPath, cell)
     }
-    
-//    func closeIssue(_ target: ViewBindable) {
-//        guard
-//            let cell = target as? IssueListTableViewCell,
-//            let index = issueList.firstIndex(where: { $0.id == cell.dto?.id })
-//        else {
-//            return
-//        }
-//
-//        modifyUseCase?.request(
-//            { [weak self] _ in
-//                self?.issueList[index].closed_at = Date().ISO8601Format()
-//                self?.output(cell.indexPath, target)
-//            }
-//        )
-//    }
-//
-//    func deleteIssue(_ target: ViewBindable) {
-//        guard
-//            let cell = target as? IssueListTableViewCell,
-//            let index = issueList.firstIndex(where: { $0.id == cell.dto?.id })
-//        else {
-//            return
-//        }
-//
-//        modifyUseCase?.request(
-//            { [weak self] _ in
-//                self?.issueList.remove(at: index)
-//                (target as? IssueListTableViewCell)?.willBeDelete = true
-//                self?.output(cell.indexPath, target)
-//            }
-//        )
-//    }
     
     private func updateIssue(_ target: ViewBindable, param: IssueAction) {
         guard let cell = target as? IssueListTableViewCell, let useCase = modifyUseCase as? IssueModifyUseCase else {
             return
         }
         
-        if param == .closeIssue {
+        // GitHub API 에서 Issue 삭제를 지원하지 않아 내부적으로 처리합니다.
+        if param == .deleteIssue {
             if let index = issueList.firstIndex(where: { $0.id == cell.dto?.id }) {
                 issueList.remove(at: index)
                 (target as? IssueListTableViewCell)?.willBeDelete = true
             }
+            
             return
         }
         

@@ -16,13 +16,15 @@ class NetworkService<T: Codable>: CommonService {
             return nil
         }
         
-        AF.request(request).response { response in
-            guard let data = response.value else {
-                return
-            }
-            
-            print(data!.base64EncodedString())
-        }
+        // Decoding 디버깅을 위한 코드.
+//        AF.request(request).response { response in
+//            guard let data = response.value else {
+//                return
+//            }
+//
+//            let result = try? JSONDecoder().decode([IssueDTO].self, from: data!)
+//            print(result)
+//        }
         
         switch method {
         case .get, .post:
