@@ -7,6 +7,9 @@ import Tabs from '@/components/common/Tabs';
 import { listItem } from '@/components/common/Tabs/type';
 import Layout from '@/layout';
 import { $MenuWrapper, $ButtonWrapper } from '@/pages/IssueList/style';
+import { FilterConditionProvider } from '@/contexts/FilterCondition';
+import { FILTER_BAR_OPTIONS } from './filterBarOptionData';
+import { IFilterBarProps } from '@/components/IssueList/FilterBar/type';
 
 const tabItems: listItem[] = [
   {
@@ -26,36 +29,10 @@ const radioIcon = {
   on: <Icon iconType="radioOn" />
 };
 
-const filterBarProps = {
+const filterBarProps: IFilterBarProps = {
   indicatorName: '필터',
   panelName: '이슈 필터',
-  options: [
-    {
-      children: '열린 이슈',
-      radio: radioIcon,
-      value: 'opened'
-    },
-    {
-      children: '내가 작성한 이슈',
-      radio: radioIcon,
-      value: 'written'
-    },
-    {
-      children: '나에게 할당된 이슈',
-      radio: radioIcon,
-      value: 'assigned'
-    },
-    {
-      children: '내가 댓글을 남긴 이슈',
-      radio: radioIcon,
-      value: 'comments'
-    },
-    {
-      children: '닫힌 이슈',
-      radio: radioIcon,
-      value: 'closed'
-    }
-  ],
+  options: FILTER_BAR_OPTIONS,
   initialValue: 'opened',
   inputStyleType: 'small',
   placeholder: 'is:issue is:open',
@@ -65,17 +42,19 @@ const filterBarProps = {
 export default function IssueListPage() {
   return (
     <Layout header={<Header />}>
-      <$MenuWrapper>
-        <FilterBar {...filterBarProps} />
-        <$ButtonWrapper>
-          <Tabs list={tabItems} />
-          <Button styleType="smallStandard">
-            <Icon iconType="plus" />
-            이슈 작성
-          </Button>
-        </$ButtonWrapper>
-      </$MenuWrapper>
-      <IssueList />
+      <FilterConditionProvider>
+        <$MenuWrapper>
+          <FilterBar {...filterBarProps} />
+          <$ButtonWrapper>
+            <Tabs list={tabItems} />
+            <Button styleType="smallStandard">
+              <Icon iconType="plus" />
+              이슈 작성
+            </Button>
+          </$ButtonWrapper>
+        </$MenuWrapper>
+        <IssueList />
+      </FilterConditionProvider>
     </Layout>
   );
 }
