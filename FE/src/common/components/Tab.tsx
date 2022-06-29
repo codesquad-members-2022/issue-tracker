@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GREYSCALE } from '@/constants';
+import { GREYSCALE } from '@/common/constants';
 import Icon from '@/assets/icons/Icon';
 
 type TabProps = {

@@ -1,10 +1,10 @@
 import FilterBar from '@/issueList/FilterBar';
-import ButtonSmallStandard from '@/common/ButtonSmallStandard';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LinkTabs from '@/issueList/LinkTabs';
-import IssueList from './IssueList';
-import IssueListProvider from './IssueListProvider';
+import ButtonSmallStandard from '@/common/components/buttons/ButtonSmallStandard';
+import IssueList from '@/issueList/issueListTable/IssueList';
+import IssueListProvider from '@/issueList/stores/IssueListProvider';
 
 function IssueListPage() {
   return (

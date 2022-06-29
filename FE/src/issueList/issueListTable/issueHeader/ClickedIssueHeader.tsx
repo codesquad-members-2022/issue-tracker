@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { GREYSCALE } from '@/constants';
+import { GREYSCALE } from '@/common/constants';
 import { IssueHeaderBox, IssueTabs } from './IssueHeader';
-import IssueTab from './IssueTab';
-import CheckBox from './CheckBox';
-import { useIssueListContext } from './IssueListProvider';
+import IssueTab from '@/issueList/issueListTable/issueHeader/IssueTab';
+import CheckBox from '@/issueList/issueListTable/CheckBox';
+import { useIssueListContext } from '@/issueList/stores/IssueListProvider';
 
 function ClickedIssueHeader() {
   const { state, dispatch } = useIssueListContext();

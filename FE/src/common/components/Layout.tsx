@@ -1,5 +1,5 @@
 import Icon from '@/assets/icons/Icon';
-import { GREYSCALE } from '@/constants';
+import { GREYSCALE } from '@/common/constants';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 

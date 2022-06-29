@@ -1,9 +1,9 @@
-import { GREYSCALE } from '@/constants';
+import { GREYSCALE } from '@/common/constants';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import CheckBox from './CheckBox';
-import { IssueListStateType } from './IssueList';
-import { useIssueListContext } from './IssueListProvider';
+import CheckBox from '@/issueList/issueListTable/CheckBox';
+import { IssueListStateType } from '@/issueList/issueListTable/IssueList';
+import { useIssueListContext } from '@/issueList/stores/IssueListProvider';
 import IssueMenu from './IssueMenu';
 import IssueTab from './IssueTab';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Login from './Login';
+import Login from '@/login/Login';
 
 function LoginPage() {
   return (
