@@ -1,11 +1,4 @@
-interface IFilterCondition {
-  status?: 'open' | 'close';
-  assignee?: string | null;
-  label?: string | null;
-  milestone?: string | null;
-  author?: string | null;
-  comment?: string | null;
-}
+import { IFilterCondition } from '@/types/common';
 
 interface Action<T, P> {
   readonly type: T;
@@ -14,13 +7,6 @@ interface Action<T, P> {
 
 type DispatchType = React.Dispatch<Action<ActionType, IFilterCondition>>;
 
-type ActionType =
-  | 'SET_STATE'
-  | 'SET_ASSIGNEE'
-  | 'SET_LABEL'
-  | 'SET_MILESTONE'
-  | 'SET_AUTHOR'
-  | 'SET_COMMENT'
-  | 'RESET';
+type ActionType = 'SET_CONDITION' | 'RESET';
 
 export type { IFilterCondition, Action, DispatchType, ActionType };

@@ -1,7 +1,8 @@
-import { IFilterCondition, Action, ActionType } from '@/contexts/FilterCondition/type';
+import { Action, ActionType } from '@/contexts/FilterCondition/type';
+import { IFilterCondition } from '@/types/common';
 
 const InitFilterCondition: IFilterCondition = {
-  status: 'open',
+  status: 'OPEN',
   assignee: null,
   label: null,
   milestone: null,
@@ -16,18 +17,8 @@ function reducer(
   const { type, payload } = action;
 
   switch (type) {
-    case 'SET_STATE':
-      return { ...state, status: payload.status };
-    case 'SET_ASSIGNEE':
-      return { ...state, assignee: payload.assignee };
-    case 'SET_LABEL':
-      return { ...state, label: payload.label };
-    case 'SET_MILESTONE':
-      return { ...state, milestone: payload.milestone };
-    case 'SET_AUTHOR':
-      return { ...state, author: payload.author };
-    case 'SET_COMMENT':
-      return { ...state, comment: payload.comment };
+    case 'SET_CONDITION':
+      return { ...state, ...payload };
     case 'RESET':
       return InitFilterCondition;
     default:
@@ -35,4 +26,23 @@ function reducer(
   }
 }
 
-export { InitFilterCondition, reducer };
+function createFilterConditionString({
+  status,
+  assignee,
+  author,
+  label,
+  milestone,
+  comment
+}: IFilterCondition) {
+  return (
+    `is:${status?.toLowerCase()}` +
+    ` is:issue` +
+    (assignee ? ` assignee:${assignee}` : '') +
+    (author ? ` author:${author}` : '') +
+    (label ? ` label:${label}` : '') +
+    (milestone ? ` milestone:${milestone}` : '') +
+    (comment ? ` comment:${comment}` : '')
+  );
+}
+
+export { InitFilterCondition, reducer, createFilterConditionString };
