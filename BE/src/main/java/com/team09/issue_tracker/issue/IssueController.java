@@ -1,14 +1,12 @@
 package com.team09.issue_tracker.issue;
 
 import com.team09.issue_tracker.common.CommonResponseDto;
-import com.team09.issue_tracker.issue.dto.IssueAssigneeService;
 import com.team09.issue_tracker.issue.dto.IssueUpdateRequestDto;
 import com.team09.issue_tracker.issue.dto.SelectableLabelMilestoneResponse;
 import com.team09.issue_tracker.issue.dto.IssueSaveRequestDto;
 import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
 import com.team09.issue_tracker.issue.dto.IssueDetailResponseDto;
 import com.team09.issue_tracker.label.LabelService;
-import com.team09.issue_tracker.milestone.Milestone;
 import com.team09.issue_tracker.milestone.MilestoneService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
