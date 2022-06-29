@@ -224,8 +224,10 @@ extension NewIssueViewController: UITableViewDataSource {
 
 extension NewIssueViewController: OptionSelectDelegate {
     func selected(item: Repository, option: Option) {
-        // 배열에서 옵션타입에 해당하는 데이터를 업뎃
-        selectedList[0] = item.name
+        guard let optionIndex = optionList.firstIndex(of: option) else {
+            return
+        }
+        selectedList[optionIndex] = item.name
         selectedRepo = item
         self.optionTable.reloadData()
     }
