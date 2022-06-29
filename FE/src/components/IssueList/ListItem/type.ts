@@ -1,33 +1,38 @@
-interface IAuthor {
-  userId: string;
-  name: string;
-  profile: string;
-}
+import { IssueStatusType } from '@/types/common';
 
-interface IListItem {
-  title: string;
-  labelList: string[];
-  number: number;
-  author: IAuthor;
-  timestamp: string;
-  milestone: string;
-  status: 'OPEN' | 'CLOSE';
+interface IMember {
+  id: number;
+  image_url: string;
+  user_id: string;
+  name: string;
 }
 
 interface ILabel {
   id: number;
   name: string;
-  description: string;
   color_code: string;
+  description: string;
 }
 
 interface IMilestone {
   id: number;
   name: string;
+  status: IssueStatusType;
   description: string;
   target_date: string;
   open_issue: number;
   closed_issue: number;
+}
+
+interface IListItem {
+  id: number;
+  title: string;
+  status: IssueStatusType;
+  assignees: IMember[];
+  author: IMember;
+  created_at: string;
+  labels: ILabel[];
+  milestone: IMilestone;
 }
 
 interface MockData {
@@ -40,4 +45,4 @@ interface I$Text {
   size: 'large' | 'small';
 }
 
-export type { IListItem, ILabel, IMilestone, MockData, I$Text };
+export type { IListItem, IMember, ILabel, IMilestone, MockData, I$Text };

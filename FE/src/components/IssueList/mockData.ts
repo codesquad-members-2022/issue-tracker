@@ -4,56 +4,163 @@ const mockData: MockData = {
   issueList: [
     {
       title: '이슈 제목',
-      labelList: ['레이블 이름', 'documentation', 'FE'],
-      number: 4,
-      timestamp: '',
-      milestone: '마스터즈 코스',
+      labels: [{ id: 1, name: 'FE', color_code: '#A062cE', description: 'Frontend' }],
+      id: 1,
+      created_at: '',
+      milestone: {
+        id: 1,
+        name: '1주차 개발 스프린트',
+        description: '1주차 개발 스프린트',
+        target_date: '2022-06-30',
+        open_issue: 0,
+        closed_issue: 3,
+        status: 'CLOSE'
+      },
       status: 'OPEN',
       author: {
+        id: 1,
         name: 'anonymous',
-        userId: 'anonymous',
-        profile:
-          'https://images.unsplash.com/profile-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
-      }
+        user_id: 'anonymous',
+        image_url:
+          'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+      },
+      assignees: [
+        {
+          id: 1,
+          name: 'anonymous',
+          user_id: 'anonymous',
+          image_url:
+            'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+        }
+      ]
     },
     {
-      title: '[FE] 이슈 리스트 페이지 레이아웃 구현',
-      labelList: ['FE', 'design'],
-      number: 3,
-      timestamp: '',
-      milestone: '마스터즈 코스',
+      title: '이슈 제목',
+      labels: [{ id: 1, name: 'FE', color_code: '#A062cE', description: 'Frontend' }],
+      id: 2,
+      created_at: '',
+      milestone: {
+        id: 1,
+        name: '1주차 개발 스프린트',
+        description: '1주차 개발 스프린트',
+        target_date: '2022-06-30',
+        open_issue: 0,
+        closed_issue: 3,
+        status: 'CLOSE'
+      },
       status: 'OPEN',
       author: {
-        name: 'Hemdi',
-        userId: 'Hemudi',
-        profile: 'https://avatars.githubusercontent.com/u/34249911?v=4'
-      }
+        id: 1,
+        name: 'anonymous',
+        user_id: 'anonymous',
+        image_url:
+          'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+      },
+      assignees: [
+        {
+          id: 1,
+          name: 'anonymous',
+          user_id: 'anonymous',
+          image_url:
+            'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+        }
+      ]
     },
     {
-      title: '[FE] TextInput 컴포넌트 글자수 체크 기능 구현',
-      labelList: ['FE', 'feature'],
-      number: 2,
-      timestamp: '',
-      milestone: '마스터즈 코스',
+      title: '이슈 제목',
+      labels: [{ id: 1, name: 'FE', color_code: '#A062cE', description: 'Frontend' }],
+      id: 3,
+      created_at: '',
+      milestone: {
+        id: 1,
+        name: '1주차 개발 스프린트',
+        description: '1주차 개발 스프린트',
+        target_date: '2022-06-30',
+        open_issue: 0,
+        closed_issue: 3,
+        status: 'CLOSE'
+      },
       status: 'OPEN',
       author: {
-        name: 'Dony',
-        userId: 'jindonyy',
-        profile: 'https://avatars.githubusercontent.com/u/17706346?v=4'
-      }
+        id: 1,
+        name: 'anonymous',
+        user_id: 'anonymous',
+        image_url:
+          'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+      },
+      assignees: [
+        {
+          id: 1,
+          name: 'anonymous',
+          user_id: 'anonymous',
+          image_url:
+            'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+        }
+      ]
     },
     {
-      title: '[BE] GitHub과의 OAuth 통신 구현',
-      labelList: ['BE', 'feature'],
-      number: 1,
-      timestamp: '',
-      milestone: '마스터즈 코스',
-      status: 'CLOSE',
+      title: '이슈 제목',
+      labels: [{ id: 1, name: 'FE', color_code: '#A062cE', description: 'Frontend' }],
+      id: 5,
+      created_at: '',
+      milestone: {
+        id: 1,
+        name: '1주차 개발 스프린트',
+        description: '1주차 개발 스프린트',
+        target_date: '2022-06-30',
+        open_issue: 0,
+        closed_issue: 3,
+        status: 'CLOSE'
+      },
+      status: 'OPEN',
       author: {
-        name: 'Sammy',
-        userId: 'astraum',
-        profile: 'https://avatars.githubusercontent.com/u/94687862?v=4'
-      }
+        id: 1,
+        name: 'anonymous',
+        user_id: 'anonymous',
+        image_url:
+          'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+      },
+      assignees: [
+        {
+          id: 1,
+          name: 'anonymous',
+          user_id: 'anonymous',
+          image_url:
+            'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+        }
+      ]
+    },
+    {
+      title: '이슈 제목',
+      labels: [{ id: 1, name: 'FE', color_code: '#A062cE', description: 'Frontend' }],
+      id: 4,
+      created_at: '',
+      milestone: {
+        id: 1,
+        name: '1주차 개발 스프린트',
+        description: '1주차 개발 스프린트',
+        target_date: '2022-06-30',
+        open_issue: 0,
+        closed_issue: 3,
+        status: 'CLOSE'
+      },
+      status: 'OPEN',
+      author: {
+        id: 1,
+        name: 'anonymous',
+        user_id: 'anonymous',
+        image_url:
+          'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+      },
+      assignees: [
+        {
+          id: 1,
+          name: 'anonymous',
+          user_id: 'anonymous',
+          image_url:
+            'https://images.unsplash.com/image_url-fb-1620954106-6ea0901e5361.jpg?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128'
+        }
+      ]
     }
   ],
   labelList: [
@@ -73,11 +180,30 @@ const mockData: MockData = {
   milestoneList: [
     {
       id: 1,
-      name: '첫번째 마일스톤',
-      description: '마일스톤 마일스톤 첫첫 마일스톤',
+      name: '1주차 개발 스프린트',
+      description: '1주차 개발 스프린트',
+      target_date: '2022-06-30',
+      open_issue: 0,
+      closed_issue: 3,
+      status: 'CLOSE'
+    },
+    {
+      id: 2,
+      name: '2주차 개발 스프린트',
+      description: '2주차 개발 스프린트',
       target_date: '2022-06-30',
       open_issue: 1,
-      closed_issue: 1
+      closed_issue: 3,
+      status: 'CLOSE'
+    },
+    {
+      id: 3,
+      name: '3주차 개발 스프린트',
+      description: '3주차 개발 스프린트',
+      target_date: '2022-06-30',
+      open_issue: 2,
+      closed_issue: 2,
+      status: 'OPEN'
     }
   ]
 };
