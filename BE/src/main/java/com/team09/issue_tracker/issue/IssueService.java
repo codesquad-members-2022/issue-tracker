@@ -19,10 +19,11 @@ import com.team09.issue_tracker.label.Label;
 import com.team09.issue_tracker.member.Member;
 import com.team09.issue_tracker.milestone.Milestone;
 import com.team09.issue_tracker.milestone.MilestoneRepository;
+import com.team09.issue_tracker.milestone.MilestoneService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,10 +35,11 @@ public class IssueService {
 
 	private final IssueRepository issueRepository;
 	private final IssueLabelRepository issueLabelRepository;
-	private final IssueAssigneeRepository issueAssigneeRepository;
 	private final MilestoneRepository milestoneRepository;
 
-	private final IssueValidateService issueValidateService;
+	private final MilestoneService milestoneService;
+	private final IssueLabelService issueLabelService;
+	private final IssueAssigneeService issueAssigneeService;
 
 	@Transactional(readOnly = true)
 	public List<IssueListResponseDto> selectOpenedList(Long memberId) {
@@ -50,91 +52,26 @@ public class IssueService {
 		return Collections.unmodifiableList(response);
 	}
 
-	/**
-	 * 이슈 생성
-	 *
-	 * @param issueSaveRequestDto
-	 * @param memberId
-	 * @return
-	 */
 	@Transactional
 	public CommonResponseDto create(IssueSaveRequestDto issueSaveRequestDto, Long memberId) {
 		boolean isOpened = true;
 
-		//1. mileStone
-		Milestone milestone = createMilestone(issueSaveRequestDto, memberId);
+		Milestone milestone = milestoneService.createMilestone(issueSaveRequestDto.getMilestoneId()
+			, memberId);
 
-		//2. Issue
 		Issue issue = Issue.of(issueSaveRequestDto.getTitle(),
 			issueSaveRequestDto.getContent(), memberId,
 			isOpened, milestone);
 
-		Issue savedIssue = issueRepository.save(issue);
-		Long issueId = savedIssue.getId();
+		issue = issueRepository.save(issue);
 
-		//3. labelsIds
-		List<Long> labelIds = issueSaveRequestDto.getLabelIds();
-		validateLabelIds(labelIds, memberId);
+		issueLabelService.saveIssueLabel(issue, issueSaveRequestDto.getLabelIds());
 
-		saveIssueLabel(savedIssue, issueId, labelIds);
+		issueAssigneeService.savedIssueAssignee(issue, issueSaveRequestDto.getAssigneeIds());
 
-		//4. assigneeIds
-		List<Long> assigneeIds = issueSaveRequestDto.getAssigneeIds();
-		validateAssigneeIds(assigneeIds);
-
-		savedIssueAssignee(issue, savedIssue, assigneeIds);
-
-		return savedIssue.toCommonResponse();
+		return issue.toCommonResponse();
 	}
 
-	private Milestone createMilestone(IssueUpdateRequestDto issueUpdateRequestDto, Long memberId) {
-		Optional.ofNullable(issueUpdateRequestDto.getMilestoneId())
-			.ifPresent(
-				milestoneId -> issueValidateService.validateMyMilestoneId(milestoneId, memberId));
-
-		return Optional.ofNullable(issueUpdateRequestDto.getMilestoneId())
-			.map(Milestone::of)
-			.orElse(null);
-	}
-
-	private Milestone createMilestone(IssueSaveRequestDto issueSaveRequestDto, Long memberId) {
-		Optional.ofNullable(issueSaveRequestDto.getMilestoneId())
-			.ifPresent(
-				milestoneId -> issueValidateService.validateMyMilestoneId(milestoneId, memberId));
-
-		Milestone milestone = Optional.ofNullable(issueSaveRequestDto.getMilestoneId())
-			.map(Milestone::of)
-			.orElse(null);
-		return milestone;
-	}
-
-	private void saveIssueLabel(Issue savedIssue, Long issueId, List<Long> labelIds) {
-		if (!labelIds.isEmpty()) {
-			List<IssueLabel> issueLabels = labelIds.stream()
-				.map(labelId -> IssueLabel.of(issueId, labelId))
-				.collect(Collectors.toList());
-
-			List<IssueLabel> savedIssueLabels = issueLabels.stream()
-				.map(issueLabel -> issueLabelRepository.save(issueLabel))
-				.collect(Collectors.toList());
-			//연관관계 편의 메서드
-			savedIssue.addIssueLabel(savedIssueLabels);
-		}
-	}
-
-	private void savedIssueAssignee(Issue issue, Issue savedIssue, List<Long> assigneeIds) {
-		if (assigneeIds.size() > 0) {
-			List<IssueAssignee> issueAssignees = assigneeIds.stream()
-				.map(assigneeId -> IssueAssignee.of(savedIssue, Member.of(assigneeId)))
-				.collect(Collectors.toList());
-
-			List<IssueAssignee> savedIssueAssignees = issueAssignees.stream()
-				.map(issueAssignee -> issueAssigneeRepository.save(issueAssignee))
-				.collect(Collectors.toList());
-			//연관관계 편의메서드
-			issue.addIssueAssignee(savedIssueAssignees);
-		}
-	}
 
 	/**
 	 * 해당 issueid가 작성/할당 된 이슈만 "더보기" 버튼 생성 하여 상세정보 수정/삭제 가능 작성자, 할당자 확인 로직
@@ -157,7 +94,7 @@ public class IssueService {
 		}
 
 		//2. 할당자인지 확인
-		List<IssueAssignee> issueAssignees = issue.getIssueAssignees();
+		Set<IssueAssignee> issueAssignees = issue.getIssueAssignees();
 		if (issueAssignees.size() != 0) {
 			isEditable = true;
 		}
@@ -165,28 +102,16 @@ public class IssueService {
 		return issue.toDetailResponse(isEditable);
 	}
 
-	/**
-	 * 이슈 수정 - 이슈, 이슈 상태,연관 레이블, 마일스톤 모두 수정 가능
-	 *
-	 * @param IssueUpdateRequestDto
-	 * @param issueId
-	 * @return
-	 */
 	@Transactional
 	public CommonResponseDto update(IssueUpdateRequestDto issueUpdateRequestDto, Long issueId,
 		Long memberId) {
 
-		List<Long> labelIds = issueUpdateRequestDto.getLabelIds();
-		validateLabelIds(labelIds, memberId);
-
 		Issue issue = issueRepository.findById(issueId)
 			.orElseThrow(() -> new IssueNotFoundException());
 
-		issue.setTitle(issueUpdateRequestDto.getTitle());
-		issue.setContent(issueUpdateRequestDto.getContent());
-		issue.setOpened(issueUpdateRequestDto.isOpened());
-		issue.setMilestone(createMilestone(issueUpdateRequestDto, memberId));
-
+		issue.update(issueUpdateRequestDto.getTitle(), issueUpdateRequestDto.getContent(),
+			milestoneService.createMilestone(issueUpdateRequestDto.getMilestoneId()
+				, memberId), issueUpdateRequestDto.isOpened());
 
 		CommonResponseDto response = updateIssueLabel(
 			issueUpdateRequestDto, issueId, issue);
@@ -195,10 +120,8 @@ public class IssueService {
 	}
 
 	/**
-	 * 	label 수정
-	 * 		 1.기존리스트 issueLabels 검색
-	 * 		 2.기존리스트에서 삭제된 레이블, DB삭제
-	 * 		 3.기존리스트에 없는 추가로 선택된 레이블, DB추가
+	 * label 수정 1.기존리스트 issueLabels 검색 2.기존리스트에서 삭제된 레이블, DB삭제 3.기존리스트에 없는 추가로 선택된 레이블, DB추가
+	 *
 	 * @param issueUpdateRequestDto
 	 * @param issueId
 	 * @param issue
@@ -207,14 +130,13 @@ public class IssueService {
 	private CommonResponseDto updateIssueLabel(IssueUpdateRequestDto issueUpdateRequestDto,
 		Long issueId, Issue issue) {
 
-		List<IssueLabel> issueLabels = issue.getIssueLabels();
+		Set<IssueLabel> issueLabels = issue.getIssueLabels();
 
 		List<Long> editingLabelIds = issueUpdateRequestDto.getLabelIds();
 		//Label을 모두 삭제할 경우
-		if (issueUpdateRequestDto.getLabelIds().isEmpty()) {
-			issueLabels.stream()
-				.forEach(issueLabel -> issueLabelRepository.delete(issueLabel));
-			issue.addIssueLabel(Collections.emptyList());
+		if (editingLabelIds.isEmpty()) {
+			issueLabelRepository.deleteAll(issueLabels);
+			issue.addIssueLabel(Collections.emptySet());
 
 			return new CommonResponseDto(issue.getId());
 		}
@@ -234,8 +156,7 @@ public class IssueService {
 					Label.of(labelId))
 				.orElseThrow(() -> new IssueLabelNotFoundException(issueId, labelId)))
 			.collect(Collectors.toList());
-		deletedIssueLabels.stream()
-			.forEach(issueLabel -> issueLabelRepository.delete(issueLabel));
+		issueLabelRepository.deleteAll(deletedIssueLabels);
 
 		//DB 추가
 		List<IssueLabel> savedIssueLabels = editingLabelIds.stream()
@@ -299,17 +220,6 @@ public class IssueService {
 		return new SelectableLabelMilestoneResponse(labelsResponse, milestoneResponse);
 	}
 
-	private void validateAssigneeIds(List<Long> assigneeIds) {
-		if (assigneeIds.size() > 0) {
-			issueValidateService.validateMember(assigneeIds);
-		}
-	}
-
-	private void validateLabelIds(List<Long> labelIds, Long memberId) {
-		if (labelIds.size() > 0) {
-			issueValidateService.validateMyLabelIds(labelIds, memberId);
-		}
-	}
 
 	@Transactional(readOnly = true)
 	public List<IssueListResponseDto> findBySearchCondition(IssueSearchRequestDto searchRequestDto,

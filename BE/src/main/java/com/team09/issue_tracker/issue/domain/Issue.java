@@ -8,8 +8,10 @@ import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
 import com.team09.issue_tracker.label.Label;
 import com.team09.issue_tracker.milestone.Milestone;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,20 +56,21 @@ public class Issue extends BaseTimeEntity {
 	private List<Comment> comments = new ArrayList<>();
 
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
-	private List<IssueLabel> issueLabels = new ArrayList<>();
+	private Set<IssueLabel> issueLabels = new HashSet<>();
+
 
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
-	private List<IssueAssignee> issueAssignees = new ArrayList<>();
+	private Set<IssueAssignee> issueAssignees = new HashSet<>();
 
 	public boolean isWriter(Long memberId) {
 		return memberId.equals(this.memberId);
 	}
 
-	public void addIssueLabel(List<IssueLabel> issueLabels) {
+	public void addIssueLabel(Set<IssueLabel> issueLabels) {
 		this.issueLabels = issueLabels;
 	}
 
-	public void addIssueAssignee(List<IssueAssignee> issueAssignees) {
+	public void addIssueAssignee(Set<IssueAssignee> issueAssignees) {
 		this.issueAssignees = issueAssignees;
 	}
 
@@ -121,20 +124,10 @@ public class Issue extends BaseTimeEntity {
 			.build();
 	}
 
-	public void setTitle(String title) {
+	public void update(String title, String content, Milestone milestone, boolean opened) {
 		this.title = title;
-	}
-
-	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public void setMilestone(Milestone milestone) {
 		this.milestone = milestone;
-	}
-
-	public void setOpened(boolean opened) {
 		isOpened = opened;
 	}
-
 }
