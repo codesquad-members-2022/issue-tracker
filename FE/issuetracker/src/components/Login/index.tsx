@@ -2,12 +2,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import * as S from 'components/Login/styled.index';
-import { loginState } from 'context/loginState';
+import { loginState } from 'store/loginState';
 
 function Login() {
   const [login, setLogin] = useRecoilState(loginState);
   const navigate = useNavigate();
-
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -24,7 +23,7 @@ function Login() {
           if (login) {
             navigate('/');
           } else {
-            navigate('/callback');
+            navigate('/loading');
           }
         }}
       >
