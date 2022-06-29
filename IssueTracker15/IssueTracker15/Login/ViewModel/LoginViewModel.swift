@@ -28,7 +28,8 @@ struct LoginViewModel: CommonViewModel {
             }
             
         case .apple:
-            appleLoginUseCase?.request { loginURL in
+            guard let useCase = appleLoginUseCase else { return }
+            useCase.request { loginURL in
                 self.output(loginURL, bindable)
             }
         }
