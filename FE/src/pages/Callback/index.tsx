@@ -9,17 +9,15 @@ function Callback() {
 
   useEffect(() => {
     const getToken = async () => {
-      const code = searchParams.get('code');
+      const code = searchParams.get('code') as string;
 
-      console.log('코드', code);
-      const baseURL = `${URI}?code=${code}`;
-
-      // const data = await axios.get(baseURL);
-      // console.log(data);
-      console.log(baseURL);
+      const data = await axios.get(URI, {
+        params: { code },
+      });
+      console.log(data);
     };
     getToken();
-  });
+  }, []);
 
   return <div>loading.....</div>;
 }
