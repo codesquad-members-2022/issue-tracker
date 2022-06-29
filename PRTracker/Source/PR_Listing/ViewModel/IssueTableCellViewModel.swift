@@ -8,19 +8,19 @@
 import Foundation
 
 final class IssueTableCellViewModel {
-    var id: Int?
-    let title: Observable<String?> = Observable(nil)
-    let state: Observable<String?> = Observable(nil)
-    let content: Observable<String?> = Observable(nil)
-    let projectName: Observable<String?> = Observable(nil)
-    let labelList: Observable<[LabelViewModel]?> = Observable(nil)
-    let commentCount: Observable<Int?> = Observable(nil)
+    var id: Int = 0
+    var title: String = ""
+    var state: String = ""
+    var content: String = ""
+    var projectName: String = ""
+    var labelList = [Label]()
     
     func configureCellData(with data: Issue) {
         self.id = data.id
-        self.state.value = data.state
-        self.title.value = data.title
-        self.content.value = data.body
-        self.projectName.value = data.milestone?.title
+        self.title = data.title
+        self.content = data.body ?? "No content"
+        self.projectName = data.milestone?.title ?? "No Milestone"
+        self.labelList = data.labels
+        self.state = data.state
     }
 }
