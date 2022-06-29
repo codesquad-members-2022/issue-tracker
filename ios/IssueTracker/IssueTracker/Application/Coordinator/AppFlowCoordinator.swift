@@ -28,7 +28,6 @@ final class AppFlowCoordinator: BaseCoordinator {
 
     override func start() {
         if appDependencies.checkUserLoggedIn() {
-            print("Run")
             runTabBarFlow()
         } else {
             runLoginFlow()

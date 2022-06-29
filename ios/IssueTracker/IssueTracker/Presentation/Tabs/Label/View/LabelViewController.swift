@@ -63,13 +63,16 @@ final class LabelViewController: UIViewController {
 // MARK: - Table view data source
 extension LabelViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        20
+        12
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt _: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.reuseIdentifier) else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.reuseIdentifier) as? LabelCell else {
             return UITableViewCell()
         }
+
+        cell.setTitle("Documentation", color: .secondary3)
+        cell.setDescription("개발 내용을 문서화 한 이슈에 사용하는 레이블")
 
         return cell
     }

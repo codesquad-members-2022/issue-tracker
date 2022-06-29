@@ -38,25 +38,25 @@ final class TabBarFlowCoordinator: BaseCoordinator {
         issueNavigationController.tabBarItem = .init(
             title: "Issue",
             image: .info,
-            selectedImage: .info
+            selectedImage: .infoFilled
         )
 
         labelNavigationController.tabBarItem = .init(
             title: "Label",
             image: .tag,
-            selectedImage: .tag
+            selectedImage: .tagFilled
         )
 
         milestoneNavigationController.tabBarItem = .init(
             title: "Milestone",
             image: .signpost,
-            selectedImage: .signpost
+            selectedImage: .signpostFilled
         )
 
         accountNavigationController.tabBarItem = .init(
             title: "Account",
             image: .profile,
-            selectedImage: .profile
+            selectedImage: .profileFilled
         )
 
         tabBarController.viewControllers = [

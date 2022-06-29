@@ -59,8 +59,9 @@ final class LabelCell: UITableViewCell {
         }
     }
 
-    func setTitle(_ text: String) {
+    func setTitle(_ text: String, color: UIColor? = nil) {
         titleLabel.text = text
+        titleLabel.backgroundColor = color ?? titleLabel.backgroundColor
     }
 
     func setDescription(_ text: String) {
