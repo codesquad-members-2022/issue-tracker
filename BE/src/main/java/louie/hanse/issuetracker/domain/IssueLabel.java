@@ -29,6 +29,5 @@ public class IssueLabel {
         this.issue = issue;
         issue.addIssueLabel(this);
         this.label = label;
-        label.addIssueLabel(this);
     }
 }
