@@ -4,11 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import louie.hanse.issuetracker.domain.*;
 import louie.hanse.issuetracker.repository.*;
+import louie.hanse.issuetracker.web.dto.IssueResponse;
 import louie.hanse.issuetracker.web.dto.IssueSaveRequest;
+import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
+import louie.hanse.issuetracker.web.dto.IssueSearchResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,5 +57,11 @@ public class IssueService {
                 .orElseThrow(IllegalStateException::new);
             issue.updateMilestone(milestone);
         }
+    }
+
+    public IssueSearchResponse search(IssueSearchRequest issueSearchRequest) {
+        List<Issue> issues = issueRepository.search(issueSearchRequest, null);
+        issues.stream().map(issue -> new IssueResponse(issue)).collect(Collectors.toList());
+        return null;
     }
  }

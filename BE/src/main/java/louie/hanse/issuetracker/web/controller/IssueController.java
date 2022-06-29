@@ -2,7 +2,6 @@ package louie.hanse.issuetracker.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import louie.hanse.issuetracker.login.jwt.JwtProvider;
-import louie.hanse.issuetracker.repository.CommentRepository;
 import louie.hanse.issuetracker.service.IssueService;
 import louie.hanse.issuetracker.web.dto.IssueSaveRequest;
 import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
@@ -18,8 +17,6 @@ public class IssueController {
     private final IssueService issueService;
     private final JwtProvider jwtProvider;
 
-    private final CommentRepository commentRepository;
-
     @PostMapping
     public void registerIssue(@RequestBody IssueSaveRequest issueSaveRequest,
         HttpServletRequest request) {
@@ -30,6 +27,6 @@ public class IssueController {
 
     @GetMapping
     public void searchIssue(IssueSearchRequest issueSearchRequest) {
-        commentRepository.search(issueSearchRequest, 1L);
+        issueService.search(issueSearchRequest);
     }
 }
