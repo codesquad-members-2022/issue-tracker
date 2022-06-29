@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { AxiosType } from '@/api/type';
 
-const baseURL = 'https://fd7da552-08a3-42fa-8ddc-0d1aaac9c7ad.mock.pstmn.io/api';
+const baseURL = 'https://85351621-920e-4834-bd3e-7d9e2f09b244.mock.pstmn.io/api';
 
 const instance = axios.create({
   baseURL: baseURL,
@@ -15,20 +15,20 @@ const handleError = (err: AxiosError) => {
     const { baseURL = '', url = '' } = config;
 
     if (status === 404) {
-      console.log(`${baseURL + url} not found`);
+      console.error(`${baseURL + url} not found`);
     }
 
     if (status === 500) {
-      console.log(`Server error`);
+      console.error(`Server error`);
     }
     return err.response;
   }
 
   if (err.request) {
     // 요청이 전송되었지만, 응답이 수신되지 않았습니다.
-    console.log('Error', err.message);
+    console.error('Error', err.message);
   } else {
-    console.log('Error', err.message);
+    console.error('Error', err.message);
   }
 
   return { data: null, status: null };
