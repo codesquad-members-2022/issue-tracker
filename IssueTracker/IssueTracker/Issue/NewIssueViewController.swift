@@ -160,20 +160,17 @@ class NewIssueViewController: UIViewController {
             let selectedRepo = selectedRepo else {
             return
         }
-        
+        print("repo : \(selectedRepo)")
         guard let titleString = self.titleField.text,
            !titleString.isEmpty else {
             // TODO: - 타이틀 입력 값이 없다 => 얼럿
             print("타이틀 필드에 입력값이 없습니다")
             return
         }
-        
-        service.createIssue(title: titleString, repo: selectedRepo, accessToken: token) { responseResult in
-            switch responseResult {
-            case .success(let createdIssue):
-                print("Success Create Issue = ", createdIssue)
-            case .failure(let error):
-                print(error.localizedDescription)
+
+        service.createIssue(title: titleString, repo: selectedRepo, accessToken: token) { boolResult in
+            if boolResult {
+                print("이슈생성완료~!")
             }
         }
     }

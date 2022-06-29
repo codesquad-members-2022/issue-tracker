@@ -42,7 +42,7 @@ struct IssueService {
         }
     }
     
-    func createIssue(title: String, repo: Repository, accessToken: String, completion: @escaping (Result<Issue, IssueError>) -> Void) {
+    func createIssue(title: String, repo: Repository, accessToken: String, completion: @escaping (Bool) -> Void) {
         let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
@@ -55,13 +55,17 @@ struct IssueService {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        AF.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .responseDecodable(of: Issue.self, decoder: decoder) { response in
+        AF.request(urlString,
+                   method: .post,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default,
+                   headers: headers)
+            .response { response in
                 switch response.result {
-                case let .success(decodeData):
-                    completion(.success(decodeData))
-                case .failure(let error):
-                    completion(.failure(.cannotCreateIssue))
+                case let .success:
+                    completion(true)
+                case .failure:
+                    completion(false)
                 }
             }
     }
