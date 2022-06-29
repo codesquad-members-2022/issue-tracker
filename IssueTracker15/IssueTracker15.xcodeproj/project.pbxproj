@@ -29,11 +29,7 @@
 		1B1A81A02860AABC003C135A /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A819F2860AABC003C135A /* IssueViewModel.swift */; };
 		1B1A81A3286160F5003C135A /* IssueListHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81A2286160F5003C135A /* IssueListHeaderReusableView.swift */; };
 		1B1A81A528617FB3003C135A /* IssueListFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1A81A428617FB3003C135A /* IssueListFooterReusableView.swift */; };
-		1B87F704285B6C7A002B47B7 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */; };
-		1B87F705285B6C7A002B47B7 /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */; };
 		1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F702285B6C7A002B47B7 /* NetworkService.swift */; };
-		1B87F708285B6C7A002B47B7 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F703285B6C7A002B47B7 /* Repository.swift */; };
-		1B87F70F285C221D002B47B7 /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B87F70E285C221D002B47B7 /* Transferable.swift */; };
 		1BC7F8AC2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7F8AB2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift */; };
 		1BC7F8AF2862B15D007415A8 /* UIImage+SFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC7F8AE2862B15D007415A8 /* UIImage+SFSymbol.swift */; };
 		1BD4763328693F9100F08BDB /* ViewBindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17483F285885710028E037 /* ViewBindable.swift */; };
@@ -124,11 +120,7 @@
 		1B1A819F2860AABC003C135A /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		1B1A81A2286160F5003C135A /* IssueListHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListHeaderReusableView.swift; sourceTree = "<group>"; };
 		1B1A81A428617FB3003C135A /* IssueListFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListFooterReusableView.swift; sourceTree = "<group>"; };
-		1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
-		1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
 		1B87F702285B6C7A002B47B7 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		1B87F703285B6C7A002B47B7 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		1B87F70E285C221D002B47B7 /* Transferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
 		1B87F71A285C38FD002B47B7 /* ViewModelUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewModelUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC7F8AB2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterItemSelectViewController.swift; sourceTree = "<group>"; };
 		1BC7F8AE2862B15D007415A8 /* UIImage+SFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+SFSymbol.swift"; sourceTree = "<group>"; };
@@ -312,21 +304,9 @@
 		1B87F6FC285B6C7A002B47B7 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				1B87F70E285C221D002B47B7 /* Transferable.swift */,
-				1B87F703285B6C7A002B47B7 /* Repository.swift */,
-				1B87F6FD285B6C7A002B47B7 /* ServiceContainer.swift */,
-				1B87F6FE285B6C7A002B47B7 /* Persistent */,
 				1B87F701285B6C7A002B47B7 /* Network */,
 			);
 			path = Repository;
-			sourceTree = "<group>";
-		};
-		1B87F6FE285B6C7A002B47B7 /* Persistent */ = {
-			isa = PBXGroup;
-			children = (
-				1B87F6FF285B6C7A002B47B7 /* PersistentService.swift */,
-			);
-			path = Persistent;
 			sourceTree = "<group>";
 		};
 		1B87F701285B6C7A002B47B7 /* Network */ = {
@@ -759,20 +739,16 @@
 				1B1A818628608CEE003C135A /* UserDTO.swift in Sources */,
 				8DDEBAEB285B57B000A4E4DC /* LoginViewModel.swift in Sources */,
 				1BC7F8AC2862ACC7007415A8 /* IssueFilterItemSelectViewController.swift in Sources */,
-				1B87F704285B6C7A002B47B7 /* ServiceContainer.swift in Sources */,
 				1B1A81982860A56A003C135A /* IssueNavigationController.swift in Sources */,
 				1B1A819E2860A828003C135A /* MilestoneNavigationController.swift in Sources */,
-				1B87F708285B6C7A002B47B7 /* Repository.swift in Sources */,
 				8D06CC46286491CD00142943 /* ValidateModel.swift in Sources */,
 				1B174821285885180028E037 /* AppDelegate.swift in Sources */,
 				1B17484C285885710028E037 /* ViewBindable.swift in Sources */,
 				1B174838285885640028E037 /* PasswordChecker.swift in Sources */,
-				1B87F705285B6C7A002B47B7 /* PersistentService.swift in Sources */,
 				1B1A818E28608E72003C135A /* IssueDTO.swift in Sources */,
 				8D0F1D7B28643AE100626040 /* UserInputViewModel.swift in Sources */,
 				8D66A2C1285959CF001B514C /* Resolvable.swift in Sources */,
 				8DFDB6E42859B906008E7E59 /* ContainerWrapper.swift in Sources */,
-				1B87F70F285C221D002B47B7 /* Transferable.swift in Sources */,
 				8DF770BD2861A26200C02D1F /* GitHubLoginModel.swift in Sources */,
 				1B1A819C2860A814003C135A /* LabelNavigationController.swift in Sources */,
 				1B174823285885180028E037 /* SceneDelegate.swift in Sources */,
