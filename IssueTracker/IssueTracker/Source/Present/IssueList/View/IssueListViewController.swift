@@ -100,12 +100,17 @@ extension IssueListViewController: UITableViewDelegate, UITableViewDataSource {
         return viewModel.numberOfItemsInSection
     }
 
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: IssueCell.self.reuseIdentifier,
             for: indexPath) as? IssueCell
         else { return UITableViewCell() }
-        cell.titleLabel.text = viewModel.issueList.value[indexPath.item].title
+        
+        let issueItem = viewModel.issueList.value[indexPath.row]
+        let cellViewModel = IssueCellViewModel(issue: issueItem)
+        cell.setComponenets(with: cellViewModel)
+       
         return cell
     }
 }
