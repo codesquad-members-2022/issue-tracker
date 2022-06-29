@@ -4,15 +4,15 @@ function IssueTitleButton({
   buttonIcon,
   buttonText,
   buttonState,
-  clickHandler,
+  handleButtonClick,
 }: {
   buttonIcon: React.ReactNode;
   buttonText: string;
   buttonState: string;
-  clickHandler: () => void;
+  handleButtonClick: () => void;
 }) {
   return (
-    <S.issueButton buttonState={buttonState} onClick={clickHandler}>
+    <S.issueButton buttonState={buttonState} onClick={handleButtonClick}>
       {buttonIcon}
       <S.buttonText>{buttonText}</S.buttonText>
     </S.issueButton>

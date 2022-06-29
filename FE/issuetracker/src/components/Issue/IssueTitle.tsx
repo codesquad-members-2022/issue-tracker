@@ -1,10 +1,10 @@
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 
+import * as I from 'design/icons';
 import * as S from 'components/Issue/styled/issueTitle';
 
-import CancleAndSaveButtons from 'components/Issue/buttons/CancleAndSaveButtons';
-import EditAndCloseButtons from 'components/Issue/buttons/EditAndCloseButtons';
+import IssueTitleButton from 'components/Issue/IssueTitleButton';
 import IssueTitleContent from 'components/Issue/IssueTitleContent';
 import IssueTitleInput from 'components/Issue/IssueTitleInput';
 import { issueState } from 'store/issue';
@@ -59,9 +59,35 @@ function IssueTitle() {
         <IssueTitleContent />
       )}
       {isEditable ? (
-        <CancleAndSaveButtons clickHandler1={cancleEdit} clickHandler2={saveInputValue} />
+        <S.buttonWrapper>
+          <IssueTitleButton
+            buttonIcon={<I.cross />}
+            buttonText="편집 취소"
+            buttonState="default"
+            handleButtonClick={cancleEdit}
+          />
+          <IssueTitleButton
+            buttonIcon={<I.edit />}
+            buttonText="편집 완료"
+            buttonState="active"
+            handleButtonClick={saveInputValue}
+          />
+        </S.buttonWrapper>
       ) : (
-        <EditAndCloseButtons clickHandler1={startEdit} clickHandler2={toggleIssueState} />
+        <S.buttonWrapper>
+          <IssueTitleButton
+            buttonIcon={<I.edit />}
+            buttonText="제목 편집"
+            buttonState="default"
+            handleButtonClick={startEdit}
+          />
+          <IssueTitleButton
+            buttonIcon={issueData.closed ? <I.alertCircle /> : <I.archive />}
+            buttonText={issueData.closed ? '다시 열기' : '이슈 닫기'}
+            buttonState="default"
+            handleButtonClick={toggleIssueState}
+          />
+        </S.buttonWrapper>
       )}
     </S.issueTitleWrapper>
   );

@@ -7,7 +7,6 @@ import { loginState } from 'store/loginState';
 function Login() {
   const [login, setLogin] = useRecoilState(loginState);
   const navigate = useNavigate();
-
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -24,7 +23,7 @@ function Login() {
           if (login) {
             navigate('/');
           } else {
-            navigate('/callback');
+            navigate('/loading');
           }
         }}
       >

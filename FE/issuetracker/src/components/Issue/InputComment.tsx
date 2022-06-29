@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import * as I from 'design/icons';
@@ -13,13 +13,13 @@ function InputComment() {
   const [isInputActive, setIsInputActive] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const focusOnComment = () => {
+  const focusOnComment = useCallback(() => {
     setIsInputActive(true);
-  };
+  }, []);
 
-  const focusOutComment = () => {
+  const focusOutComment = useCallback(() => {
     setIsInputActive(false);
-  };
+  }, []);
 
   const changeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
@@ -59,7 +59,9 @@ function InputComment() {
           </S.attachFileButtonWrapper>
         </S.comment>
       </S.commentWrapper>
-      <SaveButton buttonText="완료" margin="0 0 0 60px" handleButtonClick={saveComment} />
+      <S.saveButtonWrapper>
+        <SaveButton buttonText="완료" handleButtonClick={saveComment} />
+      </S.saveButtonWrapper>
     </S.inputComment>
   );
 }

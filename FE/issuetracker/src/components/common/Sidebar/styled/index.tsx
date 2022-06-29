@@ -3,7 +3,7 @@ import { mixin } from 'design/GlobalStyles';
 
 export const AdditionalContents = styled.div`
   ${mixin.flexbox({ dir: 'column', vertical: 'flex-start' })};
-  width: 308px;
+  min-width: 308px;
   z-index: auto;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.backgroundColors.gray4};

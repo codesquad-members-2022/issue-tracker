@@ -39,7 +39,8 @@ function SideBar({ data }: { data: newIssueType }) {
     );
 
   const first = true;
-  const subjects: Array<string> = ['담당자', '레이블', '마일스톤'];
+  type SubjectsType = '담당자' | '레이블' | '마일스톤';
+  const subjects: Array<SubjectsType> = ['담당자', '레이블', '마일스톤'];
   return (
     <S.AdditionalContents>
       <S.AdditionalContent first={first}>

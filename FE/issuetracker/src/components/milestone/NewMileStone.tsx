@@ -49,11 +49,9 @@ function NewMileStone({ mileStoneData = initialMileStone }: Props) {
         handleInputChange={handleInputChange}
       />
       {mileStoneData && (
-        <SaveButton
-          buttonText="완료"
-          margin="24px 0 0 0"
-          handleButtonClick={handleSaveButtonClick}
-        />
+        <S.saveButtonWrapper>
+          <SaveButton buttonText="완료" handleButtonClick={handleSaveButtonClick} />
+        </S.saveButtonWrapper>
       )}
     </S.newMileStoneWrapper>
   );

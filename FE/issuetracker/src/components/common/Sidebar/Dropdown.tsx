@@ -17,7 +17,7 @@ import { newIssueState } from 'store/newIssue';
 import Label from '../Common';
 
 type DropdownType = {
-  subject: string;
+  subject: '담당자' | '레이블' | '마일스톤';
 };
 
 function DropDown({ subject }: DropdownType) {
