@@ -12,4 +12,5 @@ extension UIImage {
     static let tag = UIImage(systemName: "tag")
     static let signpost = UIImage(systemName: "signpost.right")
     static let profile = UIImage(systemName: "person")
+    static let plus = UIImage(systemName: "plus")
 }
