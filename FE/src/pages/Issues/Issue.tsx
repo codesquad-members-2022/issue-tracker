@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import * as S from './Issues.styled';
-import { IssueDatasType } from './Constants';
+// import { useEffect, useState } from 'react';
+// import * as S from './Issues.styled';
+// import { IssueDatasType } from './Constants';
 
 function Issue() {
   // const [issueData, setIssueData] = useState([]);

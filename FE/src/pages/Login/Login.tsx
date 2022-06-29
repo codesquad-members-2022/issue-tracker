@@ -1,35 +1,33 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import axios from 'axios';
 import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
-const URL = 'http://louie-03.com/login';
+export function Login() {
+  const URI = '/api/login';
 
-export function Login(): JSX.Element {
-  // const URI = 'http://louie-03.com/login';
+  const getToken = async () => {
+    try {
+      const response = await axios.get(URI);
+      // const data = await response;
 
-  useEffect(() => {
-    const getToken = async () => {
-      try {
-        const response = await axios.get('/login');
-        // const data = await response;
+      // eslint-disable-next-line no-console
+      console.log('ssss', response);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('???????error???????');
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
 
-        console.log('ssss', response);
-      } catch (error) {
-        console.log('???????error???????');
-
-        console.log(error);
-      }
-    };
-    getToken();
-  });
   return (
     <S.Container>
       <S.Wrapper>
         <S.Logo>
           <S.LogoImg alt="logo" src="./imgs/LogotypeLarge.svg" />
         </S.Logo>
-        <GitHubBtn href={URL} size="lg">
+        <GitHubBtn onClick={getToken} size="lg">
           GitHub 계정으로 로그인
         </GitHubBtn>
         <S.OR

@@ -27,7 +27,7 @@ export const LogoImg = styled.img`
   display: block;
 `;
 
-export const GitHubBtn = styled.a<{ size: string }>`
+export const GitHubBtn = styled.div<{ size: string }>`
   ${FlexCenterSorter};
   ${BtnStyles}
   margin-top: 61px;
