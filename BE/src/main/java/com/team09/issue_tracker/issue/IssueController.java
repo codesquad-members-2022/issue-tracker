@@ -50,7 +50,7 @@ public class IssueController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/{id}/editing")
+	@GetMapping("/{id}/moreInfo")
 	public ResponseEntity<SelectableLabelMilestoneResponse> readyToEditLabelAndMilestone(
 		@PathVariable final Long id) {
 		SelectableLabelMilestoneResponse response = issueService.readyToEditLabelAndMilestone(
