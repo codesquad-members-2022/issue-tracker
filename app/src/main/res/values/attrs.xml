@@ -15,5 +15,11 @@
         <attr name="conditionBarBackgroundTint" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="CustomImageButton">
+        <attr name="customImageButtonTitle" format="string" />
+        <attr name="customImageButtonImage" format="reference" />
+        <attr name="customImageButtonTintColor" format="reference|color" />
+    </declare-styleable>
+
 </resources>
 

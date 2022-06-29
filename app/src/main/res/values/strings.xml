@@ -28,4 +28,8 @@
     <string name="my_account">내 계정</string>
     <string name="send_msg">메세지</string>
     <string name="dlt_friend">삭제</string>
+    <string name="detail_issue_info">이슈 상세 정보</string>
+    <string name="label">레이블</string>
+    <string name="noneExist">없음</string>
+    <string name="edit">편집하기</string>
 </resources>

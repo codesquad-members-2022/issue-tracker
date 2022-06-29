@@ -12,13 +12,18 @@ import com.example.issu_tracker.data.Comment
 import com.example.issu_tracker.databinding.ItemCommentBinding
 import com.example.issu_tracker.ui.home.userUid
 
-class CommentAdapter() : ListAdapter<Comment, RecyclerView.ViewHolder>(diffUtil) {
+class CommentAdapter(val detailEventListener: DetailEventListener) : ListAdapter<Comment, RecyclerView.ViewHolder>(diffUtil) {
     // 두 코멘트의 확장성을 고려해
     inner class MyCommentViewHolder(val binding: ItemCommentBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(comment: Comment) {
             binding.comment = comment
+
+            binding.btnEditComment.setOnClickListener {
+                detailEventListener.onClicked()
+            }
         }
+
     }
 
     inner class OtherCommentViewHolder(val binding: ItemCommentBinding) :
