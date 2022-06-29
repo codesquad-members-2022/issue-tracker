@@ -8,7 +8,13 @@
 import UIKit
 import SwiftUI
 
+protocol NewIssueCreateDelegate: AnyObject {
+    func created()
+}
+
 class NewIssueViewController: UIViewController {
+    
+    weak var delegate: NewIssueCreateDelegate?
     
     private let service = IssueService()
     
@@ -16,7 +22,6 @@ class NewIssueViewController: UIViewController {
     private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
     private var selectedRepo: Repository?
-    
     
     enum Option: CaseIterable {
         case repository
@@ -160,17 +165,16 @@ class NewIssueViewController: UIViewController {
             let selectedRepo = selectedRepo else {
             return
         }
-        print("repo : \(selectedRepo)")
         guard let titleString = self.titleField.text,
            !titleString.isEmpty else {
             // TODO: - 타이틀 입력 값이 없다 => 얼럿
-            print("타이틀 필드에 입력값이 없습니다")
             return
         }
 
         service.createIssue(title: titleString, repo: selectedRepo, accessToken: token) { boolResult in
             if boolResult {
-                print("이슈생성완료~!")
+                self.navigationController?.popViewController(animated: true)
+                self.delegate?.created()
             }
         }
     }
@@ -189,8 +193,6 @@ extension NewIssueViewController: UITableViewDelegate {
             service.requestRepos(accessToken: token) { result in
                 switch result {
                 case .success(let repositoryList):
-                    //repositoryList를 OptionSelectViewController에 전달해 주어야 함
-                    print(repositoryList)
                     guard let viewController = appdelegate.container.buildViewController(.optionSelect(token: token, repositories: repositoryList)) as? OptionSelectViewController else {
                         return
                     }
@@ -205,7 +207,6 @@ extension NewIssueViewController: UITableViewDelegate {
         default:
             break
         }
-        print(optionList[indexPath.row])
     }
 }
 

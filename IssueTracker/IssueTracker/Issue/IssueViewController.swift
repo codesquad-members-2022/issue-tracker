@@ -25,8 +25,6 @@ final class IssueViewController: UIViewController {
         }))
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         
-//        button.layer.cornerRadius = 50 / 2
-        
         return button
     }()
     
@@ -48,7 +46,7 @@ final class IssueViewController: UIViewController {
         setupViews()
         model.requestIssue()
         model.updatedIssues = { [weak self] issues in
-            DispatchQueue.main.async { [weak self] in 
+            DispatchQueue.main.async { [weak self] in
                 self?.collectionView.reloadData()
             }
         }
@@ -67,8 +65,11 @@ final class IssueViewController: UIViewController {
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        let viewController = appdelegate.container.buildViewController(.newIssue)
+        guard let viewController = appdelegate.container.buildViewController(.newIssue) as? NewIssueViewController else {
+            return
+        }
         self.navigationController?.pushViewController(viewController, animated: true)
+        viewController.delegate = self
     }
     
     private func setupNavigationBar() {
@@ -151,5 +152,11 @@ extension IssueViewController: UICollectionViewDataSource {
 extension IssueViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 200)
+    }
+}
+
+extension IssueViewController: NewIssueCreateDelegate {
+    func created() {
+        model.requestIssue()
     }
 }

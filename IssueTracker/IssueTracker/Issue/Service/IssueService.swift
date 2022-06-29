@@ -49,7 +49,8 @@ struct IssueService {
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
         ]
         let parameters: [String: Any] = [
-            "title": title
+            "title": title,
+            "assignees": [repo.owner.login]
         ]
         
         let decoder = JSONDecoder()

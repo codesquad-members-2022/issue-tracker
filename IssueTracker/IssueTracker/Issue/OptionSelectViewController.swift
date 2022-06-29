@@ -7,11 +7,12 @@ protocol OptionSelectDelegate: AnyObject {
 
 class OptionSelectViewController: UIViewController {
     
+    weak var delegate: OptionSelectDelegate?
+    
     private let service = IssueService()
     private var token: String?
     private var options: [Repository]?
     
-    weak var delegate: OptionSelectDelegate? // 순환참조를 막기 위해 weak var로 선언
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     
     init(token: String, options: [Repository]) {
@@ -54,7 +55,7 @@ extension OptionSelectViewController: UITableViewDelegate {
             return
         }
         let selectedItem = options[indexPath.row]
-        delegate?.selected(item: selectedItem) // 이벤트 보내기
+        delegate?.selected(item: selectedItem)
         self.navigationController?.popViewController(animated: true)
     }
 }
