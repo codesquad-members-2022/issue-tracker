@@ -100,4 +100,11 @@ public class IssueService {
 		issue.changeState();
 		issueRepository.save(issue);
 	}
+
+	public void delete(Long id) {
+		Issue issue = issueRepository.findById(id)
+			.orElseThrow(() -> new IssueNotFoundException(ISSUE_NOT_FOUND_MESSAGE));
+		issue.delete();
+		issueRepository.save(issue);
+	}
 }

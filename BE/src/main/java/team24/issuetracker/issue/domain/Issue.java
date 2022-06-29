@@ -68,4 +68,8 @@ public class Issue {
         this.closed = !this.closed;
 	}
 
+	public void delete(){
+		this.deleted = !this.deleted;
+	}
+
 }

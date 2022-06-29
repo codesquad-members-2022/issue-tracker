@@ -1,17 +1,14 @@
 package team24.issuetracker.issue.controller;
 
 import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
 import team24.issuetracker.issue.application.IssueService;
 import team24.issuetracker.issue.domain.dto.IssueListResponse;
 import team24.issuetracker.issue.domain.dto.IssueRequest;
@@ -27,18 +24,18 @@ public class IssueController {
 		issueService.add(issueRequest);
 	}
 
-	@GetMapping("issues/created-by/{id}")
-	public List<IssueListResponse> getByWriter(@PathVariable("id") Long id) {
+	@GetMapping("issues/created-by/{userId}")
+	public List<IssueListResponse> getByWriter(@PathVariable("userId") Long id) {
 		return issueService.findByWriter(id);
 	}
 
-	@GetMapping("issues/assigned-to/{id}")
-	public List<IssueListResponse> getByAssignee(@PathVariable("id") Long id) {
+	@GetMapping("issues/assigned-to/{userId}")
+	public List<IssueListResponse> getByAssignee(@PathVariable("userId") Long id) {
 		return issueService.findByAssignee(id);
 	}
 
-	@GetMapping("issues/commented-by/{id}")
-	public List<IssueListResponse> getByComment(@PathVariable("id") Long id) {
+	@GetMapping("issues/commented-by/{userId}")
+	public List<IssueListResponse> getByComment(@PathVariable("userId") Long id) {
 		return issueService.findByCommenter(id);
 	}
 
@@ -47,8 +44,13 @@ public class IssueController {
 		return issueService.findByState(isClosed);
 	}
 
-	@PutMapping("issue/change-state/{id}")
+	@PutMapping("issues/{id}/change-state")
 	public void changeState(@PathVariable("id") Long id) {
 		issueService.updateState(id);
+	}
+
+	@PutMapping("issues/{id}/remove")
+	public void removeIssue(@PathVariable("id") Long id) {
+		issueService.delete(id);
 	}
 }
