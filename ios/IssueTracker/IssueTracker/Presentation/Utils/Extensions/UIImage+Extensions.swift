@@ -9,7 +9,13 @@ import UIKit.UIImage
 
 extension UIImage {
     static let info = UIImage(systemName: "info.circle")
+    static let infoFilled = UIImage(systemName: "info.circle.fill")
     static let tag = UIImage(systemName: "tag")
+    static let tagFilled = UIImage(systemName: "tag.fill")
     static let signpost = UIImage(systemName: "signpost.right")
+    static let signpostFilled = UIImage(systemName: "signpost.right.fill")
     static let profile = UIImage(systemName: "person")
+    static let profileFilled = UIImage(systemName: "person.fill")
+    static let plus = UIImage(systemName: "plus")
+    static let filter = UIImage(systemName: "line.3.horizontal.decrease.circle")
 }

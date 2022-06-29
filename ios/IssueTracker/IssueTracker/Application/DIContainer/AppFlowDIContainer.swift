@@ -21,11 +21,11 @@ extension AppFlowDIContainer: AppFlowCoordinatorDependencies {
         localStorage.string(forKey: LocalStorageConstants.AuthToken) != nil
     }
 
-    func makeLoginFlowDIContainer() -> DIContainer {
+    func makeLoginFlowDIContainer() -> LoginFlowDIContainer {
         LoginFlowDIContainer()
     }
 
-    func makeTabBarFlowDIContainer() -> DIContainer {
+    func makeTabBarFlowDIContainer() -> TabBarFlowDIContainer {
         TabBarFlowDIContainer()
     }
 }

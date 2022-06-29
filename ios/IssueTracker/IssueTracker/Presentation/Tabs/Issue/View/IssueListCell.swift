@@ -43,9 +43,9 @@ final class IssueListCell: UITableViewCell {
         return label
     }()
 
-    private let icon: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "signpost.right"), for: .normal)
+    private let icon: TextButton = {
+        let button = TextButton()
+        button.setSymbol(UIImage.signpost)
         button.tintColor = .darkGray
         return button
     }()
@@ -57,9 +57,9 @@ final class IssueListCell: UITableViewCell {
         return label
     }()
 
-    private let badgeLabel: BadgeLabel = {
-        let badgeLabel = BadgeLabel(frame: .zero)
-        badgeLabel.padding = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+    private let badgeLabel: Label = {
+        let badgeLabel = Label(frame: .zero)
+        badgeLabel.setPadding(top: 10, left: 15, bottom: 10, right: 15)
         badgeLabel.font = .systemFont(ofSize: 12, weight: .bold)
         badgeLabel.textColor = .white
         badgeLabel.clipsToBounds = true

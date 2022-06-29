@@ -9,16 +9,18 @@
 /* Begin PBXBuildFile section */
 		736E6BA72864090A00BB3490 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E6BA62864090A00BB3490 /* UseCase.swift */; };
 		736E6BA92864093100BB3490 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E6BA82864093100BB3490 /* AuthRepository.swift */; };
+		73846B3B286BF86B006C2F9E /* IssueCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B3A286BF86B006C2F9E /* IssueCreateViewController.swift */; };
 		73888535286836DB00F65BEF /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73888532286836DB00F65BEF /* IssueViewController.swift */; };
 		73888536286836DB00F65BEF /* IssueListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73888533286836DB00F65BEF /* IssueListCell.swift */; };
 		73888537286836DB00F65BEF /* TableviewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73888534286836DB00F65BEF /* TableviewDataSource.swift */; };
 		7388853A2868371200F65BEF /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738885382868371200F65BEF /* TitleView.swift */; };
-		7388853B2868371200F65BEF /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738885392868371200F65BEF /* BadgeLabel.swift */; };
+		7388853B2868371200F65BEF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738885392868371200F65BEF /* Label.swift */; };
 		7389100228646DC000502A86 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7389100128646DC000502A86 /* Storage.swift */; };
 		738910042864726B00502A86 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738910032864726B00502A86 /* Service.swift */; };
 		738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C4AAE285AD38C0050990E /* LoginButton.swift */; };
 		73A7EDC62859697600191F99 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC52859697600191F99 /* UIColor+Extensions.swift */; };
 		73A7EDC92859A68800191F99 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A7EDC82859A68800191F99 /* LoginView.swift */; };
+		73CF7C71286ACD270003E946 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF7C70286ACD270003E946 /* FilterViewController.swift */; };
 		E43D17862859C7B50091DDF1 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */; };
 		E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D17892859C8590091DDF1 /* LoginViewModel.swift */; };
 		E44DF6AC2859A71700FAC8FB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44DF6AB2859A71700FAC8FB /* Observable.swift */; };
@@ -39,6 +41,8 @@
 		E46C6A0B28655B760074AEF9 /* AccountFlowDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46C6A0A28655B760074AEF9 /* AccountFlowDIContainer.swift */; };
 		E46FBE842862B77D000CB998 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE832862B77D000CB998 /* DeepLink.swift */; };
 		E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE802862B759000CB998 /* Coordinator.swift */; };
+		E4805380286BF53700090B8C /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E480537F286BF53700090B8C /* TextButton.swift */; };
+		E4805382286BFCBB00090B8C /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4805381286BFCBB00090B8C /* LabelCell.swift */; };
 		E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */; };
 		E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */; };
 		E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CD5BA528644F9D00A9B1B8 /* TabBarFlowCoordinator.swift */; };
@@ -56,16 +60,18 @@
 /* Begin PBXFileReference section */
 		736E6BA62864090A00BB3490 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		736E6BA82864093100BB3490 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		73846B3A286BF86B006C2F9E /* IssueCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCreateViewController.swift; sourceTree = "<group>"; };
 		73888532286836DB00F65BEF /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		73888533286836DB00F65BEF /* IssueListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListCell.swift; sourceTree = "<group>"; };
 		73888534286836DB00F65BEF /* TableviewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableviewDataSource.swift; sourceTree = "<group>"; };
 		738885382868371200F65BEF /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		738885392868371200F65BEF /* BadgeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		738885392868371200F65BEF /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		7389100128646DC000502A86 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		738910032864726B00502A86 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		738C4AAE285AD38C0050990E /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		73A7EDC52859697600191F99 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		73A7EDC82859A68800191F99 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		73CF7C70286ACD270003E946 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		C1D71F4808639204766E3B8B /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		E43D17852859C7B50091DDF1 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43D17892859C8590091DDF1 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -90,6 +96,8 @@
 		E46FBE832862B77D000CB998 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		E47CCCDD2859EE1B00D37ED8 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		E47CCCDE2859EE2100D37ED8 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		E480537F286BF53700090B8C /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
+		E4805381286BFCBB00090B8C /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowCoordinator.swift; sourceTree = "<group>"; };
 		E4CD5BA528644F9D00A9B1B8 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -156,9 +164,10 @@
 		738C4AAD285AD3630050990E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				738885392868371200F65BEF /* BadgeLabel.swift */,
+				738885392868371200F65BEF /* Label.swift */,
 				738885382868371200F65BEF /* TitleView.swift */,
 				738C4AAE285AD38C0050990E /* LoginButton.swift */,
+				E480537F286BF53700090B8C /* TextButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				E46C69F0286555DE0074AEF9 /* LabelViewController.swift */,
+				E4805381286BFCBB00090B8C /* LabelCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -349,6 +359,8 @@
 			children = (
 				73888533286836DB00F65BEF /* IssueListCell.swift */,
 				73888532286836DB00F65BEF /* IssueViewController.swift */,
+				73CF7C70286ACD270003E946 /* FilterViewController.swift */,
+				73846B3A286BF86B006C2F9E /* IssueCreateViewController.swift */,
 				73888534286836DB00F65BEF /* TableviewDataSource.swift */,
 			);
 			path = View;
@@ -366,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F44CEF285C292E00D3A3E6 /* AppFlowDIContainer.swift */,
+				E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */,
 				E45477AC28655C94002379F1 /* TabBarFlowDIContainer.swift */,
 				E46C6A02286559830074AEF9 /* IssueFlowDIContainer.swift */,
 				E46C6A0628655AC70074AEF9 /* LabelFlowDIContainer.swift */,
@@ -401,7 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */,
-				E4F44CED285C26C900D3A3E6 /* LoginFlowDIContainer.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -635,6 +647,7 @@
 				E45477B5286566FA002379F1 /* UIView+Extensions.swift in Sources */,
 				E4D87386285884AE00AFCE4D /* LoginViewController.swift in Sources */,
 				73A7EDC92859A68800191F99 /* LoginView.swift in Sources */,
+				E4805382286BFCBB00090B8C /* LabelCell.swift in Sources */,
 				73888537286836DB00F65BEF /* TableviewDataSource.swift in Sources */,
 				E46C69F92865568C0074AEF9 /* LabelFlowCoordinator.swift in Sources */,
 				E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */,
@@ -650,7 +663,7 @@
 				738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */,
 				E4F44CF0285C292E00D3A3E6 /* AppFlowDIContainer.swift in Sources */,
 				736E6BA92864093100BB3490 /* AuthRepository.swift in Sources */,
-				7388853B2868371200F65BEF /* BadgeLabel.swift in Sources */,
+				7388853B2868371200F65BEF /* Label.swift in Sources */,
 				E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */,
 				E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */,
 				E46C6A0728655AC70074AEF9 /* LabelFlowDIContainer.swift in Sources */,
@@ -660,8 +673,11 @@
 				E46C6A03286559830074AEF9 /* IssueFlowDIContainer.swift in Sources */,
 				E46C6A0928655B320074AEF9 /* MilestoneFlowDIContainer.swift in Sources */,
 				E46C69FD286557F20074AEF9 /* MilestoneFlowCoordinator.swift in Sources */,
+				73CF7C71286ACD270003E946 /* FilterViewController.swift in Sources */,
+				73846B3B286BF86B006C2F9E /* IssueCreateViewController.swift in Sources */,
 				7388853A2868371200F65BEF /* TitleView.swift in Sources */,
 				E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */,
+				E4805380286BF53700090B8C /* TextButton.swift in Sources */,
 				E45477AD28655C94002379F1 /* TabBarFlowDIContainer.swift in Sources */,
 				E45477B3286564B2002379F1 /* BaseCoordinator.swift in Sources */,
 				E43D178A2859C8590091DDF1 /* LoginViewModel.swift in Sources */,

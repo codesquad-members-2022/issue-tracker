@@ -8,10 +8,10 @@
 import UIKit
 
 protocol TabBarFlowCoordinatorDependencies {
-    func makeIssueFlowDIContainer() -> DIContainer
-    func makeLabelFlowDIContainer() -> DIContainer
-    func makeMilestoneFlowDIContainer() -> DIContainer
-    func makeAccountFlowDIContainer() -> DIContainer
+    func makeIssueFlowDIContainer() -> IssueFlowDIContainer
+    func makeLabelFlowDIContainer() -> LabelFlowDIContainer
+    func makeMilestoneFlowDIContainer() -> MilestoneFlowDIContainer
+    func makeAccountFlowDIContainer() -> AccountFlowDIContainer
 }
 
 final class TabBarFlowCoordinator: BaseCoordinator {
@@ -38,25 +38,25 @@ final class TabBarFlowCoordinator: BaseCoordinator {
         issueNavigationController.tabBarItem = .init(
             title: "Issue",
             image: .info,
-            selectedImage: .info
+            selectedImage: .infoFilled
         )
 
         labelNavigationController.tabBarItem = .init(
             title: "Label",
             image: .tag,
-            selectedImage: .tag
+            selectedImage: .tagFilled
         )
 
         milestoneNavigationController.tabBarItem = .init(
             title: "Milestone",
             image: .signpost,
-            selectedImage: .signpost
+            selectedImage: .signpostFilled
         )
 
         accountNavigationController.tabBarItem = .init(
             title: "Account",
             image: .profile,
-            selectedImage: .profile
+            selectedImage: .profileFilled
         )
 
         tabBarController.viewControllers = [
@@ -88,7 +88,5 @@ final class TabBarFlowCoordinator: BaseCoordinator {
         addDependency(labelFlowCoordinator)
         addDependency(milestoneFlowCoordinator)
         addDependency(accountFlowCoordinator)
-
-        print("Done")
     }
 }

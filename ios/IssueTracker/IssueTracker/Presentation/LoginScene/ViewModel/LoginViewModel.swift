@@ -77,7 +77,6 @@ extension DefaultLoginViewModel {
     func fetchToken() {
         useCase.start { error in
             if error == nil {
-                print("done")
                 navigationAction.showMainScene()
             }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AccountFlowDIContainer: DIContainer {
+final class AccountFlowDIContainer {
     func makeCoordinator(navigationController: UINavigationController) -> Coordinator {
         AccountFlowCoordinator(navigationController: navigationController, dependencies: self)
     }

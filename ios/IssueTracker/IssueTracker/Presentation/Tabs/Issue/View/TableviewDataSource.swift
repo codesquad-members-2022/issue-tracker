@@ -33,7 +33,7 @@ struct MockData {
     ]
 }
 
-final class TableviewDataSource: NSObject, UITableViewDataSource {
+final class TableviewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     var mockData = MockData.mockData
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {

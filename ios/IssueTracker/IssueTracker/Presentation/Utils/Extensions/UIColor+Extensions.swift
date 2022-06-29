@@ -9,6 +9,7 @@ import UIKit
 
 extension UIColor {
     static let line = UIColor(named: "line")
+    static let gray1 = UIColor(named: "gray1")
     static let graybg = UIColor(named: "graybg")
     static let labelGray = UIColor(named: "labelGray")
     static let deepGray = UIColor(named: "deepGray")
