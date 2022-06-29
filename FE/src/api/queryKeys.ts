@@ -18,11 +18,17 @@ const milestoneListQueryKeys = ['milestone'];
 
 const milestoneCountQueryKeys = ['milestone', 'count'];
 
+const memberListQueryKeys = ['members'];
+
+const currentMemberQueryKeys = ['members', 'current'];
+
 export {
   issueListQueryKeys,
   issueCountQueryKeys,
   labelListQueryKeys,
   labelCountQueryKeys,
   milestoneListQueryKeys,
-  milestoneCountQueryKeys
+  milestoneCountQueryKeys,
+  memberListQueryKeys,
+  currentMemberQueryKeys
 };
