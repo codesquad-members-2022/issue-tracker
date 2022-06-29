@@ -16,8 +16,9 @@ import java.util.*
 
 class IssueTrackerRepositoryImpl(
     private val issueTrackerDataSource: IssueTrackerDataSource,
+    private val issueRemoteDataSource: IssueTrackerDataSource,
 ) : IssueTrackerRepository {
-    override suspend fun getIssue(): Flow<List<Issue>> {
+    override fun getIssue(): Flow<List<Issue>> {
         return issueTrackerDataSource.getIssue().map { issues ->
             issues.map { issue -> issue.toIssue() }
         }

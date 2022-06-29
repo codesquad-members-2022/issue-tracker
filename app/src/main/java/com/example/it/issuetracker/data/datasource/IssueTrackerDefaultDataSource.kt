@@ -1,8 +1,8 @@
 package com.example.it.issuetracker.data.datasource
 
+import android.util.Log
 import com.example.it.issuetracker.data.dto.*
 import com.example.it.issuetracker.domain.model.Issue
-import com.example.it.issuetracker.domain.model.MileStone
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.*
@@ -15,58 +15,45 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             title = "제목",
             description = "이슈에 대한 설명(두 줄까지 보여줄 수 있다)",
             state = true,
-            label = listOf(LabelFakeDatabase.database[0]),
-            mileStone = MileStone(id = 1, title = "마일스톤", deadLine = "2022-06-14"),
+            labels = listOf(LabelFakeDatabase.database[0]),
+            mileStone = "마일스톤",
             createdTime = "2022-05-21",
-            milestoneId = 1,
-            memberId = 1
         ),
         IssueDto(
             id = 2L,
             title = "안드로이드이슈트래커",
             description = "2022년 6월 13일 월요일 부터 7월 1일 금요일 까지",
             state = true,
-            label = listOf(LabelFakeDatabase.database[1]),
-            mileStone = MileStone(id = 2, title = "마스터즈 코스", deadLine = "2022-06-16"),
+            labels = listOf(LabelFakeDatabase.database[1]),
+            mileStone = "마스터즈 코스",
             createdTime = "2022-05-21",
-            milestoneId = 1,
-            memberId = 1
         ),
         IssueDto(
             id = 3L,
             title = "테스트",
             description = "테스트 설명",
             state = false,
-            label = listOf(LabelFakeDatabase.database[2]),
-            mileStone = MileStone(id = 3, title = "테스트 그룹", deadLine = "2022-06-17"),
+            labels = listOf(LabelFakeDatabase.database[2]),
+            mileStone = "테스트 그룹",
             createdTime = "2022-05-21",
-            milestoneId = 1,
-            memberId = 1
         ),
         IssueDto(
             id = 4L,
             title = "안드로이드이슈트래커",
             description = "123456789",
             state = true,
-            label = listOf(LabelFakeDatabase.database[3]),
-            mileStone = MileStone(id = 4, title = "마스터즈 코스 숫자", deadLine = "2022-06-20"),
+            labels = listOf(LabelFakeDatabase.database[3]),
+            mileStone = "마스터즈 코스 숫자",
             createdTime = "2022-05-21",
-            milestoneId = 1,
-            memberId = 1
         ),
         IssueDto(
             id = 5,
             title = "제목쓰",
             description = "안녕하세요. 제목쓰에 대한 설명입니다.",
             state = true,
-            label = listOf(LabelFakeDatabase.database[0], LabelFakeDatabase.database[1]),
-            mileStone = MileStone(id = 4,
-                title = "마스터즈 코스 숫자",
-                deadLine = "2022-06-20",
-                description = ""),
+            labels = listOf(LabelFakeDatabase.database[0], LabelFakeDatabase.database[1]),
+            mileStone = "마스터즈 코스 숫자",
             createdTime = "2022-05-06 09:11:23",
-            milestoneId = 1,
-            memberId = 1
         )
     )
 
@@ -166,7 +153,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         )
     )
 
-    override suspend fun getIssue(): Flow<List<IssueDto>> = flow {
+    override fun getIssue(): Flow<List<IssueDto>> = flow {
         emit(issues.filter { it.state }.toList())
     }
 
@@ -195,6 +182,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         val index = issues.indexOf(issue)
         issueDetail.issueStatus = "close"
         issues[index].state = false
+        Log.d("test", "closeIssue: $issues")
     }
 
     override suspend fun revertIssue(list: SortedMap<Int, Issue>) {
@@ -204,7 +192,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
                 title = issue.title,
                 description = issue.description,
                 state = issue.state,
-                label = issue.label.map {
+                labels = issue.label.map {
                     LabelDto(
                         id = issues.size + 1,
                         title = it.title,
@@ -215,8 +203,6 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
                 },
                 mileStone = issue.mileStone,
                 createdTime = "2022-06-21",
-                milestoneId = 1,
-                memberId = 1
             )
             issues.add(idx, issueDto)
         }
@@ -238,22 +224,18 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
                     "status" -> {
                         filterList = filterList.filter { it.state == value }
                     }
-                    "writerId" -> {
-                        filterList = filterList.filter { it.memberId == value }
-                    }
+                    "writerId" -> {}
                     "assignee" -> {}
                     "commentedBy" -> {}
                     "label" -> {
                         filterList = filterList.filter {
-                            val find = it.label.find { label ->
+                            val find = it.labels.find { label ->
                                 label.id == value
                             }
                             find != null
                         }
                     }
-                    "milestone" -> {
-                        filterList = filterList.filter { it.mileStone.id == value }
-                    }
+                    "milestone" -> {}
                 }
             }
             filterList

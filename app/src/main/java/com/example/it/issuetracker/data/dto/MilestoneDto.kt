@@ -3,7 +3,7 @@ package com.example.it.issuetracker.data.dto
 import com.example.it.issuetracker.domain.model.MileStone
 
 data class MilestoneDto(
-    val id: Long,
+    val id: Long? = null,
     val title: String,
     val description: String? = null,
     val startDate: String? = null,
