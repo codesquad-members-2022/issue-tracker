@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 protocol OptionSelectDelegate: AnyObject {
-    func selected(item: Repository)
+    func selected(item: Repository, option: Option)
 }
 
 class OptionSelectViewController: UIViewController {
@@ -10,25 +10,41 @@ class OptionSelectViewController: UIViewController {
     weak var delegate: OptionSelectDelegate?
     
     private let service = IssueService()
-    private var token: String?
+    private let token: String
+    private let tableViewCellIdentifier = "tableViewCellIdentifier"
+    private let option: Option
     private var options: [Repository]?
     
-    private let tableViewCellIdentifier = "tableViewCellIdentifier"
-    
-    init(token: String, options: [Repository]) {
-        super.init(nibName: nil, bundle: nil)
+    init(token: String, option: Option) {
         self.token = token
-        self.options = options
+        self.option = option
+        super.init(nibName: nil, bundle: nil)
     }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+
+    required convenience init?(coder: NSCoder) {
+        self.init(token: "", option: .label)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         self.view.backgroundColor = .white
+        fetchViewData()
+    }
+    
+    private func fetchViewData() {
+        guard let token = GithubUserDefaults.getToken() else {
+            return
+        }
+        service.requestRepos(accessToken: token) { [weak self] result in
+            switch result {
+            case .success(let repositoryList):
+                self?.options = repositoryList
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     private func setupViews() {
@@ -55,7 +71,7 @@ extension OptionSelectViewController: UITableViewDelegate {
             return
         }
         let selectedItem = options[indexPath.row]
-        delegate?.selected(item: selectedItem)
+        delegate?.selected(item: selectedItem, option: option)
         self.navigationController?.popViewController(animated: true)
     }
 }

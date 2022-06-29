@@ -14,7 +14,7 @@ struct Container {
         case login
         case issue(token: String)
         case newIssue
-        case optionSelect(token: String, repositories: [Repository])
+        case optionSelect(token: String, option: Option)
     }
     
     func buildRootViewController() -> UIViewController {
@@ -36,8 +36,8 @@ struct Container {
             return UINavigationController(rootViewController: viewController)
         case .newIssue:
             return NewIssueViewController()
-        case .optionSelect(let token, let repositories):
-            return OptionSelectViewController(token: token, options: repositories)
+        case .optionSelect(let token, let option):
+            return OptionSelectViewController(token: token, option: option)
         }
     }
 }
