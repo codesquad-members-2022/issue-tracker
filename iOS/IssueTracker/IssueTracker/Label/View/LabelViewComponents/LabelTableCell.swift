@@ -46,7 +46,7 @@ final class LabelTableCell: UITableViewCell {
         descriptionLabel.text = label.description
         labelLabel.backgroundColor = UIColor(hex: label.backgroundColor)
         label.isDarkMode == "true" ?
-        (labelLabel.textColor = .black) : (labelLabel.textColor = .white)
+        (labelLabel.textColor = .white) : (labelLabel.textColor = .black)
 
         layoutIfNeeded()
         labelLabel.layer.cornerRadius = labelLabel.frame.height/2

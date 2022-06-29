@@ -54,8 +54,12 @@ final class EditingLabelView: UIStackView {
 
     func updatePreviewLabelBackgroundColor(with backgroundColorText: String) {
         editedLabelPreviewView.labelPreviewView.backgroundColor = UIColor(hex: backgroundColorText)
-        editedLabelPreviewView.labelPreviewView.textColor = UIColor(hex: backgroundColorText).isDarkColor ?
+        let isDarkMode = UIColor(hex: backgroundColorText).isDarkColor
+
+        editedLabelPreviewView.labelPreviewView.textColor = isDarkMode ?
             .white : .black
+
+        viewModel.setLabelDarkMode(with: isDarkMode)
     }
 
     func updateSelectedBackgroundLabel(with backgroundColorText: String) {

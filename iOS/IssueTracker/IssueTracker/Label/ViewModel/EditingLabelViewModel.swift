@@ -14,6 +14,7 @@ protocol EditingLabelViewModelInput {
     func didChangedTitleTextField(text: String?)
     func didChangedDescriptionTextField(text: String?)
     func viewDidLoad()
+    func setLabelDarkMode(with isDarkMode: Bool)
 }
 
 protocol EditingLabelViewModelOutput {
@@ -37,6 +38,8 @@ final class EditingLabelViewModel: EditingLabelViewModelProtocol {
     private(set) var isOverFiftyCharactersInTitleText: Observable<Bool> = Observable(false)
     private(set) var error: Observable<String> = Observable("")
 
+    private var isLabelDarkMode = false
+
     private let useCase: EditingLabelManagable
 
     init(useCase: EditingLabelManagable) {
@@ -45,7 +48,7 @@ final class EditingLabelViewModel: EditingLabelViewModelProtocol {
 
     func didTouchSave() {
         guard let title = titleText.value else { return }
-        var labelEntity = LabelItem(title: title, description: descriptionText.value, backgroundColor: backgroundColorText.value, isDarkMode: "false")
+        var labelEntity = LabelItem(title: title, description: descriptionText.value, backgroundColor: backgroundColorText.value, isDarkMode: String(isLabelDarkMode))
 
         useCase.addNewLabel(labelEntity) { [weak self] result in
             switch result {
@@ -87,6 +90,10 @@ final class EditingLabelViewModel: EditingLabelViewModelProtocol {
         let randomHexCode = useCase.generateRandomBackgroundColorString()
 
         backgroundColorText.value = randomHexCode
+    }
+
+    func setLabelDarkMode(with isDarkMode: Bool) {
+        isLabelDarkMode = isDarkMode
     }
 }
 
