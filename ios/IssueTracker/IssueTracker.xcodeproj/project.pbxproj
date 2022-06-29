@@ -13,7 +13,7 @@
 		73888536286836DB00F65BEF /* IssueListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73888533286836DB00F65BEF /* IssueListCell.swift */; };
 		73888537286836DB00F65BEF /* TableviewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73888534286836DB00F65BEF /* TableviewDataSource.swift */; };
 		7388853A2868371200F65BEF /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738885382868371200F65BEF /* TitleView.swift */; };
-		7388853B2868371200F65BEF /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738885392868371200F65BEF /* BadgeLabel.swift */; };
+		7388853B2868371200F65BEF /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738885392868371200F65BEF /* Label.swift */; };
 		7389100228646DC000502A86 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7389100128646DC000502A86 /* Storage.swift */; };
 		738910042864726B00502A86 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738910032864726B00502A86 /* Service.swift */; };
 		738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C4AAE285AD38C0050990E /* LoginButton.swift */; };
@@ -40,6 +40,7 @@
 		E46FBE842862B77D000CB998 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE832862B77D000CB998 /* DeepLink.swift */; };
 		E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46FBE802862B759000CB998 /* Coordinator.swift */; };
 		E4805380286BF53700090B8C /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E480537F286BF53700090B8C /* TextButton.swift */; };
+		E4805382286BFCBB00090B8C /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4805381286BFCBB00090B8C /* LabelCell.swift */; };
 		E4C5DADB285891160093CFF1 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */; };
 		E4C5DADD2858917E0093CFF1 /* LoginFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */; };
 		E4CD5BA628644F9D00A9B1B8 /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CD5BA528644F9D00A9B1B8 /* TabBarFlowCoordinator.swift */; };
@@ -61,7 +62,7 @@
 		73888533286836DB00F65BEF /* IssueListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListCell.swift; sourceTree = "<group>"; };
 		73888534286836DB00F65BEF /* TableviewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableviewDataSource.swift; sourceTree = "<group>"; };
 		738885382868371200F65BEF /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		738885392868371200F65BEF /* BadgeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		738885392868371200F65BEF /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		7389100128646DC000502A86 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		738910032864726B00502A86 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		738C4AAE285AD38C0050990E /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		E47CCCDD2859EE1B00D37ED8 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		E47CCCDE2859EE2100D37ED8 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		E480537F286BF53700090B8C /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
+		E4805381286BFCBB00090B8C /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		E4C5DADA285891160093CFF1 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		E4C5DADC2858917E0093CFF1 /* LoginFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowCoordinator.swift; sourceTree = "<group>"; };
 		E4CD5BA528644F9D00A9B1B8 /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -158,7 +160,7 @@
 		738C4AAD285AD3630050990E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				738885392868371200F65BEF /* BadgeLabel.swift */,
+				738885392868371200F65BEF /* Label.swift */,
 				738885382868371200F65BEF /* TitleView.swift */,
 				738C4AAE285AD38C0050990E /* LoginButton.swift */,
 				E480537F286BF53700090B8C /* TextButton.swift */,
@@ -335,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				E46C69F0286555DE0074AEF9 /* LabelViewController.swift */,
+				E4805381286BFCBB00090B8C /* LabelCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				E45477B5286566FA002379F1 /* UIView+Extensions.swift in Sources */,
 				E4D87386285884AE00AFCE4D /* LoginViewController.swift in Sources */,
 				73A7EDC92859A68800191F99 /* LoginView.swift in Sources */,
+				E4805382286BFCBB00090B8C /* LabelCell.swift in Sources */,
 				73888537286836DB00F65BEF /* TableviewDataSource.swift in Sources */,
 				E46C69F92865568C0074AEF9 /* LabelFlowCoordinator.swift in Sources */,
 				E46FBE862862F8E2000CB998 /* Coordinator.swift in Sources */,
@@ -653,7 +657,7 @@
 				738C4AAF285AD38C0050990E /* LoginButton.swift in Sources */,
 				E4F44CF0285C292E00D3A3E6 /* AppFlowDIContainer.swift in Sources */,
 				736E6BA92864093100BB3490 /* AuthRepository.swift in Sources */,
-				7388853B2868371200F65BEF /* BadgeLabel.swift in Sources */,
+				7388853B2868371200F65BEF /* Label.swift in Sources */,
 				E46C69F4286555F30074AEF9 /* MilestoneViewController.swift in Sources */,
 				E4D87384285884AE00AFCE4D /* SceneDelegate.swift in Sources */,
 				E46C6A0728655AC70074AEF9 /* LabelFlowDIContainer.swift in Sources */,
