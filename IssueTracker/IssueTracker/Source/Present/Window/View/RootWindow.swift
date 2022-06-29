@@ -36,7 +36,6 @@ final class RootWindow: UIWindow {
             }
         }
     }
-    
 
     func setIssueListVC() {
         DispatchQueue.main.async {

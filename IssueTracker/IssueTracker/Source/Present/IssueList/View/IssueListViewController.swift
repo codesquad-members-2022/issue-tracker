@@ -22,12 +22,11 @@ final class IssueListViewController: UIViewController {
         fatalError("\(#function) has not been implemented")
     }
 
-    private var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(IssueCell.self, forCellWithReuseIdentifier: IssueCell.reuseIdentifier)
-        return collectionView
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.allowsSelection = false
+        tableView.register(IssueCell.self, forCellReuseIdentifier: IssueCell.self.reuseIdentifier)
+        return tableView
     }()
 
     private lazy var filterButton: UIBarButtonItem = {
@@ -58,9 +57,9 @@ final class IssueListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        self.view.addSubview(collectionView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
         setLayout()
         setNavigationController()
         bind()
@@ -68,16 +67,16 @@ final class IssueListViewController: UIViewController {
     }
 
     private func setLayout() {
-        collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        tableView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 
     private func bind() {
-        viewModel.issueList.bind { [weak self] issueList in
+        viewModel.issueList.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
@@ -96,22 +95,17 @@ final class IssueListViewController: UIViewController {
     }
 }
 
-extension IssueListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension IssueListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfItemsInSection
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IssueCell.reuseIdentifier, for: indexPath) as? IssueCell else { return UICollectionViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: IssueCell.self.reuseIdentifier,
+            for: indexPath) as? IssueCell
+        else { return UITableViewCell() }
         cell.titleLabel.text = viewModel.issueList.value[indexPath.item].title
         return cell
-    }
-
-}
-
-extension IssueListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: collectionView.frame.width, height: 199)
-        return size
     }
 }
