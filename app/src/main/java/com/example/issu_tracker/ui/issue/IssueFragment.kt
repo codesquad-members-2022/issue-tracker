@@ -57,6 +57,7 @@ class IssueFragment : Fragment() {
         navigateIssueEditor()
         listenEditModeEvent()
         setSelectedIssueCount()
+        navigateIssueSearch()
     }
 
     private fun saveFilterConditionFromFilterFragment() {
@@ -187,6 +188,12 @@ class IssueFragment : Fragment() {
     private fun navigateIssueEditor() {
         binding.fabIssueEdit.setOnClickListener {
             navController.navigate(R.id.action_issueFragment2_to_issueEditor)
+        }
+    }
+
+    private fun navigateIssueSearch() {
+        binding.ivIssueSearch.setOnClickListener {
+            navController.navigate(R.id.action_issueFragment2_to_issueSearch)
         }
     }
 }
