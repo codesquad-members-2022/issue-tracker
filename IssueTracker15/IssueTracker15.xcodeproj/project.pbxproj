@@ -61,6 +61,7 @@
 		8DC00B55286C3AF900502150 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC00B54286C3AF900502150 /* LabelTableViewCell.swift */; };
 		8DC00B58286C3BDB00502150 /* IssueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC00B57286C3BDB00502150 /* IssueLabel.swift */; };
 		8DC00B5A286C44AD00502150 /* LabelNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC00B59286C44AD00502150 /* LabelNavigationController.swift */; };
+		8DC00B5E286C775700502150 /* AddLabelBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC00B5D286C775700502150 /* AddLabelBarButtonItem.swift */; };
 		8DDEBAE8285B382400A4E4DC /* OAuthLoginStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDEBAE7285B382400A4E4DC /* OAuthLoginStackView.swift */; };
 		8DDEBAEB285B57B000A4E4DC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */; };
 		8DF770B228619F9500C02D1F /* AppleLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF770B028619F9500C02D1F /* AppleLoginUseCase.swift */; };
@@ -153,6 +154,7 @@
 		8DC00B54286C3AF900502150 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		8DC00B57286C3BDB00502150 /* IssueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueLabel.swift; sourceTree = "<group>"; };
 		8DC00B59286C44AD00502150 /* LabelNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNavigationController.swift; sourceTree = "<group>"; };
+		8DC00B5D286C775700502150 /* AddLabelBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLabelBarButtonItem.swift; sourceTree = "<group>"; };
 		8DDEBAE7285B382400A4E4DC /* OAuthLoginStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthLoginStackView.swift; sourceTree = "<group>"; };
 		8DDEBAEA285B57B000A4E4DC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8DF770B028619F9500C02D1F /* AppleLoginUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleLoginUseCase.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 		8DC00B56286C3AFE00502150 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8DC00B5D286C775700502150 /* AddLabelBarButtonItem.swift */,
 				8DC00B54286C3AF900502150 /* LabelTableViewCell.swift */,
 				8DC00B57286C3BDB00502150 /* IssueLabel.swift */,
 			);
@@ -732,6 +735,7 @@
 				8DF9BA332861DD6500BF6CF4 /* Bundle.swift in Sources */,
 				1B1A819A2860A73C003C135A /* MainTabBarController.swift in Sources */,
 				1B174850285885710028E037 /* UseCaseResponsible.swift in Sources */,
+				8DC00B5E286C775700502150 /* AddLabelBarButtonItem.swift in Sources */,
 				1B87F707285B6C7A002B47B7 /* NetworkService.swift in Sources */,
 				8DC00B5A286C44AD00502150 /* LabelNavigationController.swift in Sources */,
 				1BD476372869401700F08BDB /* ViewBinding.swift in Sources */,

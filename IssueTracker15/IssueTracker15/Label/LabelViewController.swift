@@ -7,25 +7,22 @@
 
 import UIKit
 
-final class LabelViewController: UITableViewController {
+final class LabelViewController: UITableViewController, ViewBinding {
     
-    private lazy var addButton: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddLabelView))
-        return barButtonItem
-    }()
+    private var addButton = AddLabelBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUp()
-        self.navigationItem.rightBarButtonItem = addButton
+        setUp()   
+    }
+    
+    func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
+        print("HI!")
     }
     
     private func setUp() {
         self.navigationItem.title = "레이블"
+        self.navigationItem.rightBarButtonItem = addButton
+        self.addButton.setVC(self)
     }
-    
-    @objc func showAddLabelView() {
-        
-    }
-    
 }
