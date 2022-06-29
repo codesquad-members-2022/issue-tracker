@@ -14,6 +14,7 @@ protocol APIEndpoint {
     var url: URL { get }
     var path: String { get }
     var query: [String: String]? { get }
+    var httpMethod: HTTPMethod { get }
 }
 
 extension APIEndpoint {

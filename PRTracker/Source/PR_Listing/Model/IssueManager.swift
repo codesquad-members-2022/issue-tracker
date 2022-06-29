@@ -57,9 +57,9 @@ struct IssueManager: IssueService {
         return accessToken
     }
     
-    private func makeGetRequest(token: String) -> APIRequest<IssuesResource> {
-        let issuesResource = IssuesResource(parameter: currentParameter)
-        return APIRequest(resource: issuesResource, token: token)
+    private func makeGetRequest(token: String) -> APIRequest<GetIssues> {
+        let endpoint = GetIssues(parameter: currentParameter)
+        return APIRequest(endpoint: endpoint, token: token)
     }
     
     private func updateStorage(_ issues: [Issue]) {
@@ -92,10 +92,10 @@ extension IssueManager {
         }
     }
     
-    private func makeCloseRequest(issue: Issue, token: String) -> APIRequest<IssueUpdateResource> {
+    private func makeCloseRequest(issue: Issue, token: String) -> APIRequest<UpdateIssue> {
         let body = "{\"state\":\"closed\"}"
-        let issueUpdate = IssueUpdateResource(issue: issue)
-        return APIRequest(resource: issueUpdate, httpMethod: .patch, token: token, body: body)
+        let endpoint = UpdateIssue(issue: issue)
+        return APIRequest(endpoint: endpoint, token: token, body: body)
     }
     
     private func retriveIssue(id: Int) -> Issue? {

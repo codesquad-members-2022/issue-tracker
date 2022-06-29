@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct UserResource: APIEndpoint {
+struct GetUser: APIEndpoint {
     typealias ModelType = User
     
     let userName: String? = nil
+    
+    var httpMethod: HTTPMethod {
+        return .get
+    }
     
     var path: String {
         if let userName = userName {

@@ -1,5 +1,5 @@
 //
-//  IssuesResource.swift
+//  GetIssues.swift
 //  PRTracker
 //
 //  Created by Bumgeun Song on 2022/06/27.
@@ -7,13 +7,18 @@
 
 import Foundation
 
-struct IssuesResource: APIEndpoint {
+struct GetIssues: APIEndpoint {
+    
     typealias ModelType = [Issue]
     
     let parameter: IssuesParameter
     
     init(parameter: IssuesParameter) {
         self.parameter = parameter
+    }
+    
+    var httpMethod: HTTPMethod {
+        return .get
     }
     
     var path: String {

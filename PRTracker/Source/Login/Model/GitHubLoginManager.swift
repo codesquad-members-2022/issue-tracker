@@ -16,8 +16,6 @@ enum AuthorizationStatus {
 }
 
 struct GitHubLoginManager {
-    typealias AccessToken = String
-    
     static let shared = GitHubLoginManager()
     
     static let requiredScope = "repo,user"
@@ -48,8 +46,9 @@ struct GitHubLoginManager {
     let authorization: Observable<AuthorizationStatus> = Observable(.none)
     
     func requestAccessToken(with code: String) {
-        let tokenResource = TokenResource(clientID: Secrets.clientId, clientSecret: Secrets.clientSecret, code: code)
-        let tokenRequest = APIRequest(resource: tokenResource, httpMethod: .post)
+        
+        let endpoint = GetAccessToken(clientID: Secrets.clientId, clientSecret: Secrets.clientSecret, code: code)
+        let tokenRequest = APIRequest(endpoint: endpoint)
         
         networkService.execute(tokenRequest) { result in
             switch result {

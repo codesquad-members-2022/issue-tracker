@@ -24,9 +24,8 @@ struct UserManager {
             return completion(nil)
         }
         
-        let userResource = UserResource()
-        let userRequest = APIRequest(resource: userResource, token: accessToken)
-        
+        let endpoint = GetUser()
+        let userRequest = APIRequest(endpoint: endpoint, token: accessToken)
         
         networkService.execute(userRequest) { result in
             switch result {
