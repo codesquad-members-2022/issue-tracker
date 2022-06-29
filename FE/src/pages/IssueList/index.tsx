@@ -10,24 +10,8 @@ import { $MenuWrapper, $ButtonWrapper } from '@/pages/IssueList/style';
 import { FilterConditionProvider } from '@/contexts/FilterCondition';
 import { FILTER_BAR_OPTIONS } from './filterBarOptionData';
 import { IFilterBarProps } from '@/components/IssueList/FilterBar/type';
-
-const tabItems: listItem[] = [
-  {
-    name: '레이블',
-    iconType: 'label',
-    count: 100
-  },
-  {
-    name: '마일스톤',
-    iconType: 'milestone',
-    count: 10
-  }
-];
-
-const radioIcon = {
-  off: <Icon iconType="radioOff" />,
-  on: <Icon iconType="radioOn" />
-};
+import { useLabelCountData } from '@/hooks/useLabelListData';
+import { useMilestoneCountData } from '@/hooks/useMilestoneListData';
 
 const filterBarProps: IFilterBarProps = {
   indicatorName: '필터',
@@ -40,6 +24,22 @@ const filterBarProps: IFilterBarProps = {
 };
 
 export default function IssueListPage() {
+  const { status: labelDataStatus, data: labelCount } = useLabelCountData();
+  const { status: milestoneDataStatus, data: milestoneCount } = useMilestoneCountData();
+
+  const tabItems: listItem[] = [
+    {
+      name: '레이블',
+      iconType: 'label',
+      count: labelCount?.data.total_count
+    },
+    {
+      name: '마일스톤',
+      iconType: 'milestone',
+      count: milestoneCount?.data.total_count
+    }
+  ];
+
   return (
     <Layout header={<Header />}>
       <FilterConditionProvider>
