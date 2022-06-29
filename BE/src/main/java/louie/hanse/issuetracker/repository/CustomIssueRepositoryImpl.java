@@ -36,6 +36,24 @@ public class CustomIssueRepositoryImpl implements CustomIssueRepository {
                 ).fetch();
     }
 
+    @Override
+    public long searchCount(IssueSearchRequest request, Long userId) {
+        return jpaQueryFactory.select(issue.count())
+                .from(issue)
+                .join(issue.issueManagers, issueManager)
+                .join(issue.comments, comment)
+                .join(issue.issueLabels, issueLabel)
+                .join(issueLabel.label, label)
+                .where(
+                        issue.status.eq(request.getStatus().reverse()),
+                        issueWriterIdEq(request.getWriterId()),
+                        issueManagerIdEq(request.getManagerId()),
+                        commentWriterIdEq(userId),
+                        labelIdEq(request.getLabelId()),
+                        issueMilestoneIdEq(request.getMilestoneId())
+                ).fetchOne();
+    }
+
     private Predicate issueMilestoneIdEq(Long id) {
         return id == null ? null : issue.milestone.id.eq(id);
     }
