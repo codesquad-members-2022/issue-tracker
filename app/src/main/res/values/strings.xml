@@ -19,6 +19,7 @@
     <string name="toolbar_action_preview">미리보기</string>
     <string name="toolbar_action_save">저장</string>
     <string name="toolbar_editor_title">이슈 작성</string>
+    <string name="toolbar_search_title">검색</string>
     <string name="issue_editor_title">제목</string>
     <string name="condition_title_user">담당자</string>
     <string name="issue_editor_body_hint">코멘트는 여기에 작성하세요. 반드시 먼저 제목을 작성하고 코멘트를 작성하세요.</string>
@@ -28,4 +29,5 @@
     <string name="my_account">내 계정</string>
     <string name="send_msg">메세지</string>
     <string name="dlt_friend">삭제</string>
+    <string name="issue_search_hint">검색어를 입력하세요</string>
 </resources>
