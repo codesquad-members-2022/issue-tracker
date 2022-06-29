@@ -28,14 +28,15 @@ final class IssueViewController: UIViewController {
         return button
     }()
     
-    private var model: IssueModel
+    private let model: IssueModel
     
     init(model: IssueModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
+        self.init(model: IssueModel(service: IssueService(), token: "", repo: Repository(name: "", owner: Owner(login: ""))))
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -73,7 +74,7 @@ final class IssueViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        self.title = "이슈"
+        self.title = "이슈들"
 //        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         let filterButton = createButton(title: "필터", image: UIImage(systemName: "scroll"), action: UIAction(handler: { [weak self] _ in

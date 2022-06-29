@@ -11,10 +11,12 @@ class IssueModel {
 
     private let service: IssueService
     private let accessToken: String
+    private let repo: Repository
     
-    init(service: IssueService, token: String) {
+    init(service: IssueService, token: String, repo: Repository) {
         self.service = service
         self.accessToken = token
+        self.repo = repo
     }
     
     var updatedIssues: ( (_ issues: [Issue]) -> Void )?
@@ -37,7 +39,7 @@ class IssueModel {
     }
     
     func requestIssue() {
-        service.requestIssues(accessToken: accessToken) { result in
+        service.requestRepositoryIssues(accessToken: accessToken, repo: repo) { result in
             switch result {
             case .success(let issues):
                 self.issues = issues

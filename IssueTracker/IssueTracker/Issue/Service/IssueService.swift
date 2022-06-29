@@ -71,8 +71,8 @@ struct IssueService {
             }
     }
     
-    func requestRepos(accessToken: String, completion: @escaping (Result<[Repository], IssueError>) -> Void) {
-        let urlString = RequestURL.repos.description
+    func requestRepositoryIssues(accessToken: String, repo: Repository, completion: @escaping (Result<[Issue], IssueError>) -> Void) {
+        let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
@@ -80,7 +80,28 @@ struct IssueService {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let globalThread = DispatchQueue.global(qos: .default)
+        
+        AF.request(urlString, method: .get, headers: headers)
+            .responseDecodable(of: [ResponseIssue].self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let data):
+                    let convertedData = data.map{( Issue(title: $0.title, body: $0.body, state: $0.state, labels: $0.labels, milestone: $0.milestone, repository: repo) )}
+                    completion(.success(convertedData))
+                case .failure(let error):
+                    print(error)
+                    completion(.failure(.issueNotFound))
+                }
+            }
+    }
+    
+    func requestRepos(accessToken: String, completion: @escaping (Result<[Repository], IssueError>) -> Void) {
+        let urlString = RequestURL.repos.description
+        let headers: HTTPHeaders = [
+            NetworkHeader.acceptV3.getHttpHeader(),
+            NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
+        ]
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         AF.request(urlString, method: .get, headers: headers)
             .responseDecodable(of: [Repository].self, decoder: decoder) { response in
@@ -91,5 +112,13 @@ struct IssueService {
                     completion(.failure(.issueNotFound))
                 }
             }
+    }
+    
+    struct ResponseIssue: Codable {
+        let title: String
+        let body: String?
+        let state: String
+        let labels: [Label]
+        let milestone: Milestone?
     }
 }

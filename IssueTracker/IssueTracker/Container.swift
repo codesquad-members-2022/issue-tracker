@@ -12,14 +12,15 @@ import UIKit
 struct Container {
     enum Screen {
         case login
-        case issue(token: String)
+        case repos(token: String)
+        case issue(token: String, selectedRepo: Repository)
         case newIssue
         case optionSelect(token: String, option: Option)
     }
-    
+
     func buildRootViewController() -> UIViewController {
         if let accessToken = GithubUserDefaults.getToken() {
-            return buildViewController(.issue(token: accessToken))
+            return buildViewController(.repos(token: accessToken))
         } else {
             return buildViewController(.login)
         }
@@ -29,10 +30,14 @@ struct Container {
         switch screen {
         case .login:
             return LoginViewController(service: OAuthService())
-        case .issue(let token):
+        case .issue(let token, let selectedRepo):
             let service = IssueService()
-            let model = IssueModel(service: service, token: token)
+            let model = IssueModel(service: service, token: token, repo: selectedRepo)
             let viewController = IssueViewController(model: model)
+            return viewController
+        case .repos(token: let token):
+            let viewController = ReposViewController(token: token)
+            viewController.title = "Repos"
             return UINavigationController(rootViewController: viewController)
         case .newIssue:
             return NewIssueViewController()
