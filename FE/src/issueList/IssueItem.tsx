@@ -23,8 +23,8 @@ type IssueItemProps = {
   title: string;
   createdTime: string;
   writer: string;
-  labels: LabelType[];
-  milestoneName: string;
+  labels: LabelType[] | null;
+  milestoneName: string | null;
   isLast: boolean;
   status: IssueStateType;
 };
@@ -138,7 +138,7 @@ function IssueItem({
             <TitleText>{title}</TitleText>
           </Link>
           <Labels>
-            {!!labels.length &&
+            {!!labels &&
               labels.map(({ name, color }) => (
                 <Label
                   key={getRandomKey()}

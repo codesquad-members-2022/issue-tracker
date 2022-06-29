@@ -50,7 +50,7 @@ const issueListData = {
             }
           }
         ],
-        milestoneName: '',
+        milestoneName: null,
         status: 'OPEN'
       }
     ]
@@ -66,7 +66,7 @@ const issueListData = {
         title: '제목2',
         createdTime: '2022-06-22 12:12:13',
         writer: '글쓴이2',
-        labels: [],
+        labels: null,
         milestoneName: '마일스톤2',
         status: 'CLOSE'
       }
@@ -107,7 +107,7 @@ const issueListData = {
         title: '제목2',
         createdTime: '2022-06-22 12:12:13',
         writer: '글쓴이2',
-        labels: [],
+        labels: null,
         milestoneName: '마일스톤2',
         status: 'CLOSE'
       },
@@ -132,7 +132,7 @@ const issueListData = {
             }
           }
         ],
-        milestoneName: '',
+        milestoneName: null,
         status: 'OPEN'
       }
     ]

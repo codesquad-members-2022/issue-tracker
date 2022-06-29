@@ -22,8 +22,8 @@ export type IssueType = {
   title: string;
   createdTime: string;
   writer: string;
-  labels: LabelType[];
-  milestoneName: string;
+  labels: LabelType[] | null;
+  milestoneName: string | null;
   status: IssueStateType;
 };
 
