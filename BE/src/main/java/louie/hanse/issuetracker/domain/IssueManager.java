@@ -1,12 +1,14 @@
 package louie.hanse.issuetracker.domain;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IssueManager {

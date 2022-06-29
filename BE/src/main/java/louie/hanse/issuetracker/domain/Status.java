@@ -6,4 +6,8 @@ public enum Status {
     public Status reverse() {
         return this == OPEN ? CLOSE : OPEN;
     }
+
+    public boolean isClosed() {
+        return this.equals(Status.CLOSE);
+    }
 }

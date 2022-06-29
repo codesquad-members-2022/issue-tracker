@@ -3,6 +3,7 @@ package louie.hanse.issuetracker.web.controller;
 import lombok.RequiredArgsConstructor;
 import louie.hanse.issuetracker.login.jwt.JwtProvider;
 import louie.hanse.issuetracker.service.IssueService;
+import louie.hanse.issuetracker.web.dto.IssueDetailResponse;
 import louie.hanse.issuetracker.web.dto.IssueSaveRequest;
 import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
 import org.springframework.http.HttpHeaders;
@@ -28,5 +29,12 @@ public class IssueController {
     @GetMapping
     public void searchIssue(IssueSearchRequest issueSearchRequest) {
         issueService.search(issueSearchRequest);
+    }
+
+    @GetMapping("/{id}")
+    public IssueDetailResponse findIssue(@PathVariable Long id, HttpServletRequest request) {
+        String accessToken = request.getHeader(HttpHeaders.AUTHORIZATION);
+        Long requestMemberId = jwtProvider.verifyAccessTokenAndDecodeMemberId(accessToken);
+        return issueService.findIssue(id, requestMemberId);
     }
 }

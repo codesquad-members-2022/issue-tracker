@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import louie.hanse.issuetracker.domain.*;
 import louie.hanse.issuetracker.repository.*;
+import louie.hanse.issuetracker.web.dto.IssueDetailResponse;
 import louie.hanse.issuetracker.web.dto.IssueSaveRequest;
 import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
 import louie.hanse.issuetracker.web.dto.IssueSearchResponse;
@@ -65,4 +66,12 @@ public class IssueService {
         }
         return new IssueSearchResponse(issues, reverseStatusCount, issues.size());
     }
- }
+
+    public IssueDetailResponse findIssue(Long issueId, Long memberId) {
+        Issue issue = issueRepository.findById(issueId)
+                .orElseThrow(IllegalStateException::new);
+        Member requestMember = memberRepository.findById(memberId)
+                .orElseThrow(IllegalStateException::new);
+        return new IssueDetailResponse(issue, requestMember);
+    }
+}
