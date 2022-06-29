@@ -3,8 +3,11 @@ import * as S from 'components/newIssue/styled.index';
 import * as I from 'design/icons';
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 import SideBar from 'components/common/Sidebar';
+import { useRecoilValue } from 'recoil';
+import { newIssueState, newIssueType } from 'context/newIssue';
 
 function NewIssue() {
+  const newIssueData: newIssueType = useRecoilValue(newIssueState);
   return (
     <S.NewIssueWrap>
       <S.NewIssueTitle>새로운 이슈 작성</S.NewIssueTitle>
@@ -23,7 +26,7 @@ function NewIssue() {
             </S.AttatchFile>
           </S.InputArea>
         </S.IssueContentLeft>
-        <SideBar />
+        <SideBar data={newIssueData} />
       </S.NewIssueContent>
       <S.UnderLine />
       <S.Buttons>

@@ -6,12 +6,13 @@ import * as S from 'components/Issue/styled/issueTitleButton';
 import IssueTitleButton from 'components/Issue/buttons/IssueTitleButton';
 import { issueState } from 'context/issue';
 
-interface Props {
-  handleEditButtonClick: () => void;
-  handleCloseButtonClick: () => void;
-}
-
-function EditAndCloseButtons({ handleEditButtonClick, handleCloseButtonClick }: Props) {
+function EditAndCloseButtons({
+  clickHandler1,
+  clickHandler2,
+}: {
+  clickHandler1: () => void;
+  clickHandler2: () => void;
+}) {
   const issueData = useRecoilValue(issueState);
   return (
     <S.buttonWrapper>
@@ -19,13 +20,13 @@ function EditAndCloseButtons({ handleEditButtonClick, handleCloseButtonClick }: 
         buttonIcon={<I.edit />}
         buttonText="제목 편집"
         buttonState="default"
-        handleButtonClick={handleEditButtonClick}
+        clickHandler={clickHandler1}
       />
       <IssueTitleButton
         buttonIcon={issueData.closed ? <I.alertCircle /> : <I.archive />}
         buttonText={issueData.closed ? '다시 열기' : '이슈 닫기'}
         buttonState="default"
-        handleButtonClick={handleCloseButtonClick}
+        clickHandler={clickHandler2}
       />
     </S.buttonWrapper>
   );
