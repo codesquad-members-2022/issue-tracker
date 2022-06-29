@@ -11,7 +11,13 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 const container = document.getElementById('root');
 const root = createRoot(container as Element);
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false
+    }
+  }
+});
 
 root.render(
   <QueryClientProvider client={queryClient}>
