@@ -7,8 +7,10 @@ import com.team09.issue_tracker.issue.dto.IssueListResponseDto;
 import com.team09.issue_tracker.label.Label;
 import com.team09.issue_tracker.milestone.Milestone;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,20 +52,20 @@ public class Issue extends BaseTimeEntity {
 	private Long memberId;
 
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
-	private List<IssueLabel> issueLabels = new ArrayList<>();
+	private Set<IssueLabel> issueLabels = new HashSet<>();
 
 	@OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
-	private List<IssueAssignee> issueAssignees = new ArrayList<>();
+	private Set<IssueAssignee> issueAssignees = new HashSet<>();
 
 	public boolean isWriter(Long memberId) {
 		return memberId.equals(this.memberId);
 	}
 
-	public void addIssueLabel(List<IssueLabel> issueLabels) {
+	public void addIssueLabel(Set<IssueLabel> issueLabels) {
 		this.issueLabels = issueLabels;
 	}
 
-	public void addIssueAssignee(List<IssueAssignee> issueAssignees) {
+	public void addIssueAssignee(Set<IssueAssignee> issueAssignees) {
 		this.issueAssignees = issueAssignees;
 	}
 

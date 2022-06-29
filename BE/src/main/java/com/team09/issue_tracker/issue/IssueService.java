@@ -22,7 +22,7 @@ import com.team09.issue_tracker.milestone.MilestoneService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -69,9 +69,8 @@ public class IssueService {
 			isOpened, milestone);
 
 		issue = issueRepository.save(issue);
-		Long issueId = issue.getId();
 
-		saveIssueLabel(issue, issueId, issueSaveRequestDto.getLabelIds());
+		saveIssueLabel(issue, issueSaveRequestDto.getLabelIds());
 
 		savedIssueAssignee(issue, issue, issueSaveRequestDto.getAssigneeIds());
 
@@ -84,25 +83,24 @@ public class IssueService {
 				.map(assigneeId -> IssueAssignee.of(savedIssue, Member.of(assigneeId)))
 				.collect(Collectors.toList());
 
-			List<IssueAssignee> savedIssueAssignees = issueAssignees.stream()
+			Set<IssueAssignee> savedIssueAssignees = issueAssignees.stream()
 				.map(issueAssignee -> issueAssigneeRepository.save(issueAssignee))
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 			//연관관계 편의메서드
 			issue.addIssueAssignee(savedIssueAssignees);
 		}
 	}
 
-	private void saveIssueLabel(Issue issue, Long issueId, List<Long> labelIds) {
+	private void saveIssueLabel(Issue issue, List<Long> labelIds) {
 		if (!labelIds.isEmpty()) {
-			List<IssueLabel> issueLabels = labelIds.stream()
-				.map(labelId -> IssueLabel.of(issueId, labelId))
-				.collect(Collectors.toList());
+			Set<IssueLabel> issueLabels = labelIds.stream()
+				.map(labelId -> IssueLabel.of(issue.getId(), labelId))
+				.collect(Collectors.toSet());
 
-			List<IssueLabel> savedIssueLabels = issueLabels.stream()
-				.map(issueLabel -> issueLabelRepository.save(issueLabel))
-				.collect(Collectors.toList());
+			issueLabels = Set.copyOf(issueLabelRepository.saveAll(issueLabels));
+
 			//연관관계 편의 메서드
-			issue.addIssueLabel(savedIssueLabels);
+			issue.addIssueLabel(issueLabels);
 		}
 	}
 
@@ -127,7 +125,7 @@ public class IssueService {
 		}
 
 		//2. 할당자인지 확인
-		List<IssueAssignee> issueAssignees = issue.getIssueAssignees();
+		Set<IssueAssignee> issueAssignees = issue.getIssueAssignees();
 		if (issueAssignees.size() != 0) {
 			isEditable = true;
 		}
@@ -135,13 +133,6 @@ public class IssueService {
 		return issue.toDetailResponse(isEditable);
 	}
 
-	/**
-	 * 이슈 수정 - 이슈, 이슈 상태,연관 레이블, 마일스톤 모두 수정 가능
-	 *
-	 * @param IssueUpdateRequestDto
-	 * @param issueId
-	 * @return
-	 */
 	@Transactional
 	public CommonResponseDto update(IssueUpdateRequestDto issueUpdateRequestDto, Long issueId,
 		Long memberId) {
@@ -172,14 +163,14 @@ public class IssueService {
 	private CommonResponseDto updateIssueLabel(IssueUpdateRequestDto issueUpdateRequestDto,
 		Long issueId, Issue issue) {
 
-		List<IssueLabel> issueLabels = issue.getIssueLabels();
+		Set<IssueLabel> issueLabels = issue.getIssueLabels();
 
 		List<Long> editingLabelIds = issueUpdateRequestDto.getLabelIds();
 		//Label을 모두 삭제할 경우
 		if (issueUpdateRequestDto.getLabelIds().isEmpty()) {
 			issueLabels.stream()
 				.forEach(issueLabel -> issueLabelRepository.delete(issueLabel));
-			issue.addIssueLabel(Collections.emptyList());
+			issue.addIssueLabel(Collections.emptySet());
 
 			return new CommonResponseDto(issue.getId());
 		}
