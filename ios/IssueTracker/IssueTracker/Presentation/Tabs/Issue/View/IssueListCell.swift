@@ -43,9 +43,9 @@ final class IssueListCell: UITableViewCell {
         return label
     }()
 
-    private let icon: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "signpost.right"), for: .normal)
+    private let icon: TextButton = {
+        let button = TextButton()
+        button.setSymbol(UIImage.signpost)
         button.tintColor = .darkGray
         return button
     }()

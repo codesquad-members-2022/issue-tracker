@@ -25,6 +25,5 @@ class FilterViewController: UIViewController {
         navigationItem.rightBarButtonItem = cancelButton
         backButton.tintColor = .black
         navigationItem.leftBarButtonItem = backButton
-        title = "dddddddddd"
     }
 }

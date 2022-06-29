@@ -17,4 +17,5 @@ extension UIImage {
     static let profile = UIImage(systemName: "person")
     static let profileFilled = UIImage(systemName: "person.fill")
     static let plus = UIImage(systemName: "plus")
+    static let filter = UIImage(systemName: "line.3.horizontal.decrease.circle")
 }

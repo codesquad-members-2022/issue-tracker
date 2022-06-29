@@ -18,21 +18,19 @@ class IssueViewController: UIViewController {
     private let dataSource = TableviewDataSource()
     weak var delegate: IssueViewDelegate?
 
-    private let leftButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.init(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
+    private let leftButton: TextButton = {
+        let button = TextButton()
+        button.setSymbol(UIImage.filter)
         button.setTitle("필터", for: .normal)
         button.setTitleColor(UIColor.primary, for: .normal)
         return button
     }()
 
-    private let rightButton: UIButton = {
-        var config = UIButton.Configuration.plain()
+    private let rightButton: TextButton = {
+        let button = TextButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 14)
-        config.title = "선택"
-        config.image = .init(systemName: "checkmark.circle", withConfiguration: symbolConfiguration)
-        config.imagePlacement = .trailing
-        let button = UIButton(configuration: config)
+        button.setSymbol(UIImage(systemName: "checkmark.circle", withConfiguration: symbolConfiguration), on: .trailing)
+        button.setTitle("선택", for: .normal)
         return button
     }()
 
@@ -42,7 +40,7 @@ class IssueViewController: UIViewController {
         button.layer.cornerRadius = 30
         button.backgroundColor = .primary
         button.tintColor = .white
-        button.setImage(.init(systemName: "plus"), for: .normal)
+        button.setImage(UIImage.plus, for: .normal)
         return button
     }()
 
@@ -61,13 +59,13 @@ class IssueViewController: UIViewController {
 
     private func configureView() {
         view.backgroundColor = .white
-        delegate = self
 
         navigationItem.title = "이슈"
         navigationItem.leftBarButtonItem = .init(customView: leftButton)
         navigationItem.rightBarButtonItem = .init(customView: rightButton)
         navigationController?.navigationBar.prefersLargeTitles = true
 
+        delegate = self
         tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.register(IssueListCell.self, forCellReuseIdentifier: IssueListCell.identifier)
