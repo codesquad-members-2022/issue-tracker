@@ -1,5 +1,5 @@
-import { CheckBoxType } from './CheckBox';
-import { IssueType, SelectedIssueType } from './IssueList';
+import { CheckBoxType } from '../issueListTable/CheckBox';
+import { SelectedIssueType } from '../issueListTable/IssueList';
 
 export type IssueListCheckStateType = {
   headerCheckBox: CheckBoxType;
@@ -8,35 +8,26 @@ export type IssueListCheckStateType = {
 
 export type IssueListActionType = {
   type: 'INIT' | 'ALL_CHECK' | 'ALL_UNCHECK' | 'ITEM_CHECK' | 'ITEM_UNCHECK';
-  payload: { id?: string; data?: IssueType[] };
+  payload?: { id?: string; initialSelectedIssues?: SelectedIssueType };
 };
 
 function checkReducer(
   state: IssueListCheckStateType,
   action: IssueListActionType
 ): IssueListCheckStateType {
+  const { selectedIssues } = state;
   const { type, payload } = action;
 
   switch (type) {
     case 'INIT': {
-      const initSelectedIssues = (issues: IssueType[]) => {
-        const initialSelectedIssue: SelectedIssueType = {};
-
-        issues.forEach(({ id }) => {
-          initialSelectedIssue[id] = false;
-        });
-
-        return initialSelectedIssue;
-      };
-
       return {
         headerCheckBox: 'initial',
-        selectedIssues: initSelectedIssues(payload.data!)
+        selectedIssues: payload?.initialSelectedIssues!
       };
     }
     case 'ALL_CHECK': {
       const updatedSelectedIssues: SelectedIssueType = {
-        ...state.selectedIssues
+        ...selectedIssues
       };
       Object.keys(updatedSelectedIssues).forEach((id) => {
         updatedSelectedIssues[id] = true;
@@ -48,7 +39,7 @@ function checkReducer(
     }
     case 'ALL_UNCHECK': {
       const updatedSelectedIssues: SelectedIssueType = {
-        ...state.selectedIssues
+        ...selectedIssues
       };
       Object.keys(updatedSelectedIssues).forEach((id) => {
         updatedSelectedIssues[id] = false;
@@ -60,9 +51,9 @@ function checkReducer(
     }
     case 'ITEM_CHECK': {
       const updatedSelectedIssues: SelectedIssueType = {
-        ...state.selectedIssues
+        ...selectedIssues
       };
-      updatedSelectedIssues[payload.id!] = true;
+      updatedSelectedIssues[payload?.id!] = true;
 
       let headerCheckBox: CheckBoxType;
       if (
@@ -80,9 +71,9 @@ function checkReducer(
     }
     case 'ITEM_UNCHECK': {
       const updatedSelectedIssues: SelectedIssueType = {
-        ...state.selectedIssues
+        ...selectedIssues
       };
-      updatedSelectedIssues[payload.id!] = false;
+      updatedSelectedIssues[payload?.id!] = false;
 
       let headerCheckBox: CheckBoxType;
       if (

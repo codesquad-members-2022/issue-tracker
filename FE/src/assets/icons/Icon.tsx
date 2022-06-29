@@ -1,7 +1,9 @@
 import icons from '@/assets/icons/svgs';
 
+export type IconNameType = keyof typeof icons;
+
 type IconProps = {
-  iconName: keyof typeof icons;
+  iconName: IconNameType;
   width?: number;
   height?: number;
   stroke?: string;

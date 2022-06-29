@@ -1,11 +1,13 @@
-import Icon from '@/assets/icons/Icon';
-import { COLORS, GREYSCALE } from '@/constants';
+import Icon, { IconNameType } from '@/assets/icons/Icon';
+import { COLORS, GREYSCALE } from '@/common/constants';
 import { getRandomKey } from '@/utils';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import CheckBox from './CheckBox';
-import { useIssueListContext } from './IssueListProvider';
-import Label from './Label';
+import { getTimeStamp } from '@/common/utils/utils';
+import CheckBox from '@/issueList/issueListTable/CheckBox';
+import { IssueStateType } from '@/issueList/issueListTable/IssueList';
+import { useIssueListContext } from '@/issueList/stores/IssueListProvider';
+import Label from '@/issueList/issueListTable/issueItem/Label';
 
 type LabelColorType = {
   backgroundColor: string;
@@ -22,9 +24,21 @@ type IssueItemProps = {
   title: string;
   createdTime: string;
   writer: string;
-  labels: LabelType[];
-  milestoneName: string;
+  labels: LabelType[] | null;
+  milestoneName: string | null;
   isLast: boolean;
+  status: IssueStateType;
+};
+
+type IconType = {
+  iconName: IconNameType;
+  stroke: string;
+  fill: string;
+};
+
+type IssueIconType = {
+  OPEN: IconType;
+  CLOSE: IconType;
 };
 
 function IssueItem({
@@ -34,15 +48,27 @@ function IssueItem({
   writer,
   labels,
   milestoneName,
-  isLast
+  isLast,
+  status
 }: IssueItemProps) {
   const { state, dispatch } = useIssueListContext();
 
   const IssueItemBox = isLast ? LastIssueItemBox : DefaultIssueItemBox;
   const checkBoxType = state.selectedIssues[id] ? 'active' : 'initial';
+  const issueIcon: IssueIconType = {
+    OPEN: {
+      iconName: 'alertCircle',
+      stroke: COLORS.BLUE,
+      fill: COLORS.LIGHT_BLUE
+    },
+    CLOSE: {
+      iconName: 'archive',
+      stroke: COLORS.PURPLE,
+      fill: COLORS.LIGHT_PURPLE
+    }
+  };
 
   const handleCheckBoxClick = () => {
-    console.log(`isclicked: ${state.selectedIssues[id]}`);
     if (state.selectedIssues[id]) {
       dispatch({ type: 'ITEM_UNCHECK', payload: { id } });
     } else {
@@ -50,53 +76,6 @@ function IssueItem({
     }
   };
 
-  const getTimeStamp = (createdTime: string) => {
-    let timeStamp;
-
-    const createdTimeDate = new Date(createdTime);
-    const today = new Date();
-
-    const createdDate = {
-      year: createdTimeDate.getFullYear(),
-      month: createdTimeDate.getMonth(),
-      date: createdTimeDate.getDate(),
-      hour: createdTimeDate.getHours(),
-      min: createdTimeDate.getMinutes(),
-      sec: createdTimeDate.getSeconds()
-    };
-    const todayDate = {
-      year: today.getFullYear(),
-      month: today.getMonth(),
-      date: today.getDate(),
-      hour: today.getHours(),
-      min: today.getMinutes(),
-      sec: today.getSeconds()
-    };
-
-    switch (true) {
-      case createdDate.year !== todayDate.year:
-        timeStamp = `${createdDate.year}년 ${createdDate.month + 1}월 ${
-          createdDate.date
-        }일`;
-        break;
-      case createdDate.month !== todayDate.month:
-        timeStamp = `${createdDate.month + 1}월 ${createdDate.date}일`;
-        break;
-      case createdDate.date !== todayDate.date:
-        timeStamp = `${todayDate.date - createdDate.date}일 전`;
-        break;
-      case createdDate.hour !== todayDate.hour:
-        timeStamp = `${todayDate.hour - createdDate.hour}시간 전`;
-        break;
-      case createdDate.min !== todayDate.min:
-        timeStamp = `${todayDate.min - createdDate.min}분 전`;
-        break;
-      default:
-        timeStamp = `${todayDate.sec - createdDate.sec}초 전`;
-    }
-
-    return timeStamp;
-  };
   const timeStamp = getTimeStamp(createdTime);
 
   return (
@@ -105,15 +84,15 @@ function IssueItem({
       <IssueText>
         <IssueTitle>
           <Icon
-            iconName="alertCircle"
-            stroke={COLORS.BLUE}
-            fill={COLORS.LIGHT_BLUE}
+            iconName={issueIcon[status].iconName}
+            stroke={issueIcon[status].stroke}
+            fill={issueIcon[status].fill}
           />
           <Link to="/issueDetail">
             <TitleText>{title}</TitleText>
           </Link>
           <Labels>
-            {!!labels.length &&
+            {!!labels &&
               labels.map(({ name, color }) => (
                 <Label
                   key={getRandomKey()}

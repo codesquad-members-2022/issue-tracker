@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS, GREYSCALE } from '@/constants';
+import { COLORS, GREYSCALE } from '@/common/constants';
 
 type ButtonProps = {
   disabled: boolean;

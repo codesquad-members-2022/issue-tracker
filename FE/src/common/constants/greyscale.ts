@@ -6,7 +6,7 @@ const GREYSCALE = {
   PLACEHOLDER: '#A0A3BD',
   LABEL: '#6E7191',
   BODY: '#4E4B66',
-  TITLE_ACTION: '#14142B',
+  TITLE_ACTION: '#14142B'
 };
 
 export default GREYSCALE;

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Icon from '@/assets/icons/Icon';
-import { GREYSCALE } from '@/constants';
+import { GREYSCALE } from '@/common/constants';
 import styled from 'styled-components';
-import DropDownPanel from '@/common/DropDownPanel';
+import DropDownPanel from '@/common/components/dropDown/DropDownPanel';
 
 const filterCheckBoxItems = [
   { isChecked: true, label: '열린 이슈' },
@@ -13,6 +13,12 @@ const filterCheckBoxItems = [
 ];
 
 function FilterBar() {
+  // NOTE :
+  // 드롭다운에서 클릭하면 해당 필터 옵션을 변경 => 필터 옵션이 변경되면 해당 옵션으로 get요청
+  // 필터바의 필터옵션 상태로 관리해야할 것 같음
+  // 기존에 어떤 옵션들이 선택되었는지를 알 수 있어야 함
+  // 이슈 목록에서 담당자, 레이블, 마일스톤, 작성자 옵션을 선택할 수 있는데 이것도 같이 동기화 되야 함
+
   const [value, setValue] = useState('is:issue is:open');
   const [isFocus, setFocus] = useState(false);
   const [isFilterButtonShow, setFilterButtonShow] = useState(false);
@@ -26,7 +32,7 @@ function FilterBar() {
     setValue(event.target.value);
 
   const handleFilterButtonMouseDown = () =>
-    isFilterButtonShow ? setFilterButtonShow(false) : setFilterButtonShow(true);
+    setFilterButtonShow(!isFilterButtonShow);
 
   const handleFilterButtonBlur = () => setFilterButtonShow(false);
 
