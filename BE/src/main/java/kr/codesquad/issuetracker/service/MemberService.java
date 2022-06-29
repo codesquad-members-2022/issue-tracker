@@ -2,6 +2,7 @@ package kr.codesquad.issuetracker.service;
 
 import static kr.codesquad.issuetracker.exception.ErrorMessage.*;
 
+import java.util.List;
 import kr.codesquad.issuetracker.auth.GithubOauth;
 import kr.codesquad.issuetracker.auth.dto.AccessTokenResponseDto;
 import kr.codesquad.issuetracker.auth.dto.UserProfile;
@@ -51,5 +52,14 @@ public class MemberService {
 
 	private boolean isNotMember(String email) {
 		return memberRepository.findByEmail(email).isEmpty();
+	}
+
+	public Member findUserById(Long memberId) {
+		return memberRepository.findById(memberId)
+			.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+	}
+
+	public List<Member> findAssignees(List<Long> assignees) {
+		return memberRepository.findAllById(assignees);
 	}
 }

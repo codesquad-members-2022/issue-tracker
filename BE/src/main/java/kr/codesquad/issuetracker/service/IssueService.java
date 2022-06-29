@@ -1,13 +1,14 @@
 package kr.codesquad.issuetracker.service;
 
+import static kr.codesquad.issuetracker.exception.ErrorMessage.ISSUE_NOT_FOUND;
+
 import java.util.List;
-import java.util.stream.Collectors;
-import kr.codesquad.issuetracker.domain.Status;
+import kr.codesquad.issuetracker.domain.issue.Issue;
 import kr.codesquad.issuetracker.domain.issue.repository.IssueRepository;
-import kr.codesquad.issuetracker.domain.label.repository.LabelRepository;
-import kr.codesquad.issuetracker.domain.milestone.repository.MilestoneRepository;
-import kr.codesquad.issuetracker.web.dto.issue.IssueDto;
-import kr.codesquad.issuetracker.web.dto.issue.IssueResponseDto;
+import kr.codesquad.issuetracker.domain.member.repository.MemberRepository;
+import kr.codesquad.issuetracker.exception.CustomException;
+import kr.codesquad.issuetracker.web.dto.issue.IssueAddRequestDto;
+import kr.codesquad.issuetracker.web.dto.issue.IssueModifyRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,38 +18,30 @@ import org.springframework.transaction.annotation.Transactional;
 public class IssueService {
 
 	private final IssueRepository issueRepository;
+	private final MemberService memberService;
+	private final LabelService labelService;
+	private final MilestonesService milestonesService;
 
-	private final LabelRepository labelRepository;
+	@Transactional
+	public void statusModify(IssueModifyRequestDto dto) {
+		List<Long> ids = dto.getIds();
+		for (Long id : ids) {
+			Issue issue = issueRepository.findById(id)
+				.orElseThrow(() -> new CustomException(ISSUE_NOT_FOUND));
 
-	private final MilestoneRepository milestoneRepository;
-
-	@Transactional(readOnly = true)
-	public IssueResponseDto list(Status status) {
-		return getIssueResponseDto(status);
+			issue.updateStatus(dto.getStatus());
+		}
 	}
 
-	private IssueResponseDto getIssueResponseDto(Status status) {
-		return new IssueResponseDto(
-			(int) labelRepository.count(),
-			(int) milestoneRepository.count(),
-			countOpened(),
-			countClosed(),
-			findIssueDtos(status)
+	public void add(IssueAddRequestDto dto) {
+		Issue issue = Issue.createIssue(
+			dto.getTitle(),
+			dto.getDescription(),
+			memberService.findUserById(dto.getMemberId()),
+			memberService.findAssignees(dto.getAssignees()),
+			labelService.findLabels(dto.getLabels()),
+			milestonesService.findMilestoneById(dto.getMilestoneId())
 		);
+		issueRepository.save(issue);
 	}
-
-	private List<IssueDto> findIssueDtos(Status status) {
-		return issueRepository.findAllByStatus(status).stream()
-			.map(IssueDto::from)
-			.collect(Collectors.toList());
-	}
-
-	private int countClosed() {
-		return (int) issueRepository.countByStatus(Status.CLOSED);
-	}
-
-	private int countOpened() {
-		return (int) issueRepository.countByStatus(Status.OPEN);
-	}
-
 }

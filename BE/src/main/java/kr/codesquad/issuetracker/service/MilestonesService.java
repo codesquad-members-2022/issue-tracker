@@ -53,10 +53,7 @@ public class MilestonesService {
 
 	@Transactional
 	public void add(MilestoneRequestDto dto) {
-		Milestone milestone = milestoneRepository.save(dto.toEntity());
-		if (milestone.getId() == null){
-			throw new CustomException(MILESTONE_NOT_SAVE);
-		}
+		milestoneRepository.save(dto.toEntity());
 	}
 
 	@Transactional
@@ -75,4 +72,8 @@ public class MilestonesService {
 		milestone.update(dto);
 	}
 
+	public Milestone findMilestoneById(Long milestoneId) {
+		return milestoneRepository.findById(milestoneId)
+			.orElseThrow(() -> new CustomException(MILESTONE_NOT_FOUND));
+	}
 }

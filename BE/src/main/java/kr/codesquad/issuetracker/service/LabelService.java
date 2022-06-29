@@ -41,10 +41,7 @@ public class LabelService {
 
 	@Transactional
 	public void add(LabelRequestDto dto) {
-		Label label = labelRepository.save(dto.toEntity());
-		if (label.getId() == null){
-			throw new CustomException(LABEL_NOT_SAVE);
-		}
+		labelRepository.save(dto.toEntity());
 	}
 
 	@Transactional
@@ -59,5 +56,9 @@ public class LabelService {
 			() -> new CustomException(LABEL_NOT_FOUND)
 		);
 		label.update(dto);
+	}
+
+	public List<Label> findLabels(List<Long> labels) {
+		return labelRepository.findAllById(labels);
 	}
 }
