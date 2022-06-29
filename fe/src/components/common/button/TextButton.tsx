@@ -21,9 +21,11 @@ interface StyledTextButtonProps {
 function TextButton({ size = "small", icon, text, disabled = false }: TextButtonProps) {
   return (
     <StyledTextButton type="button" size={size} gap={4} disabled={disabled}>
-      <IconBox width={16} height={16}>
-        {icon}
-      </IconBox>
+      {icon ? (
+        <IconBox width={16} height={16}>
+          {icon}
+        </IconBox>
+      ) : null}
       {text}
     </StyledTextButton>
   );

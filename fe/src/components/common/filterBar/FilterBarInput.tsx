@@ -6,9 +6,9 @@ import { DEFAULT_VALUE, PLACEHOLDER } from "constants/filterBarText";
 import SearchIcon from "components/Icons/Search";
 import { StyledFilterBarProps } from "./FilterBarInterface";
 
-function FilterBarInput({ isFocus, inputRef, inputValue, setInputValue }) {
+function FilterBarInput({ display, isFocus, inputRef, inputValue, setInputValue }) {
   return (
-    <InputBox isFocus={isFocus}>
+    <InputBox display={display} isFocus={isFocus}>
       <SearchIcon />
       <Input
         ref={inputRef}
@@ -21,7 +21,7 @@ function FilterBarInput({ isFocus, inputRef, inputValue, setInputValue }) {
 }
 
 const InputBox = styled.div<StyledFilterBarProps>`
-  ${({ theme: { colors }, isFocus }) => {
+  ${({ theme: { colors }, isFocus, display }) => {
     const { initial, active } = filterBarStyle.input;
     const { width: filterWidth } = filterBarStyle.filter;
     const {
@@ -29,7 +29,7 @@ const InputBox = styled.div<StyledFilterBarProps>`
     } = filterBarStyle.overall;
 
     return css`
-      display: flex;
+      display: ${display};
       align-items: center;
       padding: 0 26px;
       width: ${overallWidth - filterWidth}px;

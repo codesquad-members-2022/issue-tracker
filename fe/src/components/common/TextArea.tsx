@@ -27,7 +27,6 @@ function TextArea({ type }: InputProps) {
       // });
       styles = { border, bgColor, ...typeStyle[STYLE[type]], ...customStyle[type] };
     };
-    console.log(styles);
     return styles;
   }
   makeStyle();
