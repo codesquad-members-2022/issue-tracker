@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import { buttonStyle } from "constants/buttonStyle";
@@ -9,14 +8,21 @@ import TextButton from "../button/TextButton";
 import Input from "../Input";
 import Logo from "../Logo";
 
+const LOGIN_URL =
+  "https://github.com/login/oauth/authorize/?client_id=2f2f8ccb4f67b255a805&redirect_uri=http://localhost:3000/oauth/callback";
+
 function LoginPage() {
+  const handleLoginButtonClick = () => {
+    window.location.href = LOGIN_URL;
+  };
+
   return (
     <StyledLoginPage>
       <Logo size="large" />
       <LoginForm>
-        <Link to="/issues">
-          <GithubLoginButton>{loginPageText.btn.github}</GithubLoginButton>
-        </Link>
+        <GithubLoginButton type="button" onClick={handleLoginButtonClick}>
+          {loginPageText.btn.github}
+        </GithubLoginButton>
         or
         <Input size="large" type="initial" text={loginPageText.input.id} />
         <Input size="large" type="initial" text={loginPageText.input.password} />
