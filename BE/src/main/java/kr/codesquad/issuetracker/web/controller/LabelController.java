@@ -28,21 +28,18 @@ public class LabelController {
 		return labelService.list();
 	}
 
-	@LoginRequired
 	@PostMapping
 	public void labelAdd(@RequestBody LabelRequestDto dto) {
 		log.debug("라벨 추가");
 		labelService.add(dto);
 	}
 
-	@LoginRequired
 	@DeleteMapping("{id}")
 	public void labelDelete(@PathVariable Long id) {
 		log.debug("라벨 삭제");
 		labelService.delete(id);
 	}
 
-	@LoginRequired
 	@PostMapping("{id}")
 	public void labelEdit(@PathVariable Long id, @RequestBody LabelRequestDto dto) {
 		log.debug("라벨 수정");

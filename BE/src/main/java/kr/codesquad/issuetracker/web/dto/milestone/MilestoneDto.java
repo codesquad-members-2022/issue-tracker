@@ -30,7 +30,7 @@ public class MilestoneDto {
 
 	private int closedIssue;
 
-	public static MilestoneDto of(Milestone milestone) {
+	public static MilestoneDto from(Milestone milestone) {
 		return new MilestoneDto(
 			milestone.getId(),
 			milestone.getTitle(),

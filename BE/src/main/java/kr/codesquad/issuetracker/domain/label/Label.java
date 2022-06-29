@@ -1,12 +1,22 @@
 package kr.codesquad.issuetracker.domain.label;
 
+import java.sql.Ref;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
+import kr.codesquad.issuetracker.domain.issue.Issue;
 import kr.codesquad.issuetracker.web.dto.label.LabelRequestDto;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -30,6 +40,9 @@ public class Label {
 	@Embedded
 	private Color color;
 
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "labels")
+	private List<Issue> issues = new ArrayList<>();
+
 	public Label(String title, String description, Color color) {
 		this.title = title;
 		this.description = description;
@@ -40,5 +53,10 @@ public class Label {
 		this.title = dto.getTitle();
 		this.description = dto.getDescription();
 		this.color = dto.getColor();
+	}
+
+	@PreRemove
+	public void delete() {
+		issues.forEach(i -> i.deleteLabel(this));
 	}
 }
