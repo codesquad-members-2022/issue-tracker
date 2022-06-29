@@ -119,20 +119,10 @@ public class Issue extends BaseTimeEntity {
 			.build();
 	}
 
-	public void setTitle(String title) {
+	public void update(String title, String content, Milestone milestone, boolean opened) {
 		this.title = title;
-	}
-
-	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public void setMilestone(Milestone milestone) {
 		this.milestone = milestone;
-	}
-
-	public void setOpened(boolean opened) {
 		isOpened = opened;
 	}
-
 }
