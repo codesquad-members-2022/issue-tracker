@@ -13,6 +13,7 @@ public class IssueStatusUpdateForm {
     @NotNull
     private IssueStatus updatedStatus;
     @JsonFormat(shape = Shape.ARRAY)
+    @NotNull
     private List<Long> idOfIssues;
 
 }

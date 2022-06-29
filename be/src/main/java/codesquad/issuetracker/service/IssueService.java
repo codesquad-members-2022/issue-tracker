@@ -169,6 +169,10 @@ public class IssueService {
     }
 
     private Milestone getMilestoneById(Long id) {
+        if (id == null) {
+            return null;
+        }
+
         return milestoneRepository.findById(id).orElseThrow(() -> {
             throw new IllegalStateException("존재하지 않는 마일스톤입니다.");
         });

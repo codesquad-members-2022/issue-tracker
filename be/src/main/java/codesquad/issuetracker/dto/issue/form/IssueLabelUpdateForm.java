@@ -10,6 +10,7 @@ import lombok.Getter;
 public class IssueLabelUpdateForm {
 
     @JsonFormat(shape = Shape.ARRAY)
+    @NotNull
     private List<Long> labels;
 
 }

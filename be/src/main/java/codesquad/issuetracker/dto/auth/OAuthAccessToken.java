@@ -11,8 +11,4 @@ public class OAuthAccessToken {
     private String accessToken;
     private String scope;
     private String tokenType;
-
-    public String getAuthorizationValue() {
-        return this.tokenType + " " + this.accessToken;
-    }
 }
