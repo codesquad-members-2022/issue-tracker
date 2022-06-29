@@ -4,22 +4,23 @@ import { GitHubBtn } from './Login.styled';
 import * as S from './Login.styled';
 
 export function Login() {
-  const URI = '/api/login';
+  const URI = 'http://louie-03.com/login';
 
-  const getToken = async () => {
-    try {
-      const response = await axios.get(URI);
-      // const data = await response;
+  // const getToken = async () => {
+  //   try {
+  //     const response = await axios.get(URI);
+  //     // const data = await response;
 
-      // eslint-disable-next-line no-console
-      console.log('ssss', response);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log('???????error???????');
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-  };
+  //     // eslint-disable-next-line no-console
+  //     console.log('ssss', response);
+  //   } catch (error) {
+  //     // eslint-disable-next-line no-console
+  //     console.log('???????error???????');
+  //     // eslint-disable-next-line no-console
+  //     console.log(error);
+  //   }
+  // };
+  // getToken();
 
   return (
     <S.Container>
@@ -27,7 +28,7 @@ export function Login() {
         <S.Logo>
           <S.LogoImg alt="logo" src="./imgs/LogotypeLarge.svg" />
         </S.Logo>
-        <GitHubBtn onClick={getToken} size="lg">
+        <GitHubBtn href={URI} size="lg">
           GitHub 계정으로 로그인
         </GitHubBtn>
         <S.OR
