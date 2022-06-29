@@ -1,20 +1,20 @@
 package louie.hanse.issuetracker.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.*;
+import lombok.Getter;
 
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Getter
 @Entity
 public class Label {
 
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
-    @OneToMany(mappedBy = "issue")
-    private List<IssueLabel> issueLabels = new ArrayList<>();
 
     @Column(name = "label_name")
     private String name;
@@ -24,7 +24,4 @@ public class Label {
     private String backgroundColor;
     private String textColor;
 
-    public void addIssueLabel(IssueLabel issueLabel) {
-        this.issueLabels.add(issueLabel);
-    }
 }
