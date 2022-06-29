@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentIssueBinding
 import com.example.it.issuetracker.domain.model.Issue
-import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.customview.CustomSnackBar
 import com.example.it.issuetracker.presentation.main.issue.detail.DetailFragment
@@ -19,11 +19,11 @@ import com.example.it.issuetracker.presentation.main.issue.search.SearchFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue) {
+class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fragment_issue) {
 
     private val viewModel by viewModel<IssueViewModel>()
     private val adapter = IssueAdapter(
-        toggle = { toggleMode() },
+        onToggle = { toggleMode() },
         onClick = { id ->
             val detailFragment = DetailFragment()
             detailFragment.arguments = Bundle().apply { putLong("id", id) }

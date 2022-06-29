@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentLabelBinding
 import com.example.it.issuetracker.domain.model.Label
-import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.Constants
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.label.add.LabelAddFragment
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LabelFragment : BaseFragment<FragmentLabelBinding>(R.layout.fragment_label) {
+class LabelFragment : DataBindingBaseFragment<FragmentLabelBinding>(R.layout.fragment_label) {
 
     private val viewModel by viewModel<LabelViewModel>()
     private val adapter = LabelListAdapter({ viewModel.changeEditMode(it) }, { navigatePage(it) })

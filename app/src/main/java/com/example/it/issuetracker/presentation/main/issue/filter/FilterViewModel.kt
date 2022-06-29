@@ -2,6 +2,7 @@ package com.example.it.issuetracker.presentation.main.issue.filter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.it.issuetracker.R
 import com.example.it.issuetracker.data.datasource.UserSharedPrefDataSource
 import com.example.it.issuetracker.data.dto.LabelDto
 import com.example.it.issuetracker.domain.model.Issue
@@ -9,6 +10,7 @@ import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.domain.repository.IssueTrackerRepository
 import com.example.it.issuetracker.domain.repository.LabelRepository
+import com.example.it.issuetracker.presentation.common.Constants.INIT_ERROR_MSG_ID
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -46,8 +48,8 @@ class FilterViewModel(
     private val _stateIndex = MutableStateFlow<Int>(0)
     val stateIndex = _stateIndex.asStateFlow()
 
-    private val _writer = MutableStateFlow<List<Member>>(emptyList())
-    val writer = _writer.asStateFlow()
+    private val _writerList = MutableStateFlow<List<Member>>(emptyList())
+    val writerList = _writerList.asStateFlow()
     private val _writerIndex = MutableStateFlow<Int>(0)
     val writerIndex = _writerIndex.asStateFlow()
 
@@ -57,6 +59,9 @@ class FilterViewModel(
     val milestoneIndex = _milestoneIndex.asStateFlow()
 
     private val _filtering = MutableStateFlow<HashMap<String, Any>>(hashMapOf())
+
+    private val _errorMsgId = MutableStateFlow<Int>(INIT_ERROR_MSG_ID)
+    val errorMsgId = _errorMsgId.asStateFlow()
 
     init {
         getLabelInfoList()
@@ -73,17 +78,28 @@ class FilterViewModel(
     }
 
     private fun getWriter() = viewModelScope.launch {
-        val writer = issueRepository.getWriter().getOrThrow()
-        val writerList = writer.toMutableList()
-        writerList.add(0, Member(0, "선택", ""))
-        _writer.value = writerList
+        issueRepository.getWriter()
+            .onSuccess { writers ->
+                val writerList = writers.toMutableList()
+                writerList.add(0, Member(0, "선택", ""))
+                _writerList.value = writerList
+            }
+            .onFailure {
+                _errorMsgId.value = R.string.network_error
+            }
     }
 
     private fun getMilestone() = viewModelScope.launch {
-        val milestones = issueRepository.getMilestone().getOrThrow()
-        val milestoneList = milestones.toMutableList()
-        milestoneList.add(0, MileStone(0, "선택", ""))
-        _milestoneList.value = milestoneList
+        issueRepository.getMilestone()
+            .onSuccess { milestones ->
+                val milestoneList = milestones.toMutableList()
+                milestoneList.add(0, MileStone(0, "선택", ""))
+                _milestoneList.value = milestoneList
+            }
+            .onFailure {
+                _errorMsgId.value = R.string.network_error
+            }
+
     }
 
     fun getFilterList() = viewModelScope.launch {
@@ -91,15 +107,20 @@ class FilterViewModel(
             _eventApply.emit(false)
             return@launch
         }
-        val filterList = issueRepository.getFilterList(_filtering.value).getOrThrow()
-        _issues.value = filterList
-        _eventApply.emit(true)
+        issueRepository.getFilterList(_filtering.value)
+            .onSuccess { filterList ->
+                _issues.value = filterList
+                _eventApply.emit(true)
+            }
+            .onFailure {
+                _errorMsgId.value = R.string.network_error
+            }
     }
 
-    fun clickFilterItem(item: String, type: Int, position: Int) {
+    fun clickFilterItem(item: String, type: FilterType, position: Int) {
         val userId = sharedPref.getData("id")
         when (type) {
-            0 -> {
+            FilterType.STATE -> {
                 _stateIndex.value = position
                 when (item) {
                     "열린 이슈", "닫힌 이슈" -> {
@@ -134,16 +155,16 @@ class FilterViewModel(
                     }
                 }
             }
-            1 -> {
+            FilterType.WRITER -> {
                 _writerIndex.value = position
                 if (item == "선택") {
                     _filtering.value.remove("writerId")
                 } else {
-                    val id = _writer.value.find { it.name == item }?.id ?: return
+                    val id = _writerList.value.find { it.name == item }?.id ?: return
                     _filtering.value["writerId"] = id
                 }
             }
-            2 -> {
+            FilterType.LABEL -> {
                 _labelIndex.value = position
                 if (item == "선택") {
                     _filtering.value.remove("label")
@@ -152,7 +173,7 @@ class FilterViewModel(
                     _filtering.value["label"] = id
                 }
             }
-            else -> {
+            FilterType.MILESTONE -> {
                 _milestoneIndex.value = position
                 if (item == "선택") {
                     _filtering.value.remove("milestone")

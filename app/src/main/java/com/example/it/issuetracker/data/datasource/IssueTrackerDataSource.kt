@@ -10,12 +10,12 @@ import java.util.*
 
 interface IssueTrackerDataSource {
 
-    suspend fun getIssue(): Result<List<IssueDto>>
-    suspend fun deleteIssue(list: List<Issue>): Result<List<IssueDto>>
+    suspend fun getIssue(): Flow<List<IssueDto>>
+    suspend fun deleteIssue(list: List<Issue>)
     suspend fun deleteIssue(id: Long)
-    suspend fun closeIssue(list: List<Issue>): Result<List<IssueDto>>
+    suspend fun closeIssue(list: List<Issue>)
     suspend fun closeIssue(id: Long)
-    suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<IssueDto>>
+    suspend fun revertIssue(list: SortedMap<Int, Issue>)
     suspend fun getMember(): Result<List<MemberDto>>
     suspend fun getMilestone(): Result<List<MilestoneDto>>
     suspend fun getFilterList(value: HashMap<String, Any>): Result<List<IssueDto>>

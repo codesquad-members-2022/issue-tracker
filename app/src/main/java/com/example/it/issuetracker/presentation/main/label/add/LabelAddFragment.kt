@@ -8,14 +8,15 @@ import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentLabelAddBinding
 import com.example.it.issuetracker.domain.model.Label
-import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.Constants
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LabelAddFragment : BaseFragment<FragmentLabelAddBinding>(R.layout.fragment_label_add) {
+class LabelAddFragment :
+    DataBindingBaseFragment<FragmentLabelAddBinding>(R.layout.fragment_label_add) {
 
     private val viewModel by viewModel<LabelAddViewModel>()
     private var editLabelInfo: Label? = null

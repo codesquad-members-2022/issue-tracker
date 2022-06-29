@@ -8,8 +8,8 @@ import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentMilestoneAddBinding
 import com.example.it.issuetracker.domain.model.MileStone
-import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.Constants
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MilestoneAddFragment :
-    BaseFragment<FragmentMilestoneAddBinding>(R.layout.fragment_milestone_add) {
+    DataBindingBaseFragment<FragmentMilestoneAddBinding>(R.layout.fragment_milestone_add) {
 
     private val viewModel by viewModel<MilestoneAddViewModel>()
     private var editMilestoneInfo: MileStone? = null

@@ -8,15 +8,15 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentMyPageBinding
-import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.Constants
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.login.LoginActivity
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
+class MyPageFragment : DataBindingBaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
 
     private val viewModel: MyPageViewModel by viewModel()
 

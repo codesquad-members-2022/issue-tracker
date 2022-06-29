@@ -11,14 +11,14 @@ import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.presentation.main.issue.list.Mode
 
 class LabelListAdapter(
-    private val editModeListener: (editMode: Boolean) -> Unit,
-    private val itemClickListener: (label: Label) -> Unit,
+    private val onEditMode: (editMode: Boolean) -> Unit,
+    private val onClick: (label: Label) -> Unit,
 ) : ListAdapter<Label, LabelListAdapter.LabelViewHolder>(diffUtil) {
 
     class LabelViewHolder(
         private val binding: LabelItemBinding,
-        private val editModeListener: (editMode: Boolean) -> Unit,
-        private val itemClickListener: (label: Label) -> Unit,
+        private val onEditMode: (editMode: Boolean) -> Unit,
+        private val onClick: (label: Label) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(label: Label) {
@@ -41,7 +41,7 @@ class LabelListAdapter(
         private fun setItemClickListener(label: Label) {
             if (label.mode == Mode.DEFAULT) {
                 itemView.setOnClickListener {
-                    itemClickListener(label)
+                    onClick(label)
                 }
             } else {
                 itemView.setOnClickListener {
@@ -49,7 +49,7 @@ class LabelListAdapter(
                 }
             }
             itemView.setOnLongClickListener {
-                editModeListener(true)
+                onEditMode(true)
                 true
             }
         }
@@ -62,8 +62,8 @@ class LabelListAdapter(
                 parent,
                 false
             ),
-            editModeListener,
-            itemClickListener
+            onEditMode,
+            onClick
         )
     }
 

@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentMilestoneBinding
 import com.example.it.issuetracker.domain.model.MileStone
-import com.example.it.issuetracker.presentation.common.BaseFragment
 import com.example.it.issuetracker.presentation.common.Constants
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.milestone.add.MilestoneAddFragment
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MilestoneFragment : BaseFragment<FragmentMilestoneBinding>(R.layout.fragment_milestone) {
+class MilestoneFragment :
+    DataBindingBaseFragment<FragmentMilestoneBinding>(R.layout.fragment_milestone) {
 
     private val viewModel by viewModel<MilestoneViewModel>()
 

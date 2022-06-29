@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentRegisterIssueBinding
-import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 
 class RegisterIssueFragment :
-    BaseFragment<FragmentRegisterIssueBinding>(R.layout.fragment_register_issue) {
+    DataBindingBaseFragment<FragmentRegisterIssueBinding>(R.layout.fragment_register_issue) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -9,7 +9,7 @@ import java.util.*
 
 class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
 
-    private val issues: MutableList<IssueDto> = mutableListOf(
+    private var issues: MutableList<IssueDto> = mutableListOf(
         IssueDto(
             id = 1L,
             title = "제목",
@@ -166,16 +166,15 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         )
     )
 
-    override suspend fun getIssue(): Result<List<IssueDto>> {
-        return runCatching { issues.filter { it.state } }
+    override suspend fun getIssue(): Flow<List<IssueDto>> = flow {
+        emit(issues.filter { it.state }.toList())
     }
 
-    override suspend fun deleteIssue(list: List<Issue>): Result<List<IssueDto>> {
+    override suspend fun deleteIssue(list: List<Issue>) {
         list.forEach { issue ->
             val removeIssue = issues.find { it.id == issue.id }
             issues.remove(removeIssue)
         }
-        return getIssue()
     }
 
     override suspend fun deleteIssue(id: Long) {
@@ -183,13 +182,12 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         issues.remove(issue)
     }
 
-    override suspend fun closeIssue(list: List<Issue>): Result<List<IssueDto>> {
+    override suspend fun closeIssue(list: List<Issue>) {
         list.forEach { issue ->
             val closeIssue = issues.find { it.id == issue.id }
             val index = issues.indexOf(closeIssue)
             issues[index].state = false
         }
-        return getIssue()
     }
 
     override suspend fun closeIssue(id: Long) {
@@ -199,7 +197,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         issues[index].state = false
     }
 
-    override suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<IssueDto>> {
+    override suspend fun revertIssue(list: SortedMap<Int, Issue>) {
         for ((idx, issue) in list) {
             val issueDto = IssueDto(
                 id = issue.id,
@@ -222,7 +220,6 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             )
             issues.add(idx, issueDto)
         }
-        return getIssue()
     }
 
     override suspend fun getMember(): Result<List<MemberDto>> {

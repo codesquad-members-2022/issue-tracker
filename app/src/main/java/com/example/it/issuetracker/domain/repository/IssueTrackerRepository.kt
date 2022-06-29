@@ -9,17 +9,17 @@ import java.util.*
 
 interface IssueTrackerRepository {
 
-    suspend fun getIssue(): Result<List<Issue>>
+    suspend fun getIssue(): Flow<List<Issue>>
 
-    suspend fun deleteIssue(list: List<Issue>): Result<List<Issue>>
+    suspend fun deleteIssue(list: List<Issue>)
 
     suspend fun deleteIssue(id: Long)
 
-    suspend fun closeIssue(list: List<Issue>): Result<List<Issue>>
+    suspend fun closeIssue(list: List<Issue>)
 
     suspend fun closeIssue(id: Long)
 
-    suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<Issue>>
+    suspend fun revertIssue(list: SortedMap<Int, Issue>)
 
     suspend fun getWriter(): Result<List<Member>>
 

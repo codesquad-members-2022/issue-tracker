@@ -7,14 +7,15 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentFilterBinding
-import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.Constants.FILTER_RESET_NUMBER
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.issue.list.IssueFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.Serializable
 
-class FilterFragment : BaseFragment<FragmentFilterBinding>(R.layout.fragment_filter) {
+class FilterFragment : DataBindingBaseFragment<FragmentFilterBinding>(R.layout.fragment_filter) {
 
     private val viewModel by sharedViewModel<FilterViewModel>()
 
@@ -35,10 +36,10 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(R.layout.fragment_fil
         }
 
         binding.btnReset.setOnClickListener {
-            binding.filterState.spinner.setSelection(0)
-            binding.filterLabel.spinner.setSelection(0)
-            binding.filterWriter.spinner.setSelection(0)
-            binding.filterMilestone.spinner.setSelection(0)
+            binding.filterState.spinner.setSelection(FILTER_RESET_NUMBER)
+            binding.filterLabel.spinner.setSelection(FILTER_RESET_NUMBER)
+            binding.filterWriter.spinner.setSelection(FILTER_RESET_NUMBER)
+            binding.filterMilestone.spinner.setSelection(FILTER_RESET_NUMBER)
         }
 
         binding.btnApply.setOnClickListener {
@@ -65,10 +66,10 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(R.layout.fragment_fil
         }
 
         repeatOnLifecycleExtension {
-            viewModel.writer.collectLatest {
-                val writer = it.map { member -> member.name }
+            viewModel.writerList.collectLatest {
+                val writersName = it.map { member -> member.name }
                 binding.filterWriter.spinner.adapter =
-                    SpinnerAdapter(requireContext(), R.layout.item_spinner, writer)
+                    SpinnerAdapter(requireContext(), R.layout.item_spinner, writersName)
                 binding.filterWriter.spinner.setSelection(viewModel.writerIndex.value)
             }
         }
@@ -109,7 +110,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(R.layout.fragment_fil
                 ) {
                     viewModel.clickFilterItem(
                         binding.filterState.spinner.selectedItem.toString(),
-                        0, position
+                        FilterType.STATE, position
                     )
                 }
 
@@ -126,7 +127,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(R.layout.fragment_fil
                 ) {
                     viewModel.clickFilterItem(
                         binding.filterWriter.spinner.selectedItem.toString(),
-                        1, position
+                        FilterType.WRITER, position
                     )
                 }
 
@@ -143,7 +144,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(R.layout.fragment_fil
                 ) {
                     viewModel.clickFilterItem(
                         binding.filterLabel.spinner.selectedItem.toString(),
-                        2, position
+                        FilterType.LABEL, position
                     )
                 }
 
@@ -160,7 +161,7 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(R.layout.fragment_fil
                 ) {
                     viewModel.clickFilterItem(
                         binding.filterMilestone.spinner.selectedItem.toString(),
-                        3, position
+                        FilterType.MILESTONE, position
                     )
                 }
 

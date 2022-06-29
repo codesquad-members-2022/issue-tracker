@@ -17,37 +17,30 @@ import java.util.*
 class IssueTrackerRepositoryImpl(
     private val issueTrackerDataSource: IssueTrackerDataSource,
 ) : IssueTrackerRepository {
-    override suspend fun getIssue(): Result<List<Issue>> {
+    override suspend fun getIssue(): Flow<List<Issue>> {
         return issueTrackerDataSource.getIssue().map { issues ->
             issues.map { issue -> issue.toIssue() }
         }
     }
 
-    override suspend fun deleteIssue(list: List<Issue>): Result<List<Issue>> {
-        return issueTrackerDataSource.deleteIssue(list).map { issues ->
-            issues.map { issue -> issue.toIssue() }
-
-        }
+    override suspend fun deleteIssue(list: List<Issue>) {
+        issueTrackerDataSource.deleteIssue(list)
     }
 
     override suspend fun deleteIssue(id: Long) {
         issueTrackerDataSource.deleteIssue(id)
     }
 
-    override suspend fun closeIssue(list: List<Issue>): Result<List<Issue>> {
-        return issueTrackerDataSource.closeIssue(list).map { issues ->
-            issues.map { issue -> issue.toIssue() }
-        }
+    override suspend fun closeIssue(list: List<Issue>) {
+        issueTrackerDataSource.closeIssue(list)
     }
 
     override suspend fun closeIssue(id: Long) {
         issueTrackerDataSource.closeIssue(id)
     }
 
-    override suspend fun revertIssue(list: SortedMap<Int, Issue>): Result<List<Issue>> {
-        return issueTrackerDataSource.revertIssue(list).map { issues ->
-            issues.map { issue -> issue.toIssue() }
-        }
+    override suspend fun revertIssue(list: SortedMap<Int, Issue>) {
+        issueTrackerDataSource.revertIssue(list)
     }
 
     override suspend fun getWriter(): Result<List<Member>> {
