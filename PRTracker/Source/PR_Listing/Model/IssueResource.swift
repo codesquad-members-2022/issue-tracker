@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IssueUpdateResource: APIResource {
+struct IssueUpdateResource: APIEndpoint {
     
     typealias ModelType = Issue
     

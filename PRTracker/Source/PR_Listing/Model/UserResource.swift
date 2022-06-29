@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserResource: APIResource {
+struct UserResource: APIEndpoint {
     typealias ModelType = User
     
     let userName: String? = nil

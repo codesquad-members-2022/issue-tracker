@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TokenResource: APIResource {
+struct TokenResource: APIEndpoint {
     
     private let clientID: String
     private let clientSecret: String

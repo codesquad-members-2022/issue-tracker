@@ -8,7 +8,7 @@
 import Foundation
 
 // Resource 타입이 Codable할 때 사용가능한 타입
-struct APIRequest<Resource: APIResource>: APIRequestable where Resource.ModelType: Codable {
+struct APIRequest<Resource: APIEndpoint>: APIRequestable where Resource.ModelType: Codable {
     
     typealias ModelType = Resource.ModelType
     
