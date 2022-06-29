@@ -23,11 +23,12 @@ const getSizeStyle = (size: Size) => {
 const $Label = styled.span<ILabelProps>`
   display: flex;
   align-items: center;
-  width: fit-content;
+  min-width: fit-content;
   padding: 0 16px;
   font-size: ${({ theme }) => theme.FONT.SIZE.X_SMALL};
   color: ${({ theme, status }) => theme.LABEL[status].color};
-  background: ${({ theme, status }) => theme.LABEL[status].background};
+  background: ${({ theme, status, background }) =>
+    background ? background : theme.LABEL[status].background};
   border: ${({ theme, status }) =>
     theme.LABEL[status].border ? `1px solid ${theme.LABEL[status].border}` : 0};
   svg {
