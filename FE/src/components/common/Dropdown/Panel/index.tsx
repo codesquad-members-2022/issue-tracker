@@ -6,7 +6,10 @@ import {
   $SelectList,
   $SelectedItem
 } from '@/components/common/Dropdown/Panel/style';
+import { IFilterCondition } from '@/types/common';
 import { IPanelProps } from '@/components/common/Dropdown/Panel/type';
+import { setCondition } from '@/contexts/FilterCondition/action';
+import { useFilterConditionDispatch } from '@/contexts/FilterCondition';
 
 export default function Panel({
   panelRef,
@@ -17,9 +20,15 @@ export default function Panel({
   hidePanel,
   ...props
 }: IPanelProps) {
-  const handleSelectedItemClick = (value: string) => {
+  const dispatch = useFilterConditionDispatch();
+
+  const handleSelectedItemClick = (value: string, filterCondition?: IFilterCondition) => {
     updateSelectedValue(value);
     hidePanel();
+
+    if (filterCondition) {
+      setCondition(dispatch, filterCondition);
+    }
   };
 
   return (
@@ -31,12 +40,12 @@ export default function Panel({
         ))}
       </$Select>
       <$SelectList>
-        {options.map(({ children, radio, value }) => (
+        {options.map(({ children, radio, value, filterCondition }) => (
           <$SelectedItem
             key={value}
             id={value}
             selected={value === selectedValue}
-            onMouseUp={() => handleSelectedItemClick(value)}
+            onMouseUp={() => handleSelectedItemClick(value, filterCondition)}
           >
             {children}
             {value === selectedValue ? radio?.on : radio?.off}
