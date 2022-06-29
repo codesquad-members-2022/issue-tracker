@@ -117,6 +117,7 @@ const createCustomEventStyle = (
 
 const $TextInputWrap = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 const $Label = styled.label<I$Label>`
