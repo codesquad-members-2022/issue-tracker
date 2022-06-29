@@ -119,11 +119,13 @@ class IssueFragment : Fragment() {
                         issueAdapter.submitList(it.filter { it.state })
                     }
                 }
-//                launch {
-//                    homeViewModel.filteredIssueList.collect {
-//                        issueAdapter.submitList(it)
-//                    }
-//                }
+                launch {
+                    homeViewModel.filteredIssueList.collect {
+                        if (it.isNotEmpty()) {
+                            issueAdapter.submitList(it)
+                        }
+                    }
+                }
             }
         }
     }
@@ -151,7 +153,7 @@ class IssueFragment : Fragment() {
                 issueAdapter.isEditMode = false
                 binding.clIssueOriginalModeTop.visibility = View.VISIBLE
                 binding.clIssueEditModeTop.visibility = View.GONE
-                Log.d("sdsd" , "sdsd")
+                Log.d("sdsd", "sdsd")
                 itemTouchHelper.attachToRecyclerView(binding.rvIssue)
             }
 
