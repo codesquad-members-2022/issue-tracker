@@ -50,7 +50,8 @@ struct IssueService {
         ]
         let parameters: [String: Any] = [
             "title": title,
-            "assignees": [repo.owner.login]
+            // 로그인 한 유저를 담당자로 해야 한다
+//            "assignees": [repo.owner.login]
         ]
         
         let decoder = JSONDecoder()
@@ -85,8 +86,16 @@ struct IssueService {
             .responseDecodable(of: [ResponseIssue].self, decoder: decoder) { response in
                 switch response.result {
                 case .success(let data):
-                    let convertedData = data.map{( Issue(title: $0.title, body: $0.body, state: $0.state, labels: $0.labels, milestone: $0.milestone, repository: repo) )}
-                    completion(.success(convertedData))
+                    var result: [Issue] = []
+                    for entity in data {
+                        // pullRequest 가 없으면(nil) 일반이슈, 있으면 PR 이슈
+                        if entity.pullRequest != nil {
+                            continue
+                        }
+                        let issue = Issue(title: entity.title, body: entity.body, state: entity.state, labels: entity.labels, milestone: entity.milestone, repository: repo)
+                        result.append(issue)
+                    }
+                    completion(.success(result))
                 case .failure(let error):
                     print(error)
                     completion(.failure(.issueNotFound))
@@ -120,5 +129,14 @@ struct IssueService {
         let state: String
         let labels: [Label]
         let milestone: Milestone?
+        let pullRequest: PullRequest?
+        
+        struct PullRequest: Codable {
+            let url: String
+            let htmlUrl: String
+            let diffUrl: String
+            let patchUrl: String
+            let mergedAt: String?
+        }
     }
 }

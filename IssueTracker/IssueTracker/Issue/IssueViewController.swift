@@ -29,14 +29,17 @@ final class IssueViewController: UIViewController {
     }()
     
     private let model: IssueModel
+    private let repo: Repository
     
-    init(model: IssueModel) {
+    init(model: IssueModel, repo: Repository) {
         self.model = model
+        self.repo = repo
         super.init(nibName: nil, bundle: nil)
     }
     
     required convenience init?(coder: NSCoder) {
-        self.init(model: IssueModel(service: IssueService(), token: "", repo: Repository(name: "", owner: Owner(login: ""))))
+        let repository = Repository(name: "", owner: Owner(login: ""))
+        self.init(model: IssueModel(service: IssueService(), token: "", repo: repository), repo: repository)
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -66,7 +69,7 @@ final class IssueViewController: UIViewController {
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        guard let viewController = appdelegate.container.buildViewController(.newIssue) as? NewIssueViewController else {
+        guard let viewController = appdelegate.container.buildViewController(.newIssue(repo: repo)) as? NewIssueViewController else {
             return
         }
         self.navigationController?.pushViewController(viewController, animated: true)

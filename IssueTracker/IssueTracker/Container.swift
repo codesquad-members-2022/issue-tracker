@@ -1,12 +1,3 @@
-//
-//  Container.swift
-//  IssueTracker
-//
-//  Created by Bibi on 2022/06/22.
-//
-
-import UIKit
-
 import UIKit
 
 struct Container {
@@ -14,7 +5,7 @@ struct Container {
         case login
         case repos(token: String)
         case issue(token: String, selectedRepo: Repository)
-        case newIssue
+        case newIssue(repo: Repository)
         case optionSelect(token: String, option: Option)
     }
 
@@ -33,14 +24,14 @@ struct Container {
         case .issue(let token, let selectedRepo):
             let service = IssueService()
             let model = IssueModel(service: service, token: token, repo: selectedRepo)
-            let viewController = IssueViewController(model: model)
+            let viewController = IssueViewController(model: model, repo: selectedRepo)
             return viewController
-        case .repos(token: let token):
+        case .repos(let token):
             let viewController = ReposViewController(token: token)
             viewController.title = "Repos"
             return UINavigationController(rootViewController: viewController)
-        case .newIssue:
-            return NewIssueViewController()
+        case .newIssue(let repo):
+            return NewIssueViewController(repo: repo)
         case .optionSelect(let token, let option):
             return OptionSelectViewController(token: token, option: option)
         }

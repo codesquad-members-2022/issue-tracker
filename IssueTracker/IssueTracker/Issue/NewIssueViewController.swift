@@ -8,15 +8,12 @@
 import UIKit
 
 enum Option: CaseIterable {
-    case repository
     case label
     case milestone
     case assignee
     
     var description: String {
         switch self {
-        case .repository:
-            return "저장소"
         case .label:
             return "레이블"
         case .milestone:
@@ -40,7 +37,17 @@ class NewIssueViewController: UIViewController {
     private let optionList = Option.allCases
     private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
-    private var selectedRepo: Repository?
+    private let repo: Repository
+    
+    init(repo: Repository) {
+        self.repo = repo
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required convenience init?(coder: NSCoder) {
+        self.init(repo: Repository(name: "", owner: Owner(login: "")))
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     private lazy var navSegmentedControl: UISegmentedControl = {
@@ -161,8 +168,7 @@ class NewIssueViewController: UIViewController {
     }()
     
     private func touchedCreateButton() {
-        guard let token = GithubUserDefaults.getToken(),
-            let selectedRepo = selectedRepo else {
+        guard let token = GithubUserDefaults.getToken() else {
             return
         }
         guard let titleString = self.titleField.text,
@@ -171,7 +177,7 @@ class NewIssueViewController: UIViewController {
             return
         }
 
-        service.createIssue(title: titleString, repo: selectedRepo, accessToken: token) { boolResult in
+        service.createIssue(title: titleString, repo: repo, accessToken: token) { boolResult in
             if boolResult {
                 self.navigationController?.popViewController(animated: true)
                 self.delegate?.created()
@@ -184,17 +190,18 @@ extension NewIssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let option = optionList[indexPath.row]
         switch option {
-        case .repository:
+        case .label:
+            break
             // TODO: issueService의 requestRepos() 연결해서 저장소목록 보여주기
-            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate,
-                  let token = GithubUserDefaults.getToken() else {
-                return
-            }
-            guard let viewController = appdelegate.container.buildViewController(.optionSelect(token: token, option: option)) as? OptionSelectViewController else {
-                return
-            }
-            self.navigationController?.pushViewController(viewController, animated: true)
-            viewController.delegate = self
+//            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate,
+//                  let token = GithubUserDefaults.getToken() else {
+//                return
+//            }
+//            guard let viewController = appdelegate.container.buildViewController(.optionSelect(token: token, option: option)) as? OptionSelectViewController else {
+//                return
+//            }
+//            self.navigationController?.pushViewController(viewController, animated: true)
+//            viewController.delegate = self
            
         default:
             break
@@ -227,8 +234,8 @@ extension NewIssueViewController: OptionSelectDelegate {
         guard let optionIndex = optionList.firstIndex(of: option) else {
             return
         }
-        selectedList[optionIndex] = item.name
-        selectedRepo = item
+//        selectedList[optionIndex] = item.name
+//        selectedRepo = item
         self.optionTable.reloadData()
     }
 }
