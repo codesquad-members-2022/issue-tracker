@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
+import { useRecoilState } from "recoil";
 import { FilterBar as FilterInput } from "components/common/filterBar/FilterBar";
 import Button from "components/common/button/Button";
 import PlusIcon from "components/Icons/Plus";
 import { Tab as TabBar } from "../common/Tap";
+import ListFilter from "./ListFilter";
+import { issueListState } from "./ListFilter";
 
 const counts = {
   label: 2,
@@ -13,6 +16,7 @@ const counts = {
 };
 
 function IssueListPage() {
+  const [issueList, setIssueList] = useRecoilState(issueListState);
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>

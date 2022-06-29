@@ -25,7 +25,7 @@ interface IssueList {
   writer: string;
 }
 
-const issueListState = atom<IssueList[]>({
+export const issueListState = atom<IssueList[]>({
   key: "issueListState",
   default: fakeDB,
 });
@@ -75,9 +75,6 @@ function ListFilter() {
     setFilter("Show Closed");
     setIsOpen(false);
   };
-  useEffect(() => {
-    console.log(filteredIssues);
-  }, [filter]);
 
   interface IInit {
     text: string;
@@ -136,10 +133,6 @@ function ListFilter() {
               : "";
 
           return (
-            // <FilterCard key={title}>
-            //   <Text isOpen={false}>{title}</Text>
-            //   <CheckArrowIcon />
-            // </FilterCard>
             <FilterBar
               menuList={{
                 title: `${title} 필터`,
@@ -167,7 +160,6 @@ const FiltersWrapper = styled.div`
   justify-content: space-between;
 `;
 
-// props로 컬러 받기
 const Text = styled.p<TextProps>`
   ${({ theme: { fontSize, fontWeight, colors }, isOpen }) => {
     const fontColor = isOpen ? colors.titleActive : colors.label;
