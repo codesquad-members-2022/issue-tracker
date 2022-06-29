@@ -1,10 +1,11 @@
 package kr.codesquad.issuetracker.controller;
 
 import kr.codesquad.issuetracker.dto.IssueResponse;
+import kr.codesquad.issuetracker.dto.IssueStatusRequest;
 import kr.codesquad.issuetracker.service.IssueService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,5 +18,11 @@ public class IssueController {
     @GetMapping("/issues")
     public List<IssueResponse> getOpenedIssue(){
         return issueService.getOpenedIssue();
+    }
+
+    @PatchMapping("/issues")
+    public ResponseEntity editIssueStatus(@RequestBody IssueStatusRequest issueStatusRequest,
+                                          @RequestParam Boolean status) {
+        return issueService.editStatus(issueStatusRequest, status);
     }
 }

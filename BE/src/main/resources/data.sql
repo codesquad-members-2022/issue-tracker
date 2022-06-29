@@ -17,7 +17,9 @@ INSERT INTO members(id, github_id, image_url, name)
 INSERT INTO issue(id, content, title, created_time, issues_status, member_id, milestone_id)
 VALUES (1, '테스트1', '테스트입니다1', '2022-07-06 12:00:00', false , 1, 1),
        (2, '테스트2', '테스트입니다22', '2022-07-07 12:00:00', true , 1, 2),
-       (3, '테스트3', '테스트입니다333', '2022-07-08 12:00:00', true , 1, 3);
+       (3, '테스트3', '테스트입니다333', '2022-07-08 12:00:00', true , 1, 3),
+       (4, '테스트4', '테스트입니다333', '2022-07-08 12:00:00', true , 1, 3),
+       (5, '테스트5', '테스트입니다333', '2022-07-08 12:00:00', true , 1, 3);
 
 INSERT INTO issue_labels(id, issue_id, label_id)
 VALUES (1, 2, 1),
