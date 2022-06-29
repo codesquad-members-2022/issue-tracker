@@ -1,7 +1,6 @@
 module.exports = {
   env: {
     browser: true,
-    commonjs: true,
   },
   extends: [
     'airbnb',
@@ -20,6 +19,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'import'],
   rules: {
+    '@typescript-eslint/no-var-requires': 0,
     'jsx-a11y/label-has-associated-control': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
