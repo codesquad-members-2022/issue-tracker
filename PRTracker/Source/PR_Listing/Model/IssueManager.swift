@@ -58,7 +58,7 @@ struct IssueManager: IssueService {
     }
     
     private func makeGetRequest(token: String) -> APIRequest<GetIssues> {
-        let endpoint = GetIssues(parameter: currentParameter)
+        let endpoint = GetIssues(parameter: self.currentParameter)
         return APIRequest(endpoint: endpoint, token: token)
     }
     

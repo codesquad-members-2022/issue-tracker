@@ -8,11 +8,11 @@
 import Foundation
 
 struct IssuesParameter {
-    let filter: IssueFilter
-    let state: IssueState
-    let sort: IssueSort
-    let isDescending: Bool
-    let isPull: Bool
+    var filter: IssueFilter
+    var state: IssueState
+    var sort: IssueSort
+    var isDescending: Bool
+    var isPull: Bool
     
     static let standard = IssuesParameter(filter: .assigned,
                                          state: .open,
