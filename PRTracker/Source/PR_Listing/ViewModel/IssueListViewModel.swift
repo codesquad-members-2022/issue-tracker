@@ -16,6 +16,8 @@ final class IssueListViewModel {
         return issueViewModels.value?.count ?? 0
     }
     
+    var issueState: IssueState = .open
+    
     init(issueService: IssueService = IssueManager()) {
         self.issueService = issueService
     }
@@ -25,7 +27,7 @@ final class IssueListViewModel {
     }
     
     func requestData() {
-        issueService.getIssues { issues in
+        issueService.getIssues(with: issueState) { issues in
             guard let issues = issues else {
                 return
             }

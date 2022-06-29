@@ -8,7 +8,7 @@
 import Foundation
 
 protocol IssueService {
-    func getIssues(then completion: @escaping ([Issue]?) -> Void)
+    func getIssues(with state: IssueState, then completion: @escaping ([Issue]?) -> Void)
     func close(issueId: Int, completion: @escaping (Issue?) -> Void)
 }
 
@@ -33,12 +33,12 @@ struct IssueManager: IssueService {
         return accessToken
     }
     
-    func getIssues(then completion: @escaping ([Issue]?) -> Void) {
+    func getIssues(with state: IssueState, then completion: @escaping ([Issue]?) -> Void) {
         guard let token = getAccessToken() else {
             return completion(nil)
         }
         
-        let issuesResource = IssuesResource(state: .open, isPull: false)
+        let issuesResource = IssuesResource(state: state, isPull: true)
         let issuesRequest = APIRequest(resource: issuesResource, token: token)
         
         networkService.execute(issuesRequest) { result in
