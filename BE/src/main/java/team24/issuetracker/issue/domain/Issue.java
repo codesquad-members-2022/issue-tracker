@@ -30,38 +30,42 @@ import team24.issuetracker.uploadedfile.domain.UploadedFile;
 @AllArgsConstructor
 public class Issue {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String title;
-    private String content;
+	private String title;
+	private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Member writer;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Member writer;
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IssueMember> assignees = new ArrayList<>();
+	@OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<IssueMember> assignees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IssueLabel> issueLabels = new ArrayList<>();
+	@OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<IssueLabel> issueLabels = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Milestone milestone;
-    private boolean closed;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Milestone milestone;
+	private boolean closed;
 
-    @OneToMany(mappedBy = "issue")
-    private List<UploadedFile> uploadedFiles = new ArrayList<>();
-    private LocalDateTime writtenTime;
+	@OneToMany(mappedBy = "issue")
+	private List<UploadedFile> uploadedFiles = new ArrayList<>();
+	private LocalDateTime writtenTime;
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+	@OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Comment> comments = new ArrayList<>();
 
-    private boolean deleted;
+	private boolean deleted;
 
-    public void mappingFields(List<IssueMember> assignees, List<IssueLabel> issueLabels) {
-        this.assignees = assignees;
-        this.issueLabels = issueLabels;
-    }
+	public void mappingFields(List<IssueMember> assignees, List<IssueLabel> issueLabels) {
+		this.assignees = assignees;
+		this.issueLabels = issueLabels;
+	}
+
+	public void changeState() {
+        this.closed = !this.closed;
+	}
 
 }
