@@ -34,7 +34,6 @@ public class IssueService {
 
 	private final IssueRepository issueRepository;
 	private final IssueLabelRepository issueLabelRepository;
-	private final IssueAssigneeRepository issueAssigneeRepository;
 	private final MilestoneRepository milestoneRepository;
 
 	private final MilestoneService milestoneService;
@@ -52,13 +51,6 @@ public class IssueService {
 		return Collections.unmodifiableList(response);
 	}
 
-	/**
-	 * 이슈 생성
-	 *
-	 * @param issueSaveRequestDto
-	 * @param memberId
-	 * @return
-	 */
 	@Transactional
 	public CommonResponseDto create(IssueSaveRequestDto issueSaveRequestDto, Long memberId) {
 		boolean isOpened = true;
@@ -116,11 +108,9 @@ public class IssueService {
 		Issue issue = issueRepository.findById(issueId)
 			.orElseThrow(() -> new IssueNotFoundException());
 
-		issue.setTitle(issueUpdateRequestDto.getTitle());
-		issue.setContent(issueUpdateRequestDto.getContent());
-		issue.setOpened(issueUpdateRequestDto.isOpened());
-		issue.setMilestone(milestoneService.createMilestone(issueUpdateRequestDto.getMilestoneId()
-			, memberId));
+		issue.update(issueUpdateRequestDto.getTitle(), issueUpdateRequestDto.getContent(),
+			milestoneService.createMilestone(issueUpdateRequestDto.getMilestoneId()
+				, memberId), issueUpdateRequestDto.isOpened());
 
 		CommonResponseDto response = updateIssueLabel(
 			issueUpdateRequestDto, issueId, issue);
@@ -143,9 +133,8 @@ public class IssueService {
 
 		List<Long> editingLabelIds = issueUpdateRequestDto.getLabelIds();
 		//Label을 모두 삭제할 경우
-		if (issueUpdateRequestDto.getLabelIds().isEmpty()) {
-			issueLabels.stream()
-				.forEach(issueLabel -> issueLabelRepository.delete(issueLabel));
+		if (editingLabelIds.isEmpty()) {
+			issueLabelRepository.deleteAll(issueLabels);
 			issue.addIssueLabel(Collections.emptySet());
 
 			return new CommonResponseDto(issue.getId());
@@ -166,8 +155,7 @@ public class IssueService {
 					Label.of(labelId))
 				.orElseThrow(() -> new IssueLabelNotFoundException(issueId, labelId)))
 			.collect(Collectors.toList());
-		deletedIssueLabels.stream()
-			.forEach(issueLabel -> issueLabelRepository.delete(issueLabel));
+		issueLabelRepository.deleteAll(deletedIssueLabels);
 
 		//DB 추가
 		List<IssueLabel> savedIssueLabels = editingLabelIds.stream()
