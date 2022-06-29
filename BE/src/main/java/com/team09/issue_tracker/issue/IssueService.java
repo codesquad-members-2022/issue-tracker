@@ -38,6 +38,8 @@ public class IssueService {
 	private final MilestoneRepository milestoneRepository;
 
 	private final MilestoneService milestoneService;
+	private final IssueLabelService issueLabelService;
+	private final IssueAssigneeService issueAssigneeService;
 
 	@Transactional(readOnly = true)
 	public List<IssueListResponseDto> selectOpenedList(Long memberId) {
@@ -70,39 +72,13 @@ public class IssueService {
 
 		issue = issueRepository.save(issue);
 
-		saveIssueLabel(issue, issueSaveRequestDto.getLabelIds());
+		issueLabelService.saveIssueLabel(issue, issueSaveRequestDto.getLabelIds());
 
-		savedIssueAssignee(issue, issue, issueSaveRequestDto.getAssigneeIds());
+		issueAssigneeService.savedIssueAssignee(issue, issueSaveRequestDto.getAssigneeIds());
 
 		return issue.toCommonResponse();
 	}
 
-	private void savedIssueAssignee(Issue issue, Issue savedIssue, List<Long> assigneeIds) {
-		if (assigneeIds.size() > 0) {
-			List<IssueAssignee> issueAssignees = assigneeIds.stream()
-				.map(assigneeId -> IssueAssignee.of(savedIssue, Member.of(assigneeId)))
-				.collect(Collectors.toList());
-
-			Set<IssueAssignee> savedIssueAssignees = issueAssignees.stream()
-				.map(issueAssignee -> issueAssigneeRepository.save(issueAssignee))
-				.collect(Collectors.toSet());
-			//연관관계 편의메서드
-			issue.addIssueAssignee(savedIssueAssignees);
-		}
-	}
-
-	private void saveIssueLabel(Issue issue, List<Long> labelIds) {
-		if (!labelIds.isEmpty()) {
-			Set<IssueLabel> issueLabels = labelIds.stream()
-				.map(labelId -> IssueLabel.of(issue.getId(), labelId))
-				.collect(Collectors.toSet());
-
-			issueLabels = Set.copyOf(issueLabelRepository.saveAll(issueLabels));
-
-			//연관관계 편의 메서드
-			issue.addIssueLabel(issueLabels);
-		}
-	}
 
 	/**
 	 * 해당 issueid가 작성/할당 된 이슈만 "더보기" 버튼 생성 하여 상세정보 수정/삭제 가능 작성자, 할당자 확인 로직
