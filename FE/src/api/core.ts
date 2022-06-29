@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { AxiosType } from '@/api/type';
 
-const baseURL = 'https://fd7da552-08a3-42fa-8ddc-0d1aaac9c7ad.mock.pstmn.io/api';
+const baseURL = 'https://85351621-920e-4834-bd3e-7d9e2f09b244.mock.pstmn.io/api';
 
 const instance = axios.create({
   baseURL: baseURL,

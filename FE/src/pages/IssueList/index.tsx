@@ -7,19 +7,8 @@ import Tabs from '@/components/common/Tabs';
 import { listItem } from '@/components/common/Tabs/type';
 import Layout from '@/layout';
 import { $MenuWrapper, $ButtonWrapper } from '@/pages/IssueList/style';
-
-const tabItems: listItem[] = [
-  {
-    name: '레이블',
-    iconType: 'label',
-    count: 100
-  },
-  {
-    name: '마일스톤',
-    iconType: 'milestone',
-    count: 10
-  }
-];
+import { useLabelCountData } from '@/hooks/useLabelListData';
+import { useMilestoneCountData } from '@/hooks/useMilestoneListData';
 
 const radioIcon = {
   off: <Icon iconType="radioOff" />,
@@ -63,6 +52,22 @@ const filterBarProps = {
 };
 
 export default function IssueListPage() {
+  const { status: labelDataStatus, data: labelCount } = useLabelCountData();
+  const { status: milestoneDataStatus, data: milestoneCount } = useMilestoneCountData();
+
+  const tabItems: listItem[] = [
+    {
+      name: '레이블',
+      iconType: 'label',
+      count: labelCount?.data.total_count
+    },
+    {
+      name: '마일스톤',
+      iconType: 'milestone',
+      count: milestoneCount?.data.total_count
+    }
+  ];
+
   return (
     <Layout header={<Header />}>
       <$MenuWrapper>
