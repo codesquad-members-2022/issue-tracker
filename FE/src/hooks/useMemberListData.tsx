@@ -1,12 +1,8 @@
 import { getMemberList } from '@/api/members';
 import { getCurrentMember } from '@/api/members';
 import { useQuery } from 'react-query';
-import { AxiosError } from 'axios';
 import { memberListQueryKeys, currentMemberQueryKeys } from '@/api/queryKeys';
-
-const printError = (error: AxiosError) => {
-  console.error(error.message);
-};
+import printError from '@/utils/printError';
 
 function useMemberListData() {
   return useQuery(memberListQueryKeys, () => getMemberList(), {

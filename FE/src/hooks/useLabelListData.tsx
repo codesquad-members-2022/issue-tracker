@@ -1,12 +1,8 @@
 import { getLabelList } from '@/api/labels';
 import { getLabelCount } from '@/api/labels';
 import { useQuery } from 'react-query';
-import { AxiosError } from 'axios';
 import { labelListQueryKeys, labelCountQueryKeys } from '@/api/queryKeys';
-
-const printError = (error: AxiosError) => {
-  console.error(error.message);
-};
+import printError from '@/utils/printError';
 
 function useLabelListData() {
   return useQuery(labelListQueryKeys, () => getLabelList(), {

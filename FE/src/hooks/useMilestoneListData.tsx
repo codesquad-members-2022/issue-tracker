@@ -1,12 +1,8 @@
 import { getMilestoneList } from '@/api/milestones';
 import { getMilestoneCount } from '@/api/milestones';
 import { useQuery } from 'react-query';
-import { AxiosError } from 'axios';
 import { milestoneListQueryKeys, milestoneCountQueryKeys } from '@/api/queryKeys';
-
-const printError = (error: AxiosError) => {
-  console.error(error.message);
-};
+import printError from '@/utils/printError';
 
 function useMilestoneListData() {
   return useQuery(milestoneListQueryKeys, () => getMilestoneList(), {
