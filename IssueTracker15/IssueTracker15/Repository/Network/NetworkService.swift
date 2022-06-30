@@ -5,7 +5,7 @@
 import Foundation
 import Alamofire
 
-class NetworkService<T: Codable> {
+class NetworkService<T: Codable>: CommonService {
     
     private var urgentSession = Session(requestQueue: DispatchQueue.global(qos: .userInteractive))
     private var effectiveSession = Session(requestQueue: DispatchQueue.global(qos: .background))
@@ -15,6 +15,17 @@ class NetworkService<T: Codable> {
         guard let method = request.method else {
             return nil
         }
+        
+        // Decoding 디버깅을 위한 코드.
+//        AF.request(request).response { response in
+//            guard let data = response.value else {
+//                return
+//            }
+//
+//            let result = try? JSONDecoder().decode([IssueDTO].self, from: data!)
+//            print(data!.base64EncodedString())
+//            print(result)
+//        }
         
         switch method {
         case .get, .post:
@@ -70,4 +81,8 @@ private extension Int {
         
         return nil
     }
+}
+
+protocol CommonService {
+    
 }
