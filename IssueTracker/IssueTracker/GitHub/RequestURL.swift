@@ -10,6 +10,7 @@ enum RequestURL: CustomStringConvertible {
     case ownerIssue(owner: String, repo: String)
     case repositoryLabels(owner: String, repo: String)
     case repositoryMilestones(owner: String, repo: String)
+    case repositoryAssignees(owner: String, repo: String)
     
     var description: String {
         switch self {
@@ -31,6 +32,8 @@ enum RequestURL: CustomStringConvertible {
             return "https://api.github.com/repos/\(owner)/\(repo)/labels"
         case let .repositoryMilestones(owner, repo):
             return "https://api.github.com/repos/\(owner)/\(repo)/milestones"
+        case let .repositoryAssignees(owner, repo):
+            return  "https://api.github.com/repos/\(owner)/\(repo)/assignees"
         }
     }
 }

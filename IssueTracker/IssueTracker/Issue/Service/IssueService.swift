@@ -17,6 +17,7 @@ enum IssueError: Error {
 enum OptionError: Error {
     case labelNotFound
     case milestonesNotFound
+    case assigneesNotFound
 }
 
 struct IssueService {
@@ -174,8 +175,31 @@ struct IssueService {
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
-                case .failure:
+                case .failure(let error):
                     completion(.failure(.milestonesNotFound))
+                }
+            }
+    }
+    
+    
+    func requestRepositoryAssigness(repo: Repository, completion: @escaping (Result<[Assignee], OptionError>) -> Void) {
+        let urlString = RequestURL.repositoryMilestones(owner: repo.owner.login, repo: repo.name).description
+        let headers: HTTPHeaders = [
+            NetworkHeader.acceptV3.getHttpHeader(),
+            NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
+        ]
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        AF.request(urlString, method: .get, headers: headers)
+            .responseDecodable(of: [Assigneeee].self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success([Assignee(login: "ddd")]))
+//                    completion(.success(data))
+                case .failure(let error):
+                    print(error)
+                    completion(.failure(.assigneesNotFound))
                 }
             }
     }
@@ -196,4 +220,18 @@ fileprivate struct RepositoryIssue: Codable {
         let patchUrl: String
         let mergedAt: String?
     }
+}
+
+
+
+struct Assigneeee: Codable {
+    let login: String
+}
+
+struct Assignee: Codable, Optionable {
+    var subTitle: String {
+        self.login
+    }
+    
+    let login: String
 }

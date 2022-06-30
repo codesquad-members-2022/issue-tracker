@@ -51,8 +51,15 @@ class OptionSelectModel {
                     print(error)
                 }
             }
-        default:
-            break
+        case .assignee:
+            service.requestRepositoryAssigness(repo: repo) { [weak self] result in
+                switch result {
+                case .success(let repositoryList):
+                    self?.options = repositoryList
+                case .failure(let error):
+                    print(error)
+                }
+            }
         }
         
     }
