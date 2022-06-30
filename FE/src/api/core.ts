@@ -8,6 +8,12 @@ const instance = axios.create({
   timeout: 2000 // 응답 대기 최대 시간
 });
 
+instance.interceptors.request.use(config => {
+  const currentUserToken = localStorage.getItem('currentUserToken');
+  config.headers!.Authorization = currentUserToken ? `Bearer ${currentUserToken}` : '';
+  return config;
+});
+
 const handleError = (err: AxiosError) => {
   if (err.response) {
     // 요청이 전송되었고, 서버는 2xx 외의 상태 코드로 응답했습니다.
