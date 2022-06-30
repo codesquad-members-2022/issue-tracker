@@ -6,7 +6,7 @@ import { ProgressBar } from 'components/common/Common';
 import EditAndDeleteBtn from 'components/common/LabelAndMileStoneBtns/EditAndDeleteBtn';
 import NewMileStone from 'components/milestone/NewMileStone';
 import { mileStoneType, mileStoneData } from 'store/milestone';
-import { calculatePercent, getDataByKey } from 'utils/util';
+import { convertPercent, getDataByKey } from 'utils/util';
 
 interface Props {
   idx: number;
@@ -19,7 +19,7 @@ function MileStone({
 }: Props) {
   const [isEditButtonClick, setEditButtonClick] = useState(false);
   const [elementId, setElementId] = useState(0);
-  const percent = calculatePercent(progress);
+  const percent = convertPercent(progress);
 
   const handleEditButtonClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setEditButtonClick(true);
