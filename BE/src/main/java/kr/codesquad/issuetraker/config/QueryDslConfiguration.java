@@ -1,4 +1,4 @@
-package kr.codesquad.issuetraker;
+package kr.codesquad.issuetraker.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

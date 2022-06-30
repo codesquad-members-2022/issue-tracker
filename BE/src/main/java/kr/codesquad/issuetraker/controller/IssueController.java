@@ -15,7 +15,7 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping
-    public ResponseEntity<List<IssueListResponseDto>> loadAllIssues(@ModelAttribute SearchFilterDto searchFilterDto) {
+    public ResponseEntity<IssueListResponseDto> loadAllIssues(@ModelAttribute SearchFilterDto searchFilterDto) {
         return ResponseEntity.ok(issueService.getAllIssues(searchFilterDto));
     }
 
@@ -25,7 +25,7 @@ public class IssueController {
     }
 
     @GetMapping("/{issueId}")
-    public ResponseEntity<IssueDetailResponseDto> loadIssueDetails(@PathVariable Long issueId) {
+    public ResponseEntity<IssueDetailResponseDto> loadIssueDetail(@PathVariable Long issueId) {
         return ResponseEntity.ok(issueService.getIssueDetail(issueId));
     }
 

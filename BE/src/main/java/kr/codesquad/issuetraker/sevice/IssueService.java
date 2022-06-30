@@ -25,11 +25,12 @@ public class IssueService {
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
 
-    public List<IssueListResponseDto> getAllIssues(SearchFilterDto searchFilterDto) {
+    public IssueListResponseDto getAllIssues(SearchFilterDto searchFilterDto) {
         List<Issue> issues = issueRepository.findIssuesByFilter(searchFilterDto);
-        return issues.stream()
-                .map(IssueListResponseDto::of)
+        List<IssueListElementDto> issueElements = issues.stream()
+                .map(IssueListElementDto::of)
                 .collect(Collectors.toList());
+        return new IssueListResponseDto(issueElements);
     }
 
     public NewIssueResponseDto createIssue(NewIssueRequestDto requestDto) {
@@ -45,8 +46,6 @@ public class IssueService {
                 .author(author)
                 .assignee(assignee)
                 .label(label)
-                .createdAt(LocalDateTime.now())
-                .modifiedAt(LocalDateTime.now())
                 .isOpened(true)
                 .build();
 

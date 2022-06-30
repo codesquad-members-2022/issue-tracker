@@ -5,10 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class SearchFilterDto {
-    private String title;
-    private Boolean isOpened;
-    private Long authorId;
-    private Long labelId;
+public class MilestoneCreationResponseDto {
     private Long milestoneId;
 }
