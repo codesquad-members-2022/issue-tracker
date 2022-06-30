@@ -54,7 +54,7 @@ class IssueSearchFragment : Fragment() {
 
     private fun initIssueList() {
         val originalIssueList = homeViewModel.issueList.value
-        issueSearchViewModel.initIssueList(originalIssueList)
+       // issueSearchViewModel.initIssueList(originalIssueList)
     }
 
     private fun setNavigationIconEventListener() {

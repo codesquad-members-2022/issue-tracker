@@ -1,6 +1,7 @@
 package com.example.issu_tracker.ui.issue
 
 import android.content.Intent
+import android.net.Network
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import com.example.issu_tracker.R
 import com.example.issu_tracker.ui.common.SwipeHelperCallback
 import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.network.NetworkResult
 import com.example.issu_tracker.databinding.FragmentIssueBinding
 import com.example.issu_tracker.ui.detail.DetailIssueActivity
 import com.example.issu_tracker.ui.home.HomeViewModel
@@ -116,7 +118,9 @@ class IssueFragment : Fragment() {
                 launch {
                     // open 상태만 보여주기
                     homeViewModel.issueList.collect {
-                        issueAdapter.submitList(it.filter { it.state })
+                        if (it is NetworkResult.Success) {
+                            issueAdapter.submitList(it.data.filter { it.state })
+                        }
                     }
                 }
 //                launch {
@@ -151,7 +155,7 @@ class IssueFragment : Fragment() {
                 issueAdapter.isEditMode = false
                 binding.clIssueOriginalModeTop.visibility = View.VISIBLE
                 binding.clIssueEditModeTop.visibility = View.GONE
-                Log.d("sdsd" , "sdsd")
+                Log.d("sdsd", "sdsd")
                 itemTouchHelper.attachToRecyclerView(binding.rvIssue)
             }
 

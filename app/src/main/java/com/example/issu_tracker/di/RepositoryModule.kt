@@ -2,8 +2,11 @@ package com.example.issu_tracker.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.issu_tracker.data.Converters
+import com.example.issu_tracker.data.IssueDto
+import com.example.issu_tracker.data.local.IssueDao
 import com.example.issu_tracker.data.repository.Repository
-import com.example.issu_tracker.data.local.FriendDatabase
+import com.example.issu_tracker.data.local.IssueTrackerDatabase
 import com.example.issu_tracker.data.local.UserDao
 import com.example.issu_tracker.data.repository.*
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,7 +21,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
-
 
     @Provides
     fun provideHomeRepository(fireStore: FirebaseFirestore): HomeRepository {
@@ -52,18 +54,23 @@ object RepositoryModule {
     @Provides
     fun provideUserLocalDataBase(
         @ApplicationContext context: Context
-    ): FriendDatabase = Room
-        .databaseBuilder(context, FriendDatabase::class.java, "friend.db")
+    ): IssueTrackerDatabase = Room
+        .databaseBuilder(context, IssueTrackerDatabase::class.java, "friend.db")
+        .addTypeConverter(Converters())
         .build()
 
     @Singleton
     @Provides
-    fun provideUserDao(friendDatabase: FriendDatabase): UserDao = friendDatabase.userDao()
+    fun provideUserDao(friendDatabase: IssueTrackerDatabase): UserDao = friendDatabase.userDao()
+
+    @Singleton
+    @Provides
+    fun provideIssueDao(friendDatabase: IssueTrackerDatabase): IssueDao = friendDatabase.issueDao()
 
     @Singleton
     @Provides
     fun provideRepository(
-        friendDatabase: FriendDatabase,
+        friendDatabase: IssueTrackerDatabase,
         friendRemoteDatabase: FriendRemoteRepository
     ): Repository = Repository(
         friendDatabase, friendRemoteDatabase

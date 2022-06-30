@@ -2,16 +2,16 @@ package com.example.issu_tracker.data.repository
 
 import android.util.Log
 import com.example.issu_tracker.data.User
-import com.example.issu_tracker.data.local.FriendDatabase
+import com.example.issu_tracker.data.local.IssueTrackerDatabase
+
 import com.example.issu_tracker.data.network.NetworkResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    private val friendLocalDatabase: FriendDatabase,
+    private val friendLocalDatabase: IssueTrackerDatabase,
     private val friendRemoteDatabase: FriendRemoteRepository
 ) {
     suspend fun loadFriendList(): NetworkResult<List<User>> {
