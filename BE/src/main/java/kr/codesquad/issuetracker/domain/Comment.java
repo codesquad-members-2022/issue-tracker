@@ -1,5 +1,6 @@
 package kr.codesquad.issuetracker.domain;
 
+import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@Getter
 @Table(name = "comments")
 public class Comment {
 
