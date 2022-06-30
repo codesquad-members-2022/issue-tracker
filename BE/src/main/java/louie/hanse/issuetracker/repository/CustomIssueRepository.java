@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CustomIssueRepository {
     List<Issue> search(IssueSearchRequest issueSearchRequest, Long userId);
-    long searchCount(IssueSearchRequest issueSearchRequest, Long userId);
+    long searchReverseStatusCount(IssueSearchRequest issueSearchRequest, Long userId);
 }
