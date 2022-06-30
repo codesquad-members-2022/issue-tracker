@@ -5,9 +5,32 @@ import AccountSrc from 'assets/images/UserImageLarge.svg';
 import SideBar from 'components/common/Sidebar';
 import { useRecoilValue } from 'recoil';
 import { newIssueState, newIssueType } from 'store/newIssue';
+import { usePostData } from 'APIs/Api';
+import { useMutation } from 'react-query';
 
 function NewIssue() {
   const newIssueData: newIssueType = useRecoilValue(newIssueState);
+  const data = {
+    title: newIssueData.title,
+    content: newIssueData.comments,
+    writerId: newIssueData.writer.id,
+    assignees: newIssueData.assignees.map((assignee) => {
+      assignee.id;
+    }),
+    labels: newIssueData.labels.map((label) => {
+      label.id;
+    }),
+    milestone: newIssueData.mileStone.id,
+  };
+  const mutation = useMutation((data) => {
+    return usePostData(
+      'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/issue/new',
+      data,
+    );
+  });
+  function postData() {
+    mutation.mutate(data);
+  }
   return (
     <S.NewIssueWrap>
       <S.NewIssueTitle>새로운 이슈 작성</S.NewIssueTitle>
@@ -32,7 +55,13 @@ function NewIssue() {
       <S.Buttons>
         <I.cross />
         <S.CancelText>작성 취소</S.CancelText>
-        <S.CompleteBtn>완료</S.CompleteBtn>
+        <S.CompleteBtn
+          onClick={() => {
+            postData();
+          }}
+        >
+          완료
+        </S.CompleteBtn>
       </S.Buttons>
     </S.NewIssueWrap>
   );

@@ -16,10 +16,10 @@ export type MileStoneType = {
   closedIssue: number;
 };
 export type LabelType = {
-  id?: number;
+  id?: number | undefined;
   title: string;
   color: string;
-  description?: string;
+  description?: string | undefined;
 };
 
 export const accountsData: Array<AccountType> = [

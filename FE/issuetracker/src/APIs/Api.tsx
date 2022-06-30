@@ -1,30 +1,10 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
-export const useGetFetch = (URL: string) => {
-  const [fetchedData, setFetchedData] = useState<[]>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>();
+export const useGetData = (key: string, URL: string) => useQuery(key, () => getData(URL));
 
-  useEffect(() => {
-    setLoading(true);
-    const getDatas = async () => {
-      try {
-        const response = await axios.get(URL);
-        setFetchedData(response.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        setError(true);
-      }
-    };
-
-    getDatas();
-  }, [URL]);
-
-  return { fetchedData, loading, error };
-};
+export const usePostData = (URL: string, updatedData: any) =>
+  useMutation((updatedData) => postData(URL, updatedData), updatedData);
 
 type ControlDataType = {
   [key: string]: number | string;
@@ -39,9 +19,7 @@ export const getData = async (URL: string) => {
   return data;
 };
 
-export const getLabelData = async (URL: string) => {
-  const { data } = await axios.get(URL);
-  return data;
+export const postData = async (URL: string, data: any) => {
+  const response = await axios.post(URL, data);
+  return response;
 };
-
-export const useLabelQuery = (URL: string) => useQuery('labels', () => getData(URL));
