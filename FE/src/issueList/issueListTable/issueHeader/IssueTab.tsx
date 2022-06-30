@@ -71,22 +71,22 @@ function IssueTab({ tabId, tabName }: IssueTabProps) {
   );
 }
 
-const IssueTabBox = styled.li`
+export const IssueTabBox = styled.li`
   position: relative;
 `;
 
-const TabSummary = styled.summary`
+export const TabSummary = styled.summary`
   ${({ theme }) => theme.LAYOUT.flexLayoutMixin('row', 'flex-start', 'center')};
   gap: 8px;
   cursor: pointer;
 `;
 
-const TabName = styled.p`
+export const TabName = styled.p`
   ${({ theme }) => theme.TYPOGRAPHY.LINK_SMALL}
   color: ${GREYSCALE.LABEL};
 `;
 
-const DropDownBox = styled.div`
+export const DropDownBox = styled.div`
   position: absolute;
   top: 32px;
   right: 0;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GREYSCALE } from '@constants';
 import { IssueHeaderBox, IssueTabs } from './IssueHeader';
-import IssueTab from '@issueListTable/issueHeader/IssueTab';
+import StatusIssueTab from '@issueListTable/issueHeader/StatusIssueTab';
 import CheckBox from '@issueListTable/CheckBox';
 import { useIssueListContext } from '@/issueList/stores/IssueListProvider';
 
@@ -30,7 +30,7 @@ function ClickedIssueHeader() {
         {selectedIssuesCount}개 이슈 선택
       </SelectedIssuesCountBox>
       <IssueTabs>
-        <IssueTab tabName="상태 수정" />
+        <StatusIssueTab tabName="상태 수정" />
       </IssueTabs>
     </IssueHeaderBox>
   );
