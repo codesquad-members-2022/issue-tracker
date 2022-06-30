@@ -1,7 +1,7 @@
 import * as I from 'design/icons';
 import * as S from 'components/common/Sidebar/styled/dropdown';
 
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import {
@@ -82,7 +82,6 @@ function DropDown({ subject }: DropdownType) {
   }
   function getDropDownContents(subject: string) {
     let contentsData;
-    let content: ReactNode;
     switch (subject) {
       case '담당자':
         return accountsData.map((content, idx) => {
