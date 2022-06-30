@@ -7,9 +7,13 @@
 
 import UIKit
 
-final class LabelViewController: UITableViewController, ViewBinding {
+final class LabelViewController: UIViewController, ViewBinding {
     
-    private var addButton = AddLabelBarButtonItem()
+    private lazy var addButton = AddLabelBarButtonItem()
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,12 +21,25 @@ final class LabelViewController: UITableViewController, ViewBinding {
     }
     
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {
-        print("HI!")
+        self.present(AddLabelViewController(), animated: true)
     }
     
     private func setUp() {
+        setNavigationItem()
+        setTableView()
+    }
+    
+    private func setNavigationItem() {
         self.navigationItem.title = "레이블"
         self.navigationItem.rightBarButtonItem = addButton
         self.addButton.setVC(self)
+    }
+    
+    private func setTableView() {
+        self.view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }

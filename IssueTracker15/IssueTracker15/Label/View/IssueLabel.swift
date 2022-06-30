@@ -7,6 +7,29 @@
 
 import UIKit
 
-final class IssueLabel: UILabel {
+final class IssueLabel: UIButton {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    @available (*, unavailable) required init?(coder: NSCoder) {
+        fatalError("init with coder is unavailable")
+    }
+    
+    private func setUp() {
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 8.0, leading: 8.0, bottom: 8.0, trailing: 8.0)
+        config.background.cornerRadius = self.frame.height / 2
+        self.configuration = config
+    }
+    
+    func setTitle(text: String) {
+        self.configuration?.title = text
+    }
+    
+    func setBackgroundColor(color: UIColor) {
+        self.backgroundColor = color
+    }
 }
