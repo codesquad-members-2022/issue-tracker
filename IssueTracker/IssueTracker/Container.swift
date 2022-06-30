@@ -6,10 +6,10 @@ class Container {
     
     enum Screen {
         case login
-        case repos(token: String)
-        case issue(token: String, selectedRepo: Repository)
+        case repos
+        case issue(selectedRepo: Repository)
         case newIssue(repo: Repository)
-        case optionSelect(token: String, option: Option)
+        case optionSelect(option: Option)
     }
     
     init(token: String?) {
@@ -21,30 +21,26 @@ class Container {
     }
     
     func buildRootViewController() -> UIViewController {
-        if let accessToken = self.accessToken {
-            return buildViewController(.repos(token: accessToken))
-        } else {
-            return buildViewController(.login)
-        }
+        accessToken != nil ? buildViewController(.repos) : buildViewController(.login)
     }
     
     func buildViewController(_ screen: Screen) -> UIViewController {
+        let service = IssueService(token: self.accessToken ?? "")
         switch screen {
         case .login:
             return LoginViewController(service: OAuthService())
-        case .issue(let token, let selectedRepo):
-            let service = IssueService()
-            let model = IssueModel(service: service, token: token, repo: selectedRepo)
+        case .issue(let selectedRepo):
+            let model = IssueModel(service: service, repo: selectedRepo)
             let viewController = IssueViewController(model: model, repo: selectedRepo)
             return viewController
-        case .repos(let token):
-            let viewController = ReposViewController(token: token)
+        case .repos:
+            let viewController = ReposViewController(service: service)
             viewController.title = "Repos"
             return UINavigationController(rootViewController: viewController)
         case .newIssue(let repo):
-            return NewIssueViewController(repo: repo)
-        case .optionSelect(let token, let option):
-            return OptionSelectViewController(token: token, option: option)
+            return NewIssueViewController(repo: repo, service: service)
+        case .optionSelect(let option):
+            return OptionSelectViewController(service: service, option: option)
         }
     }
 }

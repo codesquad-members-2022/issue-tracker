@@ -9,20 +9,19 @@ class OptionSelectViewController: UIViewController {
     
     weak var delegate: OptionSelectDelegate?
     
-    private let service = IssueService()
-    private let token: String
+    private let service: IssueService
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     private let option: Option
     private var options: [Repository]?
     
-    init(token: String, option: Option) {
-        self.token = token
+    init(service: IssueService, option: Option) {
+        self.service = service
         self.option = option
         super.init(nibName: nil, bundle: nil)
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(token: "", option: .label)
+        self.init(service: IssueService(token: ""), option: .label)
     }
     
     override func viewDidLoad() {
@@ -36,7 +35,7 @@ class OptionSelectViewController: UIViewController {
         guard let token = GithubUserDefaults.getToken() else {
             return
         }
-        service.requestRepos(accessToken: token) { [weak self] result in
+        service.requestRepos() { [weak self] result in
             switch result {
             case .success(let repositoryList):
                 self?.options = repositoryList

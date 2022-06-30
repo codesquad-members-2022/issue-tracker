@@ -32,20 +32,21 @@ class NewIssueViewController: UIViewController {
     
     weak var delegate: NewIssueCreateDelegate?
     
-    private let service = IssueService()
+    private let service: IssueService
     
     private let optionList = Option.allCases
     private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
     private let repo: Repository
     
-    init(repo: Repository) {
+    init(repo: Repository, service: IssueService) {
         self.repo = repo
+        self.service = service
         super.init(nibName: nil, bundle: nil)
     }
     
     required convenience init?(coder: NSCoder) {
-        self.init(repo: Repository(name: "", owner: Owner(login: "")))
+        self.init(repo: Repository(name: "", owner: Owner(login: "")), service: IssueService(token: ""))
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -168,16 +169,13 @@ class NewIssueViewController: UIViewController {
     }()
     
     private func touchedCreateButton() {
-        guard let token = GithubUserDefaults.getToken() else {
-            return
-        }
         guard let titleString = self.titleField.text,
            !titleString.isEmpty else {
             // TODO: - 타이틀 입력 값이 없다 => 얼럿
             return
         }
 
-        service.createIssue(title: titleString, repo: repo, accessToken: token) { boolResult in
+        service.createIssue(title: titleString, repo: repo) { boolResult in
             if boolResult {
                 self.navigationController?.popViewController(animated: true)
                 self.delegate?.created()

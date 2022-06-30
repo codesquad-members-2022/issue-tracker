@@ -16,7 +16,13 @@ enum IssueError: Error {
 
 struct IssueService {
     
-    func requestIssues(accessToken: String, completion: @escaping (Result<[Issue], IssueError>) -> Void) {
+    private let accessToken: String
+    
+    init(token: String) {
+        self.accessToken = token
+    }
+    
+    func requestIssues(completion: @escaping (Result<[Issue], IssueError>) -> Void) {
         let urlString = RequestURL.issues.description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
@@ -42,7 +48,7 @@ struct IssueService {
         }
     }
     
-    func createIssue(title: String, repo: Repository, accessToken: String, completion: @escaping (Bool) -> Void) {
+    func createIssue(title: String, repo: Repository, completion: @escaping (Bool) -> Void) {
         let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
@@ -64,7 +70,7 @@ struct IssueService {
                    headers: headers)
             .response { response in
                 switch response.result {
-                case let .success:
+                case .success:
                     completion(true)
                 case .failure:
                     completion(false)
@@ -72,7 +78,7 @@ struct IssueService {
             }
     }
     
-    func requestRepositoryIssues(accessToken: String, repo: Repository, completion: @escaping (Result<[Issue], IssueError>) -> Void) {
+    func requestRepositoryIssues(repo: Repository, completion: @escaping (Result<[Issue], IssueError>) -> Void) {
         let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
@@ -103,7 +109,7 @@ struct IssueService {
             }
     }
     
-    func requestRepos(accessToken: String, completion: @escaping (Result<[Repository], IssueError>) -> Void) {
+    func requestRepos(completion: @escaping (Result<[Repository], IssueError>) -> Void) {
         let urlString = RequestURL.repos.description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),

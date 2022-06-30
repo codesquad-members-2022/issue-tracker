@@ -3,18 +3,17 @@ import SnapKit
 
 class ReposViewController: UIViewController {
     
-    private let service = IssueService()
-    private let token: String
+    private let service: IssueService
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     private var options: [Repository]?
     
-    init(token: String) {
-        self.token = token
+    init(service: IssueService) {
+        self.service = service
         super.init(nibName: nil, bundle: nil)
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(token: "")
+        self.init(service: IssueService(token: ""))
     }
     
     override func viewDidLoad() {
@@ -25,10 +24,7 @@ class ReposViewController: UIViewController {
     }
     
     private func fetchViewData() {
-        guard let token = GithubUserDefaults.getToken() else {
-            return
-        }
-        service.requestRepos(accessToken: token) { [weak self] result in
+        service.requestRepos() { [weak self] result in
             switch result {
             case .success(let repositoryList):
                 self?.options = repositoryList
@@ -63,11 +59,10 @@ extension ReposViewController: UITableViewDelegate {
             return
         }
         let selectedItem = options[indexPath.row]
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate,
-              let token = GithubUserDefaults.getToken() else {
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        guard let viewController = appdelegate.container.buildViewController(.issue(token: token, selectedRepo: selectedItem)) as? IssueViewController else {
+        guard let viewController = appdelegate.container.buildViewController(.issue( selectedRepo: selectedItem)) as? IssueViewController else {
             return
         }
         self.navigationController?.pushViewController(viewController, animated: true)
