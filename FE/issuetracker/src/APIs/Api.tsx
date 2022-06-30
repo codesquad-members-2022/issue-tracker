@@ -4,7 +4,7 @@ import { useMutation, useQuery } from 'react-query';
 export const useGetData = (key: string, URL: string) => useQuery(key, () => getData(URL));
 
 export const usePostData = (URL: string, updatedData: any) =>
-  useMutation((updatedData) => postData(URL, updatedData), updatedData);
+  useMutation((updatedData) => postData(URL, updatedData));
 
 type ControlDataType = {
   [key: string]: number | string;

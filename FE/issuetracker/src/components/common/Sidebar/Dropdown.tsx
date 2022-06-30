@@ -75,7 +75,7 @@ function DropDown({ subject }: DropdownType) {
   function setMileStone(content: MileStoneType) {
     setNewIssue({
       ...newIssue,
-      mileStone: {
+      milestone: {
         ...content,
       },
     });

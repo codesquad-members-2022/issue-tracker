@@ -10,26 +10,23 @@ import { useMutation } from 'react-query';
 
 function NewIssue() {
   const newIssueData: newIssueType = useRecoilValue(newIssueState);
+  const assigneesData = newIssueData.assignees.map((assignee) => assignee.id);
+  const labelsData = newIssueData.labels.map((label) => label.id);
   const data = {
     title: newIssueData.title,
     content: newIssueData.comments,
     writerId: newIssueData.writer.id,
-    assignees: newIssueData.assignees.map((assignee) => {
-      assignee.id;
-    }),
-    labels: newIssueData.labels.map((label) => {
-      label.id;
-    }),
+    assignees: assigneesData,
+    labels: labelsData,
     milestone: newIssueData.mileStone.id,
   };
-  const mutation = useMutation((data) => {
-    return usePostData(
-      'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/issue/new',
-      data,
-    );
-  });
+
+  const mutation = usePostData(
+    'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/issue/new',
+    data,
+  );
   function postData() {
-    mutation.mutate(data);
+    return mutation.mutate(data);
   }
   return (
     <S.NewIssueWrap>
