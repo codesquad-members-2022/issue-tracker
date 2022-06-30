@@ -1,11 +1,14 @@
 package louie.hanse.issuetracker.web.dto;
 
+import lombok.Getter;
 import louie.hanse.issuetracker.domain.Label;
+import louie.hanse.issuetracker.domain.TextColor;
 
+@Getter
 public class LabelResponse {
     private String name;
     private String backgroundColor;
-    private String textColor;
+    private TextColor textColor;
 
     public LabelResponse(Label label) {
         this.name = label.getName();

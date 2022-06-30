@@ -6,6 +6,7 @@ import louie.hanse.issuetracker.service.IssueService;
 import louie.hanse.issuetracker.web.dto.IssueDetailResponse;
 import louie.hanse.issuetracker.web.dto.IssueSaveRequest;
 import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
+import louie.hanse.issuetracker.web.dto.IssueSearchResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,8 @@ public class IssueController {
     }
 
     @GetMapping
-    public void searchIssue(IssueSearchRequest issueSearchRequest) {
-        issueService.search(issueSearchRequest);
+    public IssueSearchResponse searchIssue(IssueSearchRequest issueSearchRequest) {
+        return issueService.search(issueSearchRequest);
     }
 
     @GetMapping("/{id}")

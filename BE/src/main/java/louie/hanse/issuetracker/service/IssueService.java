@@ -60,7 +60,7 @@ public class IssueService {
 
     public IssueSearchResponse search(IssueSearchRequest issueSearchRequest) {
         List<Issue> issues = issueRepository.search(issueSearchRequest, null);
-        long reverseStatusCount = issueRepository.searchCount(issueSearchRequest, null);
+        long reverseStatusCount = issueRepository.searchReverseStatusCount(issueSearchRequest, null);
         if (issueSearchRequest.getStatus().equals(Status.OPEN)) {
             return new IssueSearchResponse(issues, issues.size(), reverseStatusCount);
         }
