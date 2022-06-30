@@ -14,6 +14,12 @@ final class IssueTitleButton: UIButton {
         setUp()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.bounds.height / 2
+        self.clipsToBounds = true
+    }
+    
     @available (*, unavailable) required init?(coder: NSCoder) {
         fatalError("init with coder is unavailable")
     }
@@ -21,7 +27,6 @@ final class IssueTitleButton: UIButton {
     private func setUp() {
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 8.0, leading: 8.0, bottom: 8.0, trailing: 8.0)
-        config.background.cornerRadius = self.frame.height / 2
         self.configuration = config
     }
 }
