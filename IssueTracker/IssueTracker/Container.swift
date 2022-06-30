@@ -9,7 +9,7 @@ class Container {
         case repos
         case issue(selectedRepo: Repository)
         case newIssue(repo: Repository)
-        case optionSelect(option: Option)
+        case optionSelect(option: Option, repo: Repository)
     }
     
     init(token: String?) {
@@ -42,9 +42,9 @@ class Container {
         case .newIssue(let repo):
             let model = NewIssueModel(service: service)
             return NewIssueViewController(repo: repo, model: model)
-        case .optionSelect(let option):
+        case .optionSelect(let option, let repo):
             let model = OptionSelectModel(service: service)
-            return OptionSelectViewController(model: model, option: option)
+            return OptionSelectViewController(model: model, option: option, repo: repo)
         }
     }
 }

@@ -20,6 +20,8 @@ class NewIssueViewController: UIViewController {
     private let optionList = Option.allCases
     private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
+    private var selectedLabel: Label?
+    
     private let repo: Repository
     
     init(repo: Repository, model: NewIssueModel) {
@@ -164,7 +166,7 @@ class NewIssueViewController: UIViewController {
             return
         }
 
-        model.createIssue(title: titleString, repo: repo) { boolResult in
+        model.createIssue(title: titleString, label: selectedLabel, repo: repo) { boolResult in
             if boolResult {
                 self.navigationController?.popViewController(animated: true)
                 self.delegate?.created()
@@ -178,8 +180,14 @@ extension NewIssueViewController: UITableViewDelegate {
         let option = optionList[indexPath.row]
         switch option {
         case .label:
-            break
-            // TODO: issueService를 통해 해당 저장소의 라벨 목록 요청해서 보여주기
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            guard let viewController = appdelegate.container.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
+                return
+            }
+            self.navigationController?.pushViewController(viewController, animated: true)
+            viewController.delegate = self
         default:
             break
         }
@@ -203,11 +211,15 @@ extension NewIssueViewController: UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
         return cell
     }
-    
 }
 
 extension NewIssueViewController: OptionSelectDelegate {
-    func selected(item: Repository, option: Option) {
-        self.optionTable.reloadData()
-    }
+    func selected(item: Label, option: Option) {
+          guard let optionIndex = optionList.firstIndex(of: option) else {
+              return
+          }
+          selectedList[optionIndex] = item.name
+          selectedLabel = item
+          self.optionTable.reloadData()
+      }
 }

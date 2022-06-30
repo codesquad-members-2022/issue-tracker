@@ -15,8 +15,8 @@ class NewIssueModel {
         self.service = service
     }
     
-    func createIssue(title: String, repo: Repository, completion: @escaping (Bool) -> Void) {
-        service.createIssue(title: title, repo: repo) { boolResult in
+    func createIssue(title: String, label: Label?, repo: Repository, completion: @escaping (Bool) -> Void) {
+        service.createIssue(title: title, label: label, repo: repo) { boolResult in
             completion(boolResult)
         }
     }

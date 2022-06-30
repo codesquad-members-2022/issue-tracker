@@ -14,6 +14,10 @@ enum IssueError: Error {
     case cannotCreateIssue
 }
 
+enum OptionError: Error {
+    case labelNotFound
+}
+
 struct IssueService {
     
     private let accessToken: String
@@ -48,14 +52,20 @@ struct IssueService {
         }
     }
     
-    func createIssue(title: String, repo: Repository, completion: @escaping (Bool) -> Void) {
+    func createIssue(title: String, label: Label?, repo: Repository, completion: @escaping (Bool) -> Void) {
         let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
         ]
+        var labelList: [String] = []
+        if let label = label {
+            labelList.append(label.name)
+        }
+        
         let parameters: [String: Any] = [
-            "title": title
+            "title": title,
+            "labels": labelList
         ]
         
         let decoder = JSONDecoder()
@@ -88,7 +98,7 @@ struct IssueService {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [ResponseIssue].self, decoder: decoder) { response in
+            .responseDecodable(of: [RepositoryIssue].self, decoder: decoder) { response in
                 switch response.result {
                 case .success(let data):
                     var result: [Issue] = []
@@ -128,20 +138,40 @@ struct IssueService {
             }
     }
     
-    struct ResponseIssue: Codable {
-        let title: String
-        let body: String?
-        let state: String
-        let labels: [Label]
-        let milestone: Milestone?
-        let pullRequest: PullRequest?
+    func requestRepositoryLabels(repo: Repository, completion: @escaping (Result<[Label], OptionError>) -> Void) {
+        let urlString = RequestURL.repositoryLabels(owner: repo.owner.login, repo: repo.name).description
+        let headers: HTTPHeaders = [
+            NetworkHeader.acceptV3.getHttpHeader(),
+            NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
+        ]
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        struct PullRequest: Codable {
-            let url: String
-            let htmlUrl: String
-            let diffUrl: String
-            let patchUrl: String
-            let mergedAt: String?
-        }
+        AF.request(urlString, method: .get, headers: headers)
+            .responseDecodable(of: [Label].self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure:
+                    completion(.failure(.labelNotFound))
+                }
+            }
+    }
+}
+
+fileprivate struct RepositoryIssue: Codable {
+    let title: String
+    let body: String?
+    let state: String
+    let labels: [Label]
+    let milestone: Milestone?
+    let pullRequest: PullRequest?
+    
+    struct PullRequest: Codable {
+        let url: String
+        let htmlUrl: String
+        let diffUrl: String
+        let patchUrl: String
+        let mergedAt: String?
     }
 }

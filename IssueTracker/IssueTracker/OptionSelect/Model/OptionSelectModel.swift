@@ -10,7 +10,7 @@ import Foundation
 class OptionSelectModel {
     
     private let service: IssueService
-    private var options: [Repository] {
+    private var options: [Label] {
         didSet {
             updatedOptions?()
         }
@@ -27,18 +27,24 @@ class OptionSelectModel {
         return options.count
     }
     
-    func getOption(index: Int) -> Repository {
+    func getOption(index: Int) -> Label {
         return options[index]
     }
         
-    func requestRepos() {
-        service.requestRepos() { [weak self] result in
-            switch result {
-            case .success(let repositoryList):
-                self?.options = repositoryList
-            case .failure(let error):
-                print(error)
+    func requestOptions(_ option: Option, repo: Repository) {
+        switch option {
+        case .label:
+            service.requestRepositoryLabels(repo: repo) { [weak self] result in
+                switch result {
+                case .success(let repositoryList):
+                    self?.options = repositoryList
+                case .failure(let error):
+                    print(error)
+                }
             }
+        default:
+            break
         }
+        
     }
 }
