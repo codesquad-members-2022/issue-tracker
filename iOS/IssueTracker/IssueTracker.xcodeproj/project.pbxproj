@@ -67,6 +67,9 @@
 		02B5A55B286068670087C6C1 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B5A55A286068670087C6C1 /* NetworkServiceTests.swift */; };
 		02B5A55F2860810E0087C6C1 /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B5A55E2860810E0087C6C1 /* SignInViewModelTests.swift */; };
 		02D33372286CB98C0050882F /* EditingLabelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D33371286CB98C0050882F /* EditingLabelManager.swift */; };
+		02DD6AFE286D476D0044A365 /* IssueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6AFD286D476C0044A365 /* IssueListView.swift */; };
+		02DD6B00286D47E50044A365 /* IssueListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6AFF286D47E50044A365 /* IssueListCell.swift */; };
+		02DD6B02286D4AE30044A365 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6B01286D4AE30044A365 /* HamburgerButton.swift */; };
 		02E89496286C290800E1E549 /* EditingLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E89495286C290800E1E549 /* EditingLabelView.swift */; };
 		5B29A0C128573E400088EC11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C028573E400088EC11 /* AppDelegate.swift */; };
 		5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0C228573E400088EC11 /* SceneDelegate.swift */; };
@@ -78,13 +81,11 @@
 		5B29A0E428573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A0E328573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift */; };
 		5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A115285ABF2F0088EC11 /* IssueItem.swift */; };
 		5B29A118285ACACE0088EC11 /* CustomBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29A117285ACACE0088EC11 /* CustomBarButton.swift */; };
-		5BE928CF285852C100D237AB /* IssueCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928CE285852C100D237AB /* IssueCollectionView.swift */; };
-		5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */; };
 		5BE928D32858553800D237AB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D22858553800D237AB /* TabBarController.swift */; };
 		5BE928D52858567900D237AB /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D42858567900D237AB /* LabelViewController.swift */; };
 		5BE928D72858568B00D237AB /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D62858568B00D237AB /* MilestoneViewController.swift */; };
 		5BE928D92858569C00D237AB /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928D82858569C00D237AB /* MyAccountViewController.swift */; };
-		5BE928DB2859B94A00D237AB /* IssueCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928DA2859B94A00D237AB /* IssueCollectionViewDataSource.swift */; };
+		5BE928DB2859B94A00D237AB /* IssueListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE928DA2859B94A00D237AB /* IssueListDataSource.swift */; };
 		5BF01C7A2864202000A4D8D7 /* IssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF01C792864202000A4D8D7 /* IssueViewModel.swift */; };
 		5BF01C7D2864F06200A4D8D7 /* IssueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF01C7C2864F06200A4D8D7 /* IssueManager.swift */; };
 		5BF01C7F28655F0700A4D8D7 /* IssueNetworkTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF01C7E28655F0700A4D8D7 /* IssueNetworkTarget.swift */; };
@@ -183,6 +184,9 @@
 		02B5A55A286068670087C6C1 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		02B5A55E2860810E0087C6C1 /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
 		02D33371286CB98C0050882F /* EditingLabelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingLabelManager.swift; sourceTree = "<group>"; };
+		02DD6AFD286D476C0044A365 /* IssueListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListView.swift; sourceTree = "<group>"; };
+		02DD6AFF286D47E50044A365 /* IssueListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListCell.swift; sourceTree = "<group>"; };
+		02DD6B01286D4AE30044A365 /* HamburgerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
 		02E89495286C290800E1E549 /* EditingLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingLabelView.swift; sourceTree = "<group>"; };
 		27B2358B9B31125F065826EB /* Pods-IssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3630D8BA3D14FDF118C50CF9 /* libPods-IssueTrackerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IssueTrackerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,13 +204,11 @@
 		5B29A0E328573E410088EC11 /* IssueTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5B29A115285ABF2F0088EC11 /* IssueItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueItem.swift; sourceTree = "<group>"; };
 		5B29A117285ACACE0088EC11 /* CustomBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButton.swift; sourceTree = "<group>"; };
-		5BE928CE285852C100D237AB /* IssueCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionView.swift; sourceTree = "<group>"; };
-		5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewCell.swift; sourceTree = "<group>"; };
 		5BE928D22858553800D237AB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5BE928D42858567900D237AB /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		5BE928D62858568B00D237AB /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		5BE928D82858569C00D237AB /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
-		5BE928DA2859B94A00D237AB /* IssueCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		5BE928DA2859B94A00D237AB /* IssueListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListDataSource.swift; sourceTree = "<group>"; };
 		5BF01C792864202000A4D8D7 /* IssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueViewModel.swift; sourceTree = "<group>"; };
 		5BF01C7C2864F06200A4D8D7 /* IssueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueManager.swift; sourceTree = "<group>"; };
 		5BF01C7E28655F0700A4D8D7 /* IssueNetworkTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueNetworkTarget.swift; sourceTree = "<group>"; };
@@ -251,8 +253,8 @@
 			isa = PBXGroup;
 			children = (
 				022D77CF2863878300ACA5FA /* IssueViewNavigationItems.swift */,
-				5BE928CE285852C100D237AB /* IssueCollectionView.swift */,
-				5BE928D02858538100D237AB /* IssueCollectionViewCell.swift */,
+				02DD6AFD286D476C0044A365 /* IssueListView.swift */,
+				02DD6AFF286D47E50044A365 /* IssueListCell.swift */,
 			);
 			path = IssueViewComponents;
 			sourceTree = "<group>";
@@ -326,7 +328,6 @@
 		024F43C52859C976008C4235 /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				5BE928DA2859B94A00D237AB /* IssueCollectionViewDataSource.swift */,
 				024F43C62859C986008C4235 /* View */,
 				5B29A114285ABF070088EC11 /* Model */,
 				0290D0EF28640ACD00A4E3A7 /* ViewModel */,
@@ -340,9 +341,10 @@
 			children = (
 				5B29A0C428573E400088EC11 /* IssueViewController.swift */,
 				028CB80C286191AC00DAFE26 /* EditingIssueViewController.swift */,
-				0290D0EC2863FBAB00A4E3A7 /* EditingViewComponents */,
 				021745972865AB9100ED1BCC /* IssueViewComponents */,
+				0290D0EC2863FBAB00A4E3A7 /* EditingViewComponents */,
 				0290D0F428641A8600A4E3A7 /* Delegate */,
+				02DD6B05286D73E10044A365 /* DataSource */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -443,6 +445,7 @@
 				5B29A117285ACACE0088EC11 /* CustomBarButton.swift */,
 				02751A49286AC79400C712FF /* DeviderView.swift */,
 				0230801D286C2BB500E8F3D9 /* TextFieldWithTitleView.swift */,
+				02DD6B01286D4AE30044A365 /* HamburgerButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -510,6 +513,14 @@
 				02AEC2F728600B2D00AAE835 /* DummyData.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		02DD6B05286D73E10044A365 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				5BE928DA2859B94A00D237AB /* IssueListDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		5B29A0B428573E400088EC11 = {
@@ -856,7 +867,6 @@
 				5BF01C7A2864202000A4D8D7 /* IssueViewModel.swift in Sources */,
 				02AEC2F428600ACF00AAE835 /* URLSessionProtocol.swift in Sources */,
 				0290D0E72863F51A00A4E3A7 /* EditingIssueTitleViewComponents.swift in Sources */,
-				5BE928CF285852C100D237AB /* IssueCollectionView.swift in Sources */,
 				02174596286575EE00ED1BCC /* LabelFactory.swift in Sources */,
 				5B29A0C528573E400088EC11 /* IssueViewController.swift in Sources */,
 				0290D0F628645BD100A4E3A7 /* EditingIssueManager.swift in Sources */,
@@ -866,7 +876,6 @@
 				5B29A116285ABF2F0088EC11 /* IssueItem.swift in Sources */,
 				027C7E9D285B954700A5175B /* SignInViewModel.swift in Sources */,
 				0290D0EE28640AC800A4E3A7 /* EditingIssueViewModel.swift in Sources */,
-				5BE928D12858538100D237AB /* IssueCollectionViewCell.swift in Sources */,
 				025ADD2D286AE3D900139FC2 /* LabelTableDataSource.swift in Sources */,
 				027C7E96285B14F600A5175B /* NetworkTargetProtocol.swift in Sources */,
 				02751A4A286AC79400C712FF /* DeviderView.swift in Sources */,
@@ -891,14 +900,16 @@
 				5B29A118285ACACE0088EC11 /* CustomBarButton.swift in Sources */,
 				024F43B82859AC88008C4235 /* SignInManager.swift in Sources */,
 				024F438B28596ED3008C4235 /* SignInView.swift in Sources */,
+				02DD6B00286D47E50044A365 /* IssueListCell.swift in Sources */,
 				02308022286C782200E8F3D9 /* EditedLabelPreviewView.swift in Sources */,
+				02DD6AFE286D476D0044A365 /* IssueListView.swift in Sources */,
 				027C7E91285AF9F500A5175B /* UserDefaultManager.swift in Sources */,
 				02751A3D286A971200C712FF /* LabelNetworkTarget.swift in Sources */,
 				027C7E88285ABF1200A5175B /* StubURLSession.swift in Sources */,
 				024F438F285972DB008C4235 /* UIView+Extension.swift in Sources */,
 				0290D0F1286417A100A4E3A7 /* EditingIssueTextViewDelegate.swift in Sources */,
 				5B29A0C328573E400088EC11 /* SceneDelegate.swift in Sources */,
-				5BE928DB2859B94A00D237AB /* IssueCollectionViewDataSource.swift in Sources */,
+				5BE928DB2859B94A00D237AB /* IssueListDataSource.swift in Sources */,
 				02751A282869FB0800C712FF /* LabelViewNavigationItems.swift in Sources */,
 				02751A3B286A95E500C712FF /* LabelItem.swift in Sources */,
 				02308024286C9A3100E8F3D9 /* EditingLabelViewModel.swift in Sources */,
@@ -912,6 +923,7 @@
 				5BE928D92858569C00D237AB /* MyAccountViewController.swift in Sources */,
 				02AEC2F828600B2D00AAE835 /* DummyData.swift in Sources */,
 				02308020286C499400E8F3D9 /* SelectingLabelBackgroundColorView.swift in Sources */,
+				02DD6B02286D4AE30044A365 /* HamburgerButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
