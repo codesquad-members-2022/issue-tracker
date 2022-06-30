@@ -49,18 +49,33 @@ final class EditingIssueViewModel: EditingIssueViewModelProtocol {
 
     func didTouchSave() {
         saveButtonState.value = true
-        let issueEntity = IssueItem(id: -1, title: titleText.value, content: contentText.value, milestoneName: "", labels: [])
+        var issueEntity = IssueItem(title: titleText.value, content: contentText.value, milestoneName: "", labels: [])
 
         issueManager.sendNewIssue(issueEntity) { [weak self] (result) in
             switch result {
-            case .success(let idDictionary):
-                guard idDictionary["id"] != nil else { return }
+            case .success(let issueIDDate):
+                issueEntity.id = issueIDDate["id"]
                 self?.saveButtonState.value = true
-                // IssueViewModel에 저장됐음을 알리는 로직 필요
+
+                let userInfo = [UserInfoKey.addedIssue: issueEntity]
+                NotificationCenter.default.post(
+                    name: NotificationNames.didSaveNewIssue,
+                    object: self, userInfo: userInfo)
+
             case .failure(let error):
                 self?.saveButtonState.value = false
                 self?.error.value = error.localizedDescription
             }
         }
+    }
+}
+
+extension EditingIssueViewModel {
+    enum NotificationNames {
+        static let didSaveNewIssue = Notification.Name("EditingIssueViewDidSaveNewIssue")
+    }
+
+    enum UserInfoKey {
+        static let addedIssue = "AddedIssue"
     }
 }
