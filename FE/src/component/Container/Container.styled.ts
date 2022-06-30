@@ -1,3 +1,4 @@
+import { FlexCenterSorter } from 'common/util.styled';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -20,6 +21,7 @@ export const LogoImg = styled.img`
 `;
 
 export const User = styled.div`
+  ${FlexCenterSorter}
   width: 44px;
   height: 44px;
 `;
@@ -29,4 +31,5 @@ export const UserImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
 `;
