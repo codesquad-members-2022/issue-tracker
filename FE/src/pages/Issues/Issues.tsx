@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 import { useAccessToken } from 'hooks/useAccessToken';
-import { useEffect } from 'react';
 import Header from '../../component/Header';
 import * as S from './Issues.styled';
 import Filter from './Filter';
