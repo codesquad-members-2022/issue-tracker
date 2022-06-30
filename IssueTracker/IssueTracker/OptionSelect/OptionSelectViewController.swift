@@ -9,47 +9,40 @@ class OptionSelectViewController: UIViewController {
     
     weak var delegate: OptionSelectDelegate?
     
-    private let service: IssueService
+    private let model: OptionSelectModel
+    
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     private let option: Option
-    private var options: [Repository]?
     
-    init(service: IssueService, option: Option) {
-        self.service = service
+    
+    init(model: OptionSelectModel, option: Option) {
+        self.model = model
         self.option = option
         super.init(nibName: nil, bundle: nil)
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(service: IssueService(token: ""), option: .label)
+        let service = IssueService(token: "")
+        self.init(model: OptionSelectModel(service: service), option: .label)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         self.view.backgroundColor = .white
-        fetchViewData()
-    }
-    
-    private func fetchViewData() {
-        guard let token = GithubUserDefaults.getToken() else {
-            return
-        }
-        service.requestRepos() { [weak self] result in
-            switch result {
-            case .success(let repositoryList):
-                self?.options = repositoryList
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
+        model.requestRepos()
     }
     
     private func setupViews() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    private func bind() {
+        model.updatedOptions = {
+            self.tableView.reloadData()
         }
     }
     
@@ -66,10 +59,7 @@ class OptionSelectViewController: UIViewController {
 
 extension OptionSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let options = options else {
-            return
-        }
-        let selectedItem = options[indexPath.row]
+        let selectedItem = model.getOption(index: indexPath.row)
         delegate?.selected(item: selectedItem, option: option)
         self.navigationController?.popViewController(animated: true)
     }
@@ -77,20 +67,14 @@ extension OptionSelectViewController: UITableViewDelegate {
 
 extension OptionSelectViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let options = options else {
-            return 0
-        }
-        return options.count
+        return model.getOptionsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let options = options else {
-            return UITableViewCell()
-        }
         let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier,
                                                  for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.attributedText = NSAttributedString(string: options[indexPath.row].name)
+        content.attributedText = NSAttributedString(string: model.getOption(index: indexPath.row).name)
         cell.contentConfiguration = content
         return cell
     }

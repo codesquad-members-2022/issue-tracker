@@ -43,7 +43,8 @@ class Container {
             let model = NewIssueModel(service: service)
             return NewIssueViewController(repo: repo, model: model)
         case .optionSelect(let option):
-            return OptionSelectViewController(service: service, option: option)
+            let model = OptionSelectModel(service: service)
+            return OptionSelectViewController(model: model, option: option)
         }
     }
 }
