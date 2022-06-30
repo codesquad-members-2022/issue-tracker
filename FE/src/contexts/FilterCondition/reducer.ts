@@ -1,7 +1,7 @@
 import { Action, ActionType } from '@/contexts/FilterCondition/type';
 import { IFilterCondition } from '@/types/common';
 
-const InitFilterCondition: IFilterCondition = {
+const INIT_FILTER_CONDITION: IFilterCondition = {
   status: 'OPEN',
   assignee: null,
   label: null,
@@ -20,7 +20,7 @@ function reducer(
     case 'SET_CONDITION':
       return { ...state, ...payload };
     case 'RESET':
-      return InitFilterCondition;
+      return INIT_FILTER_CONDITION;
     default:
       return state;
   }
@@ -45,4 +45,4 @@ function createFilterConditionString({
   );
 }
 
-export { InitFilterCondition, reducer, createFilterConditionString };
+export { INIT_FILTER_CONDITION, reducer, createFilterConditionString };

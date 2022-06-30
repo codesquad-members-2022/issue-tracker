@@ -9,7 +9,7 @@ import Dropdown from '@/components/common/Dropdown';
 import { useFilterCondition, useFilterConditionDispatch } from '@/contexts/FilterCondition';
 import {
   createFilterConditionString,
-  InitFilterCondition
+  INIT_FILTER_CONDITION
 } from '@/contexts/FilterCondition/reducer';
 
 const TEXT_INPUT_DEBOUNCE_TIME = 0;

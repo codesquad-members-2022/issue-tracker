@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useMemo, useReducer } from 'react';
-import { InitFilterCondition, reducer } from '@/contexts/FilterCondition/reducer';
+import { INIT_FILTER_CONDITION, reducer } from '@/contexts/FilterCondition/reducer';
 import { DispatchType } from './type';
 
-const FilterConditionContext = createContext(InitFilterCondition);
+const FilterConditionContext = createContext(INIT_FILTER_CONDITION);
 const DispatchContext = createContext<DispatchType | undefined>(undefined);
 
 const useFilterCondition = () => {
@@ -26,7 +26,7 @@ const useFilterConditionDispatch = () => {
 };
 
 function FilterConditionProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, InitFilterCondition);
+  const [state, dispatch] = useReducer(reducer, INIT_FILTER_CONDITION);
 
   return (
     <DispatchContext.Provider value={dispatch}>
