@@ -1,5 +1,7 @@
 package louie.hanse.issuetracker.domain;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -22,6 +24,7 @@ public class Label {
     @Column(name = "label_description")
     private String description;
     private String backgroundColor;
-    private String textColor;
 
+    @Enumerated(EnumType.STRING)
+    private TextColor textColor;
 }

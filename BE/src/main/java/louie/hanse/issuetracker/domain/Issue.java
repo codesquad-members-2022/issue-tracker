@@ -21,13 +21,13 @@ public class Issue {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn
     private Milestone milestone;
 
@@ -35,7 +35,7 @@ public class Issue {
     @JoinColumn
     private Member writer;
 
-    @OneToMany(mappedBy = "issue")
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IssueManager> issueManagers = new ArrayList<>();
 
     private String title;

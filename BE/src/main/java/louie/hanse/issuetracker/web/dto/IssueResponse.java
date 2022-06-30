@@ -1,5 +1,6 @@
 package louie.hanse.issuetracker.web.dto;
 
+import lombok.Getter;
 import louie.hanse.issuetracker.domain.Issue;
 import louie.hanse.issuetracker.domain.IssueLabel;
 
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class IssueResponse {
     private long issueId;
     private String title;

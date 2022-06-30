@@ -22,10 +22,11 @@ public class CustomIssueRepositoryImpl implements CustomIssueRepository {
     @Override
     public List<Issue> search(IssueSearchRequest request, Long userId) {
         return jpaQueryFactory.selectFrom(issue)
-                .join(issue.issueManagers, issueManager)
-                .join(issue.comments, comment)
-                .join(issue.issueLabels, issueLabel)
-                .join(issueLabel.label, label)
+                .distinct()
+                .leftJoin(issue.issueManagers, issueManager)
+                .leftJoin(issue.comments, comment)
+                .leftJoin(issue.issueLabels, issueLabel)
+                .leftJoin(issueLabel.label, label)
                 .where(
                         issue.status.eq(request.getStatus()),
                         issueWriterIdEq(request.getWriterId()),
@@ -37,13 +38,13 @@ public class CustomIssueRepositoryImpl implements CustomIssueRepository {
     }
 
     @Override
-    public long searchCount(IssueSearchRequest request, Long userId) {
+    public long searchReverseStatusCount(IssueSearchRequest request, Long userId) {
         return jpaQueryFactory.select(issue.count())
                 .from(issue)
-                .join(issue.issueManagers, issueManager)
-                .join(issue.comments, comment)
-                .join(issue.issueLabels, issueLabel)
-                .join(issueLabel.label, label)
+                .leftJoin(issue.issueManagers, issueManager)
+                .leftJoin(issue.comments, comment)
+                .leftJoin(issue.issueLabels, issueLabel)
+                .leftJoin(issueLabel.label, label)
                 .where(
                         issue.status.eq(request.getStatus().reverse()),
                         issueWriterIdEq(request.getWriterId()),

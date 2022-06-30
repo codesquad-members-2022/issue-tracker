@@ -1,10 +1,12 @@
 package louie.hanse.issuetracker.web.dto;
 
+import lombok.Getter;
 import louie.hanse.issuetracker.domain.Issue;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class IssueSearchResponse {
     private List<IssueResponse> issues;
     private long openedIssueCount;
