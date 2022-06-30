@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team29.hoorry.issuetracker.core.exception.dto.ErrorResponse;
 import team29.hoorry.issuetracker.core.jwt.dto.JwtResponse;
+import team29.hoorry.issuetracker.core.member.dto.MemberAndJwtResponse;
+import team29.hoorry.issuetracker.core.member.dto.MemberLoginRequest;
 import team29.hoorry.issuetracker.core.member.dto.MemberRequest;
 import team29.hoorry.issuetracker.core.member.dto.MembersResponse;
 
@@ -59,7 +61,7 @@ public class MemberController {
 				content = {
 					@Content(
 						mediaType = "application/json",
-						schema = @Schema(implementation = JwtResponse.class)
+						schema = @Schema(implementation = MemberAndJwtResponse.class)
 					)
 				}
 			),
@@ -76,9 +78,41 @@ public class MemberController {
 		}
 	)
 	@PostMapping
-	public ResponseEntity<JwtResponse> join(@RequestBody MemberRequest memberRequest) {
-		JwtResponse jwtResponse = memberService.join(memberRequest);
-		return ResponseEntity.ok(jwtResponse);
+	public ResponseEntity<MemberAndJwtResponse> join(@RequestBody MemberRequest memberRequest) {
+		MemberAndJwtResponse memberAndJwtResponse = memberService.join(memberRequest);
+		return ResponseEntity.ok(memberAndJwtResponse);
+	}
+
+	@Operation(
+		summary = "회원 로그인",
+		description = "회원 로그인을 합니다.",
+		responses = {
+			@ApiResponse(
+				responseCode = "200",
+				description = "회원 로그인 성공",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						schema = @Schema(implementation = MemberAndJwtResponse.class)
+					)
+				}
+			),
+			@ApiResponse(
+				responseCode = "400",
+				description = "회원 로그인 실패",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						schema = @Schema(implementation = ErrorResponse.class)
+					)
+				}
+			)
+		}
+	)
+	@PostMapping("/login")
+	public ResponseEntity<MemberAndJwtResponse> login(@RequestBody MemberLoginRequest memberLoginRequest) {
+		MemberAndJwtResponse memberAndJwtResponse = memberService.login(memberLoginRequest);
+		return ResponseEntity.ok(memberAndJwtResponse);
 	}
 
 	@Operation(

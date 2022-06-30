@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class IssuesStatusUpdateRequest {
 
-	private List<IssueStatusUpdateRequest> issueStatusUpdateRequests;
+	private String status;
+	private List<Long> issueIds;
 
 }

@@ -9,4 +9,6 @@ import team29.hoorry.issuetracker.core.member.domain.Member;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
 	Optional<Member> findByOauthId(Long oauthId);
+
+	Optional<Member> findByLoginId(String loginId);
 }

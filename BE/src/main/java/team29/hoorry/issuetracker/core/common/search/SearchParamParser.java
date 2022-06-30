@@ -10,14 +10,14 @@ import org.springframework.util.MultiValueMap;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SearchParamParser {
 
-	public static MultiValueMap<SearchFilter, String> parse(String q) {
+	public static MultiValueMap<SearchFilter, String> parse(String query) {
 		MultiValueMap<SearchFilter, String> filters = new LinkedMultiValueMap<>();
 
-		if (q == null) {
+		if (query == null) {
 			return filters;
 		}
 
-		String[] params = parseParams(q);
+		String[] params = parseParams(query);
 
 		for (String param : params) {
 			convertParamToFilter(filters, param);
@@ -44,8 +44,8 @@ public class SearchParamParser {
 		filters.add(searchFilter, filterCondition);
 	}
 
-	private static String[] parseParams(String q) {
-		String[] params = q.split("\\+");
+	private static String[] parseParams(String query) {
+		String[] params = query.split("\\+");
 		for (int i = 0; i < params.length; i++) {
 			params[i] = decode(params[i]);
 		}

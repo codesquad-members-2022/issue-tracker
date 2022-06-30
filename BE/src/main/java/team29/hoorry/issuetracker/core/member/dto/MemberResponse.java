@@ -1,13 +1,12 @@
 package team29.hoorry.issuetracker.core.member.dto;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team29.hoorry.issuetracker.core.member.domain.Member;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 @AllArgsConstructor
 public class MemberResponse {
 

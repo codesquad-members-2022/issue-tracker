@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team29.hoorry.issuetracker.core.exception.dto.ErrorResponse;
+import team29.hoorry.issuetracker.core.issue.dto.request.CommentSaveRequest;
 import team29.hoorry.issuetracker.core.issue.dto.request.IssueAssigneesUpdateRequest;
 import team29.hoorry.issuetracker.core.issue.dto.request.IssueLabelsUpdateRequest;
 import team29.hoorry.issuetracker.core.issue.dto.request.IssueMilestoneUpdateRequest;
@@ -25,6 +26,7 @@ import team29.hoorry.issuetracker.core.issue.dto.request.IssueStatusUpdateReques
 import team29.hoorry.issuetracker.core.issue.dto.request.IssueTitleUpdateRequest;
 import team29.hoorry.issuetracker.core.issue.dto.request.IssuesSaveRequest;
 import team29.hoorry.issuetracker.core.issue.dto.request.IssuesStatusUpdateRequest;
+import team29.hoorry.issuetracker.core.issue.dto.request.ReactionSaveRequest;
 import team29.hoorry.issuetracker.core.issue.dto.response.IssueDetailResponse;
 import team29.hoorry.issuetracker.core.issue.dto.response.IssuesResponse;
 
@@ -36,6 +38,7 @@ public class IssueController {
 
 	private final IssueMockService issueMockService;
 	private final IssueService issueService;
+	private final CommentService commentService;
 
 	@Operation(
 		summary = "이슈 리스트 조회",
@@ -54,12 +57,12 @@ public class IssueController {
 	)
 	@GetMapping
 	public ResponseEntity<IssuesResponse> issues(
-		@RequestParam(required = false) String q,
+		@RequestParam(name = "query", required = false) String query,
 		@RequestParam Integer page
 	) {
-		IssuesResponse realIssuesResponse = issueService.findAll(q, page);
+		IssuesResponse IssuesResponse = issueService.findAll(query, page);
 
-		return ResponseEntity.ok(realIssuesResponse);
+		return ResponseEntity.ok(IssuesResponse);
 	}
 
 	@Operation(
@@ -79,7 +82,7 @@ public class IssueController {
 	)
 	@GetMapping("/{id}")
 	public ResponseEntity<IssueDetailResponse> issueDetail(@PathVariable Long id) {
-		IssueDetailResponse issueDetailResponse = issueMockService.findById(id);
+		IssueDetailResponse issueDetailResponse = issueService.findById(id);
 
 		return ResponseEntity.ok(issueDetailResponse);
 	}
@@ -106,7 +109,85 @@ public class IssueController {
 	)
 	@PostMapping
 	public ResponseEntity<Void> save(@RequestBody IssuesSaveRequest issuesSaveRequest) {
-		issueMockService.save(issuesSaveRequest);
+		issueService.save(issuesSaveRequest);
+		return ResponseEntity.ok().build();
+	}
+
+	@Operation(
+		summary = "코멘트 등록",
+		description = "코멘트를 등록합니다.",
+		responses = {
+			@ApiResponse(
+				responseCode = "200",
+				description = "코멘트 등록 성공"
+			),
+			@ApiResponse(
+				responseCode = "400",
+				description = "코멘트 등록 실패",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						schema = @Schema(implementation = ErrorResponse.class)
+					)
+				}
+			)
+		}
+	)
+	@PostMapping("/{id}/comments")
+	public ResponseEntity<Void> write(@PathVariable("id") Long issueId, @RequestBody CommentSaveRequest commentSaveRequest) {
+		commentService.write(issueId, commentSaveRequest);
+		return ResponseEntity.ok().build();
+	}
+
+	@Operation(
+		summary = "리액션 등록",
+		description = "리액션을 등록합니다.",
+		responses = {
+			@ApiResponse(
+				responseCode = "200",
+				description = "리액션 등록 성공"
+			),
+			@ApiResponse(
+				responseCode = "400",
+				description = "리액션 등록 실패",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						schema = @Schema(implementation = ErrorResponse.class)
+					)
+				}
+			)
+		}
+	)
+	@PostMapping("/{comment_id}/reaction")
+	public ResponseEntity<Void> addReaction(@PathVariable("comment_id") Long commentId, @RequestBody ReactionSaveRequest reactionSaveRequest) {
+		commentService.addReaction(commentId, reactionSaveRequest);
+		return ResponseEntity.ok().build();
+	}
+
+	@Operation(
+		summary = "리액션 삭제",
+		description = "리액션을 삭제합니다.",
+		responses = {
+			@ApiResponse(
+				responseCode = "200",
+				description = "리액션 삭제 성공"
+			),
+			@ApiResponse(
+				responseCode = "400",
+				description = "리액션 삭제 실패",
+				content = {
+					@Content(
+						mediaType = "application/json",
+						schema = @Schema(implementation = ErrorResponse.class)
+					)
+				}
+			)
+		}
+	)
+	@DeleteMapping("/{comment_id}/reaction")
+	public ResponseEntity<Void> deleteReaction(@PathVariable("comment_id") Long commentId, @RequestBody ReactionSaveRequest reactionSaveRequest) {
+		commentService.deleteReaction(commentId, reactionSaveRequest);
 		return ResponseEntity.ok().build();
 	}
 
@@ -133,7 +214,7 @@ public class IssueController {
 	@PatchMapping("/status")
 	public ResponseEntity<Void> updateAllStatus(
 		@RequestBody IssuesStatusUpdateRequest issuesStatusUpdateRequest) {
-		issueMockService.updateAllStatus(issuesStatusUpdateRequest);
+		issueService.updateAllStatus(issuesStatusUpdateRequest);
 		return ResponseEntity.ok().build();
 	}
 
@@ -161,7 +242,7 @@ public class IssueController {
 	public ResponseEntity<Void> updateStatus(
 		@PathVariable Long id,
 		@RequestBody IssueStatusUpdateRequest issueStatusUpdateRequest) {
-		issueMockService.updateStatus(id, issueStatusUpdateRequest);
+		issueService.updateStatus(id, issueStatusUpdateRequest);
 		return ResponseEntity.ok().build();
 	}
 
@@ -299,7 +380,7 @@ public class IssueController {
 	)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		issueMockService.delete(id);
+		issueService.delete(id);
 		return ResponseEntity.ok().build();
 	}
 }

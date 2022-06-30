@@ -8,12 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team29.hoorry.issuetracker.core.label.domain.Label;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 public class IssueLabel {
 
@@ -29,4 +32,8 @@ public class IssueLabel {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "label_id", nullable = false)
 	private Label label;
+
+	public static IssueLabel of(Issue issue, Label label) {
+		return new IssueLabel(null, issue, label);
+	}
 }

@@ -26,7 +26,7 @@ public class JwtGenerator {
 
 		return new RefreshToken(Jwts.builder()
 			.setIssuedAt(now)
-			.setExpiration(Date.from(Instant.now().plusMillis(JwtConst.REFRESH_TOKEN_EXPIRED_TIME)))
+			.setExpiration(Date.from(Instant.now().plusMillis(JwtConst.REFRESH_TOKEN_EXPIRED_MILLIS_TIME)))
 			.claim("memberId", memberId)
 			.signWith(JwtConst.SECRET_KET, SignatureAlgorithm.HS256)
 			.compact());

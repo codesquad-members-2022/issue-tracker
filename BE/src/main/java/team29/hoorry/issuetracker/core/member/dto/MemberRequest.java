@@ -13,6 +13,8 @@ import team29.hoorry.issuetracker.core.member.domain.Member;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class MemberRequest {
 
+	public static final String DEFAULT_IMAGE = "https://avatars.githubusercontent.com/u/81368630?v=4";
+
 	@Schema(required = true)
 	private String loginId;
 	@Schema(required = true)
@@ -22,8 +24,8 @@ public class MemberRequest {
 	@Schema(required = true)
 	private String email;
 
-	private String profileImageUrl;
-	@Schema(required = true)
+	private String profileImageUrl = DEFAULT_IMAGE;
+
 	private Long oauthId;
 
 	public static Member toEntity(MemberRequest memberRequest) {

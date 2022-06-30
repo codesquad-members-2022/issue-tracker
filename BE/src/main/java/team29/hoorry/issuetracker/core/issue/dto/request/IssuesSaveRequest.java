@@ -16,6 +16,9 @@ public class IssuesSaveRequest {
 
 	private String comment;
 
+	@Schema(required = true)
+	private Long writerId;
+
 	private List<Long> assigneeIds;
 
 	private List<Long> labelIds;

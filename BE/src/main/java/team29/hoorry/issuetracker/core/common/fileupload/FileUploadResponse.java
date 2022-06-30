@@ -1,6 +1,5 @@
-package team29.hoorry.issuetracker.core.label.dto;
+package team29.hoorry.issuetracker.core.common.fileupload;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LabelsResponse {
+public class FileUploadResponse {
 
-	private List<LabelResponse> labels;
+	private String fileUrl;
+
 }

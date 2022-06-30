@@ -23,7 +23,7 @@ public class JwtParser {
 		return claims.get(claimName, requiredType);
 	}
 
-	private static String extractBearerToken(String authorizationHeader) {
+	public static String extractBearerToken(String authorizationHeader) {
 		if (isValidBearerToken(authorizationHeader)) {
 			return authorizationHeader.split(" ")[1];
 		}

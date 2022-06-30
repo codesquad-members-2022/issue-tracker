@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class IssueStatusUpdateRequest {
+public class CommentSaveRequest {
 
 	@Schema(required = true)
-	private String status;
+	private Long memberId;
+	@Schema(required = true)
+	private String content;
 
 }

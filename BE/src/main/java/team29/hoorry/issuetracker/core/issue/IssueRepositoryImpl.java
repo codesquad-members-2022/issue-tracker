@@ -1,11 +1,13 @@
 package team29.hoorry.issuetracker.core.issue;
 
 import static team29.hoorry.issuetracker.core.issue.domain.QComment.comment;
+import static team29.hoorry.issuetracker.core.issue.domain.QCommentReaction.commentReaction;
 import static team29.hoorry.issuetracker.core.issue.domain.QIssue.issue;
 import static team29.hoorry.issuetracker.core.issue.domain.QIssueAssignee.issueAssignee;
 import static team29.hoorry.issuetracker.core.issue.domain.QIssueLabel.issueLabel;
 import static team29.hoorry.issuetracker.core.label.domain.QLabel.label;
 import static team29.hoorry.issuetracker.core.member.domain.QMember.member;
+import static team29.hoorry.issuetracker.core.milestone.domain.QMilestone.milestone;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -14,6 +16,7 @@ import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,9 +30,6 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
 
 	private final JPAQueryFactory queryFactory;
 
-	// searchParam filter는 엘라스틱서치로?
-	// 엘라스틱 서치 안하면
-	// innerJoin으로 comment, -> like로 비교
 	@Override
 	public Page<Issue> findAllByIssueFilter(IssueFilter issueFilter, Pageable pageable) {
 
@@ -41,6 +41,7 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
 			.leftJoin(issueLabel.label, label)
 			.leftJoin(issue.comments, comment)
 			.where(
+				issue.status.ne(Status.DELETED),
 				isEquals(issue.status, issueFilter.getStatus()),
 				isEquals(issue.writer.name, issueFilter.getWriterName()),
 				isEquals(issue.milestone.title, issueFilter.getMilestoneTitle()),
@@ -62,6 +63,30 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
 		return filteredIssueCountQuery(issueFilter, status).fetchOne();
 	}
 
+	@Override
+	public Optional<Issue> findByIdUsingFetchJoin(Long id) {
+		return Optional.ofNullable(queryFactory.select(issue)
+			.from(issue)
+			.leftJoin(issue.writer, member).fetchJoin()
+			.leftJoin(issue.assignees, issueAssignee).fetchJoin()
+			.leftJoin(issueAssignee.assignee, member).fetchJoin()
+			.leftJoin(issue.labels, issueLabel).fetchJoin()
+			.leftJoin(issueLabel.label, label).fetchJoin()
+			.leftJoin(issue.milestone, milestone).fetchJoin()
+			.leftJoin(issue.comments, comment).fetchJoin()
+			.leftJoin(comment.reactions, commentReaction).fetchJoin()
+			.where(issue.id.eq(id))
+			.fetchOne());
+	}
+
+	@Override
+	public Long updateAllStatus(Status status, List<Long> issueIds) {
+		return queryFactory.update(issue)
+			.set(issue.status, status)
+			.where(issue.id.in(issueIds))
+			.execute();
+	}
+
 	private JPAQuery<Long> filteredIssueCountQuery(IssueFilter issueFilter, Status status) {
 		return queryFactory.select(issue.countDistinct())
 			.from(issue)
@@ -69,6 +94,7 @@ public class IssueRepositoryImpl implements IssueCustomRepository {
 			.leftJoin(issue.labels, issueLabel)
 			.leftJoin(issue.comments, comment)
 			.where(
+				issue.status.ne(Status.DELETED),
 				isEquals(issue.status, status),
 				isEquals(issue.writer.name, issueFilter.getWriterName()),
 				isEquals(issue.milestone.title, issueFilter.getMilestoneTitle()),

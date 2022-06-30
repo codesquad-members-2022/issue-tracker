@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -27,7 +28,7 @@ import team29.hoorry.issuetracker.core.label.dto.LabelsResponse;
 @RequiredArgsConstructor
 public class LabelController {
 
-	private final LabelMockService labelMockService;
+	private final LabelService labelService;
 
 	@Operation(summary = "라벨 리스트 조회",
 		description = "모든 라벨을 조회합니다.",
@@ -44,7 +45,7 @@ public class LabelController {
 	)
 	@GetMapping
 	public ResponseEntity<LabelsResponse> labels() {
-		LabelsResponse labelsResponse = labelMockService.findAll();
+		LabelsResponse labelsResponse = labelService.findAll();
 		return ResponseEntity.ok(labelsResponse);
 	}
 
@@ -65,8 +66,8 @@ public class LabelController {
 		}
 	)
 	@PostMapping
-	public ResponseEntity<Void> add(@RequestBody LabelAddRequest labelAddRequest) {
-		labelMockService.save(labelAddRequest);
+	public ResponseEntity<Void> add(@Validated @RequestBody LabelAddRequest labelAddRequest) {
+		labelService.save(labelAddRequest);
 		return ResponseEntity.ok().build();
 	}
 
@@ -86,9 +87,9 @@ public class LabelController {
 			)
 		}
 	)
-	@PatchMapping
-	public ResponseEntity<Void> update(@RequestBody LabelUpdateRequest labelUpdateRequest) {
-		labelMockService.update(labelUpdateRequest);
+	@PatchMapping("/{id}")
+	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody LabelUpdateRequest labelUpdateRequest) {
+		labelService.update(id, labelUpdateRequest);
 		return ResponseEntity.ok().build();
 	}
 
@@ -110,7 +111,7 @@ public class LabelController {
 	)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		labelMockService.delete(id);
+		labelService.delete(id);
 		return ResponseEntity.ok().build();
 	}
 }

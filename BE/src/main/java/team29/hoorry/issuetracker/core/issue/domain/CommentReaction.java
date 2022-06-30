@@ -10,8 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import team29.hoorry.issuetracker.core.member.domain.Member;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 public class CommentReaction {
 
@@ -31,4 +38,8 @@ public class CommentReaction {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Reaction reaction;
+
+	public static CommentReaction of(Comment comment, Member member, Reaction reaction) {
+		return new CommentReaction(null, comment, member, reaction);
+	}
 }

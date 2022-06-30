@@ -8,12 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team29.hoorry.issuetracker.core.member.domain.Member;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 public class IssueAssignee {
 
@@ -30,4 +33,7 @@ public class IssueAssignee {
 	@JoinColumn(name = "assignee_id", nullable = false)
 	private Member assignee;
 
+	public static IssueAssignee of(Issue issue, Member assignee) {
+		return new IssueAssignee(null, issue, assignee);
+	}
 }

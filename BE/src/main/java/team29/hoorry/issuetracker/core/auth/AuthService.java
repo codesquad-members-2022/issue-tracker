@@ -12,6 +12,8 @@ import team29.hoorry.issuetracker.core.auth.dto.AuthMemberResponse;
 import team29.hoorry.issuetracker.core.auth.dto.AuthResponse;
 import team29.hoorry.issuetracker.core.auth.dto.AuthToken;
 import team29.hoorry.issuetracker.core.auth.dto.AuthTokenRequest;
+import team29.hoorry.issuetracker.core.exception.ExceptionMessage;
+import team29.hoorry.issuetracker.core.exception.InvalidCodeException;
 import team29.hoorry.issuetracker.core.jwt.AccessToken;
 import team29.hoorry.issuetracker.core.jwt.JwtGenerator;
 import team29.hoorry.issuetracker.core.jwt.JwtRepository;
@@ -19,6 +21,7 @@ import team29.hoorry.issuetracker.core.jwt.RefreshToken;
 import team29.hoorry.issuetracker.core.jwt.dto.JwtResponse;
 import team29.hoorry.issuetracker.core.member.MemberRepository;
 import team29.hoorry.issuetracker.core.member.domain.Member;
+import team29.hoorry.issuetracker.core.member.dto.MemberResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -31,18 +34,20 @@ public class AuthService {
 	public AuthResponse getAuthUser(String code) {
 		AuthMemberResponse authMemberResponse = requestAuthUser(requestAuthToken(code));
 
+		MemberResponse memberResponse = new MemberResponse();
 		JwtResponse jwtResponse = new JwtResponse();
 
 		Optional<Member> findMember = memberRepository.findByOauthId(authMemberResponse.getAuthId());
 		if (findMember.isPresent()) {
 			Member member = findMember.get();
+			memberResponse = MemberResponse.from(member);
 			AccessToken accessToken = JwtGenerator.generateAccessToken(member.getId());
 			RefreshToken refreshToken = JwtGenerator.generateRefreshToken(member.getId());
 			jwtRepository.save(refreshToken);
 			jwtResponse = new JwtResponse(accessToken, refreshToken);
 		}
 
-		return new AuthResponse(findMember.isPresent(), authMemberResponse, jwtResponse);
+		return new AuthResponse(findMember.isPresent(), authMemberResponse, memberResponse, jwtResponse);
 	}
 
 	private AuthToken requestAuthToken(String code) {
@@ -66,6 +71,9 @@ public class AuthService {
 			.headers(header -> header.setBearerAuth(authToken.getAccessToken()))
 			.retrieve()
 			.bodyToMono(AuthMemberResponse.class)
+			.doOnError(e -> {
+				throw new InvalidCodeException(ExceptionMessage.INVALID_CODE_MESSAGE, e);
+			})
 			.block();
 	}
 }

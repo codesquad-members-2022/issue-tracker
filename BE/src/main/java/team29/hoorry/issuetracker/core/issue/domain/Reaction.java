@@ -1,5 +1,7 @@
 package team29.hoorry.issuetracker.core.issue.domain;
 
+import java.util.NoSuchElementException;
+
 public enum Reaction {
 	THUMBS_UP_SIGN("\uD83D\uDC4D"),
 	THUMBS_DOWN_SIGN("\uD83D\uDC4E"),
@@ -14,6 +16,15 @@ public enum Reaction {
 
 	Reaction(String emoji) {
 		this.emoji = emoji;
+	}
+
+	public static Reaction findByEmoji(String emoji) {
+		for (Reaction reaction : Reaction.values()) {
+			if (emoji.equals(reaction.emoji)) {
+				return reaction;
+			}
+		}
+		throw new NoSuchElementException("해당 emoji는 존재하지 않습니다.");
 	}
 
 	public String getEmoji() {
