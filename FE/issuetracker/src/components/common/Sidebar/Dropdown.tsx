@@ -79,13 +79,8 @@ function DropDown({ subject }: DropdownType) {
   function setMileStone(content: MileStoneType) {
     setNewIssue({
       ...newIssue,
-      mileStone: {
-        title: content.title,
-        description: content.description,
-        dueDate: content.dueDate,
-        progress: content.progress,
-        openedIssue: content.openedIssue,
-        closedIssue: content.closedIssue,
+      milestone: {
+        ...content,
       },
     });
   }

@@ -9,11 +9,11 @@ export type AccountType = {
 export type MileStoneType = {
   id?: number;
   title: string;
-  description: string;
-  dueDate: string;
-  progress: number;
-  openedIssue: number;
-  closedIssue: number;
+  description?: string;
+  dueDate?: string;
+  progress?: number;
+  openedIssue?: number;
+  closedIssue?: number;
 };
 export type LabelType = {
   id?: number;
