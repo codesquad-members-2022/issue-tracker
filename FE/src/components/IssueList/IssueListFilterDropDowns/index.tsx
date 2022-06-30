@@ -19,33 +19,33 @@ const radioIcon = {
   on: <Icon iconType="radioOn" />
 };
 
+const ISSUE_FILTERS_PROPS = [
+  {
+    indicatorName: '담당자',
+    panelName: '담당자 필터',
+    filterName: 'assignee'
+  },
+  {
+    indicatorName: '레이블',
+    panelName: '레이블 필터',
+    filterName: 'label'
+  },
+  {
+    indicatorName: '마일스톤',
+    panelName: '마일스톤 필터',
+    filterName: 'milestone'
+  },
+  {
+    indicatorName: '작성자',
+    panelName: '작성자 필터',
+    filterName: 'author'
+  }
+];
+
 export default function IssueListFilterDropDowns() {
   const { status: memberDataStatus, data: memberList } = useMemberListData();
   const { status: labelDataStatus, data: labelList } = useLabelListData();
   const { status: milestoneDataStatus, data: milestoneList } = useMilestoneListData();
-
-  const ISSUE_FILTERS_PROPS = [
-    {
-      indicatorName: '담당자',
-      panelName: '담당자 필터',
-      filterName: 'assignee'
-    },
-    {
-      indicatorName: '레이블',
-      panelName: '레이블 필터',
-      filterName: 'label'
-    },
-    {
-      indicatorName: '마일스톤',
-      panelName: '마일스톤 필터',
-      filterName: 'milestone'
-    },
-    {
-      indicatorName: '작성자',
-      panelName: '작성자 필터',
-      filterName: 'author'
-    }
-  ];
 
   const getIssueFilterOptions = (filterName: string) => {
     switch (filterName) {
