@@ -40,7 +40,8 @@ class Container {
             viewController.title = "Repos"
             return UINavigationController(rootViewController: viewController)
         case .newIssue(let repo):
-            return NewIssueViewController(repo: repo, service: service)
+            let model = NewIssueModel(service: service)
+            return NewIssueViewController(repo: repo, model: model)
         case .optionSelect(let option):
             return OptionSelectViewController(service: service, option: option)
         }

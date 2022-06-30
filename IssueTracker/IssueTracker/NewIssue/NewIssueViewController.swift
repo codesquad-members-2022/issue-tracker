@@ -7,23 +7,6 @@
 
 import UIKit
 
-enum Option: CaseIterable {
-    case label
-    case milestone
-    case assignee
-    
-    var description: String {
-        switch self {
-        case .label:
-            return "레이블"
-        case .milestone:
-            return "마일스톤"
-        case .assignee:
-            return "담당자"
-        }
-    }
-}
-
 protocol NewIssueCreateDelegate: AnyObject {
     func created()
 }
@@ -32,24 +15,29 @@ class NewIssueViewController: UIViewController {
     
     weak var delegate: NewIssueCreateDelegate?
     
-    private let service: IssueService
+    private let model: NewIssueModel
     
     private let optionList = Option.allCases
     private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
     private let repo: Repository
     
-    init(repo: Repository, service: IssueService) {
+    init(repo: Repository, model: NewIssueModel) {
         self.repo = repo
-        self.service = service
+        self.model = model
         super.init(nibName: nil, bundle: nil)
     }
     
     required convenience init?(coder: NSCoder) {
-        self.init(repo: Repository(name: "", owner: Owner(login: "")), service: IssueService(token: ""))
+        
+        let owner = Owner(login: "")
+        let service = IssueService(token: "")
+        let model = NewIssueModel(service: service)
+        self.init(repo: Repository(name: "",
+                                   owner: owner),
+                  model: model)
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     private lazy var navSegmentedControl: UISegmentedControl = {
         let buttonList = ["마크다운", "미리보기"]
@@ -176,7 +164,7 @@ class NewIssueViewController: UIViewController {
             return
         }
 
-        service.createIssue(title: titleString, repo: repo) { boolResult in
+        model.createIssue(title: titleString, repo: repo) { boolResult in
             if boolResult {
                 self.navigationController?.popViewController(animated: true)
                 self.delegate?.created()

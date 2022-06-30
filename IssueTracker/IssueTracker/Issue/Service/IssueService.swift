@@ -55,9 +55,7 @@ struct IssueService {
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
         ]
         let parameters: [String: Any] = [
-            "title": title,
-            // 로그인 한 유저를 담당자로 해야 한다
-//            "assignees": [repo.owner.login]
+            "title": title
         ]
         
         let decoder = JSONDecoder()
@@ -72,7 +70,8 @@ struct IssueService {
                 switch response.result {
                 case .success:
                     completion(true)
-                case .failure:
+                case .failure(let error):
+                    print(error)
                     completion(false)
                 }
             }
