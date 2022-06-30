@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import styled, { css } from 'styled-components';
 import { InputTypes } from 'components/Atoms/Input';
 
@@ -102,6 +101,6 @@ export const StyledInput = styled.input`
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.placeholder};
+    color: ${({ theme }) => theme.colors.placeHolder};
   }
 `;

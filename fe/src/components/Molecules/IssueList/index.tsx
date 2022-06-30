@@ -7,9 +7,11 @@ import CheckBox from 'components/Atoms/CheckBox';
 import { TabTypes } from 'components/Atoms/Tab';
 import Dropdown from 'components/Atoms/Dropdown';
 
+import CommonList from 'components/Molecules/CommonList';
+import CommonTitle from 'components/Molecules/CommonList/CommonTitle';
 import Tabs from 'components/Molecules/Tabs/';
 import IssueItem, { IssueItemTypes as ItemTypes } from 'components/Molecules/IssueList/IssueItem';
-import { IssueTitle, StyeldUl, OpenCloseTab } from 'components/Molecules/IssueList/index.styles';
+import { OpenCloseTab } from 'components/Molecules/IssueList/index.styles';
 
 type IssueItemTypes = Omit<ItemTypes, 'checkedItemHandler' | 'checkedIssue'>;
 
@@ -57,9 +59,8 @@ const IssueList = (props: IssueListTypes) => {
   ];
 
   const clickedAllIssues = (id: string, isChecked: boolean) => {
-    const newArr: string[] = [];
     if (isChecked) {
-      issues.content.map((issue: IssueItemTypes) => newArr.push(String(issue.id)));
+      const newArr = issues.content.map((issue: IssueItemTypes) => String(issue.id));
       setCheckedIssue([...newArr, id]);
     } else {
       setCheckedIssue([]);
@@ -81,8 +82,8 @@ const IssueList = (props: IssueListTypes) => {
   });
 
   return (
-    <StyeldUl>
-      <IssueTitle>
+    <CommonList>
+      <CommonTitle>
         <OpenCloseTab>
           <CheckBox id="ALL" checkedItemHandler={clickedAllIssues} checkedIssue={checkedIssue} />
           {!checkedIssue.length ? (
@@ -116,9 +117,9 @@ const IssueList = (props: IssueListTypes) => {
             />
           )}
         </div>
-      </IssueTitle>
+      </CommonTitle>
       {IssueItems}
-    </StyeldUl>
+    </CommonList>
   );
 };
 

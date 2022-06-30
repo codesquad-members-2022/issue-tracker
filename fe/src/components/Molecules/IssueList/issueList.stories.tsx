@@ -106,21 +106,21 @@ const IssueListInfo: IssueListTypes = {
           {
             id: 0,
             title: 'documentation',
-            titleColor: colors.offWhite,
+            titleColor: 'white',
             backgroundColor: colors.primary.blue,
             description: 'string',
           },
           {
             id: 1,
             title: 'FE',
-            titleColor: colors.offWhite,
+            titleColor: 'white',
             backgroundColor: colors.secondary.lightPurple,
             description: 'string',
           },
           {
             id: 2,
             title: 'BE',
-            titleColor: colors.body,
+            titleColor: 'black',
             backgroundColor: colors.success.green,
             description: 'string',
           },
@@ -163,7 +163,7 @@ const IssueListInfo: IssueListTypes = {
           {
             id: 0,
             title: 'FE',
-            titleColor: colors.offWhite,
+            titleColor: 'white',
             backgroundColor: colors.secondary.lightPurple,
             description: 'string',
           },

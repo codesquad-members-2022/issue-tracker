@@ -14,7 +14,7 @@ Light.args = {
   id: 0,
   title: '레이블 이름',
   labelStyle: 'STANDARD',
-  titleColor: colors.offWhite,
+  titleColor: 'white',
   backgroundColor: colors.primary.blue,
   description: 'string',
 };
@@ -24,7 +24,7 @@ Dark.args = {
   id: 1,
   title: '레이블 이름',
   labelStyle: 'STANDARD',
-  titleColor: colors.body,
+  titleColor: 'white',
   backgroundColor: colors.line,
 };
 

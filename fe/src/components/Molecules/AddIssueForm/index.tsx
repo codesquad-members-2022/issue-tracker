@@ -1,43 +1,52 @@
-import { ReactComponent as UserImage } from 'assets/userImg/userImageLarge.svg';
+import UserImage from 'components/Atoms/UserImage';
 import Input, { InputTypes } from 'components/Atoms/Input';
 import Textarea, { TextareaTypes } from 'components/Atoms/Textarea';
 import { StyledAddIssueForm, IssueForm } from 'components/Molecules/AddIssueForm/index.styles';
-import useInput from 'hooks/useInput';
 
 export type AddIssueFormTypes = InputTypes & TextareaTypes;
 
 const AddIssueForm = (props: AddIssueFormTypes) => {
   const {
+    isActive,
+    isTyping,
     inputSize,
     inputType,
     inputMaxLength,
     inputPlaceholder,
+    inputRef,
+    onChange,
+    onClick,
+    onBlur,
     textareaSize,
     textareaMaxLength,
     textareaPlaceholder,
+    textareaRef,
   } = props;
 
-  const [isActive, isTyping, onChangeInput, onClickInput, onBlurInput] = useInput();
+  const userData = localStorage.getItem('userInfo');
+  const { loginId, profileImageUrl } = JSON.parse(userData!);
 
   return (
     <StyledAddIssueForm>
-      <UserImage />
+      <UserImage imgSize="MEDIUM" loginId={loginId} profileImageUrl={profileImageUrl} />
       <IssueForm>
         <Input
           isActive={isActive}
           isTyping={isTyping}
-          onChange={onChangeInput}
-          onClick={onClickInput}
-          onBlur={onBlurInput}
+          onChange={onChange}
+          onClick={onClick}
+          onBlur={onBlur}
           inputSize={inputSize}
           inputType={inputType}
           inputMaxLength={inputMaxLength}
           inputPlaceholder={inputPlaceholder}
+          inputRef={inputRef}
         />
         <Textarea
           textareaPlaceholder={textareaPlaceholder}
           textareaMaxLength={textareaMaxLength}
           textareaSize={textareaSize}
+          textareaRef={textareaRef}
         />
       </IssueForm>
     </StyledAddIssueForm>

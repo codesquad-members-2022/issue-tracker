@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-no-bind */
-import React from 'react';
-import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
+import useGetIssueData from 'api/issue';
 
 import styled from 'styled-components';
 import FilterBar from 'components/Molecules/FilterBar';
 import IssueList from 'components/Molecules/IssueList';
 import SubNav from 'components/Molecules/SubNav';
+import Pagination from 'components/Molecules/Pagination';
 
 import useInput from 'hooks/useInput';
-
-import { getServerData } from 'helpers/utils/fetchData';
 import ISSUE_FILTER from 'helpers/constants/IssueFilter';
 
 const StyledDiv = styled.div`
@@ -32,17 +32,21 @@ const StyledDiv = styled.div`
 `;
 
 const Issues = () => {
-  const { isLoading, data, error } = useQuery('issueData', () => getServerData('api/issues?page=0'), {
-    cacheTime: Infinity,
-  });
-  const [isActive, isTyping, onChangeInput, onClickInput, onBlurInput] = useInput();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get('page');
+
+  const { isLoading, data, error } = useGetIssueData(Number(page));
+
+  const { onChangeInput, onClickInput, onBlurInput } = useInput();
   const navigate = useNavigate();
 
   if (isLoading) return <div>loading</div>;
   if (error) return <div>error</div>;
   if (!data) return <div>데이터가 없습니다</div>;
 
-  const HandleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const HandleOnClick = () => {
     navigate('/issues/new');
   };
 
@@ -87,17 +91,13 @@ const Issues = () => {
           inputStyle="FILTERBAR"
           inputType="text"
           inputValue="is:open"
+          inputRef={inputRef}
           onBlur={onBlurInput}
           onChange={onChangeInput}
           onClick={onClickInput}
           panelType="radio"
         />
-        <SubNav
-          labelCount={data.labelCount}
-          milestoneCount={data.milestoneCount}
-          buttonText="이슈 작성"
-          HandleOnClick={HandleOnClick}
-        />
+        <SubNav labelCount={data.labelCount} milestoneCount={data.milestoneCount} HandleOnClick={HandleOnClick} />
       </StyledDiv>
       <IssueList
         openIssueCount={data.openIssueCount}
@@ -105,6 +105,7 @@ const Issues = () => {
         issues={data.issues}
         filterTabs={filterTabs}
       />
+      <Pagination data={data.issues} page={page} setSearchParams={setSearchParams} />
     </>
   );
 };

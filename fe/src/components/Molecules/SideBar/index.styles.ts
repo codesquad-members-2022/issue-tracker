@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
-import { SideBarListType } from 'components/Molecules/SideBar';
+import { SideBarTypes, SideBarListType } from 'components/Molecules/SideBar';
 import { colors, fontStyles } from 'styles/theme';
 
-export const StyledSideBar = styled.div`
+type PickIsEditer = Pick<SideBarTypes, 'isEditer'>;
+
+export const StyledSideBar = styled.div<PickIsEditer>`
   display: table;
   border-collapse: collapse;
   border-style: hidden;
@@ -24,6 +26,8 @@ export const StyledSideBar = styled.div`
   .table-row {
     display: table-row;
   }
+
+  ${({ isEditer }) => !isEditer && 'pointer-events: none;'}
 `;
 
 export const SideBarItem = styled.div`

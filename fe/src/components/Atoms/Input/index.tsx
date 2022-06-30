@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Form, StyledInput } from 'components/Atoms/Input/index.styles';
 import Icon from 'components/Atoms/Icon/';
 
@@ -9,6 +9,7 @@ export interface InputTypes {
   inputSize: 'SMALL' | 'MEDIUM' | 'LARGE';
   inputValue?: string;
   inputMaxLength: number;
+  inputRef?: React.RefObject<HTMLInputElement>;
   disabled?: boolean;
   inputPlaceholder: string;
   isActive?: boolean;
@@ -34,18 +35,20 @@ const Input = ({
     inputSize,
     inputValue,
     inputPlaceholder,
+    inputRef,
     onChange,
     onClick,
     onBlur,
   } = props;
-  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {}, [inputValue]);
 
   return (
     <Form
       inputSize={inputSize}
       onClick={() => {
         if (disabled) return;
-        inputRef.current?.focus();
+        inputRef?.current?.focus();
         onClick();
       }}
       isActive={isActive}
@@ -57,7 +60,7 @@ const Input = ({
         maxLength={inputMaxLength}
         type={inputType}
         disabled={disabled}
-        defaultValue={inputValue}
+        defaultValue={inputValue || ''}
         placeholder={inputPlaceholder}
         ref={inputRef}
         onBlur={onBlur}

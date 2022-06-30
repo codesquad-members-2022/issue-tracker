@@ -1,7 +1,10 @@
+import { Dispatch, SetStateAction } from 'react';
 import { useQueryClient } from 'react-query';
+
 import styled from 'styled-components';
 import Logo from 'components/Atoms/Logo';
 import SignUpForm from 'components/Organisms/SignUpForm';
+
 import { AuthTypes } from 'helpers/utils/fetchData';
 
 const StyledSignUp = styled.div`
@@ -26,7 +29,7 @@ const StyledSignUp = styled.div`
   }
 `;
 
-const SignUp = () => {
+const SignUp = ({ setIsOAuth }: { setIsOAuth: Dispatch<SetStateAction<boolean>> }) => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData<AuthTypes>('auth');
 
@@ -35,7 +38,7 @@ const SignUp = () => {
   return (
     <StyledSignUp>
       <Logo logoSize="Large" />
-      <SignUpForm authData={data.authMemberResponse} />
+      <SignUpForm authData={data.authMemberResponse} setIsOAuth={setIsOAuth} />
     </StyledSignUp>
   );
 };

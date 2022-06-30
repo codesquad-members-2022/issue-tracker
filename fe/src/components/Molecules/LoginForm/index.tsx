@@ -2,6 +2,7 @@ import Button from 'components/Atoms/Button';
 import Input from 'components/Atoms/Input';
 import styled from 'styled-components';
 import useInput from 'hooks/useInput';
+import { useRef } from 'react';
 
 const Form = styled.div`
   form + form {
@@ -10,10 +11,23 @@ const Form = styled.div`
 `;
 
 const LoginForm = (): JSX.Element => {
-  const [isIdActive, isIdTyping, onChangeInputId, onClickInputId, onBlurInputId] = useInput();
-  const [isPasswordActive, isPasswordTyping, onChangeInputPassword, onClickInputPassword, onBlurInputPassword] =
-    useInput();
+  const {
+    isActive: isIdActive,
+    isTyping: isIdTyping,
+    onChangeInput: onChangeInputId,
+    onClickInput: onClickInputId,
+    onBlurInput: onBlurInputId,
+  } = useInput();
+  const {
+    isActive: isPasswordActive,
+    isTyping: isPasswordTyping,
+    onChangeInput: onChangeInputPassword,
+    onClickInput: onClickInputPassword,
+    onBlurInput: onBlurInputPassword,
+  } = useInput();
   const [idMaxLength, passwordMaxLength] = [10, 10];
+  const inputIdRef = useRef<HTMLInputElement>(null);
+  const inputPasswordRef = useRef<HTMLInputElement>(null);
 
   return (
     <Form>
@@ -27,6 +41,7 @@ const LoginForm = (): JSX.Element => {
         inputType="text"
         inputMaxLength={idMaxLength}
         inputPlaceholder="아이디"
+        inputRef={inputIdRef}
       />
       <Input
         isActive={isPasswordActive}
@@ -38,6 +53,7 @@ const LoginForm = (): JSX.Element => {
         inputType="password"
         inputMaxLength={passwordMaxLength}
         inputPlaceholder="비밀번호"
+        inputRef={inputPasswordRef}
       />
       <Button buttonStyle="STANDARD" label="아이디로 로그인" size="LARGE" />
     </Form>

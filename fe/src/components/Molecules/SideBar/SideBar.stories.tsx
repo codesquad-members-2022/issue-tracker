@@ -1,3 +1,4 @@
+/* eslint-disable storybook/story-exports */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SideBar from 'components/Molecules/SideBar/';
 
@@ -71,13 +72,14 @@ const milestones = [
 ];
 
 const totalLabelList = [
-  { id: 1, title: '레이블이 없는 이슈' },
-  { id: 2, title: 'bug', backgroundColor: '#B9062F' },
-  { id: 3, title: 'documentation', backgroundColor: '#FFFFFF' },
+  { id: 1, title: '레이블이 없는 이슈', backgroundColor: '#000000', titleColor: 'black' },
+  { id: 2, title: 'bug', backgroundColor: '#B9062F', titleColor: 'black' },
+  { id: 3, title: 'documentation', backgroundColor: '#FFFFFF', titleColor: 'black' },
   {
     id: 4,
     title: 'duplicate',
     backgroundColor: '#000000',
+    titleColor: 'black',
   },
 ];
 
@@ -86,16 +88,19 @@ const labels = [
     id: 1,
     title: 'bug',
     backgroundColor: '#B9062F',
+    titleColor: 'black',
   },
   {
     id: 2,
     title: 'documentation',
     backgroundColor: '#FFFFFF',
+    titleColor: 'black',
   },
   {
     id: 3,
     title: 'duplicate',
     backgroundColor: '#000000',
+    titleColor: 'black',
   },
 ];
 
@@ -135,12 +140,12 @@ const sideBarFilledList = [
   { id: 3, type: 'MILESTONE', indicatorLabel: '마일스톤', dropdownList: totalMilestoneList, contentList: milestones },
 ];
 
-export const Standard = Template.bind({});
-Standard.args = {
-  sideBarList: sideBarStandardList,
-};
+// export const Standard = Template.bind({});
+// Standard.args = {
+//   sideBarList: sideBarStandardList,
+// };
 
-export const Filled = Template.bind({});
-Filled.args = {
-  sideBarList: sideBarFilledList,
-};
+// export const Filled = Template.bind({});
+// Filled.args = {
+//   sideBarList: sideBarFilledList,
+// };

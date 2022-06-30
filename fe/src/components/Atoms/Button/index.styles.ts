@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import styled, { css } from 'styled-components';
 import { ButtonTypes } from 'components/Atoms/Button';
 
@@ -116,11 +115,20 @@ const StyledButton = styled.button<StyledButtonTypes>`
         background: none;
         color: ${({ theme }) => theme.colors.body};
 
-        &:hover {
+        &:hover:not([disabled]) {
           color: ${({ theme }) => theme.colors.error.red};
           svg {
             stroke: ${({ theme }) => theme.colors.error.red};
           }
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: default;
+        }
+
+        &:disabled:hover {
+          color: ${({ theme }) => theme.colors.body};
         }
       `;
     }

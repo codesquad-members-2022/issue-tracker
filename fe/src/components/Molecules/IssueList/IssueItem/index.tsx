@@ -1,8 +1,10 @@
 import CheckBox from 'components/Atoms/CheckBox';
 import UserImage, { UserImageTypes } from 'components/Atoms/UserImage';
 import { LabelTypes } from 'components/Atoms/Label';
+
 import Issue from 'components/Molecules/IssueList/Issue';
-import FlexDiv, { AssigneeDiv } from 'components/Molecules/IssueList/IssueItem/index.styles';
+import { CheckIssue, AssigneeDiv } from 'components/Molecules/IssueList/IssueItem/index.styles';
+import CommonItem from 'components/Molecules/CommonList/CommonItem';
 
 export interface IssueItemTypes {
   id: number;
@@ -25,13 +27,13 @@ const IssueItem = (props: IssueItemTypes) => {
   });
 
   return (
-    <FlexDiv>
-      <div>
+    <CommonItem>
+      <CheckIssue>
         <CheckBox id={id} checkedItemHandler={checkedItemHandler} checkedIssue={checkedIssue} />
         <Issue {...props} />
-      </div>
+      </CheckIssue>
       <AssigneeDiv>{assigneeList}</AssigneeDiv>
-    </FlexDiv>
+    </CommonItem>
   );
 };
 

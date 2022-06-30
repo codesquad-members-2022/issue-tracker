@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import styled, { css } from 'styled-components';
 import { TextareaTypes } from 'components/Atoms/Textarea';
 

@@ -2,11 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
-  ${reset};
+${reset}; 
 
-  * {
+* {
     box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;    
   }
 
   body {
@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+
 `;
 
 export default GlobalStyle;

@@ -1,7 +1,9 @@
-import axios from 'axios';
 import { useQuery } from 'react-query';
 import { Dispatch, SetStateAction } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
+
 import { AuthTypes } from 'helpers/utils/fetchData';
 
 const Oauth = ({ setIsOAuth }: { setIsOAuth: Dispatch<SetStateAction<boolean>> }) => {
@@ -13,9 +15,12 @@ const Oauth = ({ setIsOAuth }: { setIsOAuth: Dispatch<SetStateAction<boolean>> }
 
     if (data.isMember) {
       // localStorage를 사용하지 않는 방법 고민하기
-      window.localStorage.setItem('refresh_token', data.jwtResponse.refreshToken);
-      window.localStorage.setItem('userInfo', JSON.stringify(data.authMemberResponse));
-      setIsOAuth(true);
+      const { jwtResponse, memberResponse } = data;
+      axios.defaults.headers.common.Authorization = `Bearer ${jwtResponse.accessToken}`;
+      axios.defaults.withCredentials = true;
+      window.localStorage.setItem('refresh_token', JSON.stringify(jwtResponse.refreshToken));
+      window.localStorage.setItem('userInfo', JSON.stringify(memberResponse));
+      await setIsOAuth(true);
       navigate('/issues');
     } else {
       navigate('/sign-up');

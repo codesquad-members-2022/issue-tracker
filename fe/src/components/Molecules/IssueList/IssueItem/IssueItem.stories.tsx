@@ -20,7 +20,7 @@ const IssueItemInfo: IssueItemTypes = {
       id: 0,
       title: 'documentation',
       labelStyle: 'STANDARD',
-      titleColor: colors.offWhite,
+      titleColor: 'white',
       backgroundColor: colors.primary.blue,
     },
   ],

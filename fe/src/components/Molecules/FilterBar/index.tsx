@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Dropdown, { DropdownTypes } from 'components/Atoms/Dropdown';
 import Input, { InputTypes } from 'components/Atoms/Input';
 import useInput from 'hooks/useInput';
+import { useRef } from 'react';
 
 const StyledFilterBar = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ export type FilterBarTypes = DropdownTypes & InputTypes;
 
 const FilterBar = (props: FilterBarTypes): JSX.Element => {
   const {
+    type,
     indicatorStyle,
     indicatorLabel,
     dropdownTitle,
@@ -27,11 +29,13 @@ const FilterBar = (props: FilterBarTypes): JSX.Element => {
     inputMaxLength,
   } = props;
 
-  const [isActive, isTyping, onChangeInput, onClickInput, onBlurInput] = useInput();
+  const { isActive, isTyping, onChangeInput, onClickInput, onBlurInput } = useInput();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <StyledFilterBar>
       <Dropdown
+        type={type}
         isActive={isActive}
         indicatorStyle={indicatorStyle}
         indicatorLabel={indicatorLabel}
@@ -48,6 +52,7 @@ const FilterBar = (props: FilterBarTypes): JSX.Element => {
         inputMaxLength={inputMaxLength}
         inputValue={inputValue}
         inputPlaceholder={inputPlaceholder}
+        inputRef={inputRef}
         onChange={onChangeInput}
         onClick={onClickInput}
         onBlur={onBlurInput}

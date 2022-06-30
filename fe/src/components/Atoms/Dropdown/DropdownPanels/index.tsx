@@ -14,50 +14,37 @@ import { DropdownListTypes } from 'components/types';
 
 export interface DropdownPanelsTypes {
   dropdownList: DropdownListTypes[];
-  panelType: 'checkbox' | 'radio';
+  panelType?: 'checkbox' | 'radio';
   dropdownTitle?: string;
+  type?: string;
   clickHandler?: (event: React.MouseEvent<HTMLInputElement>) => void;
 }
 
-const DropdownPanels = ({ panelType = 'radio', dropdownTitle = '필터 이름', ...props }: DropdownPanelsTypes) => {
-  const { dropdownList, clickHandler } = props;
-
-  // is:open, author:@me, assignee:@me , mentions:@me ,is:closed //is:issue제외
-  // assignee, label, milestone, author,
+const DropdownPanels = ({ panelType = 'checkbox', dropdownTitle = '필터 이름', ...props }: DropdownPanelsTypes) => {
+  const { dropdownList, clickHandler, type } = props;
 
   return (
     <StyledDropdownPanels>
       <DropdonwTitle>{dropdownTitle}</DropdonwTitle>
       <DropdownList initIcon={checkOffCircle} activeIcon={checkOnCircle} {...props}>
-        {dropdownList.map(
-          ({
-            id,
-            loginId,
-            title,
-            openIssueCount,
-            closedIssueCount,
-            backgroundColor,
-            profileImageUrl,
-          }: DropdownListTypes) => (
-            <li key={id}>
-              <input
-                key={`input-${id}`}
-                type={panelType}
-                name={dropdownTitle}
-                id={`${dropdownTitle}-${loginId || title}`}
-                data-assigneesdata={[id, loginId, profileImageUrl]}
-                data-labelsdata={[id, title, backgroundColor]}
-                data-milestonesdata={[id, title, openIssueCount, closedIssueCount]}
-                onClick={clickHandler}
-              />
-              <label key={`label-${id}`} htmlFor={`${dropdownTitle}-${loginId || title}`}>
-                {backgroundColor && <SmallLabel fill={backgroundColor} />}
-                {profileImageUrl && <UserImage profileImageUrl={profileImageUrl} loginId={loginId!} imgSize="SMALL" />}
-                <span>{loginId || title}</span>
-              </label>
-            </li>
-          ),
-        )}
+        {dropdownList.map(({ id, loginId, title, backgroundColor, profileImageUrl }: DropdownListTypes) => (
+          <li key={id}>
+            <input
+              key={`input-${id}`}
+              type={panelType}
+              name={dropdownTitle}
+              id={`${dropdownTitle}-${loginId || title}`}
+              data-type={type}
+              data-id={id}
+              onClick={clickHandler}
+            />
+            <label key={`label-${id}`} htmlFor={`${dropdownTitle}-${loginId || title}`}>
+              {backgroundColor && <SmallLabel fill={backgroundColor} />}
+              {profileImageUrl && <UserImage profileImageUrl={profileImageUrl} loginId={loginId!} imgSize="SMALL" />}
+              <span>{loginId || title}</span>
+            </label>
+          </li>
+        ))}
       </DropdownList>
     </StyledDropdownPanels>
   );

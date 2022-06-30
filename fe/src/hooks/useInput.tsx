@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function useInput(): [boolean, boolean, (event: React.FormEvent<HTMLInputElement>) => void, () => void, () => void] {
+function useInput() {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
@@ -14,7 +14,7 @@ function useInput(): [boolean, boolean, (event: React.FormEvent<HTMLInputElement
   const onClickInput = () => setIsActive(true);
   const onBlurInput = () => setIsActive(false);
 
-  return [isActive, isTyping, onChangeInput, onClickInput, onBlurInput];
+  return { isActive, isTyping, onChangeInput, onClickInput, onBlurInput };
 }
 
 export default useInput;

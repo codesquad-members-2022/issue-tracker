@@ -1,4 +1,5 @@
-import React, { ReactNode, useState, useRef } from 'react';
+import React, { ReactNode, useState } from 'react';
+import axios from 'axios';
 import { Form, StyledTextarea, AddFile, Count } from 'components/Atoms/Textarea/index.styles';
 import Icon from 'components/Atoms/Icon/';
 
@@ -6,6 +7,8 @@ export interface TextareaTypes {
   textareaSize: 'MEDIUM' | 'LARGE';
   textareaPlaceholder?: string;
   textareaMaxLength?: number;
+  textareaValue?: string;
+  textareaRef: React.RefObject<HTMLTextAreaElement>;
   children?: ReactNode;
 }
 
@@ -15,9 +18,9 @@ const Textarea = ({
   textareaMaxLength = defaultTextareaMaxLength,
   ...props
 }: TextareaTypes) => {
-  const { textareaPlaceholder } = props;
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [isTyping, setIsTyping] = useState<string>('');
+  const { textareaPlaceholder, textareaValue, textareaRef } = props;
+
+  const [typingValue, setTypingValue] = useState<string>(textareaValue || '');
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const maxLength = 120;
@@ -29,23 +32,40 @@ const Textarea = ({
 
   const handleTextareaChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
     const { value } = event.currentTarget;
-    if (!value) return setIsTyping('');
+    if (!value) return setTypingValue('');
     // eslint-disable-next-line no-param-reassign
     if (Number(value) >= maxLength) event.currentTarget.value = value.slice(0, maxLength);
-    return setIsTyping(value);
+    return setTypingValue(value);
   };
 
-  const count = isTyping.length || 0;
+  const count = typingValue.length || 0;
+
+  const handleUpload = async (e: { target: HTMLInputElement }) => {
+    const file = e.target.files![0];
+
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/api/upload`,
+      { file },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+
+    textareaRef.current!.value += `\n![](${data.fileUrl})\n`;
+  };
 
   return (
     <Form isActive={isActive} onClick={handleFormClick}>
-      {isTyping && (
+      {typingValue && (
         <label className="textarea" htmlFor="textarea">
           <span>{textareaPlaceholder}</span>
         </label>
       )}
       <StyledTextarea
         id="textarea"
+        defaultValue={textareaValue}
         maxLength={textareaMaxLength}
         placeholder={textareaPlaceholder}
         textareaSize={textareaSize}
@@ -56,7 +76,7 @@ const Textarea = ({
       <Count>{`띄어쓰기 포함 ${count}자`}</Count>
       <AddFile>
         <label className="addFile" htmlFor="addFile">
-          <input id="addFile" type="file" />
+          <input id="addFile" type="file" onChange={handleUpload} />
           <Icon icon="PaperClip" />
           <span>파일 첨부하기</span>
         </label>
