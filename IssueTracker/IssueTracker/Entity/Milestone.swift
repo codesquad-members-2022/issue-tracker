@@ -8,7 +8,11 @@
 import Foundation
 
 // MARK: - Milestone
-struct Milestone: Codable {
+struct Milestone: Codable, Optionable {
+    var subTitle: String {
+        self.title
+    }
+    
     let title: String
     let description: String
     let openIssues, closedIssues: Int

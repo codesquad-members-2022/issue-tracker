@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 protocol OptionSelectDelegate: AnyObject {
-    func selected(item: Label, option: Option)
+    func selected(item: Optionable, option: Option)
 }
 
 class OptionSelectViewController: UIViewController {
@@ -76,7 +76,7 @@ extension OptionSelectViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier,
                                                  for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.attributedText = NSAttributedString(string: model.getOption(index: indexPath.row).name)
+        content.attributedText = NSAttributedString(string: model.getOption(index: indexPath.row).subTitle)
         cell.contentConfiguration = content
         return cell
     }

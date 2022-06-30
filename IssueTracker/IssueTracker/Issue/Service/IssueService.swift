@@ -16,6 +16,7 @@ enum IssueError: Error {
 
 enum OptionError: Error {
     case labelNotFound
+    case milestonesNotFound
 }
 
 struct IssueService {
@@ -154,6 +155,27 @@ struct IssueService {
                     completion(.success(data))
                 case .failure:
                     completion(.failure(.labelNotFound))
+                }
+            }
+    }
+    
+    
+    func requestRepositoryMilestones(repo: Repository, completion: @escaping (Result<[Milestone], OptionError>) -> Void) {
+        let urlString = RequestURL.repositoryMilestones(owner: repo.owner.login, repo: repo.name).description
+        let headers: HTTPHeaders = [
+            NetworkHeader.acceptV3.getHttpHeader(),
+            NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
+        ]
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        AF.request(urlString, method: .get, headers: headers)
+            .responseDecodable(of: [Milestone].self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure:
+                    completion(.failure(.milestonesNotFound))
                 }
             }
     }

@@ -178,19 +178,14 @@ class NewIssueViewController: UIViewController {
 extension NewIssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let option = optionList[indexPath.row]
-        switch option {
-        case .label:
-            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return
-            }
-            guard let viewController = appdelegate.container.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
-                return
-            }
-            self.navigationController?.pushViewController(viewController, animated: true)
-            viewController.delegate = self
-        default:
-            break
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
         }
+        guard let viewController = appdelegate.container.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
+            return
+        }
+        self.navigationController?.pushViewController(viewController, animated: true)
+        viewController.delegate = self
     }
 }
 
@@ -214,12 +209,12 @@ extension NewIssueViewController: UITableViewDataSource {
 }
 
 extension NewIssueViewController: OptionSelectDelegate {
-    func selected(item: Label, option: Option) {
+    func selected(item: Optionable, option: Option) {
           guard let optionIndex = optionList.firstIndex(of: option) else {
               return
           }
-          selectedList[optionIndex] = item.name
-          selectedLabel = item
+          selectedList[optionIndex] = item.subTitle
+          selectedLabel = item as? Label
           self.optionTable.reloadData()
       }
 }
