@@ -2,6 +2,7 @@ import React, { lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
+import { CookiesProvider } from 'react-cookie';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AddIssue } from './pages/addIssue';
 import IssueList from '@pages/issueList/IssueList';
@@ -15,16 +16,18 @@ const App = () => {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <Router>
-          <Routes>
-            <Route path="/">
-              <Route index element={<AuthPage />} />
-              <Route path="issues" element={<IssueList />} />
-              <Route path="addIssue" element={<AddIssue />} />
-              <Route path="callback" element={<Callback />} />
-            </Route>
-          </Routes>
-        </Router>
+        <CookiesProvider>
+          <Router>
+            <Routes>
+              <Route path="/">
+                <Route index element={<AuthPage />} />
+                <Route path="issues" element={<IssueList />} />
+                <Route path="addIssue" element={<AddIssue />} />
+                <Route path="callback" element={<Callback />} />
+              </Route>
+            </Routes>
+          </Router>
+        </CookiesProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Provider>
