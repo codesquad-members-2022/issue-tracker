@@ -7,6 +7,7 @@ import com.example.issu_tracker.data.local.FriendDatabase
 import com.example.issu_tracker.data.local.UserDao
 import com.example.issu_tracker.data.repository.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestoreSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,7 +37,10 @@ object RepositoryModule {
 
     @Provides
     fun provideFireStoreDB(): FirebaseFirestore {
-        return FirebaseFirestore.getInstance()
+        val setting = firestoreSettings { isPersistenceEnabled = false }
+        val db = FirebaseFirestore.getInstance()
+        db.firestoreSettings = setting
+        return db
     }
 
     @Provides

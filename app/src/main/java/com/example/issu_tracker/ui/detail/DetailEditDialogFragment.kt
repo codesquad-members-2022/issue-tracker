@@ -11,7 +11,7 @@ import com.example.issu_tracker.databinding.DetailEditDialogFragmentBinding
 import java.lang.StringBuilder
 
 
-class DetailEditDialogFragment(val labelNameList: List<String>, mileStoneName: String? = null) :
+class DetailEditDialogFragment(private val labelNameList: List<String>, mileStoneName: String? = null) :
     DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
