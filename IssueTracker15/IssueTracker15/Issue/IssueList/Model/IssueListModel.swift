@@ -13,7 +13,6 @@ final class IssueListModel {
     private var baseURL: URL? {
         return URL(string: "https://api.github.com")
     }
-    private var param: Any?
     
     func requestListIssues() -> DataResponsePublisher<[IssueDTO]>? {
         guard var url = baseURL else {

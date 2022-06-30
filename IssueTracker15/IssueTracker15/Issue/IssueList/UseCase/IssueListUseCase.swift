@@ -15,7 +15,7 @@ class IssueListUseCase: UseCaseResponsible {
     
     private var cancellables = Set<AnyCancellable>()
     
-    func request(_ completionBlock: @escaping (Any?) -> Void) {
+    func request(param: Any?, _ completionBlock: @escaping (Any?) -> Void) {
         listModel
             .requestListIssues()?
             .subscribe(on: DispatchQueue.global())

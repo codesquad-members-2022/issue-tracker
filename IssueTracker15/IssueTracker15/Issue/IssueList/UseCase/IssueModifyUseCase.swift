@@ -14,7 +14,7 @@ class IssueModifyUseCase: UseCaseResponsible {
     var param: Any? // request 함수에 파라미터로 넣고 싶었지만 팀원과 동시에 진행해야 하므로 지금은 이렇게 처리합니다.
     private var cancellables = Set<AnyCancellable>()
     
-    func request(_ completionBlock: @escaping (Any?) -> Void) {
+    func request(param: Any?, _ completionBlock: @escaping (Any?) -> Void) {
         updateModel
             .requestCloseIssue()?
             .subscribe(on: DispatchQueue.global())

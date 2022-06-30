@@ -47,12 +47,12 @@ class IssueListViewModel: CommonViewModel {
     }
     
     private func getIssues(_ tableView: ViewBindable) {
-        listUseCase?.request({ [weak self] list in
+        listUseCase?.request(param: nil) { [weak self] list in
             if let list = list as? [IssueDTO] {
                 self?.issueList = list
                 self?.output(list, tableView)
             }
-        })
+        }
     }
     
     private func selectList(_ cell: ViewBindable) {
@@ -83,7 +83,7 @@ class IssueListViewModel: CommonViewModel {
         }
         
         useCase.param = cell.dto
-        useCase.request({ [weak self] _ in
+        useCase.request(param: nil) { [weak self] _ in
             
             defer {
                 self?.output(cell.indexPath, target)
@@ -96,7 +96,7 @@ class IssueListViewModel: CommonViewModel {
             if param == .closeIssue {
                 self?.issueList[index].closed_at = Date().ISO8601Format()
             }
-        })
+        }
     }
 }
 

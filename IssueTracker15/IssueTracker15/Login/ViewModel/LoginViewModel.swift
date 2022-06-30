@@ -23,13 +23,13 @@ struct LoginViewModel: CommonViewModel {
         switch loginType {
         case .gitHub:
             guard let useCase = githubLoginUseCase else { return }
-            useCase.request { loginURL in
+            useCase.request(param: nil) { loginURL in
                 self.output(loginURL, bindable)
             }
             
         case .apple:
             guard let useCase = appleLoginUseCase else { return }
-            useCase.request { loginURL in
+            useCase.request(param: nil) { loginURL in
                 self.output(loginURL, bindable)
             }
         }
