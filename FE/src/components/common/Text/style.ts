@@ -10,20 +10,15 @@ export type TextStyledProps = {
 };
 
 export const Text = styled.span.attrs<TextStyledProps>(
-  ({
-    color = 'titleArchieve',
-    fontSize = 'base',
-    fontWeight = 'base',
-    styles,
-  }) => ({
+  ({ color = 'titleArchieve', fontSize = 'base', fontWeight = 'base' }) => ({
     style: {
       color: theme.color[color],
       fontSize: theme.fontSize[fontSize],
       fontWeight: theme.fontWeight[fontWeight],
-      styles,
     },
   }),
 )<TextStyledProps>`
   display: flex;
   align-items: center;
+  ${({ styles }) => styles}
 `;

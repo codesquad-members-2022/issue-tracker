@@ -5,7 +5,7 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.json', '.svg'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.json'],
     alias: { '@': path.resolve(__dirname, 'src') },
   },
   module: {
@@ -38,8 +38,12 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg|jpe?g|gif|ico|woff|woff2|eot|ttf|otf)$/,
+        test: /\.(png|jpe?g|gif|ico|woff|woff2|eot|ttf|otf)$/,
         type: 'asset/inline',
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
       },
     ],
   },

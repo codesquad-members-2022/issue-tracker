@@ -2,7 +2,7 @@ import { Text } from '@/components/common/Text';
 
 type IssueWriterTimestampTextProps = {
   IssueWriter: string;
-  IssueTimestamp: Date;
+  IssueTimestamp: string;
 };
 
 // TODO: 날짜 계산 로직 어디에서 처리해줄것인가? 상위 템플릿 or 이 컴포넌트

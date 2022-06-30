@@ -1,10 +1,9 @@
 import * as S from './style';
 import UNDER_ARROW from '@/assets/UnderArrow.svg';
-import { Icon } from '@/components/common/Icon';
-import SEARCH_ICON from '@/assets/Search.svg';
+import SEARCH_ICON from '@/assets/Icons/search.svg';
 import { Text } from '@/components/common/Text';
 import { ListModal } from '@/components/common/ListModal';
-import { LabelFitlerItem } from '@/components/Label/LabelFilterItem';
+import { MilestoneSideBarDetailListItem } from '@/components/Milestone/MilestoneSideBarDetailListItem';
 
 // TODO: 필터 버튼 네이밍 고민
 export function ControlPanel() {
@@ -14,17 +13,26 @@ export function ControlPanel() {
         <S.FilterDetail>
           <summary>
             <Text text="필터" fontWeight="bold" color="placeholder" />
-            <Icon iconName={UNDER_ARROW} iconSize="base" />
+            <UNDER_ARROW />
           </summary>
-          <ListModal listTitle="라벨 필터">
-            {['3번', '4번', '5번'].map(title => (
-              <LabelFitlerItem contents={title} key={`${title}${Date.now()}`} />
+          <ListModal listTitle="이슈 필터" rightGap="-100px">
+            {[
+              '열린 이슈',
+              '내가 작성한 이슈',
+              '나에게 할당된 이슈',
+              '내가 댓글을 남근 이슈',
+              '닫힌 이슈',
+            ].map(title => (
+              <MilestoneSideBarDetailListItem
+                title={title}
+                key={`${title}${Date.now()}`}
+              />
             ))}
           </ListModal>
         </S.FilterDetail>
 
         <S.FilterForm>
-          <Icon iconName={SEARCH_ICON} iconSize="base" />
+          <SEARCH_ICON />
           <S.FilterInput placeholder="Search All Issue" />
         </S.FilterForm>
       </S.FilterBar>

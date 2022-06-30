@@ -1,13 +1,20 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Text } from '../common/Text';
+import MILESTONE_ICON from '@/assets/Icons/milestone.svg';
 
-export const NavItemWrapper = styled.a`
+export const NavItemWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 200px;
+  align-items: center;
+  width: 225px;
   gap: 10px;
   padding: 6px 32.5px;
-  border-right: 1px solid ${({ theme }) => theme.color.line};
+`;
+
+const LinkWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 type MilestoneNavItemProps = {
@@ -16,10 +23,14 @@ type MilestoneNavItemProps = {
 
 export function MilestonNavItem({ milestoneLength }: MilestoneNavItemProps) {
   return (
-    <NavItemWrapper href="/milestone">
-      <Text text="아이콘" color="placeholder" fontSize="small" />
-      <Text text="마일스톤" color="placeholder" fontSize="small" />
-      <Text text={`${milestoneLength}`} color="placeholder" fontSize="small" />
-    </NavItemWrapper>
+    <LinkWrapper>
+      <Link to="/milestones">
+        <NavItemWrapper>
+          <MILESTONE_ICON />
+          <Text text="마일스톤" color="label" fontWeight="bold" />
+          <Text text={`(${milestoneLength})`} color="label" />
+        </NavItemWrapper>
+      </Link>
+    </LinkWrapper>
   );
 }

@@ -5,9 +5,9 @@ type BadgeProps = {
   alt: string;
 } & S.BadgeStyledProps;
 
-export function Badge({ imgSRC, alt, styles }: BadgeProps) {
+export function Badge({ badgeSize, imgSRC, alt, styles }: BadgeProps) {
   return (
-    <S.Badge styles={styles}>
+    <S.Badge styles={styles} badgeSize={badgeSize}>
       <img src={imgSRC} alt={alt} />
     </S.Badge>
   );

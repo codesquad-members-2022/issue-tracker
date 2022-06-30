@@ -86,7 +86,6 @@ export const AttachFileLabel = styled.label`
   height: 16px;
   padding: 8px;
   display: inline-block;
-  background-color: red;
   cursor: pointer;
   input[type='file'] {
     display: none;

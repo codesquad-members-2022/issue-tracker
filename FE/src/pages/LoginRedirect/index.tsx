@@ -7,9 +7,9 @@ export function Callback() {
   const code = new URL(window.location.href).searchParams.get('code');
   // TODO: 토큰 쿠키에저장
   useEffect(() => {
-    fetch(`${code}`)
+    fetch(`${process.env.JWT_TOKEN_URL}${code}`)
       .then(data => data.json())
-      .then(() => navigate('/issueList'));
+      .then(() => navigate('/issueList/open'));
   }, []);
 
   return <S.Callback />;

@@ -19,12 +19,12 @@ export const IssueListHeader = styled.div`
   background-color: ${({ theme }) => theme.color.background};
 `;
 
-export const IssueHeaderLeft = styled.div`
+export const IssueHeaderCheckOpen = styled.div`
   display: flex;
   gap: 24px;
 `;
 
-export const IssueHeaderRight = styled.div`
+export const IssueHeaderFilters = styled.div`
   display: flex;
   gap: 24px;
 `;

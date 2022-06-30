@@ -6,7 +6,7 @@ export function AddIssueSubmit() {
     <S.AddIssueSubmit>
       <S.CancelButton>작성 취소</S.CancelButton>
       <Button color="primary" size="medium" fontSize="large">
-        테스트
+        완료
       </Button>
     </S.AddIssueSubmit>
   );

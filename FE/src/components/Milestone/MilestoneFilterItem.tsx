@@ -13,16 +13,14 @@ const ListText = styled.div`
 `;
 
 type MilestoneFilterItemProps = {
-  milestoneTitle: string;
+  title: string;
 };
 
-export function MilestoneFilterItem({
-  milestoneTitle,
-}: MilestoneFilterItemProps) {
+export function MilestoneFilterItem({ title }: MilestoneFilterItemProps) {
   return (
     <ListItem>
       <ListText>
-        <Text text={`${milestoneTitle}`} />
+        <Text text={`${title}`} />
       </ListText>
       <Text text="⃝" />
     </ListItem>

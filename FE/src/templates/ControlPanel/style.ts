@@ -17,7 +17,6 @@ export const FilterBar = styled.div<FilterBarProps>`
   border: 1px solid ${({ theme }) => theme.color.line};
   border-radius: 11px;
   background-color: ${({ theme }) => theme.color.inputBackground};
-  overflow: hidden;
 `;
 
 export const FilterDetail = styled.details`
@@ -28,17 +27,20 @@ export const FilterDetail = styled.details`
   border-right: 1px solid ${({ theme }) => theme.color.line};
   height: inherit;
   gap: 8px;
+  position: relative;
 
   summary {
+    box-sizing: border-box; // INFO: 패딩 안 넘어가게
     cursor: pointer;
     background-color: ${({ theme }) => theme.color.offwhite};
-    box-sizing: border-box; // INFO: 패딩 안 넘어가게
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: inherit;
     height: 100%;
     padding: 6px 24px;
+    border-top-left-radius: 11px;
+    border-bottom-left-radius: 11px;
   }
 `;
 
@@ -64,12 +66,18 @@ export const FilterInput = styled.input`
 `;
 
 export const DetailMenu = styled.div`
+  position: absolute;
   width: 240px;
   border: 1px solid ${({ theme }) => theme.color.line};
   border-radius: 16px;
-  position: absolute;
-  margin-top: 10px;
+  left: 0;
+  top: 120%;
   overflow: hidden;
+  background-color: ${({ theme }) => theme.color.offwhite};
+
+  & > :first-child {
+    border-top: none;
+  }
 `;
 
 export const Detailheader = styled.div`

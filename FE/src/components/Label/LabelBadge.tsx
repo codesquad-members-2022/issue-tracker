@@ -1,25 +1,36 @@
 import styled from 'styled-components';
 import { Text } from '@/components/common/Text';
 
-type LabelBadgeProps = {
-  name: string;
-  color: string;
-  // textColor: 'white' | 'black';
+type BadgeWrapperProps = {
+  backgroundColor: string;
 };
 
-const BadgeWrapper = styled.div`
-  padding: 4px 16px;
+type LabelBadgeProps = {
+  name: string;
+  textColor?: 'offwhite' | 'titleArchieve';
+} & BadgeWrapperProps;
+
+const BadgeWrapper = styled.div.attrs<BadgeWrapperProps>(
+  ({ backgroundColor = '#004DE3' }) => ({
+    style: {
+      backgroundColor: `${backgroundColor}`,
+    },
+  }),
+)<BadgeWrapperProps>`
   border-radius: 30px;
+  width: fit-content;
+  height: fit-content;
+  padding: 4px 16px;
 `;
 
 export function LabelBadge({
   name,
-  color = 'blue',
-}: // textColor,
-LabelBadgeProps) {
+  backgroundColor,
+  textColor = 'offwhite',
+}: LabelBadgeProps) {
   return (
-    <BadgeWrapper>
-      <Text text={name} />
+    <BadgeWrapper backgroundColor={backgroundColor}>
+      <Text text={name} color={textColor} />
     </BadgeWrapper>
   );
 }
