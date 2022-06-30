@@ -20,4 +20,9 @@ const getCurrentUserInfoOf = (infoType: keyof IMember) => {
   return userData;
 };
 
-export { getCurrentUserInfo, getCurrentUserInfoOf };
+const isTokenExist = () => {
+  const currentUserToken = localStorage.getItem('currentUserToken');
+  return currentUserToken !== undefined;
+};
+
+export { getCurrentUserInfo, getCurrentUserInfoOf, isTokenExist };
