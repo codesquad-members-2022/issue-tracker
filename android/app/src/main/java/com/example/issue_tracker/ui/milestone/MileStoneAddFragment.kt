@@ -81,7 +81,7 @@ class MileStoneAddFragment : Fragment() {
     }
 
     private fun observeDate() {
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.mileStone.collect { mileStone ->
                 binding.mileStone = mileStone
             }

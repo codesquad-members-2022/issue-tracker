@@ -23,9 +23,10 @@ class IssueFilterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue_filter, container, false)
+        savedInstanceState: Bundle?,
+    ): View {
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_issue_filter, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         return binding.root
@@ -39,7 +40,8 @@ class IssueFilterFragment : Fragment() {
         binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
         binding.ibFilterButtonStatus.setOnClickListener {
             val statusPopupMenu = PopupMenu(requireContext(), it)
-            statusPopupMenu.menuInflater.inflate(R.menu.issue_filter_status_menu, statusPopupMenu.menu)
+            statusPopupMenu.menuInflater.inflate(R.menu.issue_filter_status_menu,
+                statusPopupMenu.menu)
             statusPopupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.open_issue -> {
@@ -76,7 +78,7 @@ class IssueFilterFragment : Fragment() {
                 while (flag) {
                     for (i in 0 until viewModel.labelList.value.size) {
                         if (item.itemId == i) {
-                            viewModel.labelList.value[i].labelTitle?.let { title->
+                            viewModel.labelList.value[i].labelTitle?.let { title ->
                                 viewModel.setLabelChoose(title)
                             }
                             binding.tvFilterChooseLabel.text = viewModel.labelChoose.value

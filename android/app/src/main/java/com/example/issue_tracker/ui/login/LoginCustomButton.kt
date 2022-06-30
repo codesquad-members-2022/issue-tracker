@@ -39,10 +39,4 @@ class LoginCustomButton(context: Context, attrs: AttributeSet) : ConstraintLayou
         binding.ivBtnImage.setImageResource(resourceID)
     }
 
-    fun setClickBehavior(click: () -> Unit) {
-        binding.customButtonBackground.setOnClickListener {
-            click()
-        }
-    }
-
 }

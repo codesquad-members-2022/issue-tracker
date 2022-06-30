@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
-class MileStoneRepositoryImpl @Inject constructor(): MileStoneRepository {
+class MileStoneRepositoryImpl @Inject constructor() : MileStoneRepository {
 
     private val _mileStoneList = MutableStateFlow<MutableList<MileStone>>(mutableListOf())
 
@@ -14,7 +14,6 @@ class MileStoneRepositoryImpl @Inject constructor(): MileStoneRepository {
         _mileStoneList.addElement(mileStone)
     }
 
-    override fun getLabelList(): Flow<List<MileStone>> {
-        return _mileStoneList
-    }
+    override fun getLabelList(): Flow<List<MileStone>> = _mileStoneList
+
 }

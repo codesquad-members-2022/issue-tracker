@@ -11,8 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MileStoneAddViewModel @Inject constructor(
-    private val repository: MileStoneRepository
-): ViewModel() {
+    private val repository: MileStoneRepository,
+) : ViewModel() {
 
     private val _mileStone = MutableStateFlow(defaultMileStone)
     val mileStone = _mileStone.asStateFlow()
@@ -23,14 +23,16 @@ class MileStoneAddViewModel @Inject constructor(
 
     fun onPickedDate(timeStamp: Long) {
         val timeStampFormatted = timeStampToDateString(timeStamp)
-        _mileStone.value = MileStone(null, mileStoneTitle.value, mileStoneDescription.value, timeStampFormatted)
+        _mileStone.value =
+            MileStone(null, mileStoneTitle.value, mileStoneDescription.value, timeStampFormatted)
     }
 
-    fun saveData() {
-        if(_mileStone.value === defaultMileStone) {
-            repository.addLabelList(MileStone(null, mileStoneTitle.value, mileStoneDescription.value, INITIAL_DATE))
-            return
-        }
+    fun saveData() = if (_mileStone.value === defaultMileStone) {
+        repository.addLabelList(MileStone(null,
+            mileStoneTitle.value,
+            mileStoneDescription.value,
+            INITIAL_DATE))
+    } else {
         repository.addLabelList(_mileStone.value)
     }
 

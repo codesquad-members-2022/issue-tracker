@@ -6,9 +6,15 @@ import com.example.issue_tracker.common.addElement
 import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
 import com.example.issue_tracker.model.Issue
+import com.example.issue_tracker.network.CEHModel
+import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.IssueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,20 +36,27 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _checkedIssueIdListTemp = MutableStateFlow<List<Int>>(mutableListOf())
     val checkedIssueIdListTemp: StateFlow<List<Int>> = _checkedIssueIdListTemp
 
-    // 이슈 리스트를 가져오는 함수
-    // API 로 가져와 처리하는 로직으로 변경 예정
-    fun getIssue() {
-        viewModelScope.launch {
-            issueRepository.getIssue().collect { issue ->
-                _issueList.value = issue
-            }
+    private val _error = MutableStateFlow<CEHModel>(CEHModel(null, ""))
+    val error: SharedFlow<CEHModel> = _error
+
+    val checkLongClicked = MutableStateFlow<Boolean>(true)
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        _error.value = CoroutineException.throwableCheck(throwable)
+    }
+
+    fun getIssues() {
+        viewModelScope.launch(exceptionHandler) {
+            _issueList.value = issueRepository.getIssue()
         }
     }
 
     // 이슈를 닫는 로직
     // 서버에 issueId 를 보내면 닫히고 남은 이슈 리스트를 가져오는 로직으로 변경 예정
-    suspend fun closeIssue(issueId: Int) {
-        _closeIssue.emit(issueId.toString())
+    fun closeIssue(issueId: Int) {
+        viewModelScope.launch {
+            _closeIssue.emit(issueId.toString())
+        }
     }
 
     // 체크박스를 통해 선택된 issueIdList 닫기를 서버에 전송하는 로직
@@ -65,7 +78,9 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
         val list = _issueList.value.map {
             it.copy(isLongClicked = !it.isLongClicked) // LongClicked 값만 변경 후 깊은 복사 수행하여 새로운 객체 만들기
         }
-        _issueList.value = list.toMutableList() // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
+        // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
+        _issueList.value = list.toMutableList()
+        checkLongClicked.value = !checkLongClicked.value
     }
 
     fun addChecked(issueId: Int) {

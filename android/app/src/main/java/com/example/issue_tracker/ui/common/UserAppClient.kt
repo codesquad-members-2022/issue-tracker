@@ -5,9 +5,9 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 /**
  * 카카오톡 설치 여부에 따라서 설치 되어있으면 카카오톡 로그인을 시도한다.
@@ -39,7 +39,7 @@ suspend fun UserApiClient.Companion.loginWithKakao(context: Context): OAuthToken
  * UserApiClient.Companion 의 확장함수
  */
 suspend fun UserApiClient.Companion.loginWithKakaoTalk(context: Context): OAuthToken {
-    return suspendCoroutine<OAuthToken> { continuation ->
+    return suspendCancellableCoroutine<OAuthToken> { continuation ->
         instance.loginWithKakaoTalk(context) { token, error ->
             if (error != null) {
                 continuation.resumeWithException(error)
@@ -57,7 +57,7 @@ suspend fun UserApiClient.Companion.loginWithKakaoTalk(context: Context): OAuthT
  * UserApiClient.Companion 의 확장함수
  */
 suspend fun UserApiClient.Companion.loginWithKakaoAccount(context: Context): OAuthToken {
-    return suspendCoroutine<OAuthToken> { continuation ->
+    return suspendCancellableCoroutine<OAuthToken> { continuation ->
         instance.loginWithKakaoAccount(context) { token, error ->
             if (error != null) {
                 continuation.resumeWithException(error)

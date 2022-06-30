@@ -22,13 +22,12 @@ import kotlinx.coroutines.flow.collect
 class IssueAddFragment : Fragment() {
 
     private lateinit var binding: FragmentIssueAddBinding
-
     private val viewModel: IssueAddViewModel by viewModels()
 
     private val labelPopUpMenu by lazy {
         val labelList = viewModel.labelList.value
         PopupMenu(requireContext(), binding.ibFilterButtonLabel).apply {
-            for(index in labelList.indices) {
+            for (index in labelList.indices) {
                 menu.add(Menu.NONE, index, index, labelList[index].labelTitle)
             }
         }
@@ -37,7 +36,7 @@ class IssueAddFragment : Fragment() {
     private val mileStonePopUpMenu by lazy {
         val mileStoneList = viewModel.mileStoneList.value
         PopupMenu(requireContext(), binding.ibFilterButtonIssueMileStone).apply {
-            for(index in mileStoneList.indices) {
+            for (index in mileStoneList.indices) {
                 menu.add(Menu.NONE, index, index, mileStoneList[index].title)
             }
         }
@@ -47,7 +46,8 @@ class IssueAddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue_add, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_issue_add, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -85,14 +85,16 @@ class IssueAddFragment : Fragment() {
     }
 
     private fun observeClickedMenuText() {
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
-            viewModel.labelChoose.collect {
-                binding.label = it
+        with(viewLifecycleOwner) {
+            repeatOnLifecycleExtension {
+                viewModel.labelChoose.collect {
+                    binding.label = it
+                }
             }
-        }
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
-            viewModel.mileStoneChoose.collect {
-                binding.mileStone = it
+            repeatOnLifecycleExtension {
+                viewModel.mileStoneChoose.collect {
+                    binding.mileStone = it
+                }
             }
         }
     }

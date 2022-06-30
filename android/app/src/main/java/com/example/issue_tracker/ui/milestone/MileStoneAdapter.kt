@@ -16,7 +16,7 @@ class MileStoneAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(mileStone: MileStone) {
             binding.mileStone = mileStone
-            if(mileStone.description == "") {
+            if (mileStone.description == "") {
                 binding.tvMileStoneRecyclerDescription.visibility = View.GONE
             }
         }

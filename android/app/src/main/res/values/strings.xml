@@ -58,4 +58,6 @@
     <string name="add_new_issue_title">이슈 작성</string>
     <string name="label_search">검색</string>
     <string name="label_search_issue_hint">검색어를 입력하세요</string>
+    <string name="issue_edit_mode">이슈편집</string>
+    <string name="user_image_detail">userImage</string>
 </resources>

@@ -22,19 +22,6 @@ class CustomLabel(context: Context, attributeSet: AttributeSet) :
     init {
         binding =
             DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.custom_label, this, true)
-        getAttrs(attributeSet)
-    }
-
-    private fun getAttrs(attrs: AttributeSet) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomLabel)
-
-//        typedArray.getString(R.styleable.CustomLabel_title)?.let { setLabelText(it) }
-
-        typedArray.recycle()
-    }
-
-    private fun setLabelText(text: String) {
-        binding.tvCustomLabelTitle.text = text
     }
 
     fun setLabelTitle(text: String?) {

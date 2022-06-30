@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MileStoneViewModel @Inject constructor(
-    private val repository: MileStoneRepository
-): ViewModel() {
+    private val repository: MileStoneRepository,
+) : ViewModel() {
 
     private val _mileStoneList = MutableStateFlow<List<MileStone>>(mutableListOf())
     val mileStoneList = _mileStoneList.asStateFlow()

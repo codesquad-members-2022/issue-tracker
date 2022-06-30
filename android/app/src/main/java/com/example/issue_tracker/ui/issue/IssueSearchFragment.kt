@@ -17,9 +17,10 @@ class IssueSearchFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue_search, container, false)
+        savedInstanceState: Bundle?,
+    ): View {
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_issue_search, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }

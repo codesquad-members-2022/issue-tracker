@@ -27,8 +27,8 @@ class IssueFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?,
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
@@ -43,7 +43,8 @@ class IssueFragment : Fragment() {
         goToIssueFilterFragments(findNavController)
         goToSearchIssueFragment(findNavController)
         goToIssueAddFragment(findNavController)
-        viewModel.getIssue()
+        changeActionBarState()
+        viewModel.getIssues()
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
             setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
@@ -59,16 +60,6 @@ class IssueFragment : Fragment() {
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.issueList.collect {
                 adapter.submitList(it)
-                when (it[0].isLongClicked) {
-                    true -> {
-                        binding.tbIssueFragment.visibility = View.GONE
-                        binding.tbIssueFragmentLongClick.visibility = View.VISIBLE
-                    }
-                    false -> {
-                        binding.tbIssueFragment.visibility = View.VISIBLE
-                        binding.tbIssueFragmentLongClick.visibility = View.GONE
-                    }
-                }
             }
         }
 
@@ -85,9 +76,19 @@ class IssueFragment : Fragment() {
 
         binding.btnAppBarCloseIssue.setOnClickListener {
             viewModel.closeIssueByCheckBox(viewModel.checkedIssueIdList.value)
-            Toast.makeText(requireContext(), "${viewModel.checkedIssueIdListTemp.value} 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                "${viewModel.checkedIssueIdListTemp.value} 번 이슈가 닫혔습니다.",
+                Toast.LENGTH_SHORT).show()
             viewModel.clearCheckedIdList()
             viewModel.changeClickedState()
+        }
+
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+            viewModel.error.collect {
+                if (it.throwable != null) {
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -106,6 +107,14 @@ class IssueFragment : Fragment() {
     private fun goToSearchIssueFragment(findNavController: NavController) {
         binding.btnIssueSearch.setOnClickListener {
             findNavController.navigate(R.id.action_issueFragment_to_issueSearchFragment)
+        }
+    }
+
+    private fun changeActionBarState() {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.checkLongClicked.collect {
+                binding.isClicked = it
+            }
         }
     }
 }

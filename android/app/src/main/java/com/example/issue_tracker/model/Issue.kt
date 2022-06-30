@@ -8,14 +8,14 @@ data class Issue(
     val label: Label,
     var isSwiped: Boolean = false,
     var isLongClicked: Boolean = false,
-    var isChecked: Boolean = false
+    var isChecked: Boolean = false,
 )
 
 data class Label(
     val labelId: Int?,
     val labelTitle: String?,
     val labelContents: String?,
-    val labelColor: String?
+    val labelColor: String?,
 )
 
 data class MileStone(
@@ -25,5 +25,5 @@ data class MileStone(
     val dueDate: String?,
     val openedIssueCount: Int = 0,
     val closedIssueCount: Int = 0,
-    val progress: String = ""
+    val progress: String = "",
 )

@@ -7,6 +7,11 @@
         <variable
             name="viewModel"
             type="com.example.issue_tracker.ui.issue.IssueViewModel" />
+
+        <variable
+            name="isClicked"
+            type="Boolean" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +32,7 @@
                 android:id="@+id/tb_issue_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:visibility="visible">
+                visible="@{isClicked}">
 
                 <ImageButton
                     android:id="@+id/btn_issue_filter"
@@ -67,7 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@color/primary_blue"
-                android:visibility="visible">
+                visible="@{!isClicked}"
+                >
 
                 <ImageButton
                     android:id="@+id/btn_close_long_click"

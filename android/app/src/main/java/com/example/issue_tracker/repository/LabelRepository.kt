@@ -7,5 +7,5 @@ interface LabelRepository {
 
     fun addLabelList(labelList: Label)
 
-    fun getLabelList(): Flow<List<Label>>
+    suspend fun getLabelList(): List<Label>
 }

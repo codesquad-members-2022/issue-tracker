@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LabelAddViewModel @Inject constructor(
-    private val labelRepository: LabelRepository
+    private val labelRepository: LabelRepository,
 ) : ViewModel() {
 
     private val _label: MutableStateFlow<Label> = MutableStateFlow(defaultLabel)
@@ -41,17 +41,17 @@ class LabelAddViewModel @Inject constructor(
         _label.value = Label(null, labelTitle.value, labelDescription.value, randomColorString)
     }
 
-    fun saveLabel() {
-        if(_label.value === defaultLabel) {
-            labelRepository.addLabelList(Label(null, labelTitle.value, labelDescription.value, INITIAL_COLOR))
-            return
-        }
+    fun saveLabel() = if (_label.value === defaultLabel) {
+        labelRepository.addLabelList(Label(null,
+            labelTitle.value,
+            labelDescription.value,
+            INITIAL_COLOR))
+    } else {
         labelRepository.addLabelList(_label.value)
     }
 
-    private fun convertIntToHex(number: Int): String {
-        return String.format("%02x", number)
-    }
+    private fun convertIntToHex(number: Int) = String.format("%02x", number)
+
 
     companion object {
         const val INITIAL_COLOR = "#FF828282"
