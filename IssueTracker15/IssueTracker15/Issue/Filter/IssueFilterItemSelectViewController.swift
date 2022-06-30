@@ -33,10 +33,6 @@ class IssueFilterItemSelectViewController: UIViewController, ViewBindable {
         
     }
     
-    func setVC(_ binding: ViewBinding) {
-        vc = binding
-    }
-    
     // MARK: - ViewController Functionality
     override func viewDidLoad() {
         super.viewDidLoad()

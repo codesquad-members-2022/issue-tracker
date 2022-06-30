@@ -4,10 +4,15 @@
 
 import Foundation
 
-protocol ViewBindable {
-    var vc: ViewBinding? { get }
+protocol ViewBindable: AnyObject {
+    var vc: ViewBinding? { get set }
     
     func sendAction(_ param: Any?)
     func receive(_ responseData: Any)
-    func setVC(_ binding: ViewBinding)
+}
+
+extension ViewBindable {
+    func setVC(_ binding: ViewBinding) {
+        self.vc = binding
+    }
 }

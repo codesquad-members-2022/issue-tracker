@@ -144,10 +144,6 @@ class IssueListTableViewCell: UITableViewCell, ViewBindable {
         self.checkSelectButton.isSelected = currentState
     }
     
-    func setVC(_ binding: ViewBinding) {
-        self.vc = binding
-    }
-    
     func showButton(_ isShow: Bool) {
         checkSelectButton.isHidden = !isShow
     }

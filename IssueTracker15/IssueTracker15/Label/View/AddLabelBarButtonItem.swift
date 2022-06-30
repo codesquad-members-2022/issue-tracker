@@ -18,12 +18,8 @@ final class AddLabelBarButtonItem: UIBarButtonItem, ViewBindable {
         return action
     }()
     
-    // extension..?
     func sendAction(_ param: Any?) { }
     func receive(_ responseData: Any) { }
-    func setVC(_ binding: ViewBinding) {
-        self.vc = binding
-    }
     
     override init() {
         super.init()

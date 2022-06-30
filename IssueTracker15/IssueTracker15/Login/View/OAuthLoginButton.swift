@@ -37,10 +37,6 @@ final class OAuthLoginButton: UIButton, ViewBindable {
     
     func receive(_ responseData: Any) {  }
     
-    func setVC(_ binding: ViewBinding) {
-        self.vc = binding
-    }
-    
     private func setUp() {
         var config = UIButton.Configuration.filled()
         config.contentInsets = .init(top: 16, leading: 32, bottom: 16, trailing: 32)

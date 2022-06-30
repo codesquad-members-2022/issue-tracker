@@ -18,8 +18,4 @@ class IssueTableView: UITableView, ViewBindable {
     func receive(_ responseData: Any) {
         self.reloadData()
     }
-    
-    func setVC(_ binding: ViewBinding) {
-        self.vc = binding
-    }
 }

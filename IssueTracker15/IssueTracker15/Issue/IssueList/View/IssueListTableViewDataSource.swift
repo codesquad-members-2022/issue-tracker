@@ -46,10 +46,6 @@ class IssueListTableViewDataSource: NSObject, UITableViewDataSource, ViewBindabl
     func receive(_ responseData: Any) {
         
     }
-    
-    func setVC(_ binding: ViewBinding) {
-        self.vc = binding
-    }
 }
 
 private extension UITableViewCell {

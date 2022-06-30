@@ -29,10 +29,6 @@ class IssueNavigationController: UINavigationController, ViewBindable {
     
     func receive(_ responseData: Any) { }
     
-    func setVC(_ binding: ViewBinding) {
-        self.vc = binding
-    }
-    
     private var filterBarButtonAction: UIAction {
         UIAction(
             title: "필터",
