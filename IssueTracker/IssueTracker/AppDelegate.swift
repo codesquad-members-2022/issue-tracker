@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    let container = Container()
+    let container = Container(token: GithubUserDefaults.getToken())
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: - 토큰 유효기간 판단
@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
             GithubUserDefaults.setToken(token)
+            self?.container.setToken(token)
             self?.window?.rootViewController = self?.container.buildRootViewController()
         }
         return true
