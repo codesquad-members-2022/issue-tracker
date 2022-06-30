@@ -3,7 +3,7 @@ import { COLORS, GREYSCALE } from '@/common/constants';
 import { getRandomKey } from '@/utils';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getTimeStamp } from '@/common/utils/utils';
+import { getTimeStamp } from '@/common/utils';
 import CheckBox from '@/issueList/issueListTable/CheckBox';
 import { IssueStateType } from '@/issueList/issueListTable/IssueList';
 import { useIssueListContext } from '@/issueList/stores/IssueListProvider';
