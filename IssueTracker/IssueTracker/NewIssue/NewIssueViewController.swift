@@ -179,17 +179,7 @@ extension NewIssueViewController: UITableViewDelegate {
         switch option {
         case .label:
             break
-            // TODO: issueService의 requestRepos() 연결해서 저장소목록 보여주기
-//            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate,
-//                  let token = GithubUserDefaults.getToken() else {
-//                return
-//            }
-//            guard let viewController = appdelegate.container.buildViewController(.optionSelect(token: token, option: option)) as? OptionSelectViewController else {
-//                return
-//            }
-//            self.navigationController?.pushViewController(viewController, animated: true)
-//            viewController.delegate = self
-           
+            // TODO: issueService를 통해 해당 저장소의 라벨 목록 요청해서 보여주기
         default:
             break
         }
@@ -218,11 +208,6 @@ extension NewIssueViewController: UITableViewDataSource {
 
 extension NewIssueViewController: OptionSelectDelegate {
     func selected(item: Repository, option: Option) {
-        guard let optionIndex = optionList.firstIndex(of: option) else {
-            return
-        }
-//        selectedList[optionIndex] = item.name
-//        selectedRepo = item
         self.optionTable.reloadData()
     }
 }

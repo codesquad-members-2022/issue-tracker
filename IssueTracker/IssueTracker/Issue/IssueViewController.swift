@@ -49,7 +49,6 @@ final class IssueViewController: UIViewController {
         setupViews()
         model.requestIssue()
         model.updatedIssues = { [weak self] issues in
-            print(issues)
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView.reloadData()
             }
