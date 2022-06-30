@@ -15,7 +15,7 @@ export const Default: ComponentStory<typeof Label> = ({ children, ...args }) => 
     switch (status) {
       case 'open':
         return <Icon iconType="openLabel" color={LABEL[status].color} />;
-      case 'close':
+      case 'closed':
         return <Icon iconType="closeLabel" color={LABEL[status].color} />;
       default:
         return null;

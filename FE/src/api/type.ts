@@ -7,7 +7,7 @@ type AxiosType = {
   config?: AxiosRequestConfig;
 };
 
-type APIIssueStatusType = 'open' | 'close' | undefined;
+type APIIssueStatusType = 'open' | 'closed' | undefined;
 
 type APIResponse =
   | AxiosResponse<any, any>

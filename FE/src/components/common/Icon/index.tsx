@@ -16,7 +16,7 @@ import styled from 'styled-components';
 type IconTypes =
   | 'search'
   | 'plus'
-  | 'close'
+  | 'closed'
   | 'openLabel'
   | 'closeLabel'
   | 'milestone'
@@ -32,7 +32,7 @@ type Icons = Record<IconTypes, any>;
 const icons: Icons = {
   search: Search,
   plus: Plus,
-  close: Close,
+  closed: Close,
   openLabel: OpenLabel,
   closeLabel: CloseLabel,
   milestone: Milestone,

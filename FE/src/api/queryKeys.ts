@@ -1,13 +1,13 @@
 const issueListQueryKeys = {
   all: ['issue'],
   open: ['issue', { status: 'open' }],
-  close: ['issue', { status: 'close' }]
+  closed: ['issue', { status: 'closed' }]
 };
 
 const issueCountQueryKeys = {
   all: ['issue', 'count'],
   open: ['issue', { status: 'open' }, 'count'],
-  close: ['issue', { status: 'close' }, 'count']
+  closed: ['issue', { status: 'closed' }, 'count']
 };
 
 const labelListQueryKeys = ['label'];

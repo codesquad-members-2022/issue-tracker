@@ -2,7 +2,7 @@ import React from 'react';
 
 type Size = 'large' | 'small';
 
-type Status = 'open' | 'close' | 'dark' | 'light' | 'line';
+type Status = 'open' | 'closed' | 'dark' | 'light' | 'line';
 
 interface ILabelProps {
   children: React.ReactNode | string;

@@ -75,7 +75,7 @@ const LABEL = {
     color: PALETTE.BLUE[200],
     border: PALETTE.BLUE[200]
   },
-  close: {
+  closed: {
     background: PALETTE.BLUE.DARK[100],
     color: PALETTE.BLUE.DARK[200],
     border: PALETTE.BLUE.DARK[200]

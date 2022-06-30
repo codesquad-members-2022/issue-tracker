@@ -4,7 +4,7 @@ import { APIIssueStatusType } from '@/api/type';
 const getIssueList = async (status?: APIIssueStatusType) => {
   const issueList = await requestApi({
     method: 'get',
-    url: `/issues${status ? `?state=${status}` : ''}`
+    url: `/issues${status ? `?status=${status}` : ''}`
   });
 
   return issueList;
@@ -13,7 +13,7 @@ const getIssueList = async (status?: APIIssueStatusType) => {
 const getIssueCount = async (status?: APIIssueStatusType) => {
   const issueCount = await requestApi({
     method: 'get',
-    url: `/issues/counts${status ? `?state=${status}` : ''}`
+    url: `/issues/counts${status ? `?status=${status}` : ''}`
   });
 
   return issueCount;

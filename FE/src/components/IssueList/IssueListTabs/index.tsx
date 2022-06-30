@@ -11,7 +11,7 @@ export default function IssueListTabs() {
   const { status: currentStatus } = useFilterCondition();
   const dispatch = useFilterConditionDispatch();
   const { isSuccess: isSuccessOfOpen, data: issueOpenCounts } = useIssueCountData('open');
-  const { isSuccess: isSuccessOfClose, data: issueCloseCounts } = useIssueCountData('close');
+  const { isSuccess: isSuccessOfClose, data: issueCloseCounts } = useIssueCountData('closed');
 
   const handleTabClick = (status: IssueStatusType) => () => {
     setCondition(dispatch, { status });

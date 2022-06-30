@@ -13,7 +13,7 @@ const convertIssueTypeToAPIType = (
   issueStatus?: IssueStatusType
 ): APIIssueStatusType | undefined => {
   if (!issueStatus) return undefined;
-  return issueStatus === 'OPEN' ? 'open' : 'close';
+  return issueStatus === 'OPEN' ? 'open' : 'closed';
 };
 
 export default function List() {
