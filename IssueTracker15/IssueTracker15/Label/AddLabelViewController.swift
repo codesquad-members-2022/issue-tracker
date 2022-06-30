@@ -13,5 +13,4 @@ final class AddLabelViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .red
     }
-    
 }

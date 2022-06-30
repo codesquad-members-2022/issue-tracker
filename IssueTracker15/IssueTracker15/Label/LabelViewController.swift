@@ -10,14 +10,17 @@ import UIKit
 final class LabelViewController: UIViewController, ViewBinding {
     
     private lazy var addButton = AddLabelBarButtonItem()
+    private lazy var dataSource = IssueLabelDataSource()
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.dataSource = self.dataSource
+        tableView.register(LabelTableViewCell.self, forCellReuseIdentifier: LabelTableViewCell.ID)
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUp()   
+        setUp()
     }
     
     func inputViewEvent(_ target: ViewBindable, _ param: Any?) {

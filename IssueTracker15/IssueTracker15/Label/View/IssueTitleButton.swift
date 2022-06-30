@@ -1,5 +1,5 @@
 //
-//  IssueLabel.swift
+//  IssueTitleButton.swift
 //  IssueTracker15
 //
 //  Created by 박진섭 on 2022/06/29.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class IssueLabel: UIButton {
+final class IssueTitleButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,12 +24,9 @@ final class IssueLabel: UIButton {
         config.background.cornerRadius = self.frame.height / 2
         self.configuration = config
     }
-    
-    func setTitle(text: String) {
-        self.configuration?.title = text
-    }
-    
-    func setBackgroundColor(color: UIColor) {
-        self.backgroundColor = color
-    }
+}
+
+struct IssueLabel {
+    let title: String
+    let description: String
 }
