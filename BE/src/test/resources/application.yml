@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://3.39.96.36:3306/issuetracker
+    url: jdbc:mysql://10.0.11.179:3306/issuetracker
     username: ${MY_DATABASE_USERNAME}
     password: ${MY_DATABASE_PASSWORD}
   config:

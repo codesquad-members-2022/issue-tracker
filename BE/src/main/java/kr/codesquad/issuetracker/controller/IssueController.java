@@ -1,5 +1,6 @@
 package kr.codesquad.issuetracker.controller;
 
+import kr.codesquad.issuetracker.dto.IssueDetailResponse;
 import kr.codesquad.issuetracker.dto.IssueResponse;
 import kr.codesquad.issuetracker.dto.IssueStatusRequest;
 import kr.codesquad.issuetracker.service.IssueService;
@@ -25,4 +26,10 @@ public class IssueController {
                                           @RequestParam Boolean status) {
         return issueService.editStatus(issueStatusRequest, status);
     }
+
+    @GetMapping("/issues/{id}")
+    public IssueDetailResponse getIssueDetail(@PathVariable Long id){
+        return issueService.getIssueDetail(id);
+    }
+
 }

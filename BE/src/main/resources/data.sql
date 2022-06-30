@@ -12,7 +12,8 @@ VALUES (1, '레이블1', '레이블1설명', '#FFFF00', '#000000'),
        (4, '레이블4', '4설명', '#AFEEEE', '#000000');
 
 INSERT INTO members(id, github_id, image_url, name)
-    VALUE (1, 'leekm310', 'https://avatars.githubusercontent.com/u/87681380?v=4', 'K Lee');
+VALUES (1, 'leekm310', 'https://avatars.githubusercontent.com/u/87681380?v=4', 'K Lee'),
+       (2, 'tester1', 'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png', 'tester');
 
 INSERT INTO issue(id, content, title, created_time, issues_status, member_id, milestone_id)
 VALUES (1, '테스트1', '테스트입니다1', '2022-07-06 12:00:00', false , 1, 1),
@@ -25,4 +26,12 @@ INSERT INTO issue_labels(id, issue_id, label_id)
 VALUES (1, 2, 1),
        (2, 2, 2),
        (3, 3, 3);
+
+INSERT INTO  issue_members(id, issue_id, member_id)
+VALUES (1, 2, 1),
+       (2, 3, 2);
+
+INSERT INTO comments(id, content, created_time, issue_id, member_id)
+VALUE (1, '코멘트테스트', '2022-07-08 13:42:00', 2, 1);
+
 
