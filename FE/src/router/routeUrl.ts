@@ -22,7 +22,7 @@ const ROUTE_URL: URLType = {
   LIST: 'list',
   LABEL: 'label',
   MILESTONE: 'milestone',
-  LOADING: 'github-callback'
+  LOADING: '/github-callback'
 };
 
 export default ROUTE_URL;

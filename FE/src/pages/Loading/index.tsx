@@ -7,6 +7,7 @@ import { $Contents } from '@/pages/Loading/style';
 import { useEffect } from 'react';
 import { getLoginToken } from '@/api/githubOauth';
 import { useNavigate } from 'react-router-dom';
+import ROUTE_URL from '@/router/routeUrl';
 
 export default function Loading() {
   const navigate = useNavigate();
@@ -24,9 +25,14 @@ export default function Loading() {
     }
 
     const { current_user, login_token } = data;
-    localStorage.setItem('currentUserInfo', JSON.stringify(current_user));
-    localStorage.setItem('currentUserToken', login_token);
-    navigate('/issue-list', { replace: true });
+
+    if (current_user && login_token) {
+      localStorage.setItem('currentUserInfo', JSON.stringify(current_user));
+      localStorage.setItem('currentUserToken', login_token);
+      navigate(ROUTE_URL.ISSUE_LIST, { replace: true });
+    }
+
+    navigate(ROUTE_URL.LOGIN, { replace: true });
   };
 
   useEffect(() => {
