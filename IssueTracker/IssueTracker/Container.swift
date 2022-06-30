@@ -34,7 +34,8 @@ class Container {
             let viewController = IssueViewController(model: model, repo: selectedRepo)
             return viewController
         case .repos:
-            let viewController = ReposViewController(service: service)
+            let model = ReposModel(service: service)
+            let viewController = ReposViewController(model: model)
             viewController.title = "Repos"
             return UINavigationController(rootViewController: viewController)
         case .newIssue(let repo):

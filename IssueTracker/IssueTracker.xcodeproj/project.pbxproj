@@ -26,6 +26,7 @@
 		983E66C6285B208800C9B975 /* GithubUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E66C5285B208800C9B975 /* GithubUserDefaults.swift */; };
 		983E66C8285B212A00C9B975 /* GitHubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E66C7285B212A00C9B975 /* GitHubService.swift */; };
 		9844C193286C803F00D0CFC9 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9844C192286C803F00D0CFC9 /* ReposViewController.swift */; };
+		9844C195286D434B00D0CFC9 /* ReposModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9844C194286D434B00D0CFC9 /* ReposModel.swift */; };
 		985CAB47285C1A26005E709D /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB46285C1A26005E709D /* UIStackView+Extension.swift */; };
 		985CAB49285C1A61005E709D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB48285C1A61005E709D /* UIColor+Extension.swift */; };
 		985CAB4C28603AE9005E709D /* NetworkHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985CAB4B28603AE9005E709D /* NetworkHeader.swift */; };
@@ -82,6 +83,7 @@
 		983E66C5285B208800C9B975 /* GithubUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserDefaults.swift; sourceTree = "<group>"; };
 		983E66C7285B212A00C9B975 /* GitHubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubService.swift; sourceTree = "<group>"; };
 		9844C192286C803F00D0CFC9 /* ReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
+		9844C194286D434B00D0CFC9 /* ReposModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposModel.swift; sourceTree = "<group>"; };
 		985CAB46285C1A26005E709D /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		985CAB48285C1A61005E709D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		985CAB4B28603AE9005E709D /* NetworkHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHeader.swift; sourceTree = "<group>"; };
@@ -194,9 +196,18 @@
 		9844C191286C802000D0CFC9 /* Repos */ = {
 			isa = PBXGroup;
 			children = (
+				9844C196286D436900D0CFC9 /* Model */,
 				9844C192286C803F00D0CFC9 /* ReposViewController.swift */,
 			);
 			path = Repos;
+			sourceTree = "<group>";
+		};
+		9844C196286D436900D0CFC9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9844C194286D434B00D0CFC9 /* ReposModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		985CAB45285C19D0005E709D /* Extension */ = {
@@ -252,12 +263,12 @@
 		988510D428572B8700CC2DA9 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				9844C191286C802000D0CFC9 /* Repos */,
-				985CAB5128606898005E709D /* Login */,
-				985CAB4A28603AD3005E709D /* GitHub */,
-				985CAB45285C19D0005E709D /* Extension */,
-				983E66CA285B2AD300C9B975 /* Entity */,
 				983E66C4285B204600C9B975 /* Storage */,
+				985CAB45285C19D0005E709D /* Extension */,
+				985CAB4A28603AD3005E709D /* GitHub */,
+				985CAB5128606898005E709D /* Login */,
+				9844C191286C802000D0CFC9 /* Repos */,
+				983E66CA285B2AD300C9B975 /* Entity */,
 				981BD438285B123A00DDDE64 /* Issue */,
 				988510D528572B8700CC2DA9 /* AppDelegate.swift */,
 				988510DE28572B8900CC2DA9 /* Assets.xcassets */,
@@ -445,6 +456,7 @@
 				985CAB4E28603AFF005E709D /* QueryParameter.swift in Sources */,
 				0053D7572859B4CA006614EC /* PrivateStorage.swift in Sources */,
 				00BCB408285B0262005E87BC /* Label.swift in Sources */,
+				9844C195286D434B00D0CFC9 /* ReposModel.swift in Sources */,
 				983E66C6285B208800C9B975 /* GithubUserDefaults.swift in Sources */,
 				005E48D62862AE91004BD5F6 /* Container.swift in Sources */,
 				00567EEC2861B49F00F3E8EC /* IssueModel.swift in Sources */,

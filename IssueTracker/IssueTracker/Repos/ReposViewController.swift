@@ -3,34 +3,28 @@ import SnapKit
 
 class ReposViewController: UIViewController {
     
-    private let service: IssueService
+    private let model: ReposModel
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
-    private var options: [Repository]?
     
-    init(service: IssueService) {
-        self.service = service
+    init(model: ReposModel) {
+        self.model = model
         super.init(nibName: nil, bundle: nil)
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(service: IssueService(token: ""))
+        self.init(model: ReposModel(service: IssueService(token: "")))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         self.view.backgroundColor = .white
-        fetchViewData()
-    }
-    
-    private func fetchViewData() {
-        service.requestRepos() { [weak self] result in
-            switch result {
-            case .success(let repositoryList):
-                self?.options = repositoryList
+        
+        model.fetchViewData()
+        model.updated = { [weak self] repos in
+//            self?.options = repositoryList
+            DispatchQueue.main.async {
                 self?.tableView.reloadData()
-            case .failure(let error):
-                print(error)
             }
         }
     }
@@ -55,10 +49,7 @@ class ReposViewController: UIViewController {
 
 extension ReposViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let options = options else {
-            return
-        }
-        let selectedItem = options[indexPath.row]
+        let selectedItem = model.getViewData(index: indexPath.row)
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -71,20 +62,19 @@ extension ReposViewController: UITableViewDelegate {
 
 extension ReposViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let options = options else {
-            return 0
-        }
-        return options.count
+        return model.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let options = options else {
-            return UITableViewCell()
-        }
+        
+//        guard let options = options else {
+//            return UITableViewCell()
+//        }
+        let data = model.getViewData(index: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier,
                                                  for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.attributedText = NSAttributedString(string: options[indexPath.row].name)
+        content.attributedText = NSAttributedString(string: data.name)
         cell.contentConfiguration = content
         return cell
     }
