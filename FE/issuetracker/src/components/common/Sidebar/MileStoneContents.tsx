@@ -2,13 +2,13 @@ import * as S from 'components/common/Sidebar/styled';
 import { ProgressBar } from 'components/common/Common';
 import { MileStoneType } from 'data';
 
-function MileStoneContents({ mileStone }: { mileStone: MileStoneType }) {
-  const percent = (mileStone.closedIssue / (mileStone.openedIssue + mileStone.closedIssue)) * 100;
+function MileStoneContents({ milestone }: { milestone: MileStoneType }) {
+  const percent = (milestone.closedIssue / (milestone.openedIssue + milestone.closedIssue)) * 100;
   const mileStoneContent =
-    mileStone.title !== '' ? (
+    milestone.title !== '' ? (
       <>
         <ProgressBar size="small" percent={percent} />
-        {mileStone.title}
+        {milestone.title}
       </>
     ) : (
       ''

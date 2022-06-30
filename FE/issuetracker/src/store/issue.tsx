@@ -33,7 +33,7 @@ const initialData: newIssueType = {
       description: '마감일은 언제인가요??',
     },
   ],
-  mileStone: {
+  milestone: {
     id: 1,
     title: '이슈트래커 1주차',
     description: '개발 1주차',

@@ -7,18 +7,19 @@ import { useRecoilValue } from 'recoil';
 import { newIssueState, newIssueType } from 'store/newIssue';
 import { usePostData } from 'APIs/Api';
 import { useMutation } from 'react-query';
+import { PostIssueType } from 'store/issueList';
 
 function NewIssue() {
-  const newIssueData: newIssueType = useRecoilValue(newIssueState);
-  const assigneesData = newIssueData.assignees.map((assignee) => assignee.id);
-  const labelsData = newIssueData.labels.map((label) => label.id);
+  const newIssueData = useRecoilValue(newIssueState);
+  const assigneesData: number[] = newIssueData.assignees.map((assignee) => assignee.id);
+  const labelsData: number[] = newIssueData.labels.map((label) => label.id);
   const data = {
     title: newIssueData.title,
     content: newIssueData.comments,
     writerId: newIssueData.writer.id,
     assignees: assigneesData,
     labels: labelsData,
-    milestone: newIssueData.mileStone.id,
+    milestone: newIssueData.milestone.id,
   };
 
   const mutation = usePostData(
@@ -26,7 +27,7 @@ function NewIssue() {
     data,
   );
   function postData() {
-    return mutation.mutate(data);
+    mutation.mutate(data);
   }
   return (
     <S.NewIssueWrap>

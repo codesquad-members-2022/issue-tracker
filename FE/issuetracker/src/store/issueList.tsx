@@ -1,11 +1,27 @@
 import { atom } from 'recoil';
-import { newIssueType } from './newIssue';
+import { CommentType, WriterType } from './newIssue';
+import { AccountType, LabelType } from 'data';
 
 export type initialStateType = {
   key: string;
-  default: newIssueType[];
+  default: PostIssueType[];
 };
-const initialData: newIssueType[] = [
+type PostMileStoneType = {
+  id: number;
+  title: string;
+};
+
+export type PostIssueType = {
+  id?: number;
+  title: string;
+  writer: WriterType;
+  writtenTime: string;
+  milestone: PostMileStoneType;
+  labels: Array<LabelType>;
+  assignees: Array<AccountType>;
+  closed: boolean;
+};
+const initialData: PostIssueType[] = [
   {
     id: 2,
     title: 'FE 이슈 트래커 개발',

@@ -2,13 +2,13 @@ import { atom } from 'recoil';
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 import { MileStoneType, LabelType, AccountType } from 'data';
 
-type WriterType = {
+export type WriterType = {
   id?: number;
   name: string;
   profileImage: string;
   email?: string;
 };
-type CommentType = {
+export type CommentType = {
   writer: WriterType;
   writtenTime: string;
   description: string;
@@ -19,7 +19,7 @@ export type newIssueType = {
   title: string;
   writer: WriterType;
   writtenTime: string;
-  comments?: Array<CommentType>;
+  comments: Array<CommentType>;
   milestone: MileStoneType;
   labels: Array<LabelType>;
   assignees: Array<AccountType>;
@@ -48,6 +48,7 @@ const newIssue: newIssueType = {
     },
   ],
   milestone: {
+    id: 0,
     title: '',
     description: '',
     dueDate: '',
@@ -57,6 +58,7 @@ const newIssue: newIssueType = {
   },
   labels: [
     {
+      id: 0,
       title: '',
       description: '',
       color: '',
@@ -64,6 +66,7 @@ const newIssue: newIssueType = {
   ],
   assignees: [
     {
+      id: 0,
       name: '',
       profileImage: '',
       email: '',

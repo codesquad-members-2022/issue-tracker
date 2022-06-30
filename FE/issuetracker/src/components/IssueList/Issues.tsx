@@ -1,8 +1,16 @@
 import * as S from 'components/IssueList/styled.issues';
 import * as I from 'design/icons';
-import Issue from './Issue';
+import { useGetData } from 'APIs/Api';
+import Issue from 'components/IssueList/Issue';
+import { PostIssueType } from 'store/issueList';
+import { keyMaker } from 'utils/util';
 
 function Issues() {
+  const { data, status } = useGetData(
+    'issueList',
+    'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/issues?closed=false',
+  );
+  const issueData: PostIssueType[] = data;
   return (
     <S.IssuesWrap>
       <S.IssuesTab>
@@ -33,9 +41,11 @@ function Issues() {
           </S.DropboxContent>
         </S.IssuesTabRight>
       </S.IssuesTab>
-      <Issue />
-      <Issue />
-      <Issue />
+      {status === 'success' &&
+        issueData.map((issue) => {
+          const key = keyMaker();
+          return <Issue key={key} data={issue} />;
+        })}
     </S.IssuesWrap>
   );
 }

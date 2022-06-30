@@ -9,9 +9,9 @@ import MileStoneContents from 'components/common/Sidebar/MileStoneContents';
 function SideBar({ data }: { data: newIssueType }) {
   const {
     assignees,
-    mileStone,
+    milestone,
     labels,
-  }: { assignees: Array<AccountType>; mileStone: MileStoneType; labels: Array<LabelType> } = data;
+  }: { assignees: Array<AccountType>; milestone: MileStoneType; labels: Array<LabelType> } = data;
   const first = true;
   type SubjectsType = '담당자' | '레이블' | '마일스톤';
   const subjects: Array<SubjectsType> = ['담당자', '레이블', '마일스톤'];
@@ -37,7 +37,7 @@ function SideBar({ data }: { data: newIssueType }) {
           마일스톤
           <DropDown subject={subjects[2]} />
         </S.ContentTitleAndButton>
-        <MileStoneContents mileStone={mileStone} />
+        <MileStoneContents milestone={milestone} />
       </S.AdditionalContent>
     </S.AdditionalContents>
   );

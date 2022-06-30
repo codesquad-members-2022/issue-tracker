@@ -1,10 +1,21 @@
 import axios from 'axios';
 import { useMutation, useQuery } from 'react-query';
+import { CommentType } from 'store/newIssue';
 
+type dataType = {
+  title: string;
+  content: CommentType[];
+  writerId: number | undefined;
+  assignees: number[];
+  labels: number[];
+  milestone: number;
+};
 export const useGetData = (key: string, URL: string) => useQuery(key, () => getData(URL));
 
-export const usePostData = (URL: string, updatedData: any) =>
-  useMutation((updatedData) => postData(URL, updatedData));
+export const usePostData = (URL: string, updatedData: dataType) => {
+  const mutation = useMutation((updatedData: dataType) => postData(URL, updatedData));
+  return mutation;
+};
 
 type ControlDataType = {
   [key: string]: number | string;

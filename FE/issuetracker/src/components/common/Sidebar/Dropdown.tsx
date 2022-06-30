@@ -30,9 +30,7 @@ function DropDown({ subject }: DropdownType) {
         ...newIssue,
         assignees: [
           {
-            name: content.name,
-            profileImage: content.profileImage,
-            email: '',
+            ...content,
           },
         ],
       });
@@ -42,9 +40,7 @@ function DropDown({ subject }: DropdownType) {
         assignees: [
           ...newIssue.assignees,
           {
-            name: content.name,
-            profileImage: content.profileImage,
-            email: '',
+            ...content,
           },
         ],
       });

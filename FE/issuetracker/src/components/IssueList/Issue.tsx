@@ -4,11 +4,17 @@ import * as S from 'components/IssueList/styled.issue';
 import * as I from 'design/icons';
 
 import AccountSrc from 'assets/images/UserImageLarge.svg';
-import { CheckBox } from './styled.issues';
+import { CheckBox } from 'components/IssueList/styled.issues';
+import { PostIssueType } from 'store/issueList';
+import { keyMaker } from 'utils/util';
 
-function Issue() {
+function Issue({ data }: { data: PostIssueType }) {
   const title = 'FE';
   const color = 'blue';
+  const labels = data.labels.map((label) => {
+    const key = keyMaker();
+    return <Label key={key} title={label.title} color={label.color} />;
+  });
   return (
     <S.IssueWrap>
       <S.IssueLeft>
@@ -17,19 +23,19 @@ function Issue() {
           <S.AlertCircleFigure>
             <I.alertCircle />
           </S.AlertCircleFigure>
-          <S.Title>이슈 제목</S.Title>
-          <Label title={title} color={color} />
+          <S.Title>{data.title}</S.Title>
+          {labels}
         </S.IssueTop>
         <S.IssueBottom>
-          <S.IssueBottomContent>#이슈번호</S.IssueBottomContent>
-          <S.IssueBottomContent>작성자 및 타임스템프 정보</S.IssueBottomContent>
+          <S.IssueBottomContent>{data.id}</S.IssueBottomContent>
+          <S.IssueBottomContent>{data.writer.name}</S.IssueBottomContent>
           <S.IssueBottomContent>
             <I.milestone />
-            마일스톤
+            {data.milestone.title}
           </S.IssueBottomContent>
         </S.IssueBottom>
       </S.IssueLeft>
-      <AccountImg src={AccountSrc} />
+      <AccountImg src={data.writer.profileImage} />
     </S.IssueWrap>
   );
 }
