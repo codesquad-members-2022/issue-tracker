@@ -42,7 +42,7 @@ final class LabelViewModel: LabelViewModelProtocol {
             case .success(let labelData):
                 self?.labels.value = labelData
             case .failure(let error):
-                self?.error.value = error.localizedDescription
+                self?.error.value = error.message
             }
         }
     }

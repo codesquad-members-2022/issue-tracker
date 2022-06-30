@@ -50,7 +50,6 @@ final class EditingIssueViewModel: EditingIssueViewModelProtocol {
     }
 
     func didTouchSave() {
-        saveButtonState.value = true
         var issueEntity = IssueItem(title: titleText.value, content: contentText.value, milestoneName: "", labels: [])
 
         issueManager.sendNewIssue(issueEntity) { [weak self] (result) in
@@ -66,7 +65,7 @@ final class EditingIssueViewModel: EditingIssueViewModelProtocol {
 
             case .failure(let error):
                 self?.saveButtonState.value = false
-                self?.error.value = error.localizedDescription
+                self?.error.value = error.message
             }
         }
     }

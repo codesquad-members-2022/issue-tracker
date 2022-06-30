@@ -59,7 +59,7 @@ final class EditingLabelViewModel: EditingLabelViewModelProtocol {
                 let userInfo = [UserInfoKey.addedLabel: labelEntity]
                 NotificationCenter.default.post(name: NotificationNames.didSaveNewLabel, object: self, userInfo: userInfo)
             case .failure(let error):
-                self?.error.value = error.localizedDescription
+                self?.error.value = error.message
                 self?.saveButtonState.value = false
             }
         }

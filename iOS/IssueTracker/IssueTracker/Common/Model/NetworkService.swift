@@ -62,4 +62,17 @@ enum NetworkError: Error {
     case noResponse
     case serverError(statusCode: Int)
     case decodingError
+
+    var message: String {
+        switch self {
+        case .invalidURL:
+            return "잘못된 URL을 사용하고 있습니다."
+        case .transferError:
+            return "서버와 연결이 되지 않습니다."
+        case .noData, .noResponse, .decodingError:
+            return "서버와 연결에서 문제가 발생했습니다."
+        case .serverError(let statusCode):
+            return "status code: \(statusCode)에 해당하는 문제가 발생했습니다."
+        }
+    }
 }
