@@ -40,7 +40,6 @@ final class LabelViewController: UIViewController, ViewBinding {
     
     private func setTableView() {
         self.view.addSubview(tableView)
-        
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

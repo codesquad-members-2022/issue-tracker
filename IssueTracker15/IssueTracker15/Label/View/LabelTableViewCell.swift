@@ -56,6 +56,7 @@ final class LabelTableViewCell: UITableViewCell {
         descriptionLabel.snp.makeConstraints {
             $0.leading.equalTo(issueTitle.snp.leading)
             $0.top.equalTo(issueTitle.snp.bottom)
+            $0.bottom.equalToSuperview()
         }
     }
 }
