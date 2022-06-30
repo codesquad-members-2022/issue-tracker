@@ -2,14 +2,14 @@ import * as S from 'components/IssueList/styled.issues';
 import * as I from 'design/icons';
 import { useGetData } from 'APIs/Api';
 import Issue from 'components/IssueList/Issue';
-import { PostIssueType } from 'store/issueList';
+import { issueListState, PostIssueType } from 'store/issueList';
 import { keyMaker } from 'utils/util';
+import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 
 function Issues() {
-  const { data, status } = useGetData(
-    'issueList',
-    'https://8fe3cd27-6f2c-47dd-8182-62d896d6f37e.mock.pstmn.io/issues?closed=false',
-  );
+  const data = useRecoilValue(issueListState);
+
   const issueData: PostIssueType[] = data;
   return (
     <S.IssuesWrap>
@@ -41,11 +41,10 @@ function Issues() {
           </S.DropboxContent>
         </S.IssuesTabRight>
       </S.IssuesTab>
-      {status === 'success' &&
-        issueData.map((issue) => {
-          const key = keyMaker();
-          return <Issue key={key} data={issue} />;
-        })}
+      {issueData.map((issue) => {
+        const key = keyMaker();
+        return <Issue key={key} data={issue} />;
+      })}
     </S.IssuesWrap>
   );
 }
