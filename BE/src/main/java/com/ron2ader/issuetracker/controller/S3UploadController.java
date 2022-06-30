@@ -14,7 +14,7 @@ public class S3UploadController {
     private final S3UploadService s3uploadService;
 
     @PostMapping("/images/upload")
-    public String upload(@RequestPart("file") MultipartFile multipartFile) {
+    public String upload(@RequestPart("file") MultipartFile multipartFile ) {
         return s3uploadService.uploadPublic(multipartFile);
     }
 

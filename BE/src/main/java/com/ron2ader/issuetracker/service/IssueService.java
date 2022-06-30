@@ -1,27 +1,32 @@
 package com.ron2ader.issuetracker.service;
 
-import com.ron2ader.issuetracker.auth.Login;
-import com.ron2ader.issuetracker.controller.issuedto.IssueCondition;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetail;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssueFilter;
 import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssuesResponse;
+import com.ron2ader.issuetracker.controller.labeldto.LabelResponse;
 import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
-import com.ron2ader.issuetracker.domain.issue.*;
-import com.ron2ader.issuetracker.domain.label.Label;
+import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
+import com.ron2ader.issuetracker.domain.issue.Issue;
+import com.ron2ader.issuetracker.domain.issue.IssueAssignee;
+import com.ron2ader.issuetracker.domain.issue.IssueAssigneeRepository;
+import com.ron2ader.issuetracker.domain.issue.IssueLabel;
+import com.ron2ader.issuetracker.domain.issue.IssueLabelRepository;
+import com.ron2ader.issuetracker.domain.issue.IssueRepository;
 import com.ron2ader.issuetracker.domain.label.LabelRepository;
 import com.ron2ader.issuetracker.domain.member.Member;
 import com.ron2ader.issuetracker.domain.member.MemberRepository;
 import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import com.ron2ader.issuetracker.domain.milestone.MilestoneRepository;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,54 +41,89 @@ public class IssueService {
 
     @Transactional
     public Long registerIssue(String issuerId, String title, String contents,
-                                             List<Long> assigneeIds, List<Long> labelIds, Long milestoneId) {
+        List<Long> assigneeIds, List<Long> labelIds, Long milestoneId) {
 
         Member member = memberRepository.findByMemberId(issuerId).orElseThrow(NoSuchElementException::new);
-        Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(NoSuchElementException::new);
-        Issue createdIssue = issueRepository.save(Issue.createIssue(member, title, contents, milestone));
+        Issue issue = Issue.createIssue(member, title, contents);
 
-        /*
-        * 메서드 분리 필요 (findAllById로 찾을지, 스트림을 활용해서 찾을지)
-        * 예외에 대해서 더 공부하기
-        * */
         try {
-            List<Label> labels = labelRepository.findAllById(labelIds);
-            List<Member> assignees = memberRepository.findAllById(assigneeIds);
+            labelRepository.findAllById(labelIds).stream()
+                .map(label -> IssueLabel.of(issue, label))
+                .forEach(issue::addLabel);
 
-            List<IssueLabel> issueLabels = labels.stream()
-                    .map(label -> IssueLabel.of(createdIssue, label))
-                    .collect(Collectors.toList());
-            issueLabelRepository.saveAll(issueLabels);
-
-            List<IssueAssignee> issueAssignees = assignees.stream()
-                    .map(assignee -> IssueAssignee.of(createdIssue, assignee))
-                    .collect(Collectors.toList());
-            issueAssigneeRepository.saveAll(issueAssignees);
+            memberRepository.findAllById(assigneeIds).stream()
+                .map(assignee -> IssueAssignee.of(issue, assignee))
+                .forEach(issue::addAssignee);
 
         } catch (IllegalArgumentException exception) {
             throw new NoSuchElementException(exception.getMessage());
         }
 
-        return createdIssue.getId();
+        if (milestoneId != null) {
+            Milestone milestone = milestoneRepository.findById(milestoneId).orElseThrow(NoSuchElementException::new);
+            issue.setMilestone(milestone);
+        }
+
+        Issue savedIssue = issueRepository.save(issue);
+
+        return savedIssue.getId();
     }
 
     // 상세 정보
     @Transactional(readOnly = true)
     public IssueDetailResponse findById(Long issueNumber) {
-        Issue targetIssue = issueRepository.findById(issueNumber)
-                .orElseThrow(() -> new NoSuchElementException("해당하는 이슈가 없습니다."));
+        Issue issue = issueRepository.findById(issueNumber)
+            .orElseThrow(() -> new NoSuchElementException("해당하는 이슈가 없습니다."));
 
-        return new IssueDetailResponse(MemberDto.from(targetIssue.getIssuer()), IssueDetail.from(targetIssue));
+        List<MemberDto> assignees = issueAssigneeRepository.findByIssue(issue)
+            .stream()
+            .map(IssueAssignee::getAssignee)
+            .map(MemberDto::from)
+            .collect(Collectors.toList());
+
+        List<LabelResponse> labels = issueLabelRepository.findByIssue(issue)
+            .stream()
+            .map(IssueLabel::getLabel)
+            .map(LabelResponse::from)
+            .collect(Collectors.toList());
+
+        return new IssueDetailResponse(
+            MemberDto.from(issue.getIssuer()),
+            IssueDetail.from(issue),
+            assignees,
+            labels,
+            MilestoneResponse.from(issue.getMilestone())
+        );
     }
 
     @Transactional(readOnly = true)
     public Page<IssueSimpleResponse> findByOpenStatus(Pageable pageable, Boolean openStatus) {
-        Page<Issue> issues = issueRepository.findByCondition(pageable, IssueCondition.ofForFindOpenStatus(openStatus));
+        Page<Issue> issues = issueRepository.findAllByOpenStatus(pageable, openStatus);
         return issues.map(IssueSimpleResponse::from);
     }
 
     @Transactional(readOnly = true)
     public Long countByStatus(Boolean openStatus) {
         return issueRepository.countByOpenStatus(openStatus);
+    }
+
+    @Transactional(readOnly = true)
+    public IssuesResponse findByIssueFilter(IssueFilter issueFilter) {
+        List<Issue> findIssues = issueRepository.findByIssueFilter(issueFilter);
+
+        long allCount = findIssues.size();
+        long countByFilter = findIssues.stream()
+                .map(Issue::getOpenStatus)
+                .filter(openStatus -> openStatus == issueFilter.getOpenStatus())
+                .count();
+        Long oppositeCount = allCount - countByFilter;
+        List<IssueSimpleResponse> issues = findIssues.stream()
+                .map(IssueSimpleResponse::from)
+                .collect(Collectors.toList());
+
+        if (issueFilter.getOpenStatus()) {
+            return new IssuesResponse(countByFilter, oppositeCount, issues);
+        }
+        return new IssuesResponse(oppositeCount, countByFilter, issues);
     }
 }

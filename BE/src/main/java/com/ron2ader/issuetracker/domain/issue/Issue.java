@@ -1,18 +1,24 @@
 package com.ron2ader.issuetracker.domain.issue;
 
 import com.ron2ader.issuetracker.domain.common.BaseEntity;
-import com.ron2ader.issuetracker.domain.label.Label;
 import com.ron2ader.issuetracker.domain.member.Member;
 import com.ron2ader.issuetracker.domain.milestone.Milestone;
 import com.ron2ader.issuetracker.domain.reply.Reply;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -34,17 +40,17 @@ public class Issue extends BaseEntity {
 
     private Boolean openStatus;
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<IssueAssignee> assignees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<IssueLabel> labels = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Reply> replies = new ArrayList<>();
 
     private Issue(Member issuer, String title, String contents, Milestone milestone) {
@@ -60,13 +66,23 @@ public class Issue extends BaseEntity {
         return new Issue(null, member, title, contents, true, assignees, labels, milestone, replies);
     }
 
-    public static Issue createIssue(Member issuer, String title, String contents, Milestone milestone)  {
-        return new Issue(issuer, title, contents, milestone);
+    public static Issue createIssue(Member issuer, String title, String contents)  {
+        return new Issue(issuer, title, contents, null);
     }
 
     public void addReply(Reply reply) {
-        reply.setIssue(this);
         this.replies.add(reply);
     }
 
+    public void addAssignee(IssueAssignee issueAssignee) {
+        this.assignees.add(issueAssignee);
+    }
+
+    public void addLabel(IssueLabel issueLabel) {
+        this.labels.add(issueLabel);
+    }
+
+    public void setMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
 }

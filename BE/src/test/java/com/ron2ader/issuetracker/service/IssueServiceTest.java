@@ -1,76 +1,83 @@
 package com.ron2ader.issuetracker.service;
 
-import com.ron2ader.issuetracker.controller.issuedto.IssueCreateRequest;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.ron2ader.issuetracker.controller.issuedto.IssueDetail;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
-import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
-import com.ron2ader.issuetracker.domain.member.MemberRepository;
-import org.junit.jupiter.api.BeforeEach;
+import com.ron2ader.issuetracker.controller.issuedto.IssueFilter;
+import com.ron2ader.issuetracker.controller.issuedto.IssuesResponse;
+import com.ron2ader.issuetracker.controller.labeldto.LabelResponse;
+import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
+import com.ron2ader.issuetracker.controller.milestonedto.MilestoneResponse;
+import com.ron2ader.issuetracker.domain.issue.IssueRepository;
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("local")
-@Transactional
 class IssueServiceTest {
 
-    @Autowired
-    private IssueService issueService;
+    private final IssueService issueService;
+    private final IssueRepository issueRepository;
 
     @Autowired
-    private MemberRepository memberRepository;
+    public IssueServiceTest(IssueService issueService,
+        IssueRepository issueRepository) {
+        this.issueService = issueService;
+        this.issueRepository = issueRepository;
+    }
 
-    private List<IssueCreateRequest> issues;
-    private IssueCreateRequest issueCreateRequest;
+    @Test
+    @DisplayName("issue를 등록하면 등록된 이슈의 아이디를 반환한다.")
+    void registerIssueTest() {
+        // given & when
+        long issueCount = issueRepository.count();
 
-    /*
-    * 엔티티 수정과 로직 수정으로 인해서 테스트코드 다시 작성 예정
-    * */
-//    @BeforeEach
-//    void setUp() {
-//        issueCreateRequest = new IssueCreateRequest("title", "contents", null);
-//
-//        issues = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//             issues.add(new IssueCreateRequest("title" + i, "contents" + i, null));
-//        }
-//    }
-//
-//    @Test
-//    void registerIssueTest() {
-//        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest.getTitle(), issueCreateRequest.getContents(), "ron2");
-//
-//        assertThat(issueDetailResponse.getMemberDto().getMemberId()).isEqualTo("ron2");
-//        assertThat(issueDetailResponse.getMemberDto().getAvatarUrl()).isEqualTo("asdfasdf.com");
-//        assertThat(issueDetailResponse.getIssueDetail().getTitle()).isEqualTo("title");
-//    }
-//
-//    @Test
-//    void findByIdTest() {
-//        IssueDetailResponse issueDetailResponse = issueService.registerIssue(issueCreateRequest.getTitle(), issueCreateRequest.getContents(), "ron2");
-//        IssueDetailResponse findIssue = issueService.findById(issueDetailResponse.getIssueDetail().getId());
-//
-//        assertThat(findIssue).isEqualTo(issueDetailResponse);
-//    }
-//
-//    @Test
-//    void findAllByOpenStatusPagingTest() {
-//        for (int i = 0; i < 10; i++) {
-//            issueService.registerIssue(issues.get(i).getTitle(), issues.get(i).getTitle(), "ron2");
-//        }
-//
-//        Page<IssueSimpleResponse> allByOpenStatus = issueService.findByOpenStatus(PageRequest.of(0, 5), true);
-//
-//        assertThat(allByOpenStatus.getTotalElements()).isEqualTo(10);
-//        assertThat(allByOpenStatus.getSize()).isEqualTo(5);
-//    }
+        Long createdIssueId = issueService.registerIssue("ron2",
+                "my issue",
+                "contents",
+                List.of(1L, 2L),
+                List.of(1L, 2L),
+                1L);
+
+        // then
+        assertThat(createdIssueId).isEqualTo(issueCount + 1);
+    }
+
+
+    @Test
+    @DisplayName("이슈 아이디로 이슈를 조회하면 issuer, issueDetail, milestone, assignees," +
+            " labels를 모두 담은 IssueDetailResponse를 반환한다.")
+    void findByIdTest() {
+        //given & when
+        IssueDetailResponse issueDetailResponse = issueService.findById(1L);
+        MemberDto issuer = issueDetailResponse.getIssuer();
+        IssueDetail issueDetail = issueDetailResponse.getIssueDetail();
+        MilestoneResponse milestone = issueDetailResponse.getMilestone();
+        List<MemberDto> assignees = issueDetailResponse.getAssignees();
+        List<LabelResponse> labels = issueDetailResponse.getLabels();
+
+        //then
+        assertThat(issuer.getMemberId()).isEqualTo("ron2");
+        assertThat(issueDetail.getId()).isEqualTo(1L);
+        assertThat(milestone.getId()).isEqualTo(1L);
+        assertThat(assignees).hasSize(2);
+        assertThat(labels).hasSize(2);
+    }
+
+    @Test
+    @DisplayName("issue filter로 조회하면 조건에 맞는 issuesResponse를 반환한다.")
+    void findByFilterTest() {
+        IssueFilter issueFilter = new IssueFilter(true, 1L, 1L, 1L, 1L);
+
+        IssuesResponse issuesResponse = issueService.findByIssueFilter(issueFilter);
+
+        assertThat(issuesResponse.getOpenCount()).isEqualTo(4);
+        assertThat(issuesResponse.getCloseCount()).isEqualTo(0);
+    }
+
 }

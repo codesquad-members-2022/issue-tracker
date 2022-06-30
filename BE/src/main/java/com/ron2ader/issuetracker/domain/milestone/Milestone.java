@@ -4,8 +4,12 @@ import com.ron2ader.issuetracker.domain.issue.Issue;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
-
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Milestone {
 
@@ -31,10 +35,12 @@ public class Milestone {
         return new Milestone(null, title, description, endDate, null);
     }
 
-    public Long issueCountByOpenStatus(Boolean openStatus) {
-        return issues.stream()
-            .filter(issue -> issue.getOpenStatus() == openStatus)
-            .count();
+    public Long countOpenIssue() {
+        return issueCountByOpenStatus(true);
+    }
+
+    public Long countClosedIssue() {
+        return issueCountByOpenStatus(false);
     }
 
     public void update(String title, String description, LocalDate endDate) {
@@ -43,4 +49,26 @@ public class Milestone {
         this.endDate = endDate;
     }
 
+    private Long issueCountByOpenStatus(Boolean openStatus) {
+        return issues.stream()
+                .filter(issue -> issue.getOpenStatus() == openStatus)
+                .count();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Milestone milestone = (Milestone) o;
+        return Objects.equals(id, milestone.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

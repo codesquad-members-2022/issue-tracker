@@ -1,34 +1,37 @@
 package com.ron2ader.issuetracker.controller;
 
 import com.ron2ader.issuetracker.auth.Login;
+import com.ron2ader.issuetracker.controller.authdto.LoginMember;
+import com.ron2ader.issuetracker.controller.issuedto.IssueCondition;
 import com.ron2ader.issuetracker.controller.issuedto.IssueCreateRequest;
 import com.ron2ader.issuetracker.controller.issuedto.IssueDetailResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssueFilter;
 import com.ron2ader.issuetracker.controller.issuedto.IssueSimpleResponse;
+import com.ron2ader.issuetracker.controller.issuedto.IssuesPagingResponse;
 import com.ron2ader.issuetracker.controller.issuedto.IssuesResponse;
-import com.ron2ader.issuetracker.controller.memberdto.MemberDto;
 import com.ron2ader.issuetracker.service.IssueService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class IssueController {
 
     private final IssueService issueService;
 
-    /*
-    * id만 반환할지, dto로 변환해서 저장된 내용 다시 보내줄지 상의 필요
-    * */
     @PostMapping("/issues")
-    public Long register(@Login String issuerId, IssueCreateRequest issueCreateRequest) {
+    public Long register(@Login LoginMember loginMember, @RequestBody IssueCreateRequest issueCreateRequest) {
 
-        return issueService.registerIssue(issuerId,
+        return issueService.registerIssue(loginMember.getMemberId(),
                 issueCreateRequest.getTitle(),
                 issueCreateRequest.getContents(),
                 issueCreateRequest.getAssigneeIds(),
@@ -37,20 +40,29 @@ public class IssueController {
     }
 
     @GetMapping("/issues/{issueNumber}")
-    public IssueDetailResponse showIssue(@PathVariable Long issueNumber) {
+    public IssueDetailResponse getIssue(@PathVariable Long issueNumber) {
         IssueDetailResponse issueDetailResponse = issueService.findById(issueNumber);
 
         return issueDetailResponse;
     }
 
+    /*
+    * 첫 페이지
+    * */
     @GetMapping("/issues")
-    public IssuesResponse showIssuesByOpenStatus(Pageable pageable, Boolean openStatus) {
+    public IssuesPagingResponse getIssuesByOpenStatus(@PageableDefault Pageable pageable, Boolean openStatus) {
+
         Page<IssueSimpleResponse> issues = issueService.findByOpenStatus(pageable, openStatus);
         Long countByStatus = issueService.countByStatus(!openStatus);
 
         if (openStatus) {
-            return new IssuesResponse(issues.getTotalElements(), countByStatus, issues);
+            return new IssuesPagingResponse(issues.getTotalElements(), countByStatus, issues);
         }
-        return new IssuesResponse(countByStatus, issues.getTotalElements(), issues);
+        return new IssuesPagingResponse(countByStatus, issues.getTotalElements(), issues);
+    }
+
+    @GetMapping("/issues/search")
+    public IssuesResponse getIssuesByCondition(IssueCondition issueCondition) {
+        return issueService.findByIssueFilter(IssueFilter.from(issueCondition));
     }
 }

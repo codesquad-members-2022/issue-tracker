@@ -1,20 +1,20 @@
 package com.ron2ader.issuetracker.auth;
 
-import com.ron2ader.issuetracker.service.AuthService;
+import com.ron2ader.issuetracker.service.MemberService;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
-
 @RequiredArgsConstructor
+@Component
 public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private final AuthService authService;
+    private final MemberService memberService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -22,10 +22,9 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-        String token = Optional.ofNullable(AuthorizationExtractor.extract(request)).orElseThrow(RuntimeException::new);
-
-        return authService.extractUserIdByToken(token);
+        String userId = (String) request.getAttribute("userId");
+        return memberService.findMember(userId);
     }
 }
