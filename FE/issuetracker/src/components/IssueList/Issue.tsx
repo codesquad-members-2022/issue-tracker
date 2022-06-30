@@ -3,14 +3,11 @@ import Label, { AccountImg } from 'components/common/Common';
 import * as S from 'components/IssueList/styled.issue';
 import * as I from 'design/icons';
 
-import AccountSrc from 'assets/images/UserImageLarge.svg';
 import { CheckBox } from 'components/IssueList/styled.issues';
 import { PostIssueType } from 'store/issueList';
 import { keyMaker } from 'utils/util';
 
 function Issue({ data }: { data: PostIssueType }) {
-  const title = 'FE';
-  const color = 'blue';
   const labels = data.labels.map((label) => {
     const key = keyMaker();
     return <Label key={key} title={label.title} color={label.color} />;
