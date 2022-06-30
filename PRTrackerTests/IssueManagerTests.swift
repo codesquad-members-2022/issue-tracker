@@ -26,10 +26,8 @@ class IssueManagerTests: XCTestCase {
         let sut = IssueManager(keyChainService: KeyChainSuccessStub(),
                            networkService: NetworkManger(urlSession: mockSession))
         
-        guard let url = URL(string: BaseURL.issues) else {
-            Log.error("Wrong Base URL: \(BaseURL.issues)")
-            return 
-        }
+        
+        let url = GetIssues(parameter: IssuesParameter.standard).url
         
         guard let dummyData = DummyResponse.issues.data else {
             XCTFail("Cannot find \(DummyResponse.issues)")
@@ -65,6 +63,5 @@ class IssueManagerTests: XCTestCase {
             XCTAssertNil(issues)
         }
     }
-    
     
 }

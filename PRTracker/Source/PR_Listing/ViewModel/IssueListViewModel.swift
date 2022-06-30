@@ -7,9 +7,8 @@
 
 import Foundation
 
-final class IssueListViewModel {
-    private let mockDataService = MockDataService()
-    private let issueManager = IssueManager()
+struct IssueListViewModel {
+    private let issueService: IssueService
     
     var issueViewModels: Observable<[IssueTableCellViewModel]?> = Observable(nil)
 
@@ -17,40 +16,56 @@ final class IssueListViewModel {
         return issueViewModels.value?.count ?? 0
     }
     
+    var issueState: IssueState = .open
+    
+    init(issueService: IssueService = IssueManager()) {
+        self.issueService = issueService
+    }
+    
     func searchBarTextDidChange(with text: String) {
         // TODO: SearchBarText가 바뀌면 호출되는 부분 구현
     }
     
     func requestData() {
-        issueManager.getIssues { issues in
+        issueService.getIssues { issues in
             guard let issues = issues else {
                 return
             }
-            
-            self.issueViewModels.value = self.convertModelToViewModel(issues)
+            self.issueViewModels.value = self.convertToViewModel(issues)
         }
     }
     
-    func requestMockData() {
-        mockDataService.getMockIssues { issues in
-            guard let issues = issues else {
-                return
-            }
-            
-            self.issueViewModels.value = convertModelToViewModel(issues)
-        }
-    }
-    
-    private func convertModelToViewModel(_ list: [Issue]) -> [IssueTableCellViewModel] {
-        let tableCellViewModelList = list.map { pull -> IssueTableCellViewModel in
-            let tableCellViewModel = IssueTableCellViewModel()
-            tableCellViewModel.configureCellData(with: pull)
-            return tableCellViewModel
+    private func convertToViewModel(_ list: [Issue]) -> [IssueTableCellViewModel] {
+        let tableCellViewModelList = list.map { issue -> IssueTableCellViewModel in
+            return convertToViewModel(issue)
         }
         return tableCellViewModelList
     }
     
+    private func convertToViewModel(_ issue: Issue) -> IssueTableCellViewModel {
+        return IssueTableCellViewModel(id: issue.id,
+                                       title: issue.title,
+                                       state: issue.state,
+                                       content: issue.body ?? "No content",
+                                       projectName: issue.milestone?.title ?? "No title",
+                                       labelList: issue.labels ?? [Label(id: 999, color: "pink", name: "NoLabel")])
+    }
+    
     func getCellViewModel(index: Int) -> IssueTableCellViewModel? {
         return issueViewModels.value?[index]
+    }
+    
+    func close(at index: Int, completion: @escaping (Bool) -> Void) {
+        guard let issueId = issueViewModels.value?[index].id else {
+            return completion(false)
+        }
+        
+        issueService.close(issueId: issueId) { issue in
+            guard let issue = issue else { return completion(false) }
+            let cellVM = self.convertToViewModel(issue)
+            
+            self.issueViewModels.value?[index] = cellVM
+            completion(true)
+        }
     }
 }

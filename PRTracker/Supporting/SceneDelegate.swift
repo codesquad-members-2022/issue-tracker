@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let code = parseCode(from: URLContexts) else { return }
-        GitHubLoginManager.shared.getAccessToken(with: code)
+        GitHubLoginManager.shared.requestAccessToken(with: code)
     }
     
     private func parseCode(from URLContexts: Set<UIOpenURLContext>) -> String? {
@@ -24,7 +24,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return code
     }
     
+    private func gotoLogin() {
+        DispatchQueue.main.async {
+            self.window?.rootViewController?.performSegue(withIdentifier: "loginSegue", sender: nil)
+        }
+    }
+
+    private func gotoHome() {
+        DispatchQueue.main.async {
+            self.window?.rootViewController?.performSegue(withIdentifier: "mainSegue", sender: nil)
+        }
+    }
+        
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
+
+        GitHubLoginManager().checkAuthorization { [weak self] authorized in
+            if authorized {
+                self?.gotoHome()
+            } else {
+                self?.gotoLogin()
+            }
+        }
     }
 }
