@@ -1,8 +1,6 @@
 package louie.hanse.issuetracker.web.controller;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import java.util.Collections;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import louie.hanse.issuetracker.domain.Member;
@@ -10,8 +8,9 @@ import louie.hanse.issuetracker.login.jwt.JwtProvider;
 import louie.hanse.issuetracker.login.oauth.GithubAccessToken;
 import louie.hanse.issuetracker.login.oauth.GithubUser;
 import louie.hanse.issuetracker.login.oauth.OAuthProperties;
-import louie.hanse.issuetracker.service.OAuthService;
 import louie.hanse.issuetracker.service.MemberService;
+import louie.hanse.issuetracker.service.OAuthService;
+import louie.hanse.issuetracker.web.dto.LoginResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +38,7 @@ public class OAuthController {
     }
 
     @GetMapping("/login/callback")
-    public Map<String, String> login(String code, HttpServletResponse response) {
+    public LoginResponse login(String code, HttpServletResponse response) {
         GithubAccessToken githubAccessToken = oAuthService.getAccessToken(code);
         GithubUser githubUser = oAuthService.getUserInfo(githubAccessToken);
         Member member = memberService.login(githubUser);
@@ -49,12 +48,9 @@ public class OAuthController {
 
         memberService.updateRefreshToken(refreshToken, member.getId());
 
-        response.setHeader("Access-Token", accessToken);
-        response.setHeader("Refresh-Token", refreshToken);
-
         log.info("accessToken {}", accessToken);
 
-        return Collections.singletonMap("avatarImageUrl", member.getAvatarImageUrl());
+        return new LoginResponse(accessToken, refreshToken, member.getAvatarImageUrl());
     }
 
     @GetMapping("/reissue/access-token")
