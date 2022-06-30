@@ -28,7 +28,7 @@ class DetailEditDialogFragment(val labelNameList: List<String>, mileStoneName: S
     ): View? {
         binding = DetailEditDialogFragmentBinding.inflate(inflater, container, false)
 
-        binding.tvLabelContent.text = labelNameList.stringListToText()
+        binding.tvLabelContent.text = labelNameList.joinToString(", ")
         return binding.root
     }
 
