@@ -2,22 +2,36 @@ import IssueList from '@/pages/IssueList';
 import Loading from '@/pages/Loading';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
-import URL from '@/router/routeUrl';
+import ROUTE_URL from '@/router/routeUrl';
+import AuthRoute from '@/router/AuthRoute';
+
+const {
+  BASE,
+  LOGIN,
+  ISSUE_LIST,
+  NOT_FOUND,
+  NEW_ISSUE,
+  DETAIL_ISSUE,
+  LIST,
+  LABEL,
+  MILESTONE,
+  LOADING
+} = ROUTE_URL;
 
 export const routes = [
-  { path: URL.base, element: <Login /> },
-  { path: URL.login, element: <Login /> },
-  { path: URL.loading, element: <Loading /> },
-  { path: URL.detailIssue, element: <NotFound pageName="Detail Issue" /> },
-  { path: URL.issueList, element: <IssueList /> },
+  { path: BASE, element: <Login /> },
+  { path: LOGIN, element: <Login /> },
+  { path: LOADING, element: <Loading /> },
+  { path: DETAIL_ISSUE, element: <NotFound pageName="Detail Issue" /> },
+  { path: ISSUE_LIST, element: <IssueList /> },
   {
-    path: URL.list,
+    path: LIST,
     element: <NotFound pageName="List" />,
     children: [
-      { path: URL.label, element: <NotFound pageName="Label List" /> },
-      { path: URL.milestone, element: <NotFound pageName="Milestone List" /> }
+      { path: LABEL, element: <NotFound pageName="Label List" /> },
+      { path: MILESTONE, element: <NotFound pageName="Milestone List" /> }
     ]
   },
-  { path: URL.newIssue, element: <NotFound pageName="New Issue" /> },
-  { path: URL.notFound, element: <NotFound pageName="Not Found" /> }
+  { path: NEW_ISSUE, element: <NotFound pageName="New Issue" /> },
+  { path: NOT_FOUND, element: <NotFound pageName="Not Found" /> }
 ];

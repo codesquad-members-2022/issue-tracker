@@ -1,28 +1,28 @@
 type PageType =
-  | 'base'
-  | 'login'
-  | 'issueList'
-  | 'notFound'
-  | 'newIssue'
-  | 'detailIssue'
-  | 'list'
-  | 'label'
-  | 'milestone'
-  | 'loading';
+  | 'BASE'
+  | 'LOGIN'
+  | 'ISSUE_LIST'
+  | 'NOT_FOUND'
+  | 'NEW_ISSUE'
+  | 'DETAIL_ISSUE'
+  | 'LIST'
+  | 'LABEL'
+  | 'MILESTONE'
+  | 'LOADING';
 
 type URLType = Record<PageType, string>;
 
-const URL: URLType = {
-  base: '/',
-  login: 'login',
-  issueList: 'issue-list',
-  notFound: '*',
-  newIssue: 'new-issue',
-  detailIssue: 'detail-issue',
-  list: 'list',
-  label: 'label',
-  milestone: 'milestone',
-  loading: 'github-callback'
+const ROUTE_URL: URLType = {
+  BASE: '/',
+  LOGIN: 'login',
+  ISSUE_LIST: 'issue-list',
+  NOT_FOUND: '*',
+  NEW_ISSUE: 'new-issue',
+  DETAIL_ISSUE: 'detail-issue',
+  LIST: 'list',
+  LABEL: 'label',
+  MILESTONE: 'milestone',
+  LOADING: 'github-callback'
 };
 
-export default URL;
+export default ROUTE_URL;
