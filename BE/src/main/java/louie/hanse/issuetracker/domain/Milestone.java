@@ -25,9 +25,6 @@ public class Milestone {
     private String description;
     private LocalDate completedDate;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
     public void addIssue(Issue issue) {
         this.issues.add(issue);
     }
