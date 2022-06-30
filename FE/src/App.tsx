@@ -1,14 +1,30 @@
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from '@/login/LoginPage';
-import IssueListPage from '@/issueList/IssueListPage';
-import LabelListPage from './labelList/LabelListPage';
-import MilestoneListPage from './milestoneList/MilestoneListPage';
-import AddIssuePage from './addIssue/AddIssuePage';
-import IssueDetailPage from './issueDetail/IssueDetailPage';
+import LoginPage from '@/pages/LoginPage';
+import IssueListPage from '@/pages/IssueListPage';
+import { lazy, Suspense } from 'react';
 import GlobalStyles from './GlobalStyles';
 import theme from './theme';
-import Layout from './common/Layout';
+import Layout from './common/components/Layout';
+
+const pages = ['addIssue', 'issueDetail', 'labelList', 'milestoneList'].sort();
+
+const getFileName = (page: string) => {
+  const fileName = `${page[0].toUpperCase()}${page.slice(1)}Page`;
+
+  return fileName;
+};
+
+const getPage = (page: string) => {
+  const fileName = getFileName(page);
+  const Page = lazy(() => import(`./pages/${fileName}`));
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Page />
+    </Suspense>
+  );
+};
 
 export default function App() {
   return (
@@ -19,10 +35,9 @@ export default function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="/" element={<Layout />}>
             <Route path="issueList" element={<IssueListPage />} />
-            <Route path="labelList" element={<LabelListPage />} />
-            <Route path="milestoneList" element={<MilestoneListPage />} />
-            <Route path="addIssue" element={<AddIssuePage />} />
-            <Route path="issueDetail" element={<IssueDetailPage />} />
+            {pages.map((page, idx) => {
+              return <Route key={idx} path={page} element={getPage(page)} />;
+            })}
           </Route>
         </Routes>
       </BrowserRouter>

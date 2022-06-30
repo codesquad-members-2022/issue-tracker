@@ -15,7 +15,7 @@ public class LabelDto {
 	private String description;
 	private Color color;
 
-	public static LabelDto of(Label label) {
+	public static LabelDto from(Label label) {
 		return new LabelDto(
 			label.getId(),
 			label.getTitle(),

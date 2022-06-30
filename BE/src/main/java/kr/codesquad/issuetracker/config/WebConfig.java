@@ -3,9 +3,11 @@ package kr.codesquad.issuetracker.config;
 
 import io.netty.resolver.DefaultAddressResolverGroup;
 import kr.codesquad.issuetracker.auth.JwtInterceptor;
+import kr.codesquad.issuetracker.domain.StringToStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -34,5 +36,10 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(jwtInterceptor)
 			.addPathPatterns("/**");
+	}
+
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverter(new StringToStatus());
 	}
 }
