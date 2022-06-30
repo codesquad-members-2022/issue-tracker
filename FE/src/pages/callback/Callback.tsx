@@ -5,7 +5,7 @@ import qs from 'qs';
 import LoginLoading from '@components/loginCallback/LoginLoading';
 import LoginError from '@components/loginCallback/LoginError';
 import { useAuthQuery } from '../../hooks/useAuthQuery';
-
+import { useCookies } from 'react-cookie';
 const Callback = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -14,9 +14,17 @@ const Callback = () => {
   });
   const { status, data: token } = useAuthQuery(code);
 
+  const [cookies, setCookie, removeCookie] = useCookies();
+
+  // useEffect(() => {
+  //   if (cookies.token) {
+  //     console.log(cookies.token);
+  //   }
+  // }, []);
   if (status === 'success') {
-    // // localStorage.setItem('jwt', token)
-    // 아이디를 받고, 아이디를 넘겨주어야 함.
+    if (!cookies.token) {
+      setCookie('token', token);
+    }
     navigate(`/issues?id=${'test'}`);
   }
 
