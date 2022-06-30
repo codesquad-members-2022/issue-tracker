@@ -12,6 +12,8 @@ protocol EditingIssueViewModelInput {
     func didTouchCancel()
     func didTouchSave()
     func didChangeSegmentValue(index: Int)
+    func didChangeTitleText(_ changedText: String?)
+    func didChangeContentText(_ changedText: String?)
 }
 
 protocol EditingIssueViewModelOutput {
@@ -66,6 +68,18 @@ final class EditingIssueViewModel: EditingIssueViewModelProtocol {
                 self?.saveButtonState.value = false
                 self?.error.value = error.localizedDescription
             }
+        }
+    }
+
+    func didChangeTitleText(_ changedText: String?) {
+        if let changedText = changedText {
+            titleText.value = changedText
+        }
+    }
+
+    func didChangeContentText(_ changedText: String?) {
+        if let changedText = changedText {
+            contentText.value = changedText
         }
     }
 }

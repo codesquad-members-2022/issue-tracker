@@ -13,14 +13,12 @@ final class EditingIssueViewController: UIViewController {
     private let navigationItems = EditingIssueViewNavigationItems()
 
     private let textViewDelegate = EditingIssueTextViewDelegate()
-    private let textFieldDelegate = EditingIssueTextFieldDelegate()
 
     private var viewModel: EditingIssueViewModelProtocol
 
     init(viewModel: EditingIssueViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        setObserver()
     }
 
     @available(*, unavailable)
@@ -97,11 +95,15 @@ private extension EditingIssueViewController {
         navigationItems.saveButton.addAction(UIAction { _ in
             viewModel.didTouchSave()
         }, for: .touchUpInside)
+
+        titleViewComponents.titleTextField.addAction(UIAction { [weak self] _ in
+            viewModel.didChangeTitleText(self?.titleViewComponents.titleTextField.text)
+        }, for: .editingChanged)
     }
 
     func setDelegate() {
-        titleViewComponents.titleTextField.delegate = textFieldDelegate
         contentViewComponents.editableContentTextView.delegate = textViewDelegate
+        textViewDelegate.setTextViewAction(viewModel.didChangeContentText(_:))
     }
 
     func setNavigationItems() {
@@ -121,11 +123,7 @@ private extension EditingIssueViewController {
         let isTitleTextEmpty = viewModel.titleText.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let isContentTextEmpty = viewModel.contentText.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
 
-        if !isTitleTextEmpty && !isContentTextEmpty {
-            navigationItem.rightBarButtonItem?.isEnabled = true
-        } else {
-            navigationItem.rightBarButtonItem?.isEnabled = false
-        }
+        navigationItem.rightBarButtonItem?.isEnabled = !isTitleTextEmpty && !isContentTextEmpty
     }
 
     func popViewController() {
@@ -140,21 +138,6 @@ private extension EditingIssueViewController {
             let alertAction = UIAlertAction(title: "OK", style: .cancel)
             alert.addAction(alertAction)
             self?.present(alert, animated: true)
-        }
-    }
-
-    func setObserver() {
-        NotificationCenter.default.addObserver(forName: EditingIssueTextViewDelegate.NotificationNames.textViewDidChanged,
-                                               object: nil, queue: nil) { [weak self] (notification) in
-            guard let newText = notification.userInfo?["text"] as? String else { return }
-            self?.viewModel.contentText.value = newText
-        }
-
-        NotificationCenter.default.addObserver(forName: EditingIssueTextFieldDelegate.NotificationNames.textFieldDidBeginEditing,
-                                               object: nil, queue: nil) { [weak self] (notification) in
-            guard let newText = notification.userInfo?["text"] as? String else { return }
-
-            self?.viewModel.titleText.value = newText
         }
     }
 }
