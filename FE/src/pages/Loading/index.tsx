@@ -16,7 +16,7 @@ export default function Loading() {
       ignoreQueryPrefix: true
     });
 
-    const response = await getLoginToken({ code: code });
+    const response = await getLoginToken(code + '');
     const { data, status } = response;
 
     if (status !== 200) {
@@ -25,6 +25,7 @@ export default function Loading() {
 
     const { current_user, login_token } = data;
     localStorage.setItem('currentUserInfo', JSON.stringify(current_user));
+    localStorage.setItem('currentUserToken', login_token);
     navigate('/issue-list', { replace: true });
   };
 
