@@ -15,7 +15,6 @@ final class IssueViewController: UIViewController {
     
     private lazy var addButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
-//        configuration.image = UIImage(systemName: "plus")
         configuration.baseBackgroundColor = .systemBlue
         configuration.baseForegroundColor = .white
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
@@ -56,7 +55,13 @@ final class IssueViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     @objc func touchedSelectButton() {
+        
     }
     
     @objc func touchedFilterButton() {
@@ -77,14 +82,6 @@ final class IssueViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        self.title = "이슈들"
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        let filterButton = createButton(title: "필터", image: UIImage(systemName: "scroll"), action: UIAction(handler: { [weak self] _ in
-            self?.touchedFilterButton()
-        }))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButton)
-        
         let selectButton = createButton(title: "선택", image: UIImage(systemName: "checkmark.circle"), action: UIAction(handler: { [weak self] _ in
             self?.touchedSelectButton()
         }))

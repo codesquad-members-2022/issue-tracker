@@ -103,6 +103,7 @@ class NewIssueViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setUpViews()
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
 
     private func setupNavigationBar() {
