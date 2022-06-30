@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import { GREYSCALE } from '@/common/constants';
+import { GREYSCALE, PATH } from '@constants';
 import { Link } from 'react-router-dom';
-import Tab from '@/common/components/Tab';
+import Tab from '@components/Tab';
 
 function LinkTabs() {
   return (
     <TabsBox>
-      <Link to="/labelList">
+      <Link to={`/${PATH.LABEL_LIST}`}>
         <Tab isActive={false} iconName="tag" title="레이블" count={0} />
       </Link>
       <span />
-      <Link to="/milestoneList">
+      <Link to={`/${PATH.MILESTONE_LIST}`}>
         <Tab isActive={false} iconName="milestone" title="마일스톤" count={0} />
       </Link>
     </TabsBox>

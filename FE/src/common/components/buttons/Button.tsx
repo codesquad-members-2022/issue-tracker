@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { COLORS, GREYSCALE } from '@/common/constants';
+import { COLORS, GREYSCALE } from '@constants';
 
 type ButtonProps = {
   disabled: boolean;
   label: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
 function Button({ disabled, label, onClick }: ButtonProps) {

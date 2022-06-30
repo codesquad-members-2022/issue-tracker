@@ -1,9 +1,9 @@
-import Icon from '@/assets/icons/Icon';
-import { GREYSCALE } from '@/common/constants';
+import Icon from '@icon';
+import { GREYSCALE } from '@constants';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import { fetchDataUseAxios, getRandomKey } from '@/utils';
-import DropDownPanel from '@/common/components/dropDown/DropDownPanel';
+import DropDownPanel from '@components/dropDown/DropDownPanel';
 
 type IssueTabProps = {
   tabId: string;

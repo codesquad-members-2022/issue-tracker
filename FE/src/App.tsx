@@ -5,9 +5,10 @@ import IssueListPage from '@/pages/IssueListPage';
 import { lazy, Suspense } from 'react';
 import GlobalStyles from './GlobalStyles';
 import theme from './theme';
-import Layout from './common/components/Layout';
+import Layout from '@components/Layout';
+import { PATH } from '@constants';
 
-const pages = ['addIssue', 'issueDetail', 'labelList', 'milestoneList'].sort();
+const pages = Object.values(PATH).sort();
 
 const getFileName = (page: string) => {
   const fileName = `${page[0].toUpperCase()}${page.slice(1)}Page`;
