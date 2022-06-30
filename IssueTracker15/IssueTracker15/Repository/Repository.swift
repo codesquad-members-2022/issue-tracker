@@ -12,6 +12,8 @@ class Repository {
 
     private var serviceWrapper = ContainerWrapper(container: ServiceContainer())
     
+    let networkService = NetworkService<[IssueDTO]>()
+    
     func getRESTNetworkService<T: Codable>(type: T.Type) -> NetworkService<T>? {
         
         guard let service = serviceWrapper.resolve(type: type.self) else {
