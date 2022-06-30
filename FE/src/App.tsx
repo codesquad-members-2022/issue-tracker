@@ -5,8 +5,8 @@ import IssueListPage from '@/pages/IssueListPage';
 import { lazy, Suspense } from 'react';
 import GlobalStyles from './GlobalStyles';
 import theme from './theme';
-import Layout from './common/components/Layout';
-import { PATH } from './common/constants';
+import Layout from '@components/Layout';
+import { PATH } from '@constants';
 
 const pages = Object.values(PATH).sort();
 

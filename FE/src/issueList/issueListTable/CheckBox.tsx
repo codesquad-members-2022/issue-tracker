@@ -1,5 +1,5 @@
-import Icon, { IconNameType } from '@/assets/icons/Icon';
-import { COLORS, GREYSCALE } from '@/common/constants';
+import Icon, { IconNameType } from '@icon';
+import { COLORS, GREYSCALE } from '@constants';
 
 export type CheckBoxType = 'initial' | 'active' | 'disable';
 

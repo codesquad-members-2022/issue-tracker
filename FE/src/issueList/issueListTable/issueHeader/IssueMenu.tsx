@@ -1,5 +1,5 @@
-import Icon, { IconNameType } from '@/assets/icons/Icon';
-import { GREYSCALE } from '@/common/constants';
+import Icon, { IconNameType } from '@icon';
+import { GREYSCALE } from '@constants';
 import styled from 'styled-components';
 
 type IssueMenuProps = {

@@ -1,4 +1,4 @@
-import { GREYSCALE } from '@/common/constants';
+import { GREYSCALE } from '@constants';
 import styled from 'styled-components';
 
 function EmptyIssueItem() {

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { GREYSCALE, PATH } from '@/common/constants';
+import { GREYSCALE, PATH } from '@constants';
 import { Link } from 'react-router-dom';
-import Tab from '@/common/components/Tab';
+import Tab from '@components/Tab';
 
 function LinkTabs() {
   return (

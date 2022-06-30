@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { COLORS, GREYSCALE } from '@/common/constants';
-import Icon from '@/assets/icons/Icon';
+import { COLORS, GREYSCALE } from '@constants';
+import Icon from '@icon';
 
 type ButtonSmallStandardProps = {
   isDisabled: boolean;

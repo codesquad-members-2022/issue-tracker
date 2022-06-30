@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Icon from '@/assets/icons/Icon';
-import { GREYSCALE } from '@/common/constants';
+import Icon from '@icon';
+import { GREYSCALE } from '@constants';
 import styled from 'styled-components';
-import DropDownPanel from '@/common/components/dropDown/DropDownPanel';
+import DropDownPanel from '@components/dropDown/DropDownPanel';
 
 const filterCheckBoxItems = [
   { isChecked: true, label: '열린 이슈' },
