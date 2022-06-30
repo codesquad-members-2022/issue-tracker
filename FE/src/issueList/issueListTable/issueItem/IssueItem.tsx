@@ -1,5 +1,5 @@
 import Icon, { IconNameType } from '@/assets/icons/Icon';
-import { COLORS, GREYSCALE } from '@/common/constants';
+import { COLORS, GREYSCALE, PATH } from '@/common/constants';
 import { getRandomKey } from '@/utils';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -88,7 +88,7 @@ function IssueItem({
             stroke={issueIcon[status].stroke}
             fill={issueIcon[status].fill}
           />
-          <Link to="/issueDetail">
+          <Link to={`/${PATH.ISSUE_DETAIL}`}>
             <TitleText>{title}</TitleText>
           </Link>
           <Labels>
