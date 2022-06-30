@@ -24,7 +24,7 @@ struct EditingIssueManager {
 extension EditingIssueManager: EditingIssueManagable {
     func sendNewIssue(_ newIssueEntity: IssueItem, completion: @escaping (Result<IssueidData, NetworkError>) -> Void) {
         NetworkService<IssueidData>.fetchData(
-            target: EditingIssueNetworkTarget.sendIssue(newIssue: newIssueEntity),
+            target: IssueNetworkTarget.addNewIssue(newIssue: newIssueEntity),
             urlSession: urlSession,
             completion: completion)
     }

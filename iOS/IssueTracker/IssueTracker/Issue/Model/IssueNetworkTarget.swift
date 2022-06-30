@@ -8,7 +8,7 @@
 import Foundation
 
 enum IssueNetworkTarget {
-    case issuesList, createIssue
+    case issuesList, addNewIssue(newIssue: IssueItem)
     case issueListDetail(id: Int), deleteIssue(id: Int)
 }
 
@@ -25,7 +25,7 @@ extension IssueNetworkTarget: NetworkTargetProtocol {
         switch self {
         case .issuesList, .issueListDetail:
             return "GET"
-        case .createIssue:
+        case .addNewIssue:
             return "POST"
         case .deleteIssue:
             return "DEL"
@@ -33,7 +33,21 @@ extension IssueNetworkTarget: NetworkTargetProtocol {
     }
 
     var body: Data? {
-        return nil
+        switch self {
+        case .addNewIssue(let newIssue):
+            let parameter: [String: Any] = [
+                "title": newIssue.title,
+                "content": newIssue.content,
+                "milestoneTitle": newIssue.milestoneName,
+                "label": ["0"],
+                "assignee": ["0"]
+            ]
+
+            let body = try? JSONSerialization.data(withJSONObject: parameter)
+            return body
+        default:
+            return nil
+        }
     }
 }
 
@@ -44,7 +58,7 @@ private extension IssueNetworkTarget {
     
     private var path: String {
         switch self {
-        case .issuesList, .createIssue:
+        case .issuesList, .addNewIssue:
             return "/issues"
         case .issueListDetail(let id), .deleteIssue(let id):
             return "/issues/\(id)"
