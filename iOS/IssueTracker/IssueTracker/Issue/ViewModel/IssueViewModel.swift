@@ -19,9 +19,9 @@ protocol IssueViewModelProtocol: IssueViewModelInput, IssueViewModelOutput { }
 
 class IssueViewModel: IssueViewModelProtocol {
 
-    private var issueManager = IssueManager()
+    private var issueManager: IssueManagable
     
-    init(issueManager: IssueManager) {
+    init(issueManager: IssueManagable) {
         self.issueManager = issueManager
         addObserver()
     }
@@ -33,14 +33,25 @@ class IssueViewModel: IssueViewModelProtocol {
         guard index < list.value.count else { return nil }
         return list.value[index]
     }
-    
+
+    func didAddNewIssue(_ issue: IssueItem) {
+        list.value.append(issue)
+    }
 }
 
 // MARK: - Request Order List
 extension IssueViewModel {
     func loadFromIssueManager() {
-        issueManager.load { issueItemList in
-            self.list.value = issueItemList
+        issueManager.load { [weak self] result in
+            switch result {
+            case .success(let issueItemList):
+                self?.list.value = issueItemList
+            case .failure:
+                return
+            }
+        }
+    }
+}
 
 private extension IssueViewModel {
     func addObserver() {
