@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UseCaseContainer.shared.regist(type: GithubLoginUseCase.self) {
             return GithubLoginUseCase(model: GitHubLoginModel())
         }
+        UseCaseContainer.shared.regist(type: AppleLoginUseCase.self) {
+            return GithubLoginUseCase(model: AppleLoginModel())
+        }
     }
 }
 
