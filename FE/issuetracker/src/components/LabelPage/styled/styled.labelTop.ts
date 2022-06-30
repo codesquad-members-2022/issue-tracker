@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
 import { Link } from 'react-router-dom';
 
