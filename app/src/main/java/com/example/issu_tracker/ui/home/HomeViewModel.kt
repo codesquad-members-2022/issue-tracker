@@ -19,8 +19,8 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     private val _issueListStateFlow = MutableStateFlow<NetworkResult<List<IssueList>>>(NetworkResult.Loading())
     val issueListStateFlow: StateFlow<NetworkResult<List<IssueList>>> = _issueListStateFlow
 
-    private val _filteredIssueListStateFlow = MutableStateFlow<List<IssueList>>(listOf())
-    val filteredIssueListStateFlow: StateFlow<List<IssueList>> = _filteredIssueListStateFlow
+    private val _filteredIssueListStateFlow = MutableStateFlow<NetworkResult<List<IssueList>>>(NetworkResult.Loading())
+    val filteredIssueListStateFlow: StateFlow<NetworkResult<List<IssueList>>> = _filteredIssueListStateFlow
 
     init {
         viewModelScope.launch {
@@ -29,18 +29,24 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     }
 
     suspend fun getIssueList() {
-            val issueList = repository.loadFirstPageIssues().toMutableList()
-            issueList.add(IssueList.IssueProgressBar)
-            _issueListStateFlow.value = issueList
+            val issueList = repository.loadFirstPageIssues()
+            if (issueList is NetworkResult.Success) {
+               issueList.data.toMutableList().add(IssueList.IssueProgressBar)
+                _issueListStateFlow.value = issueList
+            }
     }
 
     fun getNextIssueList(currentPage: Int) {
         viewModelScope.launch {
-            val issueList = _issueListStateFlow.value.toMutableList()
-            issueList.removeLast()
-            issueList.addAll(repository.loadNextPageIssues(currentPage))
-            issueList.add(IssueList.IssueProgressBar)
-            _issueListStateFlow.value = issueList
+            val issueListResponse = _issueListStateFlow.value
+            if (issueListResponse is NetworkResult.Success) {
+                val issueList = issueListResponse.data.toMutableList()
+                issueList.add(IssueList.IssueProgressBar)
+                issueList.removeLast()
+                issueList.addAll(repository.loadNextPageIssues(currentPage))
+                issueList.add(IssueList.IssueProgressBar)
+                _issueListStateFlow.value = NetworkResult.Success(issueList)
+            }
         }
     }
 
@@ -90,7 +96,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                 false
             }
             
-        _filteredIssueListStateFlow.value = filteredIssueList
+        _filteredIssueListStateFlow.value = NetworkResult.Success(filteredIssueList)
         
         }
     }

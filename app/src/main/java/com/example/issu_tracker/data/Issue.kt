@@ -4,7 +4,6 @@ import androidx.room.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.Serializable
-import java.lang.Exception
 
 data class IssueDto(
     var id: String = "",
@@ -21,22 +20,22 @@ sealed class IssueList : Serializable {
 
     object IssueProgressBar : IssueList()
 
-   @Entity
-  data class Issue(
-    @ColumnInfo(name = "issue_id")
-    var id: String,
-    val comments: List<Comment>,
-    val description: String,
-    val label: List<Label>,
-    val mileStone: String,
-    val state: Boolean,
-    val title: String,
-    @Embedded
-    val user: User
-) : Serializable{
-    @PrimaryKey(autoGenerate = true)
-    var idx: Int = 0
-}, IssueList
+    @Entity
+    data class Issue(
+        @ColumnInfo(name = "issue_id")
+        var id: String,
+        val comments: List<Comment>,
+        val description: String,
+        val label: List<Label>,
+        val mileStone: String,
+        val state: Boolean,
+        val title: String,
+        @Embedded
+        val user: User
+    ) : IssueList(), Serializable {
+        @PrimaryKey(autoGenerate = true)
+        var idx: Int = 0
+    }
 }
 
 class Converters {
@@ -70,7 +69,7 @@ class Converters {
 
 }
 
-fun IssueDto.toIssue(): Issue? {
+fun IssueDto.toIssue(): IssueList.Issue? {
     return try {
         IssueList.Issue(id, comments, description, label, mileStoneID, state, title, user!!)
     } catch (e: Exception) {

@@ -21,7 +21,7 @@ class HomeRepositoryImpl @Inject constructor(
     private val collectionData =
         fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).orderBy("title")
 
-    override suspend fun loadFirstPageIssues(): List<IssueList> {
+    /*override suspend fun loadFirstPageIssues(): List<IssueList> {
         val list = mutableListOf<IssueList>()
         val issueData = collectionData.limit(PAGE_NUMBER).get().await()
 
@@ -42,7 +42,7 @@ class HomeRepositoryImpl @Inject constructor(
         println(lastVisibleDocument)
 
         return list
-    }
+    }*/
 
     override suspend fun loadNextPageIssues(currentPage: Int): List<IssueList> {
         val list = mutableListOf<IssueList>()
@@ -62,9 +62,12 @@ class HomeRepositoryImpl @Inject constructor(
                 issueDto.toIssue()?.let { issue ->
                     list.add(issue)
                 }
-                // 데이터를 추가하는 코드
-                // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
-                
+            }
+        }
+
+        // 데이터를 추가하는 코드
+        // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
+
         lastVisibleDocument = issueData.last()
 
         println("${issueData.last()["id"]}")
@@ -72,11 +75,12 @@ class HomeRepositoryImpl @Inject constructor(
 
         return list
     }
-                
-    override suspend fun loadIssues(): NetworkResult<List<Issue>> {
+
+    override suspend fun loadFirstPageIssues(): NetworkResult<List<IssueList>> {
         try {
-            val list = mutableListOf<Issue>()
-            val collectionData = fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).get().await()
+            val list = mutableListOf<IssueList>()
+            val collectionData =
+                fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).limit(PAGE_NUMBER).get().await()
 
             collectionData.documents.forEach {
                 val issueObj = it.toObject(IssueDto::class.java)
@@ -87,7 +91,7 @@ class HomeRepositoryImpl @Inject constructor(
                     // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
                 }
             }
-            
+
             return if (list.isEmpty()) {
                 NetworkResult.Error(EMPTY)
             } else NetworkResult.Success(list)
@@ -95,7 +99,7 @@ class HomeRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             return NetworkResult.Exception(e)
         }
-     }
+    }
 
     override suspend fun updateIssueState(itemId: String, boolean: Boolean) {
 
@@ -108,7 +112,8 @@ class HomeRepositoryImpl @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             for (i in list) {
                 if (i is IssueList.Issue)
-                    fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document(i.id).delete()
+                    fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document(i.id)
+                        .delete()
             }
         }.join()
     }
@@ -130,3 +135,4 @@ class HomeRepositoryImpl @Inject constructor(
         const val PAGE_NUMBER: Long = 10
     }
 }
+

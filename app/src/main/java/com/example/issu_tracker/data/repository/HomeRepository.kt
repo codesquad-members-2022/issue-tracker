@@ -7,8 +7,7 @@ import com.example.issu_tracker.data.network.NetworkResult
 
 interface HomeRepository {
 
-    suspend fun loadIssues(): NetworkResult<List<IssueList.Issue>>
-    suspend fun loadFirstPageIssues(): List<IssueList>
+    suspend fun loadFirstPageIssues(): NetworkResult<List<IssueList>>
     suspend fun loadNextPageIssues(currentNumber: Int): List<IssueList>
     suspend fun updateIssueState(itemId: String, boolean: Boolean)
     suspend fun deleteIssueList(list: List<IssueList>)

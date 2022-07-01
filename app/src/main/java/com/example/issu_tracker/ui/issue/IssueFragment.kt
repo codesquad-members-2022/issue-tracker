@@ -121,25 +121,25 @@ class IssueFragment : Fragment() {
                 launch {
                     // open 상태만 보여주기
                     homeViewModel.issueListStateFlow.collect {
-                        println("되는건가 $page")
-                        issueAdapter.submitList(it)
-                        issueAdapter.notifyItemRangeChanged((page - 1) * 10, 10)
-                        /*if (it is NetworkResult.Success) {
-                            issueAdapter.submitList(it.data.filter { it.state })*/
-                            
-                         /*issueAdapter.submitList(it.filter { issue ->
-                             if (issue is IssueList.Issue) {
-                                 println("당신 $issue")
-                                 issue.state
-                             }
-                             else true
-                         })*/
+                        if (it is NetworkResult.Success) {
+                            issueAdapter.submitList(it.data)
+                            issueAdapter.notifyItemRangeChanged((page - 1) * 10, 10)
+                        }
+//                            issueAdapter.submitList(it.data.filter { it.state })
+
+                        /*issueAdapter.submitList(it.filter { issue ->
+                            if (issue is IssueList.Issue) {
+                                println("당신 $issue")
+                                issue.state
+                            }
+                            else true
+                        })*/
                     }
                 }
                 launch {
                     homeViewModel.filteredIssueListStateFlow.collect {
-                        if (it.isNotEmpty()) {
-                            issueAdapter.submitList(it)
+                        if (it is NetworkResult.Success) {
+                            issueAdapter.submitList(it.data)
                         }
                     }
                 }
@@ -155,7 +155,7 @@ class IssueFragment : Fragment() {
                 val layoutManager = recyclerView.layoutManager
 
                 val lastVisibleItemPosition = if (layoutManager is LinearLayoutManager) {
-                        layoutManager.findLastCompletelyVisibleItemPosition()
+                    layoutManager.findLastCompletelyVisibleItemPosition()
                 } else 0
 
                 val itemTotalCount = (recyclerView.adapter?.itemCount ?: 0) - 1
