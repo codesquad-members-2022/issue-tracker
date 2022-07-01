@@ -56,7 +56,7 @@ class CommentAdapter(val detailEventListener: DetailEventListener) : ListAdapter
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (getItem(position).user?.UID) {
+        return when (getItem(position).user?.uid) {
             userUid -> MY_COMMENT
             else -> OTHER_COMMENT
         }

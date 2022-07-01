@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.network.NetworkResult
 import com.example.issu_tracker.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,8 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
 
-    private val _issueList = MutableStateFlow<List<Issue>>(listOf())
-    val issueList: StateFlow<List<Issue>> = _issueList
+    private val _issueList = MutableStateFlow<NetworkResult<List<Issue>>>(NetworkResult.Loading())
+    val issueList: StateFlow<NetworkResult<List<Issue>>> = _issueList
 
     private val _filteredIssueList = MutableStateFlow<List<Issue>>(listOf())
     val filteredIssueList: StateFlow<List<Issue>> = _filteredIssueList
@@ -36,7 +37,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         repository.updateIssueState(itemId, boolean)
         getIssueList()
     }
-    
+
     suspend fun deleteIssueList(issueList: List<Issue>) {
         repository.deleteIssueList(issueList)
         getIssueList()
@@ -50,31 +51,33 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     }
 
     fun filterIssueList(condition: FilterCondition) {
-        val filteredIssueList = _issueList.value
-            .filter {
-                if (condition.state.isNotEmpty()) {
-                    it.state
-                } else {
-                    true
-                }
-            }.filter {
-                if (condition.writer.isNotEmpty()) {
-                    it.user.name == condition.writer
-                } else {
-                    true
-                }
-            }
-            .filter {
-                it.label.any { label ->
-                    if (condition.label.isNotEmpty()) {
-                        label.content == condition.label
+        if (_issueList.value is NetworkResult.Success) {
+            val filteredIssueList = (_issueList.value as NetworkResult.Success).data
+                .filter {
+                    if (condition.state.isNotEmpty()) {
+                        it.state
+                    } else {
+                        true
+                    }
+                }.filter {
+                    if (condition.writer.isNotEmpty()) {
+                        it.user.name == condition.writer
                     } else {
                         true
                     }
                 }
-            }
+                .filter {
+                    it.label.any { label ->
+                        if (condition.label.isNotEmpty()) {
+                            label.content == condition.label
+                        } else {
+                            true
+                        }
+                    }
+                }
 
-        _filteredIssueList.value = filteredIssueList
+            _filteredIssueList.value = filteredIssueList
+        }
     }
 }
 
