@@ -21,6 +21,8 @@ class NewIssueViewController: UIViewController {
     private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
     
     private var selectedLabel: Label?
+    private var selectedMilestone: Milestone?
+    private var selectedAssignee: Assignee?
     
     private let repo: Repository
     
@@ -143,7 +145,7 @@ class NewIssueViewController: UIViewController {
             make.bottom.equalTo(optionTable.snp.top)
         }
     }
-
+    
     private lazy var createButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         var container = AttributeContainer()
@@ -161,14 +163,20 @@ class NewIssueViewController: UIViewController {
     
     private func touchedCreateButton() {
         guard let titleString = self.titleField.text,
-           !titleString.isEmpty else {
+              !titleString.isEmpty else {
             // TODO: - 타이틀 입력 값이 없다 => 얼럿
             return
         }
-
-        model.createIssue(title: titleString, label: selectedLabel, repo: repo) { boolResult in
+        
+        guard let contentString = contentField.text else {
+            return
+        }
+        
+        model.createIssue(title: titleString, repo: repo, content: contentString, label: selectedLabel, milestone: selectedMilestone, assignee: selectedAssignee) { boolResult in
             if boolResult {
-                self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
                 self.delegate?.created()
             }
         }
@@ -210,11 +218,20 @@ extension NewIssueViewController: UITableViewDataSource {
 
 extension NewIssueViewController: OptionSelectDelegate {
     func selected(item: Optionable, option: Option) {
-          guard let optionIndex = optionList.firstIndex(of: option) else {
-              return
-          }
-          selectedList[optionIndex] = item.subTitle
-          selectedLabel = item as? Label
-          self.optionTable.reloadData()
-      }
+        guard let optionIndex = optionList.firstIndex(of: option) else {
+            return
+        }
+        
+        switch option {
+        case .label:
+            selectedLabel = item as? Label
+        case .milestone:
+            selectedMilestone = item as? Milestone
+        case .assignee:
+            selectedAssignee = item as? Assignee
+        }
+        
+        selectedList[optionIndex] = item.subTitle
+        self.optionTable.reloadData()
+    }
 }

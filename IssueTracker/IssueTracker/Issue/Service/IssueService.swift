@@ -39,6 +39,7 @@ struct IssueService {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         let globalThread = DispatchQueue.global(qos: .default)
+        
         AF.request(urlString,
                    method: .get,
                    headers: headers)
@@ -54,31 +55,39 @@ struct IssueService {
         }
     }
     
-    func createIssue(title: String, label: Label?, repo: Repository, completion: @escaping (Bool) -> Void) {
+    func createIssue(title: String, repo: Repository, content: String, label: Label?, milestone: Milestone?, assignee: Assignee?, completion: @escaping (Bool) -> Void) {
         let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
         ]
         var labelList: [String] = []
-        if let label = label {
+        var assigneeList: [String] = []
+        if let label = label,
+           let assignee = assignee {
             labelList.append(label.name)
+            assigneeList.append(assignee.login)
         }
         
         let parameters: [String: Any] = [
             "title": title,
-            "labels": labelList
+            "body": content,
+            "labels": labelList,
+            "milestone": milestone?.number,
+            "assignees": assigneeList
         ]
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let globalThread = DispatchQueue.global(qos: .default)
         
         AF.request(urlString,
                    method: .post,
                    parameters: parameters,
                    encoding: JSONEncoding.default,
                    headers: headers)
-            .response { response in
+        .response(queue: globalThread) { response in
                 switch response.result {
                 case .success:
                     completion(true)
@@ -90,7 +99,7 @@ struct IssueService {
     }
     
     func requestRepositoryIssues(repo: Repository, completion: @escaping (Result<[Issue], IssueError>) -> Void) {
-        let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
+        let urlString = RequestURL.repositoryIssue(owner: repo.owner.login, repo: repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
@@ -99,8 +108,14 @@ struct IssueService {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [RepositoryIssue].self, decoder: decoder) { response in
+        let globalThread = DispatchQueue.global(qos: .default)
+        
+        AF.request(urlString,
+                   method: .get,
+                   headers: headers)
+            .responseDecodable(of: [RepositoryIssue].self,
+                               queue: globalThread,
+                               decoder: decoder) { response in
                 switch response.result {
                 case .success(let data):
                     var result: [Issue] = []
@@ -128,9 +143,14 @@ struct IssueService {
         ]
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let globalThread = DispatchQueue.global(qos: .default)
         
-        AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [Repository].self, decoder: decoder) { response in
+        AF.request(urlString,
+                   method: .get,
+                   headers: headers)
+            .responseDecodable(of: [Repository].self,
+                               queue: globalThread,
+                               decoder: decoder) { response in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
@@ -148,9 +168,14 @@ struct IssueService {
         ]
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let globalThread = DispatchQueue.global(qos: .default)
         
-        AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [Label].self, decoder: decoder) { response in
+        AF.request(urlString,
+                   method: .get,
+                   headers: headers)
+            .responseDecodable(of: [Label].self,
+                               queue: globalThread,
+                               decoder: decoder) { response in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
@@ -169,13 +194,18 @@ struct IssueService {
         ]
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let globalThread = DispatchQueue.global(qos: .default)
         
-        AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [Milestone].self, decoder: decoder) { response in
+        AF.request(urlString,
+                   method: .get,
+                   headers: headers)
+            .responseDecodable(of: [Milestone].self,
+                               queue: globalThread,
+                               decoder: decoder) { response in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
-                case .failure(let error):
+                case .failure:
                     completion(.failure(.milestonesNotFound))
                 }
             }
@@ -191,9 +221,14 @@ struct IssueService {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let globalThread = DispatchQueue.global(qos: .default)
         
-        AF.request(urlString, method: .get, headers: headers)
-            .responseDecodable(of: [Assignee].self, decoder: decoder) { response in
+        AF.request(urlString,
+                   method: .get,
+                   headers: headers)
+            .responseDecodable(of: [Assignee].self,
+                               queue: globalThread,
+                               decoder: decoder) { response in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))

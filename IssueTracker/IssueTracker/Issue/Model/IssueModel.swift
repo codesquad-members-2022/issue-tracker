@@ -17,11 +17,11 @@ class IssueModel {
         self.repo = repo
     }
     
-    var updatedIssues: ( (_ issues: [Issue]) -> Void )?
+    var updatedIssues: ( () -> Void )?
     
     private var issues: [Issue] = [] {
         didSet {
-            updatedIssues?(issues)
+            updatedIssues?()
         }
     }
     

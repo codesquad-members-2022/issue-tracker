@@ -7,7 +7,7 @@ enum RequestURL: CustomStringConvertible {
     case userIssues
     case createIssue(owner: String, repo: String)
     case repos
-    case ownerIssue(owner: String, repo: String)
+    case repositoryIssue(owner: String, repo: String)
     case repositoryLabels(owner: String, repo: String)
     case repositoryMilestones(owner: String, repo: String)
     case repositoryAssignees(owner: String, repo: String)
@@ -26,7 +26,7 @@ enum RequestURL: CustomStringConvertible {
             return "https://api.github.com/repos/\(owner)/\(repo)/issues"
         case .repos:
             return "https://api.github.com/user/repos"
-        case let .ownerIssue(owner, repo):
+        case let .repositoryIssue(owner, repo):
             return "https://api.github.com/repos/\(owner)/\(repo)/issues"
         case let .repositoryLabels(owner, repo):
             return "https://api.github.com/repos/\(owner)/\(repo)/labels"

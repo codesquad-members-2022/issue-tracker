@@ -13,6 +13,7 @@ struct Milestone: Codable, Optionable {
         self.title
     }
     
+    let number: Int
     let title: String
     let description: String
     let openIssues, closedIssues: Int
