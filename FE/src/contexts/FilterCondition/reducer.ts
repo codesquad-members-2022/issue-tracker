@@ -1,7 +1,7 @@
 import { Action, ActionType } from '@/contexts/FilterCondition/type';
 import { IFilterCondition } from '@/types/common';
 
-const InitFilterCondition: IFilterCondition = {
+const INIT_FILTER_CONDITION: IFilterCondition = {
   status: 'open',
   assignee: null,
   label: null,
@@ -64,7 +64,7 @@ function createFilterConditionQueryString({
 }
 
 export {
-  InitFilterCondition,
+  INIT_FILTER_CONDITION,
   reducer,
   createFilterConditionString,
   createFilterConditionQueryString
