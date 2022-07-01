@@ -11,14 +11,14 @@ public class CommentResponse {
     private Long id;
     private String content;
     private LocalDateTime createdTime;
-    private String userId;
+    private String githubId;
     private String imageUrl;
 
     public CommentResponse(Comment comment) {
         this.id = comment.getId();
         this.content = comment.getContent();
         this.createdTime = comment.getCreatedTime();
-        this.userId = comment.getMember().getGithubId();
+        this.githubId = comment.getMember().getGithubId();
         this.imageUrl = comment.getMember().getImageUrl();
     }
 }
