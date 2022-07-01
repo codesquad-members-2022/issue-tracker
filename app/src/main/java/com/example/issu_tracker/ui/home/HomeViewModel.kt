@@ -41,7 +41,6 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
             val issueListResponse = _issueListStateFlow.value
             if (issueListResponse is NetworkResult.Success) {
                 val issueList = issueListResponse.data.toMutableList()
-                issueList.add(IssueList.IssueProgressBar)
                 issueList.removeLast()
                 issueList.addAll(repository.loadNextPageIssues(currentPage))
                 issueList.add(IssueList.IssueProgressBar)
