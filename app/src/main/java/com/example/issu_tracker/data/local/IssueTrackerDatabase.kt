@@ -7,7 +7,7 @@ import com.example.issu_tracker.data.Converters
 import com.example.issu_tracker.data.IssueList
 import com.example.issu_tracker.data.User
 
-@Database(entities = [User::class , IssueList.Issue::class ], version = 2)
+@Database(entities = [User::class , IssueList.Issue::class ], version = 2,exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class IssueTrackerDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
