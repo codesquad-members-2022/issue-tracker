@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { CommentType, WriterType } from 'store/newIssue';
+import { WriterType } from 'store/newIssue';
 import { AccountType, LabelType } from 'data';
 
 export type initialStateType = {
