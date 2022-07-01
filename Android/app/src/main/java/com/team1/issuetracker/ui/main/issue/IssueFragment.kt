@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -137,7 +138,8 @@ class IssueFragment : Fragment() {
             // 아이템 롱 클릭
             PrintLog.printLog("Issue Item Long Click")    // 이슈 리스트 아이템 롱 클릭 이벤트 영역!!
 
-            actionMode = (activity as MainActivity).startSupportActionMode(callback)  // ? 맞는 방법
+            actionMode = (activity as AppCompatActivity).startSupportActionMode(callback)  // ? 맞는 방법
+
             actionMode?.let {
                 it.title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                     Html.fromHtml(

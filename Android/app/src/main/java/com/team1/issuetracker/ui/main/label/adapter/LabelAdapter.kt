@@ -110,6 +110,7 @@ class LabelAdapter(private val longClick: () -> Unit): ListAdapter<Label, LabelA
             )
         }
         submitList(newList.toList())
+
     }
 
     private object LabelDiffUtil: DiffUtil.ItemCallback<Label>() {

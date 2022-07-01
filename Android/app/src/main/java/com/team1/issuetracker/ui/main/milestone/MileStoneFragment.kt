@@ -24,6 +24,7 @@ import com.team1.issuetracker.ui.main.label.LabelViewModel
 import com.team1.issuetracker.ui.main.label.adapter.LabelAdapter
 import com.team1.issuetracker.ui.main.label.adapter.LabelSwipeHelper
 import com.team1.issuetracker.ui.main.milestone.adapter.MilestoneAdapter
+import com.team1.issuetracker.ui.main.milestone.adapter.MilestoneSwipeHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -88,7 +89,8 @@ class MilestoneFragment : Fragment() {
         setAppBar()
 
 
-        val swipeHelper = LabelSwipeHelper()
+        val swipeHelper = MilestoneSwipeHelper()
+
         val itemTouchHelper = ItemTouchHelper(swipeHelper)
         itemTouchHelper.attachToRecyclerView(binding.rvMilestone)
 

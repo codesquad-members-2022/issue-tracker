@@ -7,6 +7,7 @@
         <variable
             name="viewModel"
             type="com.team1.issuetracker.ui.main.milestone.AddMilestoneViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

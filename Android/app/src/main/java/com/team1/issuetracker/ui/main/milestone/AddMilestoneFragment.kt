@@ -2,19 +2,15 @@ package com.team1.issuetracker.ui.main.milestone
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.team1.issuetracker.R
 import com.team1.issuetracker.common.repeatOnStarted
 import com.team1.issuetracker.databinding.FragmentAddMilestoneBinding
-import com.team1.issuetracker.databinding.FragmentMilestoneBinding
-import com.team1.issuetracker.ui.main.label.AddLabelViewModel
 import hirondelle.date4j.DateTime
-import java.text.SimpleDateFormat
 import java.util.*
 
 class AddMilestoneFragment : Fragment() {

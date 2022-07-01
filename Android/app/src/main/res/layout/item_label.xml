@@ -171,7 +171,6 @@
                 app:layout_constraintHeight_percent="0.2"/>
 
 
-
             <View
                 android:id="@+id/empty_view_5"
                 android:layout_width="match_parent"
