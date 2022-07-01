@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-const data = localStorage.getItem('profileImage'); 
-const profileUrl = data !== null ? data : ''; 
+const data = localStorage.getItem('profileImage');
+const profileUrl = data !== null ? data : '';
 
 interface userType {
   name: string;
