@@ -30,7 +30,18 @@ class LabelDataSourceDefaultImpl(
     }
 
     override suspend fun editLabel(labelDto: LabelDto) {
-        LabelFakeDatabase.edit(labelDto)
+        try {
+            val editLabelDto = AddLabelDto(
+                labelDto.title,
+                labelDto.description,
+                labelDto.color,
+                labelDto.textColor
+            )
+            issueTrackerApi.editLabelInfo(labelDto.id, editLabelDto)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message, e)
+            error(e)
+        }
     }
 
     override suspend fun deleteLabelInfo(id: Int) {

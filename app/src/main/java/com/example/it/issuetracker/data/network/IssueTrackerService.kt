@@ -17,6 +17,9 @@ interface IssueTrackerService {
     @POST("labels")
     suspend fun addLabelInfo(@Body addLabelDto: AddLabelDto)
 
+    @PATCH("labels/{id}")
+    suspend fun editLabelInfo(@Path("id") id: Int, @Body addLabelDto: AddLabelDto)
+
     @DELETE("labels/{id}")
     suspend fun deleteLabelInfo(@Path("id") id: Int)
 
@@ -25,6 +28,9 @@ interface IssueTrackerService {
 
     @POST("milestones")
     suspend fun addMilestone(@Body addMilestoneDto: AddMilestoneDto)
+
+    @PATCH("milestones/{id}")
+    suspend fun editMilestoneInfo(@Path("id") id: Long, @Body addMilestoneDto: AddMilestoneDto)
 
     @DELETE("milestones/{id}")
     suspend fun deleteMilestone(@Path("id") id: Long)

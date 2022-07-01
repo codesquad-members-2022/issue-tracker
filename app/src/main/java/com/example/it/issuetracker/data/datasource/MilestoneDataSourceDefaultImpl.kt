@@ -30,7 +30,17 @@ class MilestoneDataSourceDefaultImpl(
     }
 
     override suspend fun editMilestone(milestoneDto: MilestoneDto) {
-
+        try {
+            val editMilestoneDto = AddMilestoneDto(
+                milestoneDto.title,
+                milestoneDto.description ?: "",
+                milestoneDto.deadline ?: ""
+            )
+            issueTrackerApi.editMilestoneInfo(milestoneDto.id!!, editMilestoneDto)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message, e)
+            error(e)
+        }
     }
 
     override suspend fun deleteMilestone(id: Long) {

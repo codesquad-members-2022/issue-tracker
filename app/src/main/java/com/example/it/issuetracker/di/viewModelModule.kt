@@ -4,6 +4,7 @@ import com.example.it.issuetracker.presentation.login.LoginViewModel
 import com.example.it.issuetracker.presentation.main.issue.detail.DetailViewModel
 import com.example.it.issuetracker.presentation.main.issue.filter.FilterViewModel
 import com.example.it.issuetracker.presentation.main.issue.list.IssueViewModel
+import com.example.it.issuetracker.presentation.main.issue.register.RegisterIssueViewModel
 import com.example.it.issuetracker.presentation.main.issue.search.SearchViewModel
 import com.example.it.issuetracker.presentation.main.label.LabelViewModel
 import com.example.it.issuetracker.presentation.main.label.add.LabelAddViewModel
@@ -24,4 +25,5 @@ val viewModelModule = module {
     viewModel { MilestoneAddViewModel(get()) }
     viewModel { DetailViewModel(get(), get()) }
     viewModel { MyPageViewModel(get(), get()) }
+    viewModel { RegisterIssueViewModel(get(), get(), get()) }
 }
