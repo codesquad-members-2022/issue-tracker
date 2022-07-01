@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity
-data class User(val UID: String = "", val name: String = "", val userPhoto: String?=null) :
+data class User(val uid: String = "", val name: String = "", val userPhoto: String?=null) :
     Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

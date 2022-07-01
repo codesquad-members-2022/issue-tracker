@@ -7,6 +7,7 @@ import com.example.issu_tracker.data.local.IssueTrackerDatabase
 import com.example.issu_tracker.data.network.NetworkResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,23 +22,31 @@ class Repository @Inject constructor(
         val loadResult = friendRemoteDatabase.loadFriendList()
 
         return if (loadResult is NetworkResult.Success) {
-            updateRemoteDatabase(loadResult.data)
+            Log.d(":sdfsd", loadResult.data[0].toString())
+            updateLocalDatabase(loadResult.data)
+            Log.d(":sdfsd", (friendLocalDatabase.userDao().getAll()).size.toString())
             NetworkResult.Success(friendLocalDatabase.userDao().getAll())
+
         } else {
+            Log.d(":sdfsd", (friendLocalDatabase.userDao().getAll()).size.toString())
             NetworkResult.Cached(friendLocalDatabase.userDao().getAll())
         }
+
+
     }
 
-    suspend fun updateRemoteDatabase(userList: List<User> = listOf()) {
+    suspend fun updateLocalDatabase(userList: List<User> = listOf()) {
         // 1. 리모트에서 로컬에 캐시해줌
-        CoroutineScope(Dispatchers.IO).launch {
-            friendLocalDatabase.userDao().deleteAllUsers()
-            userList.forEach {
-                launch {
-                    friendLocalDatabase.userDao().insert(it)
+        coroutineScope() {
+            launch {
+                friendLocalDatabase.userDao().deleteAllUsers()
+                userList.forEach {
+                    launch {
+                        friendLocalDatabase.userDao().insert(it)
+                    }
                 }
             }
-        }.join()
+        }
     }
 
     suspend fun updateFriend(userList: List<User>) {

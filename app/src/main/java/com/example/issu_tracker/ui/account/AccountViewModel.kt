@@ -31,7 +31,7 @@ class AccountViewModel @Inject constructor(private val repository: Repository) :
                 updateList.remove(user)
                 repository.updateFriend(updateList)
                 loadFriendList()
-                repository.updateRemoteDatabase()
+                repository.updateLocalDatabase()
             }
         }
     }

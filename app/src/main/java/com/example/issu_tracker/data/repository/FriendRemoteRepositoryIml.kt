@@ -29,7 +29,7 @@ class FriendRemoteRepositoryIml @Inject constructor(private val fireStore: Fireb
             friendData.forEach {
                 val user =
                     User(
-                        it["UID"] ?: "", it["name"] ?: "",
+                        it["uid"] ?: "", it["name"] ?: "",
                         it["userPhoto"] ?: ""
                     )
                 friendList.add(user)
