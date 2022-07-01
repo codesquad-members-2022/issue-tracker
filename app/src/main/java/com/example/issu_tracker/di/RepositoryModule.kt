@@ -2,8 +2,9 @@ package com.example.issu_tracker.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.issu_tracker.data.Converters
-import com.example.issu_tracker.data.IssueDto
 import com.example.issu_tracker.data.local.IssueDao
 import com.example.issu_tracker.data.repository.Repository
 import com.example.issu_tracker.data.local.IssueTrackerDatabase
@@ -54,10 +55,12 @@ object RepositoryModule {
     @Provides
     fun provideUserLocalDataBase(
         @ApplicationContext context: Context
-    ): IssueTrackerDatabase = Room
-        .databaseBuilder(context, IssueTrackerDatabase::class.java, "friend.db")
-        .addTypeConverter(Converters())
-        .build()
+    ): IssueTrackerDatabase {
+
+        return Room
+            .databaseBuilder(context, IssueTrackerDatabase::class.java, "friend.db")
+            .build()
+    }
 
     @Singleton
     @Provides
