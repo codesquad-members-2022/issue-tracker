@@ -50,7 +50,7 @@ enum LabelNetworkTarget: NetworkTargetProtocol {
 
 private extension LabelNetworkTarget {
     var baseURL: String {
-        return "https://008b1557-6228-4eb0-af91-8ea0225787e5.mock.pstmn.io"
+        return "http://3.37.101.82:8080"
     }
 
     var path: String {

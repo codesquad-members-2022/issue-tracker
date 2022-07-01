@@ -43,11 +43,14 @@ private extension NetworkService {
         var components = URLComponents(string: target.url) ?? URLComponents()
         components.queryItems = target.queryItem
 
+        let jwtToken = UserDefaultManager.getJWTToken() ?? ""
+
         if let url = components.url {
             var request = URLRequest(url: url)
             request.httpMethod = target.method
             request.httpBody = target.body
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
 
             return request
         }
