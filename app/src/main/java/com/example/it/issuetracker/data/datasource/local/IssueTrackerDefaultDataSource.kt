@@ -1,7 +1,6 @@
 package com.example.it.issuetracker.data.datasource.local
 
 import com.example.it.issuetracker.data.datasource.IssueTrackerDataSource
-import com.example.it.issuetracker.data.datasource.LabelFakeDatabase
 import com.example.it.issuetracker.data.dto.*
 import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow

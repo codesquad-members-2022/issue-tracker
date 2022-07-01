@@ -3,7 +3,7 @@ package com.example.it.issuetracker.presentation.main.issue.filter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.R
-import com.example.it.issuetracker.data.datasource.UserSharedPrefDataSource
+import com.example.it.issuetracker.data.datasource.local.UserSharedPrefDataSource
 import com.example.it.issuetracker.data.dto.LabelDto
 import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.domain.model.Member

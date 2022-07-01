@@ -2,7 +2,7 @@ package com.example.it.issuetracker.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.it.issuetracker.data.datasource.UserSharedPrefDataSource
+import com.example.it.issuetracker.data.datasource.local.UserSharedPrefDataSource
 import com.example.it.issuetracker.domain.model.LoginInformation
 import com.example.it.issuetracker.domain.repository.LoginRepository
 import com.example.it.issuetracker.presentation.common.Constants

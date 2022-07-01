@@ -4,6 +4,8 @@ import android.graphics.Canvas
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.it.issuetracker.presentation.common.Constants.PERCENT
+import com.example.it.issuetracker.presentation.common.Constants.RATIO
 import kotlin.math.max
 import kotlin.math.min
 
@@ -77,7 +79,7 @@ abstract class BaseSwipeHelper : ItemTouchHelper.Callback() {
         isClamped: Boolean,
         isCurrentlyActive: Boolean,
     ): Float {
-        val maxSwipe: Float = -view.width.toFloat() / 10 * 3
+        val maxSwipe: Float = -view.width.toFloat() / PERCENT * RATIO
         val right: Float = 0f
 
         val x = if (isClamped) {

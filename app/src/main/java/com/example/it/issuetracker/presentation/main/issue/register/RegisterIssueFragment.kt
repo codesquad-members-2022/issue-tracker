@@ -126,7 +126,6 @@ class RegisterIssueFragment :
     override fun observerData() {
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.filterItems }
-                .distinctUntilChanged()
                 .collect { filterItems ->
                     createLabelChipItems(filterItems.labelList)
 
@@ -144,7 +143,6 @@ class RegisterIssueFragment :
         }
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.selectedFilters }
-                .distinctUntilChanged()
                 .collect {
                     if (it.labelIndex != null) checkedLabel(it.labelIndex)
                     if (it.milestoneIndex != null && binding.filterMilestone.spinner.size != 0)
@@ -156,14 +154,12 @@ class RegisterIssueFragment :
         repeatOnLifecycleExtension {
             val saveMenu = binding.toolbar.menu.findItem(R.id.save_issue)
             viewModel.uiState.map { it.requiredField }
-                .distinctUntilChanged()
                 .collect {
                     saveMenu.isEnabled = !it.isEmptySubject && !it.isEmptyDescription
                 }
         }
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.errorMsgId }
-                .distinctUntilChanged()
                 .collect { msgId ->
                     if (msgId == INIT_ERROR_MSG_ID) return@collect
                     val text = getString(msgId)

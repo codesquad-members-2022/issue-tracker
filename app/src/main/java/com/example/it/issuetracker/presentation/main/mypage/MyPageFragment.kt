@@ -51,14 +51,12 @@ class MyPageFragment : DataBindingBaseFragment<FragmentMyPageBinding>(R.layout.f
         }
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.logout }
-                .distinctUntilChanged()
                 .collect { logout ->
                     if (logout) goToLoginActivity()
                 }
         }
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.errorMsgId }
-                .distinctUntilChanged()
                 .collect { msgId ->
                     if (msgId == Constants.INIT_ERROR_MSG_ID) return@collect
                     val msg = getString(msgId)

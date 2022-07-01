@@ -38,14 +38,12 @@ class MilestoneFragment :
     override fun observerData() {
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.milestoneList }
-                .distinctUntilChanged()
                 .collect {
                     adapter.submitList(it)
                 }
         }
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.completeTask }
-                .distinctUntilChanged()
                 .collect { isCompleted ->
                     if (isCompleted) {
                         viewModel.getMilestoneInfoList()
@@ -55,7 +53,6 @@ class MilestoneFragment :
         }
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.errorMsgId }
-                .distinctUntilChanged()
                 .collect { msgId ->
                     if (msgId == Constants.INIT_ERROR_MSG_ID) return@collect
                     val msg = getString(msgId)

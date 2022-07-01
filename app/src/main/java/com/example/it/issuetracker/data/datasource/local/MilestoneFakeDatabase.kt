@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.data.datasource
+package com.example.it.issuetracker.data.datasource.local
 
 import com.example.it.issuetracker.data.dto.MilestoneDto
 import kotlinx.coroutines.delay

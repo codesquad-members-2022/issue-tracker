@@ -4,6 +4,7 @@ import com.example.it.issuetracker.data.dto.IssueDetailDto
 import com.example.it.issuetracker.data.dto.IssueDto
 import com.example.it.issuetracker.data.dto.MemberDto
 import com.example.it.issuetracker.data.dto.MilestoneDto
+import com.example.it.issuetracker.domain.model.IssueDetail
 import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow
 
