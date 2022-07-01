@@ -5,10 +5,7 @@ import com.example.issu_tracker.data.IssueList
 import com.example.issu_tracker.data.toIssue
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -16,39 +13,17 @@ class HomeRepositoryImpl @Inject constructor(
     private val fireStore: FirebaseFirestore
 ) : HomeRepository {
 
-    private var lastVisibleDoc: DocumentSnapshot? = null
-
-    /* override suspend fun loadIssues(): List<Issue> {
-         val list = mutableListOf<Issue>()
-         val collectionData = fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).get().await()
-
-         collectionData.documents.forEach {
-             val issueObj = it.toObject(IssueDto::class.java)
-             issueObj?.id = it.id
-             issueObj?.let { it1 ->
-                 it1.toIssue()?.let { it2 -> list.add(it2) }
-                 // 데이터를 추가하는 코드
-                 // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
-             }
-         }
-         return list
-     }*/
+    private var lastVisibleDocument: DocumentSnapshot? = null
+    private val collectionData =
+        fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).orderBy("title")
 
     override suspend fun loadFirstPageIssues(): List<IssueList> {
         val list = mutableListOf<IssueList>()
-        val collectionData =
-            fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).orderBy("title").limit(10).get()
-                .await()
-        lastVisibleDoc = collectionData.documents.last()
+        val issueData = collectionData.limit(PAGE_NUMBER).get().await()
 
-        /*  val collectionData: QuerySnapshot = if (lastVisibleDoc != null) {
-              fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).limit(10).get().await()
-          } else {
-              fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).startAfter(lastVisibleDoc)
-                  .limit(10).get().await()
-          }*/
+        lastVisibleDocument = issueData.last()
 
-        collectionData.documents.forEach {
+        issueData.documents.forEach {
             val issueObj = it.toObject(IssueDto::class.java)
             issueObj?.id = it.id
             issueObj?.let { issueDto ->
@@ -59,38 +34,39 @@ class HomeRepositoryImpl @Inject constructor(
                 // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(issueDto)
             }
         }
+
+        println(lastVisibleDocument)
+
         return list
     }
 
-    override suspend fun loadNextPageIssues(): List<IssueList> {
+    override suspend fun loadNextPageIssues(currentPage: Int): List<IssueList> {
         val list = mutableListOf<IssueList>()
-        println(lastVisibleDoc)
-        val test = fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).orderBy("title").limit(10).get().await().documents.last()
-        val collectionData =
-            fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH)
-                .orderBy("title")
-                .startAfter(lastVisibleDoc)
-                .limit(10)
-                .get()
-                .await()
+        val lastVisibleDoc = fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).orderBy("title")
+            .limit(currentPage * PAGE_NUMBER).get().await().documents.last()
+        val issueData = collectionData
+//            .startAfter(lastVisibleDocument)
+            .startAfter(lastVisibleDoc)
+            .limit(PAGE_NUMBER).get().await()
 
-        println("진짜? ${collectionData.isEmpty}")
+        println("해보자 $currentPage")
 
+        issueData.documents.forEach {
+            val issueObj = it.toObject(IssueDto::class.java)
+            issueObj?.id = it.id
+            issueObj?.let { issueDto ->
+                issueDto.toIssue()?.let { issue ->
+                    list.add(issue)
+                }
+                // 데이터를 추가하는 코드
+                // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
+            }
+        }
 
-         collectionData.documents.forEach {
-             val issueObj = it.toObject(IssueDto::class.java)
-             issueObj?.id = it.id
-             issueObj?.let { issueDto ->
-                 issueDto.toIssue()?.let { issue ->
-                     list.add(issue) }
-                 // 데이터를 추가하는 코드
-                 // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
-             }
-         }
+        lastVisibleDocument = issueData.last()
 
-         if (collectionData.documents.isNotEmpty()) {
-             lastVisibleDoc = collectionData.documents.last()
-         }
+        println("${issueData.last()["id"]}")
+        println(lastVisibleDocument)
 
         return list
     }
@@ -125,5 +101,6 @@ class HomeRepositoryImpl @Inject constructor(
     companion object {
         const val FIREBASE_COLLECTION_ISSUE_PATH = "Issue"
         const val FIREBASE_COLLECTION_FRIEND_PATH = "User"
+        const val PAGE_NUMBER: Long = 10
     }
 }

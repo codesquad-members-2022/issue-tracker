@@ -122,7 +122,7 @@ class IssueFragment : Fragment() {
                         println("되는건가 $page")
                         issueAdapter.submitList(it)
                         issueAdapter.notifyItemRangeChanged((page - 1) * 10, 10)
-                        /* issueAdapter.submitList(it.filter { issue ->
+                         /*issueAdapter.submitList(it.filter { issue ->
                              if (issue is IssueList.Issue) {
                                  println("당신 $issue")
                                  issue.state
@@ -158,7 +158,7 @@ class IssueFragment : Fragment() {
                 // 스크롤이 끝에 도달했는지 확인
                 if (!recyclerView.canScrollVertically(1) && lastVisibleItemPosition == itemTotalCount) {
                     page++
-                    homeViewModel.getNextIssueList()
+                    homeViewModel.getNextIssueList(page)
                 }
 
             }

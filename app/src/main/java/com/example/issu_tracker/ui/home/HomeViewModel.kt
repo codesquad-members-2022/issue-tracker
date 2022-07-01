@@ -33,11 +33,11 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
             _issueListStateFlow.value = issueList
     }
 
-    fun getNextIssueList() {
+    fun getNextIssueList(currentPage: Int) {
         viewModelScope.launch {
             val issueList = _issueListStateFlow.value.toMutableList()
             issueList.removeLast()
-            issueList.addAll(repository.loadNextPageIssues())
+            issueList.addAll(repository.loadNextPageIssues(currentPage))
             issueList.add(IssueList.IssueProgressBar)
             _issueListStateFlow.value = issueList
         }
