@@ -11,9 +11,11 @@ protocol Resolvable {
 }
 
 extension Resolvable {
-    mutating func regist<T>(type: T.Type, make: @escaping () -> Value) {
+    mutating func regist<T>(type: T.Type, make: Value) {
         let identifier = ObjectIdentifier(type)
-        self.map[identifier] = make
+        self.map[identifier] = {
+            make
+        }
     }
     
     func resolve<T>(type: T.Type) -> (() -> Value)? {

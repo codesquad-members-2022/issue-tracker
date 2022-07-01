@@ -16,9 +16,7 @@ class Repository {
         
         guard let service = serviceWrapper.resolve(type: type.self) else {
             
-            serviceWrapper.regist(type: type.self) {
-                return NetworkService<T>()
-            }
+            serviceWrapper.regist(type: type.self, make: NetworkService<T>())
             
             let service = serviceWrapper.resolve(type: type.self)
             return service?() as? NetworkService<T>
