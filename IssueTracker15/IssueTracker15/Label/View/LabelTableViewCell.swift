@@ -12,11 +12,18 @@ final class LabelTableViewCell: UITableViewCell {
     static let ID: String = "LabelTableViewCell"
     
     private lazy var issueTitle: IssueTitleButton = IssueTitleButton()
-    
     private lazy var descriptionLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 1
         return label
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        return stackView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -34,7 +41,7 @@ final class LabelTableViewCell: UITableViewCell {
     }
     
     func setTitleBackgroundColor(color: UIColor) {
-        self.issueTitle.configuration?.baseBackgroundColor = color
+        self.issueTitle.configuration?.background.backgroundColor = color
     }
     
     func setDescription(text: String) {
@@ -43,19 +50,15 @@ final class LabelTableViewCell: UITableViewCell {
     
     private func addViews() {
         [issueTitle, descriptionLabel].forEach {
-            self.addSubview($0)
+            self.stackView.addArrangedSubview($0)
         }
+        self.addSubview(stackView)
     }
     
     private func setUp() {
-        issueTitle.snp.makeConstraints {
+        stackView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16.0)
-            $0.top.equalToSuperview().inset(16.0)
-        }
-        
-        descriptionLabel.snp.makeConstraints {
-            $0.leading.equalTo(issueTitle.snp.leading)
-            $0.top.equalTo(issueTitle.snp.bottom)
+            $0.trailing.top.bottom.equalToSuperview()
         }
     }
 }

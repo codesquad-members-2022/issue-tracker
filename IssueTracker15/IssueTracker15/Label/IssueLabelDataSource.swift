@@ -22,6 +22,7 @@ final class IssueLabelDataSource: NSObject, UITableViewDataSource {
         else { return UITableViewCell() }
         cell.setTitle(text: issueLabels[indexPath.row].title)
         cell.setDescription(text: issueLabels[indexPath.row].description)
+        cell.setTitleBackgroundColor(color: .blue)
         return cell
     }
 }
