@@ -39,10 +39,14 @@ public class MemberService {
 	}
 
 	private MemberResponseDto login(AccessTokenResponseDto token, UserProfile userInfo) {
-		Member member = memberRepository.findByEmail(userInfo.getEmail())
-			.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+		Member member = findMemberByEmailOrThrow(userInfo);
 		member.update(userInfo, token.getAccessToken());
 		return MemberResponseDto.of(member, jwtService.createToken(member));
+	}
+
+	private Member findMemberByEmailOrThrow(UserProfile userInfo) {
+		return memberRepository.findByEmail(userInfo.getEmail())
+			.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
 	}
 
 	private MemberResponseDto join(AccessTokenResponseDto token, UserProfile userInfo) {
@@ -54,7 +58,7 @@ public class MemberService {
 		return memberRepository.findByEmail(email).isEmpty();
 	}
 
-	public Member findUserById(Long memberId) {
+	public Member findUserByIdOrThrow(Long memberId) {
 		return memberRepository.findById(memberId)
 			.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
 	}

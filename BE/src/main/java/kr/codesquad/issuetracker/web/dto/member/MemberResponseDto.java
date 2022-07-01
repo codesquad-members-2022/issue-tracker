@@ -10,10 +10,10 @@ import lombok.ToString;
 @AllArgsConstructor
 public class MemberResponseDto {
 
-	private final String name;
-	private final String email;
-	private final String avatarUrl;
-	private final String token;
+	private String name;
+	private String email;
+	private String avatarUrl;
+	private String token;
 
 	public static MemberResponseDto of(Member member, String token) {
 		return new MemberResponseDto(

@@ -5,7 +5,6 @@ import static kr.codesquad.issuetracker.exception.ErrorMessage.ISSUE_NOT_FOUND;
 import java.util.List;
 import kr.codesquad.issuetracker.domain.issue.Issue;
 import kr.codesquad.issuetracker.domain.issue.repository.IssueRepository;
-import kr.codesquad.issuetracker.domain.member.repository.MemberRepository;
 import kr.codesquad.issuetracker.exception.CustomException;
 import kr.codesquad.issuetracker.web.dto.issue.IssueAddRequestDto;
 import kr.codesquad.issuetracker.web.dto.issue.IssueModifyRequestDto;
@@ -26,18 +25,22 @@ public class IssueService {
 	public void statusModify(IssueModifyRequestDto dto) {
 		List<Long> ids = dto.getIds();
 		for (Long id : ids) {
-			Issue issue = issueRepository.findById(id)
-				.orElseThrow(() -> new CustomException(ISSUE_NOT_FOUND));
+			Issue issue = findIssueByIdOrThrow(id);
 
 			issue.updateStatus(dto.getStatus());
 		}
+	}
+
+	private Issue findIssueByIdOrThrow(Long id) {
+		return issueRepository.findById(id)
+			.orElseThrow(() -> new CustomException(ISSUE_NOT_FOUND));
 	}
 
 	public void add(IssueAddRequestDto dto) {
 		Issue issue = Issue.createIssue(
 			dto.getTitle(),
 			dto.getDescription(),
-			memberService.findUserById(dto.getMemberId()),
+			memberService.findUserByIdOrThrow(dto.getMemberId()),
 			memberService.findAssignees(dto.getAssignees()),
 			labelService.findLabels(dto.getLabels()),
 			milestonesService.findMilestoneById(dto.getMilestoneId())

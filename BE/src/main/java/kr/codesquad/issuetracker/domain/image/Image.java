@@ -11,7 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import kr.codesquad.issuetracker.domain.comment.Comment;
 import kr.codesquad.issuetracker.domain.issue.Issue;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "image")
 public class Image {
