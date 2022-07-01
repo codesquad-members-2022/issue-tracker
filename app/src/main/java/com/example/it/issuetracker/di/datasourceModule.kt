@@ -1,6 +1,7 @@
 package com.example.it.issuetracker.di
 
 import com.example.it.issuetracker.data.datasource.*
+import com.example.it.issuetracker.data.datasource.local.IssueTrackerDefaultDataSource
 import com.example.it.issuetracker.data.datasource.remote.IssueTrackerRemoteDataSource
 import org.koin.core.qualifier.named
 import org.koin.dsl.module

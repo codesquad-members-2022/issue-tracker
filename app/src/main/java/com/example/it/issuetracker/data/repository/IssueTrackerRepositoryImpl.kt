@@ -13,36 +13,23 @@ import com.example.it.issuetracker.domain.repository.IssueTrackerRepository
 import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.*
 
 class IssueTrackerRepositoryImpl(
     private val issueTrackerDataSource: IssueTrackerDataSource,
     private val issueRemoteDataSource: IssueTrackerDataSource,
 ) : IssueTrackerRepository {
     override fun getIssue(): Flow<List<Issue>> {
-        return issueTrackerDataSource.getIssue().map { issues ->
+        return issueRemoteDataSource.getIssue().map { issues ->
             issues.map { issue -> issue.toIssue() }
         }
     }
 
-    override suspend fun deleteIssue(list: List<Issue>) {
-        issueTrackerDataSource.deleteIssue(list)
+    override suspend fun updateIssueDelete(status: Boolean, list: List<Long>) {
+        issueRemoteDataSource.updateIssueDelete(status, list)
     }
 
-    override suspend fun deleteIssue(id: Long) {
-        issueTrackerDataSource.deleteIssue(id)
-    }
-
-    override suspend fun closeIssue(list: List<Issue>) {
-        issueTrackerDataSource.closeIssue(list)
-    }
-
-    override suspend fun closeIssue(id: Long) {
-        issueTrackerDataSource.closeIssue(id)
-    }
-
-    override suspend fun revertIssue(list: SortedMap<Int, Issue>) {
-        issueTrackerDataSource.revertIssue(list)
+    override suspend fun updateIssueClose(status: Boolean, list: List<Long>) {
+        issueRemoteDataSource.updateIssueClose(status, list)
     }
 
     override suspend fun getWriter(): Result<List<Member>> {
@@ -70,7 +57,7 @@ class IssueTrackerRepositoryImpl(
     }
 
     override fun getIssueDetail(id: Long): Flow<IssueDetail> {
-        return issueTrackerDataSource.getIssueDetail(id).map { issueDetail ->
+        return issueRemoteDataSource.getIssueDetail(id).map { issueDetail ->
             issueDetail.toIssueDetail()
         }
     }
@@ -93,5 +80,9 @@ class IssueTrackerRepositoryImpl(
 
     override suspend fun addOk(id: Long, uid: Long) {
         issueTrackerDataSource.addOk(id, uid)
+    }
+
+    override suspend fun addComment(id: Long, text: String) {
+        issueTrackerDataSource.addComment(id, text)
     }
 }

@@ -11,7 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 class CustomSnackBar(
     view: View,
     private val message: String,
-    private val onClick: () -> Unit,
+    private val onRevert: () -> Unit,
 ) {
 
     private val context = view.context
@@ -38,7 +38,7 @@ class CustomSnackBar(
 
     private fun initData() = with(binding) {
         tvMessage.text = message
-        btnCancel.setOnClickListener { onClick() }
+        btnCancel.setOnClickListener { onRevert() }
     }
 
     fun show() {
@@ -46,7 +46,7 @@ class CustomSnackBar(
     }
 
     companion object {
-        fun make(view: View, message: String, onClick: () -> Unit) =
-            CustomSnackBar(view, message, onClick)
+        fun make(view: View, message: String, onRevert: () -> Unit) =
+            CustomSnackBar(view, message, onRevert)
     }
 }

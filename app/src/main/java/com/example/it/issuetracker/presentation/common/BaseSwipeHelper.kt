@@ -1,24 +1,22 @@
 package com.example.it.issuetracker.presentation.common
 
 import android.graphics.Canvas
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.math.min
 import kotlin.math.max
+import kotlin.math.min
 
-abstract class BaseSwipeHelper: ItemTouchHelper.Callback() {  // ItemTouchHelper.Callback 을 구현해야 한다
+abstract class BaseSwipeHelper : ItemTouchHelper.Callback() {
 
     private var currentPosition: Int? = null
     private var previousPosition: Int? = null
     private var currentDx = 0f
     private var clamp = 0f
 
-
-    override fun getMovementFlags(  // 이동 방향을 결정!!,  스와이프 시 항상 onChildDraw 보다 먼저 호출!
+    override fun getMovementFlags(
         recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder
+        viewHolder: RecyclerView.ViewHolder,
     ): Int {
         val view = getView(viewHolder)
         clamp = view.width.toFloat() / 10 * 3
@@ -28,7 +26,7 @@ abstract class BaseSwipeHelper: ItemTouchHelper.Callback() {  // ItemTouchHelper
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
-        target: RecyclerView.ViewHolder
+        target: RecyclerView.ViewHolder,
     ): Boolean = false
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) = Unit
@@ -53,9 +51,9 @@ abstract class BaseSwipeHelper: ItemTouchHelper.Callback() {  // ItemTouchHelper
         dX: Float,
         dY: Float,
         actionState: Int,
-        isCurrentlyActive: Boolean
+        isCurrentlyActive: Boolean,
     ) {
-        if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             val view = getView(viewHolder)
             val isClamped = getClamped(viewHolder)
             val x = clampViewPositionHorizontal(view, dX, isClamped, isCurrentlyActive)
@@ -77,8 +75,8 @@ abstract class BaseSwipeHelper: ItemTouchHelper.Callback() {  // ItemTouchHelper
         view: View,
         dX: Float,
         isClamped: Boolean,
-        isCurrentlyActive: Boolean
-    ) : Float {
+        isCurrentlyActive: Boolean,
+    ): Float {
         val maxSwipe: Float = -view.width.toFloat() / 10 * 3
         val right: Float = 0f
 
@@ -105,27 +103,5 @@ abstract class BaseSwipeHelper: ItemTouchHelper.Callback() {  // ItemTouchHelper
 
     abstract fun getClamped(viewHolder: RecyclerView.ViewHolder): Boolean
 
-    fun setClamp(clamp: Float) {
-        this.clamp = clamp
-    }
-
-    private fun setTag(viewHolder: RecyclerView.ViewHolder, isClamped: Boolean) {
-        viewHolder.itemView.tag = isClamped
-    }
-
-    private fun getTag(viewHolder: RecyclerView.ViewHolder) : Boolean {
-        return viewHolder.itemView.tag as? Boolean ?: false
-    }
-
-    fun removePreviousClamp(recyclerView: RecyclerView) {
-        if (currentPosition == previousPosition)
-            return
-        previousPosition?.let {
-            val viewHolder = recyclerView.findViewHolderForAdapterPosition(it) ?: return
-            getView(viewHolder).translationX = 0f
-            setClamped(viewHolder, false)
-            previousPosition = null
-        }
-    }
 }
 

@@ -8,7 +8,6 @@ data class MileStone(
     val id: Long? = null,
     val title: String,
     val description: String? = null,
-    val startDate: String? = null,
     val deadLine: String? = null,
     val openedIssues: Int? = null,
     val closedIssue: Int? = null,
@@ -21,7 +20,6 @@ fun MileStone.toMileStoneDto(): MilestoneDto {
         id,
         title,
         description,
-        startDate,
         deadLine,
         openedIssues,
         closedIssue

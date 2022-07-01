@@ -1,5 +1,6 @@
 package com.example.it.issuetracker.presentation.main.issue.register
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.R
@@ -19,11 +20,14 @@ import kotlinx.coroutines.launch
 class RegisterIssueViewModel(
     private val labelRepository: LabelRepository,
     private val milestoneRepository: MilestoneRepository,
-    private val issueTrackerRepository: IssueTrackerRepository
+    private val issueTrackerRepository: IssueTrackerRepository,
 ) : ViewModel() {
 
-    private var _uiState = MutableStateFlow(RegisterIssueUiState())
+    private val _uiState = MutableStateFlow(RegisterIssueUiState())
     val uiState = _uiState.asStateFlow()
+
+    private val _newIssue = MutableStateFlow<NewIssue>(NewIssue("", ""))
+    val newIssue = _newIssue.asStateFlow()
 
     init {
         getLabelList()
@@ -93,6 +97,8 @@ class RegisterIssueViewModel(
         )
 
         issueTrackerRepository.saveIssue(newIssue)
+        Log.d("test", "saveIssue: $newIssue")
+        _newIssue.value = newIssue
     }
 
     fun setSubject(subject: String) {
@@ -151,7 +157,7 @@ class RegisterIssueViewModel(
         issueDetail.labels.forEach { label ->
             setCheckedLabel(label.id, true)
         }
-        issueDetail.milestones[0].id?.let {
+        issueDetail.milestones.id?.let {
             setSelectedMilestoneIndex(it.toInt())
         }
     }
