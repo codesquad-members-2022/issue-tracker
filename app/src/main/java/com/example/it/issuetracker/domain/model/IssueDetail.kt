@@ -1,5 +1,7 @@
 package com.example.it.issuetracker.domain.model
 
+import java.io.Serializable
+
 data class IssueDetail(
     val id: Long,
     val title: String,
@@ -11,4 +13,4 @@ data class IssueDetail(
     val labels: List<Label>,
     val milestones: List<MileStone>,
     val comments: List<Comment>,
-)
+) : Serializable

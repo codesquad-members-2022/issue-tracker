@@ -4,6 +4,7 @@ import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.domain.model.IssueDetail
 import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
+import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 
@@ -30,6 +31,8 @@ interface IssueTrackerRepository {
     fun findIssue(title: String): Flow<List<Issue>>
 
     fun getIssueDetail(id: Long): Flow<IssueDetail>
+
+    suspend fun saveIssue(newIssue: NewIssue): Result<Unit>
 
     suspend fun addLike(id: Long, uid: Long)
 

@@ -26,7 +26,7 @@ class IssueViewModel(
         getIssues()
     }
 
-    private fun getIssues() = viewModelScope.launch {
+    fun getIssues() = viewModelScope.launch {
         _uiState.update { IssueUiState.Loading }
         issueRepository.getIssue().collectLatest { issues ->
             _uiState.update { IssueUiState.GetIssues(issues) }

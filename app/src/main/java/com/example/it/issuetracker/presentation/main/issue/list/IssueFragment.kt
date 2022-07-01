@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,7 +56,14 @@ class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fra
 
     override fun initView() = with(binding) {
         ivSearch.setOnClickListener { navigateFragment(SearchFragment(), "search_issue") }
-        btnIssue.setOnClickListener { navigateFragment(RegisterIssueFragment(), "register_issue") }
+        btnIssue.setOnClickListener {
+            val registerIssueFragment = RegisterIssueFragment().apply {
+                setOnRefreshListener {
+                    viewModel.getIssues()
+                }
+            }
+            navigateFragment(registerIssueFragment, "register_issue")
+        }
         rvIssue.adapter = adapter
         val swipeHelper = SwipeHelper()
         val itemTouchHelper = ItemTouchHelper(swipeHelper)

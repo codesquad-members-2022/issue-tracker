@@ -3,6 +3,7 @@ package com.example.it.issuetracker.data.datasource
 import android.util.Log
 import com.example.it.issuetracker.data.dto.*
 import com.example.it.issuetracker.domain.model.Issue
+import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.*
@@ -240,6 +241,33 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             }
             filterList
         }
+    }
+
+    override suspend fun saveIssue(newIssue: NewIssue) {
+        val labelList = mutableListOf<LabelDto>()
+        newIssue.labels?.forEach { label ->
+            labelList.add(
+                LabelDto(
+                    label.id,
+                    label.title,
+                    label.description,
+                    label.color,
+                    label.textColor
+                )
+            )
+        }
+
+        issues.add(
+            IssueDto(
+                issues.size + 1L,
+                newIssue.title,
+                newIssue.description,
+                true,
+                labelList,
+                newIssue.milestoneId?.title ?: "",
+                "2022-06-30",
+            )
+        )
     }
 
     override fun findByIssueName(title: String): Flow<List<IssueDto>> = flow {

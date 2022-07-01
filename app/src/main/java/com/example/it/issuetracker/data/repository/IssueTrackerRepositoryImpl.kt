@@ -10,6 +10,7 @@ import com.example.it.issuetracker.domain.model.IssueDetail
 import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.domain.repository.IssueTrackerRepository
+import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.util.*
@@ -72,6 +73,10 @@ class IssueTrackerRepositoryImpl(
         return issueTrackerDataSource.getIssueDetail(id).map { issueDetail ->
             issueDetail.toIssueDetail()
         }
+    }
+
+    override suspend fun saveIssue(newIssue: NewIssue): Result<Unit> {
+        return runCatching { issueTrackerDataSource.saveIssue(newIssue) }
     }
 
     override suspend fun addLike(id: Long, uid: Long) {

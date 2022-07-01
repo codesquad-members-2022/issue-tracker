@@ -10,25 +10,146 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.main.issue.register.RegisterIssueFragment">
+        tools:context=".presentation.main.issue.register.RegisterIssue">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/issue_write_menu"
+                app:navigationIcon="@drawable/ic_back"
+                app:titleTextColor="@color/white"
+                tools:title="이슈 작성" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tv_subject"
+            style="@style/Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/issue_write_subject_string"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar_layout" />
 
         <EditText
-            android:id="@+id/et_text"
+            android:id="@+id/edit_subject"
+            style="@style/Subtitle2"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/label_background"
+            android:hint="제목을 입력하세요"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_subject"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_subject"
+            app:layout_constraintTop_toTopOf="@id/tv_subject"
+            tools:text="테스트 이슈 작성" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_subject" />
+
+        <EditText
+            android:id="@+id/edit_description"
+            style="@style/Subtitle2"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:textColor="@drawable/edittext_enabled_text_color"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/label_background"
+            android:gravity="top"
+            app:layout_constraintBottom_toTopOf="@id/filterLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            tools:text="::마크다운::이 어떻게 보여지는지 확인합니다." />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filterLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F2F2F7"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            app:layout_constraintBottom_toTopOf="@id/filter_milestone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/Subtitle1"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_string"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <HorizontalScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/filterLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_title"
+                app:layout_constraintTop_toTopOf="@id/filterLabel">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/label_chip_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:singleLine="true" />
+            </HorizontalScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.example.it.issuetracker.presentation.customview.CustomFilter
+            android:id="@+id/filter_milestone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#F2F2F7"
+            app:layout_constraintBottom_toTopOf="@id/filter_assignee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:textColor="@android:color/black"
+            app:title="마일스톤" />
+
+        <com.example.it.issuetracker.presentation.customview.CustomFilter
+            android:id="@+id/filter_assignee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#F2F2F7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn" />
-
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="선택"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:textColor="@android:color/black"
+            app:title="담당자" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

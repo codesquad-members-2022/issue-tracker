@@ -7,6 +7,7 @@ import com.example.it.issuetracker.data.dto.MemberDto
 import com.example.it.issuetracker.data.dto.MilestoneDto
 import com.example.it.issuetracker.data.network.IssueTrackerService
 import com.example.it.issuetracker.domain.model.Issue
+import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.*
@@ -28,6 +29,10 @@ class IssueTrackerRemoteDataSource(
     override suspend fun closeIssue(id: Long) {}
 
     override suspend fun revertIssue(list: SortedMap<Int, Issue>) {}
+
+    override suspend fun saveIssue(newIssue: NewIssue) {
+        // TODO: saveIssue
+    }
 
     override suspend fun getMember(): Result<List<MemberDto>> {
         return runCatching { emptyList() }

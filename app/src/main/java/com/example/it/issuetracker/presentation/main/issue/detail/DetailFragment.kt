@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentDetailBinding
+import com.example.it.issuetracker.presentation.common.Constants
 import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.issue.list.IssueViewModel
+import com.example.it.issuetracker.presentation.main.issue.register.RegisterIssueFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +24,9 @@ class DetailFragment : DataBindingBaseFragment<FragmentDetailBinding>(R.layout.f
     private var id: Long = -1
     private val viewModel by sharedViewModel<DetailViewModel>()
     private val issueViewModel by viewModel<IssueViewModel>()
+    private val registerIssueFragment = RegisterIssueFragment().apply {
+        setOnRefreshListener { issueViewModel.getIssues() }
+    }
     private val adapter = CommentAdapter { view, uid ->
         val popupMenu = PopupMenu(requireContext(), view)
         popupMenu.setOnMenuItemClickListener { item ->
@@ -103,7 +110,7 @@ class DetailFragment : DataBindingBaseFragment<FragmentDetailBinding>(R.layout.f
             popup.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.edit -> {
-                        Toast.makeText(requireContext(), "수정하기 눌렀습니다.", Toast.LENGTH_SHORT).show()
+                        navigateRegisterPage()
                     }
                     R.id.delete -> {
                         issueViewModel.deleteIssue(id)
@@ -114,8 +121,13 @@ class DetailFragment : DataBindingBaseFragment<FragmentDetailBinding>(R.layout.f
             }
             popup.show()
         }
+    }
 
-
+    private fun navigateRegisterPage() {
+        parentFragmentManager.commit {
+            addToBackStack("register_issue")
+            replace(R.id.container_main, registerIssueFragment)
+        }
     }
 
     override fun observerData() {
@@ -155,6 +167,7 @@ class DetailFragment : DataBindingBaseFragment<FragmentDetailBinding>(R.layout.f
                 binding.chipCloseIssue.isVisible = true
             }
         }
+        registerIssueFragment.arguments = bundleOf(Constants.ISSUE_BUNDLE_KEY to state.issue)
     }
 
     private fun handlerLoading() {

@@ -75,4 +75,12 @@
     <string name="logout_question_negative_string">취소</string>
     <string name="logout_question_title_string">로그아웃</string>
     <string name="logout_question_message_string">로그아웃 하시겠습니까?</string>
+
+    <!-- issue write -->
+    <string name="preview_string">미리보기</string>
+    <string name="save_issue_string">저장</string>
+    <string name="edit_issue_string">수정</string>
+    <string name="issue_write_subject_string">제목</string>
+    <string name="new_issue_title_string">새로운 이슈</string>
+    <string name="edit_issue_title_string">이슈 수정</string>
 </resources>
