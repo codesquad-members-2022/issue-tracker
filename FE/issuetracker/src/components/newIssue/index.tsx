@@ -4,10 +4,8 @@ import * as I from 'design/icons';
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 import SideBar from 'components/common/Sidebar';
 import { useRecoilValue } from 'recoil';
-import { newIssueState, newIssueType } from 'store/newIssue';
+import { newIssueState } from 'store/newIssue';
 import { usePostData } from 'APIs/Api';
-import { useMutation } from 'react-query';
-import { PostIssueType } from 'store/issueList';
 
 function NewIssue() {
   const newIssueData = useRecoilValue(newIssueState);
