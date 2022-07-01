@@ -1,6 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
 const path = require('path');
 const webpack = require('webpack');
+
+dotenv.config();
+const WebpackEnvironmentPlugin = new webpack.EnvironmentPlugin(['BASE_URL']);
 
 module.exports = {
   entry: `${path.resolve(__dirname, '../src')}/index.tsx`,
@@ -23,7 +27,8 @@ module.exports = {
     }),
     new webpack.ProvidePlugin({
       React: 'react'
-    })
+    }),
+    WebpackEnvironmentPlugin
   ],
   resolve: {
     alias: {

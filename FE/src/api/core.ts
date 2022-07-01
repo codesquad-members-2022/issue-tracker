@@ -1,10 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { AxiosType } from '@/api/type';
 
-const baseURL = 'https://aa974b35-fbc4-4ee2-9b06-8960e6c6f57d.mock.pstmn.io/api';
-
 const instance = axios.create({
-  baseURL: baseURL,
+  baseURL: process.env.BASE_URL,
   timeout: 2000 // 응답 대기 최대 시간
 });
 
