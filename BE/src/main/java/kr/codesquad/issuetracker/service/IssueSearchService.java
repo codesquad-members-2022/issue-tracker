@@ -94,10 +94,8 @@ public class IssueSearchService {
 
 	@Transactional(readOnly = true)
 	public IssueDetailResponse detail(DetailRequestDto dto) {
-		Issue issue = issueRepository.findById(dto.getIssueId())
-			.orElseThrow(() -> new CustomException(ISSUE_NOT_FOUND));
-		Member member = memberRepository.findById(dto.getMemberId())
-			.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+		Issue issue = findIssueByIssueIdOrThrow(dto.getIssueId());
+		Member member = findMemberByMemberIdOrThrow(dto.getMemberId());
 		return IssueDetailResponse.of(
 			issue,
 			IssueDetailMemberDto.from(member),
@@ -106,6 +104,16 @@ public class IssueSearchService {
 			checkedLabels(issue),
 			checkMilestone(issue)
 		);
+	}
+
+	private Member findMemberByMemberIdOrThrow(Long memberId) {
+		return memberRepository.findById(memberId)
+			.orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+	}
+
+	private Issue findIssueByIssueIdOrThrow(Long issueId) {
+		return issueRepository.findById(issueId)
+			.orElseThrow(() -> new CustomException(ISSUE_NOT_FOUND));
 	}
 
 	private IssueDetailMilestoneDto checkMilestone(Issue issue) {
