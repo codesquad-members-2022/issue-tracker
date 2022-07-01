@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol Optionable {
-    var subTitle: String { get }
-}
-
 // MARK: - Label
 struct Label: Codable, Optionable {
     var subTitle: String {

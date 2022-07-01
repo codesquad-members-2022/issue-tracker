@@ -32,7 +32,7 @@ class Container {
         case .issue(let selectedRepo):
             let model = IssueModel(service: service, repo: selectedRepo)
             let viewController = IssueViewController(model: model, repo: selectedRepo)
-            viewController.title = "이슈들"
+            viewController.title = "Issues"
             return viewController
         case .repos:
             let model = ReposModel(service: service)
