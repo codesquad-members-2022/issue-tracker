@@ -38,7 +38,7 @@ final class IssueListModel {
         
         return Repository
             .shared
-            .networkService
+            .getRESTNetworkService(type: [IssueDTO].self)?
             .request(request, urgency: .effective)
     }
 }

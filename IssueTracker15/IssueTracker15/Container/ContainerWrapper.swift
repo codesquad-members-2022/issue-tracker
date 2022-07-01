@@ -13,7 +13,7 @@ struct ContainerWrapper<T: Resolvable> {
         self.container = container
     }
 
-    mutating func regist<P>(type: P.Type, make: @escaping () -> T.Value) {
+    mutating func regist<P>(type: P.Type, make: T.Value) {
         container?.regist(type: type, make: make)
     }
     
