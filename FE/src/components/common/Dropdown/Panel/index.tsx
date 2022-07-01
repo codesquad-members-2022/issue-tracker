@@ -27,7 +27,7 @@ export default function Panel({
     hidePanel();
 
     if (filterCondition) {
-      setCondition(dispatch, filterCondition);
+      setCondition(dispatch, { ...filterCondition });
     }
   };
 

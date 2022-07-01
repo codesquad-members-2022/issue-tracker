@@ -3,7 +3,7 @@ import { IMember } from '@/components/IssueList/ListItem/type';
 const getCurrentUserInfo = () => {
   const currentUserInfo = localStorage.getItem('currentUserInfo');
 
-  if (!currentUserInfo) return;
+  if (!currentUserInfo) return null;
 
   const userInfoObject: IMember = JSON.parse(currentUserInfo);
 

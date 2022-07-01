@@ -1,19 +1,20 @@
+import { IFilterCondition } from './../types/common';
 import { requestApi } from '@/api/core';
-import { APIIssueStatusType } from '@/api/type';
+import { createFilterConditionQueryString } from '@/contexts/FilterCondition/reducer';
 
-const getIssueList = async (status?: APIIssueStatusType) => {
+const getIssueList = async (filterCondition: IFilterCondition) => {
   const issueList = await requestApi({
     method: 'get',
-    url: `/issues${status ? `?status=${status}` : ''}`
+    url: `/issues?${createFilterConditionQueryString(filterCondition)}`
   });
 
   return issueList;
 };
 
-const getIssueCount = async (status?: APIIssueStatusType) => {
+const getIssueCount = async (filterCondition: IFilterCondition) => {
   const issueCount = await requestApi({
     method: 'get',
-    url: `/issues/counts${status ? `?status=${status}` : ''}`
+    url: `/issues?${createFilterConditionQueryString(filterCondition)}`
   });
 
   return issueCount;

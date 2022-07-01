@@ -1,8 +1,8 @@
 import { Action, ActionType } from '@/contexts/FilterCondition/type';
 import { IFilterCondition } from '@/types/common';
 
-const INIT_FILTER_CONDITION: IFilterCondition = {
-  status: 'OPEN',
+const InitFilterCondition: IFilterCondition = {
+  status: 'open',
   assignee: null,
   label: null,
   milestone: null,
@@ -37,12 +37,35 @@ function createFilterConditionString({
   return (
     `is:${status?.toLowerCase()}` +
     ` is:issue` +
-    (assignee ? ` assignee:${assignee}` : '') +
-    (author ? ` author:${author}` : '') +
-    (label ? ` label:${label}` : '') +
-    (milestone ? ` milestone:${milestone}` : '') +
-    (comment ? ` comment:${comment}` : '')
+    (assignee ? ` assignee:${assignee.name}` : '') +
+    (author ? ` author:${author.name}` : '') +
+    (label ? ` label:${label.name}` : '') +
+    (milestone ? ` milestone:${milestone.name}` : '') +
+    (comment ? ` comment:${comment.name}` : '')
   );
 }
 
-export { INIT_FILTER_CONDITION, reducer, createFilterConditionString };
+function createFilterConditionQueryString({
+  status,
+  assignee,
+  author,
+  label,
+  milestone,
+  comment
+}: IFilterCondition) {
+  return (
+    `status=${status}` +
+    (assignee ? `&assigneeId=${assignee.id}` : '') +
+    (author ? `&authorId=${author.id}` : '') +
+    (label ? `&labelIds=${label.id}` : '') +
+    (milestone ? `&milestoneId=${milestone.id}` : '') +
+    (comment ? `&commenterId=${comment.id}` : '')
+  );
+}
+
+export {
+  InitFilterCondition,
+  reducer,
+  createFilterConditionString,
+  createFilterConditionQueryString
+};

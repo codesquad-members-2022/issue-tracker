@@ -21,7 +21,7 @@ export default function Loading() {
     const { data, status } = response;
 
     if (status !== 200) {
-      navigate('/login', { replace: true });
+      navigate(`/${ROUTE_URL.LOGIN}`, { replace: true });
     }
 
     const { current_user, login_token } = data;
@@ -29,10 +29,10 @@ export default function Loading() {
     if (current_user && login_token) {
       localStorage.setItem('currentUserInfo', JSON.stringify(current_user));
       localStorage.setItem('currentUserToken', login_token);
-      navigate(ROUTE_URL.ISSUE_LIST, { replace: true });
+      navigate(`/${ROUTE_URL.ISSUE_LIST}`, { replace: true });
     }
 
-    navigate(ROUTE_URL.LOGIN, { replace: true });
+    navigate(`/${ROUTE_URL.LOGIN}`, { replace: true });
   };
 
   useEffect(() => {
