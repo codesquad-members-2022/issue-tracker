@@ -9,8 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.main.issue.register.RegisterIssue">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"
@@ -50,7 +49,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/label_background"
-            android:hint="제목을 입력하세요"
+            android:hint="@string/edit_subject_hint"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/tv_subject"
             app:layout_constraintEnd_toEndOf="parent"

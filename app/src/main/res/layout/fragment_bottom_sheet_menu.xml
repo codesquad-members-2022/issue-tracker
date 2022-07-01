@@ -112,7 +112,7 @@
             <TextView
                 android:id="@+id/tv_manager_information"
                 style="@style/Body2"
-                exists="@{issue.manager}"
+                exists="@{issue.manager[0]}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/tv_manager"

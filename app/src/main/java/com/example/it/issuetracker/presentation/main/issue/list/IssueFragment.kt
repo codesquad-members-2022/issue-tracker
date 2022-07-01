@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,6 +54,7 @@ class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fra
     }
 
     override fun initView() = with(binding) {
+        viewModel.getIssues()
         ivSearch.setOnClickListener { navigateFragment(SearchFragment(), "search_issue") }
         btnIssue.setOnClickListener {
             val registerIssueFragment = RegisterIssueFragment().apply {
@@ -122,12 +122,18 @@ class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fra
         }
 
         repeatOnLifecycleExtension {
-            viewModel.cache.collectLatest {
-                if (it.message != "") {
-                    CustomSnackBar.make(binding.issueContainer, "선택한 이슈를 닫았습니다.") {
-                        viewModel.revertIssue(it.issues)
-                    }.show()
-                }
+            viewModel.onCloseEvent.collectLatest {
+                CustomSnackBar.make(binding.issueContainer, "선택한 이슈를 닫았습니다.") {
+                    viewModel.revertCloseIssue()
+                }.show()
+            }
+        }
+
+        repeatOnLifecycleExtension {
+            viewModel.onDeleteEvent.collectLatest {
+                CustomSnackBar.make(binding.issueContainer, "선택한 이슈를 삭제했습니다.") {
+                    viewModel.revertDeleteIssue()
+                }.show()
             }
         }
     }

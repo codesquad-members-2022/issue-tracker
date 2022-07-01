@@ -1,12 +1,12 @@
-package com.example.it.issuetracker.data.datasource
+package com.example.it.issuetracker.data.datasource.local
 
-import android.util.Log
+import com.example.it.issuetracker.data.datasource.IssueTrackerDataSource
+import com.example.it.issuetracker.data.datasource.LabelFakeDatabase
 import com.example.it.issuetracker.data.dto.*
-import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.util.*
+import java.text.SimpleDateFormat
 
 class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
 
@@ -19,6 +19,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             labels = listOf(LabelFakeDatabase.database[0]),
             mileStone = "마일스톤",
             createdTime = "2022-05-21",
+            isDelete = false
         ),
         IssueDto(
             id = 2L,
@@ -28,6 +29,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             labels = listOf(LabelFakeDatabase.database[1]),
             mileStone = "마스터즈 코스",
             createdTime = "2022-05-21",
+            isDelete = false
         ),
         IssueDto(
             id = 3L,
@@ -37,6 +39,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             labels = listOf(LabelFakeDatabase.database[2]),
             mileStone = "테스트 그룹",
             createdTime = "2022-05-21",
+            isDelete = false
         ),
         IssueDto(
             id = 4L,
@@ -46,6 +49,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             labels = listOf(LabelFakeDatabase.database[3]),
             mileStone = "마스터즈 코스 숫자",
             createdTime = "2022-05-21",
+            isDelete = false
         ),
         IssueDto(
             id = 5,
@@ -55,6 +59,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
             labels = listOf(LabelFakeDatabase.database[0], LabelFakeDatabase.database[1]),
             mileStone = "마스터즈 코스 숫자",
             createdTime = "2022-05-06 09:11:23",
+            isDelete = false
         )
     )
 
@@ -116,36 +121,34 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
     private var issueDetail = IssueDetailDto(
         id = 5,
         title = "제목쓰",
-        issueStatus = "open",
-        writer = "stitch",
-        manager = "wooki",
+        issueStatus = true,
+        writer = WriterDto(id = 1L, name = "stitch", email = "", githubId = "", imageUrl = ""),
+        manager = listOf(AssigneeDto(id = 1L, githubId = "", imageUrl = "")),
         description = "안녕하세요. 제목쓰에 대한 설명입니다.",
         createdTime = "2022-05-06 09:11:23",
         labels = listOf(LabelFakeDatabase.database[0], LabelFakeDatabase.database[1]),
-        milestones = listOf(MilestoneDto(id = 4,
+        milestones = MilestoneDto(id = 4,
             title = "마스터즈 코스 숫자",
             deadline = "2022-06-20",
-            description = "")),
-        comments = listOf(
+            description = ""),
+        comments = mutableListOf(
             CommentDto(
-                uid = 1L,
-                id = "Daniel",
+                id = 1L,
+                githubId = "Daniel",
                 imageUrl = "",
                 content = "내용",
                 createDate = "2022-05-06 12:13:13",
-                reaction = 1,
                 like = 1,
                 hate = 0,
                 best = 4,
                 ok = 0
             ),
             CommentDto(
-                uid = 2L,
-                id = "Stitch",
+                id = 2L,
+                githubId = "Stitch",
                 imageUrl = "",
                 content = "happy day",
                 createDate = "2022-05-06 12:13:13",
-                reaction = 1,
                 like = 4,
                 hate = 2,
                 best = 0,
@@ -158,54 +161,19 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
         emit(issues.filter { it.state }.toList())
     }
 
-    override suspend fun deleteIssue(list: List<Issue>) {
-        list.forEach { issue ->
-            val removeIssue = issues.find { it.id == issue.id }
-            issues.remove(removeIssue)
+    override suspend fun updateIssueDelete(status: Boolean, list: List<Long>) {
+        list.forEach { id ->
+            val issue = issues.find { it.id == id }
+            val index = issues.indexOf(issue)
+            issues[index].isDelete = status
         }
     }
 
-    override suspend fun deleteIssue(id: Long) {
-        val issue = issues.find { it.id == id }
-        issues.remove(issue)
-    }
-
-    override suspend fun closeIssue(list: List<Issue>) {
-        list.forEach { issue ->
-            val closeIssue = issues.find { it.id == issue.id }
-            val index = issues.indexOf(closeIssue)
-            issues[index].state = false
-        }
-    }
-
-    override suspend fun closeIssue(id: Long) {
-        val issue = issues.find { it.id == id }
-        val index = issues.indexOf(issue)
-        issueDetail.issueStatus = "close"
-        issues[index].state = false
-        Log.d("test", "closeIssue: $issues")
-    }
-
-    override suspend fun revertIssue(list: SortedMap<Int, Issue>) {
-        for ((idx, issue) in list) {
-            val issueDto = IssueDto(
-                id = issue.id,
-                title = issue.title,
-                description = issue.description,
-                state = issue.state,
-                labels = issue.label.map {
-                    LabelDto(
-                        id = issues.size + 1,
-                        title = it.title,
-                        description = it.description,
-                        color = it.color,
-                        textColor = it.textColor
-                    )
-                },
-                mileStone = issue.mileStone,
-                createdTime = "2022-06-21",
-            )
-            issues.add(idx, issueDto)
+    override suspend fun updateIssueClose(status: Boolean, list: List<Long>) {
+        list.forEach { id ->
+            val issue = issues.find { it.id == id }
+            val index = issues.indexOf(issue)
+            issues[index].state = status
         }
     }
 
@@ -281,7 +249,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
 
     override suspend fun addLike(id: Long, uid: Long) {
         val map = issueDetail.comments.map {
-            if (it.uid == uid) {
+            if (it.id == uid) {
                 it.copy(like = it.like + 1)
             } else {
                 it
@@ -292,7 +260,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
 
     override suspend fun addBest(id: Long, uid: Long) {
         val map = issueDetail.comments.map {
-            if (it.uid == uid) {
+            if (it.id == uid) {
                 it.copy(best = it.best + 1)
             } else {
                 it
@@ -303,7 +271,7 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
 
     override suspend fun addHate(id: Long, uid: Long) {
         val map = issueDetail.comments.map {
-            if (it.uid == uid) {
+            if (it.id == uid) {
                 it.copy(hate = it.hate + 1)
             } else {
                 it
@@ -314,12 +282,35 @@ class IssueTrackerDefaultDataSource : IssueTrackerDataSource {
 
     override suspend fun addOk(id: Long, uid: Long) {
         val map = issueDetail.comments.map {
-            if (it.uid == uid) {
+            if (it.id == uid) {
                 it.copy(ok = it.ok + 1)
             } else {
                 it
             }
         }
         issueDetail = issueDetail.copy(comments = map)
+    }
+
+    override suspend fun addComment(id: Long, text: String) {
+        val comments = issueDetail.comments.toMutableList()
+        comments.add(
+            CommentDto(
+                id = (issueDetail.comments.size + 1).toLong(),
+                githubId = "Stitch",
+                imageUrl = "",
+                content = text,
+                createDate = convertTimestampToDate(System.currentTimeMillis()),
+                like = 0,
+                best = 0,
+                hate = 0,
+                ok = 0
+            )
+        )
+        issueDetail.comments = comments
+    }
+
+    private fun convertTimestampToDate(timestamp: Long): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        return sdf.format(timestamp)
     }
 }

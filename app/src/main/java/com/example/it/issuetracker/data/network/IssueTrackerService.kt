@@ -1,12 +1,19 @@
 package com.example.it.issuetracker.data.network
 
 import com.example.it.issuetracker.data.dto.*
+import com.example.it.issuetracker.domain.model.IssuesIDList
 import retrofit2.http.*
 
 interface IssueTrackerService {
 
     @GET("issues")
     suspend fun getIssues(): List<IssueDto>
+
+    @GET("issues/{id}")
+    suspend fun getIssue(@Path("id") id: Long): IssueDetailDto
+
+    @PATCH("issues")
+    suspend fun updateIssueClose(@Query("status") status: Boolean, @Body issueList: IssuesIDList)
 
     @GET("login/oauth/github")
     suspend fun loginOAuthGithub(@Query("code") code: String): LoginDto

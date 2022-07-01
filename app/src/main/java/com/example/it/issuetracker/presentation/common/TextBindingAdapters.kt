@@ -3,6 +3,7 @@ package com.example.it.issuetracker.presentation.common
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.it.issuetracker.R
+import com.example.it.issuetracker.domain.model.Assignee
 import com.example.it.issuetracker.presentation.common.utils.calculateTime
 import java.text.SimpleDateFormat
 
@@ -33,6 +34,6 @@ fun issueFormat(view: TextView, number: Long) {
 }
 
 @BindingAdapter("exists")
-fun hasManager(view: TextView, name: String?) {
-    view.text = name ?: "없음"
+fun hasManager(view: TextView, assignee: Assignee?) {
+    view.text = assignee?.githubId ?: "없음"
 }

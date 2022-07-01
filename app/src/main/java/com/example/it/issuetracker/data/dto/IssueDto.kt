@@ -11,6 +11,7 @@ data class IssueDto(
     val labels: List<LabelDto>,
     @Json(name = "milestoneName") val mileStone: String,
     val createdTime: String,
+    var isDelete: Boolean = false,
 )
 
 fun IssueDto.toIssue(): Issue =

@@ -1,7 +1,6 @@
 package com.example.it.issuetracker.presentation.main.issue.register
 
 import com.example.it.issuetracker.domain.model.Label
-import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
 
 data class NewIssue(
@@ -11,4 +10,8 @@ data class NewIssue(
     val labels: List<Label>? = null,
     val milestoneId: MileStone? = null,
     val assignee: Long? = null
-)
+) {
+    companion object {
+        val DEFAULT_ISSUE = NewIssue("", "")
+    }
+}

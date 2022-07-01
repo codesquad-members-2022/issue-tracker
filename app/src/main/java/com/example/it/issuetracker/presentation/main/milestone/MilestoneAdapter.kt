@@ -11,14 +11,14 @@ import com.example.it.issuetracker.domain.model.MileStone
 import com.example.it.issuetracker.presentation.main.issue.list.Mode
 
 class MilestoneAdapter(
-    private val editModeListener: (editMode: Boolean) -> Unit,
-    private val itemClickListener: (milestone: MileStone) -> Unit,
+    private val onEditMode: (editMode: Boolean) -> Unit,
+    private val onClick: (milestone: MileStone) -> Unit,
 ) : ListAdapter<MileStone, MilestoneAdapter.MilestoneViewHolder>(diffUtil) {
 
     class MilestoneViewHolder(
         private val binding: MilestoneItemBinding,
-        private val editModeListener: (editMode: Boolean) -> Unit,
-        private val itemClickListener: (milestone: MileStone) -> Unit,
+        private val onEditMode: (editMode: Boolean) -> Unit,
+        private val onClick: (milestone: MileStone) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(milestone: MileStone) {
@@ -41,7 +41,7 @@ class MilestoneAdapter(
         private fun setItemClickListener(milestone: MileStone) {
             if (milestone.mode == Mode.DEFAULT) {
                 itemView.setOnClickListener {
-                    itemClickListener(milestone)
+                    onClick(milestone)
                 }
             } else {
                 itemView.setOnClickListener {
@@ -49,7 +49,7 @@ class MilestoneAdapter(
                 }
             }
             itemView.setOnLongClickListener {
-                editModeListener(true)
+                onEditMode(true)
                 true
             }
         }
@@ -62,8 +62,8 @@ class MilestoneAdapter(
                 parent,
                 false
             ),
-            editModeListener,
-            itemClickListener
+            onEditMode,
+            onClick
         )
     }
 

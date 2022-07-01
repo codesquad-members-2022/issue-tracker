@@ -1,8 +1,5 @@
 package com.example.it.issuetracker.presentation.main.issue.register
 
-import com.example.it.issuetracker.data.dto.LabelDto
-import com.example.it.issuetracker.data.dto.MemberDto
-import com.example.it.issuetracker.data.dto.MilestoneDto
 import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
@@ -15,22 +12,22 @@ data class RegisterIssueUiState(
     val filterItems: FilterItems = FilterItems(),
     val selectedFilters: SelectedFilters = SelectedFilters(),
     val requiredField: RequireField = RequireField(),
-    val errorMsgId: Int = INIT_ERROR_MSG_ID
+    val errorMsgId: Int = INIT_ERROR_MSG_ID,
 ) {
     data class FilterItems(
         val labelList: List<Label> = emptyList(),
         val milestoneList: List<MileStone> = emptyList(),
-        val assigneeList: List<Member> = emptyList()
+        val assigneeList: List<Member> = emptyList(),
     )
 
     data class SelectedFilters(
         val labelIndex: List<Int>? = emptyList(),
         val milestoneIndex: Int? = FILTER_RESET_NUMBER,
-        val assigneeIndex: Int? = FILTER_RESET_NUMBER
+        val assigneeIndex: Int? = FILTER_RESET_NUMBER,
     )
 
     data class RequireField(
         val isEmptySubject: Boolean = true,
-        val isEmptyDescription: Boolean = true
+        val isEmptyDescription: Boolean = true,
     )
 }

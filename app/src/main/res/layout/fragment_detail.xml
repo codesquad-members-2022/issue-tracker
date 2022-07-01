@@ -65,9 +65,9 @@
         <com.google.android.material.chip.ChipGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_created"
             app:layout_constraintStart_toStartOf="@id/tv_title"
-            app:layout_constraintTop_toTopOf="@id/tv_created"
-            app:layout_constraintBottom_toBottomOf="@id/tv_created">
+            app:layout_constraintTop_toTopOf="@id/tv_created">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_open_issue"
@@ -107,7 +107,7 @@
         <TextView
             android:id="@+id/tv_created"
             formatDate="@{issue.createdTime}"
-            writer="@{issue.writer}"
+            writer="@{issue.writer.name}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="96dp"

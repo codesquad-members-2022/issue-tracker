@@ -23,7 +23,7 @@ val viewModelModule = module {
     viewModel { SearchViewModel(get()) }
     viewModel { MilestoneViewModel(get()) }
     viewModel { MilestoneAddViewModel(get()) }
-    viewModel { DetailViewModel(get(), get()) }
+    viewModel { DetailViewModel(get()) }
     viewModel { MyPageViewModel(get(), get()) }
     viewModel { RegisterIssueViewModel(get(), get(), get()) }
 }

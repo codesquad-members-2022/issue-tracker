@@ -77,7 +77,7 @@ class BottomSheetMenu(
         binding.tvSearchResult.isVisible = false
         binding.issue = state.issue
         labelAdapter.submitList(state.issue.labels)
-        milestoneAdapter.submitList(state.issue.milestones)
+        milestoneAdapter.submitList(listOf(state.issue.milestones))
 
     }
 

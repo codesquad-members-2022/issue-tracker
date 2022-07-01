@@ -1,17 +1,18 @@
 package com.example.it.issuetracker.data.dto
 
 import com.example.it.issuetracker.domain.model.IssueDetail
+import com.squareup.moshi.Json
 
 data class IssueDetailDto(
     val id: Long,
     val title: String,
-    var issueStatus: String,
+    @Json(name = "status") var issueStatus: Boolean,
     val createdTime: String,
     val description: String,
-    val writer: String,
-    val manager: String,
+    val writer: WriterDto,
+    @Json(name = "assignees") val manager: List<AssigneeDto>,
     val labels: List<LabelDto>,
-    val milestones: List<MilestoneDto>,
+    @Json(name = "milestone") val milestones: MilestoneDto,
     var comments: List<CommentDto>,
 )
 
@@ -21,10 +22,10 @@ fun IssueDetailDto.toIssueDetail(): IssueDetail =
         title = title,
         issueStatus = issueStatus,
         description = description,
-        writer = writer,
-        manager = manager,
+        writer = writer.toWriter(),
+        manager = manager.map { it.toAssignee() },
         createdTime = createdTime,
         labels = labels.map { it.toLabel() },
-        milestones = milestones.map { it.toMilestone() },
+        milestones = milestones.toMilestone(),
         comments = comments.map { it.toComment() }
     )

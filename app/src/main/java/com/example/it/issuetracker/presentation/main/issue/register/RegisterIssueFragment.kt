@@ -1,11 +1,11 @@
 package com.example.it.issuetracker.presentation.main.issue.register
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
@@ -16,10 +16,11 @@ import com.example.it.issuetracker.domain.model.Label
 import com.example.it.issuetracker.presentation.common.Constants
 import com.example.it.issuetracker.presentation.common.Constants.INIT_ERROR_MSG_ID
 import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
-import io.noties.markwon.Markwon
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.issue.filter.SpinnerAdapter
 import com.google.android.material.chip.Chip
+import io.noties.markwon.Markwon
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -112,7 +113,7 @@ class RegisterIssueFragment :
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
-                id: Long
+                id: Long,
             ) = listener(position)
 
             override fun onNothingSelected(parent: AdapterView<*>?) = Unit
@@ -163,6 +164,12 @@ class RegisterIssueFragment :
                     val text = getString(msgId)
                     Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
                 }
+        }
+        repeatOnLifecycleExtension {
+            viewModel.newIssue.collectLatest {
+                if (it == NewIssue.DEFAULT_ISSUE) return@collectLatest
+                Toast.makeText(requireContext(), "$it 작성 완료!", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
