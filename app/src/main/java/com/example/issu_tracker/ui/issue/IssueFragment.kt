@@ -1,6 +1,7 @@
 package com.example.issu_tracker.ui.issue
 
 import android.content.Intent
+import android.net.Network
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.issu_tracker.R
 import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.data.IssueList
+import com.example.issu_tracker.data.network.NetworkResult
 import com.example.issu_tracker.databinding.FragmentIssueBinding
 import com.example.issu_tracker.ui.common.SwipeHelperCallback
 import com.example.issu_tracker.ui.detail.DetailIssueActivity
@@ -122,6 +124,9 @@ class IssueFragment : Fragment() {
                         println("되는건가 $page")
                         issueAdapter.submitList(it)
                         issueAdapter.notifyItemRangeChanged((page - 1) * 10, 10)
+                        /*if (it is NetworkResult.Success) {
+                            issueAdapter.submitList(it.data.filter { it.state })*/
+                            
                          /*issueAdapter.submitList(it.filter { issue ->
                              if (issue is IssueList.Issue) {
                                  println("당신 $issue")

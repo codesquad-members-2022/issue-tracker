@@ -1,12 +1,16 @@
 package com.example.issu_tracker.data.repository
 
+
 import com.example.issu_tracker.data.IssueDto
 import com.example.issu_tracker.data.IssueList
 import com.example.issu_tracker.data.toIssue
 import com.google.firebase.firestore.DocumentSnapshot
+import com.example.issu_tracker.data.network.NetworkResult
+import com.example.issu_tracker.data.network.NetworkResult.Companion.EMPTY
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
+import java.lang.Exception
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -60,9 +64,7 @@ class HomeRepositoryImpl @Inject constructor(
                 }
                 // 데이터를 추가하는 코드
                 // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
-            }
-        }
-
+                
         lastVisibleDocument = issueData.last()
 
         println("${issueData.last()["id"]}")
@@ -70,6 +72,30 @@ class HomeRepositoryImpl @Inject constructor(
 
         return list
     }
+                
+    override suspend fun loadIssues(): NetworkResult<List<Issue>> {
+        try {
+            val list = mutableListOf<Issue>()
+            val collectionData = fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).get().await()
+
+            collectionData.documents.forEach {
+                val issueObj = it.toObject(IssueDto::class.java)
+                issueObj?.id = it.id
+                issueObj?.let { it1 ->
+                    it1.toIssue()?.let { it2 -> list.add(it2) }
+                    // 데이터를 추가하는 코드
+                    // fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(it1)
+                }
+            }
+            
+            return if (list.isEmpty()) {
+                NetworkResult.Error(EMPTY)
+            } else NetworkResult.Success(list)
+
+        } catch (e: Exception) {
+            return NetworkResult.Exception(e)
+        }
+     }
 
     override suspend fun updateIssueState(itemId: String, boolean: Boolean) {
 

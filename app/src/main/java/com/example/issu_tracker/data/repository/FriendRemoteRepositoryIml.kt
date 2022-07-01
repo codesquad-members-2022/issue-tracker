@@ -2,9 +2,13 @@ package com.example.issu_tracker.data.repository
 
 import android.util.Log
 import com.example.issu_tracker.data.User
+import com.example.issu_tracker.data.network.NetworkResult
+import com.example.issu_tracker.data.network.NetworkResult.Companion.EMPTY
 import com.example.issu_tracker.ui.home.userUid
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.protobuf.Empty
 import kotlinx.coroutines.tasks.await
+import java.lang.Exception
 import java.lang.StringBuilder
 import javax.inject.Inject
 
@@ -12,24 +16,32 @@ import javax.inject.Inject
 class FriendRemoteRepositoryIml @Inject constructor(private val fireStore: FirebaseFirestore) :
     FriendRemoteRepository {
 
-    override suspend fun loadFriendList(): List<User> {
-        val userData =
-            fireStore.collection(HomeRepositoryImpl.FIREBASE_COLLECTION_FRIEND_PATH)
-                .document(userUid).get().await()
-        val friendData = userData["friend"] as List<Map<String, String>>
-        Log.d("friend", friendData.toString())
+    override suspend fun loadFriendList(): NetworkResult<List<User>> {
+        try {
+            val userData =
+                fireStore.collection(HomeRepositoryImpl.FIREBASE_COLLECTION_FRIEND_PATH)
+                    .document(userUid).get().await()
+            val friendData = userData["friend"] as List<Map<String, String>>
+            Log.d("friend", friendData.toString())
 
-        val friendList = mutableListOf<User>()
+            val friendList = mutableListOf<User>()
 
-        friendData.forEach {
-            val user =
-                User(
-                    it["UID"] ?: "", it["name"] ?: "",
-                    it["userPhoto"] ?: ""
-                )
-            friendList.add(user)
+            friendData.forEach {
+                val user =
+                    User(
+                        it["uid"] ?: "", it["name"] ?: "",
+                        it["userPhoto"] ?: ""
+                    )
+                friendList.add(user)
+            }
+            return if (friendList.isNotEmpty()) {
+                NetworkResult.Success(friendList)
+            } else {
+                NetworkResult.Error(EMPTY)
+            }
+        } catch (e: Exception) {
+            return NetworkResult.Exception(e)
         }
-        return friendList
     }
 
     override suspend fun updateFriend(users: List<User>) {

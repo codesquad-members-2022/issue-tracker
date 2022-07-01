@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.FilterCondition
 import com.example.issu_tracker.data.IssueList
+import com.example.issu_tracker.data.network.NetworkResult
 import com.example.issu_tracker.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,8 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
 
-    private val _issueListStateFlow = MutableStateFlow<List<IssueList>>(mutableListOf())
-    val issueListStateFlow: StateFlow<List<IssueList>> = _issueListStateFlow
+    private val _issueListStateFlow = MutableStateFlow<NetworkResult<List<IssueList>>>(NetworkResult.Loading())
+    val issueListStateFlow: StateFlow<NetworkResult<List<IssueList>>> = _issueListStateFlow
 
     private val _filteredIssueListStateFlow = MutableStateFlow<List<IssueList>>(listOf())
     val filteredIssueListStateFlow: StateFlow<List<IssueList>> = _filteredIssueListStateFlow
@@ -61,21 +62,22 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     }
 
     fun filterIssueList(condition: FilterCondition) {
-        val filteredIssueList = _issueListStateFlow.value
-            .filter {
-                if (condition.state.isNotEmpty() && it is IssueList.Issue) {
-                    it.state
-                } else {
-                    true
+        if (_issueListStateFlow.value is NetworkResult.Success) {
+            val filteredIssueList = (_issueListStateFlow.value as NetworkResult.Success).data
+                .filter {
+                    if (condition.state.isNotEmpty() && it is IssueList.Issue) {
+                        it.state
+                    } else {
+                        true
+                    }
+                }.filter {
+                    if (condition.writer.isNotEmpty() && it is IssueList.Issue) {
+                        it.user.name == condition.writer
+                    } else {
+                        true
+                    }
                 }
-            }.filter {
-                if (condition.writer.isNotEmpty() && it is IssueList.Issue) {
-                    it.user.name == condition.writer
-                } else {
-                    true
-                }
-            }
-            .filter {
+                .filter {
                 if (it is IssueList.Issue) {
                     it.label.any { label ->
                         if (condition.label.isNotEmpty()) {
@@ -87,8 +89,10 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                 }
                 false
             }
-
+            
         _filteredIssueListStateFlow.value = filteredIssueList
+        
+        }
     }
 }
 
