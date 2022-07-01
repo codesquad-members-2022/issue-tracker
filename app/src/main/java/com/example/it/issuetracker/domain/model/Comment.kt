@@ -1,5 +1,7 @@
 package com.example.it.issuetracker.domain.model
 
+import java.io.Serializable
+
 data class Comment(
     val id: Long,
     val githubId: String,
@@ -10,4 +12,4 @@ data class Comment(
     val hate: Int,
     val best: Int,
     val ok: Int,
-)
+) : Serializable

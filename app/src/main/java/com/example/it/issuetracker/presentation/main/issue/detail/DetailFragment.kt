@@ -32,9 +32,6 @@ class DetailFragment : DataBindingBaseFragment<FragmentDetailBinding>(R.layout.f
     private val imm: InputMethodManager by lazy { activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
     private val viewModel by sharedViewModel<DetailViewModel>()
     private val issueViewModel by viewModel<IssueViewModel>()
-    private val registerIssueFragment = RegisterIssueFragment().apply {
-        setOnRefreshListener { issueViewModel.getIssues() }
-    }
     private val adapter = CommentAdapter { view, uid -> commenterOptionMenuEvent(view, uid) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -112,7 +109,6 @@ class DetailFragment : DataBindingBaseFragment<FragmentDetailBinding>(R.layout.f
                 binding.chipCloseIssue.isVisible = true
             }
         }
-        registerIssueFragment.arguments = bundleOf(Constants.ISSUE_BUNDLE_KEY to state.issue)
     }
 
     private fun handlerLoading() {
@@ -216,6 +212,10 @@ class DetailFragment : DataBindingBaseFragment<FragmentDetailBinding>(R.layout.f
     }
 
     private fun navigateRegisterPage() {
+        val registerIssueFragment = RegisterIssueFragment().apply {
+            setOnRefreshListener { issueViewModel.getIssues() }
+        }
+        registerIssueFragment.arguments = bundleOf(Constants.ISSUE_BUNDLE_KEY to binding.issue)
         parentFragmentManager.commit {
             addToBackStack("register_issue")
             replace(R.id.container_main, registerIssueFragment)

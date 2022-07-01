@@ -30,9 +30,11 @@ class RegisterIssueViewModel(
     val newIssue = _newIssue.asStateFlow()
 
     init {
+        _uiState.update { it.copy(dataLoading = false) }
         getLabelList()
         getMilestoneList()
         getAssigneeList()
+        _uiState.update { it.copy(dataLoading = true) }
     }
 
     private fun getLabelList() = viewModelScope.launch {
@@ -160,5 +162,7 @@ class RegisterIssueViewModel(
         issueDetail.milestones.id?.let {
             setSelectedMilestoneIndex(it.toInt())
         }
+        if (issueDetail.manager.isNotEmpty())
+            setSelectedAssigneeIndex(issueDetail.manager[0].id.toInt())
     }
 }

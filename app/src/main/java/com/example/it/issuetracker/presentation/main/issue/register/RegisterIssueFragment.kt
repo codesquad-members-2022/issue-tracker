@@ -8,6 +8,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.core.view.size
 import androidx.core.widget.doAfterTextChanged
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentRegisterIssueBinding
@@ -45,7 +46,6 @@ class RegisterIssueFragment :
             .build()
         binding.lifecycleOwner = viewLifecycleOwner
         editIssueDetail = arguments?.getSerializable(Constants.ISSUE_BUNDLE_KEY) as? IssueDetail
-        if (editIssueDetail != null) viewModel.setDataForEditIssue(editIssueDetail!!)
 
         initView()
         observerData()
@@ -144,8 +144,10 @@ class RegisterIssueFragment :
                 .distinctUntilChanged()
                 .collect {
                     if (it.labelIndex != null) checkedLabel(it.labelIndex)
-                    if (it.milestoneIndex != null) binding.filterMilestone.spinner.setSelection(it.milestoneIndex.toInt())
-                    if (it.assigneeIndex != null) binding.filterAssignee.spinner.setSelection(it.assigneeIndex)
+                    if (it.milestoneIndex != null && binding.filterMilestone.spinner.size != 0)
+                        binding.filterMilestone.spinner.setSelection(it.milestoneIndex.toInt())
+                    if (it.assigneeIndex != null && binding.filterAssignee.spinner.size != 0)
+                        binding.filterAssignee.spinner.setSelection(it.assigneeIndex)
                 }
         }
         repeatOnLifecycleExtension {
@@ -170,6 +172,25 @@ class RegisterIssueFragment :
                 if (it == NewIssue.DEFAULT_ISSUE) return@collectLatest
                 Toast.makeText(requireContext(), "$it 작성 완료!", Toast.LENGTH_LONG).show()
             }
+        }
+        repeatOnLifecycleExtension {
+            viewModel.uiState.map { it.dataLoading }
+                .collect { loading ->
+                    if (!loading) return@collect
+                    if (editIssueDetail != null) viewModel.setDataForEditIssue(editIssueDetail!!)
+                }
+        }
+        repeatOnLifecycleExtension {
+            viewModel.uiState.map { it.title }
+                .collect {
+                    binding.editSubject.setText(it)
+                }
+        }
+        repeatOnLifecycleExtension {
+            viewModel.uiState.map { it.description }
+                .collect {
+                    binding.editDescription.setText(it)
+                }
         }
     }
 

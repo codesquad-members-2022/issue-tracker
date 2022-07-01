@@ -13,6 +13,7 @@ data class RegisterIssueUiState(
     val selectedFilters: SelectedFilters = SelectedFilters(),
     val requiredField: RequireField = RequireField(),
     val errorMsgId: Int = INIT_ERROR_MSG_ID,
+    val dataLoading: Boolean = false,
 ) {
     data class FilterItems(
         val labelList: List<Label> = emptyList(),

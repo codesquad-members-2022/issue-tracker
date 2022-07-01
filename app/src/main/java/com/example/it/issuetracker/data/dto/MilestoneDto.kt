@@ -7,7 +7,7 @@ data class MilestoneDto(
     val id: Long? = null,
     val title: String,
     val description: String? = null,
-    @Json(name = "deadLine") val deadline: String? = null,
+    val deadline: String? = null,
     val openedIssues: Int? = null,
     val closedIssues: Int? = null,
 )
