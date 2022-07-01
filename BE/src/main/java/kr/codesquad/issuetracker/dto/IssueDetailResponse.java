@@ -14,7 +14,7 @@ public class IssueDetailResponse {
     private String title;
     private boolean status;
     private LocalDateTime createdTime;
-    private String content;
+    private String description;
     private MemberResponse writer;
     private List<AssigneeResponse> assignees;
     private List<CommentResponse> comments;
@@ -27,7 +27,7 @@ public class IssueDetailResponse {
         this.title = issue.getTitle();
         this.status = issue.isStatus();
         this.createdTime = issue.getCreatedTime();
-        this.content = issue.getContent();
+        this.description = issue.getContent();
         this.writer = writer;
         this.assignees = assignees;
         this.comments = comments;
