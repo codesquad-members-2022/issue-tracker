@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper.LEFT
 import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issu_tracker.R
+import com.example.issu_tracker.data.IssueList
 import com.example.issu_tracker.ui.issue.IssueAdapter
 import java.lang.Math.max
 
@@ -20,10 +21,11 @@ class SwipeHelperCallback() : ItemTouchHelper.Callback() {
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
     ): Int {
-
-        val view = getView(viewHolder)
-        clamp = view.width.toFloat() * (0.3f)
-        return makeMovementFlags(0, LEFT or RIGHT)
+        return if (viewHolder is IssueAdapter.IssueViewHolder) {
+            val view = getView(viewHolder)
+            clamp = view.width.toFloat() * (0.3f)
+            makeMovementFlags(0, LEFT or RIGHT)
+        } else 0
     }
 
 
@@ -47,10 +49,12 @@ class SwipeHelperCallback() : ItemTouchHelper.Callback() {
         // 현재 위치가 clamp 이상 갔을 때 스와이프 상태로 판단한다.
         // 스와이프 위치적으로 없어지는 기준 설정
         (viewHolder as IssueAdapter.IssueViewHolder).issue?.let {
-            if (currentDx <= -clamp) {
-                viewHolder.addSwipedIssue(it)
-            } else {
-                viewHolder.deleteSwipedIssue(it)
+            if (it is IssueList.Issue) {
+                if (currentDx <= -clamp) {
+                    viewHolder.addSwipedIssue(it)
+                } else {
+                    viewHolder.deleteSwipedIssue(it)
+                }
             }
         }
         return 2f

@@ -53,8 +53,8 @@ class IssueSearchFragment : Fragment() {
     }
 
     private fun initIssueList() {
-        val originalIssueList = homeViewModel.issueList.value
-       // issueSearchViewModel.initIssueList(originalIssueList)
+        val originalIssueList = homeViewModel.issueListStateFlow.value
+        issueSearchViewModel.initIssueList(originalIssueList)
     }
 
     private fun setNavigationIconEventListener() {

@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.IssueList
 import com.example.issu_tracker.databinding.ItemIssueBinding
 
-class IssueSearchAdapter : ListAdapter<Issue, IssueSearchAdapter.ViewHolder>(diffUtil) {
+class IssueSearchAdapter : ListAdapter<IssueList, IssueSearchAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,21 +19,26 @@ class IssueSearchAdapter : ListAdapter<Issue, IssueSearchAdapter.ViewHolder>(dif
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ItemIssueBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemIssueBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(issue: Issue) {
-            binding.issue = issue
+        fun bind(issue: IssueList) {
+            if (issue is IssueList.Issue) {
+                binding.issue = issue
+            }
         }
 
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Issue>() {
-            override fun areItemsTheSame(oldItem: Issue, newItem: Issue): Boolean {
-                return oldItem.title == newItem.title
+        val diffUtil = object : DiffUtil.ItemCallback<IssueList>() {
+            override fun areItemsTheSame(oldItem: IssueList, newItem: IssueList): Boolean {
+                return if (oldItem is IssueList.Issue && newItem is IssueList.Issue) {
+                    oldItem.title == newItem.title
+                } else false
             }
 
-            override fun areContentsTheSame(oldItem: Issue, newItem: Issue): Boolean {
+            override fun areContentsTheSame(oldItem: IssueList, newItem: IssueList): Boolean {
                 return oldItem == newItem
             }
 

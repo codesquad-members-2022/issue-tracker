@@ -17,8 +17,12 @@ data class IssueDto(
     val user: User? = null
 )
 
-@Entity
-data class Issue(
+sealed class IssueList : Serializable {
+
+    object IssueProgressBar : IssueList()
+
+   @Entity
+  data class Issue(
     @ColumnInfo(name = "issue_id")
     var id: String,
     val comments: List<Comment>,
@@ -32,6 +36,7 @@ data class Issue(
 ) : Serializable{
     @PrimaryKey(autoGenerate = true)
     var idx: Int = 0
+}, IssueList
 }
 
 class Converters {
@@ -67,7 +72,7 @@ class Converters {
 
 fun IssueDto.toIssue(): Issue? {
     return try {
-        Issue(id, comments, description, label, mileStoneID, state, title, user!!)
+        IssueList.Issue(id, comments, description, label, mileStoneID, state, title, user!!)
     } catch (e: Exception) {
         null
     }

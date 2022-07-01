@@ -16,15 +16,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.issu_tracker.R
-import com.example.issu_tracker.ui.common.SwipeHelperCallback
 import com.example.issu_tracker.data.FilterCondition
-import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.IssueList
 import com.example.issu_tracker.data.network.NetworkResult
 import com.example.issu_tracker.databinding.FragmentIssueBinding
+import com.example.issu_tracker.ui.common.SwipeHelperCallback
 import com.example.issu_tracker.ui.detail.DetailIssueActivity
 import com.example.issu_tracker.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +39,7 @@ class IssueFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels<HomeViewModel>()
     private lateinit var itemTouchHelper: ItemTouchHelper
     lateinit var swipeHelperCallback: SwipeHelperCallback
+    private var page = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +61,8 @@ class IssueFragment : Fragment() {
         listenEditModeEvent()
         setSelectedIssueCount()
         navigateIssueSearch()
+        recyclerView()
+
     }
 
     private fun saveFilterConditionFromFilterFragment() {
@@ -117,19 +120,54 @@ class IssueFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     // open 상태만 보여주기
-                    homeViewModel.issueList.collect {
-                        if (it is NetworkResult.Success) {
-                            issueAdapter.submitList(it.data.filter { it.state })
+                    homeViewModel.issueListStateFlow.collect {
+                        println("되는건가 $page")
+                        issueAdapter.submitList(it)
+                        issueAdapter.notifyItemRangeChanged((page - 1) * 10, 10)
+                        /*if (it is NetworkResult.Success) {
+                            issueAdapter.submitList(it.data.filter { it.state })*/
+                            
+                         /*issueAdapter.submitList(it.filter { issue ->
+                             if (issue is IssueList.Issue) {
+                                 println("당신 $issue")
+                                 issue.state
+                             }
+                             else true
+                         })*/
+                    }
+                }
+                launch {
+                    homeViewModel.filteredIssueListStateFlow.collect {
+                        if (it.isNotEmpty()) {
+                            issueAdapter.submitList(it)
                         }
                     }
                 }
-//                launch {
-//                    homeViewModel.filteredIssueList.collect {
-//                        issueAdapter.submitList(it)
-//                    }
-//                }
             }
         }
+    }
+
+    private fun recyclerView() {
+        binding.rvIssue.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager
+
+                val lastVisibleItemPosition = if (layoutManager is LinearLayoutManager) {
+                        layoutManager.findLastCompletelyVisibleItemPosition()
+                } else 0
+
+                val itemTotalCount = (recyclerView.adapter?.itemCount ?: 0) - 1
+
+                // 스크롤이 끝에 도달했는지 확인
+                if (!recyclerView.canScrollVertically(1) && lastVisibleItemPosition == itemTotalCount) {
+                    page++
+                    homeViewModel.getNextIssueList(page)
+                }
+
+            }
+        })
     }
 
 
@@ -159,15 +197,15 @@ class IssueFragment : Fragment() {
                 itemTouchHelper.attachToRecyclerView(binding.rvIssue)
             }
 
-            override fun addInCheckList(issue: Issue) {
+            override fun addInCheckList(issue: IssueList.Issue) {
                 issueViewModel.addSelectedIssue(issue)
             }
 
-            override fun deleteInCheckList(issue: Issue) {
+            override fun deleteInCheckList(issue: IssueList.Issue) {
                 issueViewModel.deleteSelectedIssue(issue)
             }
 
-            override fun getIntoDetail(issue: Issue) {
+            override fun getIntoDetail(issue: IssueList.Issue) {
                 val intent = Intent(requireContext(), DetailIssueActivity::class.java)
                 intent.putExtra("issue", issue)
                 startActivity(intent)
@@ -206,7 +244,7 @@ interface IssueAdapterEventListener {
     fun updateIssueState(itemId: String, boolean: Boolean)
     fun switchToEditMode(itemId: String)
     fun switchToOriginMode()
-    fun addInCheckList(issue: Issue)
-    fun deleteInCheckList(issue: Issue)
-    fun getIntoDetail(issue: Issue)
+    fun addInCheckList(issue: IssueList.Issue)
+    fun deleteInCheckList(issue: IssueList.Issue)
+    fun getIntoDetail(issue: IssueList.Issue)
 }
