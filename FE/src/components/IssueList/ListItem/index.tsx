@@ -19,7 +19,7 @@ export default function ListItem({
     <$ListItem>
       <$Contents>
         <$Title>
-          <Icon iconType={status === 'OPEN' ? 'openLabel' : 'closeLabel'} />
+          <Icon iconType={status === 'open' ? 'openLabel' : 'closeLabel'} />
           <$Text as="h3" size="large">
             {title}
           </$Text>

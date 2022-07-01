@@ -1,10 +1,15 @@
-export type IssueStatusType = 'OPEN' | 'CLOSE';
+export type IssueStatusType = 'open' | 'closed';
+
+type IssueOption = {
+  name: string;
+  id: number;
+} | null;
 
 export interface IFilterCondition {
   status?: IssueStatusType;
-  assignee?: string | null;
-  label?: string | null;
-  milestone?: string | null;
-  author?: string | null;
-  comment?: string | null;
+  assignee?: IssueOption;
+  label?: IssueOption;
+  milestone?: IssueOption;
+  author?: IssueOption;
+  comment?: IssueOption;
 }

@@ -14,9 +14,9 @@ const mockData: MockData = {
         target_date: '2022-06-30',
         open_issue: 0,
         closed_issue: 3,
-        status: 'CLOSE'
+        status: 'closed'
       },
-      status: 'OPEN',
+      status: 'open',
       author: {
         id: 1,
         name: 'anonymous',
@@ -46,9 +46,9 @@ const mockData: MockData = {
         target_date: '2022-06-30',
         open_issue: 0,
         closed_issue: 3,
-        status: 'CLOSE'
+        status: 'closed'
       },
-      status: 'OPEN',
+      status: 'open',
       author: {
         id: 1,
         name: 'anonymous',
@@ -78,9 +78,9 @@ const mockData: MockData = {
         target_date: '2022-06-30',
         open_issue: 0,
         closed_issue: 3,
-        status: 'CLOSE'
+        status: 'closed'
       },
-      status: 'OPEN',
+      status: 'open',
       author: {
         id: 1,
         name: 'anonymous',
@@ -110,9 +110,9 @@ const mockData: MockData = {
         target_date: '2022-06-30',
         open_issue: 0,
         closed_issue: 3,
-        status: 'CLOSE'
+        status: 'closed'
       },
-      status: 'OPEN',
+      status: 'open',
       author: {
         id: 1,
         name: 'anonymous',
@@ -142,9 +142,9 @@ const mockData: MockData = {
         target_date: '2022-06-30',
         open_issue: 0,
         closed_issue: 3,
-        status: 'CLOSE'
+        status: 'closed'
       },
-      status: 'OPEN',
+      status: 'open',
       author: {
         id: 1,
         name: 'anonymous',
@@ -185,7 +185,7 @@ const mockData: MockData = {
       target_date: '2022-06-30',
       open_issue: 0,
       closed_issue: 3,
-      status: 'CLOSE'
+      status: 'closed'
     },
     {
       id: 2,
@@ -194,7 +194,7 @@ const mockData: MockData = {
       target_date: '2022-06-30',
       open_issue: 1,
       closed_issue: 3,
-      status: 'CLOSE'
+      status: 'closed'
     },
     {
       id: 3,
@@ -203,7 +203,7 @@ const mockData: MockData = {
       target_date: '2022-06-30',
       open_issue: 2,
       closed_issue: 2,
-      status: 'OPEN'
+      status: 'open'
     }
   ]
 };

@@ -8,10 +8,16 @@ import { COLOR } from '@/styles/common';
 import { IssueStatusType } from '@/types/common';
 
 export default function IssueListTabs() {
-  const { status: currentStatus } = useFilterCondition();
+  const { status: currentStatus, ...filterCondition } = useFilterCondition();
   const dispatch = useFilterConditionDispatch();
-  const { isSuccess: isSuccessOfOpen, data: issueOpenCounts } = useIssueCountData('open');
-  const { isSuccess: isSuccessOfClose, data: issueCloseCounts } = useIssueCountData('closed');
+  const { isSuccess: isSuccessOfOpen, data: issueOpenCounts } = useIssueCountData({
+    ...filterCondition,
+    status: 'open'
+  });
+  const { isSuccess: isSuccessOfClose, data: issueCloseCounts } = useIssueCountData({
+    ...filterCondition,
+    status: 'closed'
+  });
 
   const handleTabClick = (status: IssueStatusType) => () => {
     setCondition(dispatch, { status });
@@ -21,16 +27,16 @@ export default function IssueListTabs() {
     <$IssueListTabs>
       <Button
         styleType="mediumText"
-        color={currentStatus === 'OPEN' ? COLOR.title : ''}
-        onClick={handleTabClick('OPEN')}
+        color={currentStatus === 'open' ? COLOR.title : ''}
+        onClick={handleTabClick('open')}
       >
         <Icon iconType="openLabel" />
         {`열린 이슈 ${isSuccessOfOpen ? `(${issueOpenCounts?.data.total_count})` : ''}`}
       </Button>
       <Button
         styleType="mediumText"
-        color={currentStatus === 'CLOSE' ? COLOR.title : ''}
-        onClick={handleTabClick('CLOSE')}
+        color={currentStatus === 'closed' ? COLOR.title : ''}
+        onClick={handleTabClick('closed')}
       >
         <Icon iconType="closeLabel" />
         {`닫힌 이슈 ${isSuccessOfClose ? `(${issueCloseCounts?.data.total_count})` : ''}`}

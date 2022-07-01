@@ -51,7 +51,7 @@ export default function IssueListFilterDropDowns() {
     switch (filterName) {
       case 'assignee':
         const optionData = memberList ? memberList?.data.data : [];
-        return optionData.map(({ user_id, image_url }: IMemberData) => {
+        return optionData.map(({ id, user_id, image_url }: IMemberData) => {
           return {
             children: (
               <$IssueListFIlterSelect>
@@ -62,39 +62,48 @@ export default function IssueListFilterDropDowns() {
             radio: radioIcon,
             value: user_id,
             filterCondition: {
-              assignee: user_id
+              assignee: {
+                id,
+                name: user_id
+              }
             }
           };
         });
       case 'label': {
         const optionData = labelList ? labelList.data.data : [];
-        return optionData.map(({ name, description }: ILabelData) => {
+        return optionData.map(({ id, name, description }: ILabelData) => {
           return {
             children: name,
             radio: radioIcon,
             value: description,
             filterCondition: {
-              label: name
+              label: {
+                id,
+                name
+              }
             }
           };
         });
       }
       case 'milestone': {
         const optionData = milestoneList ? milestoneList.data.data : [];
-        return optionData.map(({ name, description }: IMilestoneData) => {
+        return optionData.map(({ id, name, description }: IMilestoneData) => {
           return {
             children: name,
             radio: radioIcon,
             value: description,
             filterCondition: {
-              milestone: name
+              milestone: {
+                id,
+                name
+              }
             }
           };
         });
       }
       case 'author': {
         const optionData = memberList ? memberList?.data.data : [];
-        return optionData.map(({ user_id, image_url }: IMemberData) => {
+        return optionData.map(({ id, user_id, image_url }: IMemberData) => {
           return {
             children: (
               <$IssueListFIlterSelect>
@@ -105,7 +114,10 @@ export default function IssueListFilterDropDowns() {
             radio: radioIcon,
             value: user_id,
             filterCondition: {
-              author: user_id
+              author: {
+                id,
+                name: user_id
+              }
             }
           };
         });
