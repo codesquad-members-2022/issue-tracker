@@ -2,22 +2,28 @@ package team25.issuetracker.service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
+import team25.issuetracker.controller.ResponseTokenMessage;
+import team25.issuetracker.domain.OauthRefreshToken;
 import team25.issuetracker.repository.InMemoryProviderRepository;
 import team25.issuetracker.JwtTokenProvider;
-import team25.issuetracker.LoginResponse;
+import team25.issuetracker.controller.LoginResponse;
 import team25.issuetracker.domain.Member;
 import team25.issuetracker.repository.MemberRepository;
 import team25.issuetracker.OauthAttributes;
 import team25.issuetracker.OauthProvider;
 import team25.issuetracker.OauthTokenResponse;
 import team25.issuetracker.UserProfile;
+import team25.issuetracker.repository.RefreshTokenRepository;
 
 @Service
 public class OauthService {
@@ -25,13 +31,16 @@ public class OauthService {
 	private final InMemoryProviderRepository inMemoryProviderRepository;
 	private final MemberRepository memberRepository;
 	private final JwtTokenProvider jwtTokenProvider;
+	private final RefreshTokenRepository refreshTokenRepository;
 
 	public OauthService(InMemoryProviderRepository inMemoryProviderRepository,
 		MemberRepository memberRepository,
-		JwtTokenProvider jwtTokenProvider) {
+		JwtTokenProvider jwtTokenProvider,
+		RefreshTokenRepository refreshTokenRepository) {
 		this.inMemoryProviderRepository = inMemoryProviderRepository;
 		this.memberRepository = memberRepository;
 		this.jwtTokenProvider = jwtTokenProvider;
+		this.refreshTokenRepository = refreshTokenRepository;
 	}
 
 	public LoginResponse login(String providerName, String code) {
@@ -53,6 +62,13 @@ public class OauthService {
 		// TODO 레디스에 refresh token 추가
 		// redisUtil.setData(String.valueOf(member.getId()), refreshToken);
 
+		// refresh token 저장
+		OauthRefreshToken refreshTokenObj = OauthRefreshToken.builder()
+			.refreshToken(refreshToken)
+			.keyEmail(member.getEmail())
+			.build();
+		refreshTokenRepository.save(refreshTokenObj);
+
 		return LoginResponse.builder()
 			.id(member.getId())
 			.name(member.getName())
@@ -62,6 +78,41 @@ public class OauthService {
 			.tokenType("Bearer")
 			.accessToken(accessToken)
 			.refreshToken(refreshToken)
+			.build();
+	}
+
+	public Optional<OauthRefreshToken> getRefreshToken(String refreshToken) {
+
+		return refreshTokenRepository.findByRefreshToken(refreshToken);
+	}
+
+	public ResponseTokenMessage validateRefreshToken(String refreshToken) {
+		OauthRefreshToken refreshTokenObj = getRefreshToken(refreshToken).get();
+		String createdAccessToken = jwtTokenProvider.validateRefreshToken(refreshTokenObj);
+		RefreshJson refreshJson = createRefreshJson(createdAccessToken);
+		return ResponseTokenMessage.builder()
+			.accessToken(refreshJson.getAccessToken())
+			.refreshToken(refreshTokenObj.getRefreshToken())
+			.errorType(refreshJson.getErrorType())
+			.message(refreshJson.getMessage())
+			.status(refreshJson.getStatus())
+			.build();
+	}
+
+	public RefreshJson createRefreshJson(String createdAccessToken) {
+
+		if (createdAccessToken == null) {
+			return RefreshJson.builder()
+				.accessToken("")
+				.errorType(HttpStatus.FORBIDDEN)
+				.status(HttpStatus.PAYMENT_REQUIRED)
+				.message("Refresh 토큰이 만료되었습니다. 로그인이 필요합니다.")
+				.build();
+		}
+		return RefreshJson.builder()
+			.accessToken(createdAccessToken)
+			.status(HttpStatus.OK)
+			.message("Refresh 토큰을 통한 Access Token 생성이 완료되었습니다.")
 			.build();
 	}
 

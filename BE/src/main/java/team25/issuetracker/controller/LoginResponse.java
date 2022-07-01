@@ -1,8 +1,9 @@
-package team25.issuetracker;
+package team25.issuetracker.controller;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import team25.issuetracker.Role;
 
 @Getter
 @NoArgsConstructor
