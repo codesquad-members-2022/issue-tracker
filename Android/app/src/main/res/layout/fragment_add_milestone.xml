@@ -124,7 +124,7 @@
             android:textSize="14sp"
             android:hint="@string/date_format"
             android:background="@android:color/transparent"
-            setDate="@{viewModel}"/>
+            setDate="@{viewModel.setDate}"/>
 
         <ImageView
             android:id="@+id/btn_calendar"

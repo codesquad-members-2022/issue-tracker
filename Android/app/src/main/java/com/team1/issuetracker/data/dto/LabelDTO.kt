@@ -5,18 +5,18 @@ import com.team1.issuetracker.data.model.Label
 
 data class LabelDTO(
     @SerializedName("color")
-    val color: String?,
+    val color: String = "#000000",
     @SerializedName("description")
-    val description: String?,
+    val description: String = "",
     @SerializedName("label_id")
-    val labelId: Int?,
+    val labelId: Int = 0,
     @SerializedName("name")
-    val name: String?
+    val name: String = "unKnown"
 )
 
 fun LabelDTO.toLabels(): Label {
     val color = requireNotNull(this.color)
-    val description = this.description ?: ""
+    val description = this.description
     val id = requireNotNull(this.labelId)
     val title = requireNotNull(this.name)
 

@@ -44,7 +44,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintWidth_percent="0.186"
                     app:layout_constraintDimensionRatio="1:1"
-                    android:src="@drawable/ic_issue_list_close"/>
+                    android:src="@drawable/ic_issue_delete_white"/>
 
                 <View
                     android:id="@+id/empty_view_1_1"
@@ -60,7 +60,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/empty_view_1_1"
-                    android:text="닫기"
+                    android:text="삭제"
                     style="@style/Text_Secondary1.14_Bold"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -227,6 +227,7 @@
                     android:backgroundTint="@color/Primary1"/>
 
                 <TextView
+                    android:id="@+id/tv_open_issue_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
@@ -235,8 +236,8 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:textColor="@color/Primary1"
-                    setOpenIssue="@{item.open}"
                     tools:text="열린 이슈 1개"/>
+<!--                setOpenIssue="@{item.open}"-->
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -261,6 +262,7 @@
                     android:backgroundTint="@color/Secondary1"/>
 
                 <TextView
+                    android:id="@+id/tv_closed_issue_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
@@ -269,8 +271,8 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:textColor="@color/Secondary1"
-                    setClosedIssue="@{item.closed}"
                     tools:text="닫힌 이슈 1개"/>
+<!--                setClosedIssue="@{item.closed}"-->
             </androidx.cardview.widget.CardView>
 
             <View

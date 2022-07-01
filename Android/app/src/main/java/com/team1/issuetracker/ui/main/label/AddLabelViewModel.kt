@@ -27,6 +27,12 @@ class AddLabelViewModel @Inject constructor() : ViewModel() {
     private val _labelColor = MutableStateFlow(0)
     val labelColor: StateFlow<Int> = _labelColor
 
+
+    val setLabelBackgroundColor = { color: Int, colorName: String ->
+        _labelColor.value = color
+        _labelColorText.value = colorName
+    }
+
     fun onTitleTextWatcher(text: CharSequence?, start: Int, before: Int, count: Int) {
         Log.d("TAG", "onTitleTextWatcher")
         _labelText.value = text.toString()
@@ -47,7 +53,7 @@ class AddLabelViewModel @Inject constructor() : ViewModel() {
         description = text.toString()
     }
 
-    fun setLabelBackground() {
+    fun setLabelBackgroundRandomColor() {
         val random = Random()
 
         val red = random.nextInt(256)
@@ -59,5 +65,7 @@ class AddLabelViewModel @Inject constructor() : ViewModel() {
         _labelColor.value = color.getLabelColor(red, green, blue)
         _labelColorText.value = color.getColorLabel(red, green, blue)
     }
+
+
 
 }

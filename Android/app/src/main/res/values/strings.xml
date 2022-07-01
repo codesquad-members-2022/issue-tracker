@@ -21,5 +21,7 @@
     <string name="title_label">제목</string>
     <string name="color_hint">#808080</string>
     <string name="background_label">배경색</string>
+    <string name="open_issue_count_label">"열린 이슈 %d개"</string>
+    <string name="closed_issue_count_label">"닫힌 이슈 %d개"</string>
 
 </resources>

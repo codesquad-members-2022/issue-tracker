@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.*
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.core.content.ContextCompat
@@ -200,31 +201,56 @@ class IssueFragment : Fragment() {
             }
         }
 
-//        binding.topAppBar.setNavigationOnClickListener {
-//            PrintLog.printLog("issue filter")
-//            if (binding.cloFilterLayout.visibility == View.VISIBLE) {
-//                binding.cloFilterLayout.visibility = View.GONE
+        binding.topAppBar.setNavigationOnClickListener {
+            PrintLog.printLog("issue filter")
+            if (binding.cloFilterLayout.visibility == View.VISIBLE) {
+                binding.cloFilterLayout.visibility = View.GONE
 //                binding.imgMore1.animate().setDuration(200).rotation(180f)
-//            } else {
-//                binding.cloFilterLayout.visibility = View.VISIBLE
+                setIssueAppbar()
+            } else {
+                binding.cloFilterLayout.visibility = View.VISIBLE
+                binding.cloFilterLayout.bringToFront()
 //                binding.imgMore1.animate().setDuration(200).rotation(0f)
-//                changeAppbar()
-//            }
-//        }
+                setFilterAppbar()
+                setSpinner()
+            }
+        }
     }
 
-    private fun changeAppbar() {
+    private fun setSpinner() {
+        val items = arrayOf("아이템0","아이템1","아이템2","아이템3","아이템4")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
+        binding.spState.adapter = adapter
+    }
+
+    private fun setFilterAppbar() {
         binding.topAppBar.setBackgroundColor(
             ContextCompat.getColor(
                 requireContext(),
                 R.color.Primary1
             )
         )
+        binding.topAppBar.menu.clear()
         binding.topAppBar.inflateMenu(R.menu.filter_appbar_menu)
         binding.topAppBar.title = "필터"
         binding.topAppBar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.white))
         binding.topAppBar.navigationIcon =
             ContextCompat.getDrawable(requireContext(), R.drawable.ic_cancel)
+    }
+
+    private fun setIssueAppbar() {
+        binding.topAppBar.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.white
+            )
+        )
+        binding.topAppBar.menu.clear()
+        binding.topAppBar.inflateMenu(R.menu.issue_appbar_menu)
+        binding.topAppBar.title = "이슈"
+        binding.topAppBar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        binding.topAppBar.navigationIcon =
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_issue_filter)
     }
 
     private fun showSnackbar(){

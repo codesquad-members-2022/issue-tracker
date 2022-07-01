@@ -12,14 +12,17 @@ import androidx.databinding.BindingAdapter
 import com.team1.issuetracker.ui.main.label.AddLabelViewModel
 
 @BindingAdapter("setLabelColor")
-fun setLabelColor(editText: EditText, viewModel: AddLabelViewModel) {
+fun setLabelColor(editText: EditText, setLabelBackground: (Int, String) -> Unit) {
     var text = ""
     editText.addTextChangedListener(object : TextWatcher {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
         }
 
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+
+        }
+
         override fun afterTextChanged(s: Editable) {
             text = s.toString()
         }
@@ -30,7 +33,7 @@ fun setLabelColor(editText: EditText, viewModel: AddLabelViewModel) {
             runCatching {
                 Color.parseColor(text)
             }.onSuccess {
-                viewModel.setLabelBackground()
+                setLabelBackground(it, text)
                 Log.d("TAG", "success")
             }.onFailure {
                 Toast.makeText(editText.context, "올바른 색상을 입력해주세요.", Toast.LENGTH_SHORT).show()

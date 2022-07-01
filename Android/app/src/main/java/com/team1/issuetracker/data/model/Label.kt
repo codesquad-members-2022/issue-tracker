@@ -7,5 +7,6 @@ data class Label(
     val description: String,
     var isSwiped: Boolean = false,
     var isCheckVisible: Boolean = false,
-    var isChecked: Boolean = false
+    var isChecked: Boolean = false,
+    var state: Boolean = true
 )

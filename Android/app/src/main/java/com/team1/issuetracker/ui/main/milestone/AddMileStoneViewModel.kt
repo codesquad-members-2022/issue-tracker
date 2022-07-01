@@ -8,11 +8,9 @@ import kotlinx.coroutines.flow.StateFlow
 import java.text.SimpleDateFormat
 
 class AddMilestoneViewModel: ViewModel() {
-    private val _title = MutableStateFlow("")
-    val title : StateFlow<String> = _title
+    private var title = ""
 
-    private val _content = MutableStateFlow("")
-    val content: StateFlow<String> = _content
+    private var content = ""
 
     private val _date = MutableStateFlow("")
     val date : StateFlow<String> = _date
@@ -21,7 +19,8 @@ class AddMilestoneViewModel: ViewModel() {
     val saveButtonState: StateFlow<Boolean> = _saveButtonState
 
     fun setTitle(text: CharSequence?, start: Int, before: Int, count: Int) {
-        _title.value = text.toString()
+        title = text.toString()
+
         when {
             text.toString() != "" -> {
                 Log.d("TAG", "binding.etTitle.text ${text}, $start, $before, $count")
@@ -32,17 +31,14 @@ class AddMilestoneViewModel: ViewModel() {
                 _saveButtonState.value = false
             }
         }
-
     }
 
     fun setContent(text: Editable?) {
-        _content.value = text.toString()
+        content = text.toString()
     }
 
-    fun setDate(text: String) {
+    val setDate = { text: String ->
         _date.value = text
-
-
     }
 
 }

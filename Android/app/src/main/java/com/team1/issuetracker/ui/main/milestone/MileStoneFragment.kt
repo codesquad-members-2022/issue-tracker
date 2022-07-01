@@ -1,6 +1,8 @@
 package com.team1.issuetracker.ui.main.milestone
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.*
 import androidx.appcompat.view.ActionMode
@@ -14,12 +16,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.google.android.material.snackbar.Snackbar
 import com.team1.issuetracker.R
 import com.team1.issuetracker.common.PrintLog
 import com.team1.issuetracker.data.model.Milestone
 import com.team1.issuetracker.databinding.FragmentIssueBinding
 import com.team1.issuetracker.databinding.FragmentMilestoneBinding
 import com.team1.issuetracker.ui.main.MainActivity
+import com.team1.issuetracker.ui.main.issue.adapter.IssueListAdapter
 import com.team1.issuetracker.ui.main.label.LabelViewModel
 import com.team1.issuetracker.ui.main.label.adapter.LabelAdapter
 import com.team1.issuetracker.ui.main.label.adapter.LabelSwipeHelper
@@ -38,6 +42,7 @@ class MilestoneFragment : Fragment() {
 
     private val viewModel: MilestoneViewModel by viewModels()
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,10 +57,17 @@ class MilestoneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val swipeHelper = MilestoneSwipeHelper()
+        val itemTouchHelper = ItemTouchHelper(swipeHelper)
+        itemTouchHelper.attachToRecyclerView(binding.rvMilestone)
+
         val callback = object : ActionMode.Callback {
+            var cancel = true
+
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
                 Log.d("AppTest", "onCreateActionMode")
-                requireActivity().menuInflater.inflate(R.menu.contextual_action_bar, menu)
+                requireActivity().menuInflater.inflate(R.menu.action_bar_menu, menu)
+                cancel = true
                 return true
             }
 
@@ -68,10 +80,7 @@ class MilestoneFragment : Fragment() {
                 return when (item?.itemId) {
                     R.id.delete -> {
                         // Handle delete icon press
-                        true
-                    }
-                    R.id.close -> {
-                        // Handle close icon press
+                        cancel = false
                         true
                     }
                     else -> false
@@ -83,34 +92,69 @@ class MilestoneFragment : Fragment() {
                 actionMode = null
 
                 milestoneAdapter.makeCheckBoxGone() // 모든 아이템 체크박스 보이지 않도록
+                if(cancel) viewModel.checkedSetClear()
+                else viewModel.requestRemoveMilestoneSet()
+
+                itemTouchHelper.attachToRecyclerView(binding.rvMilestone) // 다시 헬퍼 붙이기
             }
         }
 
         setAppBar()
 
 
-        val swipeHelper = MilestoneSwipeHelper()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.itemCount.collect {
+                    val count = it
+                    actionMode?.let {
+                        it.title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                            Html.fromHtml(
+                                "<font color='#FFFFFF'>${count}</font>",
+                                Html.FROM_HTML_MODE_LEGACY
+                            )
+                        else
+                            Html.fromHtml("<font color='#FFFFFF'>${count}</font>")
+                    }
+                }
+            }
+        }
 
-        val itemTouchHelper = ItemTouchHelper(swipeHelper)
-        itemTouchHelper.attachToRecyclerView(binding.rvMilestone)
+        viewLifecycleOwner.lifecycleScope.launch{
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.closeOrDeleteFlow.collect{
+                    PrintLog.printLog("sharedflow collect")
+                    if(it) showSnackbar()
+                }
+            }
+        }
 
-        milestoneAdapter = MilestoneAdapter {
+
+        milestoneAdapter = MilestoneAdapter({
+            // 아이템 롱 클릭
             PrintLog.printLog("Issue Item Long Click")    // 이슈 리스트 아이템 롱 클릭 이벤트 영역!!
 
             actionMode = (activity as MainActivity).startSupportActionMode(callback)  // ? 맞는 방법
             actionMode?.let {
-//                it.title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-//                    Html.fromHtml(
-//                        "<font color='#FFFFFF'>${viewModel.itemCount.value}</font>",
-//                        Html.FROM_HTML_MODE_LEGACY
-//                    )
-//                else
-//                    Html.fromHtml("<font color='#FFFFFF'>${viewModel.itemCount.value}</font>")
+                it.title = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                    Html.fromHtml(
+                        "<font color='#FFFFFF'>${viewModel.itemCount.value}</font>",
+                        Html.FROM_HTML_MODE_LEGACY
+                    )
+                else
+                    Html.fromHtml("<font color='#FFFFFF'>${viewModel.itemCount.value}</font>")
             }
 
             itemTouchHelper.attachToRecyclerView(null) // 체크 박스 활성화 상태에서는 스와이프 안되게
             milestoneAdapter.makeCheckBoxVisible() // 모든 아이템 체크박스 보이도록
-        }
+        },
+            {
+                // 체크박스
+                viewModel.checkItem(it)
+            },
+            {
+                // 스와이프 후 해당 아이템 close
+                viewModel.requestRemoveSpecificIssue(it)
+            })
 
         binding.rvMilestone.apply {
             adapter = milestoneAdapter
@@ -160,6 +204,24 @@ class MilestoneFragment : Fragment() {
                 else -> false
             }
         }
+    }
+
+    private fun showSnackbar(){
+        val snackbar = Snackbar.make(requireActivity().findViewById(R.id.cl_main), "선택한 이슈를 닫았습니다.", Snackbar.LENGTH_LONG)
+        snackbar.setAction("실행취소"
+        ) {
+            PrintLog.printLog("실행취소")
+            viewModel.undo()
+        }
+            .addCallback(object: Snackbar.Callback(){ // 스낵바 사라지는 시점 체크
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    super.onDismissed(transientBottomBar, event)
+
+                    PrintLog.printLog("snackbar dismissed")
+                    viewModel.checkedSetClear()
+                }
+            })
+        snackbar.show()
     }
 
 }
