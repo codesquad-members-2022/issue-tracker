@@ -1,11 +1,13 @@
 package com.example.it.issuetracker.presentation.main.issue.list
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.domain.repository.IssueTrackerRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.*
@@ -17,8 +19,6 @@ class IssueViewModel(
     private val _uiState = MutableStateFlow<IssueUiState>(IssueUiState.UnInitialization)
     val uiState = _uiState.asStateFlow()
 
-    private var _init: Boolean = true
-
     private val _cache = MutableStateFlow<CacheIssue>(CacheIssue(sortedMapOf(), ""))
     val cache = _cache.asStateFlow()
 
@@ -28,18 +28,19 @@ class IssueViewModel(
 
     private fun getIssues() = viewModelScope.launch {
         _uiState.update { IssueUiState.Loading }
-        val activeIssues = issueRepository.getIssue().getOrThrow()
-        _uiState.update { IssueUiState.GetIssues(activeIssues) }
+        issueRepository.getIssue().collectLatest { issues ->
+            _uiState.update { IssueUiState.GetIssues(issues) }
+        }
         _cache.value = CacheIssue(sortedMapOf(), "")
     }
 
     fun toggleViewType() {
-        when (_uiState.value) {
+        when (val state = _uiState.value) {
             is IssueUiState.GetIssues -> {
-                val editIssueList = (_uiState.value as IssueUiState.GetIssues).issues.map { issue ->
+                val editIssueList = state.issues.map { issue ->
                     when (issue.viewType) {
                         Mode.DEFAULT -> issue.copy(viewType = Mode.EDIT)
-                        Mode.EDIT -> issue.copy(viewType = Mode.DEFAULT)
+                        Mode.EDIT -> issue.copy(viewType = Mode.DEFAULT, isSwiped = false)
                     }
                 }
                 _uiState.update { IssueUiState.GetIssues(editIssueList) }
@@ -50,10 +51,10 @@ class IssueViewModel(
     }
 
     fun updateDefaultViewType() {
-        when (_uiState.value) {
+        when (val state = _uiState.value) {
             is IssueUiState.GetIssues -> {
                 val defaultIssueList =
-                    (_uiState.value as IssueUiState.GetIssues).issues.map { issue ->
+                    state.issues.map { issue ->
                         issue.copy(viewType = Mode.DEFAULT)
                     }
                 _uiState.update { IssueUiState.GetIssues(defaultIssueList) }
@@ -65,47 +66,54 @@ class IssueViewModel(
     }
 
     fun deleteIssue() = viewModelScope.launch {
-        when (_uiState.value) {
+        when (val state = _uiState.value) {
             is IssueUiState.GetIssues -> {
-                val filterList =
-                    (_uiState.value as IssueUiState.GetIssues).issues.filter { issue -> issue.isChecked }
+                val filterList = state.issues.filter { issue -> issue.isChecked }
 
                 val newList: SortedMap<Int, Issue> = sortedMapOf()
-                (_uiState.value as IssueUiState.GetIssues).issues.mapIndexed { idx, issue ->
+                state.issues.mapIndexed { idx, issue ->
                     if (issue.isChecked) {
                         newList[idx] = issue
                     }
                 }
 
                 if (isCheckEmpty(filterList)) return@launch
-                val activeIssues = issueRepository.deleteIssue(filterList).getOrThrow()
-                _uiState.update { IssueUiState.GetIssues(activeIssues) }
+                issueRepository.deleteIssue(filterList)
+                getIssues()
                 _cache.value = CacheIssue(newList, "선택한 이슈를 삭제했습니다.")
             }
             else -> {}
         }
     }
 
+    fun deleteIssue(id: Long) = viewModelScope.launch {
+        issueRepository.deleteIssue(id)
+    }
+
     fun closeIssue() = viewModelScope.launch {
-        when (_uiState.value) {
+        when (val state = _uiState.value) {
             is IssueUiState.GetIssues -> {
-                val filterList =
-                    (_uiState.value as IssueUiState.GetIssues).issues.filter { issue -> issue.isChecked }
+                val filterList = state.issues.filter { issue -> issue.isChecked }
 
                 val newList: SortedMap<Int, Issue> = sortedMapOf()
-                (_uiState.value as IssueUiState.GetIssues).issues.mapIndexed { idx, issue ->
+                state.issues.mapIndexed { idx, issue ->
                     if (issue.isChecked) {
                         newList[idx] = issue
                     }
                 }
 
                 if (isCheckEmpty(filterList)) return@launch
-                val activeIssue = issueRepository.closeIssue(filterList).getOrThrow()
-                _uiState.update { IssueUiState.GetIssues(activeIssue) }
+                issueRepository.closeIssue(filterList)
+                getIssues()
                 _cache.value = CacheIssue(newList, "선택한 이슈를 닫았습니다.")
             }
             else -> {}
         }
+    }
+
+    fun closeIssue(id: Long) = viewModelScope.launch {
+        issueRepository.closeIssue(id)
+        getIssues()
     }
 
     private fun isCheckEmpty(filterList: List<Issue>): Boolean {
@@ -117,8 +125,8 @@ class IssueViewModel(
     }
 
     fun revertIssue(list: SortedMap<Int, Issue>) = viewModelScope.launch {
-        val activeIssues = issueRepository.revertIssue(list).getOrThrow()
-        _uiState.update { IssueUiState.GetIssues(activeIssues) }
+        issueRepository.revertIssue(list)
+        getIssues()
     }
 
     fun getFilterList(value: List<Issue>) {
@@ -127,5 +135,21 @@ class IssueViewModel(
             return
         }
         _uiState.update { IssueUiState.GetIssues(value) }
+    }
+
+    fun addLike(id: Long, uid: Long) = viewModelScope.launch {
+        issueRepository.addLike(id, uid)
+    }
+
+    fun addBest(id: Long, uid: Long) = viewModelScope.launch {
+        issueRepository.addBest(id, uid)
+    }
+
+    fun addHate(id: Long, uid: Long) = viewModelScope.launch {
+        issueRepository.addHate(id, uid)
+    }
+
+    fun addOk(id: Long, uid: Long) = viewModelScope.launch {
+        issueRepository.addOk(id, uid)
     }
 }

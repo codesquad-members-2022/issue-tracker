@@ -9,18 +9,23 @@ import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.presentation.main.issue.list.IssueDiffUtil
 import com.example.it.issuetracker.presentation.main.issue.list.LabelAdapter
 
-class SearchIssueAdapter : ListAdapter<Issue, SearchIssueAdapter.IssueViewHolder>(IssueDiffUtil()) {
+class SearchIssueAdapter(
+    private val onClick: (Issue) -> Unit,
+) : ListAdapter<Issue, SearchIssueAdapter.IssueViewHolder>(IssueDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueViewHolder {
         val binding = ItemIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return IssueViewHolder(binding)
+        return IssueViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: IssueViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class IssueViewHolder(private val binding: ItemIssueBinding) :
+    class IssueViewHolder(
+        private val binding: ItemIssueBinding,
+        private val onClick: (Issue) -> Unit,
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         private val adapter = LabelAdapter()
 
@@ -28,6 +33,7 @@ class SearchIssueAdapter : ListAdapter<Issue, SearchIssueAdapter.IssueViewHolder
             binding.issue = issue
             binding.rvLabel.adapter = adapter
             adapter.submitList(issue.label)
+            itemView.setOnClickListener { onClick(issue) }
         }
     }
 }

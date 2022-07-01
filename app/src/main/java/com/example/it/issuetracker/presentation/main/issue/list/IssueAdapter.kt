@@ -1,5 +1,6 @@
 package com.example.it.issuetracker.presentation.main.issue.list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +11,9 @@ import com.example.it.issuetracker.databinding.ItemIssueBinding
 import com.example.it.issuetracker.domain.model.Issue
 
 class IssueAdapter(
-    private val toggle: () -> Unit,
+    private val onToggle: () -> Unit,
+    private val onClick: (Long) -> Unit,
+    private val onClose: (Long) -> Unit,
 ) : ListAdapter<Issue, RecyclerView.ViewHolder>(IssueDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -18,12 +21,12 @@ class IssueAdapter(
             0 -> {
                 val binding =
                     ItemIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                IssueViewHolder(binding, toggle)
+                IssueViewHolder(binding, onToggle, onClick, onClose)
             }
             else -> {
                 val binding =
                     ItemEditIssueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                IssueEditViewHolder(binding, toggle)
+                IssueEditViewHolder(binding, onToggle)
             }
         }
     }
@@ -43,27 +46,47 @@ class IssueAdapter(
         return currentList[position].viewType.viewType
     }
 
-    class IssueViewHolder(
+    inner class IssueViewHolder(
         private val binding: ItemIssueBinding,
-        private val toggle: () -> Unit,
+        private val onToggle: () -> Unit,
+        private val onClick: (Long) -> Unit,
+        private val onClose: (Long) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val adapter = LabelAdapter()
 
         fun bind(issue: Issue) {
+            if (issue.isSwiped) binding.container.translationX = binding.root.width * -1f / 10 * 3
+            else binding.container.translationX = 0f
+
             binding.issue = issue
             binding.rvLabel.adapter = adapter
             adapter.submitList(issue.label)
+            binding.layoutErase.setOnClickListener {
+                Log.d("test", "bind: erase")
+                if (getItem(adapterPosition).isSwiped) {
+                    onClose.invoke(getItem(adapterPosition).id)
+                }
+            }
+            binding.container.setOnClickListener {
+                onClick(issue.id)
+            }
             binding.container.setOnLongClickListener {
-                toggle()
+                onToggle()
                 true
             }
         }
+
+        fun setClamped(isClamped: Boolean) {
+            getItem(adapterPosition).isSwiped = isClamped
+        }
+
+        fun getClamped(): Boolean = getItem(adapterPosition).isSwiped
     }
 
     class IssueEditViewHolder(
         private val binding: ItemEditIssueBinding,
-        private val toggle: () -> Unit,
+        private val onToggle: () -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val adapter = LabelAdapter()
@@ -76,7 +99,7 @@ class IssueAdapter(
                 issue.isChecked = isChecked
             }
             binding.container.setOnLongClickListener {
-                toggle()
+                onToggle()
                 true
             }
         }

@@ -23,6 +23,9 @@
 
     <!--issue-->
     <string name="description_add_issue">add_issue</string>
+    <string name="date_format">yyyy-MM-dd HH:mm:ss</string>
+    <string name="issue_write_time"> %s, %s님이 작성했습니다."</string>
+    <string name="issue_number">#%d</string>
 
     <!--image description-->
     <string name="toolbar_search">toolbar_search</string>
@@ -51,5 +54,25 @@
     <string name="milestone_add_string">새로운 마일스톤</string>
     <string name="milestone_edit_string">마일스톤 수정</string>
     <string name="clear_date_string">날짜 초기화</string>
+    <string name="detail_delete">삭제하기</string>
+    <string name="detail_close">닫기</string>
+    <string name="detail_edit">편집하기</string>
+    <string name="issue_open">열림</string>
+    <string name="issue_close">닫힘</string>
+    <string name="issue_open_eng">open</string>
+    <string name="issue_close_eng">close</string>
+    <string name="detail_menu_edit">수정하기</string>
+    <string name="detail_menu_delete">삭제하기</string>
 
+    <!-- network error message -->
+    <string name="network_error">서버와 통신할 수 없습니다.</string>
+
+    <!-- my page -->
+    <string name="user_image_string">User Image</string>
+    <string name="user_login_option_string">%s로 로그인하였습니다.</string>
+    <string name="logout_question_positive_string">로그아웃</string>
+    <string name="my_page_bottom_button_string">로그아웃</string>
+    <string name="logout_question_negative_string">취소</string>
+    <string name="logout_question_title_string">로그아웃</string>
+    <string name="logout_question_message_string">로그아웃 하시겠습니까?</string>
 </resources>

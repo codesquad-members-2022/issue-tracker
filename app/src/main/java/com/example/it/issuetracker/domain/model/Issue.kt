@@ -10,7 +10,8 @@ data class Issue(
     val description: String,
     val label: List<Label>,
     var state: Boolean,
-    val mileStone: MileStone,
+    val mileStone: String,
     var isChecked: Boolean = false,
     var viewType: Mode = DEFAULT,
+    var isSwiped: Boolean = false,
 ) : Serializable

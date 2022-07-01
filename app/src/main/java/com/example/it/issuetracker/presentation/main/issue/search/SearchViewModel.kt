@@ -20,8 +20,11 @@ class SearchViewModel(
     fun findIssue(title: String) = viewModelScope.launch {
         _uiState.update { IssueUiState.Loading }
         repository.findIssue(title).collectLatest { issues ->
-            if (issues.isEmpty() || title == "") _uiState.update { IssueUiState.GetIssues(emptyList()) }
-            else _uiState.update { IssueUiState.GetIssues(issues) }
+            if (issues.isEmpty() || title == "") {
+                _uiState.update { IssueUiState.GetIssues(emptyList()) }
+            } else {
+                _uiState.update { IssueUiState.GetIssues(issues) }
+            }
         }
     }
 }

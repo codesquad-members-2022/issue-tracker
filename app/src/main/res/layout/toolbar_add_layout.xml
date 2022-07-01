@@ -32,7 +32,7 @@
                 app:menu="@menu/only_save_string_menu"
                 app:navigationIcon="@drawable/ic_back"
                 app:title="@{title}"
-                app:titleTextColor="@color/white"/>
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

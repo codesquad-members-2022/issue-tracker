@@ -5,7 +5,7 @@ import com.example.it.issuetracker.presentation.main.issue.list.Mode
 import java.io.Serializable
 
 data class MileStone(
-    val id: Long,
+    val id: Long? = null,
     val title: String,
     val description: String? = null,
     val startDate: String? = null,
@@ -13,7 +13,7 @@ data class MileStone(
     val openedIssue: Int? = null,
     val closedIssue: Int? = null,
     var isChecked: Boolean = false,
-    val mode: Mode = Mode.DEFAULT
+    val mode: Mode = Mode.DEFAULT,
 ) : Serializable
 
 fun MileStone.toMileStoneDto(): MilestoneDto {

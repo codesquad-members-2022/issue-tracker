@@ -1,27 +1,44 @@
 package com.example.it.issuetracker.presentation.main.issue.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentIssueBinding
 import com.example.it.issuetracker.domain.model.Issue
-import com.example.it.issuetracker.presentation.common.BaseFragment
+import com.example.it.issuetracker.presentation.common.DataBindingBaseFragment
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.customview.CustomSnackBar
+import com.example.it.issuetracker.presentation.main.issue.detail.DetailFragment
 import com.example.it.issuetracker.presentation.main.issue.filter.FilterFragment
 import com.example.it.issuetracker.presentation.main.issue.register.RegisterIssueFragment
 import com.example.it.issuetracker.presentation.main.issue.search.SearchFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue) {
+class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fragment_issue) {
 
     private val viewModel by viewModel<IssueViewModel>()
-    private val adapter = IssueAdapter { toggleMode() }
+    private val adapter = IssueAdapter(
+        onToggle = { toggleMode() },
+        onClick = { id ->
+            val detailFragment = DetailFragment()
+            detailFragment.arguments = Bundle().apply { putLong("id", id) }
+            parentFragmentManager.beginTransaction()
+                .addToBackStack("detail")
+                .replace(R.id.container_main, detailFragment)
+                .commit()
+        },
+        onClose = { id ->
+            Log.d("test", ": $id")
+            viewModel.closeIssue(id)
+        }
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +57,9 @@ class IssueFragment : BaseFragment<FragmentIssueBinding>(R.layout.fragment_issue
         ivSearch.setOnClickListener { navigateFragment(SearchFragment(), "search_issue") }
         btnIssue.setOnClickListener { navigateFragment(RegisterIssueFragment(), "register_issue") }
         rvIssue.adapter = adapter
+        val swipeHelper = SwipeHelper()
+        val itemTouchHelper = ItemTouchHelper(swipeHelper)
+        itemTouchHelper.attachToRecyclerView(binding.rvIssue)
         val dividerItemDecoration =
             DividerItemDecoration(context, LinearLayoutManager(context).orientation)
         rvIssue.addItemDecoration(dividerItemDecoration)
