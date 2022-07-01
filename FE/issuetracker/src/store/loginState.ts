@@ -7,7 +7,7 @@ interface loginStateType {
 
 const initialState: loginStateType = {
   key: 'loginState',
-  default: true,
+  default: false,
 };
 
 export const loginState = atom(initialState);
