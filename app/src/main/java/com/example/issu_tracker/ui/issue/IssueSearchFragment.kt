@@ -53,7 +53,7 @@ class IssueSearchFragment : Fragment() {
     }
 
     private fun initIssueList() {
-        val originalIssueList = homeViewModel.issueList.value
+        val originalIssueList = homeViewModel.issueListStateFlow.value
         issueSearchViewModel.initIssueList(originalIssueList)
     }
 

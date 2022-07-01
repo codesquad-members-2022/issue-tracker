@@ -14,20 +14,27 @@ data class IssueDto(
     val user: User? = null
 )
 
-data class Issue(
-    var id: String,
-    val comments: List<Comment>,
-    val description: String,
-    val label: List<Label>,
-    val mileStone: String,
-    val state: Boolean,
-    val title: String,
-    val user: User
-) : Serializable
+sealed class IssueList : Serializable {
 
-fun IssueDto.toIssue(): Issue? {
+    object IssueProgressBar : IssueList()
+
+    data class Issue(
+        var id: String,
+        val comments: List<Comment>,
+        val description: String,
+        val label: List<Label>,
+        val mileStone: String,
+        val state: Boolean,
+        val title: String,
+        val user: User
+    ) : Serializable, IssueList()
+}
+
+
+
+fun IssueDto.toIssue(): IssueList.Issue? {
     return try {
-        Issue(id, comments, description, label, mileStoneID, state, title, user!!)
+        IssueList.Issue(id, comments, description, label, mileStoneID, state, title, user!!)
     } catch (e: Exception) {
         null
     }

@@ -1,14 +1,13 @@
 package com.example.issu_tracker.data.repository
 
-import com.example.issu_tracker.data.Issue
-import com.example.issu_tracker.data.User
+import com.example.issu_tracker.data.IssueList
 
 interface HomeRepository {
 
-    suspend fun loadIssues(): List<Issue>
+    suspend fun loadFirstPageIssues(): List<IssueList>
+    suspend fun loadNextPageIssues(): List<IssueList>
     suspend fun updateIssueState(itemId: String, boolean: Boolean)
+    suspend fun deleteIssueList(list: List<IssueList>)
+    suspend fun updateIssueListState(list: List<IssueList>, boolean: Boolean)
 
-    suspend fun deleteIssueList(list: List<Issue>)
-
-    suspend fun updateIssueListState(list: List<Issue>, boolean: Boolean)
 }

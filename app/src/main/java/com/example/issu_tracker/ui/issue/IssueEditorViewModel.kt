@@ -3,7 +3,7 @@ package com.example.issu_tracker.ui.issue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issu_tracker.data.ConditionType
-import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.IssueList
 import com.example.issu_tracker.data.Label
 import com.example.issu_tracker.data.User
 import com.example.issu_tracker.data.repository.IssueEditorRepository
@@ -58,7 +58,7 @@ class IssueEditorViewModel @Inject constructor(val repository: IssueEditorReposi
     }
 
     fun createIssue() {
-        val newIssue = Issue(
+        val newIssue = IssueList.Issue(
             id = "",
             comments = listOf(),
             description = _issueBodyStateFlow.value,
