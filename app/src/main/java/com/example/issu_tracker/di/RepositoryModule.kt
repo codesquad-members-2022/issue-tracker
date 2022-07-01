@@ -2,11 +2,16 @@ package com.example.issu_tracker.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.issu_tracker.data.Converters
+import com.example.issu_tracker.data.local.IssueDao
 import com.example.issu_tracker.data.repository.Repository
-import com.example.issu_tracker.data.local.FriendDatabase
+import com.example.issu_tracker.data.local.IssueTrackerDatabase
 import com.example.issu_tracker.data.local.UserDao
 import com.example.issu_tracker.data.repository.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestoreSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +22,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
-
 
     @Provides
     fun provideHomeRepository(fireStore: FirebaseFirestore): HomeRepository {
@@ -36,7 +40,10 @@ object RepositoryModule {
 
     @Provides
     fun provideFireStoreDB(): FirebaseFirestore {
-        return FirebaseFirestore.getInstance()
+        val setting = firestoreSettings { isPersistenceEnabled = false }
+        val db = FirebaseFirestore.getInstance()
+        db.firestoreSettings = setting
+        return db
     }
 
     @Provides
@@ -48,18 +55,25 @@ object RepositoryModule {
     @Provides
     fun provideUserLocalDataBase(
         @ApplicationContext context: Context
-    ): FriendDatabase = Room
-        .databaseBuilder(context, FriendDatabase::class.java, "friend.db")
-        .build()
+    ): IssueTrackerDatabase {
+
+        return Room
+            .databaseBuilder(context, IssueTrackerDatabase::class.java, "friend.db")
+            .build()
+    }
 
     @Singleton
     @Provides
-    fun provideUserDao(friendDatabase: FriendDatabase): UserDao = friendDatabase.userDao()
+    fun provideUserDao(friendDatabase: IssueTrackerDatabase): UserDao = friendDatabase.userDao()
+
+    @Singleton
+    @Provides
+    fun provideIssueDao(friendDatabase: IssueTrackerDatabase): IssueDao = friendDatabase.issueDao()
 
     @Singleton
     @Provides
     fun provideRepository(
-        friendDatabase: FriendDatabase,
+        friendDatabase: IssueTrackerDatabase,
         friendRemoteDatabase: FriendRemoteRepository
     ): Repository = Repository(
         friendDatabase, friendRemoteDatabase

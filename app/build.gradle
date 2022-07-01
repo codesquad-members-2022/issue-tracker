@@ -8,7 +8,9 @@ plugins {
 
 android {
     compileSdk 32
-
+    packagingOptions {
+        pickFirst "META-INF/DEPENDENCIES"
+    }
     defaultConfig {
         applicationId "com.example.issu_tracker"
         minSdk 23
@@ -38,8 +40,12 @@ android {
 }
 
 dependencies {
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+
     //Room
     implementation "androidx.room:room-ktx:2.4.2"
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.7.1'
     kapt "androidx.room:room-compiler:2.4.2"
     implementation "androidx.room:room-runtime:2.4.2"
     annotationProcessor "androidx.room:room-compiler:2.4.2"

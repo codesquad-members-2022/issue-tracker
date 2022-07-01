@@ -2,7 +2,7 @@ package com.example.issu_tracker.data.repository
 
 import android.util.Log
 import androidx.core.net.toUri
-import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.IssueList
 import com.example.issu_tracker.data.Label
 import com.example.issu_tracker.data.User
 import com.google.firebase.firestore.FirebaseFirestore
@@ -40,11 +40,13 @@ class IssueEditorRepositoryImpl @Inject constructor(private val fireStore: Fireb
         return assigneeList
     }
 
-    override fun createNewIssue(newIssue: Issue) {
-        fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(newIssue)
-            .addOnSuccessListener {
-                println("성공")
-            }
+    override fun createNewIssue(newIssue: IssueList) {
+        if (newIssue is IssueList.Issue) {
+            fireStore.collection(FIREBASE_COLLECTION_ISSUE_PATH).document().set(newIssue)
+                .addOnSuccessListener {
+                    println("성공")
+                }
+        }
     }
 
     override suspend fun uploadImageAndGetImageUriFromFireBase(imageUriFromLocal: String): String {

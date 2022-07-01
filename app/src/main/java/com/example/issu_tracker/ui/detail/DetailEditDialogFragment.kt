@@ -11,7 +11,7 @@ import com.example.issu_tracker.databinding.DetailEditDialogFragmentBinding
 import java.lang.StringBuilder
 
 
-class DetailEditDialogFragment(val labelNameList: List<String>, mileStoneName: String? = null) :
+class DetailEditDialogFragment(private val labelNameList: List<String>, mileStoneName: String? = null) :
     DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class DetailEditDialogFragment(val labelNameList: List<String>, mileStoneName: S
     ): View? {
         binding = DetailEditDialogFragmentBinding.inflate(inflater, container, false)
 
-        binding.tvLabelContent.text = labelNameList.stringListToText()
+        binding.tvLabelContent.text = labelNameList.joinToString(", ")
         return binding.root
     }
 

@@ -1,9 +1,12 @@
 package com.example.issu_tracker.ui.account
 
+import android.net.Network
+import android.net.NetworkRequest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.issu_tracker.R
+import com.example.issu_tracker.data.network.NetworkResult
 import com.example.issu_tracker.databinding.FragmentIssueBinding
 import com.example.issu_tracker.databinding.FragmentMyAccountBinding
 import com.google.firebase.firestore.auth.User
@@ -33,7 +37,6 @@ class MyAccountFragment : Fragment() {
         setRecyclerView()
         listenFriendListUpdate()
 
-
         return binding.root
     }
 
@@ -41,7 +44,16 @@ class MyAccountFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 accountViewModel.friendList.collect {
-                    adapter.submitList(it)
+                    if (it is NetworkResult.Success) {
+                        adapter.submitList(it.data)
+                    } else if (it is NetworkResult.Cached) {
+                        adapter.submitList(it.data)
+                        Toast.makeText(
+                            this@MyAccountFragment.requireContext(),
+                            "최신 데이터가 아닐 수 있습니다",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
         }
@@ -51,7 +63,7 @@ class MyAccountFragment : Fragment() {
     private fun setRecyclerView() {
         accountViewModel.loadFriendList()
 
-        adapter = FriendAdapter(object :UserAdapterEventListener{
+        adapter = FriendAdapter(object : UserAdapterEventListener {
             override fun dltUser(user: com.example.issu_tracker.data.User) {
                 accountViewModel.dltFriend(user)
             }

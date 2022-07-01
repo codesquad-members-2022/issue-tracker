@@ -1,21 +1,20 @@
 package com.example.issu_tracker.ui.issue
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.issu_tracker.data.Issue
+import com.example.issu_tracker.data.IssueList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class IssueSearchViewModel @Inject constructor() : ViewModel() {
 
-    private val issueMap = mutableMapOf<String, Issue>()
-    private val _searchedIssueStateFlow = MutableStateFlow<List<Issue>>(listOf())
+    private val issueMap = mutableMapOf<String, IssueList.Issue>()
+    private val _searchedIssueStateFlow = MutableStateFlow<List<IssueList.Issue>>(listOf())
     val searchedIssueStateFlow = _searchedIssueStateFlow.asStateFlow()
 
-    fun initIssueList(issueList: List<Issue>) {
+    fun initIssueList(issueList: List<IssueList>) {
         issueList.forEach {
+            if (it is IssueList.Issue)
             issueMap[it.title] = it
         }
     }
