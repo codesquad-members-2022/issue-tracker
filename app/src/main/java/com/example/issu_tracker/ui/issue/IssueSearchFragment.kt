@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.issu_tracker.data.network.NetworkResult
 import com.example.issu_tracker.databinding.FragmentIssueSearchBinding
 import com.example.issu_tracker.ui.home.HomeViewModel
 import com.google.android.material.textfield.TextInputEditText
@@ -53,8 +54,10 @@ class IssueSearchFragment : Fragment() {
     }
 
     private fun initIssueList() {
-        val originalIssueList = homeViewModel.issueList.value
-        issueSearchViewModel.initIssueList(originalIssueList)
+        val originalIssueList = homeViewModel.issueListStateFlow.value
+        if (originalIssueList is NetworkResult.Success) {
+            issueSearchViewModel.initIssueList(originalIssueList.data)
+        }
     }
 
     private fun setNavigationIconEventListener() {

@@ -50,7 +50,7 @@ class FriendAdapter(val userAdapterEventListener: UserAdapterEventListener) :
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<User>() {
             override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
-                return oldItem.UID == newItem.UID
+                return oldItem.uid == newItem.uid
             }
 
             override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {

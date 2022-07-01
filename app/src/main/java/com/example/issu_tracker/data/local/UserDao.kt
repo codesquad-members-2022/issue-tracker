@@ -9,9 +9,6 @@ interface UserDao {
     @Insert
     suspend fun insert(user: User)
 
-    @Update
-    suspend fun update(user: User)
-
     @Delete
     suspend fun delete(user: User)
 
@@ -21,8 +18,8 @@ interface UserDao {
     @Query("DELETE FROM User WHERE name = :name")
     suspend fun deleteUserByName(name: String)
 
-    @Query("UPDATE User SET userPhoto =:userPhoto,name=:name WHERE UID = :UID")
-    suspend fun updateUser(userPhoto: String, UID: String, name: String)
+    @Query("UPDATE User SET userPhoto =:userPhoto,name=:name WHERE uid = :uid")
+    suspend fun updateUser(userPhoto: String, uid: String, name: String)
 
     @Query("DELETE FROM User")
     suspend fun deleteAllUsers()
