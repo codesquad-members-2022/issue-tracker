@@ -46,7 +46,10 @@ class RegisterIssueFragment :
             .build()
         binding.lifecycleOwner = viewLifecycleOwner
         editIssueDetail = arguments?.getSerializable(Constants.ISSUE_BUNDLE_KEY) as? IssueDetail
-
+        if(editIssueDetail != null) {
+            binding.editDescription.setText(editIssueDetail?.description)
+            binding.editSubject.setText(editIssueDetail?.title)
+        }
         initView()
         observerData()
     }
@@ -178,18 +181,6 @@ class RegisterIssueFragment :
                 .collect { loading ->
                     if (!loading) return@collect
                     if (editIssueDetail != null) viewModel.setDataForEditIssue(editIssueDetail!!)
-                }
-        }
-        repeatOnLifecycleExtension {
-            viewModel.uiState.map { it.title }
-                .collect {
-                    binding.editSubject.setText(it)
-                }
-        }
-        repeatOnLifecycleExtension {
-            viewModel.uiState.map { it.description }
-                .collect {
-                    binding.editDescription.setText(it)
                 }
         }
     }
