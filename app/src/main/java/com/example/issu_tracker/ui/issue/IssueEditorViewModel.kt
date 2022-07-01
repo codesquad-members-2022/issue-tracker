@@ -2,11 +2,12 @@ package com.example.issu_tracker.ui.issue
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.issu_tracker.data.ConditionType
 import com.example.issu_tracker.data.Issue
 import com.example.issu_tracker.data.Label
 import com.example.issu_tracker.data.User
 import com.example.issu_tracker.data.repository.IssueEditorRepository
-import com.example.issu_tracker.ui.common.Constants
+import com.example.issu_tracker.ui.common.SpinnerViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class IssueEditorViewModel @Inject constructor(val repository: IssueEditorRepository) :
-    ViewModel() {
+    ViewModel(), SpinnerViewModel {
 
     private val _issueTitleStateFlow = MutableStateFlow<String>("")
     val issueTitleStateFlow = _issueTitleStateFlow.asStateFlow()
@@ -23,11 +24,11 @@ class IssueEditorViewModel @Inject constructor(val repository: IssueEditorReposi
     private val _issueBodyStateFlow = MutableStateFlow<String>("")
     val issueBodyStateFlow = _issueBodyStateFlow.asStateFlow()
 
-    private val _assigneeList = mutableListOf<User>()
+    private val _assigneeMap = mutableMapOf<String, User>()
     private val _assigneeStateFlow = MutableStateFlow<List<String>>(mutableListOf(""))
     val assigneeStateFlow = _assigneeStateFlow.asStateFlow()
 
-    private val _labelList = mutableListOf<Label>()
+    private val _labelMap = mutableMapOf<String, Label>()
     private val _labelStateFlow = MutableStateFlow<List<String>>(mutableListOf(""))
     val labelStateFlow = _labelStateFlow.asStateFlow()
 
@@ -73,43 +74,23 @@ class IssueEditorViewModel @Inject constructor(val repository: IssueEditorReposi
     }
 
     private suspend fun setLabelList() {
-        _labelList.addAll(repository.loadLabel())
-        val labelList = mutableListOf<String>()
-        _labelList.forEach {
-            labelList.add(it.content)
-        }
+        _labelMap.putAll(repository.loadLabel())
+        val labelList = _labelMap.keys.toMutableList()
         labelList.add("")
         _labelStateFlow.emit(labelList)
     }
 
     private suspend fun setAssigneeList() {
-        _assigneeList.addAll(repository.loadAssignee())
-        val assigneeList = mutableListOf<String>()
-        _assigneeList.forEach {
-            assigneeList.add(it.name)
-        }
+        _assigneeMap.putAll(repository.loadAssignee())
+        val assigneeList = _assigneeMap.keys.toMutableList()
         assigneeList.add("")
         _assigneeStateFlow.emit(assigneeList)
     }
 
-    fun inputSpinnerValue(condition: String, conditionType: Int) {
+    override fun inputSpinnerValue(condition: String, conditionType: Enum<ConditionType>) {
         when (conditionType) {
-            Constants.CONDITION_TYPE_ASSIGNEE -> {
-                _assigneeList.forEach {
-                    if (it.name == condition) {
-                        assigneeConditionValue = it
-                        return
-                    }
-                }
-            }
-            Constants.CONDITION_TYPE_LABEL -> {
-                _labelList.forEach {
-                    if (it.content == condition) {
-                        labelConditionValue = it
-                        return
-                    }
-                }
-            }
+            ConditionType.ASSIGNEE -> assigneeConditionValue = _assigneeMap[condition] ?: User()
+            ConditionType.LABEL -> labelConditionValue = _labelMap[condition] ?: Label()
 //            Constants.CONDITION_TYPE_ASSIGNEE -> mileStoneConditionValue = text
         }
     }

@@ -2,7 +2,7 @@ package com.example.issu_tracker.ui.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.issu_tracker.data.Repository
+import com.example.issu_tracker.data.repository.Repository
 import com.example.issu_tracker.data.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

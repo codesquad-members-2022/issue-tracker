@@ -8,30 +8,30 @@ import javax.inject.Inject
 class FilterRepositoryImpl @Inject constructor(private val fireStore: FirebaseFirestore) :
     FilterRepository {
 
-    override suspend fun loadUsers(): List<String> {
-        val list = mutableListOf<String>()
+    override suspend fun loadUsers(): Map<String, User> {
+        val userList = mutableMapOf<String, User>()
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_USER_PATH).get().await()
 
         collectionData.documents.forEach {
-            val userObj = it.toObject(User::class.java)
-            userObj?.let { label ->
-                list.add(label.name)
+            val assigneeObj = it.toObject(User::class.java)
+            assigneeObj?.let { user ->
+                userList[user.name] = user
             }
         }
-        return list
+        return userList
     }
 
-    override suspend fun loadLabel(): List<String> {
-        val list = mutableListOf<String>()
+    override suspend fun loadLabel(): Map<String, Label> {
+        val labelList = mutableMapOf<String, Label>()
         val collectionData = fireStore.collection(FIREBASE_COLLECTION_LABEL_PATH).get().await()
 
-        collectionData.documents.forEach {
+        collectionData.documents.forEach { it ->
             val labelObj = it.toObject(Label::class.java)
             labelObj?.let { label ->
-                list.add(label.content)
+                labelList[label.content] = label
             }
         }
-        return list
+        return labelList
     }
 
     companion object {
