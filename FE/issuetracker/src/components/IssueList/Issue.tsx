@@ -1,5 +1,5 @@
 import Label, { AccountImg } from 'components/common/Common';
-
+import accountsrc from 'assets/images/UserImageSmall.svg';
 import * as S from 'components/IssueList/styled.issue';
 import * as I from 'design/icons';
 
@@ -32,7 +32,7 @@ function Issue({ data }: { data: PostIssueType }) {
           </S.IssueBottomContent>
         </S.IssueBottom>
       </S.IssueLeft>
-      <AccountImg src={data.writer.profileImage} />
+      <AccountImg src={accountsrc} />
     </S.IssueWrap>
   );
 }
