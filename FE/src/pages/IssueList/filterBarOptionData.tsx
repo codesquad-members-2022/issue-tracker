@@ -7,9 +7,10 @@ const radioIcon = {
   on: <Icon iconType="radioOn" />
 };
 
-const FILTER_BAR_OPTIONS = ((): Option[] => {
-  const { id, user_id } = getCurrentUserInfo();
-  return [
+const getFilterBarOptions = (): Option[] => {
+  const emptyUser = { id: -1, user_id: 'empty' };
+  const { id, user_id } = getCurrentUserInfo() || emptyUser;
+  const FILTER_BAR_OPTIONS = [
     {
       children: '열린 이슈',
       radio: radioIcon,
@@ -85,6 +86,7 @@ const FILTER_BAR_OPTIONS = ((): Option[] => {
       }
     }
   ];
-})();
+  return FILTER_BAR_OPTIONS;
+};
 
-export { FILTER_BAR_OPTIONS };
+export { getFilterBarOptions };

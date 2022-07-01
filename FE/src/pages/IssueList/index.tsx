@@ -8,19 +8,21 @@ import { listItem } from '@/components/common/Tabs/type';
 import Layout from '@/layout';
 import { $MenuWrapper, $ButtonWrapper } from '@/pages/IssueList/style';
 import { FilterConditionProvider } from '@/contexts/FilterCondition';
-import { FILTER_BAR_OPTIONS } from './filterBarOptionData';
+import { getFilterBarOptions } from './filterBarOptionData';
 import { IFilterBarProps } from '@/components/IssueList/FilterBar/type';
 import { useLabelCountData } from '@/hooks/useLabelListData';
 import { useMilestoneCountData } from '@/hooks/useMilestoneListData';
 
-const filterBarProps: IFilterBarProps = {
-  indicatorName: '필터',
-  panelName: '이슈 필터',
-  options: FILTER_BAR_OPTIONS,
-  initialValue: 'opened',
-  inputStyleType: 'small',
-  placeholder: 'is:issue is:open',
-  name: 'issueFilter'
+const getFilterBarProps = (): IFilterBarProps => {
+  return {
+    indicatorName: '필터',
+    panelName: '이슈 필터',
+    options: getFilterBarOptions(),
+    initialValue: 'opened',
+    inputStyleType: 'small',
+    placeholder: 'is:issue is:open',
+    name: 'issueFilter'
+  };
 };
 
 export default function IssueListPage() {
@@ -44,7 +46,7 @@ export default function IssueListPage() {
     <Layout header={<Header />}>
       <FilterConditionProvider>
         <$MenuWrapper>
-          <FilterBar {...filterBarProps} />
+          <FilterBar {...getFilterBarProps()} />
           <$ButtonWrapper>
             <Tabs list={tabItems} />
             <Button styleType="smallStandard">
