@@ -46,16 +46,20 @@ public class LabelService {
 
 	@Transactional
 	public void delete(Long id) {
-		Label label = labelRepository.findById(id).orElseThrow(() -> new CustomException(LABEL_NOT_FOUND));
+		Label label = findLabelByLabelIdOrThrow(id);
 		labelRepository.delete(label);
 	}
 
 	@Transactional
 	public void update(Long id, LabelRequestDto dto) {
-		Label label = labelRepository.findById(id).orElseThrow(
+		Label label = findLabelByLabelIdOrThrow(id);
+		label.update(dto);
+	}
+
+	private Label findLabelByLabelIdOrThrow(Long id) {
+		return labelRepository.findById(id).orElseThrow(
 			() -> new CustomException(LABEL_NOT_FOUND)
 		);
-		label.update(dto);
 	}
 
 	public List<Label> findLabels(List<Long> labels) {

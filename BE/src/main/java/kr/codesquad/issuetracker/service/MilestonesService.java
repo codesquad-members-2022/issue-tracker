@@ -58,22 +58,23 @@ public class MilestonesService {
 
 	@Transactional
 	public void delete(Long id) {
-		Milestone milestone = milestoneRepository.findById(id).orElseThrow(
-			() -> new CustomException(MILESTONE_NOT_FOUND)
-		);
+		Milestone milestone = findMilestoneByMilestoneId(id);
 		milestoneRepository.delete(milestone);
 	}
 
 	@Transactional
 	public void update(Long id, MilestoneEditRequestDto dto) {
-		Milestone milestone = milestoneRepository.findById(id).orElseThrow(
-			() -> new CustomException(MILESTONE_NOT_FOUND)
-		);
+		Milestone milestone = findMilestoneByMilestoneId(id);
 		milestone.update(dto);
 	}
 
 	public Milestone findMilestoneById(Long milestoneId) {
-		return milestoneRepository.findById(milestoneId)
-			.orElseThrow(() -> new CustomException(MILESTONE_NOT_FOUND));
+		return findMilestoneByMilestoneId(milestoneId);
+	}
+
+	private Milestone findMilestoneByMilestoneId(Long id) {
+		return milestoneRepository.findById(id).orElseThrow(
+			() -> new CustomException(MILESTONE_NOT_FOUND)
+		);
 	}
 }

@@ -16,7 +16,9 @@ import kr.codesquad.issuetracker.domain.BaseTimeEntity;
 import kr.codesquad.issuetracker.domain.image.Image;
 import kr.codesquad.issuetracker.domain.issue.Issue;
 import kr.codesquad.issuetracker.domain.member.Member;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseTimeEntity {
@@ -38,4 +40,8 @@ public class Comment extends BaseTimeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "issue_id")
 	private Issue issue;
+
+	public boolean isWriter(Member member, Issue issue) {
+		return writer.equals(member) && writer.equals(issue.getWriter());
+	}
 }
