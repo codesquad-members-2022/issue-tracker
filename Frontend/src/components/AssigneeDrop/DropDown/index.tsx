@@ -4,15 +4,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useRef, useState } from 'react';
 
-import DropBox from '@/components/DropBox';
+import DropBox from '@/components/AssigneeDrop/DropBox';
 import Filter from '@/components/Filter';
 import useMouse from '@/hooks/useMouse';
 
 import * as S from './style';
 
 interface Item {
-  filter: string;
-  description: string;
+  id: number;
+  name: string;
+  profileImageUrl: string;
 }
 
 interface DropDownProps {

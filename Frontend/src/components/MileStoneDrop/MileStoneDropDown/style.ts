@@ -5,11 +5,9 @@ export const Container = styled.div<{
   height: string;
 }>`
   position: relative;
-  background-color: ${({ theme }) => theme.colors.greyScale.inputBackground};
+  background-color: ${({ theme }) => theme.colors.greyScale.background};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  border-radius: 11px 0px 0px 11px;
-  border: 1px solid ${({ theme }) => theme.colors.greyScale.border};
   cursor: pointer;
 `;
 

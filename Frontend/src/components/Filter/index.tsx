@@ -8,10 +8,9 @@ interface FilterProps {
   handleMouseDown: () => void;
   handleMouseUp: () => void;
   dropDownTitle: string;
-  dropDownId: string;
-  dropDownLabelName: string;
   isMouseOvered: boolean;
   isActive: boolean;
+  handleClick?: () => void;
 }
 
 export default function Filter({
@@ -20,10 +19,9 @@ export default function Filter({
   handleMouseDown,
   handleMouseUp,
   dropDownTitle,
-  dropDownId,
-  dropDownLabelName,
   isMouseOvered,
   isActive,
+  handleClick,
 }: FilterProps) {
   return (
     <S.Filter
@@ -31,14 +29,10 @@ export default function Filter({
       onMouseOut={handleMouseOut}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onClick={handleClick}
     >
-      <S.DropDown
-        id={dropDownId}
-        type="checkbox"
-        constentsName={`${dropDownTitle}`}
-        labelName={dropDownLabelName}
-      />
-      <S.DropdownLabel className={dropDownLabelName} htmlFor={dropDownId}>
+      <S.DropDown type="checkbox" />
+      <S.DropdownLabel>
         <S.DropDownTitle isMouseOvered={isMouseOvered}>
           {dropDownTitle}
         </S.DropDownTitle>

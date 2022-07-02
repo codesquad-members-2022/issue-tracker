@@ -4,15 +4,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useRef, useState } from 'react';
 
-import DropBox from '@/components/DropBox';
 import Filter from '@/components/Filter';
 import useMouse from '@/hooks/useMouse';
 
+import DropBox from '../DropBox';
 import * as S from './style';
 
 interface Item {
-  filter: string;
-  description: string;
+  id: number;
+  title: string;
+  deadline: string;
 }
 
 interface DropDownProps {
@@ -25,7 +26,7 @@ interface DropDownProps {
   isStartFromRight?: boolean;
 }
 
-export default function DropDown({
+export default function MileStoneDropDown({
   dropDownWidth,
   dropDownHeight,
   dropDownTitle,

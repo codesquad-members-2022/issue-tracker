@@ -1,17 +1,20 @@
 import { useState } from 'react';
 
-type UseMouseType = [
-  boolean,
-  boolean,
-  () => void,
-  () => void,
-  () => void,
-  () => void
-];
+type UseMouseType = {
+  isMouseOvered: boolean;
+  isActive: boolean;
+  isClicked: boolean;
+  handleMouseOver: () => void;
+  handleMouseOut: () => void;
+  handleMouseDown: () => void;
+  handleMouseUp: () => void;
+  handleClick: () => void;
+};
 
 export default function useMouse(inintialState = false): UseMouseType {
   const [isMouseOvered, setIsMouseOvered] = useState(inintialState);
   const [isActive, setIsActive] = useState(inintialState);
+  const [isClicked, setIsClicked] = useState(inintialState);
 
   const handleMouseOver = () => {
     setIsMouseOvered(true);
@@ -31,12 +34,18 @@ export default function useMouse(inintialState = false): UseMouseType {
     setIsActive(false);
   };
 
-  return [
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+
+  return {
     isMouseOvered,
     isActive,
+    isClicked,
     handleMouseOver,
     handleMouseOut,
     handleMouseDown,
     handleMouseUp,
-  ];
+    handleClick,
+  };
 }

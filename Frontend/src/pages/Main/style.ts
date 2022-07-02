@@ -10,21 +10,9 @@ export const MenuBar = styled.div`
   margin: 0 0 24px 0;
 `;
 
-export const FilterSearchBarContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 export const Title = styled.h1``;
 
 export const UserInfo = styled.img``;
-
-export const SearchBar = styled.input<{ height: string }>`
-  width: 472px;
-  height: ${({ height }) => height};
-  border: 1px solid ${({ theme }) => theme.colors.greyScale.border};
-  border-radius: 0px 11px 11px 0px;
-`;
 
 export const TapContainer = styled.div<{
   isMouseOvered: boolean;

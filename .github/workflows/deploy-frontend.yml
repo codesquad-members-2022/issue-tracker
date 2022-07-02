@@ -41,6 +41,8 @@ jobs:
 
       - name: build webpack
         run: npm run build
+        env:
+          SERVER_ENDPOINT: ${{ secrets.AWS_ACCESS_KEY_ID }}
 
       - name: AWS Credential 설정
         uses: aws-actions/configure-aws-credentials@v1

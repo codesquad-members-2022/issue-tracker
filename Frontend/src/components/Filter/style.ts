@@ -2,18 +2,9 @@ import styled from 'styled-components';
 
 export const DropdownLabel = styled.label``;
 
-export const DropDown = styled.input<{
-  constentsName: string;
-  labelName: string;
-}>`
+export const DropDown = styled.input`
   visibility: hidden;
   position: absolute;
-  :checked
-    + .${({ labelName }) => labelName}
-    + .${({ constentsName }) => constentsName} {
-    display: block;
-    border-top: 1px solid ${({ theme }) => theme.colors.greyScale.line};
-  }
 `;
 
 export const DropDownTitle = styled.div<{

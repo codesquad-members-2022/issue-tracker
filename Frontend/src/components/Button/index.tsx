@@ -10,7 +10,9 @@ export type ButtonStyleType =
   | 'mediumStandard'
   | 'smallSecondary'
   | 'mediumText'
-  | 'smallText';
+  | 'smallText'
+  | 'sort'
+  | 'largeLogin';
 
 export interface ButtonCustomStyleProps {
   width?: string;
@@ -25,6 +27,7 @@ export interface ButtonCustomStyleProps {
 
 export interface ButtonProps extends ButtonCustomStyleProps {
   buttonStyle: ButtonStyleType;
+  hasIcon: boolean;
   iconType?: IconType;
   contents?: string;
   children?: React.ReactNode;
@@ -37,18 +40,13 @@ export interface StyledButtonProps extends ButtonCustomStyleProps {
 }
 
 export default function Button({
-  buttonStyle = 'large',
+  buttonStyle,
   contents,
   children,
   iconType = 'plus',
+  hasIcon,
   ...props
 }: ButtonProps) {
-  const hasIcon =
-    buttonStyle === 'smallStandard' ||
-    buttonStyle === 'smallSecondary' ||
-    buttonStyle === 'mediumText' ||
-    buttonStyle === 'smallText';
-
   return (
     <S.Button buttonStyle={buttonStyle} {...props}>
       {hasIcon && <Icons type={iconType} />}

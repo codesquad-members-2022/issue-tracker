@@ -7,6 +7,10 @@ export const Container = styled.div`
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 60px;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const Title = styled.h1`

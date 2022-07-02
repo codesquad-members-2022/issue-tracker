@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ZeroList = styled.div`
+export const ZeroList = styled.div`
   width: 1280px;
   height: 200px;
   font-weight: 700;
@@ -9,5 +9,3 @@ const ZeroList = styled.div`
   color: ${({ theme }) => theme.colors.greyScale.titleActive};
   ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};
 `;
-
-export { ZeroList };

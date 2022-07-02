@@ -117,6 +117,24 @@ const smallTextStyle = css`
   ${textColor}
 `;
 
+const sortStyle = css`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 28px;
+  ${textColor}
+`;
+
+const largeLoginStyle = css`
+  width: 340px;
+  height: 64px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+  ${({ theme }) => getButtonInnerColorStyle(theme.colors.greyScale.offWhite)};
+  background: ${({ theme }) => theme.colors.greyScale.titleActive};
+`;
+
 const getButtonStyle = (style: ButtonStyleType) => {
   switch (style) {
     case 'large':
@@ -131,6 +149,10 @@ const getButtonStyle = (style: ButtonStyleType) => {
       return mediumTextStyle;
     case 'smallText':
       return smallTextStyle;
+    case 'sort':
+      return sortStyle;
+    case 'largeLogin':
+      return largeLoginStyle;
     default:
       return '';
   }

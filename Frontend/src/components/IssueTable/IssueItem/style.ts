@@ -23,6 +23,9 @@ const Wrapper3 = styled.div`
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+  & > button:not(:last-child) {
+    margin-right: 5px;
+  }
   ${({ theme }) => theme.mixins.flexBox('row', 'center', 'start')};
 `;
 

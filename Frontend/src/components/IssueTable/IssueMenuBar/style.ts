@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import Button from '../../common/Button';
-
 const Container = styled.div`
   width: 1280px;
   height: 64px;
@@ -11,35 +9,11 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const IssueButton = styled(Button)`
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 28px;
-  color: ${({ theme }) => theme.colors.greyScale.titleActive};
-`;
-
-const SortButton = styled(Button)`
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 28px;
-  color: ${({ theme }) => theme.colors.greyScale.label};
-  background: none;
-  &:hover {
-    color: ${({ theme }) => theme.colors.blueScale.lightBlue};
-  }
-`;
-
-const Wrapper1 = styled.div`
+const Wrapper = styled.div`
   ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};
   & > :not(:last-child) {
     margin-right: 22px;
   }
 `;
 
-const Wrapper2 = styled.div`
-  *:not(:last-child) {
-    margin-right: 22px;
-  }
-`;
-
-export { Container, IssueButton, SortButton, Wrapper1, Wrapper2 };
+export { Container, Wrapper };
