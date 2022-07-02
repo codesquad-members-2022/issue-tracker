@@ -12,6 +12,8 @@ protocol EditingIssueViewModelInput {
     func didTouchCancel()
     func didTouchSave()
     func didChangeSegmentValue(index: Int)
+    func didChangeTitleText(_ changedText: String?)
+    func didChangeContentText(_ changedText: String?)
 }
 
 protocol EditingIssueViewModelOutput {
@@ -26,7 +28,7 @@ protocol EditingIssueViewModelOutput {
 protocol EditingIssueViewModelProtocol: EditingIssueViewModelInput, EditingIssueViewModelOutput { }
 
 final class EditingIssueViewModel: EditingIssueViewModelProtocol {
-    private let useCase: EditingIssueManagable
+    private let issueManager: EditingIssueManagable
 
     private(set) var titleText: Observable<String> = Observable("")
     private(set) var contentText: Observable<String> = Observable("")
@@ -36,7 +38,7 @@ final class EditingIssueViewModel: EditingIssueViewModelProtocol {
     private(set) var error: Observable<String> = Observable("")
 
     init(useCase: EditingIssueManagable) {
-        self.useCase = useCase
+        self.issueManager = useCase
     }
 
     func didChangeSegmentValue(index: Int) {
@@ -48,19 +50,45 @@ final class EditingIssueViewModel: EditingIssueViewModelProtocol {
     }
 
     func didTouchSave() {
-        saveButtonState.value = true
-        let issueEntity = IssueItem(id: -1, title: titleText.value, content: contentText.value, milestoneName: "", labels: [])
+        var issueEntity = IssueItem(title: titleText.value, content: contentText.value, milestoneName: "", labels: [])
 
-        useCase.sendNewIssue(issueEntity) { [weak self] (result) in
+        issueManager.sendNewIssue(issueEntity) { [weak self] (result) in
             switch result {
-            case .success(let idDictionary):
-                guard idDictionary["id"] != nil else { return }
+            case .success(let issueIDDate):
+                issueEntity.id = issueIDDate["id"]
                 self?.saveButtonState.value = true
-                // IssueViewModel에 저장됐음을 알리는 로직 필요
+
+                let userInfo = [UserInfoKey.addedIssue: issueEntity]
+                NotificationCenter.default.post(
+                    name: NotificationNames.didSaveNewIssue,
+                    object: self, userInfo: userInfo)
+
             case .failure(let error):
                 self?.saveButtonState.value = false
-                self?.error.value = error.localizedDescription
+                self?.error.value = error.message
             }
         }
+    }
+
+    func didChangeTitleText(_ changedText: String?) {
+        if let changedText = changedText {
+            titleText.value = changedText
+        }
+    }
+
+    func didChangeContentText(_ changedText: String?) {
+        if let changedText = changedText {
+            contentText.value = changedText
+        }
+    }
+}
+
+extension EditingIssueViewModel {
+    enum NotificationNames {
+        static let didSaveNewIssue = Notification.Name("EditingIssueViewDidSaveNewIssue")
+    }
+
+    enum UserInfoKey {
+        static let addedIssue = "AddedIssue"
     }
 }

@@ -45,7 +45,7 @@ private extension SignInNetworkTarget {
     private var baseURL: String {
         switch self {
         case .requestJWTTokenFromGitHub:
-            return "https://008b1557-6228-4eb0-af91-8ea0225787e5.mock.pstmn.io/login/oauth"
+            return "http://3.37.101.82:8080/login/oauth"
         default:
             return "https://github.com/login/oauth"
         }

@@ -26,8 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let codeURL = URLContexts.first?.url {
             signInManager.requestJWTToken(codeURL: codeURL) { [weak self] result in
                 switch result {
-                case let .success(jwtToken):
-                    self?.saveJWTToken(jwtToken: jwtToken["JWT_access_token"] ?? "")
+                case let .success(signInInfo):
+                    self?.saveSignInInfo(signInInfo)
                     DispatchQueue.main.async {
                         let rootViewController = TabBarController()
                         self?.window?.rootViewController = rootViewController
@@ -55,8 +55,9 @@ private extension SceneDelegate {
         TabBarController() : makeSignInViewController()
     }
 
-    func saveJWTToken(jwtToken: String) {
-        UserDefaultManager.saveJWTToken(jwtToken)
+    func saveSignInInfo(_ signInInfo: SignInInfo) {
+        UserDefaultManager.saveJWTToken(signInInfo.accessToken)
+        UserDefaultManager.saveRefreshToken(signInInfo.refreshToken)
     }
 
     func makeSignInViewController() -> UIViewController {

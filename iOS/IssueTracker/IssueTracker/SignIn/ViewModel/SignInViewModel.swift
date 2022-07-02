@@ -44,7 +44,7 @@ final class SignInViewModel: SignInViewModelProtocol {
 private extension SignInViewModel {
     func setObserver() {
         NotificationCenter.default.addObserver(forName: SceneDelegate.NotificationNames.didGetSignInError, object: nil, queue: nil) { [weak self] notification in
-            self?.error.value = notification.description
-            }
+            self?.error.value = notification.object.debugDescription
+        }
     }
 }

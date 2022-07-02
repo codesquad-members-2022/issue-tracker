@@ -9,15 +9,15 @@ import UIKit
 
 class IssueViewController: UIViewController {
     private let navigationItems = IssueViewNavigationItems()
-    private lazy var issueCollectionView = IssueCollectionView(frame: view.frame)
-    private var dataSource: IssueCollectionViewDataSource
+    private lazy var issueListView = IssueListView(frame: view.frame)
+    private let dataSource: IssueListDataSource
     private var searchController = UISearchController(searchResultsController: nil)
     
     let issueViewModel: IssueViewModel
     
     init(issueViewModel: IssueViewModel) {
         self.issueViewModel = issueViewModel
-        self.dataSource = IssueCollectionViewDataSource(issueEntityList: issueViewModel.list)
+        self.dataSource = IssueListDataSource(issueEntityList: issueViewModel.list)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,14 +30,12 @@ class IssueViewController: UIViewController {
         super.viewDidLoad()
         setNavigationItems()
         setSearchController()
-        view = issueCollectionView
-
-        issueCollectionView.setDataSource(dataSource)
-        setButtonAction()
-        issueCollectionView.setCollectionViewDelegate(self)
+        view = issueListView
+        setIssueListView()
         bind()
         issueViewModel.loadFromIssueManager()
     }
+
     private func setNavigationItems() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: navigationItems.filterButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationItems.selectButton)
@@ -58,17 +56,37 @@ class IssueViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
     }
 
-    private func setButtonAction() {
-        issueCollectionView.setNewIssueButtonAction(UIAction { [weak self] _ in
+    private func setIssueListView() {
+        issueListView.dataSource = dataSource
+        issueListView.delegate = self
+    }
+}
+
+private extension IssueViewController/*: UICollectionViewDelegate*/ {
+    func bind() {
+        issueViewModel.list.bind(on: self) { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.issueListView.reloadData()
+            }
+        }
+
+        issueListView.addIssueButtonAddAction(UIAction { [weak self] _ in
             let editingIssueManager = EditingIssueManager()
             let editingIssueViewModel = EditingIssueViewModel(useCase: editingIssueManager)
             let editingIssueViewController = EditingIssueViewController(viewModel: editingIssueViewModel)
             self?.navigationController?.pushViewController(editingIssueViewController, animated: true)
-        })
+        }, for: .touchUpInside)
+    }
+
+    func showEditingIssueView() {
+        let editingIssueManager = EditingIssueManager()
+        let editingIssueViewModel = EditingIssueViewModel(useCase: editingIssueManager)
+        let editingIssueViewController = EditingIssueViewController(viewModel: editingIssueViewModel)
+        navigationController?.pushViewController(editingIssueViewController, animated: true)
     }
 }
 
-extension IssueViewController: UICollectionViewDelegate {
+extension IssueViewController: UITableViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard velocity.y != 0 else { return }
 
@@ -76,14 +94,6 @@ extension IssueViewController: UICollectionViewDelegate {
             navigationItem.searchController = searchController
         } else {
             navigationItem.searchController = nil
-        }
-    }
-    
-    func bind() {
-        self.issueViewModel.list.bind(on: self) { _ in
-            DispatchQueue.main.async {
-                self.issueCollectionView.updateIssueView()
-            }
         }
     }
 }

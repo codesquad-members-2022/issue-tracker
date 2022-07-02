@@ -24,6 +24,15 @@ extension UIColor {
                   alpha: alpha)
         return
     }
+
+    var isDarkColor: Bool {
+        var red, green, blue, alpah: CGFloat
+        (red, green, blue, alpah) = (0, 0, 0, 0)
+
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpah)
+        let lum = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+        return  lum < 0.50
+    }
 }
 
 fileprivate extension UIColor {
@@ -63,4 +72,5 @@ fileprivate extension UIColor {
 extension UIColor {
     static let primary1 = UIColor(hex: "#007AFF")
     static let gray5 = UIColor(hex: "#E5E5EA")
+    static let background2 = UIColor(hex: "#F2F2F7")
 }

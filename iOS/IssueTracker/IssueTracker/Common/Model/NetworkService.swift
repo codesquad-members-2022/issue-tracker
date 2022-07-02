@@ -43,11 +43,14 @@ private extension NetworkService {
         var components = URLComponents(string: target.url) ?? URLComponents()
         components.queryItems = target.queryItem
 
+        let jwtToken = UserDefaultManager.getJWTToken() ?? ""
+
         if let url = components.url {
             var request = URLRequest(url: url)
             request.httpMethod = target.method
             request.httpBody = target.body
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
 
             return request
         }
@@ -62,4 +65,17 @@ enum NetworkError: Error {
     case noResponse
     case serverError(statusCode: Int)
     case decodingError
+
+    var message: String {
+        switch self {
+        case .invalidURL:
+            return "잘못된 URL을 사용하고 있습니다."
+        case .transferError:
+            return "서버와 연결이 되지 않습니다."
+        case .noData, .noResponse, .decodingError:
+            return "서버와 연결에서 문제가 발생했습니다."
+        case .serverError(let statusCode):
+            return "status code: \(statusCode)에 해당하는 문제가 발생했습니다."
+        }
+    }
 }

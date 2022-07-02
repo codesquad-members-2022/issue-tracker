@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - WelcomeElement
 struct IssueItem: Codable {
-    let id: Int
+    var id: Int?
     let title, content, milestoneName: String
     let labels: [Label]
     

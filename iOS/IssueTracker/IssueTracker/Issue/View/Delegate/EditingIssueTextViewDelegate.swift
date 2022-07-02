@@ -10,6 +10,12 @@ import UIKit
 final class EditingIssueTextViewDelegate: NSObject, UITextViewDelegate {
     static let placeholder = "코멘트는 여기에 작성하세요."
 
+    private var onUpdateText: (String) -> Void = { _ in }
+
+    func setTextViewAction(_ action: @escaping (String) -> Void) {
+        onUpdateText = action
+    }
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         let isEditedTextEmpty = textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let isStartEditing = textView.text == Self.placeholder
@@ -24,11 +30,7 @@ final class EditingIssueTextViewDelegate: NSObject, UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        let userInfo: [String: String] = ["text": textView.text]
-
-        NotificationCenter.default.post(name: NotificationNames.textViewDidChanged,
-                                        object: self,
-                                        userInfo: userInfo)
+        onUpdateText(textView.text)
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -38,11 +40,5 @@ final class EditingIssueTextViewDelegate: NSObject, UITextViewDelegate {
             textView.textColor = .gray
             textView.text = Self.placeholder
         }
-    }
-}
-
-extension EditingIssueTextViewDelegate {
-    enum NotificationNames {
-        static let textViewDidChanged = Notification.Name("textViewDidChanged")
     }
 }
