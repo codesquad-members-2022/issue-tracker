@@ -7,7 +7,20 @@
 
 protocol Resolvable {
     associatedtype Value
+    var map: [ObjectIdentifier: () -> Value] { get set }
+}
+
+extension Resolvable {
+    mutating func regist<T>(type: T.Type, make: Value) {
+        let identifier = ObjectIdentifier(type)
+        self.map[identifier] = {
+            make
+        }
+    }
     
-    func regist<T>(instance: T)
-    func resolve<T>(type: T.Type) -> Value?
+    func resolve<T>(type: T.Type) -> (() -> Value)? {
+        let identifier = ObjectIdentifier(type)
+        guard let useCase = map[identifier] else { return nil }
+        return useCase
+    }
 }

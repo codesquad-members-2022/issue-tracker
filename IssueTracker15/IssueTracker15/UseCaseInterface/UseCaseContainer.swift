@@ -7,23 +7,23 @@
 
 import Foundation
 
-final class UseCaseContainer: Resolvable {
+struct UseCaseContainer: Resolvable {
     typealias Value = UseCaseResponsible
+    typealias Creator = () -> Value
     
-    static let shard: UseCaseContainer = UseCaseContainer()
+    static var shared: UseCaseContainer = UseCaseContainer()
     
-    private var useCases: [ObjectIdentifier: UseCaseResponsible] = [:]
+    var map: [ObjectIdentifier: Creator] = [:]
     
-    func regist<T>(instance: T) {
-        let identifier = ObjectIdentifier(T.self)
-        guard let useCase = instance as? Value else { return }
-        self.useCases[identifier] = useCase
+    mutating func regist<T: UseCaseResponsible>(type: T.Type, make: @escaping Creator) {
+        let identifier = ObjectIdentifier(type)
+        map[identifier] = make
     }
     
-    func resolve<T>(type: T.Type) -> Value? {
+    func resolve<T: UseCaseResponsible>(type: T.Type) -> Value? {
         let identifier = ObjectIdentifier(type)
-        guard let useCase = useCases[identifier] else { return nil }
-        return useCase
+        guard let useCaseCreator = map[identifier] else { return nil }
+        return useCaseCreator()
     }
 
     private init() { }

@@ -13,7 +13,7 @@ struct AppleLoginUseCase: UseCaseResponsible {
         self.model = model
     }
     
-    func request(_ completionBlock: @escaping (Any?) -> Void) {
+    func request(param: Any?, _ completionBlock: @escaping (Any?) -> Void) {
         guard let url = model?.getLoginURL() else { return }
         completionBlock(url)
     }

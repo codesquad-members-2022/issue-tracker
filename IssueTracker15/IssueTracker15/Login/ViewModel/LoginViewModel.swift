@@ -10,8 +10,8 @@ import Foundation
 struct LoginViewModel: CommonViewModel {
     var output: (Any?, ViewBindable) -> Void
     
-    private var githubLoginUseCase = UseCaseContainer.shard.resolve(type: GithubLoginUseCase.self)
-    private var appleLoginUseCase = UseCaseContainer.shard.resolve(type: GithubLoginUseCase.self)
+    private var githubLoginUseCase = UseCaseContainer.shared.resolve(type: GithubLoginUseCase.self)
+    private var appleLoginUseCase = UseCaseContainer.shared.resolve(type: AppleLoginUseCase.self)
     
     init(_ output: @escaping (Any?, ViewBindable) -> Void) {
         self.output = output
@@ -22,11 +22,14 @@ struct LoginViewModel: CommonViewModel {
         
         switch loginType {
         case .gitHub:
-            githubLoginUseCase?.request { loginURL in
+            guard let useCase = githubLoginUseCase else { return }
+            useCase.request(param: nil) { loginURL in
                 self.output(loginURL, bindable)
             }
+            
         case .apple:
-            appleLoginUseCase?.request { loginURL in
+            guard let useCase = appleLoginUseCase else { return }
+            useCase.request(param: nil) { loginURL in
                 self.output(loginURL, bindable)
             }
         }

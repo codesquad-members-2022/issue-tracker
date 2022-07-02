@@ -28,9 +28,6 @@ final class UserInfoTextField: UITextField, ViewBindable {
         
     }
     
-    func setVC(_ binding: ViewBinding) {
-        self.vc = binding
-    }
     
     func setPlaceHolder(_ text: String) {
         self.placeholder = text

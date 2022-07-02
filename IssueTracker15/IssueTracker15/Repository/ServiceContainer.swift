@@ -2,28 +2,25 @@
 //  ServiceContainer.swift
 //  IssueTracker15
 //
-//  Created by 백상휘 on 2022/06/16.
+//  Created by 백상휘 on 2022/06/29.
 //
 
 import Foundation
 
-/// Service들을 Repository에서 DI 하고자 만든 클래스. 현재 사용하지 않음.
-class ServiceContainer<S>: Resolvable {
+struct ServiceContainer: Resolvable {
+    typealias Value = CommonService
+    typealias Creator = () -> Value
     
-    typealias Value = S
+    var map: [ObjectIdentifier: Creator] = [:]
     
-    private var services: [ObjectIdentifier: S] = [:]
-    
-    func regist<T>(instance: T) {
-        let identifier = ObjectIdentifier(T.self)
-        guard let service = instance as? S else { return } // is this type ServiceLayer??
-        self.services[identifier] = service
-    }
-    
-    func resolve<T>(type: T.Type) -> Value? {
+    mutating func regist<T: Value>(type: T.Type, make: @escaping Creator) {
         let identifier = ObjectIdentifier(type)
-        guard let service = services[identifier] else { return nil }
-        return service
+        map[identifier] = make
     }
     
+    func resolve<T: Value>(type: T.Type) -> Value? {
+        let identifier = ObjectIdentifier(type)
+        guard let service = map[identifier] else { return nil }
+        return service()
+    }
 }

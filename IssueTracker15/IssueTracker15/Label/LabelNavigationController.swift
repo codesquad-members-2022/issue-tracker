@@ -2,13 +2,19 @@
 //  LabelNavigationController.swift
 //  IssueTracker15
 //
-//  Created by 백상휘 on 2022/06/20.
+//  Created by 박진섭 on 2022/06/29.
 //
 
 import UIKit
 
-class LabelNavigationController: UINavigationController {
+final class LabelNavigationController: UINavigationController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUp()
+    }
+    
+    private func setUp() {
+        self.navigationBar.prefersLargeTitles = true
     }
 }

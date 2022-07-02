@@ -8,15 +8,20 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let issueVC = IssueListTableViewController()
+        let labelVC = LabelViewController()
         
-        view.backgroundColor = .white
-        let issueVC = IssueListViewController()
-        let navVC = IssueNavigationController(rootViewController: issueVC)
-        navVC.tabBarItem.title = "이슈"
-        navVC.tabBarItem.image = UIImage(systemName: "exclamationmark.circle")
+        let issueNavVC = IssueNavigationController(rootViewController: issueVC)
+        issueNavVC.tabBarItem.title = "이슈"
+        issueNavVC.tabBarItem.image = UIImage(systemName: "exclamationmark.circle")
         
-        viewControllers = [navVC]
+        let labelNavVC = LabelNavigationController(rootViewController: labelVC)
+        labelNavVC.tabBarItem.title = "레이블"
+        labelNavVC.tabBarItem.image = UIImage(systemName: "tag.fill")
+        
+        viewControllers = [issueNavVC, labelNavVC]
     }
 }
