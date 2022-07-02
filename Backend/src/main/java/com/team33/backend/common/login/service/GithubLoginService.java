@@ -1,5 +1,6 @@
 package com.team33.backend.common.login.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team33.backend.common.login.token.OauthClient;
 import com.team33.backend.common.login.token.jwt.JwtTokenProvider;
 import com.team33.backend.member.domain.Member;
@@ -25,7 +26,7 @@ public class GithubLoginService implements LoginService {
 
     private final Logger logger = LoggerFactory.getLogger(GithubLoginService.class);
     private final MemberRepository memberRepository;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider = new JwtTokenProvider();
     private final RedisTemplate<String, String> redisTemplate;
 
     @Transactional

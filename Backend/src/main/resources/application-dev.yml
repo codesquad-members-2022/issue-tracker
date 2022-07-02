@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/issue_tracker
-    username: root
-    password: 1234
+    url: ENC(Ds/iAswKDOI2IBdXVlUbp+1ZYJs/loWNCyGaebesnH+oiH5A+vPEpYY09swmh46cg4LixzDn+SY=)
+    username: ENC(W30pxDFoEU+LniYDtqL3zg==)
+    password: ENC(N/y/BCe1NvxsQe1SNaQArA==)
   h2:
     console:
       enabled: true
@@ -12,6 +12,7 @@ spring:
     properties:
       hibernate:
         default_batch_fetch_size: 100
+
   redis:
     host: 127.0.0.1
     port: 6379
@@ -19,3 +20,37 @@ logging:
   level:
     com.team33.backend: debug
     org.springframework.web.servlet: trace
+
+token:
+  secret: ENC(45MwwxJFvXC3J9gM0eRaWAjPyOO8XDi+2VE/4bN27oFMgDj/k/5y2lfkhN3IZ2DZ)
+
+oauth:
+  client:
+    registration:
+      github:
+        client-id: 912a90df15b22f4ac0c0
+        client-secret: ENC(hgURvQ/78bLe7S10DC4qXN+LUdpS4JMeXnl7xWB/WAZ0u7MXuH184D/mBvVj6Tyl5sakWBEdoaE=)
+        redirect-uri: http://localhost:8080/api/oauth/callback
+        login-page: https://github.com/login/oauth/authorize?client_id=912a90df15b22f4ac0c0
+
+    provider:
+      github:
+        token-uri: https://github.com/login/oauth/access_token
+        user-info-uri: https://api.github.com/user
+        user-authrozation-uri: https://github.com/login/oauth/authorize
+server:
+  port: 8080
+cloud:
+  aws:
+    credentials:
+      access-key: ENC(o0l7ANej8qA8z7azRUkYXlzm++j1vn9CGctcNjQqhlA=)
+      secret-key: ENC(7gpXJuBBXCEhqpHdX8ZSDzY9mXtG6ShSEB9Hw5FKFrrjtIZ4JymVpwjv1LlFLVPvwpREnwo9Mh0=)
+    s3:
+      bucket: is-team33
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+jasypt:
+  encryptor:
+    bean: stringEncryptor

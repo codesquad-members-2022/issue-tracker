@@ -12,6 +12,8 @@ jobs:
       run:
         shell: bash
         working-directory: ./Backend
+    env:
+      JASYPT_KEY: issue-tracker-jasypt-key
 
     steps:
       # https://github.com/actions/setup-java#basic

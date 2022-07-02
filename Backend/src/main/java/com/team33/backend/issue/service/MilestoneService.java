@@ -45,7 +45,7 @@ public class MilestoneService {
     }
 
     @Transactional(readOnly = true)
-    public List<MilestoneResponse> findMilestoneByIssueId(Long issueGroupId) {
+    public List<Milestone> findMilestoneByIssueId(Long issueGroupId) {
         return milestoneQueryRepository.findMilestoneByIssuegroupId(issueGroupId);
     }
 }

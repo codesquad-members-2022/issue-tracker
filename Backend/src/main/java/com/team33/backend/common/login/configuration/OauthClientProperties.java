@@ -29,11 +29,13 @@ public class OauthClientProperties {
         private final String clientId;
         private final String clientSecret;
         private final String redirectUri;
+        private final String loginPage;
 
-        public Registration(String clientId, String clientSecret, String redirectUri) {
+        public Registration(String clientId, String clientSecret, String redirectUri, String loginPage) {
             this.clientId = clientId;
             this.clientSecret = clientSecret;
             this.redirectUri = redirectUri;
+            this.loginPage = loginPage;
         }
     }
 

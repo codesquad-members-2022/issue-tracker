@@ -35,4 +35,17 @@ public class IssueResponse {
     private boolean isMilestoneExists(Issue issue) {
         return issue.getMilestone() != null;
     }
+
+    @Override
+    public String toString() {
+        return "IssueResponse{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", createdAt=" + createdAt +
+                ", author=" + author +
+                ", milestone=" + milestone +
+                ", labels=" + labels +
+                ", assignees=" + assignees +
+                '}';
+    }
 }

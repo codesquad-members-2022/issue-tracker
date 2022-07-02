@@ -1,1 +1,56 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(VDSJhyZDoYrKe6wqK1woc8C9S+0Yv77axuETPtUw4FSlpaRW2aGKkpczm8NuU55g0vsgzqtcldB+Xh5/A2XB5eUxqzl5r37o416w7e9Jr/f2x9ZE05/u3snu0pmHwfEf+D4NOD0akubq0xyiWjg8j3io68JslGy9)
+    username: ENC(FSbh389px3QjhVVdgC37P0baR+vzb1KNEyp1ZCq95o8=)
+    password: ENC(cleds58H0DdTWirNL/jn0QivniDA1n2t)
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
 
+  redis:
+    host: 127.0.0.1
+    port: 6379
+logging:
+  level:
+    root: info
+
+token:
+  secret: ENC(45MwwxJFvXC3J9gM0eRaWAjPyOO8XDi+2VE/4bN27oFMgDj/k/5y2lfkhN3IZ2DZ)
+
+oauth:
+  client:
+    registration:
+      github:
+        client-id: 912a90df15b22f4ac0c0
+        client-secret: ENC(hgURvQ/78bLe7S10DC4qXN+LUdpS4JMeXnl7xWB/WAZ0u7MXuH184D/mBvVj6Tyl5sakWBEdoaE=)
+        redirect-uri: http://localhost:8080/api/oauth/callback
+        login-page: https://github.com/login/oauth/authorize?client_id=912a90df15b22f4ac0c0
+
+    provider:
+      github:
+        token-uri: https://github.com/login/oauth/access_token
+        user-info-uri: https://api.github.com/user
+        user-authrozation-uri: https://github.com/login/oauth/authorize
+server:
+  port: 8080
+cloud:
+  aws:
+    credentials:
+      accessKey: ENC(cdlW4Ga/72wv9nP73rELmBHSClxp0z1T4Hw0RouGTFA=)
+      secretKey: ENC(Qry2IZWVer2nCG3QXwqlqLvoeJk82AdzF4Jwxor51zGKPR3ERd0K+0559Y9Uy4dPH4i2+GkYRYg=)
+    s3:
+      bucket: is-team33
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+jasypt:
+  encryptor:
+    bean: stringEncryptor

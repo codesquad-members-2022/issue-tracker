@@ -14,6 +14,7 @@ jobs:
         working-directory: ./Backend
     env:
       PROJECT_NAME: issue-tracker
+      JASYPT_KEY: issue-tracker-jasypt-key경
 
     steps:
       # https://github.com/actions/setup-java#basic

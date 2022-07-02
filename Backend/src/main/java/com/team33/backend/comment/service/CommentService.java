@@ -39,6 +39,7 @@ public class CommentService {
     public Comment editComment(Long commentId, CommentEditRequest request) {
         Comment findComment = commentRepository.findById(commentId).orElseThrow();
         findComment.editComment(request.getContent());
+        cacheService.updateCommentCache(findComment);
         return findComment;
     }
 
@@ -49,7 +50,7 @@ public class CommentService {
         return findComment;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CommentCache> findCommentsByIssueId(Long issueId) {
         return cacheService.findCommentCacheByIssueId(issueId);
     }

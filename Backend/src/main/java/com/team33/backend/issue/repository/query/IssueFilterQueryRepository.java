@@ -1,19 +1,20 @@
 package com.team33.backend.issue.repository.query;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.team33.backend.issue.domain.Issue;
 import com.team33.backend.issue.domain.IssueStatus;
 import com.team33.backend.issue.domain.QIssue;
 import com.team33.backend.issue.domain.filter.IssueFilter;
-import com.team33.backend.issuegroup.domain.IssueGroup;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import static com.team33.backend.comment.domain.QComment.comment;
+import static com.team33.backend.issue.domain.QAssignee.assignee;
 
 @Repository
 public class IssueFilterQueryRepository extends QuerydslRepositorySupport {
@@ -27,14 +28,24 @@ public class IssueFilterQueryRepository extends QuerydslRepositorySupport {
         this.queryFactory = queryFactory;
     }
 
-    public List<Issue> findAllFilteredIssues(List<IssueFilter> issueFilters, long issueGroupId, Pageable pageable) {
+    public List<Issue> findAllFilteredIssues(List<IssueFilter> issueFilters, long issueGroupId, long memberId, Pageable pageable) {
         JPAQuery<Issue> filteredIssuesQuery = queryFactory.selectFrom(issue)
                 .where(issue.issueGroup.id.eq(issueGroupId));
 
         for (IssueFilter issueFilter : issueFilters) {
-            BooleanExpression condition = convertFilterToConditionOrNull(issueFilter);
-            if (condition != null) {
-                filteredIssuesQuery.where(condition);
+            switch (issueFilter) {
+                case OPEN: filteredIssuesQuery = filteredIssuesQuery.where(issue.issueStatus.eq(IssueStatus.OPEN)); break;
+                case CLOSED: filteredIssuesQuery = filteredIssuesQuery.where(issue.issueStatus.eq(IssueStatus.CLOSED)); break;
+                case AUTHOR_ME: filteredIssuesQuery = filteredIssuesQuery.where(issue.author.id.eq(memberId)); break;
+                case COMMENTED_ME: filteredIssuesQuery = filteredIssuesQuery
+                        .innerJoin(comment)
+                        .on(comment.issue.id.eq(issue.id))
+                        .on(comment.member.id.eq(memberId)); break;
+                case ASSIGNED_ME: filteredIssuesQuery = filteredIssuesQuery
+                        .innerJoin(assignee)
+                        .on(assignee.issue.id.eq(issue.id))
+                        .on(assignee.member.id.eq(memberId)); break;
+                default: break;
             }
         }
 
@@ -42,17 +53,5 @@ public class IssueFilterQueryRepository extends QuerydslRepositorySupport {
 
         return querydsl.applyPagination(pageable, filteredIssuesQuery)
                 .fetch();
-    }
-
-    private BooleanExpression convertFilterToConditionOrNull(IssueFilter issueFilter) {
-
-        JPAQuery<?> query = queryFactory.query();
-
-        switch (issueFilter) {
-            case OPEN: return issue.issueStatus.eq(IssueStatus.OPEN);
-            case CLOSED: return issue.issueStatus.eq(IssueStatus.CLOSED);
-            // TODO : 요청자의 회원 ID 를 가져올 수 있게 되면, 나머지 enum 의 where 구문 매핑하기
-            default: return null;
-        }
     }
 }

@@ -1,6 +1,7 @@
 package com.team33.backend.issue.service;
 
 import com.team33.backend.common.exception.issue.IssueGroupNotFoundException;
+import com.team33.backend.common.exception.member.MemberNotFoundException;
 import com.team33.backend.issue.controller.dto.MemberResponse;
 import com.team33.backend.issue.controller.dto.issue.IssueListRequest;
 import com.team33.backend.issue.controller.dto.issue.IssueListResponse;
@@ -12,6 +13,8 @@ import com.team33.backend.issue.domain.filter.IssueFilter;
 import com.team33.backend.issue.repository.IssueRepository;
 import com.team33.backend.issue.repository.query.IssueFilterQueryRepository;
 import com.team33.backend.issuegroup.repository.IssueGroupRepository;
+import com.team33.backend.member.domain.Member;
+import com.team33.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class IssueService {
 
+    private final MemberRepository memberRepository;
     private final IssueRepository issueRepository;
     private final IssueGroupRepository issueGroupRepository;
     private final IssueFilterQueryRepository issueFilterQueryRepository;
@@ -75,17 +79,20 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public IssueListResponse findAllIssueWithStatusAndFilter(IssueListRequest issueListRequest, String filterQuery) {
+    public IssueListResponse findAllIssueWithStatusAndFilter(IssueListRequest issueListRequest, String filterQuery, String githubId) {
+        Member member = memberRepository.findByGithubId(githubId)
+                .orElseThrow(() -> new MemberNotFoundException());
+
         List<IssueFilter> filters = issueFilterService.findAllMatchedFilters(filterQuery);
 
         long issueGroupId = issueListRequest.getIssueGroupId();
         Pageable pageable = issueListRequest.getPageable();
 
-        if (validateIssueGroup(issueListRequest.getIssueGroupId())) {
+        if (!validateIssueGroup(issueListRequest.getIssueGroupId())) {
             throw new IssueGroupNotFoundException();
         }
 
-        List<Issue> filteredIssues = issueFilterQueryRepository.findAllFilteredIssues(filters, issueGroupId, pageable);
+        List<Issue> filteredIssues = issueFilterQueryRepository.findAllFilteredIssues(filters, issueGroupId, member.getId(), pageable);
 
         return getIssueListResponse(issueGroupId, filteredIssues);
     }

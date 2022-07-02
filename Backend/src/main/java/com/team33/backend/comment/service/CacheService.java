@@ -1,5 +1,6 @@
 package com.team33.backend.comment.service;
 
+import com.team33.backend.comment.domain.Comment;
 import com.team33.backend.emoji.controller.dto.cache.CommentCache;
 import com.team33.backend.emoji.controller.dto.cache.EmojiCache;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.groupingBy;
 
 @Service
@@ -35,9 +37,21 @@ public class CacheService {
                 .collect(groupingBy(EmojiCache::getCommentId));
 
         for (CommentCache comment : findCommentCaches) {
-            comment.registEmojis(result.get(comment.getId()));
+            if (result.get(comment.getId()) != null) {
+                comment.registEmojis(result.get(comment.getId()));
+            }
         }
         return findCommentCaches;
+    }
+
+    @Transactional
+    public void updateCommentCache(Comment findComment) {
+        CommentCache cache = getValueOperations().get(findComment.getId());
+        if (cache != null) {
+            getValueOperations().set(String.valueOf(requireNonNull(cache).getId()), requireNonNull(cache));
+            return;
+        }
+        getValueOperations().set(String.valueOf(findComment.getId()), requireNonNull(cache));
     }
 
     private ValueOperations<String, CommentCache> getValueOperations() {

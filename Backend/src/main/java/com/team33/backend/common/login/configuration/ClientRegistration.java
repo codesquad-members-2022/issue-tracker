@@ -12,20 +12,20 @@ public class ClientRegistration {
     private final String clientId;
     private final String clientSecret;
     private final String redirectUrl;
-    private final String version;
+    private final String loginPage;
 
     public static ClientRegistration bind(OauthClientProperties.Registration registration, OauthClientProperties.Provider provider) {
         return new ClientRegistration(registration.getRedirectUri(), provider.getTokenUri(), provider.getUserInfoUri(),
-                registration.getClientId(), registration.getClientSecret(), registration.getRedirectUri(), provider.getVersion());
+                registration.getClientId(), registration.getClientSecret(), registration.getRedirectUri(), registration.getLoginPage());
     }
 
-    public ClientRegistration(String redirectUri, String tokenUrl, String userInfoUrl, String clientId, String clientSecret, String redirectUrl, String version) {
+    public ClientRegistration(String redirectUri, String tokenUrl, String userInfoUrl, String clientId, String clientSecret, String redirectUrl, String loginPage) {
         this.redirectUri = redirectUri;
         this.tokenUrl = tokenUrl;
         this.userInfoUrl = userInfoUrl;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.redirectUrl = redirectUrl;
-        this.version = version;
+        this.loginPage = loginPage;
     }
 }

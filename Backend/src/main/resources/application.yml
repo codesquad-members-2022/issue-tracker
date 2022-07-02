@@ -4,3 +4,5 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+token:
+  secret: Ds/iAswKDOI2IBdXVlUbp+1ZYJs/loWNCyGaebesnH+oiH5A+vPEpYY09swmh46cg4LixzDn+SY=

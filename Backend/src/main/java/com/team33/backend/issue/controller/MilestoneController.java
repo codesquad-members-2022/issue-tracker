@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,7 +34,8 @@ public class MilestoneController {
 
     @GetMapping("/{issueGroupId}/milestones")
     public List<MilestoneResponse> getMilestonesByIssuegroupId(@PathVariable Long issueGroupId) {
-        return milestoneService.findMilestoneByIssueId(issueGroupId);
+        return milestoneService.findMilestoneByIssueId(issueGroupId).stream()
+                .map(MilestoneResponse::new).collect(Collectors.toList());
     }
 
     @PostMapping("/{issueGroupId}/milestones/{milestoneId}")

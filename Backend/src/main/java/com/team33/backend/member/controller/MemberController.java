@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,8 +18,9 @@ public class MemberController {
 
     private final MemberQueryService memberQueryService;
 
-    @GetMapping("/{issueGroupId}/members")
+    @GetMapping("/{issueGroupId}/issues/assignees")
     public List<MemberQueryResponse> findIssueGroupMembers(@PathVariable Long issueGroupId) {
-        return memberQueryService.findGroupMembers(issueGroupId);
+        return memberQueryService.findGroupMembers(issueGroupId).stream().map(MemberQueryResponse::new)
+                .collect(Collectors.toList());
     }
 }
