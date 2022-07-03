@@ -1,8 +1,10 @@
 package team24.issuetracker.issue.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,9 +18,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import team24.issuetracker.issue.domain.reference.IssueLabel;
-import team24.issuetracker.issue.domain.reference.IssueUser;
+import team24.issuetracker.issue.domain.reference.IssueMember;
+import team24.issuetracker.member.domain.Member;
 import team24.issuetracker.milestone.domain.Milestone;
-import team24.issuetracker.common.domain.User;
+import team24.issuetracker.uploadedfile.domain.UploadedFile;
 
 @Entity
 @Getter
@@ -27,32 +30,46 @@ import team24.issuetracker.common.domain.User;
 @AllArgsConstructor
 public class Issue {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String title;
-    private String content;
+	private String title;
+	private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User writer;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Member writer;
 
-    @OneToMany(mappedBy = "issue")
-    private List<IssueUser> assignees;
+	@OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<IssueMember> assignees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue")
-    private List<IssueLabel> issueLabels;
+	@OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<IssueLabel> issueLabels = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Milestone milestone;
-    private boolean isClosed;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Milestone milestone;
+	private boolean closed;
 
-    @OneToMany(mappedBy = "issue")
-    private List<Image> images;
-    private LocalDateTime writtenTime;
+	@OneToMany(mappedBy = "issue")
+	private List<UploadedFile> uploadedFiles = new ArrayList<>();
+	private LocalDateTime writtenTime;
 
-    @OneToMany(mappedBy = "issue")
-    private List<Comment> comments;
+	@OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Comment> comments = new ArrayList<>();
 
-    private boolean isDeleted;
+	private boolean deleted;
+
+	public void mappingFields(List<IssueMember> assignees, List<IssueLabel> issueLabels) {
+		this.assignees = assignees;
+		this.issueLabels = issueLabels;
+	}
+
+	public void changeState() {
+        this.closed = !this.closed;
+	}
+
+	public void delete(){
+		this.deleted = !this.deleted;
+	}
+
 }

@@ -12,7 +12,7 @@ public interface MilestoneRepository extends JpaRepository<Milestone, Long> {
 	@Query("select distinct m "
 		+ "from Milestone m "
 		+ "join fetch m.issues i "
-		+ "where m.isDeleted = false "
-		+ "and i.isDeleted = false")
+		+ "where m.deleted = false "
+		+ "and i.deleted = false")
 	List<Milestone> findAll();
 }

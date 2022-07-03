@@ -9,10 +9,12 @@ public class LabelListResponse {
 	private final Long id;
 	private final String title;
 	private final String description;
+	private final String color;
 
 	public LabelListResponse(Label label) {
 		this.id = label.getId();
 		this.title = label.getTitle();
 		this.description = label.getDescription();
+		this.color = label.getColor();
 	}
 }
