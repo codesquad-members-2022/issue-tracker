@@ -61,12 +61,13 @@ const NewIssueFooter = () => {
 				icon="RemoveCircleOutline"
 				content="작성 취소"
 				handleClick={handleTextButtonClick}
+				size="linkSmall"
 			/>
 			<Button
 				content="완료"
 				size="medium"
 				clickHandler={handleButtonClick}
-				disableOption={isLoading}
+				disableOption={isLoading || !title.length || !desc.length}
 			/>
 		</StyledNewIssueFooter>
 	);

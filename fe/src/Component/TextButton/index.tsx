@@ -1,24 +1,52 @@
 import React from "react";
+
+import { TKeysColors } from "Styles/theme";
 import icons, { TKeysIcons } from "Util/Icons";
 import StyledTextButton from "./TextButton.styled";
+
+const iconSizeData = {
+	linkSmall: 20,
+	textSmall: 20,
+	linkXSmall: 15,
+	textXSmall: 15,
+};
+
+type TTextButtonSize = keyof typeof iconSizeData;
 
 type TTextButtonProps = {
 	icon: TKeysIcons;
 	content: string;
 	handleClick?: (event: React.MouseEvent) => void;
+	color?: TKeysColors;
+	size?: TTextButtonSize;
+	isHover?: boolean;
+	disabledOption?: boolean;
 };
 
-const TextButton = ({ icon, content, handleClick }: TTextButtonProps) => {
+const TextButton = ({
+	icon,
+	content,
+	handleClick = undefined,
+	color = "titleActive",
+	size = "textSmall",
+	isHover = true,
+	disabledOption = false,
+}: TTextButtonProps) => {
 	const Icon = icons[icon];
+	const iconSize = iconSizeData[size];
 
 	return (
-		<StyledTextButton onClick={handleClick}>
-			<Icon size={18} colorset="label" />
+		<StyledTextButton
+			onClick={handleClick}
+			color={color}
+			size={size}
+			isHover={isHover === true}
+			disabled={disabledOption}
+		>
+			<Icon size={iconSize} colorset={color} />
 			{content}
 		</StyledTextButton>
 	);
 };
-
-TextButton.defaultProps = { handleClick: undefined };
 
 export default TextButton;

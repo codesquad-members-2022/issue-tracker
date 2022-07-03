@@ -1,7 +1,8 @@
 import React, { ReactNode, useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { RecoilState } from "recoil";
 
-import { TNewIssueOption } from "Atoms";
+import { TIssueOption } from "Atoms";
+import LoadingAnimation from "Component/Loading";
 import { StyledPopup, StyledPopupWrapper } from "./Popup.styled";
 import PopupContent, { TContentProps } from "./PopupContent";
 
@@ -15,17 +16,31 @@ type TPopupProps = {
 	title: string;
 	contents: TPopupContentProps[];
 	setOption?: Dispatch<SetStateAction<boolean>>;
-	atom?: RecoilState<TNewIssueOption[]>;
+	atom?: RecoilState<TIssueOption[]>;
+	loading?: boolean;
 };
 
-const defaultPopupProps = {
-	setOption: undefined,
-	atom: undefined,
-};
-
-const Popup = ({ children, isLeft, title, contents, setOption, atom }: TPopupProps) => {
+const Popup = ({
+	children,
+	isLeft,
+	title,
+	contents,
+	setOption = undefined,
+	atom = undefined,
+	loading = false,
+}: TPopupProps) => {
 	const contentsList = contents.map(
-		({ id, name, image, imageType, clickEventHandler, isCheckBox, disabledOption, option }) => (
+		({
+			id,
+			name,
+			image,
+			imageType,
+			clickEventHandler,
+			isCheckBox,
+			disabledOption,
+			option,
+			filterName,
+		}) => (
 			<PopupContent
 				id={id}
 				key={id}
@@ -37,6 +52,7 @@ const Popup = ({ children, isLeft, title, contents, setOption, atom }: TPopupPro
 				disabledOption={disabledOption}
 				atom={atom}
 				option={option}
+				filterName={filterName}
 			/>
 		)
 	);
@@ -90,13 +106,17 @@ const Popup = ({ children, isLeft, title, contents, setOption, atom }: TPopupPro
 				onAnimationEnd={handleAnimationEnd}
 			>
 				<div>{title}</div>
-				{contentsList}
+				{!loading ? (
+					contentsList
+				) : (
+					<div>
+						<LoadingAnimation color="label" size={40} border={5} />
+					</div>
+				)}
 			</StyledPopup>
 		</StyledPopupWrapper>
 	);
 };
-
-Popup.defaultProps = defaultPopupProps;
 
 export default Popup;
 export type { TPopupContentProps };

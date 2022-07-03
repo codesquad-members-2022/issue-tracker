@@ -1,9 +1,10 @@
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Link, useLocation } from "react-router-dom";
+
+import { useLabelsGet } from "Hooks/useLabels";
+import useMilestones from "Hooks/useMilestones";
 import icons from "Util/Icons";
 import Button from "Component/Button";
-import useCookieUserInfo from "Hooks/useCookieUserInfo";
-import { milestoneApi, labelsApi } from "Api";
 import { StyledOptionTabs, StyledTabsLabelMilestone, StyledTab } from "./OptionsTabs.styled";
 
 const { BookmarksOutlined, DirectionsOutlined } = icons;
@@ -11,20 +12,20 @@ const LABEL = "레이블";
 const MILESTONE = "마일스톤";
 const ADD_ISSUE = "이슈 작성";
 const ADD_LABEL = "추가";
+const ADD_LABEL_CLOSE = "닫기";
 
 type TOptionTabs = {
-	addNewLabelIsClicked?: boolean;
-	setAddNewLabelIsClicked?: Dispatch<SetStateAction<boolean>>;
+	labelFormIsClicked?: boolean;
+	setLabelFormIsClicked?: Dispatch<SetStateAction<boolean>>;
 };
 
-const defaultOptionTabs = {
-	addNewLabelIsClicked: false,
-	setAddNewLabelIsClicked: undefined,
-};
-
-const OptionTabs = ({ addNewLabelIsClicked, setAddNewLabelIsClicked }: TOptionTabs) => {
+const OptionTabs = ({
+	labelFormIsClicked = false,
+	setLabelFormIsClicked = undefined,
+}: TOptionTabs) => {
 	const location = useLocation();
-	const { accessToken } = useCookieUserInfo();
+	const { data: labelsData, isSuccess: isLabelsSuccess } = useLabelsGet({ isCount: true });
+	const { data: milestonesData, isSuccess: isMilestonesSuccess } = useMilestones({ isCount: true });
 	const [labelCount, setLabelCount] = useState(0);
 	const [milestoneCount, setMilestoneCount] = useState(0);
 	const tabsInfo = [
@@ -46,8 +47,8 @@ const OptionTabs = ({ addNewLabelIsClicked, setAddNewLabelIsClicked }: TOptionTa
 	const tabs = tabsInfo.map(({ id, Icon, name, count }) => {
 		const nextPage = name === LABEL ? "/labels" : "/milestones";
 		return (
-			<Link to={nextPage}>
-				<StyledTab key={id} className={name}>
+			<Link to={nextPage} key={id}>
+				<StyledTab tabType={name} isLabels={isLabels}>
 					<Icon colorset="label" size={20} />
 					<div>{name}</div>
 					<div>({count})</div>
@@ -56,30 +57,26 @@ const OptionTabs = ({ addNewLabelIsClicked, setAddNewLabelIsClicked }: TOptionTa
 		);
 	});
 
-	const getLabelMilestoneCount = async () => {
-		const milestoneResponse = await milestoneApi.getMilestone(accessToken, true);
-		const labelResponse = await labelsApi.getLabels(accessToken, true);
-
-		const { data: milestoneData } = milestoneResponse;
-		const { data: labelData } = labelResponse;
-
-		setMilestoneCount(milestoneData);
-		setLabelCount(labelData);
+	const handleLabelFormIsClicked = () => {
+		if (setLabelFormIsClicked !== undefined) setLabelFormIsClicked(!labelFormIsClicked);
 	};
 
 	useEffect(() => {
-		getLabelMilestoneCount();
-	}, []);
-
-	const handleAddNewLabelIsClicked = () => {
-		if (setAddNewLabelIsClicked !== undefined) setAddNewLabelIsClicked(!addNewLabelIsClicked);
-	};
+		if (!isLabelsSuccess || !isMilestonesSuccess) return;
+		setLabelCount(labelsData);
+		setMilestoneCount(milestonesData);
+	}, [isLabelsSuccess, isMilestonesSuccess]);
 
 	return (
 		<StyledOptionTabs isLabels={isLabels}>
 			<StyledTabsLabelMilestone>{tabs}</StyledTabsLabelMilestone>
 			{isLabels ? (
-				<Button content={ADD_LABEL} icon="AddBox" clickHandler={handleAddNewLabelIsClicked} />
+				<Button
+					content={labelFormIsClicked ? ADD_LABEL_CLOSE : ADD_LABEL}
+					icon={labelFormIsClicked ? "RemoveCircleOutline" : "AddBox"}
+					reverse={labelFormIsClicked}
+					clickHandler={handleLabelFormIsClicked}
+				/>
 			) : (
 				<Link to="new-issue">
 					<Button content={ADD_ISSUE} icon="AddBox" />
@@ -88,7 +85,5 @@ const OptionTabs = ({ addNewLabelIsClicked, setAddNewLabelIsClicked }: TOptionTa
 		</StyledOptionTabs>
 	);
 };
-
-OptionTabs.defaultProps = defaultOptionTabs;
 
 export default OptionTabs;
