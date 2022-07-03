@@ -1,13 +1,13 @@
 import AccountSrc from 'assets/images/UserImageLarge.svg';
 
 export type AccountType = {
-  id?: number;
+  id: number;
   name: string;
   email?: string;
   profileImage: string;
 };
 export type MileStoneType = {
-  id?: number;
+  id: number;
   title: string;
   description: string;
   dueDate: string;
@@ -16,7 +16,7 @@ export type MileStoneType = {
   closedIssue: number;
 };
 export type LabelType = {
-  id?: number;
+  id: number;
   title: string;
   color: string;
   description?: string;

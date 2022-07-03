@@ -1,46 +1,21 @@
 import * as S from 'components/common/Sidebar/styled';
 import { newIssueType } from 'store/newIssue';
-import { keyMaker } from 'utils/util';
-import Label, { ProgressBar } from '../Common';
-import DropDown from './Dropdown';
+import AssigneesContents from 'components/common/Sidebar/AssigneesContents';
+import DropDown from 'components/common/Sidebar/Dropdown';
+import LabelsContents from 'components/common/Sidebar/LabelsContents';
+import { AccountType, LabelType, MileStoneType } from 'data';
+import MileStoneContents from 'components/common/Sidebar/MileStoneContents';
 
 function SideBar({ data }: { data: newIssueType }) {
-  const { assignees, mileStone, labels } = data;
-  const labelContents =
-    labels[0].title !== ''
-      ? labels.map((label) => {
-          const key = keyMaker();
-          return <Label key={key} color={label.color} title={label.title} />;
-        })
-      : '';
-  const assigneesCotents =
-    assignees[0].name !== ''
-      ? assignees.map((assignee) => {
-          const key = keyMaker();
-          return (
-            <S.DropDownContent key={key}>
-              <S.SmallAcountImg src={assignee.profileImage} />
-              {assignee.name}
-            </S.DropDownContent>
-          );
-        })
-      : '';
-  const mileStoneContent =
-    mileStone.title !== '' ? (
-      <>
-        <ProgressBar
-          size="small"
-          percent={(mileStone.closedIssue / (mileStone.openedIssue + mileStone.closedIssue)) * 100}
-        />
-        {mileStone.title}
-      </>
-    ) : (
-      ''
-    );
-
+  const {
+    assignees,
+    milestone,
+    labels,
+  }: { assignees: Array<AccountType>; milestone: MileStoneType; labels: Array<LabelType> } = data;
   const first = true;
   type SubjectsType = '담당자' | '레이블' | '마일스톤';
   const subjects: Array<SubjectsType> = ['담당자', '레이블', '마일스톤'];
+
   return (
     <S.AdditionalContents>
       <S.AdditionalContent first={first}>
@@ -48,21 +23,21 @@ function SideBar({ data }: { data: newIssueType }) {
           담당자
           <DropDown subject={subjects[0]} />
         </S.ContentTitleAndButton>
-        <S.Status>{assigneesCotents}</S.Status>
+        <AssigneesContents assignees={assignees} />
       </S.AdditionalContent>
       <S.AdditionalContent first={!first}>
         <S.ContentTitleAndButton>
           레이블
           <DropDown subject={subjects[1]} />
         </S.ContentTitleAndButton>
-        <S.Status>{labelContents}</S.Status>
+        <LabelsContents labels={labels} />
       </S.AdditionalContent>
       <S.AdditionalContent first={!first}>
         <S.ContentTitleAndButton>
           마일스톤
           <DropDown subject={subjects[2]} />
         </S.ContentTitleAndButton>
-        <S.Status>{mileStoneContent}</S.Status>
+        <MileStoneContents milestone={milestone} />
       </S.AdditionalContent>
     </S.AdditionalContents>
   );

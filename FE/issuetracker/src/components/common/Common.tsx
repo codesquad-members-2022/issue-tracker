@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { mixin } from 'design/GlobalStyles';
-import { LabelType } from 'data';
 
+type LabelType = {
+  title: string;
+  color: string;
+};
 function Label({ title, color }: LabelType) {
   return <LabelWrap color={color}>{title}</LabelWrap>;
 }

@@ -9,7 +9,7 @@ const initialData: newIssueType = {
   writer: {
     id: 1,
     name: 'Oni',
-    imgUrl: userImageURL,
+    profileImage: userImageURL,
   },
   writtenTime: '2022-06-22T16:37:04',
   comments: [
@@ -17,7 +17,7 @@ const initialData: newIssueType = {
       writer: {
         id: 1,
         name: 'Oni',
-        imgUrl: userImageURL,
+        profileImage: userImageURL,
       },
       writtenTime: '2022-06-22T16:37:04',
       description:
@@ -27,13 +27,13 @@ const initialData: newIssueType = {
       writer: {
         id: 2,
         name: 'Daniel',
-        imgUrl: userImageURL2,
+        profileImage: userImageURL2,
       },
       writtenTime: '2022-06-22T16:37:04',
       description: '마감일은 언제인가요??',
     },
   ],
-  mileStone: {
+  milestone: {
     id: 1,
     title: '이슈트래커 1주차',
     description: '개발 1주차',

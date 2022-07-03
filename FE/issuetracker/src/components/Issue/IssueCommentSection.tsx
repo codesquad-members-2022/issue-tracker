@@ -11,7 +11,7 @@ function IssueCommentSection() {
       {issueData.comments.map((comment) => (
         <IssueComment
           key={comment.writer.id}
-          imageURL={comment.writer.imgUrl}
+          imageURL={comment.writer.profileImage}
           writerName={comment.writer.name}
           log={comment.writtenTime}
           description={comment.description}

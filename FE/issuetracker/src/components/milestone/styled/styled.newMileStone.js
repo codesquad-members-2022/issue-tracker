@@ -52,4 +52,5 @@ export const saveButtonWrapper = styled.div`
   ${mixin.flexbox({ dir: 'row-reverse' })};
   width: 100%;
   margin-top: 24px;
+  gap: 8px;
 `;

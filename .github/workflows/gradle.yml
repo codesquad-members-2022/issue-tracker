@@ -22,6 +22,12 @@ jobs:
       run:
         working-directory: ./BE
 
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -87,4 +93,3 @@ jobs:
           --application-name Issue-Tracker-Application \
           --deployment-group-name Issue-Tracker-Deploy-Group \
           --s3-location bucket=issue-tracker-was-bucket,key=issue-tracker.zip,bundleType=zip
-

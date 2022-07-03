@@ -1,7 +1,7 @@
 import * as I from 'design/icons';
 import * as S from 'components/common/Sidebar/styled/dropdown';
 
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import {
@@ -30,9 +30,7 @@ function DropDown({ subject }: DropdownType) {
         ...newIssue,
         assignees: [
           {
-            name: content.name,
-            profileImage: content.profileImage,
-            email: '',
+            ...content,
           },
         ],
       });
@@ -42,9 +40,7 @@ function DropDown({ subject }: DropdownType) {
         assignees: [
           ...newIssue.assignees,
           {
-            name: content.name,
-            profileImage: content.profileImage,
-            email: '',
+            ...content,
           },
         ],
       });
@@ -56,9 +52,7 @@ function DropDown({ subject }: DropdownType) {
         ...newIssue,
         labels: [
           {
-            title: content.title,
-            description: content.description,
-            color: content.color,
+            ...content,
           },
         ],
       });
@@ -68,9 +62,7 @@ function DropDown({ subject }: DropdownType) {
         labels: [
           ...newIssue.labels,
           {
-            title: content.title,
-            description: content.description,
-            color: content.color,
+            ...content,
           },
         ],
       });
@@ -79,23 +71,16 @@ function DropDown({ subject }: DropdownType) {
   function setMileStone(content: MileStoneType) {
     setNewIssue({
       ...newIssue,
-      mileStone: {
-        title: content.title,
-        description: content.description,
-        dueDate: content.dueDate,
-        progress: content.progress,
-        openedIssue: content.openedIssue,
-        closedIssue: content.closedIssue,
+      milestone: {
+        ...content,
       },
     });
   }
   function getDropDownContents(subject: string) {
     let contentsData;
-    let content: ReactNode;
     switch (subject) {
       case '담당자':
-        contentsData = accountsData;
-        content = contentsData.map((content, idx) => {
+        return accountsData.map((content, idx) => {
           const key = keyMaker();
           return (
             <S.DropDownList
@@ -113,10 +98,9 @@ function DropDown({ subject }: DropdownType) {
             </S.DropDownList>
           );
         });
-        return content;
       case '레이블':
         contentsData = labelsData;
-        content = contentsData.map((content, idx) => {
+        return contentsData.map((content, idx) => {
           const key = keyMaker();
           return (
             <S.DropDownList
@@ -133,10 +117,9 @@ function DropDown({ subject }: DropdownType) {
             </S.DropDownList>
           );
         });
-        return content;
       case '마일스톤':
         contentsData = mileStonesData;
-        content = contentsData.map((content, idx) => {
+        return contentsData.map((content, idx) => {
           const key = keyMaker();
           return (
             <S.DropDownList
@@ -151,9 +134,8 @@ function DropDown({ subject }: DropdownType) {
             </S.DropDownList>
           );
         });
-        return content;
       default:
-        throw new Error();
+        throw new Error(`해당 ${subject}는 유효하지 않은 타이틀입니다`);
     }
   }
   function toggleDropdown() {
