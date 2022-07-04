@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { GREYSCALE } from '@/common/constants';
-import Icon from '@/assets/icons/Icon';
+import { GREYSCALE } from '@constants';
+import Icon from '@icon';
 
 type DropDownCheckBoxItemProps = {
   isChecked: boolean;

@@ -1,28 +1,29 @@
-import { CheckBoxType } from '../issueListTable/CheckBox';
-import { SelectedIssueType } from '../issueListTable/IssueList';
+import { CheckBoxType } from '@issueListTable/CheckBox';
+import { SelectedIssueType } from '@issueListTable/IssueList';
 
 export type IssueListCheckStateType = {
   headerCheckBox: CheckBoxType;
   selectedIssues: SelectedIssueType;
 };
 
-export type IssueListActionType = {
-  type: 'INIT' | 'ALL_CHECK' | 'ALL_UNCHECK' | 'ITEM_CHECK' | 'ITEM_UNCHECK';
-  payload?: { id?: string; initialSelectedIssues?: SelectedIssueType };
-};
+export type IssueListActionType =
+  | { type: 'INIT'; payload: { initialSelectedIssues: SelectedIssueType } }
+  | { type: 'ALL_CHECK' }
+  | { type: 'ALL_UNCHECK' }
+  | { type: 'ITEM_CHECK'; payload: { id: string } }
+  | { type: 'ITEM_UNCHECK'; payload: { id: string } };
 
 function checkReducer(
   state: IssueListCheckStateType,
   action: IssueListActionType
 ): IssueListCheckStateType {
   const { selectedIssues } = state;
-  const { type, payload } = action;
 
-  switch (type) {
+  switch (action.type) {
     case 'INIT': {
       return {
         headerCheckBox: 'initial',
-        selectedIssues: payload?.initialSelectedIssues!
+        selectedIssues: action.payload.initialSelectedIssues!
       };
     }
     case 'ALL_CHECK': {
@@ -53,7 +54,7 @@ function checkReducer(
       const updatedSelectedIssues: SelectedIssueType = {
         ...selectedIssues
       };
-      updatedSelectedIssues[payload?.id!] = true;
+      updatedSelectedIssues[action.payload.id] = true;
 
       let headerCheckBox: CheckBoxType;
       if (
@@ -73,7 +74,7 @@ function checkReducer(
       const updatedSelectedIssues: SelectedIssueType = {
         ...selectedIssues
       };
-      updatedSelectedIssues[payload?.id!] = false;
+      updatedSelectedIssues[action.payload.id] = false;
 
       let headerCheckBox: CheckBoxType;
       if (

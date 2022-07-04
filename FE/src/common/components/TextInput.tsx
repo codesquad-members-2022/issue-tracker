@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GREYSCALE } from '@/common/constants';
+import { GREYSCALE } from '@constants';
 import { MutableRefObject } from 'react';
 
 type TextInputProps = {

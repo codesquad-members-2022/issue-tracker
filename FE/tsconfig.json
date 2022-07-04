@@ -23,7 +23,11 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@constants/*": ["src/common/constants/*"],
+      "@icon/*": ["src/assets/icons/Icon.tsx"],
+      "@components/*": ["src/common/components/*"],
+      "@issueListTable/*": ["src/issueList/issueListTable/*"]
     }
   },
   "include": ["src", "public/mockServiceWorker.js"]

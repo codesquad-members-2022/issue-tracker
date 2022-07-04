@@ -2,9 +2,10 @@ import FilterBar from '@/issueList/FilterBar';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LinkTabs from '@/issueList/LinkTabs';
-import ButtonSmallStandard from '@/common/components/buttons/ButtonSmallStandard';
-import IssueList from '@/issueList/issueListTable/IssueList';
+import ButtonSmallStandard from '@components/buttons/ButtonSmallStandard';
+import IssueList from '@issueListTable/IssueList';
 import IssueListProvider from '@/issueList/stores/IssueListProvider';
+import { PATH } from '@constants';
 
 function IssueListPage() {
   return (
@@ -12,7 +13,7 @@ function IssueListPage() {
       <Wrap>
         <FilterBar />
         <LinkTabs />
-        <Link to="/addIssue">
+        <Link to={`/${PATH.ADD_ISSUE}`}>
           <ButtonSmallStandard isDisabled={false} label="이슈 작성" />
         </Link>
       </Wrap>
