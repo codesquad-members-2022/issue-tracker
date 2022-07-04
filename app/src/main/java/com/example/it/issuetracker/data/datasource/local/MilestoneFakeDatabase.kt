@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.data.datasource
+package com.example.it.issuetracker.data.datasource.local
 
 import com.example.it.issuetracker.data.dto.MilestoneDto
 import kotlinx.coroutines.delay
@@ -11,8 +11,8 @@ object MilestoneFakeDatabase {
             title = "마일스톤",
             deadline = "2022-06-14",
             description = "",
-            openedIssue = 1,
-            closedIssue = 1
+            openedIssues = 1,
+            closedIssues = 1
         ),
         MilestoneDto(
             id = 2,
@@ -25,8 +25,8 @@ object MilestoneFakeDatabase {
             title = "테스트 그룹",
             deadline = "2022-06-17",
             description = "",
-            openedIssue = 3,
-            closedIssue = 2
+            openedIssues = 3,
+            closedIssues = 2
         ),
         MilestoneDto(
             id = 4,

@@ -4,22 +4,16 @@ import com.example.it.issuetracker.domain.model.Issue
 import com.example.it.issuetracker.domain.model.IssueDetail
 import com.example.it.issuetracker.domain.model.Member
 import com.example.it.issuetracker.domain.model.MileStone
+import com.example.it.issuetracker.presentation.main.issue.register.NewIssue
 import kotlinx.coroutines.flow.Flow
-import java.util.*
 
 interface IssueTrackerRepository {
 
     fun getIssue(): Flow<List<Issue>>
 
-    suspend fun deleteIssue(list: List<Issue>)
+    suspend fun updateIssueDelete(status: Boolean, list: List<Long>)
 
-    suspend fun deleteIssue(id: Long)
-
-    suspend fun closeIssue(list: List<Issue>)
-
-    suspend fun closeIssue(id: Long)
-
-    suspend fun revertIssue(list: SortedMap<Int, Issue>)
+    suspend fun updateIssueClose(status: Boolean, list: List<Long>)
 
     suspend fun getWriter(): Result<List<Member>>
 
@@ -31,6 +25,8 @@ interface IssueTrackerRepository {
 
     fun getIssueDetail(id: Long): Flow<IssueDetail>
 
+    suspend fun saveIssue(newIssue: NewIssue): Result<Unit>
+
     suspend fun addLike(id: Long, uid: Long)
 
     suspend fun addBest(id: Long, uid: Long)
@@ -38,4 +34,6 @@ interface IssueTrackerRepository {
     suspend fun addHate(id: Long, uid: Long)
 
     suspend fun addOk(id: Long, uid: Long)
+
+    suspend fun addComment(id: Long, text: String)
 }

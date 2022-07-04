@@ -12,4 +12,12 @@ object Constants {
 
     // 필터 페이지에서 리셋 초기화를 눌렀을 때 사용될 값
     const val FILTER_RESET_NUMBER = 0
+
+    // Issue 추가 및 수정 부분에서 번들로 받기 위한 Key값 정의
+    const val ISSUE_BUNDLE_KEY = "issue_bundle"
+
+    // Swipe
+    const val PERCENT = 10
+    const val RATIO = 3
+    const val REVERSE = -1f
 }

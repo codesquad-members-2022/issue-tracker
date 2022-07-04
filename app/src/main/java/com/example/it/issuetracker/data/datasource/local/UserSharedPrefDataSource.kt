@@ -1,4 +1,4 @@
-package com.example.it.issuetracker.data.datasource
+package com.example.it.issuetracker.data.datasource.local
 
 import android.content.Context
 import androidx.core.content.edit

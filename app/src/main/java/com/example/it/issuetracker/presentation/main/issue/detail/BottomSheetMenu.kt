@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.fragment.app.commit
+import com.example.it.issuetracker.R
 import com.example.it.issuetracker.databinding.FragmentBottomSheetMenuBinding
+import com.example.it.issuetracker.presentation.common.Constants
 import com.example.it.issuetracker.presentation.common.repeatOnLifecycleExtension
 import com.example.it.issuetracker.presentation.main.issue.list.LabelAdapter
+import com.example.it.issuetracker.presentation.main.issue.register.RegisterIssueFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -40,6 +45,10 @@ class BottomSheetMenu(
         btnClose.setOnClickListener { dismiss() }
         rvLabel.adapter = labelAdapter
         rvMilestone.adapter = milestoneAdapter
+        btnIssueEdit.setOnClickListener {
+            navigateRegisterPage()
+            dismiss()
+        }
         btnIssueClose.setOnClickListener {
             onCloseClick()
             dismiss()
@@ -77,12 +86,21 @@ class BottomSheetMenu(
         binding.tvSearchResult.isVisible = false
         binding.issue = state.issue
         labelAdapter.submitList(state.issue.labels)
-        milestoneAdapter.submitList(state.issue.milestones)
+        milestoneAdapter.submitList(listOf(state.issue.milestones))
 
     }
 
     private fun handlerLoading() {
         binding.progressBar.isVisible = true
         binding.tvSearchResult.isVisible = false
+    }
+
+    private fun navigateRegisterPage() {
+        val registerIssueFragment = RegisterIssueFragment()
+        registerIssueFragment.arguments = bundleOf(Constants.ISSUE_BUNDLE_KEY to binding.issue)
+        parentFragmentManager.commit {
+            addToBackStack("register_issue")
+            replace(R.id.container_main, registerIssueFragment)
+        }
     }
 }

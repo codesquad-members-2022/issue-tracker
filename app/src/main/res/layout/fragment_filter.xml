@@ -61,6 +61,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_filter_issue"
+            app:textColor="@android:color/white"
             app:title="상태" />
 
         <com.example.it.issuetracker.presentation.customview.CustomFilter
@@ -71,6 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/filter_state"
+            app:textColor="@android:color/white"
             app:title="작성자" />
 
         <com.example.it.issuetracker.presentation.customview.CustomFilter
@@ -81,6 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/filter_writer"
+            app:textColor="@android:color/white"
             app:title="레이블" />
 
         <com.example.it.issuetracker.presentation.customview.CustomFilter
@@ -91,6 +94,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/filter_label"
+            app:textColor="@android:color/white"
             app:title="마일스톤" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

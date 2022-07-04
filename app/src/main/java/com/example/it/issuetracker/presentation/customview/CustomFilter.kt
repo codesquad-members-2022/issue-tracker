@@ -18,6 +18,7 @@ class CustomFilter(context: Context, attrs: AttributeSet?) : ConstraintLayout(co
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.FilterCondition)
         binding.tvTitle.text = a.getString(R.styleable.FilterCondition_title).toString()
+        binding.tvTitle.setTextColor(a.getColor(R.styleable.FilterCondition_textColor, 0))
         a.recycle()
     }
 }

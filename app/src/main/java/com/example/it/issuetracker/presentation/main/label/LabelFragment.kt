@@ -35,14 +35,12 @@ class LabelFragment : DataBindingBaseFragment<FragmentLabelBinding>(R.layout.fra
     override fun observerData() {
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.labelList }
-                .distinctUntilChanged()
                 .collect {
                     adapter.submitList(it)
                 }
         }
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.completeTask }
-                .distinctUntilChanged()
                 .collect { isCompleted ->
                     if (isCompleted) {
                         viewModel.getLabelInfoList()
@@ -52,7 +50,6 @@ class LabelFragment : DataBindingBaseFragment<FragmentLabelBinding>(R.layout.fra
         }
         repeatOnLifecycleExtension {
             viewModel.uiState.map { it.errorMsgId }
-                .distinctUntilChanged()
                 .collect { msgId ->
                     if (msgId == Constants.INIT_ERROR_MSG_ID) return@collect
                     val msg = getString(msgId)

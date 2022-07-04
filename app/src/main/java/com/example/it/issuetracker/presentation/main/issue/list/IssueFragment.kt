@@ -54,8 +54,16 @@ class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fra
     }
 
     override fun initView() = with(binding) {
+        viewModel.getIssues()
         ivSearch.setOnClickListener { navigateFragment(SearchFragment(), "search_issue") }
-        btnIssue.setOnClickListener { navigateFragment(RegisterIssueFragment(), "register_issue") }
+        btnIssue.setOnClickListener {
+            val registerIssueFragment = RegisterIssueFragment().apply {
+                setOnRefreshListener {
+                    viewModel.getIssues()
+                }
+            }
+            navigateFragment(registerIssueFragment, "register_issue")
+        }
         rvIssue.adapter = adapter
         val swipeHelper = SwipeHelper()
         val itemTouchHelper = ItemTouchHelper(swipeHelper)
@@ -114,12 +122,18 @@ class IssueFragment : DataBindingBaseFragment<FragmentIssueBinding>(R.layout.fra
         }
 
         repeatOnLifecycleExtension {
-            viewModel.cache.collectLatest {
-                if (it.message != "") {
-                    CustomSnackBar.make(binding.issueContainer, "선택한 이슈를 닫았습니다.") {
-                        viewModel.revertIssue(it.issues)
-                    }.show()
-                }
+            viewModel.onCloseEvent.collectLatest {
+                CustomSnackBar.make(binding.issueContainer, "선택한 이슈를 닫았습니다.") {
+                    viewModel.revertCloseIssue()
+                }.show()
+            }
+        }
+
+        repeatOnLifecycleExtension {
+            viewModel.onDeleteEvent.collectLatest {
+                CustomSnackBar.make(binding.issueContainer, "선택한 이슈를 삭제했습니다.") {
+                    viewModel.revertDeleteIssue()
+                }.show()
             }
         }
     }

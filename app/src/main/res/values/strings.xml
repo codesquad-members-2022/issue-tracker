@@ -23,7 +23,7 @@
 
     <!--issue-->
     <string name="description_add_issue">add_issue</string>
-    <string name="date_format">yyyy-MM-dd HH:mm:ss</string>
+    <string name="date_format">yyyy-MM-dd\'T\'HH:mm:ss</string>
     <string name="issue_write_time"> %s, %s님이 작성했습니다."</string>
     <string name="issue_number">#%d</string>
 
@@ -59,8 +59,6 @@
     <string name="detail_edit">편집하기</string>
     <string name="issue_open">열림</string>
     <string name="issue_close">닫힘</string>
-    <string name="issue_open_eng">open</string>
-    <string name="issue_close_eng">close</string>
     <string name="detail_menu_edit">수정하기</string>
     <string name="detail_menu_delete">삭제하기</string>
 
@@ -75,4 +73,13 @@
     <string name="logout_question_negative_string">취소</string>
     <string name="logout_question_title_string">로그아웃</string>
     <string name="logout_question_message_string">로그아웃 하시겠습니까?</string>
+
+    <!-- issue write -->
+    <string name="preview_string">미리보기</string>
+    <string name="save_issue_string">저장</string>
+    <string name="edit_issue_string">수정</string>
+    <string name="issue_write_subject_string">제목</string>
+    <string name="new_issue_title_string">새로운 이슈</string>
+    <string name="edit_issue_title_string">이슈 수정</string>
+    <string name="edit_subject_hint">제목을 입력하세요</string>
 </resources>

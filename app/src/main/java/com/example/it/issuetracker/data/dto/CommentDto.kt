@@ -1,19 +1,19 @@
 package com.example.it.issuetracker.data.dto
 
 import com.example.it.issuetracker.domain.model.Comment
+import com.squareup.moshi.Json
 
 data class CommentDto(
-    val uid: Long,
-    val id: String,
+    val id: Long,
+    val githubId: String,
     val imageUrl: String,
     val content: String,
-    val createDate: String,
-    val reaction: Int,
-    var like: Int,
-    var best: Int,
-    var hate: Int,
-    var ok: Int,
+    @Json(name = "createdTime") val createDate: String,
+    var like: Int = 0,
+    var best: Int = 0,
+    var hate: Int = 0,
+    var ok: Int = 0,
 )
 
 fun CommentDto.toComment(): Comment =
-    Comment(uid, id, imageUrl, content, createDate, reaction, like, hate, best, ok)
+    Comment(id, githubId, imageUrl, content, createDate, like, hate, best, ok)

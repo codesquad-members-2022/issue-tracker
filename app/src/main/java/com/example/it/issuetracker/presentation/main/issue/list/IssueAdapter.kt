@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.it.issuetracker.databinding.ItemEditIssueBinding
 import com.example.it.issuetracker.databinding.ItemIssueBinding
 import com.example.it.issuetracker.domain.model.Issue
+import com.example.it.issuetracker.presentation.common.Constants.PERCENT
+import com.example.it.issuetracker.presentation.common.Constants.RATIO
+import com.example.it.issuetracker.presentation.common.Constants.REVERSE
 
 class IssueAdapter(
     private val onToggle: () -> Unit,
@@ -56,7 +59,8 @@ class IssueAdapter(
         private val adapter = LabelAdapter()
 
         fun bind(issue: Issue) {
-            if (issue.isSwiped) binding.container.translationX = binding.root.width * -1f / 10 * 3
+            if (issue.isSwiped) binding.container.translationX =
+                binding.root.width * REVERSE / PERCENT * RATIO
             else binding.container.translationX = 0f
 
             binding.issue = issue
