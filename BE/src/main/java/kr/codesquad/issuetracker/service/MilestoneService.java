@@ -5,6 +5,9 @@ import kr.codesquad.issuetracker.dto.MilestoneRequest;
 import kr.codesquad.issuetracker.dto.MilestoneResponse;
 import kr.codesquad.issuetracker.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,18 +21,33 @@ public class MilestoneService {
 
     private final MilestoneRepository milestoneRepository;
 
-    //TODO: 열린이슈와 닫힌이슈 리스트 생성해서 리턴하기
     public List<MilestoneResponse> getMilestoneList() {
         return milestoneRepository.findAll().stream()
                 .map(MilestoneResponse::new).collect(Collectors.toList());
     }
 
-    public void createMilestone(MilestoneRequest milestoneRequest){
+    public ResponseEntity createMilestone(MilestoneRequest milestoneRequest){
         Milestone milestone = new Milestone(milestoneRequest);
-        milestoneRepository.save(milestone);
+        try {
+            milestoneRepository.save(milestone);
+        } catch (RuntimeException e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
-    public void deleteMilestone(Long id){
-        milestoneRepository.deleteById(id);
+    public ResponseEntity deleteMilestone(Long id){
+        try {
+            milestoneRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    public ResponseEntity editMilestone(Long id, MilestoneRequest milestoneRequest){
+        Milestone milestone = milestoneRepository.findById(id).orElseThrow(RuntimeException::new);
+        milestone.update(milestoneRequest);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

@@ -13,28 +13,29 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/labels")
 public class LabelController {
 
     private final LabelService labelService;
 
-    @GetMapping("/labels")
+    @GetMapping
     public List<LabelResponse> getLabelList() {
         return labelService.getLabelList();
     }
 
-    @PostMapping("/labels")
+    @PostMapping
     public ResponseEntity createLabel(@RequestBody LabelRequest labelRequest){
         labelService.createLabel(labelRequest);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @DeleteMapping("/labels/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteLabel(@PathVariable Long id) {
-        try {
-            labelService.deleteLabel(id);
-        } catch (EmptyResultDataAccessException e) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity(HttpStatus.OK);
+        return labelService.deleteLabel(id);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity editLabel(@PathVariable Long id, @RequestBody LabelRequest labelRequest) {
+        return labelService.editLabel(id, labelRequest);
     }
 }

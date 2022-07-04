@@ -34,4 +34,20 @@ public class Label {
         this.backgroundColor = labelRequest.getColor();
         this.textColor = labelRequest.getTextColor();
     }
+
+    //TODO: 리팩토링 필요
+    public void update(LabelRequest labelRequest){
+        if (labelRequest.getTitle() != null) {
+            this.title = labelRequest.getTitle();
+        }
+        if (labelRequest.getDescription() != null) {
+            this.content = labelRequest.getDescription();
+        }
+        if (labelRequest.getColor() != null) {
+            this.backgroundColor = labelRequest.getColor();
+        }
+        if (labelRequest.getTextColor() != null) {
+            this.textColor = labelRequest.getTextColor();
+        }
+    }
 }
