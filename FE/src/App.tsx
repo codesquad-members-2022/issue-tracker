@@ -9,7 +9,6 @@ import { Milestones } from 'pages/Milestones';
 import { Container } from 'component/Container';
 import Callback from 'pages/Callback';
 // import { worker } from './mocks/browser';
-
 // worker.start();
 
 function App(): JSX.Element {
