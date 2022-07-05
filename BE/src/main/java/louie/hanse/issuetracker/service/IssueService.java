@@ -58,10 +58,25 @@ public class IssueService {
     }
 
     public IssueDetailResponse findIssue(Long issueId, Long memberId) {
-        Issue issue = issueRepository.findById(issueId)
-                .orElseThrow(IllegalStateException::new);
+        Issue issue = findByIdOrThrow(issueId);
         Member requestMember = memberRepository.findById(memberId)
                 .orElseThrow(IllegalStateException::new);
         return new IssueDetailResponse(issue, requestMember);
+    }
+
+    @Transactional
+    public void edit(Long id, String title) {
+        Issue issue = findByIdOrThrow(id);
+        issue.updateTitle(title);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Issue issue = findByIdOrThrow(id);
+        issueRepository.delete(issue);
+    }
+
+    private Issue findByIdOrThrow(Long id) {
+        return issueRepository.findById(id).orElseThrow(IllegalStateException::new);
     }
 }
