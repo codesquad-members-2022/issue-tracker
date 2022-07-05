@@ -27,6 +27,7 @@
 		B3773F352858648E008C4AAF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F342858648E008C4AAF /* TabBarViewController.swift */; };
 		B3773F37285864E2008C4AAF /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F36285864E2008C4AAF /* IssueListViewController.swift */; };
 		B3773F3928586D97008C4AAF /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3773F3828586D97008C4AAF /* IssueCell.swift */; };
+		B3839EB3286C339500FFA23A /* IssueCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3839EB2286C339500FFA23A /* IssueCellViewModel.swift */; };
 		B3BFBD3628572E5400D69A34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBD3528572E5400D69A34 /* AppDelegate.swift */; };
 		B3BFBD3828572E5400D69A34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBD3728572E5400D69A34 /* SceneDelegate.swift */; };
 		B3BFBD3A28572E5400D69A34 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BFBD3928572E5400D69A34 /* LoginViewController.swift */; };
@@ -36,6 +37,7 @@
 		B3D736F02861893D0053E887 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D736EF2861893D0053E887 /* IssueListViewModel.swift */; };
 		B3D73712286432230053E887 /* RootWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D73711286432230053E887 /* RootWindow.swift */; };
 		B3D737142864330B0053E887 /* RootWindowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D737132864330B0053E887 /* RootWindowViewModel.swift */; };
+		B3D7371C2869985A0053E887 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7371B2869985A0053E887 /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,7 @@
 		B3773F342858648E008C4AAF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		B3773F36285864E2008C4AAF /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		B3773F3828586D97008C4AAF /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
+		B3839EB2286C339500FFA23A /* IssueCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCellViewModel.swift; sourceTree = "<group>"; };
 		B3BFBD3228572E5400D69A34 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3BFBD3528572E5400D69A34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3BFBD3728572E5400D69A34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 		B3D736EF2861893D0053E887 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
 		B3D73711286432230053E887 /* RootWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindow.swift; sourceTree = "<group>"; };
 		B3D737132864330B0053E887 /* RootWindowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootWindowViewModel.swift; sourceTree = "<group>"; };
+		B3D7371B2869985A0053E887 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C0F9D2A98896B0988903BE82 /* Pods-IssueTracker.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.dev.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +180,7 @@
 				00B2A26328585CD700D201D3 /* DecodeManager.swift */,
 				B3BFBD3528572E5400D69A34 /* AppDelegate.swift */,
 				B3BFBD3728572E5400D69A34 /* SceneDelegate.swift */,
+				B3D7371B2869985A0053E887 /* Observable.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				B3D736EF2861893D0053E887 /* IssueListViewModel.swift */,
+				B3839EB2286C339500FFA23A /* IssueCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -551,9 +557,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3D7371C2869985A0053E887 /* Observable.swift in Sources */,
 				B3773F352858648E008C4AAF /* TabBarViewController.swift in Sources */,
 				B3BFBD3A28572E5400D69A34 /* LoginViewController.swift in Sources */,
 				B3D736E9286008440053E887 /* Extension+.swift in Sources */,
+				B3839EB3286C339500FFA23A /* IssueCellViewModel.swift in Sources */,
 				B3773F37285864E2008C4AAF /* IssueListViewController.swift in Sources */,
 				B3BFBD3628572E5400D69A34 /* AppDelegate.swift in Sources */,
 				B3773F2E28585237008C4AAF /* Tag.swift in Sources */,

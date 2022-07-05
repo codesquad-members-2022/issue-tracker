@@ -8,16 +8,23 @@
 import UIKit
 import SnapKit
 
-final class IssueCell: UICollectionViewCell {
+final class IssueCell: UITableViewCell {
 
     static let reuseIdentifier = "IssueCell"
     var issueListViewModel = IssueListViewModel()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        addsubviews()
+//        setLayouts()
+//    }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         addsubviews()
         setLayouts()
     }
+
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("\(#function) has not been implemented")
@@ -30,7 +37,7 @@ final class IssueCell: UICollectionViewCell {
         return label
     }()
 
-    private var descriptionLabel: UILabel = {
+    var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "이슈에 대한 설명(최대 두줄 까지 보여줄 수 있다)"
         label.textColor = .systemGray
@@ -38,7 +45,7 @@ final class IssueCell: UICollectionViewCell {
         return label
     }()
 
-    private var milestoneLabel: UILabel = {
+    var milestoneLabel: UILabel = {
         let label = UILabel()
         label.text = "마일스톤 이름"
         label.textColor = .systemGray
@@ -46,7 +53,7 @@ final class IssueCell: UICollectionViewCell {
         return label
     }()
 
-    private var tagLabel: UILabel = {
+    var tagLabel: UILabel = {
         let label = UILabel()
         label.text = "레이블 이름"
         label.backgroundColor = .systemGray2
@@ -91,6 +98,13 @@ final class IssueCell: UICollectionViewCell {
             make.width.greaterThanOrEqualTo(114)
             make.bottom.equalTo(contentView.snp.bottom).offset(-24)
         }
+    }
+
+    func setComponenets(with viewModel: IssueCellViewModel) {
+        titleLabel.text = viewModel.title
+        descriptionLabel.text = viewModel.description
+        tagLabel.text = viewModel.tag
+        milestoneLabel.text = viewModel.milestone
     }
 
 }

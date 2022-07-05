@@ -14,7 +14,8 @@ final class TabBarViewController: UITabBarController {
 
         self.view.backgroundColor = .white
 
-        let issueListViewController = IssueListViewController()
+        let issueListViewController = IssueListViewController(viewModel: IssueListViewModel())
+        issueListViewController.viewModel.loadIssueList()
         // TODO: 다른 VC로 변경 예정
         let secondVC = UIViewController()
         let thirdVC = UIViewController()
