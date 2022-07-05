@@ -1,7 +1,7 @@
 package louie.hanse.issuetracker.repository;
 
 import louie.hanse.issuetracker.domain.Issue;
-import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
+import louie.hanse.issuetracker.web.dto.issue.IssueSearchRequest;
 
 import java.util.List;
 

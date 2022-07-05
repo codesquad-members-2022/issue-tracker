@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker.web.dto;
+package louie.hanse.issuetracker.web.dto.label;
 
 import lombok.Getter;
 import louie.hanse.issuetracker.domain.Label;

@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker.web.dto;
+package louie.hanse.issuetracker.web.dto.manager;
 
 import louie.hanse.issuetracker.domain.Member;
 
