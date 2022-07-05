@@ -10,7 +10,7 @@ import louie.hanse.issuetracker.login.oauth.GithubUser;
 import louie.hanse.issuetracker.login.oauth.OAuthProperties;
 import louie.hanse.issuetracker.service.MemberService;
 import louie.hanse.issuetracker.service.OAuthService;
-import louie.hanse.issuetracker.web.dto.LoginResponse;
+import louie.hanse.issuetracker.web.dto.login.LoginResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

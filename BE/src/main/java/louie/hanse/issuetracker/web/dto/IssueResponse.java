@@ -1,8 +1,9 @@
-package louie.hanse.issuetracker.web.dto;
+package louie.hanse.issuetracker.web.dto.issue;
 
 import lombok.Getter;
 import louie.hanse.issuetracker.domain.Issue;
 import louie.hanse.issuetracker.domain.IssueLabel;
+import louie.hanse.issuetracker.web.dto.label.LabelResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,9 +1,12 @@
-package louie.hanse.issuetracker.web.dto;
+package louie.hanse.issuetracker.web.dto.issue;
 
 import louie.hanse.issuetracker.domain.Issue;
 import louie.hanse.issuetracker.domain.IssueLabel;
 import louie.hanse.issuetracker.domain.Member;
 import louie.hanse.issuetracker.domain.Status;
+import louie.hanse.issuetracker.web.dto.label.LabelResponse;
+import louie.hanse.issuetracker.web.dto.manager.ManagerResponse;
+import louie.hanse.issuetracker.web.dto.comment.CommentResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;

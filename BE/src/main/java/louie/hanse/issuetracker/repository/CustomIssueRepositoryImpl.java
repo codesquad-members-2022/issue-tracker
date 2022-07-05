@@ -4,7 +4,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import louie.hanse.issuetracker.domain.*;
-import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
+import louie.hanse.issuetracker.web.dto.issue.IssueSearchRequest;
 
 import java.util.List;
 

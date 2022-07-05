@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker.web.dto;
+package louie.hanse.issuetracker.web.dto.login;
 
 import lombok.Getter;
 

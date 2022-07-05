@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import louie.hanse.issuetracker.domain.*;
 import louie.hanse.issuetracker.repository.*;
-import louie.hanse.issuetracker.web.dto.IssueDetailResponse;
-import louie.hanse.issuetracker.web.dto.IssueSaveRequest;
-import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
-import louie.hanse.issuetracker.web.dto.IssueSearchResponse;
+import louie.hanse.issuetracker.web.dto.issue.IssueDetailResponse;
+import louie.hanse.issuetracker.web.dto.issue.IssueSaveRequest;
+import louie.hanse.issuetracker.web.dto.issue.IssueSearchRequest;
+import louie.hanse.issuetracker.web.dto.issue.IssueSearchResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

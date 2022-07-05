@@ -3,10 +3,10 @@ package louie.hanse.issuetracker.web.controller;
 import lombok.RequiredArgsConstructor;
 import louie.hanse.issuetracker.login.jwt.JwtProvider;
 import louie.hanse.issuetracker.service.IssueService;
-import louie.hanse.issuetracker.web.dto.IssueDetailResponse;
-import louie.hanse.issuetracker.web.dto.IssueSaveRequest;
-import louie.hanse.issuetracker.web.dto.IssueSearchRequest;
-import louie.hanse.issuetracker.web.dto.IssueSearchResponse;
+import louie.hanse.issuetracker.web.dto.issue.IssueDetailResponse;
+import louie.hanse.issuetracker.web.dto.issue.IssueSaveRequest;
+import louie.hanse.issuetracker.web.dto.issue.IssueSearchRequest;
+import louie.hanse.issuetracker.web.dto.issue.IssueSearchResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
