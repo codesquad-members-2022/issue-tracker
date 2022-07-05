@@ -27,7 +27,7 @@ public class Issue {
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IssueLabel> issueLabels = new ArrayList<>();
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn
     private Milestone milestone;
 
@@ -47,6 +47,10 @@ public class Issue {
     public Issue(String title, Member writer) {
         this.title = title;
         this.writer = writer;
+    }
+
+    public void updateTitle(String title) {
+        this.title = title;
     }
 
     public void updateMilestone(Milestone milestone) {
