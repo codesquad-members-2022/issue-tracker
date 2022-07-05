@@ -5,15 +5,18 @@ import com.team31.codesquad.issuetracker.domain.comment.CommentRepository;
 import com.team31.codesquad.issuetracker.domain.issue.Issue;
 import com.team31.codesquad.issuetracker.domain.issue.IssueLabel;
 import com.team31.codesquad.issuetracker.domain.issue.IssueLabelRepository;
+import com.team31.codesquad.issuetracker.domain.issue.IssueQueryRepository;
 import com.team31.codesquad.issuetracker.domain.issue.IssueRepository;
-import com.team31.codesquad.issuetracker.domain.issue.IssueStatus;
+import com.team31.codesquad.issuetracker.domain.label.IssueLabelQueryRepository;
 import com.team31.codesquad.issuetracker.domain.label.LabelRepository;
 import com.team31.codesquad.issuetracker.domain.milestone.Milestone;
 import com.team31.codesquad.issuetracker.domain.milestone.MilestoneRepository;
 import com.team31.codesquad.issuetracker.domain.user.AssignedUser;
+import com.team31.codesquad.issuetracker.domain.user.AssignedUserQueryRepository;
 import com.team31.codesquad.issuetracker.domain.user.AssignedUserRepository;
 import com.team31.codesquad.issuetracker.domain.user.User;
 import com.team31.codesquad.issuetracker.domain.user.UserRepository;
+import com.team31.codesquad.issuetracker.dto.OpenClosedCount;
 import com.team31.codesquad.issuetracker.dto.OpenClosedCountResult;
 import com.team31.codesquad.issuetracker.dto.issue.IssueAssigneesChangeRequest;
 import com.team31.codesquad.issuetracker.dto.issue.IssueCreateRequest;
@@ -22,6 +25,7 @@ import com.team31.codesquad.issuetracker.dto.issue.IssueDetailResponse;
 import com.team31.codesquad.issuetracker.dto.issue.IssueLabelsChangeRequest;
 import com.team31.codesquad.issuetracker.dto.issue.IssueMilestoneChangeRequest;
 import com.team31.codesquad.issuetracker.dto.issue.IssueResponse;
+import com.team31.codesquad.issuetracker.dto.issue.IssueSearchCondition;
 import com.team31.codesquad.issuetracker.dto.issue.IssueStatusChangeRequest;
 import com.team31.codesquad.issuetracker.dto.issue.IssueTitleChangeRequest;
 import com.team31.codesquad.issuetracker.dto.issue.MultiIssueStatusChangeRequest;
@@ -31,6 +35,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,42 +46,34 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class IssueServiceImpl implements IssueService {
 
-    public static final int DEFAULT_PAGE = 1;
-    public static final String DEFAULT_QUERY = "is:open";
+    public static final int PAGE_SIZE = 25;
 
     private final IssueRepository issueRepository;
+    private final IssueQueryRepository issueQueryRepository;
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
     private final CommentRepository commentRepository;
     private final AssignedUserRepository assignedUserRepository;
     private final IssueLabelRepository issueLabelRepository;
+    private final AssignedUserQueryRepository assignedUserQueryRepository;
+    private final IssueLabelQueryRepository issueLabelQueryRepository;
 
     @Override
     public OpenClosedCountResult<List<IssueResponse>> findAll(Integer page, String query) {
 
-        // TODO: 페이징 및 검색 조건 쿼리 구현
+        IssueSearchCondition condition = IssueSearchCondition.create(query);
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
 
-        // 임시 로직
-        IssueStatus status = IssueStatus.OPEN;
-        if (query.strip().equals("is:closed")) {
-            status = IssueStatus.CLOSED;
-        }
-        long countAll = issueRepository.count();
-        List<IssueResponse> issueResponses = issueRepository.findAllByStatus(status).stream()
-                .map(IssueResponse::new)
-                .collect(Collectors.toList());
+        List<IssueResponse> issueResponses =
+                issueQueryRepository.findAllByCondition(condition, pageable)
+                        .stream()
+                        .map(IssueResponse::new).collect(Collectors.toList());
 
-        if (status.equals(IssueStatus.OPEN)) {
-            return new OpenClosedCountResult<>((long) issueResponses.size(),
-                    countAll - issueResponses.size()
-                    , issueResponses);
-        }
+        OpenClosedCount openClosedCount = issueQueryRepository.countAllByCondition(condition);
 
-        return new OpenClosedCountResult<>(
-                countAll - issueResponses.size(),
-                (long) issueResponses.size()
-                , issueResponses);
+        return new OpenClosedCountResult<>(openClosedCount.getOpenCount(),
+                openClosedCount.getClosedCount(), issueResponses);
     }
 
     @Transactional
@@ -86,103 +84,86 @@ public class IssueServiceImpl implements IssueService {
 
     @Transactional
     @Override
-    public IssueCreateResponse createIssue(IssueCreateRequest request, String loginName) {
-        User author = getAuthor(loginName);
-        List<AssignedUser> assignedUsers = createAssignedUsers(request.getAssigneeIds());
-        List<IssueLabel> issueLabels = createIssueLabels(request.getLabelIds());
+    public IssueCreateResponse createIssue(IssueCreateRequest request, User loginUser) {
         Milestone milestone = getMilestone(request.getMilestoneId());
-
-        Issue issue = Issue.createIssue(request.getTitle(), author,
-                assignedUsers, issueLabels, milestone);
+        Comment comment = new Comment(loginUser, request.getCommentCreateRequest().getContent());
+        Issue issue = Issue.createIssue(request.getTitle(), loginUser, milestone, comment);
         issueRepository.save(issue);
-        Comment comment = new Comment(issue, author,
-                request.getCommentCreateRequest().getContent());
-        commentRepository.save(comment);
 
-        issue.addComment(comment);
+        List<AssignedUser> assignedUsers = createAssignedUsers(request.getAssigneeIds(), issue);
+        List<IssueLabel> issueLabels = createIssueLabels(request.getLabelIds(), issue);
+        assignedUserRepository.saveAll(assignedUsers);
+        issueLabelRepository.saveAll(issueLabels);
 
         return new IssueCreateResponse(issue.getId(), comment.getId());
     }
 
     @Override
     public IssueDetailResponse getIssue(Long issueId) {
-        Issue issue = issueRepository.findById(issueId)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "존재하지 않는 issue 입니다. issueId = " + issueId));
-        return new IssueDetailResponse(issue);
+        Issue issue = issueQueryRepository.findIssueWithAuthorAndMilestone(issueId);
+        List<AssignedUser> assignedUsers =
+                assignedUserQueryRepository.findAssignedUsersWithUsersByIssue(issue);
+        List<IssueLabel> issueLabels = issueLabelQueryRepository.findIssueLabelWithLabelByIssue(
+                issue);
+        List<Comment> comments = commentRepository.findAllByIssue(issue);
+        return new IssueDetailResponse(issue, assignedUsers, issueLabels, comments);
     }
 
     @Transactional
     @Override
-    public void changeStatus(Long issueId, IssueStatusChangeRequest request, String loginName) {
-        Issue issue = issueRepository.findById(issueId)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "존재하지 않는 issue 입니다. issueId = " + issueId));
-        User statusChangeUser = getAuthor(loginName);
+    public void changeStatus(Long issueId, IssueStatusChangeRequest request,
+            User statusChangeUser) {
+        Issue issue = findIssueWithExistValidation(issueId);
         issue.changStatus(request.getStatus(), statusChangeUser);
     }
 
     @Transactional
     @Override
     public void changeTitle(Long issueId, IssueTitleChangeRequest request) {
-        Issue issue = issueRepository.findById(issueId)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "존재하지 않는 issue 입니다. issueId = " + issueId));
+        Issue issue = findIssueWithExistValidation(issueId);
         issue.changeTitle(request.getTitle());
     }
 
     @Transactional
     @Override
-    public void changIssuesStatus(MultiIssueStatusChangeRequest request, String loginName) {
-        User statusChangeUser = getAuthor(loginName);
-        request.getIssueIds().stream()
-                .map(
-                        id -> issueRepository.findById(id)
-                                .orElseThrow(() -> new IllegalArgumentException(
-                                        "존재하지 않는 issue 입니다. issueId = " + id))
-                )
+    public void changIssuesStatus(MultiIssueStatusChangeRequest request, User statusChangeUser) {
+        issueRepository.findAllById(request.getIssueIds())
                 .forEach(i -> i.changStatus(request.getStatus(), statusChangeUser));
     }
 
     @Transactional
     @Override
-    public void changeAssignee(Long issueId, IssueAssigneesChangeRequest request) {
-        Issue issue = issueRepository.findById(issueId)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "존재하지 않는 issue 입니다. issueId = " + issueId));
+    public void changeAssignees(Long issueId, IssueAssigneesChangeRequest request) {
+        Issue issue = findIssueWithExistValidation(issueId);
         assignedUserRepository.deleteAll(issue.getAssignees());
 
-        List<AssignedUser> assignedUsers = createAssignedUsers(request.getAssigneeIds());
+        List<AssignedUser> assignedUsers = createAssignedUsers(request.getAssigneeIds(), issue);
         issue.updateAssignedUsers(assignedUsers);
     }
 
     @Transactional
     @Override
     public void changeMilestone(Long issueId, IssueMilestoneChangeRequest request) {
-        Issue issue = issueRepository.findById(issueId)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "존재하지 않는 issue 입니다. issueId = " + issueId));
+        Issue issue = findIssueWithExistValidation(issueId);
         Milestone milestone = getMilestone(request.getMilestoneId());
 
         issue.updateMilestone(milestone);
     }
 
+    private Issue findIssueWithExistValidation(Long issueId) {
+        return issueRepository.findById(issueId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "존재하지 않는 issue 입니다. issueId = " + issueId));
+    }
+
     @Transactional
     @Override
     public void changeLabels(Long issueId, IssueLabelsChangeRequest request) {
-        Issue issue = issueRepository.findById(issueId)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "존재하지 않는 issue 입니다. issueId = " + issueId));
+        Issue issue = findIssueWithExistValidation(issueId);
         issueLabelRepository.deleteAll(issue.getIssueLabels());
 
-        List<IssueLabel> issueLabels = createIssueLabels(request.getLabelIds());
+        List<IssueLabel> issueLabels = createIssueLabels(request.getLabelIds(), issue);
         issue.updateIssueLabels(issueLabels);
-    }
-
-    private User getAuthor(String loginName) {
-        return userRepository.findByLoginName(loginName)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "존재하지 않는 user 입니다. loginName = " + loginName));
     }
 
     private Milestone getMilestone(Long milestoneId) {
@@ -194,35 +175,27 @@ public class IssueServiceImpl implements IssueService {
                         "존재하지 않는 milestone 입니다. id = " + milestoneId));
     }
 
-    private List<IssueLabel> createIssueLabels(List<Long> labelIds) {
+    private List<IssueLabel> createIssueLabels(List<Long> labelIds, Issue issue) {
         if (labelIds == null || labelIds.size() == 0) {
             return new ArrayList<>();
         }
 
-        List<IssueLabel> issueLabels = labelIds.stream()
-                .map(id -> labelRepository.findById(id)
-                        .orElseThrow(() -> new IllegalArgumentException(
-                                "존재하지 않는 label 입니다. id = " + id)))
-                .map(IssueLabel::new)
+        List<IssueLabel> issueLabels = labelRepository.findAllById(labelIds).stream()
+                .map(label -> new IssueLabel(label, issue))
                 .collect(Collectors.toList());
 
-        issueLabelRepository.saveAll(issueLabels);
         return issueLabels;
     }
 
-    private List<AssignedUser> createAssignedUsers(List<Long> assigneeIds) {
+    private List<AssignedUser> createAssignedUsers(List<Long> assigneeIds, Issue issue) {
         if (assigneeIds == null || assigneeIds.size() == 0) {
             return new ArrayList<>();
         }
 
-        List<AssignedUser> assignedUsers = assigneeIds.stream()
-                .map(id -> userRepository.findById(id)
-                        .orElseThrow(
-                                () -> new IllegalArgumentException("존재하지 않는 user 입니다. id = " + id)))
-                .map(AssignedUser::new)
+        List<AssignedUser> assignedUsers = userRepository.findAllById(assigneeIds).stream()
+                .map(user -> new AssignedUser(user, issue))
                 .collect(Collectors.toList());
 
-        assignedUserRepository.saveAll(assignedUsers);
         return assignedUsers;
     }
 
