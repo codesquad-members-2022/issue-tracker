@@ -2,6 +2,7 @@ package louie.hanse.issuetracker.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import louie.hanse.issuetracker.domain.Status;
 import louie.hanse.issuetracker.login.jwt.JwtProvider;
 import louie.hanse.issuetracker.service.IssueService;
 import louie.hanse.issuetracker.web.dto.issue.IssueDetailResponse;
@@ -12,7 +13,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequestMapping("/issues")
 @RestController
@@ -45,11 +49,23 @@ public class IssueController {
     @PatchMapping("/{id}")
     public void editTitle(@PathVariable Long id, @RequestBody Map<String, String> map) {
         String title = map.get("title");
-        issueService.edit(id, title);
+        issueService.editTitle(id, title);
     }
 
     @DeleteMapping("/{id}")
     public void deleteIssue(@PathVariable Long id) {
         issueService.delete(id);
     }
+
+    @PatchMapping("/{ids}/status")
+    public void editStatus(@PathVariable(name = "ids") String stringIds, @RequestBody Map<String, Status> map) {
+        List<Long> issueIds = Arrays.stream(stringIds.split(","))
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
+        Status status = map.get("status");
+        issueService.editStatus(issueIds, status);
+    }
+
+
+
 }

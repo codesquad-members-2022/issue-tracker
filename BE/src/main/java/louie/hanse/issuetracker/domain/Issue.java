@@ -49,6 +49,10 @@ public class Issue {
         this.writer = writer;
     }
 
+    public void updateStatus(Status status) {
+        this.status = status;
+    }
+
     public void updateTitle(String title) {
         this.title = title;
     }
@@ -73,4 +77,5 @@ public class Issue {
     public boolean isClosed() {
         return status.isClosed();
     }
+
 }
