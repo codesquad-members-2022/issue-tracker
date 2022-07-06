@@ -84,7 +84,7 @@ public class IssueService {
         }
     }
 
-    private Issue findByIdOrThrow(Long id) {
+    public Issue findByIdOrThrow(Long id) {
         return issueRepository.findById(id).orElseThrow(IllegalStateException::new);
     }
 }
