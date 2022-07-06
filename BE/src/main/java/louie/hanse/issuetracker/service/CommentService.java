@@ -1,5 +1,6 @@
 package louie.hanse.issuetracker.service;
 
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import louie.hanse.issuetracker.domain.Comment;
 import louie.hanse.issuetracker.domain.Issue;
@@ -22,5 +23,13 @@ public class CommentService {
         Comment comment = new Comment(issue, contents);
         commentRepository.save(comment);
         return new CommentSaveResponse(comment);
+    }
+
+    @Transactional
+    public LocalDateTime edit(Long id, String contents) {
+        Comment comment = commentRepository.findById(id)
+            .orElseThrow(IllegalStateException::new);
+        comment.updateContents(contents);
+        return comment.getUpdatedDateTime();
     }
 }
