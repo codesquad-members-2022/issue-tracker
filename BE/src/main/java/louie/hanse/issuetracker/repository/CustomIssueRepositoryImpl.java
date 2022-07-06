@@ -39,8 +39,8 @@ public class CustomIssueRepositoryImpl implements CustomIssueRepository {
 
     @Override
     public long searchReverseStatusCount(IssueSearchRequest request, Long userId) {
-        return jpaQueryFactory.select(issue.count())
-                .from(issue)
+        return jpaQueryFactory.selectFrom(issue)
+                .distinct()
                 .leftJoin(issue.issueManagers, issueManager)
                 .leftJoin(issue.comments, comment)
                 .leftJoin(issue.issueLabels, issueLabel)
@@ -52,7 +52,7 @@ public class CustomIssueRepositoryImpl implements CustomIssueRepository {
                         commentWriterIdEq(userId),
                         labelIdEq(request.getLabelId()),
                         issueMilestoneIdEq(request.getMilestoneId())
-                ).fetchOne();
+                ).fetch().size();
     }
 
     private Predicate issueMilestoneIdEq(Long id) {

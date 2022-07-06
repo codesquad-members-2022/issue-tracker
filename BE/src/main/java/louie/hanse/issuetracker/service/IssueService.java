@@ -65,7 +65,7 @@ public class IssueService {
     }
 
     @Transactional
-    public void edit(Long id, String title) {
+    public void editTitle(Long id, String title) {
         Issue issue = findByIdOrThrow(id);
         issue.updateTitle(title);
     }
@@ -74,6 +74,14 @@ public class IssueService {
     public void delete(Long id) {
         Issue issue = findByIdOrThrow(id);
         issueRepository.delete(issue);
+    }
+
+    @Transactional
+    public void editStatus(List<Long> issueIds, Status status) {
+        List<Issue> issues = issueRepository.findAllById(issueIds);
+        for (Issue issue : issues) {
+            issue.updateStatus(status);
+        }
     }
 
     private Issue findByIdOrThrow(Long id) {
