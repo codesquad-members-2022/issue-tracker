@@ -42,4 +42,10 @@ public class MemberService {
                     throw new MemberNotFoundException("해당 id를 가진 회원이 존재하지 않습니다.");
                 });
     }
+
+    @Transactional
+    public void deleteRefreshToken(Long id) {
+        Member member = findByIdOrThrow(id);
+        member.deleteRefreshToken();
+    }
 }

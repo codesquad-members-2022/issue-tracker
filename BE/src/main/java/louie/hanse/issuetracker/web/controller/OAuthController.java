@@ -14,6 +14,7 @@ import louie.hanse.issuetracker.web.dto.login.LoginResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,6 +82,37 @@ public class OAuthController {
             response.setHeader("Access-Token",  reissueAccessToken);
 
         }
+    }
+    
+    @PostMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        String accessToken = request.getHeader("Access-Token");
+        String refreshToken = request.getHeader("Refresh-Token");
+
+        try {
+            jwtProvider.verifyAccessToken(accessToken);
+            jwtProvider.verifyRefreshToken(refreshToken);
+
+            Long accessTokenId = jwtProvider.decodeMemberId(accessToken);
+            Long refreshTokenId = jwtProvider.decodeMemberId(refreshToken);
+
+            if (!accessTokenId.equals(refreshTokenId)) {
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                return;
+            }
+            String findRefreshToken = memberService.findRefreshTokenById(refreshTokenId);
+            if (!findRefreshToken.equals(refreshToken)) {
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                return;
+            }
+            memberService.deleteRefreshToken(refreshTokenId);
+
+        } catch (TokenExpiredException e) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
+
+
+
     }
 
 }
