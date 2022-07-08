@@ -36,7 +36,13 @@ class Container {
             return viewController
         case .repos:
             let model = ReposModel(service: service)
+            model.fetchViewData()
             let viewController = ReposViewController(model: model)
+            model.updated = { repos in
+                DispatchQueue.main.async {
+                    viewController.reloadTableView()
+                }
+            }
             viewController.title = "Repos"
             return UINavigationController(rootViewController: viewController)
         case .newIssue(let repo):
