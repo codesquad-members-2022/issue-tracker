@@ -8,7 +8,11 @@
 import Foundation
 
 // MARK: - Label
-struct Label: Codable {
+struct Label: Codable, Optionable {
+    var subTitle: String {
+        self.name
+    }
+    
     let id: Int
     let url: String
     let name, color: String

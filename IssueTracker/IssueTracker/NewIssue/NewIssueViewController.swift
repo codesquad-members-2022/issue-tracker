@@ -7,7 +7,41 @@
 
 import UIKit
 
+protocol NewIssueCreateDelegate: AnyObject {
+    func created()
+}
+
 class NewIssueViewController: UIViewController {
+    
+    weak var delegate: NewIssueCreateDelegate?
+    
+    private let model: NewIssueModel
+    
+    private let optionList = Option.allCases
+    private var selectedList = Array<String>(repeating: "", count: Option.allCases.count)
+    
+    private var selectedLabel: Label?
+    private var selectedMilestone: Milestone?
+    private var selectedAssignee: Assignee?
+    
+    private let repo: Repository
+    
+    init(repo: Repository, model: NewIssueModel) {
+        self.repo = repo
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required convenience init?(coder: NSCoder) {
+        
+        let owner = Owner(login: "")
+        let service = IssueService(token: "")
+        let model = NewIssueModel(service: service)
+        self.init(repo: Repository(name: "",
+                                   owner: owner),
+                  model: model)
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var navSegmentedControl: UISegmentedControl = {
         let buttonList = ["마크다운", "미리보기"]
@@ -38,7 +72,6 @@ class NewIssueViewController: UIViewController {
         return devider
     }()
     
-    private let optionList = ["저장소", "레이블", "마일스톤", "담당자"]
     private let optionTableCellIdentifier = "optionTableCellIdentifier"
     
     private lazy var optionTable: UITableView = {
@@ -62,6 +95,7 @@ class NewIssueViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setUpViews()
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
 
     private func setupNavigationBar() {
@@ -109,10 +143,9 @@ class NewIssueViewController: UIViewController {
             make.top.equalTo(horizontalDevider.snp.bottom)
             make.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
             make.bottom.equalTo(optionTable.snp.top)
-            
         }
     }
-
+    
     private lazy var createButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         var container = AttributeContainer()
@@ -129,18 +162,39 @@ class NewIssueViewController: UIViewController {
     }()
     
     private func touchedCreateButton() {
-        // TODO: 이슈생성
-        //1. api 호출
-        //2. api 가 성공적으로 응답을 보내줬다면 =>
-            //2-1. 이전 화면으로 돌아가고
-            //2-2. 이슈 목록 조회 다시해서 보여주기
-        //3. api 가 실패했다면 => issue 생성실패 얼럿띄우기
+        guard let titleString = self.titleField.text,
+              !titleString.isEmpty else {
+            // TODO: - 타이틀 입력 값이 없다 => 얼럿
+            return
+        }
         
+        guard let contentString = contentField.text else {
+            return
+        }
+        
+        model.createIssue(title: titleString, repo: repo, content: contentString, label: selectedLabel, milestone: selectedMilestone, assignee: selectedAssignee) { boolResult in
+            if boolResult {
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                self.delegate?.created()
+            }
+        }
     }
 }
 
 extension NewIssueViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let option = optionList[indexPath.row]
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        guard let viewController = appdelegate.container?.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
+            return
+        }
+        self.navigationController?.pushViewController(viewController, animated: true)
+        viewController.delegate = self
+    }
 }
 
 extension NewIssueViewController: UITableViewDataSource {
@@ -152,13 +206,32 @@ extension NewIssueViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: optionTableCellIdentifier,
                                                  for: indexPath)
         var sidebarCell = UIListContentConfiguration.sidebarCell()
-        sidebarCell.text = optionList[indexPath.item]
-        sidebarCell.secondaryText = "선택내용"
+        sidebarCell.text = optionList[indexPath.item].description
+        sidebarCell.secondaryText = selectedList[indexPath.item]
         sidebarCell.prefersSideBySideTextAndSecondaryText = true
         
         cell.contentConfiguration = sidebarCell
         cell.accessoryType = .disclosureIndicator
         return cell
     }
-    
+}
+
+extension NewIssueViewController: OptionSelectDelegate {
+    func selected(item: Optionable, option: Option) {
+        guard let optionIndex = optionList.firstIndex(of: option) else {
+            return
+        }
+        
+        switch option {
+        case .label:
+            selectedLabel = item as? Label
+        case .milestone:
+            selectedMilestone = item as? Milestone
+        case .assignee:
+            selectedAssignee = item as? Assignee
+        }
+        
+        selectedList[optionIndex] = item.subTitle
+        self.optionTable.reloadData()
+    }
 }

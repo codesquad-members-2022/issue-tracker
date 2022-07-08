@@ -10,18 +10,18 @@ import Foundation
 class IssueModel {
 
     private let service: IssueService
-    private let accessToken: String
+    private let repo: Repository
     
-    init(service: IssueService, token: String) {
+    init(service: IssueService, repo: Repository) {
         self.service = service
-        self.accessToken = token
+        self.repo = repo
     }
     
-    var updatedIssues: ( (_ issues: [Issue]) -> Void )?
+    var updatedIssues: ( () -> Void )?
     
     private var issues: [Issue] = [] {
         didSet {
-            updatedIssues?(issues)
+            updatedIssues?()
         }
     }
     
@@ -37,7 +37,7 @@ class IssueModel {
     }
     
     func requestIssue() {
-        service.requestIssues(accessToken: accessToken) { result in
+        service.requestRepositoryIssues(repo: repo) { result in
             switch result {
             case .success(let issues):
                 self.issues = issues

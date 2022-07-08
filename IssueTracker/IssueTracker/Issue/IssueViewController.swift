@@ -15,7 +15,6 @@ final class IssueViewController: UIViewController {
     
     private lazy var addButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
-//        configuration.image = UIImage(systemName: "plus")
         configuration.baseBackgroundColor = .systemBlue
         configuration.baseForegroundColor = .white
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
@@ -25,19 +24,21 @@ final class IssueViewController: UIViewController {
         }))
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         
-//        button.layer.cornerRadius = 50 / 2
-        
         return button
     }()
     
-    private var model: IssueModel
+    private let model: IssueModel
+    private let repo: Repository
     
-    init(model: IssueModel) {
+    init(model: IssueModel, repo: Repository) {
         self.model = model
+        self.repo = repo
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
+        let repository = Repository(name: "", owner: Owner(login: ""))
+        self.init(model: IssueModel(service: IssueService(token: ""), repo: repository), repo: repository)
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -47,14 +48,20 @@ final class IssueViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         model.requestIssue()
-        model.updatedIssues = { [weak self] issues in
-            DispatchQueue.main.async { [weak self] in 
+        model.updatedIssues = {
+            DispatchQueue.main.async { [weak self] in
                 self?.collectionView.reloadData()
             }
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     @objc func touchedSelectButton() {
+        
     }
     
     @objc func touchedFilterButton() {
@@ -64,18 +71,17 @@ final class IssueViewController: UIViewController {
     }
     
     @objc func touchedAddButton() {
-        self.navigationController?.pushViewController(Container().buildViewController(.newIssue), animated: true)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        guard let viewController = appdelegate.container?.buildViewController(.newIssue(repo: repo)) as? NewIssueViewController else {
+            return
+        }
+        self.navigationController?.pushViewController(viewController, animated: true)
+        viewController.delegate = self
     }
     
     private func setupNavigationBar() {
-        self.title = "이슈"
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        let filterButton = createButton(title: "필터", image: UIImage(systemName: "scroll"), action: UIAction(handler: { [weak self] _ in
-            self?.touchedFilterButton()
-        }))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButton)
-        
         let selectButton = createButton(title: "선택", image: UIImage(systemName: "checkmark.circle"), action: UIAction(handler: { [weak self] _ in
             self?.touchedSelectButton()
         }))
@@ -147,5 +153,11 @@ extension IssueViewController: UICollectionViewDataSource {
 extension IssueViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 200)
+    }
+}
+
+extension IssueViewController: NewIssueCreateDelegate {
+    func created() {
+        model.requestIssue()
     }
 }
