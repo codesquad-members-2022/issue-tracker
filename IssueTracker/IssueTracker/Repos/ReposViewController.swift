@@ -53,7 +53,7 @@ extension ReposViewController: UITableViewDelegate {
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        guard let viewController = appdelegate.container.buildViewController(.issue( selectedRepo: selectedItem)) as? IssueViewController else {
+        guard let viewController = appdelegate.container?.buildViewController(.issue( selectedRepo: selectedItem)) as? IssueViewController else {
             return
         }
         self.navigationController?.pushViewController(viewController, animated: true)

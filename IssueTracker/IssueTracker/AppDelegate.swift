@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    let container = Container(token: GithubUserDefaults.getToken())
+    private let githubUserDefaults = GithubUserDefaults()
+    var container: Container?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: - 토큰 유효기간 판단
@@ -22,8 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // UserDefaults.토큰이저장된시간 > 1일
         // { 다시 로그인을 해야된다고 판단 => UerDefaults.token 삭제 }
         
+        container = Container(token: githubUserDefaults.getToken())
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = container.buildRootViewController()
+        window?.rootViewController = container?.buildRootViewController()
         window?.makeKeyAndVisible()
         return true
     }
@@ -34,9 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // TODO: 로그인 실패 얼럿띄우기
                 return
             }
-            GithubUserDefaults.setToken(token)
-            self?.container.setToken(token)
-            self?.window?.rootViewController = self?.container.buildRootViewController()
+            self?.githubUserDefaults.setToken(token)
+            self?.container?.setToken(token)
+            self?.window?.rootViewController = self?.container?.buildRootViewController()
         }
         return true
     }
