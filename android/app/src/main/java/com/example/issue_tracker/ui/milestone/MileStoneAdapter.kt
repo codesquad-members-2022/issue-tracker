@@ -9,15 +9,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.databinding.ItemMileStoneRecyclerViewBinding
 import com.example.issue_tracker.model.MileStone
 
-class MileStoneAdapter :
-    ListAdapter<MileStone, MileStoneAdapter.MileStoneViewHolder>(MileStoneDiffCallback) {
+class MileStoneAdapter(
+    private val startActionMode: (View) -> Unit,
+    private val changeLongClickState: () -> Unit,
+    private val stopActionMode: () -> Unit,
+) : ListAdapter<MileStone, MileStoneAdapter.MileStoneViewHolder>(MileStoneDiffCallback) {
 
-    class MileStoneViewHolder(private val binding: ItemMileStoneRecyclerViewBinding) :
+    inner class MileStoneViewHolder(private val binding: ItemMileStoneRecyclerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(mileStone: MileStone) {
             binding.mileStone = mileStone
             if (mileStone.description == "") {
                 binding.tvMileStoneRecyclerDescription.visibility = View.GONE
+            }
+            binding.cvMilestoneSwipeView.setOnLongClickListener {
+                showActionMode(mileStone.isLongClicked, it)
+                changeLongClickState()
+                false
+            }
+        }
+
+        private fun showActionMode(isLongClicked: Boolean, view: View) {
+            if (isLongClicked) {
+                stopActionMode()
+            } else {
+                startActionMode(view)
             }
         }
     }
@@ -44,5 +60,4 @@ class MileStoneAdapter :
             }
         }
     }
-
 }

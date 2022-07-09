@@ -6,15 +6,25 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
+import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentSignUpBinding
+import com.example.issue_tracker.model.SignUpRequest
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.collect
 
-
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
+    private val viewModel: SignUpViewModel by viewModels()
     private var idFlag = false
     private var passwordFlag = false
     private var passwordCheckFlag = false
@@ -22,20 +32,48 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
+    ): View {
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.nextButton.isEnabled = false
+        val findNavController = findNavController()
+        binding.signUpButton.isEnabled = false
         binding.idTextInputLayout.editText?.addTextChangedListener(idListener)
         binding.passwordTextInputLayout.editText?.addTextChangedListener(passwordListener)
         binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(
             passwordRecheckListener
         )
+        binding.signUpButton.setOnClickListener {
+            requestSignUp()
+        }
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.signUpResponse.collect {
+                if (it.statusCode == 200) {
+                    Toast.makeText(requireContext(), "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                    goToLoginFragment(findNavController)
+                } else {
+                    Toast.makeText(requireContext(), "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun requestSignUp() {
+        val request = SignUpRequest(
+            binding.idTextInputEditText.text?.toString(),
+            binding.passwordRecheckTextInputEditText.text?.toString(),
+            binding.nickNameTextInputEditText.text?.toString()
+        )
+        viewModel.requestSignUp(request)
+    }
+
+    private fun goToLoginFragment(findNavController: NavController) {
+        findNavController.navigate(R.id.action_signUpFragment_to_loginFragment)
     }
 
     private val idListener = object : TextWatcher {
@@ -133,13 +171,12 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    // 이메일 정규식 확인
     private fun checkEmailRegex(id: String): Boolean {
         return emailValidation.matches(id)
     }
 
     fun flagCheck() {
-        binding.nextButton.isEnabled = idFlag && passwordFlag && passwordCheckFlag
+        binding.signUpButton.isEnabled = idFlag && passwordFlag && passwordCheckFlag
     }
 
     companion object {

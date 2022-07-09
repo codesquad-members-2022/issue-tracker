@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="issue"
             type="com.example.issue_tracker.model.Issue" />
@@ -33,7 +32,7 @@
                 android:layout_weight="3"
                 android:background="@color/close_blue"
                 android:gravity="center"
-                android:text="닫기"
+                android:text="@string/issue_close"
                 android:textColor="@color/close_text" />
 
         </LinearLayout>
@@ -46,9 +45,9 @@
 
             <CheckBox
                 android:id="@+id/issue_check_box"
+                visible="@{issue.longClicked}"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                visible="@{issue.longClicked}"
                 android:buttonTint="@color/primary_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

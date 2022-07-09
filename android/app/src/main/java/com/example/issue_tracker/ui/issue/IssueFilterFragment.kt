@@ -36,7 +36,8 @@ class IssueFilterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
         goBackIssue(findNavController)
-        viewModel.addDummyData()
+        applyFilter(findNavController)
+        viewModel.loadLabelAndMileStone()
         binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
         binding.ibFilterButtonStatus.setOnClickListener {
             val statusPopupMenu = PopupMenu(requireContext(), it)
@@ -46,18 +47,11 @@ class IssueFilterFragment : Fragment() {
                 when (item.itemId) {
                     R.id.open_issue -> {
                         viewModel.setStatusChoose("열린 이슈")
-                    }
-                    R.id.issue_i_worte -> {
-                        viewModel.setStatusChoose("내가 작성한 이슈")
-                    }
-                    R.id.issue_for_me -> {
-                        viewModel.setStatusChoose("나에게 할당된 이슈")
-                    }
-                    R.id.issue_i_comment -> {
-                        viewModel.setStatusChoose("내가 댓글을 남긴 이슈")
+                        viewModel.setStatusRequest(true)
                     }
                     R.id.closed_issue -> {
                         viewModel.setStatusChoose("닫힌 이슈")
+                        viewModel.setStatusRequest(false)
                     }
                 }
                 false
@@ -82,6 +76,7 @@ class IssueFilterFragment : Fragment() {
                                 viewModel.setLabelChoose(title)
                             }
                             binding.tvFilterChooseLabel.text = viewModel.labelChoose.value
+                            viewModel.setLabelRequest(viewModel.labelList.value[i].labelId)
                             flag = false
                         }
                     }
@@ -94,7 +89,7 @@ class IssueFilterFragment : Fragment() {
         binding.tvFilterChooseMileStone.text = viewModel.mileStoneChoose.value
         binding.ibFilterButtonMileStone.setOnClickListener {
             val mileStonePopupMenu = PopupMenu(requireContext(), it)
-            for (i in 0 until viewModel.labelList.value.size) {
+            for (i in 0 until viewModel.mileStoneList.value.size) {
                 mileStonePopupMenu.menu.add(Menu.NONE, i, i, viewModel.mileStoneList.value[i].title)
             }
             mileStonePopupMenu.setOnMenuItemClickListener { item ->
@@ -106,6 +101,7 @@ class IssueFilterFragment : Fragment() {
                                 viewModel.setMileStoneChoose(title)
                             }
                             binding.tvFilterChooseMileStone.text = viewModel.mileStoneChoose.value
+                            viewModel.setMileStoneRequest(viewModel.mileStoneList.value[i].mileStoneId)
                             flag = false
                         }
                     }
@@ -113,6 +109,13 @@ class IssueFilterFragment : Fragment() {
                 false
             }
             mileStonePopupMenu.show()
+        }
+    }
+
+    private fun applyFilter(findNavController: NavController) {
+        binding.btnIssueFilterApply.setOnClickListener {
+            viewModel.setIssueFilterRequest()
+            findNavController.navigate(R.id.action_issueFilterFragment_to_issueFragment)
         }
     }
 

@@ -1,19 +1,27 @@
 package com.example.issue_tracker.repository
 
 import com.example.issue_tracker.common.addElement
+import com.example.issue_tracker.datasource.DataSource
 import com.example.issue_tracker.model.MileStone
+import com.example.issue_tracker.model.MileStoneDTO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import retrofit2.HttpException
 import javax.inject.Inject
 
-class MileStoneRepositoryImpl @Inject constructor() : MileStoneRepository {
+class MileStoneRepositoryImpl @Inject constructor(
+    private val dataSource: DataSource,
+) : MileStoneRepository {
 
-    private val _mileStoneList = MutableStateFlow<MutableList<MileStone>>(mutableListOf())
-
-    override fun addLabelList(mileStone: MileStone) {
-        _mileStoneList.addElement(mileStone)
+    override suspend fun addMileStone(item: MileStoneDTO.MileStoneDTOItem) {
+        val result = dataSource.addMileStones(item)
+        if (!result.isSuccessful) {
+            throw HttpException(result)
+        }
     }
 
-    override fun getLabelList(): Flow<List<MileStone>> = _mileStoneList
-
+    override suspend fun getMileStoneList() =
+        dataSource.getMileStones().milestones.map { mileStoneDTOItem ->
+            MileStone.of(mileStoneDTOItem)
+        }
 }

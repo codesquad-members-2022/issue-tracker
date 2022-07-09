@@ -60,4 +60,17 @@
     <string name="label_search_issue_hint">검색어를 입력하세요</string>
     <string name="issue_edit_mode">이슈편집</string>
     <string name="user_image_detail">userImage</string>
+    <string name="label_nick_name">닉네임</string>
+    <string name="button_logo">button_logo</string>
+    <string name="label_custom_image">라벨 이미지</string>
+    <string name="filter_status">상태</string>
+    <string name="filter_author">작성자</string>
+    <string name="filter_label">레이블</string>
+    <string name="filter_milestone">마일스톤</string>
+    <string name="issue_tracker_drawable">issueTrackerDrawable</string>
+    <string name="issue_close">닫기</string>
+    <string name="label_default_description">새로운 기능 추가</string>
+    <string name="save_label_complete">성공적으로 저장하였습니다</string>
+    <string name="label_close">close</string>
+    <string name="label_delete">delete</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.example.issue_tracker.R" />
 
         <variable
@@ -11,103 +12,144 @@
             type="com.example.issue_tracker.model.MileStone" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_mile_stone_recycler_title"
-            style="@style/TextHeadline5.bold"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/close_blue" />
+
+            <TextView
+                android:id="@+id/tv_close_issue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/close_blue"
+                android:gravity="center"
+                android:text="@string/issue_close"
+                android:textColor="@color/close_text" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_milestone_swipe_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@{mileStone.title}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="마스터스 코스" />
+            android:background="@color/white">
 
-        <TextView
-            android:id="@+id/tv_mile_stone_recycler_progress"
-            style="@style/TextHeadline5.bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/primary_green"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="진행률" />
+            <CheckBox
+                android:id="@+id/milestone_check_box"
+                visible="@{mileStone.longClicked}"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:buttonTint="@color/primary_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_mile_stone_recycler_description"
-            style="@style/Subtitle1.14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@{mileStone.description}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_title"
-            tools:text="마일스톤 대한 설명" />
+            <TextView
+                android:id="@+id/tv_mile_stone_recycler_title"
+                style="@style/TextHeadline5.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{mileStone.title}"
+                app:layout_constraintStart_toEndOf="@id/milestone_check_box"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="마스터스 코스" />
 
-        <ImageView
-            android:id="@+id/iv_calendar"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="9dp"
-            android:src="@drawable/ic_calendar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_description"
-            android:layout_marginStart="16dp" />
+            <TextView
+                android:id="@+id/tv_mile_stone_recycler_progress"
+                style="@style/TextHeadline5.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/primary_green"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="진행률" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            tools:text="완료일"
-            android:layout_marginTop="8dp"
-            android:text="@{mileStone.dueDate}"
-            app:layout_constraintStart_toEndOf="@id/iv_calendar"
-            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_description" />
+            <TextView
+                android:id="@+id/tv_mile_stone_recycler_description"
+                style="@style/Subtitle1.14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@{mileStone.description}"
+                app:layout_constraintStart_toEndOf="@id/milestone_check_box"
+                app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_title"
+                tools:text="마일스톤 대한 설명" />
 
-        <com.example.issue_tracker.ui.label.CustomLabel
-            android:id="@+id/cl_opened_issue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:labelOpenCount="@{mileStone.openedIssueCount}"
-            app:labelImage="@{R.drawable.ic_opened_issue_image}"
-            app:labelColorResource="@{R.color.primary_blueish}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_calendar"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            />
+            <ImageView
+                android:id="@+id/iv_calendar"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="9dp"
+                android:src="@drawable/ic_calendar"
+                app:layout_constraintStart_toEndOf="@id/milestone_check_box"
+                app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_description" />
 
-        <com.example.issue_tracker.ui.label.CustomLabel
-            android:id="@+id/cl_closed_issue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:labelCloseCount="@{mileStone.closedIssueCount}"
-            app:labelImage="@{R.drawable.ic_closed_issue_image}"
-            app:labelColorResource="@{R.color.primary_purple}"
-            app:layout_constraintStart_toEndOf="@id/cl_opened_issue"
-            app:layout_constraintTop_toBottomOf="@id/iv_calendar"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@{mileStone.dueDate}"
+                app:layout_constraintStart_toEndOf="@id/iv_calendar"
+                app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_description"
+                tools:text="완료일" />
 
-        <View
-            android:id="@+id/view_item_label_bottom"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/gray01"
-            app:layout_constraintTop_toBottomOf="@id/cl_opened_issue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <com.example.issue_tracker.ui.label.CustomLabel
+                android:id="@+id/cl_opened_issue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:labelColorResource="@{R.color.primary_blueish}"
+                app:labelImage="@{R.drawable.ic_opened_issue_image}"
+                app:labelOpenCount="@{mileStone.openedIssueCount}"
+                app:layout_constraintStart_toEndOf="@id/milestone_check_box"
+                app:layout_constraintTop_toBottomOf="@id/iv_calendar" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.example.issue_tracker.ui.label.CustomLabel
+                android:id="@+id/cl_closed_issue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:labelCloseCount="@{mileStone.closedIssueCount}"
+                app:labelColorResource="@{R.color.primary_purple}"
+                app:labelImage="@{R.drawable.ic_closed_issue_image}"
+                app:layout_constraintStart_toEndOf="@id/cl_opened_issue"
+                app:layout_constraintTop_toBottomOf="@id/iv_calendar" />
+
+            <View
+                android:id="@+id/view_item_label_bottom"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/gray01"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_opened_issue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
 </layout>

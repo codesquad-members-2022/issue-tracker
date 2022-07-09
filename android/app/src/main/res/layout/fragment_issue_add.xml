@@ -56,21 +56,12 @@
                     android:textSize="24sp" />
 
                 <Button
-                    android:id="@+id/btn_issue_pre_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:background="@android:color/transparent"
-                    android:outlineProvider="none"
-                    android:text="@string/text_pre_view" />
-
-                <Button
                     android:id="@+id/btn_issue_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:backgroundTint="@android:color/transparent"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:outlineProvider="none"
                     android:text="@string/label_save" />
 
@@ -97,6 +88,7 @@
             android:layout_marginTop="12dp"
             android:background="@android:color/transparent"
             android:hint="@string/add_new_issue_title"
+            android:inputType="none"
             android:maxLines="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_issue_title"
@@ -132,12 +124,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@android:color/transparent"
-                android:gravity="top" />
+                android:gravity="top"
+                android:inputType="none" />
         </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_assigned"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="60dp"
             android:background="@color/gray05"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -151,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:text="담당자"
+                android:text="@string/filter_author"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -185,7 +178,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_issue_mile_stone"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="60dp"
             android:background="@color/gray05"
             app:layout_constraintBottom_toTopOf="@id/constraint_layout_assigned"
@@ -199,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:text="마일스톤"
+                android:text="@string/filter_milestone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -234,7 +227,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_issue_label"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="60dp"
             android:background="@color/gray05"
             app:layout_constraintBottom_toTopOf="@id/constraint_layout_issue_mile_stone"
@@ -248,7 +241,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:text="레이블"
+                android:text="@string/filter_label"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

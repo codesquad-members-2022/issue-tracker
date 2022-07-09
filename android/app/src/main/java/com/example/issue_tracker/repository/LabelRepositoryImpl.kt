@@ -1,26 +1,25 @@
 package com.example.issue_tracker.repository
 
-import com.example.issue_tracker.common.addElement
+import com.example.issue_tracker.datasource.DataSource
 import com.example.issue_tracker.model.Label
-import com.example.issue_tracker.model.toLabelList
-import com.example.issue_tracker.network.APIService
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.example.issue_tracker.model.LabelDTO
+import retrofit2.HttpException
 import javax.inject.Inject
 
 
 class LabelRepositoryImpl @Inject constructor(
-    private val apiService: APIService
+    private val dataSource: DataSource,
 ) : LabelRepository {
 
-    private val _labelList = MutableStateFlow<MutableList<Label>>(mutableListOf())
-
-    override fun addLabelList(labelList: Label) {
-        _labelList.addElement(labelList)
+    override suspend fun addLabel(label: LabelDTO.LabelDTOItem) {
+        val result = dataSource.addLabels(label)
+        if (!result.isSuccessful) {
+            throw HttpException(result)
+        }
     }
 
     override suspend fun getLabelList(): List<Label> =
-         apiService.getLabels().labels.toLabelList()
-
-
+        dataSource.getLabels().labels.map { labelDTO ->
+            Label.of(labelDTO)
+        }
 }

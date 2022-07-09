@@ -25,9 +25,7 @@ class LoginCustomButton(context: Context, attrs: AttributeSet) : ConstraintLayou
 
     private fun getAttrs(attrs: AttributeSet) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoginCustomButton)
-
         typedArray.getString(R.styleable.LoginCustomButton_text)?.let { setButtonText(it) }
-
         typedArray.recycle()
     }
 
@@ -38,5 +36,4 @@ class LoginCustomButton(context: Context, attrs: AttributeSet) : ConstraintLayou
     fun setButtonImage(@DrawableRes resourceID: Int) {
         binding.ivBtnImage.setImageResource(resourceID)
     }
-
 }

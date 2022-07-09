@@ -68,13 +68,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
-                    android:hint="@string/label_search_issue_hint"
                     android:background="@drawable/edittext_rounded_corner"
+                    android:hint="@string/label_search_issue_hint"
                     android:importantForAutofill="no"
-                    tools:targetApi="O"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    tools:targetApi="O" />
 
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_issue_search"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/abb_bar_issue_search_edit_text"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

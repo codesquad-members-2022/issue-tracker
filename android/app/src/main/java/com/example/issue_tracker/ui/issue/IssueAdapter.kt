@@ -1,6 +1,5 @@
 package com.example.issue_tracker.ui.issue
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,9 +10,7 @@ import com.example.issue_tracker.model.Issue
 
 class IssueAdapter(
     private val viewModel: IssueViewModel,
-) : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(
-    IssueDiffCallback
-) {
+) : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(IssueDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueViewHolder {
         val binding =
             ItemIssueRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,6 +18,7 @@ class IssueAdapter(
     }
 
     override fun onBindViewHolder(holder: IssueViewHolder, position: Int) {
+        holder.itemView.translationX = 0f
         holder.bind(getItem(position))
     }
 
@@ -29,9 +27,7 @@ class IssueAdapter(
         fun bind(issue: Issue) {
             binding.issue = issue
             binding.tvCloseIssue.setOnClickListener {
-                // TODO 닫기 버튼 클릭 시 로직 구현
                 viewModel.closeIssue(issue.issueId)
-                Log.d("닫기", issue.issueId.toString())
             }
 
             binding.cvSwipeView.setOnLongClickListener {

@@ -2,6 +2,7 @@ package com.example.issue_tracker.ui.common
 
 import android.graphics.Canvas
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +13,9 @@ import kotlin.math.min
 
 
 class SwipeHelperCallback(
-    private val issueAdapter: IssueAdapter,
-    private val viewModel: IssueViewModel,
+    private val getIssueSwiped: (Int) -> Boolean,
+    private val changeIssueSwiped: (Int, Boolean) -> Unit,
+    @IdRes private val clampView: Int,
 ) : ItemTouchHelper.Callback() {
 
     // swipe_view 를 swipe 했을 때 <닫기> 화면이 보이도록 고정하기 위한 변수들
@@ -43,14 +45,14 @@ class SwipeHelperCallback(
     // swipe_view 반환 -> swipe_view 만 이동할 수 있게 해줌
     private fun getView(viewHolder: RecyclerView.ViewHolder): View =
         viewHolder.itemView.findViewById(
-            R.id.cv_swipe_view
+            clampView
         )
 
     private fun getTag(viewHolder: RecyclerView.ViewHolder): Boolean =
-        viewModel.getIssueSwiped(viewHolder.adapterPosition)
+        getIssueSwiped(viewHolder.adapterPosition)
 
     private fun setTag(viewHolder: RecyclerView.ViewHolder, isClamped: Boolean) {
-        viewModel.changeIssueSwiped(viewHolder.adapterPosition, isClamped)
+        changeIssueSwiped(viewHolder.adapterPosition, isClamped)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

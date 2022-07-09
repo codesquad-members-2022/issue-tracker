@@ -60,8 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:backgroundTint="@android:color/transparent"
-                    android:outlineProvider="none"
                     android:enabled="false"
+                    android:outlineProvider="none"
                     android:text="@string/label_save" />
 
             </androidx.appcompat.widget.Toolbar>
@@ -84,8 +84,8 @@
             android:id="@+id/et_label_title"
             android:layout_width="314dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
             android:layout_marginTop="26dp"
+            android:background="@android:color/transparent"
             android:hint="@string/label_title_required"
             android:maxLines="1"
             android:text="@={viewModel.labelTitle}"

@@ -1,7 +1,6 @@
 package com.example.issue_tracker.ui.common
 
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("visible")

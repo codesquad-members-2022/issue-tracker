@@ -1,12 +1,17 @@
 package com.example.issue_tracker.ui.label
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.model.Label
+import com.example.issue_tracker.model.LabelDTO
+import com.example.issue_tracker.network.CEHModel
+import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.LabelRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +25,18 @@ class LabelAddViewModel @Inject constructor(
     val labelTitle: MutableStateFlow<String> = MutableStateFlow("")
 
     val labelDescription: MutableStateFlow<String> = MutableStateFlow("")
+
+    private val _error = MutableSharedFlow<CEHModel>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val error = _error.asSharedFlow()
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        viewModelScope.launch {
+            _error.tryEmit(CoroutineException.checkThrowable(throwable))
+        }
+    }
 
     fun randomColor() {
         val randomA = 255
@@ -37,24 +54,48 @@ class LabelAddViewModel @Inject constructor(
             append(colorG)
             append(colorB)
         }
-
-        _label.value = Label(null, labelTitle.value, labelDescription.value, randomColorString)
+        _label.value = Label(
+            labelId = Label.INITIAL_ID,
+            labelTitle = labelTitle.value,
+            labelContents = labelDescription.value,
+            labelColor = randomColorString
+        )
     }
 
-    fun saveLabel() = if (_label.value === defaultLabel) {
-        labelRepository.addLabelList(Label(null,
-            labelTitle.value,
-            labelDescription.value,
-            INITIAL_COLOR))
-    } else {
-        labelRepository.addLabelList(_label.value)
+    fun saveLabel() {
+        viewModelScope.launch(exceptionHandler) {
+            if (label.value === defaultLabel) {
+                val color = convertColorToLabelDTOColor(Label.INITIAL_COLOR.substring(3))
+                labelRepository.addLabel(LabelDTO.LabelDTOItem(
+                    id = Label.INITIAL_ID,
+                    name = labelTitle.value,
+                    description = labelDescription.value,
+                    backgroundColor = color))
+            } else {
+                val item = label.value
+                val color = convertColorToLabelDTOColor(item.labelColor.substring(3))
+                labelRepository.addLabel(LabelDTO.LabelDTOItem(
+                    id = Label.INITIAL_ID,
+                    name = item.labelTitle,
+                    description = item.labelContents ?: Label.INITIAL_DESCRIPTION,
+                    backgroundColor = color
+                ))
+            }
+        }
     }
 
     private fun convertIntToHex(number: Int) = String.format("%02x", number)
 
+    private fun convertColorToLabelDTOColor(color: String): String = buildString {
+        append("0x")
+        append(color)
+    }
 
-    companion object {
-        const val INITIAL_COLOR = "#FF828282"
-        val defaultLabel = Label(null, "", null, INITIAL_COLOR)
+    companion object Companion {
+        val defaultLabel = Label(
+            Label.INITIAL_ID,
+            Label.INITIAL_TITLE,
+            Label.INITIAL_DESCRIPTION,
+            Label.INITIAL_COLOR)
     }
 }

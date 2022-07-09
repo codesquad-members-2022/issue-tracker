@@ -105,4 +105,8 @@
     <style name="Subtitle2.grey03">
         <item name="android:textColor">@color/gray02</item>
     </style>
+
+    <style name="styleActionMode" parent="@style/Widget.AppCompat.ActionMode">
+        <item name="background">@color/primary_blue</item>
+    </style>
 </resources>

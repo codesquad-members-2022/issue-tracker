@@ -1,6 +1,7 @@
 package com.example.issue_tracker.ui.label
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -8,12 +9,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.databinding.ItemLabelRecyclerViewBinding
 import com.example.issue_tracker.model.Label
 
-class LabelListAdapter : ListAdapter<Label, LabelListAdapter.LabelViewHolder>(LabelDiffCallback) {
+class LabelListAdapter(
+    private val startActionMode: (View) -> Unit,
+    private val changeLongClickState: () -> Unit,
+    private val stopActionMode: () -> Unit,
+) : ListAdapter<Label, LabelListAdapter.LabelViewHolder>(LabelDiffCallback) {
 
-    class LabelViewHolder(private val binding: ItemLabelRecyclerViewBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class LabelViewHolder(
+        private val binding: ItemLabelRecyclerViewBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(label: Label) {
             binding.label = label
+            binding.cvLabelSwipeView.setOnLongClickListener {
+                showActionMode(label.isLongClicked, it)
+                changeLongClickState()
+                false
+            }
+        }
+
+        private fun showActionMode(isLongClicked: Boolean, view: View) {
+            if (isLongClicked) {
+                stopActionMode()
+            } else {
+                startActionMode(view)
+            }
         }
     }
 

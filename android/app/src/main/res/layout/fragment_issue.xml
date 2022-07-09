@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.issue_tracker.ui.issue.IssueViewModel" />
@@ -30,9 +31,9 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/tb_issue_fragment"
+                visible="@{isClicked}"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                visible="@{isClicked}">
+                android:layout_height="56dp">
 
                 <ImageButton
                     android:id="@+id/btn_issue_filter"
@@ -69,11 +70,10 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/tb_issue_fragment_long_click"
+                visible="@{!isClicked}"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="@color/primary_blue"
-                visible="@{!isClicked}"
-                >
+                android:background="@color/primary_blue">
 
                 <ImageButton
                     android:id="@+id/btn_close_long_click"
@@ -123,7 +123,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_issue"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -140,11 +140,11 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/primary_blue"
+            android:contentDescription="@string/add_new_issue"
             android:src="@drawable/ic_baseline_add_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/white"
-            android:contentDescription="@string/add_new_issue" />
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
