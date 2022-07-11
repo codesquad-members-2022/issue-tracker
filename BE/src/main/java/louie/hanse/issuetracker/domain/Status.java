@@ -16,6 +16,10 @@ public enum Status {
     }
 
     public boolean isClosed() {
-        return this.equals(Status.CLOSE);
+        return this.equals(CLOSE);
+    }
+
+    public boolean isOpened() {
+        return this.equals(OPEN);
     }
 }

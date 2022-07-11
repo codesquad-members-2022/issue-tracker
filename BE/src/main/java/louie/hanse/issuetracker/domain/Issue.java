@@ -78,4 +78,11 @@ public class Issue {
         return status.isClosed();
     }
 
+    public boolean isOpened() {
+        return status.isOpened();
+    }
+
+    public void deleteMilestone() {
+        this.milestone = null;
+    }
 }
