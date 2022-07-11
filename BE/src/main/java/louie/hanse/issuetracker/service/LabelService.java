@@ -38,4 +38,11 @@ public class LabelService {
         label.changeBackgroundColor(request.getBackgroundColor());
         label.changeTextColor(request.getTextColor());
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Label label = labelRepository.findById(id)
+            .orElseThrow(IllegalStateException::new);
+        labelRepository.delete(label);
+    }
 }

@@ -6,6 +6,7 @@ import louie.hanse.issuetracker.service.LabelService;
 import louie.hanse.issuetracker.web.dto.label.LabelEditRequest;
 import louie.hanse.issuetracker.web.dto.label.LabelListResponse;
 import louie.hanse.issuetracker.web.dto.label.LabelSaveRequest;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +35,10 @@ public class LabelController {
     @PutMapping("/{id}")
     public void editLabel(@PathVariable Long id, @Valid @RequestBody LabelEditRequest request) {
         labelService.edit(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteLabel(@PathVariable Long id) {
+        labelService.delete(id);
     }
 }

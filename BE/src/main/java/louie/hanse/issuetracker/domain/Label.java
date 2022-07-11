@@ -1,7 +1,11 @@
 package louie.hanse.issuetracker.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -20,6 +24,9 @@ public class Label {
 
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
+    @OneToMany(mappedBy = "label", cascade = CascadeType.REMOVE)
+    private List<IssueLabel> issueLabels = new ArrayList<>();
 
     @Column(name = "label_name")
     private String name;
