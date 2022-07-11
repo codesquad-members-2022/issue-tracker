@@ -1,6 +1,8 @@
 package louie.hanse.issuetracker.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +13,7 @@ import static javax.persistence.GenerationType.*;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Milestone {
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -27,5 +30,11 @@ public class Milestone {
 
     public void addIssue(Issue issue) {
         this.issues.add(issue);
+    }
+
+    public Milestone(String title, String description, LocalDate completedDate) {
+        this.title = title;
+        this.description = description;
+        this.completedDate = completedDate;
     }
 }
