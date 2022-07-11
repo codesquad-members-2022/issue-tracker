@@ -27,4 +27,12 @@ public class Label {
 
     @Enumerated(EnumType.STRING)
     private TextColor textColor;
+
+    public Label(String name, String description, String backgroundColor,
+        TextColor textColor) {
+        this.name = name;
+        this.description = description;
+        this.backgroundColor = backgroundColor;
+        this.textColor = textColor;
+    }
 }
