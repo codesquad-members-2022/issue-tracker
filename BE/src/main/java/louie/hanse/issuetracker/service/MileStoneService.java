@@ -5,7 +5,7 @@ import louie.hanse.issuetracker.domain.Milestone;
 import louie.hanse.issuetracker.domain.Status;
 import louie.hanse.issuetracker.repository.MilestoneRepository;
 import louie.hanse.issuetracker.web.dto.milestone.MilestoneListResponse;
-import louie.hanse.issuetracker.web.dto.milestone.MilestoneSaveRequest;
+import louie.hanse.issuetracker.web.dto.milestone.MilestoneRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,7 @@ public class MileStoneService {
     private final MilestoneRepository milestoneRepository;
 
     @Transactional
-    public void register(MilestoneSaveRequest request) {
+    public void register(MilestoneRequest request) {
         Milestone milestone = request.toEntity();
         milestoneRepository.save(milestone);
     }
@@ -32,5 +32,14 @@ public class MileStoneService {
             return new MilestoneListResponse(openedMilestone.size(), closedMilestone.size(), openedMilestone);
         }
         return new MilestoneListResponse(openedMilestone.size(), closedMilestone.size(), closedMilestone);
+    }
+
+    @Transactional
+    public void edit(Long id, MilestoneRequest request) {
+        Milestone milestone = milestoneRepository.findById(id).orElseThrow(IllegalStateException::new);
+
+        milestone.updateTitle(request.getTitle());
+        milestone.updateDescription(request.getDescription());
+        milestone.updateCompletedDate(request.getCompletedDate());
     }
 }

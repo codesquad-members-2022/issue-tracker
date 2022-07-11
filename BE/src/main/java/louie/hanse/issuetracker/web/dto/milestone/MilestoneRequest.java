@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Getter
-public class MilestoneSaveRequest {
+public class MilestoneRequest {
     @NotEmpty
     private String title;
     private String description;

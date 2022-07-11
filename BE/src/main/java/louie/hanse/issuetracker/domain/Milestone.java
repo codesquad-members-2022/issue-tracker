@@ -37,4 +37,16 @@ public class Milestone {
         this.description = description;
         this.completedDate = completedDate;
     }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    public void updateDescription(String description) {
+        this.description = description;
+    }
+
+    public void updateCompletedDate(LocalDate completedDate) {
+        this.completedDate = completedDate;
+    }
 }
