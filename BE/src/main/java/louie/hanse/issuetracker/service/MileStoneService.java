@@ -1,6 +1,7 @@
 package louie.hanse.issuetracker.service;
 
 import lombok.RequiredArgsConstructor;
+import louie.hanse.issuetracker.domain.Issue;
 import louie.hanse.issuetracker.domain.Milestone;
 import louie.hanse.issuetracker.domain.Status;
 import louie.hanse.issuetracker.repository.MilestoneRepository;
@@ -41,5 +42,15 @@ public class MileStoneService {
         milestone.updateTitle(request.getTitle());
         milestone.updateDescription(request.getDescription());
         milestone.updateCompletedDate(request.getCompletedDate());
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Milestone milestone = milestoneRepository.findById(id).orElseThrow(IllegalStateException::new);
+        List<Issue> issues = milestone.getIssues();
+        for (Issue issue : issues) {
+            issue.deleteMilestone();
+        }
+        milestoneRepository.delete(milestone);
     }
 }

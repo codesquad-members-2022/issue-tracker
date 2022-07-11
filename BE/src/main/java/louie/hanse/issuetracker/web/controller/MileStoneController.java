@@ -28,4 +28,9 @@ public class MileStoneController {
     public void editMilestone(@PathVariable Long id, @RequestBody MilestoneRequest request) {
         mileStoneService.edit(id, request);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteMilestone(@PathVariable Long id) {
+        mileStoneService.delete(id);
+    }
 }

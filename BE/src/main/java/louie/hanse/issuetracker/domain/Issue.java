@@ -82,4 +82,7 @@ public class Issue {
         return status.isOpened();
     }
 
+    public void deleteMilestone() {
+        this.milestone = null;
+    }
 }
