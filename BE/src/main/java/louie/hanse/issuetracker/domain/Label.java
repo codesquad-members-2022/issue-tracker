@@ -2,15 +2,18 @@ package louie.hanse.issuetracker.domain;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import lombok.NoArgsConstructor;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 public class Label {
