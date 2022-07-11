@@ -38,4 +38,20 @@ public class Label {
         this.backgroundColor = backgroundColor;
         this.textColor = textColor;
     }
+
+    public void changeName(String name) {
+        this.name = name;
+    }
+
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
+    public void changeBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public void changeTextColor(TextColor textColor) {
+        this.textColor = textColor;
+    }
 }
