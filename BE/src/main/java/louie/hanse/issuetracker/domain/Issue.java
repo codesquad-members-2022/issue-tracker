@@ -78,4 +78,8 @@ public class Issue {
         return status.isClosed();
     }
 
+    public boolean isOpened() {
+        return status.isOpened();
+    }
+
 }
