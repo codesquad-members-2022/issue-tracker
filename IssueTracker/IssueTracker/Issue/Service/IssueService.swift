@@ -8,18 +8,6 @@
 import Foundation
 import Alamofire
 
-
-enum IssueError: Error {
-    case issueNotFound
-    case cannotCreateIssue
-}
-
-enum OptionError: Error {
-    case labelNotFound
-    case milestonesNotFound
-    case assigneesNotFound
-}
-
 struct IssueService {
     
     private let accessToken: String
@@ -255,4 +243,15 @@ fileprivate struct RepositoryIssue: Codable {
         let patchUrl: String
         let mergedAt: String?
     }
+}
+
+enum IssueError: Error {
+    case issueNotFound
+    case cannotCreateIssue
+}
+
+enum OptionError: Error {
+    case labelNotFound
+    case milestonesNotFound
+    case assigneesNotFound
 }

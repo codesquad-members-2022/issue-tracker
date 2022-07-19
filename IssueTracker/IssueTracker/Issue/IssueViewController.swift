@@ -45,6 +45,7 @@ final class IssueViewController: UIViewController {
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Issues"
         setupNavigationBar()
         setupViews()
         model.requestIssue()

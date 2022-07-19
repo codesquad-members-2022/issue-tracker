@@ -1,6 +1,6 @@
 import Foundation
 
-
+// Environment : 디펜던시를 관리하는 객체
 class ReposModel {
     private let service: IssueService
     
