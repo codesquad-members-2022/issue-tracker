@@ -13,13 +13,27 @@ class Container {
         switch screen {
         case .login:
             return LoginViewController(service: environment.oAuthService)
-        case .issue(let selectedRepo): // 필요한 service조각만 넣어주기(클로저?)
+        case .issue(let selectedRepo):
             let model = IssueModel(service: service, repo: selectedRepo)
             let viewController = IssueViewController(model: model, repo: selectedRepo) // Issue -> Issues
             return viewController
         case .repos:
-            let model = ReposModel(service: service)
+            // Repost에 필요한 service조각만 Model에 넣어주기(클로저 방식 사용)
+            // ReposModelEnvironment로 IssueService의 requestRepos()를 넣어줘야 한다
+            let model = ReposModel(environment: .init(requestRepos: { [weak self] completion in
+                self?.environment.issueService.requestRepos(completion: { result in
+                    completion(result)
+                })
+            }))
             let viewController = ReposViewController(model: model)
+            model.fetchViewData()
+            // vc는 모델을 가지는데, 모델은 vc의 테이블뷰를 참조해야 하므로 순환참조를 방지하기 위해 weak vc로 선언
+            model.updated = { [weak viewController] repos in
+                DispatchQueue.main.async {
+                    viewController?.reloadTableView()
+                }
+            }
+            viewController.title = "Repos"
             return UINavigationController(rootViewController: viewController)
         case .newIssue(let repo):
             let model = NewIssueModel(service: service)
@@ -31,7 +45,6 @@ class Container {
     }
     
     func checkRootViewController(url: URL, completion: @escaping (UIViewController) -> Void) {
-        // TODO: 분리하는중
         environment.oAuthService.fetchToken(from: url) { [weak self] accessToken in
             guard let token = accessToken,
                   let self = self else {
