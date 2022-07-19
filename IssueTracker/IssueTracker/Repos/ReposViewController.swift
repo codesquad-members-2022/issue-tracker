@@ -12,20 +12,26 @@ class ReposViewController: UIViewController {
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(model: ReposModel(service: IssueService(token: "")))
+        self.init(model: ReposModel(environment: .init(requestRepos: { completion in
+        })))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        // 뷰컨 자신에 대한 셋팅 코드는 뷰컨을 만드는 Container에서 해준다 (추후 Coordinator로 분리)
         self.view.backgroundColor = .white
-        self.title = "Repos"
-        model.fetchViewData()
-        model.updated = { [weak self] repos in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
+//        self.title = "Repos"
+//        model.fetchViewData()
+//        model.updated = { [weak self] repos in
+//            DispatchQueue.main.async {
+//                self?.tableView.reloadData()
+//            }
+//        }
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
     }
     
     private func setupViews() {
