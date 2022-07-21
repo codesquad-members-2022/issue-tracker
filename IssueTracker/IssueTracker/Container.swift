@@ -35,18 +35,24 @@ class Container {
         case .issue(let selectedRepo):
             let model = IssueModel(
                 environment: .init(requestRepositoryIssues: { [weak self] completion in
-                        self?.environment.issueService.requestRepositoryIssues(repo: selectedRepo, completion: { result in
-                            completion(result)
-                        })
+                    self?.environment.issueService.requestRepositoryIssues(repo: selectedRepo, completion: { result in
+                        completion(result)
                     })
-                )
+                })
+            )
             let viewController = IssueViewController(model: model, repo: selectedRepo) // Issue -> Issues
             return viewController
         case .newIssue(let repo):
             let model = NewIssueModel(environment: .init(createIssue: environment.issueService.createIssue(title:repo:content:label:milestone:assignee:completion:)))
             return NewIssueViewController(repo: repo, model: model)
         case .optionSelect(let option, let repo):
-            let model = OptionSelectModel(service: service)
+            let model = OptionSelectModel(environment:
+                    .init(requestRepositoryLabels:
+                            environment.issueService.requestRepositoryLabels(repo:completion:),
+                          requestRepositoryMilestones:
+                            environment.issueService.requestRepositoryMilestones(repo:completion:),
+                          requestRepositoryAssigness:
+                            environment.issueService.requestRepositoryAssigness(repo:completion:)))
             return OptionSelectViewController(model: model, option: option, repo: repo)
         }
     }
@@ -65,8 +71,8 @@ class Container {
     
     func buildRootViewController() -> UIViewController {
         self.environment.githubUserDefaults.getToken() != nil
-            ? self.buildViewController(.repos)
-            : self.buildViewController(.login)
+        ? self.buildViewController(.repos)
+        : self.buildViewController(.login)
     }
 }
 
