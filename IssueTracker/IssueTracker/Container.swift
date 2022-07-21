@@ -43,7 +43,7 @@ class Container {
             let viewController = IssueViewController(model: model, repo: selectedRepo) // Issue -> Issues
             return viewController
         case .newIssue(let repo):
-            let model = NewIssueModel(service: service)
+            let model = NewIssueModel(environment: .init(createIssue: environment.issueService.createIssue(title:repo:content:label:milestone:assignee:completion:)))
             return NewIssueViewController(repo: repo, model: model)
         case .optionSelect(let option, let repo):
             let model = OptionSelectModel(service: service)

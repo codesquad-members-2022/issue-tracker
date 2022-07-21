@@ -35,8 +35,9 @@ class NewIssueViewController: UIViewController {
     required convenience init?(coder: NSCoder) {
         
         let owner = Owner(login: "")
-        let service = IssueService(token: "")
-        let model = NewIssueModel(service: service)
+        let modelEnvironment = NewIssueModelEnvironment(createIssue: { _, _, _, _, _, _, _ in
+        })
+        let model = NewIssueModel(environment: modelEnvironment)
         self.init(repo: Repository(name: "",
                                    owner: owner),
                   model: model)

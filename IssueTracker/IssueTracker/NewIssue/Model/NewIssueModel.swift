@@ -9,15 +9,19 @@ import Foundation
 
 class NewIssueModel {
     
-    private let service: IssueService
+    private let environment: NewIssueModelEnvironment
     
-    init(service: IssueService) {
-        self.service = service
+    init(environment: NewIssueModelEnvironment) {
+        self.environment = environment
     }
     
     func createIssue(title: String, repo: Repository, content: String, label: Label?, milestone: Milestone?, assignee: Assignee?, completion: @escaping (Bool) -> Void) {
-        service.createIssue(title: title, repo: repo, content: content, label: label, milestone: milestone, assignee: assignee) { boolResult in
+        environment.createIssue(title, repo, content, label, milestone, assignee) { boolResult in
             completion(boolResult)
         }
     }
+}
+
+struct NewIssueModelEnvironment {
+    let createIssue: (String, Repository, String, Label?, Milestone?, Assignee?, @escaping (Bool) -> Void) -> Void
 }
