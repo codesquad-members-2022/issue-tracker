@@ -38,7 +38,8 @@ final class IssueViewController: UIViewController {
     
     required convenience init?(coder: NSCoder) {
         let repository = Repository(name: "", owner: Owner(login: ""))
-        self.init(model: IssueModel(service: IssueService(token: ""), repo: repository), repo: repository)
+        self.init(model: IssueModel(environment: .init(requestRepositoryIssues: { completion in
+        })), repo: repository)
         fatalError("init(coder:) has not been implemented")
     }
     

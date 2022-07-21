@@ -13,19 +13,16 @@ class Container {
         switch screen {
         case .login:
             return LoginViewController(service: environment.oAuthService)
-        case .issue(let selectedRepo):
-            let model = IssueModel(service: service, repo: selectedRepo)
-            let viewController = IssueViewController(model: model, repo: selectedRepo) // Issue -> Issues
-            return viewController
         case .repos:
             // Repost에 필요한 service조각만 Model에 넣어주기(클로저 방식 사용)
-            // ReposModelEnvironment로 IssueService의 requestRepos()를 넣어줘야 한다
+            // ReposModelEnvironment로 IssueService의 requestRepos()를 넣어줘야 한다 - completion으로 넘겨줌
             let model = ReposModel(environment: .init(requestRepos: { [weak self] completion in
                 self?.environment.issueService.requestRepos(completion: { result in
                     completion(result)
                 })
             }))
             let viewController = ReposViewController(model: model)
+            // VC.viewDidLoad()에서 하던 준비작업을 여기서 함
             model.fetchViewData()
             // vc는 모델을 가지는데, 모델은 vc의 테이블뷰를 참조해야 하므로 순환참조를 방지하기 위해 weak vc로 선언
             model.updated = { [weak viewController] repos in
@@ -35,6 +32,16 @@ class Container {
             }
             viewController.title = "Repos"
             return UINavigationController(rootViewController: viewController)
+        case .issue(let selectedRepo):
+            let model = IssueModel(
+                environment: .init(requestRepositoryIssues: { [weak self] completion in
+                        self?.environment.issueService.requestRepositoryIssues(repo: selectedRepo, completion: { result in
+                            completion(result)
+                        })
+                    })
+                )
+            let viewController = IssueViewController(model: model, repo: selectedRepo) // Issue -> Issues
+            return viewController
         case .newIssue(let repo):
             let model = NewIssueModel(service: service)
             return NewIssueViewController(repo: repo, model: model)

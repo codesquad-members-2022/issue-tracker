@@ -9,12 +9,15 @@ import Foundation
 
 class IssueModel {
 
-    private let service: IssueService
-    private let repo: Repository
+    private let environment: IssueModelEnvironment
     
-    init(service: IssueService, repo: Repository) {
-        self.service = service
-        self.repo = repo
+//    init(service: IssueService, repo: Repository) {
+//        self.service = service
+//        self.repo = repo
+//    }
+    
+    init(environment: IssueModelEnvironment) {
+        self.environment = environment
     }
     
     var updatedIssues: ( () -> Void )?
@@ -37,7 +40,7 @@ class IssueModel {
     }
     
     func requestIssue() {
-        service.requestRepositoryIssues(repo: repo) { result in
+        environment.requestRepositoryIssues() { result in
             switch result {
             case .success(let issues):
                 self.issues = issues
@@ -46,4 +49,9 @@ class IssueModel {
             }
         }
     }
+}
+
+struct IssueModelEnvironment {
+    // completion을 파라미터로 받고, 리턴타입은 Void인 클로저
+    let requestRepositoryIssues: (@escaping (Result<[Issue], IssueError>) -> Void) -> Void
 }
