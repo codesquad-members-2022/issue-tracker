@@ -1,6 +1,7 @@
 import UIKit
 
 class Container {
+    // VC를 찍어내는 역할
     
     let environment: ContainerEnvironment
     
@@ -9,13 +10,18 @@ class Container {
     }
     
     func buildViewController(_ screen: Screen) -> UIViewController {
-        let service = environment.issueService
         switch screen {
         case .login:
-            return LoginViewController(service: environment.oAuthService)
+            let model = LoginModel(environment: .init(requestCode: { [weak self] completion in
+                self?.environment.oAuthService.requestCode { result in
+                    completion(result)
+                }
+            }))
+            return LoginViewController(model: model)
         case .repos:
             // Repost에 필요한 service조각만 Model에 넣어주기(클로저 방식 사용)
             // ReposModelEnvironment로 IssueService의 requestRepos()를 넣어줘야 한다 - completion으로 넘겨줌
+            // 클로저 사용 시 weak 사용 염두에 두기!!
             let model = ReposModel(environment: .init(requestRepos: { [weak self] completion in
                 self?.environment.issueService.requestRepos(completion: { result in
                     completion(result)
@@ -43,6 +49,7 @@ class Container {
             let viewController = IssueViewController(model: model, repo: selectedRepo) // Issue -> Issues
             return viewController
         case .newIssue(let repo):
+            // MARK: 아래와 같이 파라미터와 completion이 함께 필요한 클로저라면, 클로저를 통해 넘기지 않고 직접 참조해서 넣어줘도 괜찮은지?? (weak self 필요없음)
             let model = NewIssueModel(environment: .init(createIssue: environment.issueService.createIssue(title:repo:content:label:milestone:assignee:completion:)))
             return NewIssueViewController(repo: repo, model: model)
         case .optionSelect(let option, let repo):

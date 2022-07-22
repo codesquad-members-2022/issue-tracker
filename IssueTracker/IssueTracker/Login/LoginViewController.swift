@@ -11,11 +11,17 @@ import Alamofire
 
 class LoginViewController: UIViewController {
     
-    private var oauthService: OAuthService?
+    private var model: LoginModel
     
-    convenience init(service: OAuthService) {
-        self.init()
-        self.oauthService = service
+    init(model: LoginModel) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.model = LoginModel(environment: .init(requestCode: { completion in 
+        }))
+        super.init(coder: coder)
     }
     
     override func viewDidLoad() {
@@ -50,7 +56,7 @@ class LoginViewController: UIViewController {
     }()
     
     private func touchedLoginButton() {
-        oauthService?.requestCode { result in
+        model.requestCode { result in
             switch result {
             case .success(let url):
                 UIApplication.shared.open(url)

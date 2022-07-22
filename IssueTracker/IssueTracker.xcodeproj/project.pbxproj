@@ -10,6 +10,7 @@
 		000B92C2286D67F8009EB2D8 /* NewIssueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C1286D67F8009EB2D8 /* NewIssueModel.swift */; };
 		000B92C4286D6816009EB2D8 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C3286D6816009EB2D8 /* Option.swift */; };
 		000B92C7286D6F9D009EB2D8 /* OptionSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C6286D6F9D009EB2D8 /* OptionSelectModel.swift */; };
+		00383AB0288A8306008B215E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00383AAF288A8306008B215E /* LoginModel.swift */; };
 		004800F6286E8C0700A58B2A /* Assignee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004800F5286E8C0700A58B2A /* Assignee.swift */; };
 		004800F8286E907300A58B2A /* Optionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004800F7286E907300A58B2A /* Optionable.swift */; };
 		0053D7552859B162006614EC /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0053D7542859B162006614EC /* Config.plist */; };
@@ -72,6 +73,7 @@
 		000B92C1286D67F8009EB2D8 /* NewIssueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueModel.swift; sourceTree = "<group>"; };
 		000B92C3286D6816009EB2D8 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		000B92C6286D6F9D009EB2D8 /* OptionSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectModel.swift; sourceTree = "<group>"; };
+		00383AAF288A8306008B215E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		004800F5286E8C0700A58B2A /* Assignee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignee.swift; sourceTree = "<group>"; };
 		004800F7286E907300A58B2A /* Optionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optionable.swift; sourceTree = "<group>"; };
 		0053D7542859B162006614EC /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				985CAB52286068A4005E709D /* OAuthService.swift */,
+				00383AAF288A8306008B215E /* LoginModel.swift */,
 				988510D928572B8700CC2DA9 /* LoginViewController.swift */,
 			);
 			path = Login;
@@ -498,6 +501,7 @@
 				988510DA28572B8700CC2DA9 /* LoginViewController.swift in Sources */,
 				00567EE8286194DB00F3E8EC /* IssueService.swift in Sources */,
 				981BD43D285B12AC00DDDE64 /* IssueListCell.swift in Sources */,
+				00383AB0288A8306008B215E /* LoginModel.swift in Sources */,
 				000B92C2286D67F8009EB2D8 /* NewIssueModel.swift in Sources */,
 				988510D628572B8700CC2DA9 /* AppDelegate.swift in Sources */,
 				985CAB49285C1A61005E709D /* UIColor+Extension.swift in Sources */,
