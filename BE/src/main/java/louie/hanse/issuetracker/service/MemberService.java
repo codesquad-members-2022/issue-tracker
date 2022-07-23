@@ -3,7 +3,7 @@ package louie.hanse.issuetracker.service;
 import lombok.RequiredArgsConstructor;
 import louie.hanse.issuetracker.domain.Member;
 import louie.hanse.issuetracker.exception.MemberNotFoundException;
-import louie.hanse.issuetracker.oauth.GithubUser;
+import louie.hanse.issuetracker.login.oauth.GithubUser;
 import louie.hanse.issuetracker.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long login(GithubUser githubUser) {
+    public Member login(GithubUser githubUser) {
         Member member = memberRepository.findBySocialId(githubUser.getLogin())
                 .orElse(null);
 
@@ -24,7 +24,7 @@ public class MemberService {
             member = new Member(githubUser.getLogin(), githubUser.getAvatarUrl());
             memberRepository.save(member);
         }
-        return member.getId();
+        return member;
     }
 
     public String findRefreshTokenById(Long id) {
@@ -41,5 +41,11 @@ public class MemberService {
         return memberRepository.findById(id).orElseThrow(() -> {
                     throw new MemberNotFoundException("해당 id를 가진 회원이 존재하지 않습니다.");
                 });
+    }
+
+    @Transactional
+    public void deleteRefreshToken(Long id) {
+        Member member = findByIdOrThrow(id);
+        member.deleteRefreshToken();
     }
 }

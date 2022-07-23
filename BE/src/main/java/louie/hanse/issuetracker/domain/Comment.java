@@ -1,23 +1,27 @@
 package louie.hanse.issuetracker.domain;
 
-import javax.persistence.*;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.*;
-
+@Getter
 @Entity
 @Table(name = "comments")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
 
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
-    @OneToMany(mappedBy = "comment")
-    private List<UploadFile> uploadFiles = new ArrayList<>();
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn
@@ -27,8 +31,18 @@ public class Comment {
     @JoinColumn
     private Member writer;
 
-    private String content;
-    private LocalDateTime createdDateTime;
-    private LocalDateTime updatedDateTime;
+    private String contents;
+    private LocalDateTime createdDateTime = LocalDateTime.now();
+    private LocalDateTime updatedDateTime = LocalDateTime.now();
 
+    public Comment(Issue issue, String contents) {
+        this.issue = issue;
+        issue.addComment(this);
+        this.contents = contents;
+    }
+
+    public void updateContents(String contents) {
+        this.contents = contents;
+        updatedDateTime = LocalDateTime.now();
+    }
 }

@@ -1,4 +1,4 @@
-package louie.hanse.issuetracker.jwt;
+package louie.hanse.issuetracker.login.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -58,6 +58,11 @@ public class JwtProvider {
                 .sign(algorithm);
     }
 
+    public Long verifyAccessTokenAndDecodeMemberId(String accessToken) {
+        verifyAccessToken(accessToken);
+        return decodeMemberId(accessToken);
+    }
+
     private void verifyToken(String token, String subject) {
         JWT.require(algorithm)
                 .withIssuer(issuer)
@@ -65,5 +70,4 @@ public class JwtProvider {
                 .build()
                 .verify(token);
     }
-
 }

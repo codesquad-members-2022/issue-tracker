@@ -1,0 +1,15 @@
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: louie1se-file-upload
+    credentials:
+      access-key: ${FILE_UPLOAD_S3_ACCESS_KEY}
+      secret-key: ${FILE_UPLOAD_S3_SECRET_KEY}
+    stack:
+      auto: false
+
+directory:
+  name:
+    louie1se
