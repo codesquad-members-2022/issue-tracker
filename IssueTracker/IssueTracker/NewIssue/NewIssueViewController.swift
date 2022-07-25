@@ -190,7 +190,7 @@ extension NewIssueViewController: UITableViewDelegate {
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        guard let viewController = appdelegate.container.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
+        guard let viewController = appdelegate.container?.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
             return
         }
         self.navigationController?.pushViewController(viewController, animated: true)

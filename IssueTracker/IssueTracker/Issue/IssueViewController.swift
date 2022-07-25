@@ -75,7 +75,7 @@ final class IssueViewController: UIViewController {
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        guard let viewController = appdelegate.container.buildViewController(.newIssue(repo: repo)) as? NewIssueViewController else {
+        guard let viewController = appdelegate.container?.buildViewController(.newIssue(repo: repo)) as? NewIssueViewController else {
             return
         }
         self.navigationController?.pushViewController(viewController, animated: true)
