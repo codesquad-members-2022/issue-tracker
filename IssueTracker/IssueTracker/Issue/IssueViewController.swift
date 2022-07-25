@@ -46,20 +46,19 @@ final class IssueViewController: UIViewController {
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Issues"
+        
         setupNavigationBar()
         setupViews()
-        model.requestIssue()
-        model.updatedIssues = {
-            DispatchQueue.main.async { [weak self] in
-                self?.collectionView.reloadData()
-            }
-        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    func reloadData() {
+        self.collectionView.reloadData()
     }
     
     @objc func touchedSelectButton() {

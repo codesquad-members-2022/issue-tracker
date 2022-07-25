@@ -46,7 +46,14 @@ class Container {
                     })
                 })
             )
-            let viewController = IssueViewController(model: model, repo: selectedRepo) // Issue -> Issues
+            let viewController = IssueViewController(model: model, repo: selectedRepo)
+            model.requestIssue()
+            model.updatedIssues = {
+                DispatchQueue.main.async { [weak viewController] in
+                    viewController?.reloadData()
+                }
+            }
+            viewController.title = "Issues"
             return viewController
         case .newIssue(let repo):
             // MARK: 아래와 같이 파라미터와 completion이 함께 필요한 클로저라면, 클로저를 통해 넘기지 않고 직접 참조해서 넣어줘도 괜찮은지?? (weak self 필요없음)
