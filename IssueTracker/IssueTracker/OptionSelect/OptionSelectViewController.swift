@@ -40,8 +40,7 @@ class OptionSelectViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         self.view.backgroundColor = .white
-        model.requestOptions(option, repo: repository)
-        bind()
+        
     }
     
     private func setupViews() {
@@ -51,10 +50,8 @@ class OptionSelectViewController: UIViewController {
         }
     }
     
-    private func bind() {
-        model.updatedOptions = {
-            self.tableView.reloadData()
-        }
+    func reloadData() {
+        self.tableView.reloadData()
     }
     
     private lazy var tableView: UITableView = {

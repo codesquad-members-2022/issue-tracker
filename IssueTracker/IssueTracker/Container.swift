@@ -21,7 +21,7 @@ class Container {
         case .repos:
             // Repost에 필요한 service조각만 Model에 넣어주기(클로저 방식 사용)
             // ReposModelEnvironment로 IssueService의 requestRepos()를 넣어줘야 한다 - completion으로 넘겨줌
-            // 클로저 사용 시 weak 사용 염두에 두기!!
+            // 클로저 사용 시 weak 사용 반드시 확인하기!!
             let model = ReposModel(environment: .init(requestRepos: { [weak self] completion in
                 self?.environment.issueService.requestRepos(completion: { result in
                     completion(result)
@@ -67,7 +67,14 @@ class Container {
                             environment.issueService.requestRepositoryMilestones(repo:completion:),
                           requestRepositoryAssigness:
                             environment.issueService.requestRepositoryAssigness(repo:completion:)))
-            return OptionSelectViewController(model: model, option: option, repo: repo)
+            model.requestOptions(option, repo: repo)
+            let viewController = OptionSelectViewController(model: model, option: option, repo: repo)
+            model.updatedOptions = {
+                DispatchQueue.main.async { [weak viewController] in
+                    viewController?.reloadData()
+                }
+            }
+            return viewController
         }
     }
     
