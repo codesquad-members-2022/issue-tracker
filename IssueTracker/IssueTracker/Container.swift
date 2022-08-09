@@ -1,7 +1,10 @@
 import UIKit
 
 class Container {
-    // VC를 찍어내는 역할
+//   - 인스턴스를 소유하고 관리하는 역할 - 객체 생성 및 의존성 주입
+//    - MVVM 생성
+//    - 사용할 객체를 Container에 등록
+//    - 객체를 사용할 때는 Continer에 요청
     
     let environment: ContainerEnvironment
     
@@ -78,7 +81,7 @@ class Container {
         }
     }
     
-    func checkRootViewController(url: URL, completion: @escaping (UIViewController) -> Void) {
+    func fetchAccessToken(url: URL) {
         environment.oAuthService.fetchToken(from: url) { [weak self] accessToken in
             guard let token = accessToken,
                   let self = self else {
@@ -86,7 +89,6 @@ class Container {
                 return // 옵셔널 처리 시 리턴값이 애매해질 때 한가지 방법은, 리턴값 대신 completion(리턴값) -> Void 를 사용하는 것
             }
             self.environment.githubUserDefaults.setToken(token)
-            completion(self.buildRootViewController())
         }
     }
     

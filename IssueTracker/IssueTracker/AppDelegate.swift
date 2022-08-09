@@ -12,7 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let container = Container(environment: .live)
+    let coordinator = AppCoordinator(navigationController: .init())
+//    let container = Container(environment: .live)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: - 토큰 유효기간 판단
@@ -22,17 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // { 다시 로그인을 해야된다고 판단 => UerDefaults.token 삭제 }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = container.buildRootViewController()
+        window?.rootViewController = coordinator.buildRootViewController()
+//        container.buildRootViewController()
         window?.makeKeyAndVisible()
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         // AppDelegate입장에서는 : 콜백으로 들어와서 토큰이 있으면 repoVC, 없으면 loginVC를 rootVC로 설정하면 된다. 나머지 내용은 알 필요가 없다.
-        // TODO: 분리하기!
-        container.checkRootViewController(url: url) { viewController in
-            self.window?.rootViewController = viewController
-        }
+        coordinator.fetchToken(url: url)
+        let rootVC = coordinator.buildRootViewController()
+        self.window?.rootViewController = rootVC
         return true
     }
 }
