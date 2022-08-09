@@ -9,7 +9,7 @@ import Foundation
 
 class OptionSelectModel {
     
-    private let service: IssueService
+    private let environment: OptionSelectModelEnvironment
     private var options: [Optionable] {
         didSet {
             updatedOptions?()
@@ -18,8 +18,8 @@ class OptionSelectModel {
     
     var updatedOptions: (() -> Void)?
     
-    init(service: IssueService) {
-        self.service = service
+    init(environment: OptionSelectModelEnvironment) {
+        self.environment = environment
         self.options = []
     }
     
@@ -34,7 +34,7 @@ class OptionSelectModel {
     func requestOptions(_ option: Option, repo: Repository) {
         switch option {
         case .label:
-            service.requestRepositoryLabels(repo: repo) { [weak self] result in
+            environment.requestRepositoryLabels(repo) { [weak self] result in
                 switch result {
                 case .success(let repositoryList):
                     self?.options = repositoryList
@@ -43,7 +43,7 @@ class OptionSelectModel {
                 }
             }
         case .milestone:
-            service.requestRepositoryMilestones(repo: repo) { [weak self] result in
+            environment.requestRepositoryMilestones(repo) { [weak self] result in
                 switch result {
                 case .success(let repositoryList):
                     self?.options = repositoryList
@@ -52,7 +52,7 @@ class OptionSelectModel {
                 }
             }
         case .assignee:
-            service.requestRepositoryAssigness(repo: repo) { [weak self] result in
+            environment.requestRepositoryAssigness(repo) { [weak self] result in
                 switch result {
                 case .success(let repositoryList):
                     self?.options = repositoryList
@@ -63,4 +63,10 @@ class OptionSelectModel {
         }
         
     }
+}
+
+struct OptionSelectModelEnvironment {
+    let requestRepositoryLabels: (Repository, @escaping (Result<[Label], OptionError>) -> Void) -> Void
+    let requestRepositoryMilestones: (Repository, @escaping (Result<[Milestone], OptionError>) -> Void) -> Void
+    let requestRepositoryAssigness: (Repository, @escaping (Result<[Assignee], OptionError>) -> Void) -> Void
 }

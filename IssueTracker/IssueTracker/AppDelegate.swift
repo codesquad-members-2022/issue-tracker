@@ -12,9 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
-    private let githubUserDefaults = GithubUserDefaults()
-    var container: Container?
+    let container = Container(environment: .live)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: - 토큰 유효기간 판단
@@ -32,14 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        OAuthService().fetchToken(from: url) { [weak self] accessToken in
-            guard let token = accessToken else {
-                // TODO: 로그인 실패 얼럿띄우기
-                return
-            }
-            self?.githubUserDefaults.setToken(token)
-            self?.container?.setToken(token)
-            self?.window?.rootViewController = self?.container?.buildRootViewController()
+        // AppDelegate입장에서는 : 콜백으로 들어와서 토큰이 있으면 repoVC, 없으면 loginVC를 rootVC로 설정하면 된다. 나머지 내용은 알 필요가 없다.
+        // TODO: 분리하기!
+        container.checkRootViewController(url: url) { viewController in
+            self.window?.rootViewController = viewController
         }
         return true
     }

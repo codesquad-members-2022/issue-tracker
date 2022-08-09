@@ -21,18 +21,26 @@ class OptionSelectViewController: UIViewController {
         self.repository = repo
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required convenience init?(coder: NSCoder) {
-        let service = IssueService(token: "")
-        self.init(model: OptionSelectModel(service: service), option: .label, repo: Repository(name: "", owner: Owner(login: "")))
+        let repo = Repository(name: "", owner: Owner(login: ""))
+        self.init(model:
+                    OptionSelectModel(environment:
+                            .init(requestRepositoryLabels: { repo, completion in },
+                                  requestRepositoryMilestones: { repo, completion in },
+                                  requestRepositoryAssigness:  { repo, completion in }
+                                 )
+                    ),
+                  option: .label,
+                  repo: repo
+        )
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         self.view.backgroundColor = .white
-        model.requestOptions(option, repo: repository)
-        bind()
+        
     }
     
     private func setupViews() {
@@ -42,10 +50,8 @@ class OptionSelectViewController: UIViewController {
         }
     }
     
-    private func bind() {
-        model.updatedOptions = {
-            self.tableView.reloadData()
-        }
+    func reloadData() {
+        self.tableView.reloadData()
     }
     
     private lazy var tableView: UITableView = {
@@ -56,7 +62,7 @@ class OptionSelectViewController: UIViewController {
         tableView.dataSource = self
         return tableView
     }()
-
+    
 }
 
 extension OptionSelectViewController: UITableViewDelegate {
