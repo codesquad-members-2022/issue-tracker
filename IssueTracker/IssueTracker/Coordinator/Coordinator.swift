@@ -8,6 +8,7 @@
 import Foundation
 
 protocol Coordinator: AnyObject {
+    var container: Container { get }
     var childCoordinators: [Coordinator] { get set }
     func start()
 }

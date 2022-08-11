@@ -9,7 +9,14 @@ import UIKit
 import SnapKit
 import Alamofire
 
+// 이 VC에서 Coordinator에 위임할 작업
+protocol LoginViewControllerDelegate {
+    func login()
+}
+
 class LoginViewController: UIViewController {
+
+    var delegate: LoginViewControllerDelegate?
     
     private var model: LoginModel
     
@@ -26,11 +33,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        setupView()
     }
     
-    private func setupView() {
+    func setupView() {
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -49,8 +54,8 @@ class LoginViewController: UIViewController {
         configuration.buttonSize = .large
         configuration.image = UIImage(named: "GitHub-Mark")
         configuration.imagePadding = 8
-        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { _ in
-            self.touchedLoginButton()
+        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
+            self?.loginButtonTapped()
         }))
         return button
     }()
@@ -65,6 +70,11 @@ class LoginViewController: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    // 위의 메서드를 아래로 변경
+    func loginButtonTapped() {
+        self.delegate?.login()
     }
 }
 

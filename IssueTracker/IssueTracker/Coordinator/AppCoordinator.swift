@@ -15,7 +15,7 @@ class AppCoordinator: Coordinator {
 //    - VC 재사용 가능
 //    - VC와 코디네이터는 1:1 관계
     
-    private let container = Container(environment: .live)
+    let container = Container(environment: .live)
     
     private let navigationController: UINavigationController
     
@@ -29,6 +29,9 @@ class AppCoordinator: Coordinator {
     
     func start() {
         // entrypoint에서 보일 화면 로직 설정
+        container.environment.githubUserDefaults.getToken() != nil
+        ? showReposViewController()
+        : showLoginViewController()
     }
     
     func fetchToken(url: URL) {
@@ -41,15 +44,27 @@ class AppCoordinator: Coordinator {
         : container.buildViewController(.login)
     }
     
-    
     // 아래에 필요한 뷰컨 초기화를 맡는 메서드 로직 작성
-    private func showReposViewController() {
-        
+    private func showLoginViewController() {
+        let coordinator = LoginCoordinator(navigationController: navigationController, container: container)
+        coordinator.delegate = self
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
     }
     
-    // 아래에 delegate받아 처리할 메서드(화면전환) 로직 작성
+    private func showReposViewController() {
+        let coordinator = ReposCoordinator(navigationController: navigationController)
+        coordinator.delegate = self
+    }
 }
 
+// 아래에 delegate받아 처리할 메서드(화면전환) 로직 작성
 extension AppCoordinator: LoginCoordinatorDelegate {
+    func didLoggedIn(coordinator: LoginCoordinator) {
+        
+    }
+}
+
+extension AppCoordinator: ReposCoordinatorDelegate {
     
 }

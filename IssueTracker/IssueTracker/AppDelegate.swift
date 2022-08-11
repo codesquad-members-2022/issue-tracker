@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let coordinator = AppCoordinator(navigationController: .init())
-//    let container = Container(environment: .live)
+    let container = Container(environment: .live) // 리팩토링 후 삭제해야!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // TODO: - 토큰 유효기간 판단
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = coordinator.buildRootViewController()
-//        container.buildRootViewController()
+        coordinator.start()
         window?.makeKeyAndVisible()
         return true
     }

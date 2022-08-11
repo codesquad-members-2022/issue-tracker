@@ -1,15 +1,49 @@
 import UIKit
 
 class Container {
-//   - 인스턴스를 소유하고 관리하는 역할 - 객체 생성 및 의존성 주입
-//    - MVVM 생성
-//    - 사용할 객체를 Container에 등록
-//    - 객체를 사용할 때는 Continer에 요청
+    //   - 인스턴스를 소유하고 관리하는 역할 - 객체 생성 및 의존성 주입
+    //    - MVVM 생성
+    //    - 사용할 객체를 Container에 등록
+    //    - 객체를 사용할 때는 Continer에 요청
     
     let environment: ContainerEnvironment
+    private var objects: [String: Any] = [:]
+    
     
     init(environment: ContainerEnvironment) {
         self.environment = environment
+        registerObjects()
+    }
+    
+    func registerObjects() {
+        registerLoginVC()
+    }
+    
+    // 외부 등록 허용??
+    func register<T>(_ object: T) {
+        let key = String(describing: type(of: T.self)) // 해당 클래스의 이름을 key값으로 저장
+        objects[key] = object
+    }
+    
+    // let value: Type = container.resolve() 로 사용
+    func resolve<T>() -> T? {
+        let key = String(describing: type(of: T.self))
+        guard let object = objects[key],
+              let object = object as? T else {
+            print("\(key)는 register되지 않음")
+            return nil
+        }
+        return object
+    }
+    
+    private func registerLoginVC() {
+        let loginModel = LoginModel(environment: .init(requestCode: { [weak self] completion in // 모델에 필요한 service의 클로저만 넣어주기
+            self?.environment.oAuthService.requestCode(completion: { result in
+                completion(result)
+            })
+        }))
+        let loginVC = LoginViewController(model: loginModel)
+        register(loginVC)
     }
     
     func buildViewController(_ screen: Screen) -> UIViewController {
