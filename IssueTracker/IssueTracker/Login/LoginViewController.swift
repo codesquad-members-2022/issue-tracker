@@ -31,6 +31,10 @@ class LoginViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    deinit {
+        print("-- \(type(of: self)) is deinited")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

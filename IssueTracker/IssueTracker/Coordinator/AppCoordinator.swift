@@ -53,18 +53,24 @@ class AppCoordinator: Coordinator {
     }
     
     private func showReposViewController() {
-        let coordinator = ReposCoordinator(navigationController: navigationController)
+        let coordinator = ReposCoordinator(navigationController: navigationController, container: container)
         coordinator.delegate = self
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
     }
 }
 
 // 아래에 delegate받아 처리할 메서드(화면전환) 로직 작성
 extension AppCoordinator: LoginCoordinatorDelegate {
     func didLoggedIn(coordinator: LoginCoordinator) {
-        
+        childCoordinators = childCoordinators.filter { $0 !== coordinator } // 자식 코디네이터들에서 LoginCoordinator 삭제
+        showReposViewController()
     }
 }
 
 extension AppCoordinator: ReposCoordinatorDelegate {
-    
+    func didSelect(repository: Repository) {
+        // showIssueViewController()
+        print("IssueVC를 보여줌")
+    }
 }

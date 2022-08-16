@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        // AppDelegate입장에서는 : 콜백으로 들어와서 토큰이 있으면 repoVC, 없으면 loginVC를 rootVC로 설정하면 된다. 나머지 내용은 알 필요가 없다.
         coordinator.fetchToken(url: url)
         let rootVC = coordinator.buildRootViewController()
         self.window?.rootViewController = rootVC

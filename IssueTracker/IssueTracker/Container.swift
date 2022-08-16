@@ -16,7 +16,10 @@ class Container {
     }
     
     func registerObjects() {
-        registerLoginVC()
+        registerLoginModel()
+        registerLoginViewController()
+        registerReposModel()
+        registerReposViewController()
     }
     
     // 외부 등록 허용??
@@ -36,14 +39,41 @@ class Container {
         return object
     }
     
-    private func registerLoginVC() {
+    private func registerLoginModel() {
         let loginModel = LoginModel(environment: .init(requestCode: { [weak self] completion in // 모델에 필요한 service의 클로저만 넣어주기
             self?.environment.oAuthService.requestCode(completion: { result in
                 completion(result)
             })
         }))
+        register(loginModel)
+    }
+    
+    // MARK: Container에서 register하는 요소들 간에 종속관계가 생기는 경우 어떻게 register해야..??
+    private func registerLoginViewController() {
+        guard let loginModel: LoginModel = self.resolve() else {
+            self.registerLoginModel()
+            return
+        }
         let loginVC = LoginViewController(model: loginModel)
         register(loginVC)
+    }
+    
+    private func registerReposModel() {
+        let reposModel = ReposModel(environment: .init(requestRepos: { [weak self] completion in
+            self?.environment.issueService.requestRepos(completion: { result in
+                completion(result)
+            })
+        }))
+        register(reposModel)
+    }
+    
+    private func registerReposViewController() {
+        guard let reposModel: ReposModel = resolve() else {
+            self.registerReposModel()
+            return
+        }
+        let reposVC = ReposViewController(model: reposModel)
+        register(reposVC)
     }
     
     func buildViewController(_ screen: Screen) -> UIViewController {

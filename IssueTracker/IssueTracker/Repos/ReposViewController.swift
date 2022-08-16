@@ -1,10 +1,16 @@
 import UIKit
 import SnapKit
 
+protocol ReposViewControllerDelegate {
+    func showIssue(didSelectRowAt indexPath: IndexPath)
+}
+
 class ReposViewController: UIViewController {
     
     private let model: ReposModel
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
+    
+    var delegate: ReposViewControllerDelegate?
     
     init(model: ReposModel) {
         self.model = model
@@ -16,18 +22,21 @@ class ReposViewController: UIViewController {
         })))
     }
     
+    deinit {
+        print("-- \(type(of: self)) is deinited")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        // 뷰컨 자신에 대한 셋팅 코드는 뷰컨을 만드는 Container에서 해준다 (추후 Coordinator로 분리)
-        self.view.backgroundColor = .white
+//        self.view.backgroundColor = .white
     }
     
     func reloadTableView() {
         tableView.reloadData()
     }
     
-    private func setupViews() {
+    func setupViews() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -47,14 +56,16 @@ class ReposViewController: UIViewController {
 
 extension ReposViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = model.getViewData(index: indexPath.row)
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        guard let viewController = appdelegate.container.buildViewController(.issue( selectedRepo: selectedItem)) as? IssueViewController else {
-            return
-        }
-        self.navigationController?.pushViewController(viewController, animated: true)
+        self.delegate?.showIssue(didSelectRowAt: indexPath)
+        // 아래 코드를 위 한줄로 대체
+//        let selectedItem = model.getViewData(index: indexPath.row)
+//        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+//            return
+//        }
+//        guard let viewController = appdelegate.container.buildViewController(.issue( selectedRepo: selectedItem)) as? IssueViewController else {
+//            return
+//        }
+//        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
