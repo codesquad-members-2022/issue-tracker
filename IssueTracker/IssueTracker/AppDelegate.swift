@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // { 다시 로그인을 해야된다고 판단 => UerDefaults.token 삭제 }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        // MARK: AppDelegate RootViewController 설정을 위해 할당할 때도 Container 사용?
         window?.rootViewController = coordinator.buildRootViewController()
         coordinator.start()
         window?.makeKeyAndVisible()

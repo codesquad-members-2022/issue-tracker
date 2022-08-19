@@ -23,8 +23,9 @@ class LoginCoordinator: Coordinator {
         guard let loginVC: LoginViewController = container.resolve() else {
             return
         }
-        loginVC.view.backgroundColor = .white
-        loginVC.setupView()
+        loginVC.delegate = self
+        
+        self.navigationController.viewControllers = [loginVC]
     }
 }
 

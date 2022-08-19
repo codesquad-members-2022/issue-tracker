@@ -32,15 +32,14 @@ class ReposCoordinator: Coordinator {
             return
         }
         viewController.delegate = self
-        // MARK: setupViews는 코디네이터에서 안되나?
-//        viewController.setupViews()
-        viewController.view.backgroundColor = .white
+        
         self.navigationController.viewControllers = [viewController]
     }
 }
 
 extension ReposCoordinator: ReposViewControllerDelegate {
     func showIssue(didSelectRowAt indexPath: IndexPath) {
+        print("showIssue")
         guard let model: ReposModel = container.resolve() else {
             return
         }

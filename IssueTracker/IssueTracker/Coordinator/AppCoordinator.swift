@@ -21,8 +21,6 @@ class AppCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     
-    // var isLoggedIn = false
-    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -39,9 +37,17 @@ class AppCoordinator: Coordinator {
     }
     
     func buildRootViewController() -> UIViewController {
-        container.environment.githubUserDefaults.getToken() != nil
-        ? container.buildViewController(.repos)
-        : container.buildViewController(.login)
+        var vc = UIViewController()
+        if container.environment.githubUserDefaults.getToken() != nil {
+            if let reposVC: ReposViewController = container.resolve() {
+                vc = reposVC
+            }
+        } else {
+            if let loginVC: LoginViewController = container.resolve() {
+                vc = loginVC
+            }
+        }
+        return vc // TODO: 빈 VC 반환하지 않는 방법 찾기
     }
     
     // 아래에 필요한 뷰컨 초기화를 맡는 메서드 로직 작성
@@ -64,6 +70,7 @@ class AppCoordinator: Coordinator {
 extension AppCoordinator: LoginCoordinatorDelegate {
     func didLoggedIn(coordinator: LoginCoordinator) {
         childCoordinators = childCoordinators.filter { $0 !== coordinator } // 자식 코디네이터들에서 LoginCoordinator 삭제
+        print("appCoordinator까지 왔어요")
         showReposViewController()
     }
 }

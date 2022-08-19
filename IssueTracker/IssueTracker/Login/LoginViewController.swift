@@ -37,6 +37,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        self.setupView()
     }
     
     func setupView() {
@@ -64,8 +66,22 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    private func touchedLoginButton() {
-        model.requestCode { result in
+//    private func touchedLoginButton() {
+//        model.requestCode { result in
+//            switch result {
+//            case .success(let url):
+//                UIApplication.shared.open(url)
+//            case .failure(let error):
+//                // TODO: - 로그인 하지 못했을때 에러처리
+//                print(error)
+//            }
+//        }
+//    }
+    
+    // 위의 메서드를 아래로 변경
+    func loginButtonTapped() {
+        model.requestCode { result in // TODO: delegate로 옮기기
+            print(result)
             switch result {
             case .success(let url):
                 UIApplication.shared.open(url)
@@ -74,10 +90,7 @@ class LoginViewController: UIViewController {
                 print(error)
             }
         }
-    }
-    
-    // 위의 메서드를 아래로 변경
-    func loginButtonTapped() {
+        print("loginVC's delegate: \(self.delegate)")
         self.delegate?.login()
     }
 }

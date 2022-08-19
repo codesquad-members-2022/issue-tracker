@@ -26,10 +26,18 @@ class ReposViewController: UIViewController {
         print("-- \(type(of: self)) is deinited")
     }
     
+    // 뷰 : 이벤트를 발생시키는 공간
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         setupViews()
-//        self.view.backgroundColor = .white
+        
+        model.fetchViewData()
+        model.updated = { [weak self] repos in
+            DispatchQueue.main.async {
+                self?.reloadTableView()
+            }
+        }
     }
     
     func reloadTableView() {
@@ -37,6 +45,7 @@ class ReposViewController: UIViewController {
     }
     
     func setupViews() {
+        print("ReposVC - setupViews")
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -56,6 +65,8 @@ class ReposViewController: UIViewController {
 
 extension ReposViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("셀 선택 : \(indexPath)")
+        print(self.delegate)
         self.delegate?.showIssue(didSelectRowAt: indexPath)
         // 아래 코드를 위 한줄로 대체
 //        let selectedItem = model.getViewData(index: indexPath.row)
