@@ -82,6 +82,13 @@ class AppCoordinator: NSObject, Coordinator {
         self.childCoordinators.append(coordinator)
     }
     
+    private func showOptionSelectViewController(option: Option, repo: Repository) {
+        let coordinator = OptionSelectCoordinator(navigationController: navigationController, container: container, option: option, repo: repo)
+        coordinator.delegate = self
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
     private func removeChildCoordinator(child: Coordinator) {
         for (index, coordinator) in  childCoordinators.enumerated() {
             if coordinator === child {
@@ -107,20 +114,34 @@ extension AppCoordinator: ReposCoordinatorDelegate {
 
 extension AppCoordinator: IssueCoordinatorDelegate {
     func makeIssue(with repo: Repository) {
-        print("NewIssueVC를 보여줄 것임")
         showNewIssueViewController(repo: repo)
     }
 }
 
 extension AppCoordinator: NewIssueCoordinatorDelegate {
+    func showOptions(option: Option, repo: Repository) {
+        showOptionSelectViewController(option: option, repo: repo)
+    }
+    
     func goBackToIssueVC(repo: Repository) {
         // 기존 스택에서 IssueVC삭제 or 이전 화면으로 되돌아옴
         DispatchQueue.main.async {
             self.navigationController.popViewController(animated: true)
             self.navigationController.reloadInputViews()
-        // TODO: 여전히 이전 뷰로 되돌아오면서 새로 생긴 issue를 갱신해 보여주는 동작이 되지 않음
+        // TODO: 여전히 이전 뷰로 되돌아오면서 새로 생긴 issue를 갱신해 보여주는 동작이 되지 않음 (goBackToNewIssueVC도 마찬가지)
         }
     }
+}
+
+extension AppCoordinator: OptionSelectCoordinatorDelegate {
+    func goBackToNewIssueVC(item: Optionable, option: Option) {
+        DispatchQueue.main.async {
+            self.navigationController.popViewController(animated: true)
+        }
+//        showNewIssueViewController(repo: <#T##Repository#>)
+    }
+    
+    
 }
 
 extension AppCoordinator: UINavigationControllerDelegate {

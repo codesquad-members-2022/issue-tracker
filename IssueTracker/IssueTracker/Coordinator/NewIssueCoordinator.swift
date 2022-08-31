@@ -10,6 +10,8 @@ import UIKit
 
 protocol NewIssueCoordinatorDelegate {
     func goBackToIssueVC(repo: Repository)
+    
+    func showOptions(option: Option, repo: Repository)
 }
 
 class NewIssueCoordinator: Coordinator {
@@ -45,8 +47,8 @@ class NewIssueCoordinator: Coordinator {
 }
 
 extension NewIssueCoordinator: NewIssueViewControllerDelegate {
-    func getCoordinatorType() -> Coordinator.Type {
-        return type(of: self)
+    func touchedOption(option: Option, repo: Repository) {
+        self.delegate?.showOptions(option: option, repo: repo)
     }
     
     func goBackToPreviousVC(repo: Repository) {

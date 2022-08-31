@@ -10,7 +10,7 @@ import UIKit
 protocol NewIssueViewControllerDelegate: AnyObject {
     func goBackToPreviousVC(repo: Repository)
     
-    func getCoordinatorType() -> Coordinator.Type
+    func touchedOption(option: Option, repo: Repository)
 }
 
 class NewIssueViewController: UIViewController {
@@ -196,6 +196,8 @@ class NewIssueViewController: UIViewController {
 extension NewIssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let option = optionList[indexPath.row]
+        self.delegate?.touchedOption(option: option, repo: repo)
+        // 아래 코드들을 delegate 처리
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -226,7 +228,7 @@ extension NewIssueViewController: UITableViewDataSource {
     }
 }
 
-extension NewIssueViewController: OptionSelectDelegate {
+extension NewIssueViewController: OptionSelectViewControllerDelegate {
     func selected(item: Optionable, option: Option) {
         guard let optionIndex = optionList.firstIndex(of: option) else {
             return

@@ -1,24 +1,26 @@
 import UIKit
 import SnapKit
 
-protocol OptionSelectDelegate: AnyObject {
+protocol OptionSelectViewControllerDelegate: AnyObject {
     func selected(item: Optionable, option: Option)
 }
 
 class OptionSelectViewController: UIViewController {
     
-    weak var delegate: OptionSelectDelegate?
+    weak var delegate: OptionSelectViewControllerDelegate?
+    
+    weak var coordinator: OptionSelectCoordinator?
     
     private let model: OptionSelectModel
     
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     private let option: Option
-    private let repository: Repository
+//    private let repository: Repository
     
     init(model: OptionSelectModel, option: Option, repo: Repository) {
         self.model = model
         self.option = option
-        self.repository = repo
+//        self.repository = repo
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -69,7 +71,10 @@ extension OptionSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = model.getOption(index: indexPath.row)
         delegate?.selected(item: selectedItem, option: option)
-        self.navigationController?.popViewController(animated: true)
+        // 아래 코드를 delegate로 coordinator에게 보내기
+//
+//        delegate?.selected(item: selectedItem, option: option)
+//        self.navigationController?.popViewController(animated: true)
     }
 }
 
