@@ -8,7 +8,7 @@ class Container {
     
     let environment: ContainerEnvironment
     private var objects: [String: Any] = [:]
-    
+    //
     
     init(environment: ContainerEnvironment) {
         self.environment = environment
@@ -76,6 +76,18 @@ class Container {
         register(reposVC)
     }
     
+    // MARK: 뷰모델 초기화에 유저 선택 데이터가 필요한 경우 초기화방법/시점은..?
+    // 이슈모델은 한번 만들어 두고 계속 쓰는 게 아니라 selectedRepo가 달라질때마다 새로 만들어야 하는데.. 그럼 컨테이너로 관리하기 적당하지 않은 대상인가??
+    // 필요할때 초기화하고 써도 되나? 근데 그러면 컨테이너가 미리 만들어두는 의미가..있나?
+    // -> 뷰만 재사용하고 데이터는 repo를 새로 선택할때마다 업데이트.
+    private func registerIssueModel(selectedRepo: Repository) {
+    }
+
+    private func registerIssueViewController() {
+        
+    }
+    
+    // (구) VC생성 메서드
     func buildViewController(_ screen: Screen) -> UIViewController {
         switch screen {
         case .login:

@@ -17,7 +17,7 @@ class ReposCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     
-    private let navigationController: UINavigationController
+    let navigationController: UINavigationController
     
     var delegate: ReposCoordinatorDelegate?
     
@@ -27,24 +27,24 @@ class ReposCoordinator: Coordinator {
     }
     
     func start() {
-        // MARK: VC초기화시 인스턴스 container에서 받아오기
         guard let viewController: ReposViewController = container.resolve() else {
             return
         }
         viewController.delegate = self
         
+        // MARK: 아래 코드가 뷰에 화면을 보여주는 역할 - 둘 중 하나 사용
         self.navigationController.viewControllers = [viewController]
+//        navigationController.pushViewController(viewController, animated: true)
     }
 }
 
 extension ReposCoordinator: ReposViewControllerDelegate {
     func showIssue(didSelectRowAt indexPath: IndexPath) {
-        print("showIssue")
         guard let model: ReposModel = container.resolve() else {
             return
         }
-        let selectedItem = model.getViewData(index: indexPath.row)
-        self.delegate?.didSelect(repository: selectedItem)
+        let selectedRepo = model.getViewData(index: indexPath.row)
+        self.delegate?.didSelect(repository: selectedRepo)
     }
 }
 

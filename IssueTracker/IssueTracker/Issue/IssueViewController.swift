@@ -1,6 +1,10 @@
 import UIKit
 
 
+protocol IssueViewControllerDelegate {
+    func touchedNewIssueButton()
+}
+
 final class IssueViewController: UIViewController {
 
     private lazy var collectionView: UICollectionView = {
@@ -29,6 +33,7 @@ final class IssueViewController: UIViewController {
     
     private let model: IssueModel
     private let repo: Repository
+    var delegate: IssueViewControllerDelegate?
     
     init(model: IssueModel, repo: Repository) {
         self.model = model
@@ -47,9 +52,17 @@ final class IssueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Issues"
+        self.view.backgroundColor = .white
         setupNavigationBar()
         setupViews()
         
+        model.requestIssue()
+        model.updatedIssues = {
+            DispatchQueue.main.async { [weak self] in
+                self?.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

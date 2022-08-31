@@ -8,7 +8,7 @@ protocol LoginCoordinatorDelegate {
 
 class LoginCoordinator: Coordinator {
     
-    private var navigationController: UINavigationController
+    let navigationController: UINavigationController
     
     let container: Container
     var childCoordinators: [Coordinator] = []

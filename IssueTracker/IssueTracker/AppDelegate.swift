@@ -12,27 +12,27 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let coordinator = AppCoordinator(navigationController: .init())
+    var coordinator: AppCoordinator?
     let container = Container(environment: .live) // 리팩토링 후 삭제해야!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // TODO: - 토큰 유효기간 판단
-        // 토큰저장할때: 토큰 & 토큰이 저장된 시간 & 유효시간(1일)
-        // 토큰이 유효한지 판단
-        // UserDefaults.토큰이저장된시간 > 1일
-        // { 다시 로그인을 해야된다고 판단 => UerDefaults.token 삭제 }
+        let navController = UINavigationController()
         
+        coordinator = AppCoordinator(navigationController: navController)
+        
+        coordinator?.start()
+         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        // MARK: AppDelegate RootViewController 설정을 위해 할당할 때도 Container 사용?
-        window?.rootViewController = coordinator.buildRootViewController()
-        coordinator.start()
+//        window?.rootViewController = coordinator?.buildRootViewController()
+        // TODO: 왜 위 코드가 아닌 아래 코드가 되는 건지 확인.. nav
+        window?.rootViewController = navController
         window?.makeKeyAndVisible()
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        coordinator.fetchToken(url: url)
-        let rootVC = coordinator.buildRootViewController()
+        coordinator?.fetchToken(url: url)
+        let rootVC = coordinator?.buildRootViewController()
         self.window?.rootViewController = rootVC
         return true
     }

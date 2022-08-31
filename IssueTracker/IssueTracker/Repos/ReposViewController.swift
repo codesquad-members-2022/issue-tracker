@@ -68,15 +68,6 @@ extension ReposViewController: UITableViewDelegate {
         print("셀 선택 : \(indexPath)")
         print(self.delegate)
         self.delegate?.showIssue(didSelectRowAt: indexPath)
-        // 아래 코드를 위 한줄로 대체
-//        let selectedItem = model.getViewData(index: indexPath.row)
-//        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            return
-//        }
-//        guard let viewController = appdelegate.container.buildViewController(.issue( selectedRepo: selectedItem)) as? IssueViewController else {
-//            return
-//        }
-//        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

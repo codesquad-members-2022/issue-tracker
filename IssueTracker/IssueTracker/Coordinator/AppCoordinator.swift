@@ -17,7 +17,7 @@ class AppCoordinator: Coordinator {
     
     let container = Container(environment: .live)
     
-    private let navigationController: UINavigationController
+    let navigationController: UINavigationController
     
     var childCoordinators: [Coordinator] = []
     
@@ -64,6 +64,13 @@ class AppCoordinator: Coordinator {
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
+    
+    private func showIssueViewController(repo: Repository) {
+        let coordinator = IssueCoordinator(navigationController: navigationController, container: container, repository: repo)
+        coordinator.delegate = self
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
 }
 
 // 아래에 delegate받아 처리할 메서드(화면전환) 로직 작성
@@ -77,7 +84,14 @@ extension AppCoordinator: LoginCoordinatorDelegate {
 
 extension AppCoordinator: ReposCoordinatorDelegate {
     func didSelect(repository: Repository) {
-        // showIssueViewController()
+        showIssueViewController(repo: repository)
         print("IssueVC를 보여줌")
+    }
+}
+
+extension AppCoordinator: IssueCoordinatorDelegate {
+    func makeIssue() {
+        print("NewIssueVC를 보여줄 것임")
+//        showNewIssueViewController()
     }
 }
