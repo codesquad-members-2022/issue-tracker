@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol NewIssueCreateDelegate: AnyObject {
+protocol NewIssueViewControllerDelegate: AnyObject {
     func created()
 }
 
 class NewIssueViewController: UIViewController {
     
-    weak var delegate: NewIssueCreateDelegate?
+    weak var delegate: NewIssueViewControllerDelegate?
     
     private let model: NewIssueModel
     
@@ -35,8 +35,8 @@ class NewIssueViewController: UIViewController {
     required convenience init?(coder: NSCoder) {
         
         let owner = Owner(login: "")
-        let modelEnvironment = NewIssueModelEnvironment(createIssue: { _, _, _, _, _, _, _ in
-        })
+        let modelEnvironment = NewIssueModelEnvironment { _, _ in
+        }
         let model = NewIssueModel(environment: modelEnvironment)
         self.init(repo: Repository(name: "",
                                    owner: owner),
@@ -173,7 +173,9 @@ class NewIssueViewController: UIViewController {
             return
         }
         
-        model.createIssue(title: titleString, repo: repo, content: contentString, label: selectedLabel, milestone: selectedMilestone, assignee: selectedAssignee) { boolResult in
+        let newIssueFormat = NewIssueFormat(title: titleString, repo: repo, content: contentString, label: selectedLabel, milestone: selectedMilestone, assignee: selectedAssignee)
+        
+        model.createIssue(newIssue: newIssueFormat) { boolResult in
             if boolResult {
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)

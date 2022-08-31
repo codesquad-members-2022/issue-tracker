@@ -15,13 +15,13 @@ class NewIssueModel {
         self.environment = environment
     }
     
-    func createIssue(title: String, repo: Repository, content: String, label: Label?, milestone: Milestone?, assignee: Assignee?, completion: @escaping (Bool) -> Void) {
-        environment.createIssue(title, repo, content, label, milestone, assignee) { boolResult in
+    func createIssue(newIssue: NewIssueFormat, completion: @escaping (Bool) -> Void) {
+        environment.createIssue(newIssue) { boolResult in
             completion(boolResult)
         }
     }
 }
 
 struct NewIssueModelEnvironment {
-    let createIssue: (String, Repository, String, Label?, Milestone?, Assignee?, @escaping (Bool) -> Void) -> Void
+    let createIssue: (NewIssueFormat, @escaping (Bool) -> Void) -> Void
 }

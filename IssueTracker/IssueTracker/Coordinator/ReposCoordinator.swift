@@ -32,9 +32,7 @@ class ReposCoordinator: Coordinator {
         }
         viewController.delegate = self
         
-        // MARK: 아래 코드가 뷰에 화면을 보여주는 역할 - 둘 중 하나 사용
-        self.navigationController.viewControllers = [viewController]
-//        navigationController.pushViewController(viewController, animated: true)
+        navigationController.pushViewController(viewController, animated: false)
     }
 }
 

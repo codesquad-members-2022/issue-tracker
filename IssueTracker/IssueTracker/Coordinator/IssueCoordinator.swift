@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol IssueCoordinatorDelegate {
-    func makeIssue()
+    func makeIssue(with repo: Repository)
 }
 
 class IssueCoordinator: Coordinator {
@@ -42,21 +42,15 @@ class IssueCoordinator: Coordinator {
         }))
         let issueVC = IssueViewController(model: issueModel, repo: repo)
         issueVC.delegate = self
-        issueVC.reloadData()
+//        issueVC.reloadData()
         
-        print(navigationController.viewControllers)
-        self.navigationController.viewControllers = [issueVC]
-        // MARK: 아래, 위 중 하나만 사용해 화면 전환 - 무슨 차이?
-        // 위는 스택에 1개의 뷰컨만 존재하게 하므로 back버튼이 생기지 않음
-//        navigationController.pushViewController(issueVC, animated: true) // 오류
-        print(navigationController.viewControllers)
-        // TODO: IssueVC의 viewDidLoad가 호출이 안됨..!!
+        navigationController.pushViewController(issueVC, animated: true)
     }
 
 }
 
 extension IssueCoordinator: IssueViewControllerDelegate {
-    func touchedNewIssueButton() {
-        self.delegate?.makeIssue()
+    func touchedNewIssueButton(repo: Repository) {
+        self.delegate?.makeIssue(with: repo)
     }
 }

@@ -2,7 +2,7 @@ import UIKit
 
 
 protocol IssueViewControllerDelegate {
-    func touchedNewIssueButton()
+    func touchedNewIssueButton(repo: Repository)
 }
 
 final class IssueViewController: UIViewController {
@@ -85,14 +85,16 @@ final class IssueViewController: UIViewController {
     }
     
     @objc func touchedAddButton() {
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        guard let viewController = appdelegate.container.buildViewController(.newIssue(repo: repo)) as? NewIssueViewController else {
-            return
-        }
-        self.navigationController?.pushViewController(viewController, animated: true)
-        viewController.delegate = self
+        self.delegate?.touchedNewIssueButton(repo: repo)
+        // 아래 코드를 위 한줄로 대체
+//        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+//            return
+//        }
+//        guard let viewController = appdelegate.container.buildViewController(.newIssue(repo: repo)) as? NewIssueViewController else {
+//            return
+//        }
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//        viewController.delegate = self
     }
     
     private func setupNavigationBar() {
@@ -169,8 +171,10 @@ extension IssueViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.width, height: 200)
     }
 }
-
-extension IssueViewController: NewIssueCreateDelegate {
+extension IssueViewController: NewIssueViewControllerDelegate {
+    
+    
+    
     func created() {
         model.requestIssue()
     }

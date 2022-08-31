@@ -23,8 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coordinator?.start()
          
         self.window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = coordinator?.buildRootViewController()
-        // TODO: 왜 위 코드가 아닌 아래 코드가 되는 건지 확인.. nav
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
         return true

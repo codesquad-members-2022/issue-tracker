@@ -25,7 +25,7 @@ class LoginCoordinator: Coordinator {
         }
         loginVC.delegate = self
         
-        self.navigationController.viewControllers = [loginVC]
+        navigationController.pushViewController(loginVC, animated: false)
     }
 }
 

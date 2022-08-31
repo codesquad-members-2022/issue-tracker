@@ -43,25 +43,25 @@ struct IssueService {
         }
     }
     
-    func createIssue(title: String, repo: Repository, content: String, label: Label?, milestone: Milestone?, assignee: Assignee?, completion: @escaping (Bool) -> Void) {
-        let urlString = RequestURL.createIssue(owner: repo.owner.login, repo: repo.name).description
+    func createIssue(newIssue: NewIssueFormat, completion: @escaping (Bool) -> Void) {
+        let urlString = RequestURL.createIssue(owner: newIssue.repo.owner.login, repo: newIssue.repo.name).description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
             NetworkHeader.authorization(accessToken: accessToken).getHttpHeader()
         ]
         var labelList: [String] = []
         var assigneeList: [String] = []
-        if let label = label,
-           let assignee = assignee {
+        if let label = newIssue.label,
+           let assignee = newIssue.assignee {
             labelList.append(label.name)
             assigneeList.append(assignee.login)
         }
         
         let parameters: [String: Any] = [
-            "title": title,
-            "body": content,
+            "title": newIssue.title,
+            "body": newIssue.content,
             "labels": labelList,
-            "milestone": milestone?.number,
+            "milestone": newIssue.milestone?.number,
             "assignees": assigneeList
         ]
         

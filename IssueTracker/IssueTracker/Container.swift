@@ -87,7 +87,7 @@ class Container {
         
     }
     
-    // (구) VC생성 메서드
+    // MARK: (구) VC생성 메서드
     func buildViewController(_ screen: Screen) -> UIViewController {
         switch screen {
         case .login:
@@ -136,8 +136,8 @@ class Container {
             return viewController
         case .newIssue(let repo):
             // MARK: 아래와 같이 파라미터와 completion이 함께 필요한 클로저라면, 클로저를 통해 넘기지 않고 직접 참조해서 넣어줘도 괜찮은지?? (weak self 필요없음) -> 아님 메모리누수 나고있음~
-            let newIssueModelEnvironment = NewIssueModelEnvironment { [weak self] title, repo, content, label, milestone, assignee, completion in
-                self?.environment.issueService.createIssue(title: title, repo: repo, content: content, label: label, milestone: milestone, assignee: assignee, completion: completion)
+            let newIssueModelEnvironment = NewIssueModelEnvironment { [weak self] newIssueFormat, completion in
+                self?.environment.issueService.createIssue(newIssue: newIssueFormat, completion: completion)
             }
 //            let model = NewIssueModel(environment: .init(createIssue: environment.issueService.createIssue(title:repo:content:label:milestone:assignee:completion:)))
             let model = NewIssueModel(environment: newIssueModelEnvironment)

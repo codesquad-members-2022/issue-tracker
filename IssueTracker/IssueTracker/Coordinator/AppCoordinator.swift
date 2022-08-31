@@ -50,7 +50,6 @@ class AppCoordinator: Coordinator {
         return vc // TODO: 빈 VC 반환하지 않는 방법 찾기
     }
     
-    // 아래에 필요한 뷰컨 초기화를 맡는 메서드 로직 작성
     private func showLoginViewController() {
         let coordinator = LoginCoordinator(navigationController: navigationController, container: container)
         coordinator.delegate = self
@@ -71,13 +70,19 @@ class AppCoordinator: Coordinator {
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
+    
+    private func showNewIssueViewController(repo: Repository) {
+        let coordinator = NewIssueCoordinator(navigationController: navigationController, container: container, repo: repo)
+        coordinator.delegate = self
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
 }
 
 // 아래에 delegate받아 처리할 메서드(화면전환) 로직 작성
 extension AppCoordinator: LoginCoordinatorDelegate {
     func didLoggedIn(coordinator: LoginCoordinator) {
         childCoordinators = childCoordinators.filter { $0 !== coordinator } // 자식 코디네이터들에서 LoginCoordinator 삭제
-        print("appCoordinator까지 왔어요")
         showReposViewController()
     }
 }
@@ -85,13 +90,16 @@ extension AppCoordinator: LoginCoordinatorDelegate {
 extension AppCoordinator: ReposCoordinatorDelegate {
     func didSelect(repository: Repository) {
         showIssueViewController(repo: repository)
-        print("IssueVC를 보여줌")
     }
 }
 
 extension AppCoordinator: IssueCoordinatorDelegate {
-    func makeIssue() {
+    func makeIssue(with repo: Repository) {
         print("NewIssueVC를 보여줄 것임")
-//        showNewIssueViewController()
+        showNewIssueViewController(repo: repo)
     }
+}
+
+extension AppCoordinator: NewIssueCoordinatorDelegate {
+    
 }

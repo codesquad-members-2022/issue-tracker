@@ -20,6 +20,7 @@
 		00383AB0288A8306008B215E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00383AAF288A8306008B215E /* LoginModel.swift */; };
 		004800F6286E8C0700A58B2A /* Assignee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004800F5286E8C0700A58B2A /* Assignee.swift */; };
 		004800F8286E907300A58B2A /* Optionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004800F7286E907300A58B2A /* Optionable.swift */; };
+		004ABDE628BF516400F5CEC8 /* NewIssueFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004ABDE528BF516400F5CEC8 /* NewIssueFormat.swift */; };
 		0053D7552859B162006614EC /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0053D7542859B162006614EC /* Config.plist */; };
 		0053D7572859B4CA006614EC /* PrivateStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053D7562859B4CA006614EC /* PrivateStorage.swift */; };
 		00567EE8286194DB00F3E8EC /* IssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00567EE7286194DB00F3E8EC /* IssueService.swift */; };
@@ -90,6 +91,7 @@
 		00383AAF288A8306008B215E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		004800F5286E8C0700A58B2A /* Assignee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignee.swift; sourceTree = "<group>"; };
 		004800F7286E907300A58B2A /* Optionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optionable.swift; sourceTree = "<group>"; };
+		004ABDE528BF516400F5CEC8 /* NewIssueFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueFormat.swift; sourceTree = "<group>"; };
 		0053D7542859B162006614EC /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		0053D7562859B4CA006614EC /* PrivateStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateStorage.swift; sourceTree = "<group>"; };
 		00567EE7286194DB00F3E8EC /* IssueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueService.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				000B92C1286D67F8009EB2D8 /* NewIssueModel.swift */,
+				004ABDE528BF516400F5CEC8 /* NewIssueFormat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				003081F228A28F8C001B7600 /* LoginCoordinator.swift in Sources */,
 				9844C193286C803F00D0CFC9 /* ReposViewController.swift in Sources */,
 				000B92C7286D6F9D009EB2D8 /* OptionSelectModel.swift in Sources */,
+				004ABDE628BF516400F5CEC8 /* NewIssueFormat.swift in Sources */,
 				988FA2EA2864034C0058C333 /* OptionSelectViewController.swift in Sources */,
 				003081F428A29EC0001B7600 /* ReposCoordinator.swift in Sources */,
 				00BCB406285B01AA005E87BC /* Issue.swift in Sources */,
