@@ -6,34 +6,12 @@ protocol IssueViewControllerDelegate {
 }
 
 final class IssueViewController: UIViewController {
-
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        return collectionView
-    }()
-    
-    private lazy var addButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = .systemBlue
-        configuration.baseForegroundColor = .white
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-        configuration.background.cornerRadius = 70
-        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
-            self?.touchedAddButton()
-        }))
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        
-        return button
-    }()
     
     private let model: IssueModel
     private let repo: Repository
+    
     var delegate: IssueViewControllerDelegate?
+    weak var coordinator: IssueCoordinator?
     
     init(model: IssueModel, repo: Repository) {
         self.model = model
@@ -86,15 +64,6 @@ final class IssueViewController: UIViewController {
     
     @objc func touchedAddButton() {
         self.delegate?.touchedNewIssueButton(repo: repo)
-        // 아래 코드를 위 한줄로 대체
-//        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            return
-//        }
-//        guard let viewController = appdelegate.container.buildViewController(.newIssue(repo: repo)) as? NewIssueViewController else {
-//            return
-//        }
-//        self.navigationController?.pushViewController(viewController, animated: true)
-//        viewController.delegate = self
     }
     
     private func setupNavigationBar() {
@@ -124,6 +93,30 @@ final class IssueViewController: UIViewController {
             make.trailing.equalTo(self.view).offset(-50)
         }
     }
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    private lazy var addButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseBackgroundColor = .systemBlue
+        configuration.baseForegroundColor = .white
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        configuration.background.cornerRadius = 70
+        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
+            self?.touchedAddButton()
+        }))
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+        return button
+    }()
     
     private func createButton(title: String, image: UIImage?, action: UIAction) -> UIButton {
         var configuration = UIButton.Configuration.plain()
@@ -171,11 +164,16 @@ extension IssueViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.width, height: 200)
     }
 }
-extension IssueViewController: NewIssueViewControllerDelegate {
-    
-    
-    
-    func created() {
-        model.requestIssue()
-    }
-}
+
+//extension IssueViewController: NewIssueViewControllerDelegate {
+//    func goBackToPreviousVC(repo: Repository) {
+//        <#code#>
+//    }
+//
+//
+//
+//
+//    func created() {
+//        model.requestIssue()
+//    }
+//}

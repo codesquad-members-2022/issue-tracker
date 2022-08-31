@@ -17,6 +17,7 @@ protocol LoginViewControllerDelegate {
 class LoginViewController: UIViewController {
 
     var delegate: LoginViewControllerDelegate?
+    weak var coordinator: LoginCoordinator?
     
     private var model: LoginModel
     

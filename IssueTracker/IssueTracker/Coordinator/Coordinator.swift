@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol Coordinator: AnyObject {
+protocol Coordinator: AnyObject { // 클래스에서만 사용 가능하도록 보장
     var navigationController: UINavigationController { get }
     var childCoordinators: [Coordinator] { get set }
     func start()

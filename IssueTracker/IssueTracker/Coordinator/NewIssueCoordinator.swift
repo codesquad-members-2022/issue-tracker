@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol NewIssueCoordinatorDelegate {
-    
+    func goBackToIssueVC(repo: Repository)
 }
 
 class NewIssueCoordinator: Coordinator {
@@ -36,6 +36,7 @@ class NewIssueCoordinator: Coordinator {
         let newIssueVC = NewIssueViewController(repo: repo, model: model)
         
         newIssueVC.delegate = self
+        newIssueVC.coordinator = self
         
         navigationController.pushViewController(newIssueVC, animated: true)
     }
@@ -44,9 +45,11 @@ class NewIssueCoordinator: Coordinator {
 }
 
 extension NewIssueCoordinator: NewIssueViewControllerDelegate {
-    func created() {
-        
+    func getCoordinatorType() -> Coordinator.Type {
+        return type(of: self)
     }
     
-    
+    func goBackToPreviousVC(repo: Repository) {
+        self.delegate?.goBackToIssueVC(repo: repo)
+    }
 }

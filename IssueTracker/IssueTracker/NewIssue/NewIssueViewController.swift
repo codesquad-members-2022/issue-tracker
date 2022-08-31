@@ -8,12 +8,15 @@
 import UIKit
 
 protocol NewIssueViewControllerDelegate: AnyObject {
-    func created()
+    func goBackToPreviousVC(repo: Repository)
+    
+    func getCoordinatorType() -> Coordinator.Type
 }
 
 class NewIssueViewController: UIViewController {
     
     weak var delegate: NewIssueViewControllerDelegate?
+    weak var coordinator: NewIssueCoordinator?
     
     private let model: NewIssueModel
     
@@ -175,12 +178,16 @@ class NewIssueViewController: UIViewController {
         
         let newIssueFormat = NewIssueFormat(title: titleString, repo: repo, content: contentString, label: selectedLabel, milestone: selectedMilestone, assignee: selectedAssignee)
         
-        model.createIssue(newIssue: newIssueFormat) { boolResult in
+        // 모델을 통해 이슈 생성요청을 보낸다
+        // 생성되었다면 현재 VC를 없애고 이전 VC로 되돌아간다
+        // 되돌아간 VC를 업데이트한다
+        model.createIssue(newIssue: newIssueFormat) { [weak self] boolResult in
             if boolResult {
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
+                guard let delegate = self?.delegate,
+                      let repo = self?.repo else {
+                    return
                 }
-                self.delegate?.created()
+                delegate.goBackToPreviousVC(repo: repo)
             }
         }
     }

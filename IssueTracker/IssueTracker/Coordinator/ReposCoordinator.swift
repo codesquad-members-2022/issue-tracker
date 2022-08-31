@@ -27,12 +27,13 @@ class ReposCoordinator: Coordinator {
     }
     
     func start() {
-        guard let viewController: ReposViewController = container.resolve() else {
+        guard let reposVC: ReposViewController = container.resolve() else {
             return
         }
-        viewController.delegate = self
+        reposVC.delegate = self
+        reposVC.coordinator = self
         
-        navigationController.pushViewController(viewController, animated: false)
+        navigationController.pushViewController(reposVC, animated: false)
     }
 }
 

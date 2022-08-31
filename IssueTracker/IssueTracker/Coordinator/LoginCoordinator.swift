@@ -12,6 +12,7 @@ class LoginCoordinator: Coordinator {
     
     let container: Container
     var childCoordinators: [Coordinator] = []
+    
     var delegate: LoginCoordinatorDelegate?
     
     init(navigationController: UINavigationController, container: Container) {
@@ -24,6 +25,7 @@ class LoginCoordinator: Coordinator {
             return
         }
         loginVC.delegate = self
+        loginVC.coordinator = self
         
         navigationController.pushViewController(loginVC, animated: false)
     }
