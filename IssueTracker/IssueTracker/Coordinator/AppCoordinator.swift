@@ -130,11 +130,16 @@ extension AppCoordinator: NewIssueCoordinatorDelegate {
     
     func goBackToIssueVC(repo: Repository) {
         // 기존 스택에서 IssueVC삭제 or 이전 화면으로 되돌아옴
-        DispatchQueue.main.async {
-            self.navigationController.popViewController(animated: true)
-            self.navigationController.reloadInputViews()
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController.popViewController(animated: true)
+            
         // TODO: 여전히 이전 뷰로 되돌아오면서 새로 생긴 issue를 갱신해 보여주는 동작이 되지 않음 (goBackToNewIssueVC도 마찬가지)
         }
+        guard let issueCoordinator: IssueCoordinator = container.resolve() else {
+            return
+        }
+        
+        issueCoordinator.reloadIssues()
     }
 }
 
@@ -143,7 +148,11 @@ extension AppCoordinator: OptionSelectCoordinatorDelegate {
         DispatchQueue.main.async {
             self.navigationController.popViewController(animated: true)
         }
-//        showNewIssueViewController(repo: <#T##Repository#>)
+        
+        guard let newIssueCoordinator: NewIssueCoordinator = container.resolve() else {
+            return
+        }
+        newIssueCoordinator.reloadOptions()
     }
     
     

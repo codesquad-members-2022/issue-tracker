@@ -15,6 +15,7 @@ protocol IssueCoordinatorDelegate {
 class IssueCoordinator: Coordinator {
     
     var navigationController: UINavigationController
+    var viewController: IssueViewController?
     
     var container: Container
     
@@ -42,14 +43,21 @@ class IssueCoordinator: Coordinator {
         }))
         let issueVC = IssueViewController(model: issueModel, repo: repo)
         issueVC.delegate = self
+        viewController = issueVC
         
-        DispatchQueue.main.async { [weak self] in
+//        DispatchQueue.main.async { [weak self] in
             issueVC.reloadData()
-            self?.navigationController.pushViewController(issueVC, animated: true)
+            self.navigationController.pushViewController(issueVC, animated: true)
             
-        }
+//        }
     }
 
+    func reloadIssues() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.reloadData()
+        }
+    }
+    
 }
 
 extension IssueCoordinator: IssueViewControllerDelegate {

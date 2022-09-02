@@ -19,6 +19,8 @@ class NewIssueCoordinator: Coordinator {
     var delegate: NewIssueCoordinatorDelegate?
     
     var navigationController: UINavigationController
+    var viewController: NewIssueViewController?
+    
     var childCoordinators: [Coordinator] = []
     
     private var repo: Repository
@@ -42,7 +44,11 @@ class NewIssueCoordinator: Coordinator {
         navigationController.pushViewController(newIssueVC, animated: true)
     }
     
-    
+    func reloadOptions() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.reloadOptions()
+        }
+    }
 }
 
 extension NewIssueCoordinator: NewIssueViewControllerDelegate {

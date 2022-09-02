@@ -100,6 +100,10 @@ class NewIssueViewController: UIViewController {
         setUpViews()
         self.navigationController?.navigationBar.prefersLargeTitles = false
     }
+    
+    func reloadOptions() {
+        self.optionTable.reloadData()
+    }
 
     private func setupNavigationBar() {
         self.navigationItem.titleView = navSegmentedControl
@@ -243,6 +247,6 @@ extension NewIssueViewController: OptionSelectViewControllerDelegate {
         }
         
         selectedList[optionIndex] = item.subTitle
-        self.optionTable.reloadData()
+        reloadOptions()
     }
 }
