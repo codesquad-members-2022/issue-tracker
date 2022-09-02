@@ -181,9 +181,6 @@ class NewIssueViewController: UIViewController {
         
         let newIssueFormat = NewIssueFormat(title: titleString, repo: repo, content: contentString, label: selectedLabel, milestone: selectedMilestone, assignee: selectedAssignee)
         
-        // 모델을 통해 이슈 생성요청을 보낸다
-        // 생성되었다면 현재 VC를 없애고 이전 VC로 되돌아간다
-        // 되돌아간 VC를 업데이트한다
         model.createIssue(newIssue: newIssueFormat) { [weak self] boolResult in
             if boolResult {
                 guard let delegate = self?.delegate,
@@ -201,14 +198,14 @@ extension NewIssueViewController: UITableViewDelegate {
         let option = optionList[indexPath.row]
         self.delegate?.touchedOption(option: option, repo: repo)
         // 아래 코드들을 delegate 처리
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        guard let viewController = appdelegate.container.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
-            return
-        }
-        self.navigationController?.pushViewController(viewController, animated: true)
-        viewController.delegate = self
+//        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+//            return
+//        }
+//        guard let viewController = appdelegate.container.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
+//            return
+//        }
+//        self.navigationController?.pushViewController(viewController, animated: true)
+//        viewController.delegate = self
     }
 }
 

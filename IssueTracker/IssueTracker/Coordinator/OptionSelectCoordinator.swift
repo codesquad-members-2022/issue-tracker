@@ -33,11 +33,14 @@ class OptionSelectCoordinator: Coordinator {
     }
     
     func start() {
-        let optionSelectModelEnvironment = OptionSelectModelEnvironment { [weak self] repo, completion in
+        let optionSelectModelEnvironment = OptionSelectModelEnvironment {
+            [weak self] repo, completion in
             self?.container.environment.issueService.requestRepositoryLabels(repo: repo, completion: completion)
-        } requestRepositoryMilestones: { [weak self] repo, completion in
+        } requestRepositoryMilestones: {
+            [weak self] repo, completion in
             self?.container.environment.issueService.requestRepositoryMilestones(repo: repo, completion: completion)
-        } requestRepositoryAssigness: { [weak self] repo, completion in
+        } requestRepositoryAssigness: {
+            [weak self] repo, completion in
             self?.container.environment.issueService.requestRepositoryAssigness(repo: repo, completion: completion)
         }
 
@@ -48,8 +51,6 @@ class OptionSelectCoordinator: Coordinator {
         
         navigationController.pushViewController(optionSelectVC, animated: true)
     }
-    
-    
 }
 
 extension OptionSelectCoordinator: OptionSelectViewControllerDelegate {

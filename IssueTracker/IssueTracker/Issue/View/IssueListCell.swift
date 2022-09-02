@@ -16,7 +16,6 @@ final class IssueListCell: UICollectionViewCell {
         self.titleLabel.text = title
         self.descriptionLabel.text = description
         self.milestoneLabel.text = milestone
-        // TODO: - 스택뷰를 ScrollView 로 바꾸기
         self.labelsStackView.clearSubviews()
         for label in labels {
             let view = CapsuleTextView(title: label.name, hexColor: label.color)

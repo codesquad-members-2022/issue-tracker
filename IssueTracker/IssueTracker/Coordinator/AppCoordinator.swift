@@ -51,7 +51,7 @@ class AppCoordinator: NSObject, Coordinator {
                 vc = loginVC
             }
         }
-        return vc // TODO: 빈 VC 반환하지 않는 방법 찾기
+        return vc
     }
     
     private func showLoginViewController() {
@@ -165,11 +165,12 @@ extension AppCoordinator: UINavigationControllerDelegate {
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
             return
         }
-//
+        
         // navStack에 존재한다면 - pop이 아닌 push
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
+        
         // navStack에 존재하지 않음 = pop됨 : 해당 뷰컨의 coordinator를 childCoordinators에서 지워야 함
         // MARK: 모든 뷰컨의 코디네이터 관리하면서도 코드중복 피하는 방법..?
         if fromViewController as? LoginViewController != nil,

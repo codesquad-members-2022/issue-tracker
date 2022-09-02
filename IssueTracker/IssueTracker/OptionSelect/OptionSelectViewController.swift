@@ -13,12 +13,12 @@ class OptionSelectViewController: UIViewController {
     
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     private let option: Option
-//    private let repository: Repository
+    private let repo: Repository
     
     init(model: OptionSelectModel, option: Option, repo: Repository) {
         self.model = model
         self.option = option
-//        self.repository = repo
+        self.repo = repo
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -41,6 +41,12 @@ class OptionSelectViewController: UIViewController {
         setupViews()
         self.view.backgroundColor = .white
         
+        model.requestOptions(option, repo: repo)
+        model.updatedOptions = {
+            DispatchQueue.main.async { [weak self] in
+                self?.reloadData()
+            }
+        }
     }
     
     private func setupViews() {

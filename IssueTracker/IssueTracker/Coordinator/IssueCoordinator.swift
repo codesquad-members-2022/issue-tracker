@@ -44,12 +44,10 @@ class IssueCoordinator: Coordinator {
         let issueVC = IssueViewController(model: issueModel, repo: repo)
         issueVC.delegate = self
         viewController = issueVC
+    
+        reloadIssues()
+        self.navigationController.pushViewController(issueVC, animated: true)
         
-//        DispatchQueue.main.async { [weak self] in
-            issueVC.reloadData()
-            self.navigationController.pushViewController(issueVC, animated: true)
-            
-//        }
     }
 
     func reloadIssues() {

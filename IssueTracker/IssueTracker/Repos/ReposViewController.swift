@@ -45,7 +45,6 @@ class ReposViewController: UIViewController {
     }
     
     func setupViews() {
-        print("ReposVC - setupViews")
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -65,8 +64,6 @@ class ReposViewController: UIViewController {
 
 extension ReposViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("셀 선택 : \(indexPath)")
-        print(self.delegate)
         self.delegate?.showIssue(didSelectRowAt: indexPath)
     }
 }

@@ -135,11 +135,9 @@ class Container {
             viewController.title = "Issues"
             return viewController
         case .newIssue(let repo):
-            // MARK: 아래와 같이 파라미터와 completion이 함께 필요한 클로저라면, 클로저를 통해 넘기지 않고 직접 참조해서 넣어줘도 괜찮은지?? (weak self 필요없음) -> 아님 메모리누수 나고있음~
             let newIssueModelEnvironment = NewIssueModelEnvironment { [weak self] newIssueFormat, completion in
                 self?.environment.issueService.createIssue(newIssue: newIssueFormat, completion: completion)
             }
-//            let model = NewIssueModel(environment: .init(createIssue: environment.issueService.createIssue(title:repo:content:label:milestone:assignee:completion:)))
             let model = NewIssueModel(environment: newIssueModelEnvironment)
             return NewIssueViewController(repo: repo, model: model)
         case .optionSelect(let option, let repo):
@@ -165,18 +163,17 @@ class Container {
         environment.oAuthService.fetchToken(from: url) { [weak self] accessToken in
             guard let token = accessToken,
                   let self = self else {
-                // TODO: 로그인 실패 얼럿띄우기
-                return // 옵셔널 처리 시 리턴값이 애매해질 때 한가지 방법은, 리턴값 대신 completion(리턴값) -> Void 를 사용하는 것
+                return
             }
             self.environment.githubUserDefaults.setToken(token)
         }
     }
     
-    func buildRootViewController() -> UIViewController {
-        self.environment.githubUserDefaults.getToken() != nil
-        ? self.buildViewController(.repos)
-        : self.buildViewController(.login)
-    }
+//    func buildRootViewController() -> UIViewController {
+//        self.environment.githubUserDefaults.getToken() != nil
+//        ? self.buildViewController(.repos)
+//        : self.buildViewController(.login)
+//    }
 }
 
 extension Container {
