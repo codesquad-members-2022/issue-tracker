@@ -38,7 +38,6 @@ class NewIssueCoordinator: Coordinator {
         let newIssueVC = NewIssueViewController(repo: repo, model: model)
         
         newIssueVC.delegate = self
-        newIssueVC.coordinator = self
         
         navigationController.pushViewController(newIssueVC, animated: true)
     }

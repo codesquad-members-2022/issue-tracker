@@ -57,6 +57,7 @@ class AppCoordinator: NSObject, Coordinator {
     private func showLoginViewController() {
         let coordinator = LoginCoordinator(navigationController: navigationController, container: container)
         coordinator.delegate = self
+        container.register(coordinator)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
@@ -64,6 +65,7 @@ class AppCoordinator: NSObject, Coordinator {
     private func showReposViewController() {
         let coordinator = ReposCoordinator(navigationController: navigationController, container: container)
         coordinator.delegate = self
+        container.register(coordinator)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
@@ -71,6 +73,7 @@ class AppCoordinator: NSObject, Coordinator {
     private func showIssueViewController(repo: Repository) {
         let coordinator = IssueCoordinator(navigationController: navigationController, container: container, repository: repo)
         coordinator.delegate = self
+        container.register(coordinator)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
@@ -78,6 +81,7 @@ class AppCoordinator: NSObject, Coordinator {
     private func showNewIssueViewController(repo: Repository) {
         let coordinator = NewIssueCoordinator(navigationController: navigationController, container: container, repo: repo)
         coordinator.delegate = self
+        container.register(coordinator)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
@@ -85,12 +89,13 @@ class AppCoordinator: NSObject, Coordinator {
     private func showOptionSelectViewController(option: Option, repo: Repository) {
         let coordinator = OptionSelectCoordinator(navigationController: navigationController, container: container, option: option, repo: repo)
         coordinator.delegate = self
+        container.register(coordinator)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
     
     private func removeChildCoordinator(child: Coordinator) {
-        for (index, coordinator) in  childCoordinators.enumerated() {
+        for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
                 childCoordinators.remove(at: index)
             }
@@ -156,11 +161,26 @@ extension AppCoordinator: UINavigationControllerDelegate {
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
-        
         // navStack에 존재하지 않음 = pop됨 : 해당 뷰컨의 coordinator를 childCoordinators에서 지워야 함
-        // MARK: 이걸 모든 VC타입에 대해 해줘야 하나..??
-        if let issueVC = fromViewController as? IssueViewController,
-           let coordinator = issueVC.coordinator {
+        // MARK: 모든 뷰컨의 코디네이터 관리하면서도 코드중복 피하는 방법..?
+        if fromViewController as? LoginViewController != nil,
+            let coordinator: LoginCoordinator = container.resolve() {
+            removeChildCoordinator(child: coordinator)
+        }
+        if fromViewController as? ReposViewController != nil,
+            let coordinator: ReposCoordinator = container.resolve() {
+            removeChildCoordinator(child: coordinator)
+        }
+        if fromViewController as? IssueViewController != nil,
+            let coordinator: IssueCoordinator = container.resolve() {
+            removeChildCoordinator(child: coordinator)
+        }
+        if fromViewController as? NewIssueViewController != nil,
+            let coordinator: NewIssueCoordinator = container.resolve() {
+            removeChildCoordinator(child: coordinator)
+        }
+        if fromViewController as? OptionSelectViewController != nil,
+            let coordinator: OptionSelectCoordinator = container.resolve() {
             removeChildCoordinator(child: coordinator)
         }
     }

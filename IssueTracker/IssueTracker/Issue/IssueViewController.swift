@@ -11,7 +11,6 @@ final class IssueViewController: UIViewController {
     private let repo: Repository
     
     var delegate: IssueViewControllerDelegate?
-    weak var coordinator: IssueCoordinator?
     
     init(model: IssueModel, repo: Repository) {
         self.model = model

@@ -9,8 +9,6 @@ class OptionSelectViewController: UIViewController {
     
     weak var delegate: OptionSelectViewControllerDelegate?
     
-    weak var coordinator: OptionSelectCoordinator?
-    
     private let model: OptionSelectModel
     
     private let tableViewCellIdentifier = "tableViewCellIdentifier"

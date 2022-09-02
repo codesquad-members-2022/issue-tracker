@@ -16,7 +16,6 @@ protocol NewIssueViewControllerDelegate: AnyObject {
 class NewIssueViewController: UIViewController {
     
     weak var delegate: NewIssueViewControllerDelegate?
-    weak var coordinator: NewIssueCoordinator?
     
     private let model: NewIssueModel
     

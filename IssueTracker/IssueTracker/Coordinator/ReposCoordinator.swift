@@ -31,7 +31,6 @@ class ReposCoordinator: Coordinator {
             return
         }
         reposVC.delegate = self
-        reposVC.coordinator = self
         
         navigationController.pushViewController(reposVC, animated: false)
     }

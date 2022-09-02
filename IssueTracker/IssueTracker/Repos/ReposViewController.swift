@@ -11,7 +11,6 @@ class ReposViewController: UIViewController {
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     
     var delegate: ReposViewControllerDelegate?
-    weak var coordinator: ReposCoordinator?
     
     init(model: ReposModel) {
         self.model = model

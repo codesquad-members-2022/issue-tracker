@@ -45,7 +45,6 @@ class OptionSelectCoordinator: Coordinator {
         
         let optionSelectVC = OptionSelectViewController(model: optionSelectModel, option: option, repo: repo)
         optionSelectVC.delegate = self
-        optionSelectVC.coordinator = self
         
         navigationController.pushViewController(optionSelectVC, animated: true)
     }

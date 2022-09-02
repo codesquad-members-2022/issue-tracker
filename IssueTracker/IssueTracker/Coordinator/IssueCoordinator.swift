@@ -42,7 +42,6 @@ class IssueCoordinator: Coordinator {
         }))
         let issueVC = IssueViewController(model: issueModel, repo: repo)
         issueVC.delegate = self
-        issueVC.coordinator = self
         
         DispatchQueue.main.async { [weak self] in
             issueVC.reloadData()
