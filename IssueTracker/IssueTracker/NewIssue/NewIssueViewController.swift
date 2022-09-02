@@ -197,15 +197,6 @@ extension NewIssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let option = optionList[indexPath.row]
         self.delegate?.touchedOption(option: option, repo: repo)
-        // 아래 코드들을 delegate 처리
-//        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            return
-//        }
-//        guard let viewController = appdelegate.container.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
-//            return
-//        }
-//        self.navigationController?.pushViewController(viewController, animated: true)
-//        viewController.delegate = self
     }
 }
 
