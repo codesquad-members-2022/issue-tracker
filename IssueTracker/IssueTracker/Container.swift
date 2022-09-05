@@ -77,86 +77,11 @@ class Container {
     }
     
     // MARK: 뷰모델 초기화에 유저 선택 데이터가 필요한 경우 초기화방법/시점은..?
-    // 이슈모델은 한번 만들어 두고 계속 쓰는 게 아니라 selectedRepo가 달라질때마다 새로 만들어야 하는데.. 그럼 컨테이너로 관리하기 적당하지 않은 대상인가??
-    // 필요할때 초기화하고 써도 되나? 근데 그러면 컨테이너가 미리 만들어두는 의미가..있나?
-    // -> 뷰만 재사용하고 데이터는 repo를 새로 선택할때마다 업데이트.
     private func registerIssueModel(selectedRepo: Repository) {
     }
 
     private func registerIssueViewController() {
         
-    }
-    
-    // MARK: (구) VC생성 메서드
-    func buildViewController(_ screen: Screen) -> UIViewController {
-        switch screen {
-        case .login:
-            let model = LoginModel(environment: .init(requestCode: { [weak self] completion in
-                self?.environment.oAuthService.requestCode { result in
-                    completion(result)
-                }
-            }))
-            return LoginViewController(model: model)
-        case .repos:
-            // Repost에 필요한 service조각만 Model에 넣어주기(클로저 방식 사용)
-            // ReposModelEnvironment로 IssueService의 requestRepos()를 넣어줘야 한다 - completion으로 넘겨줌
-            // 클로저 사용 시 weak 사용 반드시 확인하기!!
-            let model = ReposModel(environment: .init(requestRepos: { [weak self] completion in
-                self?.environment.issueService.requestRepos(completion: { result in
-                    completion(result)
-                })
-            }))
-            let viewController = ReposViewController(model: model)
-            // VC.viewDidLoad()에서 하던 준비작업을 여기서 함
-            model.fetchViewData()
-            // vc는 모델을 가지는데, 모델은 vc의 테이블뷰를 참조해야 하므로 순환참조를 방지하기 위해 weak vc로 선언
-            model.updated = { [weak viewController] repos in
-                DispatchQueue.main.async {
-                    viewController?.reloadTableView()
-                }
-            }
-            viewController.title = "Repos"
-            return UINavigationController(rootViewController: viewController)
-        case .issue(let selectedRepo):
-            let model = IssueModel(
-                environment: .init(requestRepositoryIssues: { [weak self] completion in
-                    self?.environment.issueService.requestRepositoryIssues(repo: selectedRepo, completion: { result in
-                        completion(result)
-                    })
-                })
-            )
-            let viewController = IssueViewController(model: model, repo: selectedRepo)
-            model.requestIssue()
-            model.updatedIssues = {
-                DispatchQueue.main.async { [weak viewController] in
-                    viewController?.reloadData()
-                }
-            }
-            viewController.title = "Issues"
-            return viewController
-        case .newIssue(let repo):
-            let newIssueModelEnvironment = NewIssueModelEnvironment { [weak self] newIssueFormat, completion in
-                self?.environment.issueService.createIssue(newIssue: newIssueFormat, completion: completion)
-            }
-            let model = NewIssueModel(environment: newIssueModelEnvironment)
-            return NewIssueViewController(repo: repo, model: model)
-        case .optionSelect(let option, let repo):
-            let model = OptionSelectModel(environment:
-                    .init(requestRepositoryLabels:
-                            environment.issueService.requestRepositoryLabels(repo:completion:),
-                          requestRepositoryMilestones:
-                            environment.issueService.requestRepositoryMilestones(repo:completion:),
-                          requestRepositoryAssigness:
-                            environment.issueService.requestRepositoryAssigness(repo:completion:)))
-            model.requestOptions(option, repo: repo)
-            let viewController = OptionSelectViewController(model: model, option: option, repo: repo)
-            model.updatedOptions = {
-                DispatchQueue.main.async { [weak viewController] in
-                    viewController?.reloadData()
-                }
-            }
-            return viewController
-        }
     }
     
     func fetchAccessToken(url: URL) {
