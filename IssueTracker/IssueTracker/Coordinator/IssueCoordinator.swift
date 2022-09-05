@@ -45,14 +45,24 @@ class IssueCoordinator: Coordinator {
         issueVC.delegate = self
         viewController = issueVC
     
-        reloadIssues()
+        loadIssues()
         self.navigationController.pushViewController(issueVC, animated: true)
         
     }
+    
+    func loadIssues() {
+        guard let viewController = self.viewController else {
+            return
+        }
+        viewController.loadIssue()
+    }
 
-    func reloadIssues() {
-        DispatchQueue.main.async { [weak self] in
-            self?.viewController?.reloadData()
+    func fetchIssues(title: String) {
+        guard let viewController = self.viewController else {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+            viewController.fetchIssue(title: title)
         }
     }
     

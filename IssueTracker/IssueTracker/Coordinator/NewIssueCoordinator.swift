@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol NewIssueCoordinatorDelegate {
-    func goBackToIssueVC(repo: Repository)
+    func goBackToIssueVC(repo: Repository, title: String)
     
     func showOptions(option: Option, repo: Repository)
 }
@@ -45,9 +45,11 @@ class NewIssueCoordinator: Coordinator {
     }
     
     func reloadOptions() {
-        DispatchQueue.main.async { [weak self] in
-            self?.viewController?.reloadOptions()
-        }
+        self.viewController?.reloadOptions()
+    }
+    
+    func setOptions(item: Optionable, option: Option) {
+        self.viewController?.setSelectedOption(item: item, option: option)
     }
 }
 
@@ -56,7 +58,7 @@ extension NewIssueCoordinator: NewIssueViewControllerDelegate {
         self.delegate?.showOptions(option: option, repo: repo)
     }
     
-    func goBackToPreviousVC(repo: Repository) {
-        self.delegate?.goBackToIssueVC(repo: repo)
+    func goBackToPreviousVC(repo: Repository, title: String) {
+        self.delegate?.goBackToIssueVC(repo: repo, title: title)
     }
 }

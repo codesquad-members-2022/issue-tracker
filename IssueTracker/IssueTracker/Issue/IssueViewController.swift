@@ -34,10 +34,9 @@ final class IssueViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         
-        model.requestIssue()
-        model.updatedIssues = {
+        model.issuesUpdated = {
             DispatchQueue.main.async { [weak self] in
-                self?.reloadData()
+                self?.collectionView.reloadData()
             }
         }
     }
@@ -45,10 +44,36 @@ final class IssueViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        // MARK: 왜되지??????????? - 왜또안되지??????
+//        fetchIssue()
     }
     
-    func reloadData() {
-        self.collectionView.reloadData()
+    func loadIssue() {
+        self.model.requestIssue { titleArr in
+            if titleArr != nil {
+                DispatchQueue.main.async { [weak self] in
+                    self?.collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    func fetchIssue(title: String) {
+        self.model.requestIssue { titleArr in
+            guard let titleArr = titleArr else {
+                return
+            }
+            if !titleArr.contains(title) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
+                    self?.fetchIssue(title: title)
+                }
+            } else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.collectionView.reloadData()
+                }
+            }
+            
+        }
     }
     
     @objc func touchedSelectButton() {
@@ -163,16 +188,3 @@ extension IssueViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.width, height: 200)
     }
 }
-
-//extension IssueViewController: NewIssueViewControllerDelegate {
-//    func goBackToPreviousVC(repo: Repository) {
-//        <#code#>
-//    }
-//
-//
-//
-//
-//    func created() {
-//        model.requestIssue()
-//    }
-//}

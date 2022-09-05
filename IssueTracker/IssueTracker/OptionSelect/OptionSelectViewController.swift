@@ -43,9 +43,7 @@ class OptionSelectViewController: UIViewController {
         
         model.requestOptions(option, repo: repo)
         model.updatedOptions = {
-            DispatchQueue.main.async { [weak self] in
-                self?.reloadData()
-            }
+            self.reloadData()
         }
     }
     
@@ -57,7 +55,9 @@ class OptionSelectViewController: UIViewController {
     }
     
     func reloadData() {
-        self.tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     private lazy var tableView: UITableView = {

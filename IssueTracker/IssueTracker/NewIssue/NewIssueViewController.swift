@@ -8,7 +8,7 @@
 import UIKit
 
 protocol NewIssueViewControllerDelegate: AnyObject {
-    func goBackToPreviousVC(repo: Repository)
+    func goBackToPreviousVC(repo: Repository, title: String)
     
     func touchedOption(option: Option, repo: Repository)
 }
@@ -102,7 +102,9 @@ class NewIssueViewController: UIViewController {
     }
     
     func reloadOptions() {
-        self.optionTable.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.optionTable.reloadData()
+        }
     }
 
     private func setupNavigationBar() {
@@ -187,9 +189,26 @@ class NewIssueViewController: UIViewController {
                       let repo = self?.repo else {
                     return
                 }
-                delegate.goBackToPreviousVC(repo: repo)
+                delegate.goBackToPreviousVC(repo: repo, title: titleString)
             }
         }
+    }
+    
+    func setSelectedOption(item: Optionable, option: Option) {
+        guard let optionIndex = optionList.firstIndex(of: option) else {
+            return
+        }
+        
+        switch option {
+        case .label:
+            selectedLabel = item as? Label
+        case .milestone:
+            selectedMilestone = item as? Milestone
+        case .assignee:
+            selectedAssignee = item as? Assignee
+        }
+        
+        selectedList[optionIndex] = item.subTitle
     }
 }
 
@@ -216,25 +235,5 @@ extension NewIssueViewController: UITableViewDataSource {
         cell.contentConfiguration = sidebarCell
         cell.accessoryType = .disclosureIndicator
         return cell
-    }
-}
-
-extension NewIssueViewController: OptionSelectViewControllerDelegate {
-    func selected(item: Optionable, option: Option) {
-        guard let optionIndex = optionList.firstIndex(of: option) else {
-            return
-        }
-        
-        switch option {
-        case .label:
-            selectedLabel = item as? Label
-        case .milestone:
-            selectedMilestone = item as? Milestone
-        case .assignee:
-            selectedAssignee = item as? Assignee
-        }
-        
-        selectedList[optionIndex] = item.subTitle
-        reloadOptions()
     }
 }
