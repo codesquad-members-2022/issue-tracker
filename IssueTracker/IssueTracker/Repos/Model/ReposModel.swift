@@ -1,6 +1,5 @@
 import Foundation
 
-// Environment : 디펜던시를 관리하는 객체
 class ReposModel {
     
     private let environment: ReposModelEnvironment
@@ -11,11 +10,6 @@ class ReposModel {
             updated?(ReposList)
         }
     }
-    
-//    init(service: IssueService) {
-//        self.service = service
-//        self.ReposList = []
-//    }
     
     init(environment: ReposModelEnvironment) {
         self.environment = environment
@@ -31,7 +25,6 @@ class ReposModel {
     }
     
     func fetchViewData() {
-        // (전) service.requestRepos() { ... }
         environment.requestRepos() { [weak self] result in
             switch result {
             case .success(let repositoryList):

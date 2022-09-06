@@ -1,10 +1,6 @@
 import UIKit
 
 class Container {
-    //   - 인스턴스를 소유하고 관리하는 역할 - 객체 생성 및 의존성 주입
-    //    - MVVM 생성
-    //    - 사용할 객체를 Container에 등록
-    //    - 객체를 사용할 때는 Continer에 요청
     
     let environment: ContainerEnvironment
     private var objects: [String: Any] = [:]
@@ -40,7 +36,7 @@ class Container {
     }
     
     private func registerLoginModel() {
-        let loginModel = LoginModel(environment: .init(requestCode: { [weak self] completion in // 모델에 필요한 service의 클로저만 넣어주기
+        let loginModel = LoginModel(environment: .init(requestCode: { [weak self] completion in
             self?.environment.oAuthService.requestCode(completion: { result in
                 completion(result)
             })
@@ -48,7 +44,7 @@ class Container {
         register(loginModel)
     }
     
-    // MARK: Container에서 register하는 요소들 간에 종속관계가 생기는 경우 어떻게 register해야..??
+    // MARK: Container에서 register하는 요소들 간에 종속관계가 생기는 경우 어떻게 register해야??
     private func registerLoginViewController() {
         guard let loginModel: LoginModel = self.resolve() else {
             self.registerLoginModel()
@@ -74,14 +70,6 @@ class Container {
         }
         let reposVC = ReposViewController(model: reposModel)
         register(reposVC)
-    }
-    
-    // MARK: 뷰모델 초기화에 유저 선택 데이터가 필요한 경우 초기화방법/시점은..?
-    private func registerIssueModel(selectedRepo: Repository) {
-    }
-
-    private func registerIssueViewController() {
-        
     }
     
     func fetchAccessToken(url: URL) {

@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var coordinator: AppCoordinator?
-    let container = Container(environment: .live) // 리팩토링 후 삭제해야!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let navController = UINavigationController()

@@ -75,10 +75,6 @@ extension OptionSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = model.getOption(index: indexPath.row)
         delegate?.selected(item: selectedItem, option: option)
-        // 아래 코드를 delegate로 coordinator에게 보내기
-//
-//        delegate?.selected(item: selectedItem, option: option)
-//        self.navigationController?.popViewController(animated: true)
     }
 }
 

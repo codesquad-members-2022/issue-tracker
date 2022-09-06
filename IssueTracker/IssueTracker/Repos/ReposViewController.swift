@@ -26,7 +26,6 @@ class ReposViewController: UIViewController {
         print("-- \(type(of: self)) is deinited")
     }
     
-    // 뷰 : 이벤트를 발생시키는 공간
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -74,10 +73,6 @@ extension ReposViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        guard let options = options else {
-//            return UITableViewCell()
-//        }
         let data = model.getViewData(index: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier,
                                                  for: indexPath)

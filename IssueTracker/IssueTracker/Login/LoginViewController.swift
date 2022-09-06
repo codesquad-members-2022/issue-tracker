@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 import Alamofire
 
-// 이 VC에서 Coordinator에 위임할 작업
 protocol LoginViewControllerDelegate {
     func login()
 }

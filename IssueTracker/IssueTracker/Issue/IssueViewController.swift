@@ -44,8 +44,6 @@ final class IssueViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        // MARK: 왜되지??????????? - 왜또안되지??????
-//        fetchIssue()
     }
     
     func loadIssue() {

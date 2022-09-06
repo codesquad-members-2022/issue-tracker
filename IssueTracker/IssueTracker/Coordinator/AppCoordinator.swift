@@ -9,11 +9,6 @@ import Foundation
 import UIKit
 
 class AppCoordinator: NSObject, Coordinator {
-//    - 모든 ViewController를 모으고 관리하는 역할 - flow logic 관리
-//    - 코디네이터는 Container만 알고 있으면 된다. MVVM에 대해 알 필요 없음
-//    - flow logic을 VC로부터 분리
-//    - VC 재사용 가능
-//    - VC와 코디네이터는 1:1 관계
     
     let container = Container(environment: .live)
     
@@ -106,7 +101,6 @@ class AppCoordinator: NSObject, Coordinator {
 // 아래에 delegate받아 처리할 메서드(화면전환) 로직 작성
 extension AppCoordinator: LoginCoordinatorDelegate {
     func didLoggedIn(coordinator: LoginCoordinator) {
-        childCoordinators = childCoordinators.filter { $0 !== coordinator } // 자식 코디네이터들에서 LoginCoordinator 삭제
         showReposViewController()
     }
 }
@@ -129,18 +123,14 @@ extension AppCoordinator: NewIssueCoordinatorDelegate {
     }
     
     func goBackToIssueVC(repo: Repository, title: String) {
-        // 기존 스택에서 IssueVC삭제 or 이전 화면으로 되돌아옴
         DispatchQueue.main.async { [weak self] in
             self?.navigationController.popViewController(animated: true)
-        // TODO: 여전히 이전 뷰로 되돌아오면서 새로 생긴 issue를 갱신해 보여주는 동작이 되지 않음 (goBackToNewIssueVC도 마찬가지)
         }
         
         guard let issueCoordinator: IssueCoordinator = container.resolve() else {
             return
         }
-        //request
         issueCoordinator.fetchIssues(title: title)
-//        issueCoordinator.reloadIssues()
     }
 }
 
@@ -168,7 +158,7 @@ extension AppCoordinator: UINavigationControllerDelegate {
             return
         }
         
-        // navStack에 존재한다면 - pop이 아닌 push
+        // navStack에 존재한다면 - pop이 아닌 push됨
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
