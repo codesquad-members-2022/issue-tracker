@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-protocol ReposViewControllerDelegate {
+protocol ReposViewControllerDelegate: AnyObject {
     func showIssue(didSelectRowAt indexPath: IndexPath)
 }
 
@@ -10,7 +10,7 @@ class ReposViewController: UIViewController {
     private let model: ReposModel
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     
-    var delegate: ReposViewControllerDelegate?
+    weak var delegate: ReposViewControllerDelegate?
     
     init(model: ReposModel) {
         self.model = model
@@ -18,8 +18,7 @@ class ReposViewController: UIViewController {
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(model: ReposModel(environment: .init(requestRepos: { completion in
-        })))
+        self.init(coder: coder)
     }
     
     deinit {
@@ -63,7 +62,7 @@ class ReposViewController: UIViewController {
 
 extension ReposViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.showIssue(didSelectRowAt: indexPath)
+        delegate?.showIssue(didSelectRowAt: indexPath)
     }
 }
 
@@ -74,8 +73,7 @@ extension ReposViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = model.getViewData(index: indexPath.row)
-        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier,
-                                                 for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier, for: indexPath)
         var content = cell.defaultContentConfiguration()
         content.attributedText = NSAttributedString(string: data.name)
         cell.contentConfiguration = content

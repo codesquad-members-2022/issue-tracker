@@ -36,14 +36,18 @@ class OptionSelectViewController: UIViewController {
         )
     }
     
+    deinit {
+        print("-- \(type(of: self)) is deinited")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         self.view.backgroundColor = .white
         
         model.requestOptions(option, repo: repo)
-        model.updatedOptions = {
-            self.reloadData()
+        model.updatedOptions = { [weak self] in
+            self?.reloadData()
         }
     }
     

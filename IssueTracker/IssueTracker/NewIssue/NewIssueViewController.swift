@@ -35,15 +35,19 @@ class NewIssueViewController: UIViewController {
     }
     
     required convenience init?(coder: NSCoder) {
-        
-        let owner = Owner(login: "")
-        let modelEnvironment = NewIssueModelEnvironment { _, _ in
-        }
-        let model = NewIssueModel(environment: modelEnvironment)
-        self.init(repo: Repository(name: "",
-                                   owner: owner),
-                  model: model)
-        fatalError("init(coder:) has not been implemented")
+        self.init(coder: coder)
+//        let owner = Owner(login: "")
+//        let modelEnvironment = NewIssueModelEnvironment { _, _ in
+//        }
+//        let model = NewIssueModel(environment: modelEnvironment)
+//        self.init(repo: Repository(name: "",
+//                                   owner: owner),
+//                  model: model)
+//        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("-- \(type(of: self)) is deinited")
     }
     
     private lazy var navSegmentedControl: UISegmentedControl = {
@@ -116,19 +120,28 @@ class NewIssueViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.top.leading.equalTo(self.view.safeAreaLayoutGuide).offset(10)
             make.width.equalTo(50)
         }
         
         self.view.addSubview(titleField)
-        titleField.snp.makeConstraints { make in
+        titleField.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.top.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(10)
             make.leading.equalTo(titleLabel.snp.trailing)
         }
         
         self.view.addSubview(horizontalDevider)
-        horizontalDevider.snp.makeConstraints { make in
+        horizontalDevider.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.leading.equalTo(self.view.safeAreaLayoutGuide).offset(5)
             make.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(-5)
@@ -140,7 +153,10 @@ class NewIssueViewController: UIViewController {
         
         self.view.addSubview(optionTable)
         optionTable.isScrollEnabled = true
-        optionTable.snp.makeConstraints { make in
+        optionTable.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(optionTable
                 .contentSize
@@ -148,7 +164,10 @@ class NewIssueViewController: UIViewController {
         }
         
         self.view.addSubview(contentField)
-        contentField.snp.makeConstraints { make in
+        contentField.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.top.equalTo(horizontalDevider.snp.bottom)
             make.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
             make.bottom.equalTo(optionTable.snp.top)
@@ -164,8 +183,8 @@ class NewIssueViewController: UIViewController {
         configuration.buttonSize = .small
         configuration.image = UIImage(systemName: "folder.badge.plus")
         configuration.imagePadding = 4
-        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { action in
-            self.touchedCreateButton()
+        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] action in
+            self?.touchedCreateButton()
         }))
         return button
     }()

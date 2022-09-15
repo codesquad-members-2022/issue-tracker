@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 import Alamofire
 
-protocol LoginViewControllerDelegate {
+protocol LoginViewControllerDelegate: AnyObject {
     func login()
 }
 
 class LoginViewController: UIViewController {
 
-    var delegate: LoginViewControllerDelegate?
+    weak var delegate: LoginViewControllerDelegate?
     
     private var model: LoginModel
     
@@ -36,8 +36,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        self.setupView()
+        view.backgroundColor = .white
+        setupView()
     }
     
     func setupView() {
@@ -74,7 +74,7 @@ class LoginViewController: UIViewController {
                 print(error)
             }
         }
-        self.delegate?.login()
+        delegate?.login()
     }
 }
 

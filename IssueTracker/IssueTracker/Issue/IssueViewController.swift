@@ -1,7 +1,7 @@
 import UIKit
 
 
-protocol IssueViewControllerDelegate {
+protocol IssueViewControllerDelegate: AnyObject {
     func touchedNewIssueButton(repo: Repository)
 }
 
@@ -10,12 +10,16 @@ final class IssueViewController: UIViewController {
     private let model: IssueModel
     private let repo: Repository
     
-    var delegate: IssueViewControllerDelegate?
+    weak var delegate: IssueViewControllerDelegate?
     
     init(model: IssueModel, repo: Repository) {
         self.model = model
         self.repo = repo
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    deinit {
+        print("-- \(type(of: self)) is deinited")
     }
     
     required convenience init?(coder: NSCoder) {
