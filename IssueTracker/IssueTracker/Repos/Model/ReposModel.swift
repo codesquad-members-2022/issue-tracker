@@ -5,30 +5,30 @@ class ReposModel {
     private let environment: ReposModelEnvironment
     var updated: (([Repository]) -> Void)?
     
-    private var ReposList: [Repository] {
+    private var reposList: [Repository] {
         didSet {
-            updated?(ReposList)
+            updated?(reposList)
         }
     }
     
     init(environment: ReposModelEnvironment) {
         self.environment = environment
-        self.ReposList = []
+        self.reposList = []
     }
     
     var count: Int {
-        ReposList.count
+        reposList.count
     }
     
     func getViewData(index: Int) -> Repository {
-        return ReposList[index]
+        return reposList[index]
     }
     
     func fetchViewData() {
         environment.requestRepos() { [weak self] result in
             switch result {
             case .success(let repositoryList):
-                self?.ReposList = repositoryList
+                self?.reposList = repositoryList
                 
             case .failure(let error):
                 print(error)

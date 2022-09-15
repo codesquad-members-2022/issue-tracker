@@ -3,8 +3,7 @@ import UIKit
 class Container {
     
     let environment: ContainerEnvironment
-    private var objects: [String: Any] = [:]
-    //
+    private var registeredObjects: [String: Any] = [:]
     
     init(environment: ContainerEnvironment) {
         self.environment = environment
@@ -21,13 +20,13 @@ class Container {
     // 외부 등록 허용??
     func register<T>(_ object: T) {
         let key = String(describing: type(of: T.self)) // 해당 클래스의 이름을 key값으로 저장
-        objects[key] = object
+        registeredObjects[key] = object
     }
     
     // let value: Type = container.resolve() 로 사용
     func resolve<T>() -> T? {
         let key = String(describing: type(of: T.self))
-        guard let object = objects[key],
+        guard let object = registeredObjects[key],
               let object = object as? T else {
             print("\(key)는 register되지 않음")
             return nil
@@ -72,6 +71,9 @@ class Container {
         register(reposVC)
     }
     
+    private func registerIssueModel() {
+    }
+    
     func fetchAccessToken(url: URL) {
         environment.oAuthService.fetchToken(from: url) { [weak self] accessToken in
             guard let token = accessToken,
@@ -81,12 +83,6 @@ class Container {
             self.environment.githubUserDefaults.setToken(token)
         }
     }
-    
-//    func buildRootViewController() -> UIViewController {
-//        self.environment.githubUserDefaults.getToken() != nil
-//        ? self.buildViewController(.repos)
-//        : self.buildViewController(.login)
-//    }
 }
 
 extension Container {
