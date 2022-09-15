@@ -23,10 +23,7 @@ final class IssueViewController: UIViewController {
     }
     
     required convenience init?(coder: NSCoder) {
-        let repository = Repository(name: "", owner: Owner(login: ""))
-        self.init(model: IssueModel(environment: .init(requestRepositoryIssues: { completion in
-        })), repo: repository)
-        fatalError("init(coder:) has not been implemented")
+        self.init(coder: coder)
     }
     
     // MARK: ViewDidLoad
@@ -60,20 +57,20 @@ final class IssueViewController: UIViewController {
         }
     }
     
-    func fetchIssue(title: String) {
+    func fetchIssue() {
         self.model.requestIssue { titleArr in
-            guard let titleArr = titleArr else {
-                return
-            }
-            if !titleArr.contains(title) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
-                    self?.fetchIssue(title: title)
-                }
-            } else {
+//            guard let titleArr = titleArr else {
+//                return
+//            }
+//            if !titleArr.contains(title) {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) { [weak self] in
+//                    self?.fetchIssue(title: title)
+//                }
+//            } else {
                 DispatchQueue.main.async { [weak self] in
                     self?.collectionView.reloadData()
                 }
-            }
+//            }
             
         }
     }

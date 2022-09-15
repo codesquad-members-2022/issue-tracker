@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol NewIssueCoordinatorDelegate {
-    func goBackToIssueVC(repo: Repository, title: String)
+    func goBackToIssueVC(repo: Repository)
     
     func showOptions(option: Option, repo: Repository)
 }
@@ -35,7 +35,13 @@ class NewIssueCoordinator: Coordinator {
     func start() {
         let modelEnvironment = NewIssueModelEnvironment { [weak self] newIssueFormat, completion in
             self?.container.environment.issueService.createIssue(newIssue: newIssueFormat, completion: completion)
+        } requestRepositoryIssues: { [weak self] completion in
+            guard let self = self else {
+                return
+            }
+            self.container.environment.issueService.requestRepositoryIssues(repo: self.repo, completion: completion)
         }
+        
         let model = NewIssueModel(environment: modelEnvironment)
         let newIssueVC = NewIssueViewController(repo: repo, model: model)
         
@@ -58,7 +64,7 @@ extension NewIssueCoordinator: NewIssueViewControllerDelegate {
         self.delegate?.showOptions(option: option, repo: repo)
     }
     
-    func goBackToPreviousVC(repo: Repository, title: String) {
-        self.delegate?.goBackToIssueVC(repo: repo, title: title)
+    func goBackToPreviousVC(repo: Repository) {
+        self.delegate?.goBackToIssueVC(repo: repo)
     }
 }

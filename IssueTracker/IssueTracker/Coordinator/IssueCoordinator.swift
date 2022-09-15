@@ -57,13 +57,11 @@ class IssueCoordinator: Coordinator {
         viewController.loadIssue()
     }
 
-    func fetchIssues(title: String) {
+    func fetchIssues() {
         guard let viewController = self.viewController else {
             return
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
-            viewController.fetchIssue(title: title)
-        }
+        viewController.fetchIssue()
     }
     
 }

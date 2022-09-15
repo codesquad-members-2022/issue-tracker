@@ -8,7 +8,7 @@
 import UIKit
 
 protocol NewIssueViewControllerDelegate: AnyObject {
-    func goBackToPreviousVC(repo: Repository, title: String)
+    func goBackToPreviousVC(repo: Repository)
     
     func touchedOption(option: Option, repo: Repository)
 }
@@ -36,14 +36,6 @@ class NewIssueViewController: UIViewController {
     
     required convenience init?(coder: NSCoder) {
         self.init(coder: coder)
-//        let owner = Owner(login: "")
-//        let modelEnvironment = NewIssueModelEnvironment { _, _ in
-//        }
-//        let model = NewIssueModel(environment: modelEnvironment)
-//        self.init(repo: Repository(name: "",
-//                                   owner: owner),
-//                  model: model)
-//        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -110,7 +102,7 @@ class NewIssueViewController: UIViewController {
             self?.optionTable.reloadData()
         }
     }
-
+    
     private func setupNavigationBar() {
         self.navigationItem.titleView = navSegmentedControl
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createButton)
@@ -204,11 +196,33 @@ class NewIssueViewController: UIViewController {
         
         model.createIssue(newIssue: newIssueFormat) { [weak self] boolResult in
             if boolResult {
-                guard let delegate = self?.delegate,
-                      let repo = self?.repo else {
-                    return
+                self?.fetchIssue(title: titleString)
+            } else {
+                // TODO: 이슈 생성 실패 얼럿 띄우기
+            }
+        }
+    }
+    
+    func fetchIssue(title: String) {
+        model.requestIssue { [weak self] titleArr in
+            guard let titleArr = titleArr,
+                  let self = self,
+                  let delegate = self.delegate else {
+                return
+            }
+            
+            // TODO: Indicator - 되긴 하는데 (1)너무 느리고 (2) 여러 개 생성되어 오래 기다릴땐 빙글빙글 도는 게 안보임..
+            DispatchQueue.main.async {
+                let indicator = UIActivityIndicatorView()
+                self.createButton.addSubview(indicator)
+                if !titleArr.contains(title) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                        indicator.startAnimating()
+                        self.fetchIssue(title: title)
+                    }
+                } else {
+                    delegate.goBackToPreviousVC(repo: self.repo)
                 }
-                delegate.goBackToPreviousVC(repo: repo, title: titleString)
             }
         }
     }

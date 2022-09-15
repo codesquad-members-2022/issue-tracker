@@ -118,11 +118,12 @@ extension AppCoordinator: IssueCoordinatorDelegate {
 }
 
 extension AppCoordinator: NewIssueCoordinatorDelegate {
+    
     func showOptions(option: Option, repo: Repository) {
         showOptionSelectViewController(option: option, repo: repo)
     }
     
-    func goBackToIssueVC(repo: Repository, title: String) {
+    func goBackToIssueVC(repo: Repository) {
         DispatchQueue.main.async { [weak self] in
             self?.navigationController.popViewController(animated: true)
         }
@@ -130,7 +131,7 @@ extension AppCoordinator: NewIssueCoordinatorDelegate {
         guard let issueCoordinator: IssueCoordinator = container.resolve() else {
             return
         }
-        issueCoordinator.fetchIssues(title: title)
+        issueCoordinator.fetchIssues()
     }
 }
 
@@ -185,5 +186,8 @@ extension AppCoordinator: UINavigationControllerDelegate {
             let coordinator: OptionSelectCoordinator = container.resolve() {
             removeChildCoordinator(child: coordinator)
         }
+        
+        print(navigationController.viewControllers)
+        print(childCoordinators)
     }
 }

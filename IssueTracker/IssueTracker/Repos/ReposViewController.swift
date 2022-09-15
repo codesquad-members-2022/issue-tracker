@@ -7,10 +7,10 @@ protocol ReposViewControllerDelegate: AnyObject {
 
 class ReposViewController: UIViewController {
     
+    weak var delegate: ReposViewControllerDelegate?
+    
     private let model: ReposModel
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
-    
-    weak var delegate: ReposViewControllerDelegate?
     
     init(model: ReposModel) {
         self.model = model
