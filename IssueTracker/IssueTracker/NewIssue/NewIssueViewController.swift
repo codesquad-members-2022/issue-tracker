@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol NewIssueViewControllerDelegate: AnyObject {
     func goBackToPreviousVC(repo: Repository)
@@ -196,7 +197,7 @@ class NewIssueViewController: UIViewController {
         
         model.createIssue(newIssue: newIssueFormat) { [weak self] boolResult in
             if boolResult {
-                self?.fetchIssue(title: titleString)
+                self?.reloadIssues(title: titleString)
             } else {
                 // TODO: 이슈 생성 실패 얼럿 띄우기
             }
@@ -225,6 +226,40 @@ class NewIssueViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func reloadIssues(title: String) {
+        var indicator: UIActivityIndicatorView?
+        DispatchQueue.main.async { [weak self] in
+            indicator = UIActivityIndicatorView()
+            if let indicator = indicator {
+                self?.createButton.addSubview(indicator)
+            }
+            
+            // Timer : 메인 스레드의 RunLoop에서 실행하거나 직접 넣어줘야 함
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                print("🌀루프 도는 중..")
+                self?.model.requestIssue { titleArr in
+                    guard let titleArr = titleArr,
+                          let indicator = indicator,
+                          let delegate = self?.delegate,
+                          let repo = self?.repo else {
+                        // 이슈 조회 실패
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        // UI조작 코드는 반드시 main스레드에서 진행
+                        indicator.startAnimating()
+                        
+                    }
+                    if titleArr.contains(title) {
+                        timer.invalidate()
+                        delegate.goBackToPreviousVC(repo: repo)
+                    }
+                }
+            }
+        }
+        
     }
     
     func setSelectedOption(item: Optionable, option: Option) {
