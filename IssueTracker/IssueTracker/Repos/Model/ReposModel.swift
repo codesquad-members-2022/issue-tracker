@@ -8,6 +8,7 @@ class ReposModel {
     private var reposList: [Repository] {
         didSet {
             updated?(reposList)
+            print("repos 업데이트됨")
         }
     }
     
@@ -24,13 +25,16 @@ class ReposModel {
         return reposList[index]
     }
     
-    func fetchViewData() {
+    func fetchViewData(completion: @escaping (Bool) -> Void) {
+        print("ReposModel 데이터를 가져옵니다")
         environment.requestRepos() { [weak self] result in
             switch result {
             case .success(let repositoryList):
                 self?.reposList = repositoryList
-                
+                completion(true)
+                print("ReposModel 데이터를 가져왔습니다")
             case .failure(let error):
+                completion(false)
                 print(error)
             }
         }

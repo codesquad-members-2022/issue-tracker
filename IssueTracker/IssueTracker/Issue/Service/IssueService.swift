@@ -8,11 +8,15 @@
 import Foundation
 import Alamofire
 
-struct IssueService {
+class IssueService {
     
-    private let accessToken: String
+    private var accessToken: String
     
     init(token: String) {
+        self.accessToken = token
+    }
+    
+    func setAccessToken(_ token: String) {
         self.accessToken = token
     }
     
@@ -124,6 +128,7 @@ struct IssueService {
     }
     
     func requestRepos(completion: @escaping (Result<[Repository], IssueError>) -> Void) {
+        print("액세스토큰 : \(accessToken)")
         let urlString = RequestURL.repos.description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
@@ -139,11 +144,13 @@ struct IssueService {
             .responseDecodable(of: [Repository].self,
                                queue: globalThread,
                                decoder: decoder) { response in
+                print("응답 : \(response)")
+                print("결과 : \(response.result)")
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
                 case .failure:
-                    completion(.failure(.issueNotFound))
+                    completion(.failure(.repoNotFound))
                 }
             }
     }
@@ -248,6 +255,7 @@ fileprivate struct RepositoryIssue: Codable {
 enum IssueError: Error {
     case issueNotFound
     case cannotCreateIssue
+    case repoNotFound
 }
 
 enum OptionError: Error {

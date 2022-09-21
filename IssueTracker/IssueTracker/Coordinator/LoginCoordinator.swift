@@ -20,12 +20,19 @@ class LoginCoordinator: Coordinator {
     }
     
     func start() { // LoginVC 초기화 코드
-        guard let loginVC: LoginViewController = container.resolve() else {
-            return
+        let environment = LoginModelEnvironment { [weak self] completion in
+            self?.container.environment.oAuthService.requestCode(completion: { result in
+                completion(result)
+            })
         }
-        loginVC.delegate = self
+        let model = LoginModel(environment: environment)
+        let viewController = LoginViewController(model: model)
         
-        navigationController.pushViewController(loginVC, animated: false)
+        container.register(model)
+        container.register(viewController)
+        viewController.delegate = self
+        
+        navigationController.pushViewController(viewController, animated: false)
     }
 }
 

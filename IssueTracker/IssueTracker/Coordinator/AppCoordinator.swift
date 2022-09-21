@@ -21,18 +21,25 @@ class AppCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-        
         // navigationController의 동작 감지
         navigationController.delegate = self
         
         // entrypoint에서 보일 화면 로직 설정
+        showRootViewController()
+        
+    }
+    
+    func fetchToken(url: URL, completion: @escaping (Bool) -> Void) {
+        container.fetchAccessToken(url: url) { bool in
+            completion(bool)
+        }
+    }
+    
+    func showRootViewController() {
+        print("토큰 : \(container.environment.githubUserDefaults.getToken())")
         container.environment.githubUserDefaults.getToken() != nil
         ? showReposViewController()
         : showLoginViewController()
-    }
-    
-    func fetchToken(url: URL) {
-        container.fetchAccessToken(url: url)
     }
     
     func buildRootViewController() -> UIViewController {
@@ -101,7 +108,10 @@ class AppCoordinator: NSObject, Coordinator {
 // 아래에 delegate받아 처리할 메서드(화면전환) 로직 작성
 extension AppCoordinator: LoginCoordinatorDelegate {
     func didLoggedIn(coordinator: LoginCoordinator) {
-        showReposViewController()
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController.popViewController(animated: true)
+        }
     }
 }
 
@@ -159,35 +169,39 @@ extension AppCoordinator: UINavigationControllerDelegate {
             return
         }
         
-        // navStack에 존재한다면 - pop이 아닌 push됨
+        // navStack에 존재한다면 - pop이 아닌 push된 것이므로 별도의 처리가 필요하지 않음
         if navigationController.viewControllers.contains(fromViewController) {
             return
         }
         
         // navStack에 존재하지 않음 = pop됨 : 해당 뷰컨의 coordinator를 childCoordinators에서 지워야 함
-        // MARK: 모든 뷰컨의 코디네이터 관리하면서도 코드중복 피하는 방법..?
-        if fromViewController as? LoginViewController != nil,
-            let coordinator: LoginCoordinator = container.resolve() {
-            removeChildCoordinator(child: coordinator)
-        }
-        if fromViewController as? ReposViewController != nil,
-            let coordinator: ReposCoordinator = container.resolve() {
-            removeChildCoordinator(child: coordinator)
-        }
-        if fromViewController as? IssueViewController != nil,
-            let coordinator: IssueCoordinator = container.resolve() {
-            removeChildCoordinator(child: coordinator)
-        }
-        if fromViewController as? NewIssueViewController != nil,
-            let coordinator: NewIssueCoordinator = container.resolve() {
-            removeChildCoordinator(child: coordinator)
-        }
-        if fromViewController as? OptionSelectViewController != nil,
-            let coordinator: OptionSelectCoordinator = container.resolve() {
+        // TODO: resolve로부터 받아온 코디네이터가 제대로 삭제되지 않음 - 디버깅 필요
+        if let coordinator = container.resolvePair(of: fromViewController) {
             removeChildCoordinator(child: coordinator)
         }
         
-        print(navigationController.viewControllers)
-        print(childCoordinators)
+//        if fromViewController as? LoginViewController != nil,
+//            let coordinator: LoginCoordinator = container.resolve() {
+//            removeChildCoordinator(child: coordinator)
+//        }
+//        if fromViewController as? ReposViewController != nil,
+//            let coordinator: ReposCoordinator = container.resolve() {
+//            removeChildCoordinator(child: coordinator)
+//        }
+//        if fromViewController as? IssueViewController != nil,
+//            let coordinator: IssueCoordinator = container.resolve() {
+//            removeChildCoordinator(child: coordinator)
+//        }
+//        if fromViewController as? NewIssueViewController != nil,
+//            let coordinator: NewIssueCoordinator = container.resolve() {
+//            removeChildCoordinator(child: coordinator)
+//        }
+//        if fromViewController as? OptionSelectViewController != nil,
+//            let coordinator: OptionSelectCoordinator = container.resolve() {
+//            removeChildCoordinator(child: coordinator)
+//        }
+        
+        print("내비게이션 스택 : \(navigationController.viewControllers)")
+        print("자식 코디네이터들 : \(childCoordinators)")
     }
 }

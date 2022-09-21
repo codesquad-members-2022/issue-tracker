@@ -28,9 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        coordinator?.fetchToken(url: url)
-        let rootVC = coordinator?.buildRootViewController()
-        self.window?.rootViewController = rootVC
+        coordinator?.fetchToken(url: url, completion: { [weak self] bool in
+            if bool {
+                self?.coordinator?.showRootViewController()
+            }
+        })
+        
+//        let rootVC = coordinator?.buildRootViewController()
+//        self.window?.rootViewController = rootVC
         return true
     }
 }

@@ -10,6 +10,7 @@
 		000B92C2286D67F8009EB2D8 /* NewIssueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C1286D67F8009EB2D8 /* NewIssueModel.swift */; };
 		000B92C4286D6816009EB2D8 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C3286D6816009EB2D8 /* Option.swift */; };
 		000B92C7286D6F9D009EB2D8 /* OptionSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C6286D6F9D009EB2D8 /* OptionSelectModel.swift */; };
+		0022D4D728D9A94700088543 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0022D4D628D9A94700088543 /* ViewControllerCoordinator.swift */; };
 		003081ED28A2486E001B7600 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081EC28A2486E001B7600 /* AppCoordinator.swift */; };
 		003081F028A24E2C001B7600 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081EF28A24E2C001B7600 /* Coordinator.swift */; };
 		003081F228A28F8C001B7600 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081F128A28F8C001B7600 /* LoginCoordinator.swift */; };
@@ -81,6 +82,7 @@
 		000B92C1286D67F8009EB2D8 /* NewIssueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueModel.swift; sourceTree = "<group>"; };
 		000B92C3286D6816009EB2D8 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		000B92C6286D6F9D009EB2D8 /* OptionSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectModel.swift; sourceTree = "<group>"; };
+		0022D4D628D9A94700088543 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		003081EC28A2486E001B7600 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		003081EF28A24E2C001B7600 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		003081F128A28F8C001B7600 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				003081F528A29EC8001B7600 /* IssueCoordinator.swift */,
 				003081F728A29ED3001B7600 /* NewIssueCoordinator.swift */,
 				003081F928A29EE2001B7600 /* OptionSelectCoordinator.swift */,
+				0022D4D628D9A94700088543 /* ViewControllerCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				003081ED28A2486E001B7600 /* AppCoordinator.swift in Sources */,
 				983E66C6285B208800C9B975 /* GithubUserDefaults.swift in Sources */,
 				004800F6286E8C0700A58B2A /* Assignee.swift in Sources */,
+				0022D4D728D9A94700088543 /* ViewControllerCoordinator.swift in Sources */,
 				000B92C4286D6816009EB2D8 /* Option.swift in Sources */,
 				005E48D62862AE91004BD5F6 /* Container.swift in Sources */,
 				003081FA28A29EE2001B7600 /* OptionSelectCoordinator.swift in Sources */,

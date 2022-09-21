@@ -237,7 +237,7 @@ class NewIssueViewController: UIViewController {
             }
             
             // Timer : 메인 스레드의 RunLoop에서 실행하거나 직접 넣어줘야 함
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 print("🌀루프 도는 중..")
                 self?.model.requestIssue { titleArr in
                     guard let titleArr = titleArr,
@@ -258,6 +258,7 @@ class NewIssueViewController: UIViewController {
                     }
                 }
             }
+            timer.tolerance = 0.1
         }
         
     }

@@ -66,15 +66,15 @@ class LoginViewController: UIViewController {
     }()
     
     func loginButtonTapped() {
-        model.requestCode { result in // TODO: delegate로 옮기기
+        model.requestCode { [weak self] result in // TODO: delegate로 옮기기
             switch result {
             case .success(let url):
                 UIApplication.shared.open(url)
+                self?.delegate?.login()
             case .failure(let error):
                 print(error)
             }
         }
-        delegate?.login()
     }
 }
 

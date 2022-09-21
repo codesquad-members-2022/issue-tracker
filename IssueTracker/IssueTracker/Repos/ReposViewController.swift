@@ -30,16 +30,23 @@ class ReposViewController: UIViewController {
         self.view.backgroundColor = .white
         setupViews()
         
-        model.fetchViewData()
         model.updated = { [weak self] repos in
-            DispatchQueue.main.async {
+            self?.reloadTableView()
+        }
+        
+        model.fetchViewData { [weak self] bool in
+            print(bool)
+            if bool {
                 self?.reloadTableView()
             }
         }
+        
     }
     
     func reloadTableView() {
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     func setupViews() {

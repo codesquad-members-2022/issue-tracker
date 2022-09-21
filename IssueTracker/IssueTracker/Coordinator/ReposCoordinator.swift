@@ -27,12 +27,21 @@ class ReposCoordinator: Coordinator {
     }
     
     func start() {
-        guard let reposVC: ReposViewController = container.resolve() else {
-            return
-        }
-        reposVC.delegate = self
+        let environment = ReposModelEnvironment(requestRepos: { [weak self] completion in
+            self?.container.environment.issueService.requestRepos(completion: { result in
+                completion(result)
+            })
+        })
+        let model = ReposModel(environment: environment)
+        let viewController = ReposViewController(model: model)
         
-        navigationController.pushViewController(reposVC, animated: false)
+        container.register(model)
+        container.register(viewController)
+        
+        viewController.delegate = self
+//        viewController.reloadTableView()
+        
+        navigationController.pushViewController(viewController, animated: false)
     }
 }
 
