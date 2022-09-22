@@ -19,7 +19,7 @@ class LoginCoordinator: Coordinator {
         self.container = container
     }
     
-    func start() { // LoginVC 초기화 코드
+    func start() {
         let environment = LoginModelEnvironment { [weak self] completion in
             self?.container.environment.oAuthService.requestCode(completion: { result in
                 completion(result)

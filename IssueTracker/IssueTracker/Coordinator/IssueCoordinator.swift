@@ -35,7 +35,6 @@ class IssueCoordinator: Coordinator {
         guard let repo = selectedRepo else {
             return
         }
-        // MARK: 동적으로 생성되어야 하는 VC는 Container를 사용할 수 없나?
         let model = IssueModel(environment: .init(requestRepositoryIssues: { [weak self] completion in
             self?.container.environment.issueService.requestRepositoryIssues(repo: repo, completion: { result in
                 completion(result)

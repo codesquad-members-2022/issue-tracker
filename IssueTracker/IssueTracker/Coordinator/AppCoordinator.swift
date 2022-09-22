@@ -24,9 +24,7 @@ class AppCoordinator: NSObject, Coordinator {
         // navigationController의 동작 감지
         navigationController.delegate = self
         
-        // entrypoint에서 보일 화면 로직 설정
         showRootViewController()
-        
     }
     
     func fetchToken(url: URL, completion: @escaping (Bool) -> Void) {
@@ -40,20 +38,6 @@ class AppCoordinator: NSObject, Coordinator {
         ? showReposViewController()
         : showLoginViewController()
     }
-    
-//    func buildRootViewController() -> UIViewController {
-//        var vc = UIViewController()
-//        if container.environment.githubUserDefaults.getToken() != nil {
-//            if let reposVC: ReposViewController = container.resolve() {
-//                vc = reposVC
-//            }
-//        } else {
-//            if let loginVC: LoginViewController = container.resolve() {
-//                vc = loginVC
-//            }
-//        }
-//        return vc
-//    }
     
     private func showLoginViewController() {
         let coordinator = LoginCoordinator(navigationController: navigationController, container: container)
@@ -161,8 +145,7 @@ extension AppCoordinator: OptionSelectCoordinatorDelegate {
 }
 
 extension AppCoordinator: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) { // navCon이 새 뷰컨을 보여준 직후 호출됨
-        // 어떤 뷰컨으로부터 이동했는지 확인
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) { // navCon이 새 뷰컨을 보여준 직후 호출되어, 어떤 뷰컨으로부터 이동했는지 확인 가능
         // MARK: 뭐하는 코드인지 공부하기
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
             return
@@ -177,8 +160,5 @@ extension AppCoordinator: UINavigationControllerDelegate {
         if let coordinator = container.resolvePair(of: fromViewController) {
             removeChildCoordinator(child: coordinator)
         }
-        
-        print("내비게이션 스택 : \(navigationController.viewControllers)")
-        print("자식 코디네이터 : \(childCoordinators)")
     }
 }

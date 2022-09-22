@@ -34,8 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
         
-//        let rootVC = coordinator?.buildRootViewController()
-//        self.window?.rootViewController = rootVC
         return true
     }
 }

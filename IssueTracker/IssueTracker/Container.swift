@@ -12,10 +12,10 @@ class Container {
     
     // model, viewcontroller, coordinator를 생성 시점에 등록함
     func register<T>(_ object: T) {
-        let key = String(describing: T.self) // String(describing: type(of: T.self)) 와의 차이점?? 타입명 vs 타입명.Type
+        let key = String(describing: T.self)
         registeredObjects[key] = object
         if let viewControllerObject = object as? UIViewController {
-            registerPair(viewController: viewControllerObject)
+            registerPairCoordinator(with: viewControllerObject)
         }
     }
     
@@ -30,9 +30,8 @@ class Container {
         return object
     }
     
-    func registerPair(viewController: UIViewController) {
-        // 받아온 UIViewController타입의 뷰컨을 형변환 또는 타입연산 후, 연관 코디네이터와 함께 저장
-        let viewControllerName = String(describing: type(of:viewController))
+    func registerPairCoordinator(with viewController: UIViewController) {
+        let viewControllerName = String(describing: type(of: viewController))
         
         let allViewController = ViewControllerCoordinator.allCases
         for oneCase in allViewController {
@@ -46,77 +45,11 @@ class Container {
                 registeredViewControllerCoordinator[viewController] = castedCoordinator
             }
         }
-//
-//        switch viewController { // enum을 적용하고 싶음..
-//        case is LoginViewController:
-//            if let coordinator: LoginCoordinator = resolve(),
-//               let typedViewController = viewController as? LoginViewController {
-//                registeredViewControllerCoordinator[typedViewController] = coordinator
-//            }
-//        case is ReposViewController:
-//            if let coordinator: ReposCoordinator = resolve(),
-//               let typedViewController = viewController as? ReposViewController {
-//                registeredViewControllerCoordinator[typedViewController] = coordinator
-//            }
-//        case is IssueViewController:
-//            if let coordinator: IssueCoordinator = resolve(),
-//               let typedViewController = viewController as? IssueViewController {
-//                registeredViewControllerCoordinator[typedViewController] = coordinator
-//            }
-//        case is NewIssueViewController:
-//            if let coordinator: NewIssueCoordinator = resolve(),
-//               let typedViewController = viewController as? NewIssueViewController {
-//                registeredViewControllerCoordinator[typedViewController] = coordinator
-//            }
-//        case is OptionSelectViewController:
-//            if let coordinator: OptionSelectCoordinator = resolve(),
-//               let typedViewController = viewController as? OptionSelectViewController {
-//                registeredViewControllerCoordinator[typedViewController] = coordinator
-//            }
-//        default:
-//            return
-//        }
     }
     
     func resolvePair(of viewController: UIViewController) -> Coordinator? {
         return registeredViewControllerCoordinator[viewController]
     }
-    
-//    private func registerLoginModel() {
-//        let loginModel = LoginModel(environment: .init(requestCode: { [weak self] completion in
-//            self?.environment.oAuthService.requestCode(completion: { result in
-//                completion(result)
-//            })
-//        }))
-//        register(loginModel)
-//    }
-//
-//    private func registerLoginViewController() {
-//        guard let loginModel: LoginModel = self.resolve() else {
-//            self.registerLoginModel()
-//            return
-//        }
-//        let loginVC = LoginViewController(model: loginModel)
-//        register(loginVC)
-//    }
-//
-//    private func registerReposModel() {
-//        let reposModel = ReposModel(environment: .init(requestRepos: { [weak self] completion in
-//            self?.environment.issueService.requestRepos(completion: { result in
-//                completion(result)
-//            })
-//        }))
-//        register(reposModel)
-//    }
-//
-//    private func registerReposViewController() {
-//        guard let reposModel: ReposModel = resolve() else {
-//            self.registerReposModel()
-//            return
-//        }
-//        let reposVC = ReposViewController(model: reposModel)
-//        register(reposVC)
-//    }
     
     func fetchAccessToken(url: URL, completion: @escaping (Bool) -> Void) {
         environment.oAuthService.fetchToken(from: url) { [weak self] accessToken in
@@ -142,7 +75,7 @@ struct ContainerEnvironment {
         let githubUserDefaults = GithubUserDefaults()
         let token = githubUserDefaults.getToken()
         
-        // 문제 발생 지점 -
+        // MARK: 문제 발생 지점 - 로그인 전에는 토큰이 없으므로 ""가 들어감
         return ContainerEnvironment(githubUserDefaults: githubUserDefaults, oAuthService: OAuthService(), issueService: IssueService(token: token ?? ""))
     }()
 }

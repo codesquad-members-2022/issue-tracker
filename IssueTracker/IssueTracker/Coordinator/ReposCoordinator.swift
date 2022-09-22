@@ -39,7 +39,6 @@ class ReposCoordinator: Coordinator {
         container.register(viewController)
         
         viewController.delegate = self
-//        viewController.reloadTableView()
         
         navigationController.pushViewController(viewController, animated: false)
     }
