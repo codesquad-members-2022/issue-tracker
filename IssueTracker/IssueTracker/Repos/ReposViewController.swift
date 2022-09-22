@@ -35,7 +35,6 @@ class ReposViewController: UIViewController {
         }
         
         model.fetchViewData { [weak self] bool in
-            print(bool)
             if bool {
                 self?.reloadTableView()
             }

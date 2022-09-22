@@ -12,57 +12,70 @@ class Container {
     
     // model, viewcontroller, coordinator를 생성 시점에 등록함
     func register<T>(_ object: T) {
-        let key = String(describing: type(of: T.self))
+        let key = String(describing: T.self) // String(describing: type(of: T.self)) 와의 차이점?? 타입명 vs 타입명.Type
         registeredObjects[key] = object
         if let viewControllerObject = object as? UIViewController {
-            print("vc등록")
             registerPair(viewController: viewControllerObject)
         }
     }
     
     // let value: Type = container.resolve() 로 사용
     func resolve<T>() -> T? {
-        let key = String(describing: type(of: T.self))
+        let key = String(describing: T.self)
         guard let object = registeredObjects[key],
               let object = object as? T else {
-            print("\(key)는 register되지 않음")
+            print("⚠️\(key)는 register되지 않음")
             return nil
         }
         return object
     }
     
     func registerPair(viewController: UIViewController) {
-        // 받아온 UIViewController타입의 뷰컨을 형변환 또는 타입연산 후, 적절한 코디네이터와 함께 저장
-        let name = String(describing: type(of:viewController))
-        switch viewController { // enum을 적용하고 싶음..
-        case is LoginViewController:
-            if let coordinator: LoginCoordinator = resolve(),
-               let typedViewController = viewController as? LoginViewController {
-                registeredViewControllerCoordinator[typedViewController] = coordinator
+        // 받아온 UIViewController타입의 뷰컨을 형변환 또는 타입연산 후, 연관 코디네이터와 함께 저장
+        let viewControllerName = String(describing: type(of:viewController))
+        
+        let allViewController = ViewControllerCoordinator.allCases
+        for oneCase in allViewController {
+            let oneCaseName = String(describing: oneCase) // Enum case의 이름을 String으로 변환
+            if oneCaseName == viewControllerName {
+                let coordinatorName = oneCase.rawValue
+                guard let coordinator = registeredObjects[coordinatorName],
+                      let castedCoordinator = coordinator as? Coordinator else {
+                    return
+                }
+                registeredViewControllerCoordinator[viewController] = castedCoordinator
             }
-        case is ReposViewController:
-            if let coordinator: ReposCoordinator = resolve(),
-               let typedViewController = viewController as? ReposViewController {
-                registeredViewControllerCoordinator[typedViewController] = coordinator
-            }
-        case is IssueViewController:
-            if let coordinator: IssueCoordinator = resolve(),
-               let typedViewController = viewController as? IssueViewController {
-                registeredViewControllerCoordinator[typedViewController] = coordinator
-            }
-        case is NewIssueViewController:
-            if let coordinator: NewIssueCoordinator = resolve(),
-               let typedViewController = viewController as? NewIssueViewController {
-                registeredViewControllerCoordinator[typedViewController] = coordinator
-            }
-        case is OptionSelectViewController:
-            if let coordinator: OptionSelectCoordinator = resolve(),
-               let typedViewController = viewController as? OptionSelectViewController {
-                registeredViewControllerCoordinator[typedViewController] = coordinator
-            }
-        default:
-            return
         }
+//
+//        switch viewController { // enum을 적용하고 싶음..
+//        case is LoginViewController:
+//            if let coordinator: LoginCoordinator = resolve(),
+//               let typedViewController = viewController as? LoginViewController {
+//                registeredViewControllerCoordinator[typedViewController] = coordinator
+//            }
+//        case is ReposViewController:
+//            if let coordinator: ReposCoordinator = resolve(),
+//               let typedViewController = viewController as? ReposViewController {
+//                registeredViewControllerCoordinator[typedViewController] = coordinator
+//            }
+//        case is IssueViewController:
+//            if let coordinator: IssueCoordinator = resolve(),
+//               let typedViewController = viewController as? IssueViewController {
+//                registeredViewControllerCoordinator[typedViewController] = coordinator
+//            }
+//        case is NewIssueViewController:
+//            if let coordinator: NewIssueCoordinator = resolve(),
+//               let typedViewController = viewController as? NewIssueViewController {
+//                registeredViewControllerCoordinator[typedViewController] = coordinator
+//            }
+//        case is OptionSelectViewController:
+//            if let coordinator: OptionSelectCoordinator = resolve(),
+//               let typedViewController = viewController as? OptionSelectViewController {
+//                registeredViewControllerCoordinator[typedViewController] = coordinator
+//            }
+//        default:
+//            return
+//        }
     }
     
     func resolvePair(of viewController: UIViewController) -> Coordinator? {

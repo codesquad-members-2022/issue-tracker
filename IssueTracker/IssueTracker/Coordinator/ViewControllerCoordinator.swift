@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 enum ViewControllerCoordinator: String, CaseIterable {
     case LoginViewController = "LoginCoordinator"

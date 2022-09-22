@@ -177,5 +177,8 @@ extension AppCoordinator: UINavigationControllerDelegate {
         if let coordinator = container.resolvePair(of: fromViewController) {
             removeChildCoordinator(child: coordinator)
         }
+        
+        print("내비게이션 스택 : \(navigationController.viewControllers)")
+        print("자식 코디네이터 : \(childCoordinators)")
     }
 }
