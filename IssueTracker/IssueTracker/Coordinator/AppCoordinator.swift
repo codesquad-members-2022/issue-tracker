@@ -36,25 +36,24 @@ class AppCoordinator: NSObject, Coordinator {
     }
     
     func showRootViewController() {
-        print("토큰 : \(container.environment.githubUserDefaults.getToken())")
         container.environment.githubUserDefaults.getToken() != nil
         ? showReposViewController()
         : showLoginViewController()
     }
     
-    func buildRootViewController() -> UIViewController {
-        var vc = UIViewController()
-        if container.environment.githubUserDefaults.getToken() != nil {
-            if let reposVC: ReposViewController = container.resolve() {
-                vc = reposVC
-            }
-        } else {
-            if let loginVC: LoginViewController = container.resolve() {
-                vc = loginVC
-            }
-        }
-        return vc
-    }
+//    func buildRootViewController() -> UIViewController {
+//        var vc = UIViewController()
+//        if container.environment.githubUserDefaults.getToken() != nil {
+//            if let reposVC: ReposViewController = container.resolve() {
+//                vc = reposVC
+//            }
+//        } else {
+//            if let loginVC: LoginViewController = container.resolve() {
+//                vc = loginVC
+//            }
+//        }
+//        return vc
+//    }
     
     private func showLoginViewController() {
         let coordinator = LoginCoordinator(navigationController: navigationController, container: container)
@@ -98,7 +97,7 @@ class AppCoordinator: NSObject, Coordinator {
     
     private func removeChildCoordinator(child: Coordinator) {
         for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
+            if coordinator === child { // 참조 비교
                 childCoordinators.remove(at: index)
             }
         }
@@ -175,33 +174,8 @@ extension AppCoordinator: UINavigationControllerDelegate {
         }
         
         // navStack에 존재하지 않음 = pop됨 : 해당 뷰컨의 coordinator를 childCoordinators에서 지워야 함
-        // TODO: resolve로부터 받아온 코디네이터가 제대로 삭제되지 않음 - 디버깅 필요
         if let coordinator = container.resolvePair(of: fromViewController) {
             removeChildCoordinator(child: coordinator)
         }
-        
-//        if fromViewController as? LoginViewController != nil,
-//            let coordinator: LoginCoordinator = container.resolve() {
-//            removeChildCoordinator(child: coordinator)
-//        }
-//        if fromViewController as? ReposViewController != nil,
-//            let coordinator: ReposCoordinator = container.resolve() {
-//            removeChildCoordinator(child: coordinator)
-//        }
-//        if fromViewController as? IssueViewController != nil,
-//            let coordinator: IssueCoordinator = container.resolve() {
-//            removeChildCoordinator(child: coordinator)
-//        }
-//        if fromViewController as? NewIssueViewController != nil,
-//            let coordinator: NewIssueCoordinator = container.resolve() {
-//            removeChildCoordinator(child: coordinator)
-//        }
-//        if fromViewController as? OptionSelectViewController != nil,
-//            let coordinator: OptionSelectCoordinator = container.resolve() {
-//            removeChildCoordinator(child: coordinator)
-//        }
-        
-        print("내비게이션 스택 : \(navigationController.viewControllers)")
-        print("자식 코디네이터들 : \(childCoordinators)")
     }
 }

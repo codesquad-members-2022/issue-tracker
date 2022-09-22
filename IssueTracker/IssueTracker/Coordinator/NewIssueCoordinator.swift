@@ -45,6 +45,9 @@ class NewIssueCoordinator: Coordinator {
         let model = NewIssueModel(environment: modelEnvironment)
         let newIssueVC = NewIssueViewController(repo: repo, model: model)
         
+        container.register(model)
+        container.register(newIssueVC)
+        
         newIssueVC.delegate = self
         
         navigationController.pushViewController(newIssueVC, animated: true)

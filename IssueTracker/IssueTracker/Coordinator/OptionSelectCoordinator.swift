@@ -45,8 +45,11 @@ class OptionSelectCoordinator: Coordinator {
         }
 
         let optionSelectModel = OptionSelectModel(environment: optionSelectModelEnvironment)
-        
         let optionSelectVC = OptionSelectViewController(model: optionSelectModel, option: option, repo: repo)
+        
+        container.register(optionSelectModel)
+        container.register(optionSelectVC)
+        
         optionSelectVC.delegate = self
         
         navigationController.pushViewController(optionSelectVC, animated: true)

@@ -128,7 +128,6 @@ class IssueService {
     }
     
     func requestRepos(completion: @escaping (Result<[Repository], IssueError>) -> Void) {
-        print("액세스토큰 : \(accessToken)")
         let urlString = RequestURL.repos.description
         let headers: HTTPHeaders = [
             NetworkHeader.acceptV3.getHttpHeader(),
@@ -144,8 +143,6 @@ class IssueService {
             .responseDecodable(of: [Repository].self,
                                queue: globalThread,
                                decoder: decoder) { response in
-                print("응답 : \(response)")
-                print("결과 : \(response.result)")
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))

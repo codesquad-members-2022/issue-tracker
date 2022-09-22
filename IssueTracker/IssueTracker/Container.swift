@@ -8,19 +8,11 @@ class Container {
     
     init(environment: ContainerEnvironment) {
         self.environment = environment
-//        registerObjects()
     }
     
-//    func registerObjects() {
-//        registerLoginModel()
-//        registerLoginViewController()
-//        registerReposModel()
-//        registerReposViewController()
-//    }
-    
-    // 외부 등록 허용??
+    // model, viewcontroller, coordinator를 생성 시점에 등록함
     func register<T>(_ object: T) {
-        let key = String(describing: type(of: T.self)) // 해당 클래스의 이름을 key값으로 저장
+        let key = String(describing: type(of: T.self))
         registeredObjects[key] = object
         if let viewControllerObject = object as? UIViewController {
             print("vc등록")
@@ -115,7 +107,6 @@ class Container {
     
     func fetchAccessToken(url: URL, completion: @escaping (Bool) -> Void) {
         environment.oAuthService.fetchToken(from: url) { [weak self] accessToken in
-            print("가져온 액세스토큰 : \(accessToken)")
             guard let token = accessToken,
                   let self = self else {
                 completion(false)

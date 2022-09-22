@@ -36,17 +36,19 @@ class IssueCoordinator: Coordinator {
             return
         }
         // MARK: 동적으로 생성되어야 하는 VC는 Container를 사용할 수 없나?
-        let issueModel = IssueModel(environment: .init(requestRepositoryIssues: { [weak self] completion in
+        let model = IssueModel(environment: .init(requestRepositoryIssues: { [weak self] completion in
             self?.container.environment.issueService.requestRepositoryIssues(repo: repo, completion: { result in
                 completion(result)
             })
         }))
-        let issueVC = IssueViewController(model: issueModel, repo: repo)
-        issueVC.delegate = self
-        viewController = issueVC
+        let viewcontroller = IssueViewController(model: model, repo: repo)
+        viewcontroller.delegate = self
+        self.viewController = viewcontroller
+        container.register(model)
+        container.register(viewcontroller)
     
         loadIssues()
-        self.navigationController.pushViewController(issueVC, animated: true)
+        self.navigationController.pushViewController(viewcontroller, animated: true)
         
     }
     
