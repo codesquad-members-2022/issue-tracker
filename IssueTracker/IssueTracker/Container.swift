@@ -76,6 +76,6 @@ struct ContainerEnvironment {
         let token = githubUserDefaults.getToken()
         
         // MARK: 문제 발생 지점 - 로그인 전에는 토큰이 없으므로 ""가 들어감
-        return ContainerEnvironment(githubUserDefaults: githubUserDefaults, oAuthService: OAuthService(), issueService: IssueService(token: token ?? ""))
+        return ContainerEnvironment(githubUserDefaults: githubUserDefaults, oAuthService: OAuthService(), issueService: IssueService())
     }()
 }
