@@ -1,24 +1,24 @@
 import UIKit
 import SnapKit
 
-protocol OptionSelectDelegate: AnyObject {
+protocol OptionSelectViewControllerDelegate: AnyObject {
     func selected(item: Optionable, option: Option)
 }
 
 class OptionSelectViewController: UIViewController {
     
-    weak var delegate: OptionSelectDelegate?
+    weak var delegate: OptionSelectViewControllerDelegate?
     
     private let model: OptionSelectModel
     
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
     private let option: Option
-    private let repository: Repository
+    private let repo: Repository
     
     init(model: OptionSelectModel, option: Option, repo: Repository) {
         self.model = model
         self.option = option
-        self.repository = repo
+        self.repo = repo
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,11 +36,19 @@ class OptionSelectViewController: UIViewController {
         )
     }
     
+    deinit {
+        print("-- \(type(of: self)) is deinited")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         self.view.backgroundColor = .white
         
+        model.requestOptions(option, repo: repo)
+        model.updatedOptions = { [weak self] in
+            self?.reloadData()
+        }
     }
     
     private func setupViews() {
@@ -51,7 +59,9 @@ class OptionSelectViewController: UIViewController {
     }
     
     func reloadData() {
-        self.tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
     private lazy var tableView: UITableView = {
@@ -69,7 +79,6 @@ extension OptionSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = model.getOption(index: indexPath.row)
         delegate?.selected(item: selectedItem, option: option)
-        self.navigationController?.popViewController(animated: true)
     }
 }
 

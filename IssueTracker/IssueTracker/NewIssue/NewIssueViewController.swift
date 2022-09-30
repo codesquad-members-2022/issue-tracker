@@ -6,14 +6,17 @@
 //
 
 import UIKit
+import SwiftUI
 
-protocol NewIssueCreateDelegate: AnyObject {
-    func created()
+protocol NewIssueViewControllerDelegate: AnyObject {
+    func goBackToPreviousVC(repo: Repository)
+    
+    func touchedOption(option: Option, repo: Repository)
 }
 
 class NewIssueViewController: UIViewController {
     
-    weak var delegate: NewIssueCreateDelegate?
+    weak var delegate: NewIssueViewControllerDelegate?
     
     private let model: NewIssueModel
     
@@ -33,15 +36,11 @@ class NewIssueViewController: UIViewController {
     }
     
     required convenience init?(coder: NSCoder) {
-        
-        let owner = Owner(login: "")
-        let modelEnvironment = NewIssueModelEnvironment(createIssue: { _, _, _, _, _, _, _ in
-        })
-        let model = NewIssueModel(environment: modelEnvironment)
-        self.init(repo: Repository(name: "",
-                                   owner: owner),
-                  model: model)
-        fatalError("init(coder:) has not been implemented")
+        self.init(coder: coder)
+    }
+    
+    deinit {
+        print("-- \(type(of: self)) is deinited")
     }
     
     private lazy var navSegmentedControl: UISegmentedControl = {
@@ -98,7 +97,13 @@ class NewIssueViewController: UIViewController {
         setUpViews()
         self.navigationController?.navigationBar.prefersLargeTitles = false
     }
-
+    
+    func reloadOptions() {
+        DispatchQueue.main.async { [weak self] in
+            self?.optionTable.reloadData()
+        }
+    }
+    
     private func setupNavigationBar() {
         self.navigationItem.titleView = navSegmentedControl
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: createButton)
@@ -108,19 +113,28 @@ class NewIssueViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.top.leading.equalTo(self.view.safeAreaLayoutGuide).offset(10)
             make.width.equalTo(50)
         }
         
         self.view.addSubview(titleField)
-        titleField.snp.makeConstraints { make in
+        titleField.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.top.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(10)
             make.leading.equalTo(titleLabel.snp.trailing)
         }
         
         self.view.addSubview(horizontalDevider)
-        horizontalDevider.snp.makeConstraints { make in
+        horizontalDevider.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.leading.equalTo(self.view.safeAreaLayoutGuide).offset(5)
             make.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(-5)
@@ -132,7 +146,10 @@ class NewIssueViewController: UIViewController {
         
         self.view.addSubview(optionTable)
         optionTable.isScrollEnabled = true
-        optionTable.snp.makeConstraints { make in
+        optionTable.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(optionTable
                 .contentSize
@@ -140,7 +157,10 @@ class NewIssueViewController: UIViewController {
         }
         
         self.view.addSubview(contentField)
-        contentField.snp.makeConstraints { make in
+        contentField.snp.makeConstraints { [weak self] make in
+            guard let self = self else {
+                return
+            }
             make.top.equalTo(horizontalDevider.snp.bottom)
             make.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
             make.bottom.equalTo(optionTable.snp.top)
@@ -156,8 +176,8 @@ class NewIssueViewController: UIViewController {
         configuration.buttonSize = .small
         configuration.image = UIImage(systemName: "folder.badge.plus")
         configuration.imagePadding = 4
-        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { action in
-            self.touchedCreateButton()
+        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] action in
+            self?.touchedCreateButton()
         }))
         return button
     }()
@@ -173,28 +193,94 @@ class NewIssueViewController: UIViewController {
             return
         }
         
-        model.createIssue(title: titleString, repo: repo, content: contentString, label: selectedLabel, milestone: selectedMilestone, assignee: selectedAssignee) { boolResult in
+        let newIssueFormat = NewIssueFormat(title: titleString, repo: repo, content: contentString, label: selectedLabel, milestone: selectedMilestone, assignee: selectedAssignee)
+        
+        model.createIssue(newIssue: newIssueFormat) { [weak self] boolResult in
             if boolResult {
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
-                self.delegate?.created()
+                self?.reloadIssues(title: titleString)
+            } else {
+                // TODO: 이슈 생성 실패 얼럿 띄우기
             }
         }
+    }
+    
+    func fetchIssue(title: String) {
+        model.requestIssue { [weak self] titleArr in
+            guard let titleArr = titleArr,
+                  let self = self,
+                  let delegate = self.delegate else {
+                return
+            }
+            
+            // TODO: Indicator - 되긴 하는데 (1)너무 느리고 (2) 여러 개 생성되어 오래 기다릴땐 빙글빙글 도는 게 안보임..
+            DispatchQueue.main.async {
+                let indicator = UIActivityIndicatorView()
+                self.createButton.addSubview(indicator)
+                if !titleArr.contains(title) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                        indicator.startAnimating()
+                        self.fetchIssue(title: title)
+                    }
+                } else {
+                    delegate.goBackToPreviousVC(repo: self.repo)
+                }
+            }
+        }
+    }
+    
+    func reloadIssues(title: String) {
+        var indicator: UIActivityIndicatorView?
+        DispatchQueue.main.async { [weak self] in
+            indicator = UIActivityIndicatorView()
+            if let indicator = indicator {
+                self?.createButton.addSubview(indicator)
+            }
+            
+            let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                print("🌀루프 도는 중..")
+                self?.model.requestIssue { titleArr in
+                    guard let titleArr = titleArr,
+                          let indicator = indicator,
+                          let delegate = self?.delegate,
+                          let repo = self?.repo else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        indicator.startAnimating()
+                    }
+                    if titleArr.contains(title) {
+                        timer.invalidate()
+                        delegate.goBackToPreviousVC(repo: repo)
+                    }
+                }
+            }
+            timer.tolerance = 0.1
+        }
+        
+    }
+    
+    func setSelectedOption(item: Optionable, option: Option) {
+        guard let optionIndex = optionList.firstIndex(of: option) else {
+            return
+        }
+        
+        switch option {
+        case .label:
+            selectedLabel = item as? Label
+        case .milestone:
+            selectedMilestone = item as? Milestone
+        case .assignee:
+            selectedAssignee = item as? Assignee
+        }
+        
+        selectedList[optionIndex] = item.subTitle
     }
 }
 
 extension NewIssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let option = optionList[indexPath.row]
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        guard let viewController = appdelegate.container?.buildViewController(.optionSelect(option: option, repo: repo)) as? OptionSelectViewController else {
-            return
-        }
-        self.navigationController?.pushViewController(viewController, animated: true)
-        viewController.delegate = self
+        self.delegate?.touchedOption(option: option, repo: repo)
     }
 }
 
@@ -214,25 +300,5 @@ extension NewIssueViewController: UITableViewDataSource {
         cell.contentConfiguration = sidebarCell
         cell.accessoryType = .disclosureIndicator
         return cell
-    }
-}
-
-extension NewIssueViewController: OptionSelectDelegate {
-    func selected(item: Optionable, option: Option) {
-        guard let optionIndex = optionList.firstIndex(of: option) else {
-            return
-        }
-        
-        switch option {
-        case .label:
-            selectedLabel = item as? Label
-        case .milestone:
-            selectedMilestone = item as? Milestone
-        case .assignee:
-            selectedAssignee = item as? Assignee
-        }
-        
-        selectedList[optionIndex] = item.subTitle
-        self.optionTable.reloadData()
     }
 }

@@ -1,43 +1,37 @@
 import Foundation
 
-// Environment : 디펜던시를 관리하는 객체
 class ReposModel {
     
     private let environment: ReposModelEnvironment
     var updated: (([Repository]) -> Void)?
     
-    private var ReposList: [Repository] {
+    private var reposList: [Repository] {
         didSet {
-            updated?(ReposList)
+            updated?(reposList)
         }
     }
     
-//    init(service: IssueService) {
-//        self.service = service
-//        self.ReposList = []
-//    }
-    
     init(environment: ReposModelEnvironment) {
         self.environment = environment
-        self.ReposList = []
+        self.reposList = []
     }
     
     var count: Int {
-        ReposList.count
+        reposList.count
     }
     
     func getViewData(index: Int) -> Repository {
-        return ReposList[index]
+        return reposList[index]
     }
     
-    func fetchViewData() {
-        // (전) service.requestRepos() { ... }
+    func fetchViewData(completion: @escaping (Bool) -> Void) {
         environment.requestRepos() { [weak self] result in
             switch result {
             case .success(let repositoryList):
-                self?.ReposList = repositoryList
-                
+                self?.reposList = repositoryList
+                completion(true)
             case .failure(let error):
+                completion(false)
                 print(error)
             }
         }

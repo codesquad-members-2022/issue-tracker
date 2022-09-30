@@ -11,20 +11,15 @@ class IssueModel {
 
     private let environment: IssueModelEnvironment
     
-//    init(service: IssueService, repo: Repository) {
-//        self.service = service
-//        self.repo = repo
-//    }
-    
     init(environment: IssueModelEnvironment) {
         self.environment = environment
     }
     
-    var updatedIssues: ( () -> Void )?
+    var issuesUpdated: ( () -> Void )?
     
     private var issues: [Issue] = [] {
         didSet {
-            updatedIssues?()
+            issuesUpdated?()
         }
     }
     
@@ -39,13 +34,16 @@ class IssueModel {
         return nil
     }
     
-    func requestIssue() {
+    func requestIssue(completion: @escaping ([String]?) -> Void) {
         environment.requestRepositoryIssues() { result in
             switch result {
             case .success(let issues):
                 self.issues = issues
+                let issuesTitleArr = issues.map{ $0.title }
+                completion(issuesTitleArr)
             case .failure(let error):
                 print(error.localizedDescription)
+                completion(nil)
             }
         }
     }

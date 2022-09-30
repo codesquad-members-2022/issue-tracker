@@ -15,13 +15,28 @@ class NewIssueModel {
         self.environment = environment
     }
     
-    func createIssue(title: String, repo: Repository, content: String, label: Label?, milestone: Milestone?, assignee: Assignee?, completion: @escaping (Bool) -> Void) {
-        environment.createIssue(title, repo, content, label, milestone, assignee) { boolResult in
+    func createIssue(newIssue: NewIssueFormat, completion: @escaping (Bool) -> Void) {
+        environment.createIssue(newIssue) { boolResult in
             completion(boolResult)
+        }
+    }
+    
+    func requestIssue(completion: @escaping ([String]?) -> Void) {
+        environment.requestRepositoryIssues() { result in
+            switch result {
+            case .success(let issues):
+                let issuesTitleArr = issues.map{ $0.title }
+                completion(issuesTitleArr)
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(nil)
+            }
         }
     }
 }
 
 struct NewIssueModelEnvironment {
-    let createIssue: (String, Repository, String, Label?, Milestone?, Assignee?, @escaping (Bool) -> Void) -> Void
+    let createIssue: (NewIssueFormat, @escaping (Bool) -> Void) -> Void
+    
+    let requestRepositoryIssues: (@escaping (Result<[Issue], IssueError>) -> Void) -> Void
 }

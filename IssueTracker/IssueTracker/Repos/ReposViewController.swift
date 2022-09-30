@@ -1,7 +1,13 @@
 import UIKit
 import SnapKit
 
+protocol ReposViewControllerDelegate: AnyObject {
+    func showIssue(didSelectRowAt indexPath: IndexPath)
+}
+
 class ReposViewController: UIViewController {
+    
+    weak var delegate: ReposViewControllerDelegate?
     
     private let model: ReposModel
     private let tableViewCellIdentifier = "tableViewCellIdentifier"
@@ -12,22 +18,37 @@ class ReposViewController: UIViewController {
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(model: ReposModel(environment: .init(requestRepos: { completion in
-        })))
+        self.init(coder: coder)
+    }
+    
+    deinit {
+        print("-- \(type(of: self)) is deinited")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
-        // 뷰컨 자신에 대한 셋팅 코드는 뷰컨을 만드는 Container에서 해준다 (추후 Coordinator로 분리)
         self.view.backgroundColor = .white
+        setupViews()
+        
+        model.updated = { [weak self] repos in
+            self?.reloadTableView()
+        }
+        
+        model.fetchViewData { [weak self] bool in
+            if bool {
+                self?.reloadTableView()
+            }
+        }
+        
     }
     
     func reloadTableView() {
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
     
-    private func setupViews() {
+    func setupViews() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -47,14 +68,7 @@ class ReposViewController: UIViewController {
 
 extension ReposViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = model.getViewData(index: indexPath.row)
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        guard let viewController = appdelegate.container?.buildViewController(.issue( selectedRepo: selectedItem)) as? IssueViewController else {
-            return
-        }
-        self.navigationController?.pushViewController(viewController, animated: true)
+        delegate?.showIssue(didSelectRowAt: indexPath)
     }
 }
 
@@ -64,13 +78,8 @@ extension ReposViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        guard let options = options else {
-//            return UITableViewCell()
-//        }
         let data = model.getViewData(index: indexPath.row)
-        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier,
-                                                 for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewCellIdentifier, for: indexPath)
         var content = cell.defaultContentConfiguration()
         content.attributedText = NSAttributedString(string: data.name)
         cell.contentConfiguration = content

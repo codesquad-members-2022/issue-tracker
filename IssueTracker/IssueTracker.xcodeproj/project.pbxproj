@@ -10,9 +10,18 @@
 		000B92C2286D67F8009EB2D8 /* NewIssueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C1286D67F8009EB2D8 /* NewIssueModel.swift */; };
 		000B92C4286D6816009EB2D8 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C3286D6816009EB2D8 /* Option.swift */; };
 		000B92C7286D6F9D009EB2D8 /* OptionSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B92C6286D6F9D009EB2D8 /* OptionSelectModel.swift */; };
+		0022D4D728D9A94700088543 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0022D4D628D9A94700088543 /* ViewControllerCoordinator.swift */; };
+		003081ED28A2486E001B7600 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081EC28A2486E001B7600 /* AppCoordinator.swift */; };
+		003081F028A24E2C001B7600 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081EF28A24E2C001B7600 /* Coordinator.swift */; };
+		003081F228A28F8C001B7600 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081F128A28F8C001B7600 /* LoginCoordinator.swift */; };
+		003081F428A29EC0001B7600 /* ReposCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081F328A29EC0001B7600 /* ReposCoordinator.swift */; };
+		003081F628A29EC8001B7600 /* IssueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081F528A29EC8001B7600 /* IssueCoordinator.swift */; };
+		003081F828A29ED3001B7600 /* NewIssueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081F728A29ED3001B7600 /* NewIssueCoordinator.swift */; };
+		003081FA28A29EE2001B7600 /* OptionSelectCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003081F928A29EE2001B7600 /* OptionSelectCoordinator.swift */; };
 		00383AB0288A8306008B215E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00383AAF288A8306008B215E /* LoginModel.swift */; };
 		004800F6286E8C0700A58B2A /* Assignee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004800F5286E8C0700A58B2A /* Assignee.swift */; };
 		004800F8286E907300A58B2A /* Optionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004800F7286E907300A58B2A /* Optionable.swift */; };
+		004ABDE628BF516400F5CEC8 /* NewIssueFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004ABDE528BF516400F5CEC8 /* NewIssueFormat.swift */; };
 		0053D7552859B162006614EC /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0053D7542859B162006614EC /* Config.plist */; };
 		0053D7572859B4CA006614EC /* PrivateStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0053D7562859B4CA006614EC /* PrivateStorage.swift */; };
 		00567EE8286194DB00F3E8EC /* IssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00567EE7286194DB00F3E8EC /* IssueService.swift */; };
@@ -73,9 +82,18 @@
 		000B92C1286D67F8009EB2D8 /* NewIssueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueModel.swift; sourceTree = "<group>"; };
 		000B92C3286D6816009EB2D8 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		000B92C6286D6F9D009EB2D8 /* OptionSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectModel.swift; sourceTree = "<group>"; };
+		0022D4D628D9A94700088543 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		003081EC28A2486E001B7600 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		003081EF28A24E2C001B7600 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		003081F128A28F8C001B7600 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		003081F328A29EC0001B7600 /* ReposCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposCoordinator.swift; sourceTree = "<group>"; };
+		003081F528A29EC8001B7600 /* IssueCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCoordinator.swift; sourceTree = "<group>"; };
+		003081F728A29ED3001B7600 /* NewIssueCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueCoordinator.swift; sourceTree = "<group>"; };
+		003081F928A29EE2001B7600 /* OptionSelectCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectCoordinator.swift; sourceTree = "<group>"; };
 		00383AAF288A8306008B215E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		004800F5286E8C0700A58B2A /* Assignee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignee.swift; sourceTree = "<group>"; };
 		004800F7286E907300A58B2A /* Optionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optionable.swift; sourceTree = "<group>"; };
+		004ABDE528BF516400F5CEC8 /* NewIssueFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIssueFormat.swift; sourceTree = "<group>"; };
 		0053D7542859B162006614EC /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		0053D7562859B4CA006614EC /* PrivateStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateStorage.swift; sourceTree = "<group>"; };
 		00567EE7286194DB00F3E8EC /* IssueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueService.swift; sourceTree = "<group>"; };
@@ -158,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				000B92C1286D67F8009EB2D8 /* NewIssueModel.swift */,
+				004ABDE528BF516400F5CEC8 /* NewIssueFormat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +196,21 @@
 				000B92C6286D6F9D009EB2D8 /* OptionSelectModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		003081EE28A2487B001B7600 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				003081EF28A24E2C001B7600 /* Coordinator.swift */,
+				003081EC28A2486E001B7600 /* AppCoordinator.swift */,
+				003081F128A28F8C001B7600 /* LoginCoordinator.swift */,
+				003081F328A29EC0001B7600 /* ReposCoordinator.swift */,
+				003081F528A29EC8001B7600 /* IssueCoordinator.swift */,
+				003081F728A29ED3001B7600 /* NewIssueCoordinator.swift */,
+				003081F928A29EE2001B7600 /* OptionSelectCoordinator.swift */,
+				0022D4D628D9A94700088543 /* ViewControllerCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		00567EE92861B42A00F3E8EC /* Service */ = {
@@ -320,12 +354,13 @@
 				981BD438285B123A00DDDE64 /* Issue */,
 				000B92BF286D67C6009EB2D8 /* NewIssue */,
 				000B92C5286D6F85009EB2D8 /* OptionSelect */,
+				003081EE28A2487B001B7600 /* Coordinator */,
 				988510D528572B8700CC2DA9 /* AppDelegate.swift */,
+				005E48D52862AE91004BD5F6 /* Container.swift */,
 				988510DE28572B8900CC2DA9 /* Assets.xcassets */,
 				988510E028572B8900CC2DA9 /* LaunchScreen.storyboard */,
 				988510E328572B8900CC2DA9 /* Info.plist */,
 				0053D7542859B162006614EC /* Config.plist */,
-				005E48D52862AE91004BD5F6 /* Container.swift */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -499,8 +534,10 @@
 				985CAB5528607052005E709D /* UIView+Extension.swift in Sources */,
 				98130E1B285AC8A5001B6DA1 /* IssueViewController.swift in Sources */,
 				988510DA28572B8700CC2DA9 /* LoginViewController.swift in Sources */,
+				003081F828A29ED3001B7600 /* NewIssueCoordinator.swift in Sources */,
 				00567EE8286194DB00F3E8EC /* IssueService.swift in Sources */,
 				981BD43D285B12AC00DDDE64 /* IssueListCell.swift in Sources */,
+				003081F028A24E2C001B7600 /* Coordinator.swift in Sources */,
 				00383AB0288A8306008B215E /* LoginModel.swift in Sources */,
 				000B92C2286D67F8009EB2D8 /* NewIssueModel.swift in Sources */,
 				988510D628572B8700CC2DA9 /* AppDelegate.swift in Sources */,
@@ -510,15 +547,22 @@
 				0053D7572859B4CA006614EC /* PrivateStorage.swift in Sources */,
 				00BCB408285B0262005E87BC /* Label.swift in Sources */,
 				9844C195286D434B00D0CFC9 /* ReposModel.swift in Sources */,
+				003081ED28A2486E001B7600 /* AppCoordinator.swift in Sources */,
 				983E66C6285B208800C9B975 /* GithubUserDefaults.swift in Sources */,
 				004800F6286E8C0700A58B2A /* Assignee.swift in Sources */,
+				0022D4D728D9A94700088543 /* ViewControllerCoordinator.swift in Sources */,
 				000B92C4286D6816009EB2D8 /* Option.swift in Sources */,
 				005E48D62862AE91004BD5F6 /* Container.swift in Sources */,
+				003081FA28A29EE2001B7600 /* OptionSelectCoordinator.swift in Sources */,
+				003081F628A29EC8001B7600 /* IssueCoordinator.swift in Sources */,
 				00567EEC2861B49F00F3E8EC /* IssueModel.swift in Sources */,
 				00BCB40C285B076B005E87BC /* State.swift in Sources */,
+				003081F228A28F8C001B7600 /* LoginCoordinator.swift in Sources */,
 				9844C193286C803F00D0CFC9 /* ReposViewController.swift in Sources */,
 				000B92C7286D6F9D009EB2D8 /* OptionSelectModel.swift in Sources */,
+				004ABDE628BF516400F5CEC8 /* NewIssueFormat.swift in Sources */,
 				988FA2EA2864034C0058C333 /* OptionSelectViewController.swift in Sources */,
+				003081F428A29EC0001B7600 /* ReposCoordinator.swift in Sources */,
 				00BCB406285B01AA005E87BC /* Issue.swift in Sources */,
 				00AF8F282869A7060009674C /* Repository.swift in Sources */,
 			);

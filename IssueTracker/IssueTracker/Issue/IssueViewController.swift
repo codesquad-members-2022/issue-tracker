@@ -1,34 +1,16 @@
 import UIKit
 
 
-final class IssueViewController: UIViewController {
+protocol IssueViewControllerDelegate: AnyObject {
+    func touchedNewIssueButton(repo: Repository)
+}
 
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        return collectionView
-    }()
-    
-    private lazy var addButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = .systemBlue
-        configuration.baseForegroundColor = .white
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-        configuration.background.cornerRadius = 70
-        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
-            self?.touchedAddButton()
-        }))
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        
-        return button
-    }()
+final class IssueViewController: UIViewController {
     
     private let model: IssueModel
     private let repo: Repository
+    
+    weak var delegate: IssueViewControllerDelegate?
     
     init(model: IssueModel, repo: Repository) {
         self.model = model
@@ -36,20 +18,28 @@ final class IssueViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    deinit {
+        print("-- \(type(of: self)) is deinited")
+    }
+    
     required convenience init?(coder: NSCoder) {
-        let repository = Repository(name: "", owner: Owner(login: ""))
-        self.init(model: IssueModel(environment: .init(requestRepositoryIssues: { completion in
-        })), repo: repository)
-        fatalError("init(coder:) has not been implemented")
+        self.init(coder: coder)
     }
     
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Issues"
+        self.view.backgroundColor = .white
         setupNavigationBar()
         setupViews()
         
+        model.issuesUpdated = {
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,8 +47,22 @@ final class IssueViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    func reloadData() {
-        self.collectionView.reloadData()
+    func loadIssue() {
+        self.model.requestIssue { titleArr in
+            if titleArr != nil {
+                DispatchQueue.main.async { [weak self] in
+                    self?.collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    func fetchIssue() {
+        self.model.requestIssue { titleArr in
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     @objc func touchedSelectButton() {
@@ -72,14 +76,7 @@ final class IssueViewController: UIViewController {
     }
     
     @objc func touchedAddButton() {
-        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        guard let viewController = appdelegate.container?.buildViewController(.newIssue(repo: repo)) as? NewIssueViewController else {
-            return
-        }
-        self.navigationController?.pushViewController(viewController, animated: true)
-        viewController.delegate = self
+        self.delegate?.touchedNewIssueButton(repo: repo)
     }
     
     private func setupNavigationBar() {
@@ -109,6 +106,30 @@ final class IssueViewController: UIViewController {
             make.trailing.equalTo(self.view).offset(-50)
         }
     }
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    private lazy var addButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseBackgroundColor = .systemBlue
+        configuration.baseForegroundColor = .white
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        configuration.background.cornerRadius = 70
+        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
+            self?.touchedAddButton()
+        }))
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+        return button
+    }()
     
     private func createButton(title: String, image: UIImage?, action: UIAction) -> UIButton {
         var configuration = UIButton.Configuration.plain()
@@ -154,11 +175,5 @@ extension IssueViewController: UICollectionViewDataSource {
 extension IssueViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 200)
-    }
-}
-
-extension IssueViewController: NewIssueCreateDelegate {
-    func created() {
-        model.requestIssue()
     }
 }
