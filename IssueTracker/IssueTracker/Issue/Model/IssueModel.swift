@@ -9,19 +9,17 @@ import Foundation
 
 class IssueModel {
 
-    private let service: IssueService
-    private let accessToken: String
+    private let environment: IssueModelEnvironment
     
-    init(service: IssueService, token: String) {
-        self.service = service
-        self.accessToken = token
+    init(environment: IssueModelEnvironment) {
+        self.environment = environment
     }
     
-    var updatedIssues: ( (_ issues: [Issue]) -> Void )?
+    var issuesUpdated: ( () -> Void )?
     
     private var issues: [Issue] = [] {
         didSet {
-            updatedIssues?(issues)
+            issuesUpdated?()
         }
     }
     
@@ -36,14 +34,22 @@ class IssueModel {
         return nil
     }
     
-    func requestIssue() {
-        service.requestIssues(accessToken: accessToken) { result in
+    func requestIssue(completion: @escaping ([String]?) -> Void) {
+        environment.requestRepositoryIssues() { result in
             switch result {
             case .success(let issues):
                 self.issues = issues
+                let issuesTitleArr = issues.map{ $0.title }
+                completion(issuesTitleArr)
             case .failure(let error):
                 print(error.localizedDescription)
+                completion(nil)
             }
         }
     }
+}
+
+struct IssueModelEnvironment {
+    // completion을 파라미터로 받고, 리턴타입은 Void인 클로저
+    let requestRepositoryIssues: (@escaping (Result<[Issue], IssueError>) -> Void) -> Void
 }

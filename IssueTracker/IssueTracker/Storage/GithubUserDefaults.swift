@@ -2,13 +2,13 @@ import Foundation
 
 struct GithubUserDefaults {
 
-    private static let key = "github_access_token"
+    private let key = "github_access_token"
 
-    static func setToken(_ token: String) {
+    func setToken(_ token: String) {
         UserDefaults.standard.set(token, forKey: key)
     }
 
-    static func getToken() -> String? {
-        return UserDefaults.standard.string(forKey: self.key)
+    func getToken() -> String? {
+        return UserDefaults.standard.string(forKey: key)
     }
 }

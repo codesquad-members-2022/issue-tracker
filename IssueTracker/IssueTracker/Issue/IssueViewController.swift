@@ -1,60 +1,72 @@
 import UIKit
 
 
-final class IssueViewController: UIViewController {
+protocol IssueViewControllerDelegate: AnyObject {
+    func touchedNewIssueButton(repo: Repository)
+}
 
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        return collectionView
-    }()
+final class IssueViewController: UIViewController {
     
-    private lazy var addButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-//        configuration.image = UIImage(systemName: "plus")
-        configuration.baseBackgroundColor = .systemBlue
-        configuration.baseForegroundColor = .white
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-        configuration.background.cornerRadius = 70
-        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
-            self?.touchedAddButton()
-        }))
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        
-//        button.layer.cornerRadius = 50 / 2
-        
-        return button
-    }()
+    private let model: IssueModel
+    private let repo: Repository
     
-    private var model: IssueModel
+    weak var delegate: IssueViewControllerDelegate?
     
-    init(model: IssueModel) {
+    init(model: IssueModel, repo: Repository) {
         self.model = model
+        self.repo = repo
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    deinit {
+        print("-- \(type(of: self)) is deinited")
+    }
+    
+    required convenience init?(coder: NSCoder) {
+        self.init(coder: coder)
     }
     
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Issues"
+        self.view.backgroundColor = .white
         setupNavigationBar()
         setupViews()
-        model.requestIssue()
-        model.updatedIssues = { [weak self] issues in
-            DispatchQueue.main.async { [weak self] in 
+        
+        model.issuesUpdated = {
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    func loadIssue() {
+        self.model.requestIssue { titleArr in
+            if titleArr != nil {
+                DispatchQueue.main.async { [weak self] in
+                    self?.collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    func fetchIssue() {
+        self.model.requestIssue { titleArr in
+            DispatchQueue.main.async { [weak self] in
                 self?.collectionView.reloadData()
             }
         }
     }
     
     @objc func touchedSelectButton() {
+        
     }
     
     @objc func touchedFilterButton() {
@@ -64,18 +76,10 @@ final class IssueViewController: UIViewController {
     }
     
     @objc func touchedAddButton() {
-        self.navigationController?.pushViewController(Container().buildViewController(.newIssue), animated: true)
+        self.delegate?.touchedNewIssueButton(repo: repo)
     }
     
     private func setupNavigationBar() {
-        self.title = "이슈"
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        let filterButton = createButton(title: "필터", image: UIImage(systemName: "scroll"), action: UIAction(handler: { [weak self] _ in
-            self?.touchedFilterButton()
-        }))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: filterButton)
-        
         let selectButton = createButton(title: "선택", image: UIImage(systemName: "checkmark.circle"), action: UIAction(handler: { [weak self] _ in
             self?.touchedSelectButton()
         }))
@@ -102,6 +106,30 @@ final class IssueViewController: UIViewController {
             make.trailing.equalTo(self.view).offset(-50)
         }
     }
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(IssueListCell.self, forCellWithReuseIdentifier: IssueListCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    private lazy var addButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.baseBackgroundColor = .systemBlue
+        configuration.baseForegroundColor = .white
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        configuration.background.cornerRadius = 70
+        var button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
+            self?.touchedAddButton()
+        }))
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+        return button
+    }()
     
     private func createButton(title: String, image: UIImage?, action: UIAction) -> UIButton {
         var configuration = UIButton.Configuration.plain()
